@@ -9,7 +9,7 @@ class Category(models.Model):
     """
     name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Kategoriebezeichnung")
     description = models.TextField(blank=True, null=True, verbose_name="Beschreibung")
-    image = models.ImageField()
+    image = ResizedImageField(size=[500, 500], upload_to='stock/categories/', blank=True, null=True, help_text='Product picture.')
     history = HistoricalRecords()
 
     def __unicode__(self):
@@ -27,8 +27,8 @@ class Product(models.Model):
     name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Produktbezeichnung")
     sku = models.CharField(blank=False, null=False, max_length=255, verbose_name="SKU", unique=True)
     description = models.TextField(blank=True, null=True, verbose_name="Beschreibung")
-    category = models.ForeignKey(Category, verbose_name="Category", related_name='category')
-    image = ResizedImageField(size=[500, 500], upload_to='stock/img/', blank=True, null=True, help_text='Product picture.')
+    category = models.ForeignKey('Category', verbose_name="Category")
+    image = ResizedImageField(size=[500, 500], upload_to='stock/products/', blank=True, null=True, help_text='Product picture.')
     history = HistoricalRecords()
 
     def __unicode__(self):
