@@ -3,8 +3,7 @@ from __future__ import unicode_literals
 
 from django.db import models, migrations
 import django_resized.forms
-import simple_history.models
-import datetime
+import django.db.models.deletion
 from django.conf import settings
 
 
@@ -34,14 +33,16 @@ class Migration(migrations.Migration):
                 ('id', models.IntegerField(verbose_name='ID', db_index=True, auto_created=True, blank=True)),
                 ('name', models.CharField(max_length=255, verbose_name=b'Kategoriebezeichnung')),
                 ('description', models.TextField(null=True, verbose_name=b'Beschreibung', blank=True)),
-                ('image', django_resized.forms.ResizedImageField(help_text=b'Product picture.', null=True, upload_to=b'stock/categories/', blank=True)),
+                ('image', models.TextField(help_text=b'Product picture.', max_length=100, null=True, blank=True)),
                 ('history_id', models.AutoField(serialize=False, primary_key=True)),
-                ('history_date', models.DateTimeField(default=datetime.datetime.now)),
-                ('history_type', models.CharField(max_length=1, choices=[(b'+', b'Created'), (b'~', b'Changed'), (b'-', b'Deleted')])),
-                ('history_user', simple_history.models.CurrentUserField(related_name='_category_history', to=settings.AUTH_USER_MODEL, null=True)),
+                ('history_date', models.DateTimeField()),
+                ('history_type', models.CharField(max_length=1, choices=[('+', 'Created'), ('~', 'Changed'), ('-', 'Deleted')])),
+                ('history_user', models.ForeignKey(related_name='+', on_delete=django.db.models.deletion.SET_NULL, to=settings.AUTH_USER_MODEL, null=True)),
             ],
             options={
-                'ordering': ('-history_date',),
+                'ordering': ('-history_date', '-history_id'),
+                'get_latest_by': 'history_date',
+                'verbose_name': 'historical category',
             },
         ),
         migrations.CreateModel(
@@ -51,15 +52,17 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=255, verbose_name=b'Produktbezeichnung')),
                 ('sku', models.CharField(max_length=255, verbose_name=b'SKU', db_index=True)),
                 ('description', models.TextField(null=True, verbose_name=b'Beschreibung', blank=True)),
-                ('category', models.IntegerField(db_index=True, null=True, verbose_name=b'Category', blank=True)),
-                ('image', django_resized.forms.ResizedImageField(help_text=b'Product picture.', null=True, upload_to=b'stock/products/', blank=True)),
+                ('image', models.TextField(help_text=b'Product picture.', max_length=100, null=True, blank=True)),
                 ('history_id', models.AutoField(serialize=False, primary_key=True)),
-                ('history_date', models.DateTimeField(default=datetime.datetime.now)),
-                ('history_type', models.CharField(max_length=1, choices=[(b'+', b'Created'), (b'~', b'Changed'), (b'-', b'Deleted')])),
-                ('history_user', simple_history.models.CurrentUserField(related_name='_product_history', to=settings.AUTH_USER_MODEL, null=True)),
+                ('history_date', models.DateTimeField()),
+                ('history_type', models.CharField(max_length=1, choices=[('+', 'Created'), ('~', 'Changed'), ('-', 'Deleted')])),
+                ('category', models.ForeignKey(related_name='+', on_delete=django.db.models.deletion.DO_NOTHING, db_constraint=False, blank=True, to='stock.Category', null=True)),
+                ('history_user', models.ForeignKey(related_name='+', on_delete=django.db.models.deletion.SET_NULL, to=settings.AUTH_USER_MODEL, null=True)),
             ],
             options={
-                'ordering': ('-history_date',),
+                'ordering': ('-history_date', '-history_id'),
+                'get_latest_by': 'history_date',
+                'verbose_name': 'historical product',
             },
         ),
         migrations.CreateModel(
