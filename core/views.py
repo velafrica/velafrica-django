@@ -1,6 +1,6 @@
 from django.conf import settings
-from stock import Category, Product
-from counter import Entry
+from stock.models import Category, Product
+from counter.models import Entry
 from django.shortcuts import render_to_response
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
@@ -11,9 +11,12 @@ from django.shortcuts import redirect
 
 from django.core import serializers
 
+def home(request):
+  return render_to_response('base.html')
+
 def counter(request):
   entries = Entry.objects.all()
-  return render_to_response('base:counter.html', entries)
+  return render_to_response('base_counter.html', entries)
 
 """
 def listPlayers(request):

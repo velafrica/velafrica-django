@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load staticfiles %}
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -9,8 +10,8 @@
     <title>Velafrica</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="/static/bootstrap-3.0.0/dist/css/bootstrap.css" rel="stylesheet">
-    <link href="/static/style.css" rel="stylesheet">
+    <link href="{% static "bootstrap-3.0.0/dist/css/bootstrap.css" %}" rel="stylesheet">
+    <link href="{% static "style.css" %}" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -91,11 +92,10 @@
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
         {% block jumbotron-img %}{% endblock %}
-        <h1>{% block jumbotron-title %}Swiss Rugby Stats{% endblock jumbotron-title %}</h1>
+        <h1>{% block jumbotron-title %}Velafrica{% endblock jumbotron-title %}</h1>
 
         {% block jumbotron %}Under construction
-        <p>The final goal of this site is to provide an easy to use service for Swiss Rugby Clubs to create statistics about their players and games.</p>
-        <p>&copy; by <a href="http://platzh1rsch.ch">Platzh1rsch</a></p> {% endblock jumbotron %}
+        <p>&copy; by <a href="http://velafrica.ch">Velafrica</a></p> {% endblock jumbotron %}
 
       </div>
 
@@ -111,8 +111,7 @@
         <div class="container">
             <footer>
                Under construction
-              <p>The final goal of this site is to provide an easy to use service for Swiss Rugby Clubs to create statistics about their players and games.</p>
-              <p>&copy; by <a href="http://platzh1rsch.ch">Platzh1rsch</a></p>
+              <p>&copy; by <a href="http://velafrica.ch">Velafrica</a></p>
             </footer>
         </div>
     </div>

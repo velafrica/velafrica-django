@@ -40,7 +40,8 @@ INSTALLED_APPS = (
     'django_resized',
     'simple_history',
     'counter',
-    'stock'
+    'stock',
+    'frontend'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -60,7 +61,7 @@ ROOT_URLCONF = 'core.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['frontend'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -105,6 +106,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = 'static'
 
 # Django Resized
 DJANGORESIZED_DEFAULT_SIZE = [1920, 1080]
