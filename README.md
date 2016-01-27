@@ -15,3 +15,7 @@ sudo -u postgres createdb $USER
 
 # Getting started with Django on Heroku
 https://devcenter.heroku.com/articles/django-app-configuration#creating-a-new-django-project
+
+# Database
+https://devcenter.heroku.com/articles/heroku-postgresql#local-setup
+DATABASE_URL: postgres://<username>:<password>@<host>/<dbname>
