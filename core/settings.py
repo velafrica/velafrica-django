@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
+    'counter',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,10 +39,10 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_resized',
+    'frontend',
     'simple_history',
-    'counter',
     'stock',
-    'frontend'
+    'translation',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -84,8 +85,23 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    },
+    'prod': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'mydatabase',
+        'USER': 'mydatabaseuser',
+        'PASSWORD': 'mypassword',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
+
+# Parse database configuration from $DATABASE_URL
+#import dj_database_url
+#DATABASES['default'] =  dj_database_url.config()
+
+# Enable Persistent Connections
+#DATABASES['default']['CONN_MAX_AGE'] = 500
 
 
 # Internationalization
@@ -102,11 +118,21 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.8/howto/static-files/
+# Simplified static file serving.
+# https://warehouse.python.org/project/whitenoise/
 
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.7/howto/static-files/
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(PROJECT_DIR, "static")
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 
 # Media files (Files uploaded by user)
 
