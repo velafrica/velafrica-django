@@ -87,13 +87,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
 if 'ON_HEROKU' in os.environ:
     if int(os.environ['ON_HEROKU']) == 1:
         # Parse database configuration from $DATABASE_URL
