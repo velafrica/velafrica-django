@@ -95,7 +95,7 @@ DATABASES = {
     }
 }
 if 'ON_HEROKU' in locals():
-    if ON_HEROKU == 1:
+    if int(ON_HEROKU) == 1:
         # Parse database configuration from $DATABASE_URL
         import dj_database_url
         DATABASES['default'] =  dj_database_url.config()
