@@ -19,3 +19,8 @@ https://devcenter.heroku.com/articles/django-app-configuration#creating-a-new-dj
 # Database
 https://devcenter.heroku.com/articles/heroku-postgresql#local-setup
 DATABASE_URL: postgres://<username>:<password>@<host>/<dbname>
+
+# Most helpful heroku toolkit cmds
+`heroku login` login to heroku
+`heroku config --app velafrica-admin` show all env variables
+`heroku config:set ON_HEROKU=1 --app velafrica-admin` set ENV variable (necessary for choosing the right database)
