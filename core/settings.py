@@ -94,11 +94,12 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-if int(ON_HEROKU) == 1:
-    # Parse database configuration from $DATABASE_URL
-    import dj_database_url
-    DATABASES['default'] =  dj_database_url.config()
-    DATABASES['default']['CONN_MAX_AGE'] = 500
+if 'ON_HEROKU' in locals():
+    if ON_HEROKU == 1:
+        # Parse database configuration from $DATABASE_URL
+        import dj_database_url
+        DATABASES['default'] =  dj_database_url.config()
+        DATABASES['default']['CONN_MAX_AGE'] = 500
 
 
 # Internationalization
