@@ -29,9 +29,8 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-
 INSTALLED_APPS = (
-    'counter',
+    # django apps & addons
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,6 +38,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_resized',
+    # custom velafrica apps
+    'counter',
     'frontend',
     'simple_history',
     'stock',
