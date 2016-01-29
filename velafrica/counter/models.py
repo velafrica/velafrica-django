@@ -9,7 +9,7 @@ class Entry(models.Model):
     """
     date = models.DateTimeField(blank=False, null=False, default=datetime.now, verbose_name="Datum und Uhrzeit")
     amount = models.IntegerField(blank=False, null=False, verbose_name="Anzahl Velos")
-    note = models.TextField(blank=True, null=True, verbose_name="Bemerkung")
+    note = models.CharField(blank=True, null=True, max_length=255, verbose_name="Bemerkungen")
     history = HistoricalRecords()
 
     def __unicode__(self):

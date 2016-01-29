@@ -96,7 +96,9 @@ if 'ON_HEROKU' in os.environ:
         # Parse database configuration from $DATABASE_URL
         import dj_database_url
         DATABASES['default'] =  dj_database_url.config()
-        DATABASES['default']['CONN_MAX_AGE'] = 500
+        # fasten up database access
+        # not working smoothly with free plan 
+        # DATABASES['default']['CONN_MAX_AGE'] = 500
 
 
 # Internationalization
