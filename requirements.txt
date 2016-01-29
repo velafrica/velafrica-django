@@ -4,11 +4,13 @@ Markdown==2.6.2
 Pillow==2.9.0
 PyJWT==1.4.0
 argparse==1.2.1
+diff-match-patch==20110725.1
 dj-database-url==0.3.0
 django-admin-conf-vars==0.3.1
 django-cors-headers==1.1.0
 django-crispy-forms==1.5.2
 django-filter==0.11.0
+django-import-export==0.4.2
 django-resized==0.3.5
 django-simple-history==1.7.0
 djangorestframework==3.2.3
@@ -18,5 +20,6 @@ psycopg2==2.6.1
 pytz==2015.4
 requests==2.7.0
 simple-history==1.1
+tablib==0.10.0
 whitenoise==2.0.6
 wsgiref==0.1.2
