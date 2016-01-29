@@ -41,7 +41,7 @@ class Person(models.Model):
     organisation = models.ForeignKey('Organisation', verbose_name="Arbeitgeber")
 
     def __unicode__(self):
-        if (len(self.user.first_name) > 0 and len(self.user.last_name > 0)):
+        if (len(self.user.first_name) > 0 and len(self.user.last_name) > 0):
             return "{} {} ({})".format(self.user.first_name, self.user.last_name, self.organisation.name)
         else:
             return "{} ({})".format(self.user.username, self.organisation.name)
