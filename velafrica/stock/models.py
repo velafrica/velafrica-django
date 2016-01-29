@@ -49,3 +49,47 @@ class Product(models.Model):
 
     class Meta:
         ordering = ['sku']
+
+
+class Warehouse(models.Model):
+    """
+    TODO: everything
+    - Name
+    - Organisation
+    - Adresse
+    - Beschreibung
+    """
+    pass
+
+class Stock(models.Model):
+    """
+    TODO: everything
+    - Warehouse
+    - Product
+    - amount
+    """
+    pass
+
+
+class StockMovement(models.Model):
+    """
+    Used for every inhouse stock movement
+    TODO: everything
+    - date
+    - from
+    - to
+    - products + amount
+    """
+    pass
+
+class StockInOut(models.Model):
+    """
+    Used for incoming and outgoing stock
+    TODO: everything
+    - date
+    - type (in / out)
+    - warehouse
+    - note
+    - products + amount
+    """
+    pass

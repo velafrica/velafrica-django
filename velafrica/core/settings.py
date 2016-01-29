@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     # custom apps
     'django_resized',
     'simple_history',
+    'import_export',
     # custom velafrica apps
     'velafrica.core',
     'velafrica.counter',
