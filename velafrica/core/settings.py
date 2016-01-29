@@ -44,7 +44,7 @@ INSTALLED_APPS = (
     'velafrica.core',
     'velafrica.counter',
     'velafrica.frontend',
-    #'velafrica.partner',
+    'velafrica.organisation',
     'velafrica.stock',
     'velafrica.translation'
 )

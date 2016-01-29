@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.core.validators import RegexValidator
 from django.db import models
 from django_resized import ResizedImageField
@@ -29,3 +30,21 @@ class Organisation(models.Model):
 
     class Meta:
         ordering = ['name']
+
+class Person(models.Model):
+    """
+    Person working at a network partner.
+    """
+    user = models.ForeignKey(User, verbose_name="Django User Account")
+    #first_name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Vorname")
+    #last_name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Nachname")
+    organisation = models.ForeignKey('Organisation', verbose_name="Arbeitgeber")
+
+    def __unicode__(self):
+        if (len(self.user.first_name) > 0 and len(self.user.last_name > 0)):
+            return "{} {} ({})".format(self.user.first_name, self.user.last_name, self.organisation.name)
+        else:
+            return "{} ({})".format(self.user.username, self.organisation.name)
+
+    class Meta:
+        verbose_name_plural = "People"

@@ -40,6 +40,7 @@
           <a class="navbar-brand" href="/">Velafrica</a>
         </div>
         <div class="navbar-collapse collapse">
+          <!--
           <ul class="nav navbar-nav">
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Leagues <b class="caret"></b></a>
@@ -67,13 +68,13 @@
                 <li><a href="#">One more separated link</a></li>
               </ul>
             </li>
-          </ul>
+          </ul>-->
           <ul class="nav navbar-nav navbar-right">
 
 {% if user.is_authenticated %}
             <li><a href="/auth/profile/">{{ user.username }}</a></li>
 {% else %}
-            <li><a href="/auth/profile/">Login</a></li>
+            <li><a href="/admin">Login</a></li>
 {% endif %}
           </ul>
         </div><!--/.nav-collipse -->

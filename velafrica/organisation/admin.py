@@ -1,5 +1,5 @@
 from django.contrib import admin
-from velafrica.partner.models import Partner
+from velafrica.organisation.models import Organisation, Person
 from simple_history.admin import SimpleHistoryAdmin
 
 """
@@ -8,4 +8,5 @@ class PartnerAdmin(SimpleHistoryAdmin):
     search_fields = ['name', 'description']
 """
 
-admin.site.register(Partner)
+admin.site.register(Organisation)
+admin.site.register(Person)
