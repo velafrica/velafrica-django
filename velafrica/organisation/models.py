@@ -17,10 +17,10 @@ class Organisation(models.Model):
     - Bemerkungen
     - Website
     """
-    name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Name der Organisation")
-    street = models.CharField(blank=False, null=False, max_length=255, verbose_name="Strasse")
-    plz = models.IntegerField(blank=False, null=False, verbose_name="PLZ")
-    city = models.CharField(blank=False, null=False, max_length=255, verbose_name="Ort")
+    name = models.CharField(blank=False, null=True, max_length=255, verbose_name="Name der Organisation")
+    street = models.CharField(blank=True, null=True, max_length=255, verbose_name="Strasse")
+    plz = models.IntegerField(blank=True, null=True, verbose_name="PLZ")
+    city = models.CharField(blank=True, null=True, max_length=255, verbose_name="Ort")
 
     website = models.CharField(blank=True, null=True, max_length=255, verbose_name="Website")
 

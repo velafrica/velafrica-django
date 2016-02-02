@@ -33,14 +33,46 @@ class ProductResource(resources.ModelResource):
 
 
 class ProductAdmin(ImportExportMixin, SimpleHistoryAdmin):
+    """
+    """
     resource_class = ProductResource
     list_display = ('articlenr', 'hscode', 'category', 'name', 'price', 'description')
     search_fields = ['articlenr', 'name', 'description']
     list_filter = ['category']
 
+
+class WarehouseResource(resources.ModelResource):
+    """
+    """
+    class Meta:
+        model = Warehouse
+
+class StockInline(admin.TabularInline):
+    model = Stock
+
+
+class WarehouseAdmin(ImportExportMixin, SimpleHistoryAdmin):
+    inlines = [StockInline,]
+    resource_class = WarehouseResource
+    list_display = ['name', 'organisation', 'description', 'stock_management']
+    search_fields = ['name', 'description', 'organisation']
+    list_filter = ['organisation', 'stock_management']
+
+
+class StockTransferPositionInline(admin.TabularInline):
+    model = StockTransferPosition
+
+
+class StockTransferAdmin(SimpleHistoryAdmin):
+    inlines = [StockTransferPositionInline,]
+    list_display = ['__unicode__', 'date', 'warehouse_from', 'warehouse_to', 'executor', 'booked']
+    list_filter = ['date', 'warehouse_from', 'warehouse_to', 'executor', 'booked']
+    readonly_fields = ['booked']
+
+
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Product, ProductAdmin)
-admin.site.register(Warehouse)
+admin.site.register(Warehouse, WarehouseAdmin)
 admin.site.register(Stock)
-admin.site.register(StockTransfer)
+admin.site.register(StockTransfer, StockTransferAdmin)
 admin.site.register(StockTransferPosition)

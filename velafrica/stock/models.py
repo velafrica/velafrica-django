@@ -67,8 +67,9 @@ class Warehouse(models.Model):
     """
     name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Name", help_text="Der Name / Bezeichnung des Lagers")
     description = models.CharField(blank=True, null=True, max_length=255, verbose_name="Beschreibung", help_text="Beschreibung / Bemerkungen zum Lager")
-    organisation = models.ForeignKey(Organisation, verbose_name="Lager", help_text='Die Organisation zu welcher das Lager gehört.')
+    organisation = models.ForeignKey(Organisation, verbose_name="Organisation", help_text='Die Organisation zu welcher das Lager gehört.')
     image = ResizedImageField(size=[500, 500], upload_to='stock/warehouses/', blank=True, null=True, verbose_name="Bild des Lagers")
+    stock_management = models.BooleanField(default=False, verbose_name="Automatisches Stock-Management", help_text="Gibt an ob automatisches Stock-Management aktiviert ist, d.h. ob bei Stock Verschiebungen der Stock automatisch angepasst werden soll.")
     
     def __unicode__(self):
         return u"{}, {}".format(self.organisation.name, self.name)
@@ -93,6 +94,7 @@ class Stock(models.Model):
 
     class Meta:
         ordering = ['warehouse', 'product']
+        unique_together = (("product", "warehouse"),)
 
 
 class StockTransfer(models.Model):
@@ -108,15 +110,16 @@ class StockTransfer(models.Model):
     """
     executor = models.ForeignKey(Person, null=False, blank=False, verbose_name="Ausführende Person", help_text="Die Person welche die Verschiebung vorgenommen hat.")
     date = models.DateField(blank=False, null=False, default=datetime.now, verbose_name="Ausführdatum")
-    booked = models.BooleanField(default=False, null=False, blank=False, help_text="Gibt an ob der Stock bereits angepasst wurde.")
     warehouse_from = models.ForeignKey(Warehouse, related_name="warehouse_from")
     warehouse_to = models.ForeignKey(Warehouse, related_name="warehouse_to")
+    booked = models.BooleanField(default=False, null=False, blank=False, help_text="Gibt an ob der Stock bereits angepasst wurde.")
 
     def __unicode__(self):
         return u"{}: {} nach {}".format(self.date, self.warehouse_from, self.warehouse_to)
 
     class Meta:
         ordering = ['-date']
+
 
 class StockTransferPosition(models.Model):
     """
@@ -125,3 +128,6 @@ class StockTransferPosition(models.Model):
     stocktransfer = models.ForeignKey(StockTransfer, verbose_name='Der zugehörige StockTransfer')
     product = models.ForeignKey(Product)
     amount = models.IntegerField(blank=False, null=False, verbose_name="Stückzahl")
+
+    class Meta:
+        unique_together = (("stocktransfer", "product"),)
