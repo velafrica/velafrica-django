@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.contrib import admin
 from velafrica.organisation.models import Organisation, Person
 from simple_history.admin import SimpleHistoryAdmin

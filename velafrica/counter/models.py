@@ -1,4 +1,5 @@
-from datetime import datetime    
+# -*- coding: utf-8 -*-
+from datetime import datetime
 from django.db import models
 from simple_history.models import HistoricalRecords
 from velafrica.organisation.models import Organisation
@@ -15,7 +16,7 @@ class Entry(models.Model):
     history = HistoricalRecords()
 
     def __unicode__(self):
-        return "{}: {}".format(self.date, self.amount)
+        return u"{}: {}".format(self.date, self.amount)
 
     class Meta:
         verbose_name_plural = "Entries"

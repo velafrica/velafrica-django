@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.contrib.auth.models import User
 from django.core.validators import RegexValidator
 from django.db import models
@@ -26,7 +27,7 @@ class Organisation(models.Model):
     history = HistoricalRecords()
 
     def __unicode__(self):
-        return "{}, {}".format(self.name, self.city)
+        return u"{}, {}".format(self.name, self.city)
 
     class Meta:
         ordering = ['name']
@@ -42,9 +43,9 @@ class Person(models.Model):
 
     def __unicode__(self):
         if (len(self.user.first_name) > 0 and len(self.user.last_name) > 0):
-            return "{} {} ({})".format(self.user.first_name, self.user.last_name, self.organisation.name)
+            return u"{} {} ({})".format(self.user.first_name, self.user.last_name, self.organisation.name)
         else:
-            return "{} ({})".format(self.user.username, self.organisation.name)
+            return u"{} ({})".format(self.user.username, self.organisation.name)
 
     class Meta:
         verbose_name_plural = "People"

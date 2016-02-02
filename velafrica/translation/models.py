@@ -10,7 +10,7 @@ class Language(models.Model):
     history = HistoricalRecords()
 
     def __unicode__(self):
-        return "{}".format(self.name)
+        return u"{}".format(self.name)
 
     class Meta:
         ordering = ['name']
