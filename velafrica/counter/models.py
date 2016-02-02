@@ -19,5 +19,6 @@ class Entry(models.Model):
         return u"{}: {}".format(self.date, self.amount)
 
     class Meta:
+        unique_together = ['organisation', 'date']
         verbose_name_plural = "Entries"
         ordering = ['-date']

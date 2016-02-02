@@ -65,7 +65,7 @@ class StockTransferPositionInline(admin.TabularInline):
 
 class StockTransferAdmin(SimpleHistoryAdmin):
     inlines = [StockTransferPositionInline,]
-    list_display = ['__unicode__', 'date', 'warehouse_from', 'warehouse_to', 'executor', 'booked']
+    list_display = ['id', 'date', 'warehouse_from', 'warehouse_to', 'executor', 'booked']
     list_filter = ['date', 'warehouse_from', 'warehouse_to', 'executor', 'booked']
     readonly_fields = ['booked']
 
