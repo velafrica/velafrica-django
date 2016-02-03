@@ -10,10 +10,10 @@ class Category(models.Model):
     """
     Represents a product category.
     """
+    articlenr_start = models.CharField(blank=True, null=True, max_length=8, verbose_name="Kategorienummer", unique=True, help_text="")
     name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Kategoriebezeichnung")
     description = models.TextField(blank=True, null=True, verbose_name="Beschreibung")
     image = ResizedImageField(size=[500, 500], upload_to='stock/categories/', blank=True, null=True, help_text='Product picture.')
-    articlenr_start = models.CharField(blank=True, null=True, max_length=7, verbose_name="Erste Nummer des Artikelnummerbereiches", unique=True, help_text="")
     color = models.CharField(
         validators=[
             RegexValidator(
@@ -41,9 +41,9 @@ class Product(models.Model):
     """
     Represents a product.
     """
+    articlenr = models.CharField(blank=False, null=False, max_length=7, verbose_name="Artikelnummer", unique=True, help_text="Die Velafrica Artikelnummer (in der Form 123.123)")
     name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Produktbezeichnung")
-    articlenr = models.CharField(blank=False, null=False, default="000.000", max_length=7, verbose_name="Artikelnummer", unique=True, help_text="Die Velafrica Artikelnummer (in der Form 123.123)")
-    hscode = models.CharField(blank=False, null=False, default="0000.00", max_length=7, verbose_name="Harmonized System Code")
+    hscode = models.CharField(blank=False, null=False, max_length=7, verbose_name="Harmonized System Code")
     description = models.TextField(blank=True, null=True, verbose_name="Beschreibung", help_text="Hinweise zur Qualität bzw Hinweise und Ergänzung")
     category = models.ForeignKey('Category', verbose_name="Kategorie", help_text='Die Hauptkategorie des Produktes.')
     image = ResizedImageField(size=[500, 500], upload_to='stock/products/', blank=True, null=True, verbose_name="Produktbild")
@@ -110,8 +110,9 @@ class StockTransfer(models.Model):
     """
     executor = models.ForeignKey(Person, null=False, blank=False, verbose_name="Ausführende Person", help_text="Die Person welche die Verschiebung vorgenommen hat.")
     date = models.DateField(blank=False, null=False, default=datetime.now, verbose_name="Ausführdatum")
-    warehouse_from = models.ForeignKey(Warehouse, related_name="warehouse_from")
-    warehouse_to = models.ForeignKey(Warehouse, related_name="warehouse_to")
+    warehouse_from = models.ForeignKey(Warehouse, related_name="warehouse_from", verbose_name="Herkunfts-Lager")
+    warehouse_to = models.ForeignKey(Warehouse, related_name="warehouse_to", verbose_name="Ziel-Lager")
+    note = models.CharField(blank=True, null=True, max_length=255, verbose_name="Bemerkungen")
     booked = models.BooleanField(default=False, null=False, blank=False, help_text="Gibt an ob der Stock bereits angepasst wurde.")
 
     def __unicode__(self):

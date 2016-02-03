@@ -12,12 +12,13 @@ class CategoryResource(resources.ModelResource):
 
     class Meta:
         model = Category
-        import_id_fields = ('name',)
+        import_id_fields = ('articlenr_start',)
+        fields = ('articlenr_start', 'name', 'description')
 
 
 class CategoryAdmin(ImportExportMixin, SimpleHistoryAdmin):
     resource_class = CategoryResource
-    list_display = ('name', 'description')
+    list_display = ('articlenr_start', 'name', 'description')
     search_fields = ['name', 'description']
 
 
