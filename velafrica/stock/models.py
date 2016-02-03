@@ -112,7 +112,7 @@ class StockTransfer(models.Model):
     date = models.DateField(blank=False, null=False, default=datetime.now, verbose_name="Ausführdatum")
     warehouse_from = models.ForeignKey(Warehouse, related_name="warehouse_from", verbose_name="Herkunfts-Lager")
     warehouse_to = models.ForeignKey(Warehouse, related_name="warehouse_to", verbose_name="Ziel-Lager")
-    note = models.CharField(blank=True, null=True, max_length=255, verbose_name="Bemerkungen")
+    #note = models.CharField(blank=True, null=True, max_length=255, verbose_name="Bemerkungen")
     booked = models.BooleanField(default=False, null=False, blank=False, help_text="Gibt an ob der Stock bereits angepasst wurde.")
 
     def __unicode__(self):
