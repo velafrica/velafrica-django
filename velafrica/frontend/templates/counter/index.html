@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block breadcrumb %} 
+<li><a href="/">Home</a></li>
+<li><a href="/counter">Velo Counter</a></li>
+{% endblock %} 
+
+
+{% block jumbotron-title %}
+Velo Counter
+{% endblock %}
+
+{% block jumbotron %}
+
+<p>Abstract</p>
+
+<h2>Heute</h2>
+<div style="font-size: 5em; font-weight: bold;">{{ velos_today }}</div>
+
+<h2>Total</h2>
+<div style="font-size: 5em; font-weight: bold;">{{ velos_total }}</div>
+
+{% endblock %}

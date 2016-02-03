@@ -15,8 +15,10 @@
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-      <script src="/static/bootstrap-3.0.0/assets/js/html5shiv.js"></script>
-      <script src="/static/bootstrap-3.0.0/assets/js/respond.min.js"></script>
+      <script src="{% static "jquery-2.2.0.min.js" %}"></script>
+      <script src="{% static "bootstrap-3.3.6-dist/js/bootstrap.min.js" %}"></script>
+      <script src="{% static "bootstrap-3.3.6-dist/js/html5shiv.js" %}"></script>
+      <script src="{% static "bootstrap-3.3.6-dist/js/respond.min.js" %}"></script>
     <![endif]-->
   
   <!-- HEADER Block to include further JS or CSS -->
@@ -40,8 +42,8 @@
           <a class="navbar-brand" href="/">Velafrica</a>
         </div>
         <div class="navbar-collapse collapse">
-          <!--
           <ul class="nav navbar-nav">
+            <!--
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Leagues <b class="caret"></b></a>
               <ul class="dropdown-menu">
@@ -52,8 +54,9 @@
                 <li><a href="#">1. Liga West</a></li>                
               </ul>
             </li>
-            <li><a href="/clubs" id="clubs">Clubs</a></li>
-            <li><a href="/games" id="games">Games</a></li>
+          -->
+            <li><a href="/counter" id="velocounter">Velo Counter</a></li>
+            <!--<li><a href="/games" id="games">Games</a></li>
             <li><a href="/players" id="players">Players</a></li>
             <li><a href="/about" id="about">About</a></li>
             <li class="dropdown">
@@ -67,8 +70,8 @@
                 <li><a href="#">Separated link</a></li>
                 <li><a href="#">One more separated link</a></li>
               </ul>
-            </li>
-          </ul>-->
+            </li>-->
+          </ul>
           <ul class="nav navbar-nav navbar-right">
 
 {% if user.is_authenticated %}
@@ -95,7 +98,10 @@
         {% block jumbotron-img %}{% endblock %}
         <h1>{% block jumbotron-title %}Velafrica{% endblock jumbotron-title %}</h1>
 
-        {% block jumbotron %}Under construction
+        {% block jumbotron %}
+        
+        <p>This site is still under construction</p>
+        
         <p>&copy; by <a href="http://velafrica.ch">Velafrica</a></p> {% endblock jumbotron %}
 
       </div>
@@ -121,8 +127,14 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="/static/bootstrap-3.0.0/assets/js/jquery.js"></script>
-    <script src="/static/bootstrap-3.0.0/dist/js/bootstrap.min.js"></script>
+    <script src="{% static "jquery-2.2.0.min.js" %}"></script>
+    <script src="{% static "bootstrap-3.3.6-dist/js/bootstrap.min.js" %}"></script>
+    <!--
+    <script src="{% static "bootstrap-3.3.6-dist/js/html5shiv.js" %}"></script>
+    <script src="{% static "bootstrap-3.3.6-dist/js/respond.min.js" %}"></script>
+    -->
+
+    
 
 
   </body>

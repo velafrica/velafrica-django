@@ -17,7 +17,13 @@ def home(request):
 
 def counter(request):
   entries = Entry.objects.all()
-  return render_to_response('base_counter.html', entries)
+  today = entries.first()
+  velos_total = 0
+  for entry in entries:
+    velos_total += entry.amount
+  print("velos " + str(velos_total))
+  velos_total_str = str(velos_total)
+  return render_to_response('counter/index.html', { 'velos_total': velos_total_str, 'velos_today': today.amount })
 
 """
 def listPlayers(request):
