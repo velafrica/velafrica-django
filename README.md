@@ -22,5 +22,14 @@ DATABASE_URL: postgres://<username>:<password>@<host>/<dbname>
 
 # Most helpful heroku toolkit cmds
 `heroku login` login to heroku
+
 `heroku config --app velafrica-admin` show all env variables
+
 `heroku config:set ON_HEROKU=1 --app velafrica-admin` set ENV variable (necessary for choosing the right database)
+
+# Postgres command to reset currentt id
+    select id from auth_group order by id DESC LIMIT 1;
+     id 
+    ----
+     11
+    alter sequence auth_group_id_seq restart with 12;
