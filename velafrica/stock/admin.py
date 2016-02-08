@@ -52,6 +52,13 @@ class StockInline(admin.TabularInline):
     model = Stock
 
 
+class StockAdmin(SimpleHistoryAdmin):
+    list_display = ['__unicode__', 'product', 'warehouse', 'amount']
+    list_editable = ['amount']
+    search_fields = ['product']
+    list_filter = ['warehouse']
+
+
 class WarehouseAdmin(ImportExportMixin, SimpleHistoryAdmin):
     inlines = [StockInline,]
     resource_class = WarehouseResource
@@ -74,6 +81,6 @@ class StockTransferAdmin(SimpleHistoryAdmin):
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Warehouse, WarehouseAdmin)
-admin.site.register(Stock)
+admin.site.register(Stock, StockAdmin)
 admin.site.register(StockTransfer, StockTransferAdmin)
 admin.site.register(StockTransferPosition)

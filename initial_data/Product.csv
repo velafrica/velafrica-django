@@ -6,7 +6,7 @@ articlenr,name,hscode,description,category,price,category__name
 100.104,"Hinterrad 26""",8714.92,"vgl Hinterrad 28""",1,2.70,Laufräder und Zubehör
 100.106,"Vorderrad 28""",8714.92,"Sollte zentrierbar sein, kein Speichenbruch",1,1.80,Laufräder und Zubehör
 100.108,"Vorderrad 26""",8714.92,"Sollte zentrierbar sein, kein Speichenbruch",1,1.80,Laufräder und Zubehör
-100.11,Räder gemischt 24'' und kleiner,8714.92,"Sollte zentrierbar sein, kein Speichenbruch",1,1.40,Laufräder und Zubehör
+100.110,Räder gemischt 24'' und kleiner,8714.92,"Sollte zentrierbar sein, kein Speichenbruch",1,1.40,Laufräder und Zubehör
 100.112,Felgen 28'',8714.92,,1,1.30,Laufräder und Zubehör
 100.114,Felgen 26'',8714.92,,1,1.30,Laufräder und Zubehör
 100.116,Felgen gemischt  24'' und kleiner,8714.92,,1,1.30,Laufräder und Zubehör
@@ -28,6 +28,7 @@ articlenr,name,hscode,description,category,price,category__name
 100.211,Bremsklötze ,8714.99,WERDEN NICHT MEHR ANGEBOTEN,2,0.60,Bremsen
 100.302,Schalthebel (Paar),8714.91,intakte und zu reparierende (z.B. Raster),3,1.80,Antrieb und Schaltung
 100.304,Schalthebel (einzeln),8714.91,intakte und zu reparierende (z.B. Raster),3,1.80,Antrieb und Schaltung
+100.305,Schalthebel Grip-Shift,8714.91,,3,,Antrieb und Schaltung
 100.306,Brems & Schalthebel (Kombination),8714.91,intakte und zu reparierende (z.B. Raster),3,1.80,Antrieb und Schaltung
 100.308,Umwerfer 2 und 3 fach (vorne),8714.91,Feder sollte ok sein,3,1.20,Antrieb und Schaltung
 100.31,Wechsler (Schaltwerk),8714.91,"Feder sollte ok sein, Rädchen nicht komplett verschlissen",3,1.50,Antrieb und Schaltung
@@ -50,7 +51,8 @@ articlenr,name,hscode,description,category,price,category__name
 100.414,Lenkergriffe (Paar),8714.99,"fraglich, wenn dann nicht zu abgegriffen. Evtl nur neu??",4,0.60,Komponenten
 100.416,Vorbau A-Head (neues System),8714.91,Schrauben dürfen nicht durchgedreht sein,4,1.20,Komponenten
 100.418,Vorbau (altes System),8714.91,"muss vollständig sein, Schraube mit Klemmmechanismus",4,1.20,Komponenten
-100.42,Sattelstange,8714.95,,4,1.02,Komponenten
+100.420,Sattelstange (altes System),8714.95,,4,1.02,Komponenten
+100.421,Sattelstange (neues System),8714.95,,4,,Komponenten
 100.422,Sattel,8714.95,"keine Risse, annehmbarer Allgemeinzustand",4,1.80,Komponenten
 100.424,Pedale,8714.96,Lager sollten sauber laufen und kein Spiel haben,4,1.20,Komponenten
 100.426,Pedale Click,8714.96,Lager sollten sauber laufen und kein Spiel haben,4,1.20,Komponenten
