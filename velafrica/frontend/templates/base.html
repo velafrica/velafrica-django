@@ -102,13 +102,15 @@
         
         <p>This site is still under construction</p>
         
-        <p>&copy; by <a href="http://velafrica.ch">Velafrica</a></p> {% endblock jumbotron %}
+        <p>&copy; by <a href="http://velafrica.ch">Velafrica</a></p> 
+
+        {% endblock jumbotron %}
 
       </div>
 
       <div>
-    <h2>{% block content-title %}{% endblock %}</h2>
-    {% block content %}{% endblock content %}
+        <h2>{% block content-title %}{% endblock %}</h2>
+        {% block content %}{% endblock content %}
       </div>
 
     </div> <!-- /container -->

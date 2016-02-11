@@ -13,10 +13,35 @@ Velo Counter
 
 <p>Hier ist die Anzahl verarbeiteter Velos aus der Velafrica Velowerkstatt seit dem 1.1.2016 ersichtlich.</p>
 
+<div class="col-md-4">
 <h2>Heute</h2>
 <div style="font-size: 5em; font-weight: bold;">{{ velos_today }}</div>
+</div>
 
+<div class="col-md-4">
+<h2>Gestern</h2>
+<div style="font-size: 5em; font-weight: bold;">{{ velos_yesterday }}</div>
+</div>
+
+<div class="col-md-4">
+<h2>Diese Woche</h2>
+<div style="font-size: 5em; font-weight: bold;">{{ velos_thisweek}}</div>
+</div>
+
+<div class="col-md-4">
+<h2>Diesen Monat</h2>
+<div style="font-size: 5em; font-weight: bold;">{{ velos_thismonth }}</div>
+</div>
+
+<div class="col-md-4">
+<h2>Dieses Jahr</h2>
+<div style="font-size: 5em; font-weight: bold;">{{ velos_thisyear }}</div>
+</div>
+
+<div class="col-md-4">
 <h2>Total</h2>
 <div style="font-size: 5em; font-weight: bold;">{{ velos_total }}</div>
+</div>
+
 
 {% endblock %}
