@@ -10,7 +10,7 @@ from django.shortcuts import redirect
 
 from django.core import serializers
 
-from velafrica.stock.models import Category, Product
+from velafrica.stock.models import Category, Product, Stock
 from velafrica.counter.models import Entry
 
 def home(request):
@@ -64,4 +64,14 @@ def counter(request):
     'velos_thisweek': velos_thisweek,
     'velos_yesterday': velos_yesterday,
     'velos_today': velos_today
+    })
+
+"""
+Stock
+"""
+
+def stock(request):
+  stock = Stock.objects.all()
+  return render_to_response('stock/index.html', { 
+    'stock': stock
     })
