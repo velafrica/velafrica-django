@@ -11,7 +11,10 @@ Velo Counter
 
 {% block jumbotron %}
 
-<p>Hier ist die Anzahl verarbeiteter Velos aus der Velafrica Velowerkstatt seit dem 1.1.2016 ersichtlich.</p>
+<p>Anzahl verarbeiteter Velos aus der Velafrica Velowerkstatt seit dem 1.1.2016</p>
+<p><i>TODO: Filter pro Verarbeitungsort</i></p>
+<p><a href="#"><span class="label label-warning">Alle</span></a></p>
+<p><a href="#"><span class="label label-default">Velafrica</span></a> <a href="#"><span class="label label-default">Drahtesel</span></a></p>
 
 <div class="col-md-4">
 <h2>Heute</h2>
@@ -43,5 +46,6 @@ Velo Counter
 <div style="font-size: 5em; font-weight: bold;">{{ velos_total }}</div>
 </div>
 
+<p><i>TODO: weitere Auswertungen (Durchschnitt / Tag / Woche / Monat / Jahr, produktivster Tag)</i></p>
 
 {% endblock %}
