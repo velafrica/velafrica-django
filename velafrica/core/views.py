@@ -16,11 +16,11 @@ from velafrica.counter.models import Entry
 def home(request):
   return render_to_response('base.html')
 
-"""
-Counter
-"""
-
 def counter(request):
+  """
+  Counter
+  """
+  org_id = 0
   velos_today = 0
   velos_yesterday = 0
   velos_thisweek = 0
@@ -29,35 +29,42 @@ def counter(request):
   velos_total = 0
 
   entries = Entry.objects.all()
-  latest = entries.first()
-  now = date.today()
-  first_day_of_week = now - timedelta(days=now.weekday())
 
-  # check if latest entry was from today
-  if now == latest.date:
-      velos_today = latest.amount
+  if ('id' in request.GET):
+    org_id = int(request.GET.get('id'))
+    entries = entries.filter(organisation=org_id)
 
-  for entry in entries:
-    # sum up total
-    velos_total += entry.amount
+  if (entries.count() > 0):
+    latest = entries.first()
+    now = date.today()
+    first_day_of_week = now - timedelta(days=now.weekday())
 
-    # check if entry is from current year
-    if entry.date.year == now.year:
-      velos_thisyear += entry.amount
+    # check if latest entry was from today
+    if now == latest.date:
+        velos_today = latest.amount
 
-      # check if entry is from current month
-      if entry.date.month == now.month:
-        velos_thismonth += entry.amount
+    for entry in entries:
+      # sum up total
+      velos_total += entry.amount
 
-    # check if entry is from current week
-    if entry.date >= first_day_of_week:
-      velos_thisweek += entry.amount
+      # check if entry is from current year
+      if entry.date.year == now.year:
+        velos_thisyear += entry.amount
 
-    # todo: get entry from yesterday
-    if entry.date == (now - timedelta(days=1)):
-      velos_yesterday += entry.amount
+        # check if entry is from current month
+        if entry.date.month == now.month:
+          velos_thismonth += entry.amount
 
-  return render_to_response('counter/index.html', { 
+      # check if entry is from current week
+      if entry.date >= first_day_of_week:
+        velos_thisweek += entry.amount
+
+      # todo: get entry from yesterday
+      if entry.date == (now - timedelta(days=1)):
+        velos_yesterday += entry.amount
+
+  return render_to_response('counter/index.html', {
+    'org_id': org_id,
     'velos_total': velos_total,
     'velos_thisyear': velos_thisyear,
     'velos_thismonth': velos_thismonth,
