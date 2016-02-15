@@ -23,5 +23,6 @@ urlpatterns = [
 	url(r'^$', views.home, name='home'),
 	url(r'^counter', views.counter, name='counter'),
     url(r'^stock', views.stock, name='stock'),
+    url(r'^transport', views.transport, name='transport'),
     url(r'^admin/', include(admin.site.urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

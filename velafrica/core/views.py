@@ -73,12 +73,18 @@ def counter(request):
     'velos_today': velos_today
     })
 
-"""
-Stock
-"""
-
 def stock(request):
+  """
+  Stock
+  """
   stock = Stock.objects.all()
   return render_to_response('stock/index.html', { 
     'stock': stock
     })
+
+
+def transport(request):
+  """
+  transport
+  """
+  return render_to_response('transport/index.html')
