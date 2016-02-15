@@ -1,7 +1,4 @@
 articlenr,name,hscode,description,category,price,category__name
-000.100,Velo allgemein (Rohmaterial),0000.00,Unverarbeitetes Velo,7,,Velos
-000.102,Velo allgemein (Ausschlacht),0000.00,Velo zum Ausschlachten,7,,Velos
-000.104,Velo allgemein (demontiert),0000.00,"demontiertes Velo, ready für den Export",7,,Velos
 100.102,"Hinterrad 28""",8714.92,"Sollte zentrierbar sein, kein Speichenbruch, Freilauf funktioniert",1,2.70,Laufräder und Zubehör
 100.104,"Hinterrad 26""",8714.92,"vgl Hinterrad 28""",1,2.70,Laufräder und Zubehör
 100.106,"Vorderrad 28""",8714.92,"Sollte zentrierbar sein, kein Speichenbruch",1,1.80,Laufräder und Zubehör
@@ -12,41 +9,41 @@ articlenr,name,hscode,description,category,price,category__name
 100.116,Felgen gemischt  24'' und kleiner,8714.92,,1,1.30,Laufräder und Zubehör
 100.118,"Reifen 28""",8714.5,"Profil noch vorhanden, Gummi nicht porös, Flanken haben keine Risse",1,0.90,Laufräder und Zubehör
 100.119,"Reifen 28"" NEU",8714.5,,1,,Laufräder und Zubehör
-100.12,"Reifen 26""",8714.5,"Profil noch vorhanden, Gummi nicht porös, Flanken haben keine Risse",1,0.90,Laufräder und Zubehör
+100.120,"Reifen 26""",8714.5,"Profil noch vorhanden, Gummi nicht porös, Flanken haben keine Risse",1,0.90,Laufräder und Zubehör
 100.121,"Reifen 26"" NEU",8714.5,,1,,Laufräder und Zubehör
 100.122,Reifen gemsicht  24'' und kleiner,8714.5,"Profil noch vorhanden, Gummi nicht porös, Flanken haben keine Risse",1,0.90,Laufräder und Zubehör
 100.128,"Schläuche 28""",4013.2,intakt bzw kein Loch,1,0.30,Laufräder und Zubehör
 100.129,"Schläuche 28"" NEU",4013.2,,1,,Laufräder und Zubehör
-100.13,"Schläuche 26""",4013.2,intakt bzw kein Loch,1,0.30,Laufräder und Zubehör
+100.130,"Schläuche 26""",4013.2,intakt bzw kein Loch,1,0.30,Laufräder und Zubehör
 100.131,"Schläuche 26"" NEU",4013.2,,1,,Laufräder und Zubehör
 100.132,Schläuche gemischt 24'' und kleiner,4013.2,intakt bzw kein Loch,1,0.30,Laufräder und Zubehör
 100.202,Bremshebel (Paar),8714.99,Gelenk muss in Ordnung sein,2,1.50,Bremsen
 100.204,Bremsen Weinmann,8714.99,"vollständig inklusive aller Schrauben, Scheiben und sonstiger Teile",2,1.80,Bremsen
 100.206,Bremsen Cantilever,8714.99,"vollständig inklusive aller Schrauben, Scheiben und sonstiger Teile",2,1.80,Bremsen
 100.208,Bremsen V-Brake,8714.99,"vollständig inklusive aller Schrauben, Scheiben und sonstiger Teile",2,1.80,Bremsen
-100.21,Bremsklötze NEU,8714.99,,2,,Bremsen
+100.210,Bremsklötze NEU,8714.99,,2,,Bremsen
 100.211,Bremsklötze ,8714.99,WERDEN NICHT MEHR ANGEBOTEN,2,0.60,Bremsen
 100.302,Schalthebel (Paar),8714.91,intakte und zu reparierende (z.B. Raster),3,1.80,Antrieb und Schaltung
 100.304,Schalthebel (einzeln),8714.91,intakte und zu reparierende (z.B. Raster),3,1.80,Antrieb und Schaltung
-100.305,Schalthebel Grip-Shift,8714.91,,3,,Antrieb und Schaltung
+100.305,Schalthebel Grip-Shift,8714.91,,3,1.80,Antrieb und Schaltung
 100.306,Brems & Schalthebel (Kombination),8714.91,intakte und zu reparierende (z.B. Raster),3,1.80,Antrieb und Schaltung
 100.308,Umwerfer 2 und 3 fach (vorne),8714.91,Feder sollte ok sein,3,1.20,Antrieb und Schaltung
-100.31,Wechsler (Schaltwerk),8714.91,"Feder sollte ok sein, Rädchen nicht komplett verschlissen",3,1.50,Antrieb und Schaltung
+100.310,Wechsler (Schaltwerk),8714.91,"Feder sollte ok sein, Rädchen nicht komplett verschlissen",3,1.50,Antrieb und Schaltung
 100.312,Kurbelgarniture 1-fach (4-Kant),8714.91,"Kettenblätter nicht verschlissen (bzw. spitz), Kettenblattschrauben müssen zu öffnen sein",3,1.80,Antrieb und Schaltung
 100.314,Kurbelgarniture 2-fach (4-Kant),8714.91,"Kettenblätter nicht verschlissen (bzw. spitz), Kettenblattschrauben müssen zu öffnen sein",3,1.80,Antrieb und Schaltung
 100.316,Kurbelgarnitur 3-fach (4-Kant),8714.91,"Kettenblätter nicht verschlissen (bzw. spitz), Kettenblattschrauben müssen zu öffnen sein",3,1.80,Antrieb und Schaltung
 100.318,MTB Kurbel NEU 3,8714.91,3 Fach vierkant Aufnahme ,3,,Antrieb und Schaltung
-100.32,Tretlager kompakt (4-Kant),8714.91,"läuft rund, Lagerschalen nicht ausgeschlagen, vollständig",3,0.90,Antrieb und Schaltung
+100.320,Tretlager kompakt (4-Kant),8714.91,"läuft rund, Lagerschalen nicht ausgeschlagen, vollständig",3,0.90,Antrieb und Schaltung
 100.322,Tretlager universell NEU,8714.91,,3,,Antrieb und Schaltung
 100.324,Kette ,8714.91,nicht verschlissen (Kettentest),3,1.80,Antrieb und Schaltung
 100.326,Kette NEU 8/9- Fach,8714.91,einzeln oder  in Kombination mit neuer Kassette,3,,Antrieb und Schaltung
 100.328,Kassette ,8714.91,,3,1.80,Antrieb und Schaltung
-100.33,Kassette Neu 8/9 -Fach,8714.91,einzeln oder  in Kombination mit neuer Kett,3,1.80,Antrieb und Schaltung
+100.330,Kassette Neu 8/9 -Fach,8714.91,einzeln oder  in Kombination mit neuer Kett,3,1.80,Antrieb und Schaltung
 100.402,Vordergabel,8714.91,"nicht verbogen, Gabelgewinde ok",4,3.00,Komponenten
 100.404,Federgabel,8714.91,,4,3.00,Komponenten
 100.406,Federgabel NEU,8714.99,,4,3.00,Komponenten
 100.408,Steuerlager,8714.99,"nicht ausgeschlagen, sollte vollständig sein",4,1.20,Komponenten
-100.41,"Lenker gerade oder gebogen, keine Rennvelolenker",8714.91,meistens aus Aluminium- dürfen keine Risse haben,4,1.50,Komponenten
+100.410,"Lenker gerade oder gebogen, keine Rennvelolenker",8714.91,meistens aus Aluminium- dürfen keine Risse haben,4,1.50,Komponenten
 100.412,Rennvelolenker,8714.91,s. Lenker gerade oder gebogen,4,1.50,Komponenten
 100.414,Lenkergriffe (Paar),8714.99,"fraglich, wenn dann nicht zu abgegriffen. Evtl nur neu??",4,0.60,Komponenten
 100.416,Vorbau A-Head (neues System),8714.91,Schrauben dürfen nicht durchgedreht sein,4,1.20,Komponenten
@@ -57,23 +54,23 @@ articlenr,name,hscode,description,category,price,category__name
 100.424,Pedale,8714.96,Lager sollten sauber laufen und kein Spiel haben,4,1.20,Komponenten
 100.426,Pedale Click,8714.96,Lager sollten sauber laufen und kein Spiel haben,4,1.20,Komponenten
 100.428,Gepäckträger,8714.99,"nicht verbogen, sollte montierbar sein",4,1.80,Komponenten
-100.43,Schutzblech Metall,8714.99,inklusive aller Schrauben,4,0.30,Komponenten
+100.430,Schutzblech Metall,8714.99,inklusive aller Schrauben,4,0.30,Komponenten
 100.432,Steckschutzbleche Kunststoff,8714.99,inklusive Halterung?,4,0.30,Komponenten
 100.502,Pumpe,8714.99,funktioniert,5,1.20,Zubehör
 100.504,Veloständer,8714.99,ganz,5,1.20,Zubehör
 100.506,Dynamo,8714.99,funktioniert,5,1.50,Zubehör
 100.508,Rücklicht,8714.99,funktioniert,5,1.20,Zubehör
-100.51,Vorderlicht,8714.99,funktioniert,5,1.20,Zubehör
+100.510,Vorderlicht,8714.99,funktioniert,5,1.20,Zubehör
 100.512,Reflektoren,8714.99,funktioniert,5,0.30,Zubehör
 100.514,Klingel,8714.99,funktioniert,5,0.60,Zubehör
 100.516,Lenkerhörnli (Paar),8714.99,funktioniert,5,1.20,Zubehör
 100.518,Bidonhalter,8714.99,,5,0.30,Zubehör
-100.52,"Schrauben, Muttern & Unterlagscheiben",8714.99,,5,0.30,Zubehör
+100.520,"Schrauben, Muttern & Unterlagscheiben",8714.99,,5,0.30,Zubehör
 100.522,Schaltkabel NEU,8714.99,,5,44.20,Zubehör
 100.523,Schaltkabel Hülllen NEU,8714.99,,5,13.44,Zubehör
 100.524,Bremskabel NEU,8714.99,,5,53.88,Zubehör
 100.525,Bremskabel Hüllen NEU,8714.99,,5,9.36,Zubehör
 100.526,Kabelenden,8714.99,,5,0.01,Zubehör
 100.527,Schaltkabel / Bremskabel / Hüllen,8714.99,WERDEN NICHT MEHR ANGEBOTEN,5,0.30,Zubehör
-100.53,Stromkabel & Zubehör,8714.99,,5,0.30,Zubehör
+100.530,Stromkabel & Zubehör,8714.99,,5,0.30,Zubehör
 100.532,Schnellspanner und Klemmen,8714.99,,5,0.12,Zubehör
