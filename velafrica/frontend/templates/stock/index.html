@@ -6,9 +6,7 @@
 {% endblock %} 
 
 {% block document-head %}
-<!-- include footable -->
-<link rel="stylesheet" type="text/css" href="{% static "css/footable.core.min.css" %}" />
-<script type="text/javascript" src="{% static "js/footable.all.min.js" %}"></script>
+
 {% endblock %}
 
 {% block jumbotron-title %}
@@ -21,7 +19,7 @@ Spare Parts Stock
 {% block content %}
 
 <!-- seach box -->		
-<!--<div class="input-group"><span class="input-group-addon">Search:</span> <input id="filter" type="text" class="form-control" /></div>-->
+<div class="input-group"><span class="input-group-addon">Search:</span> <input id="filter" type="text" class="form-control" /></div>
 
 <table class="table footable" data-page-size=100 data-filter="#filter">
 	<thead>
@@ -50,6 +48,10 @@ Spare Parts Stock
 {% endblock %}
 
 {% block document-foot %}
+<!-- include footable -->
+<link rel="stylesheet" type="text/css" href="{% static "css/footable.core.min.css" %}" />
+<script type="text/javascript" src="{% static "js/footable.all.min.js" %}"></script>
+
 <!-- init footable -->
 <script type="text/javascript">
 	$(function () {
