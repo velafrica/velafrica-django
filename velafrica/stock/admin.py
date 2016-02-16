@@ -5,6 +5,7 @@ from import_export import resources
 from import_export.admin import ImportExportMixin
 from simple_history.admin import SimpleHistoryAdmin
 
+
 class CategoryResource(resources.ModelResource):
     """
     Define the category resource for import / export.
