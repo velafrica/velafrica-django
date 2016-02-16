@@ -47,7 +47,8 @@ INSTALLED_APPS = (
     'velafrica.frontend',
     'velafrica.organisation',
     'velafrica.stock',
-    'velafrica.translation'
+    #'velafrica.translation'
+    'velafrica.transport'
 )
 
 MIDDLEWARE_CLASSES = (

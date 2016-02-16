@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+from datetime import datetime
 from django.core.validators import RegexValidator
 from django.db import models
 from django_resized import ResizedImageField
@@ -30,7 +32,7 @@ class Driver(models.Model):
     """
     name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Name des Fahrers")
     organisation = models.ForeignKey(Organisation, blank=True, null=True, help_text='Organisation bei welcher der Fahrer angestellt ist.')
-    person = models.ForeignKeyField(Person, blank=True, null=True, verbose_name='Verknüpfte Person')
+    person = models.ForeignKey(Person, blank=True, null=True, verbose_name='Verknüpfte Person')
 
     def __unicode__(self):
         return u"{}".format(self.name)
@@ -44,7 +46,7 @@ class VeloState(models.Model):
     Represents the state of a bicycle.
     """
     name = models.CharField(blank=False, null=False, max_length=40, verbose_name="Name des Zustandes")
-    description = name = models.CharField(blank=True, null=True, max_length=255, verbose_name="Beschreibung")
+    description = models.CharField(blank=True, null=True, max_length=255, verbose_name="Beschreibung")
 
     def __unicode__(self):
         return u"{}".format(self.name)
@@ -59,19 +61,19 @@ class Ride(models.Model):
     Used to count how many bicycles went from one place to another in a certain period of time.
     """
     date = models.DateField(blank=False, null=False, default=datetime.now, verbose_name="Datum")
-    from = models.ForeignKeyField(Warehouse, verbose_name='Start', help_text='Start der Fahrt')
-    to = models.ForeignKeyField(Warehouse, verbose_name='Ziel', help_text='Ziel der Fahrt')
-    driver = models.ForeignKeyField(Driver, verbose_name='Fahrer', help_text='Person die den Transport durchgeführt hat.')
-    car = models.ForeignKeyField(Car, verbose_name='Fahrzeug')
+    from_warehouse = models.ForeignKey(Warehouse, verbose_name='Start', related_name='from_warehouse', help_text='Start der Fahrt')
+    to_warehouse = models.ForeignKey(Warehouse, verbose_name='Ziel', related_name='to_warehouse', help_text='Ziel der Fahrt')
+    driver = models.ForeignKey(Driver, verbose_name='Fahrer', help_text='Person die den Transport durchgeführt hat.')
+    car = models.ForeignKey(Car, verbose_name='Fahrzeug')
     velos = models.IntegerField(blank=False, null=False, default=0, verbose_name='Anzahl Velos')
-    velo_state = models.ForeignKeyField(VeloState, verbose_name='Zustand der Velos')
+    velo_state = models.ForeignKey(VeloState, verbose_name='Zustand der Velos')
     spare_parts = models.BooleanField(default=False, verbose_name='Ersatzteile transportiert?')
     note = models.CharField(blank=True, null=True, max_length=255, verbose_name="Bemerkung", help_text="Bemerkung zur Fahrt")
     
     history = HistoricalRecords()
 
     def __unicode__(self):
-        return u"Fahrt {}, {}: {} nach {}".format(self.id, self.date, self.from, self.to)
+        return u"Fahrt {}, {}: {} nach {}".format(self.id, self.date, self.from_warehouse, self.to_warehouse)
 
     class Meta:
-        ordering = ['date', 'from']
+        ordering = ['date', 'from_warehouse']

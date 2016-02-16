@@ -1,26 +1,27 @@
+# -*- coding: utf-8 -*-
 from django.contrib import admin
 from simple_history.admin import SimpleHistoryAdmin
-from velafrica.transport import Car, Driver, VeloState, Ride
+from velafrica.transport.models import Car, Driver, VeloState, Ride
 
 
 class CarAdmin(SimpleHistoryAdmin):
-    list_display = ('name', 'organisation', 'plate')
+    list_display = ['name', 'organisation', 'plate']
     search_fields = ['name']
 
 
 class DriverAdmin(SimpleHistoryAdmin):
-    list_display = ('name')
+    list_display = ['name']
     search_fields = ['name']
 
 
 class VeloStateAdmin(SimpleHistoryAdmin):
-    list_display = ('name')
+    list_display = ['name']
     search_fields = ['name']
 
 
 class RideAdmin(SimpleHistoryAdmin):
-    list_display = ('id', 'date', 'from', 'to', 'driver', 'velos', 'velo_state', 'spare_parts')
-    search_fields = ['from', 'to', 'driver']
+    list_display = ['id', 'date', 'from_warehouse', 'to_warehouse', 'driver', 'velos', 'velo_state', 'spare_parts']
+    search_fields = ['from_warehouse', 'to_warehouse', 'driver']
     list_filter = ['date', 'driver', 'velo_state', 'spare_parts']
 
 admin.site.register(Car, CarAdmin)
