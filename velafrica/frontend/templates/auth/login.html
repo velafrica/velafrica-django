@@ -10,8 +10,9 @@ Login
 {% endblock %}
 
 {% block jumbotron %}
-{% if form.errors %}
-<p>Your username and password didn't match. Please try again.</p>
+
+{% if user.is_authenticated %}
+You are already logged in :)
 {% endif %}
 
 <form method="post" action="{% url 'django.contrib.auth.views.login' %}" role="form">

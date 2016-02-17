@@ -55,9 +55,9 @@
               </ul>
             </li>
           -->
-            <li><a href="/counter" id="velocounter">Velo Counter</a></li>
-            <li><a href="/stock" id="velocounter">Stock</a></li>
-            <li><a href="/transport" id="velocounter">Transport</a></li>
+            <li><a href="{% url 'counter' %}" id="velocounter">Velo Counter</a></li>
+            <li><a href="{% url 'stock' %}" id="velocounter">Stock</a></li>
+            <li><a href="{% url 'transport' %}" id="velocounter">Transport</a></li>
             <!--<li><a href="/games" id="games">Games</a></li>
             <li><a href="/players" id="players">Players</a></li>
             <li><a href="/about" id="about">About</a></li>
@@ -77,9 +77,10 @@
           <ul class="nav navbar-nav navbar-right">
 
 {% if user.is_authenticated %}
-            <li><a href="/auth/profile/">{{ user.username }}</a></li>
+            <li><a href="{% url 'profile' %}">{{ user.username }}</a></li>
+            <li><a href="{% url 'logout' %}">Logout</a></li>
 {% else %}
-            <li><a href="/admin">Login</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
 {% endif %}
           </ul>
         </div><!--/.nav-collipse -->

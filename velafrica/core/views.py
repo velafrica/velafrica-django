@@ -5,7 +5,7 @@ from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.template import RequestContext
-from django.contrib.auth import logout
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
 
 from django.core import serializers
@@ -13,12 +13,23 @@ from django.core import serializers
 from velafrica.stock.models import Category, Product, Stock
 from velafrica.counter.models import Entry
 
+@login_required
+def profile(request):
+  return render_to_response('auth/profile.html', context_instance=RequestContext(request))
+
+def accounts_logout(request):
+  """
+  according to https://docs.djangoproject.com/en/1.9/topics/auth/default/
+  """
+  logout(request)
+  return redirect('django.contrib.auth.views.login')
+
 def home(request):
-  return render_to_response('base.html')
+  return render_to_response('base.html', context_instance=RequestContext(request))
 
 def counter(request):
   """
-  Counter
+  Counter main view
   """
   org_id = 0
   velos_today = 0
@@ -70,8 +81,16 @@ def counter(request):
     'velos_thismonth': velos_thismonth,
     'velos_thisweek': velos_thisweek,
     'velos_yesterday': velos_yesterday,
-    'velos_today': velos_today
-    })
+    'velos_today': velos_today,
+    }, context_instance=RequestContext(request)
+  )
+
+@login_required
+def counter_form(request):
+  """
+  Show to create new entries.
+  """
+  pass
 
 def stock(request):
   """
@@ -80,11 +99,13 @@ def stock(request):
   stock = Stock.objects.all()
   return render_to_response('stock/index.html', { 
     'stock': stock
-    })
+    }, context_instance=RequestContext(request)
+  )
 
 
 def transport(request):
   """
   transport
   """
-  return render_to_response('transport/index.html')
+  return render_to_response('transport/index.html',
+     context_instance=RequestContext(request))

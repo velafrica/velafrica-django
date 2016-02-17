@@ -117,6 +117,10 @@ USE_L10N = True
 USE_TZ = True
 
 
+LOGIN_URL = '/auth/login'
+LOGIN_REDIRECT_URL = '/auth/profile'
+LOGOUT_URL = '/auth/logout'
+
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
 

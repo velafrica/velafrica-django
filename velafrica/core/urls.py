@@ -24,5 +24,8 @@ urlpatterns = [
 	url(r'^counter', views.counter, name='counter'),
     url(r'^stock', views.stock, name='stock'),
     url(r'^transport', views.transport, name='transport'),
+    url(r'^auth/login', 'django.contrib.auth.views.login', {'template_name':'auth/login.html'}, name='login'),
+    url(r'^auth/profile', views.profile, name='profile'),
+    url(r'^auth/logout', views.accounts_logout, name='logout'),
     url(r'^admin/', include(admin.site.urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
