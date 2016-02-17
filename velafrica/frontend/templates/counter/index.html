@@ -21,36 +21,69 @@ add new entry
  <a href="{% url 'counter' %}?id=2"><span class="label {% if org_id == 2 %}label-warning{% else %}label-default{% endif %}">Drahtesel</span></a>
 </p>
 
-<div class="col-md-4">
-<h2>Heute</h2>
-<div style="font-size: 5em; font-weight: bold;">{{ velos_today }}</div>
+<div class="row">
+
+	<div class="col-md-4">
+	<h2>Heute</h2>
+	<div style="font-size: 5em; font-weight: bold;">{{ velos_today }}</div>
+	</div>
+
+	<div class="col-md-4">
+	<h2>Gestern</h2>
+	<div style="font-size: 5em; font-weight: bold;">{{ velos_yesterday }}</div>
+	</div>
+
+	<div class="col-md-4">
+	<h2>Diese Woche</h2>
+	<div style="font-size: 5em; font-weight: bold;">{{ velos_thisweek}}</div>
+	</div>
 </div>
 
-<div class="col-md-4">
-<h2>Gestern</h2>
-<div style="font-size: 5em; font-weight: bold;">{{ velos_yesterday }}</div>
+<div class="row">
+	<div class="col-md-4">
+	<h2>Diesen Monat</h2>
+	<div style="font-size: 5em; font-weight: bold;">{{ velos_thismonth }}</div>
+	</div>
+
+	<div class="col-md-4">
+	<h2>Dieses Jahr</h2>
+	<div style="font-size: 5em; font-weight: bold;">{{ velos_thisyear }}</div>
+	</div>
+
+	<div class="col-md-4">
+	<h2>Total</h2>
+	<div style="font-size: 5em; font-weight: bold;">{{ velos_total }}</div>
+	</div>
 </div>
 
-<div class="col-md-4">
-<h2>Diese Woche</h2>
-<div style="font-size: 5em; font-weight: bold;">{{ velos_thisweek}}</div>
+<div class="row">
+	<div class="col-md-12">
+	<h2>Produktivster Tag</h2>
+	<div style="font-size: 5em; font-weight: bold;">{{ velos_max }}</div> am {{ velos_max_date }}
+	</div>
 </div>
 
-<div class="col-md-4">
-<h2>Diesen Monat</h2>
-<div style="font-size: 5em; font-weight: bold;">{{ velos_thismonth }}</div>
-</div>
+<div class="row">
+	<div class="col-md-4">
+	<h2>Velos pro Tag</h2>
+	<div style="font-size: 5em; font-weight: bold;">0</div>
+	</div>
 
-<div class="col-md-4">
-<h2>Dieses Jahr</h2>
-<div style="font-size: 5em; font-weight: bold;">{{ velos_thisyear }}</div>
-</div>
+	<div class="col-md-4">
+	<h2>Velos pro Woche</h2>
+	<div style="font-size: 5em; font-weight: bold;">0</div>
+	</div>
 
-<div class="col-md-4">
-<h2>Total</h2>
-<div style="font-size: 5em; font-weight: bold;">{{ velos_total }}</div>
-</div>
+	<div class="col-md-4">
+	<h2>Velos pro Monat</h2>
+	<div style="font-size: 5em; font-weight: bold;">0</div>
+	</div>
 
-<p><i>TODO: weitere Auswertungen (Durchschnitt / Tag / Woche / Monat / Jahr, produktivster Tag)</i></p>
+	<div class="col-md-4">
+	<h2>Velos pro Jahr</h2>
+	<div style="font-size: 5em; font-weight: bold;">0</div>
+	</div>
+
+</div>
 
 {% endblock %}

@@ -39,6 +39,9 @@ def counter(request):
   velos_thisyear = 0
   velos_total = 0
 
+  velos_max = 0
+  velos_max_date = date.today()
+
   entries = Entry.objects.all()
 
   if ('id' in request.GET):
@@ -57,6 +60,11 @@ def counter(request):
     for entry in entries:
       # sum up total
       velos_total += entry.amount
+
+      # check if it is the biggest amount
+      if entry.amount > velos_max:
+        velos_max = entry.amount
+        velos_max_date = entry.date
 
       # check if entry is from current year
       if entry.date.year == now.year:
@@ -82,6 +90,8 @@ def counter(request):
     'velos_thisweek': velos_thisweek,
     'velos_yesterday': velos_yesterday,
     'velos_today': velos_today,
+    'velos_max': velos_max,
+    'velos_max_date': velos_max_date,
     }, context_instance=RequestContext(request)
   )
 
