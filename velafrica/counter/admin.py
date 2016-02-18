@@ -35,7 +35,7 @@ class EntryAdmin(ImportExportMixin, SimpleHistoryAdmin):
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == 'organisation':
             if request.user.is_superuser:
-                return qs
+                pass
             # other users with a correlating person should only see their organisation
             elif hasattr(request.user, 'person'):
                 kwargs["queryset"] = Organisation.objects.filter(id=request.user.person.organisation.id)
