@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.contrib.auth.models import User
 from django.core.validators import RegexValidator
+from django.conf import settings
 from django.db import models
 from django_resized import ResizedImageField
 from simple_history.models import HistoricalRecords
@@ -36,7 +37,11 @@ class Person(models.Model):
     """
     Person working at a network partner.
     """
-    user = models.ForeignKey(User, verbose_name="Django User Account")
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        verbose_name="Django User Account"
+        )
     #first_name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Vorname")
     #last_name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Nachname")
     organisation = models.ForeignKey('Organisation', verbose_name="Arbeitgeber")
