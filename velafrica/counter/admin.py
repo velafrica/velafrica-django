@@ -1,5 +1,6 @@
 from django.contrib import admin
 from velafrica.counter.models import Entry
+from velafrica.organisation.models import Organisation
 from import_export import resources
 from import_export.admin import ImportExportMixin
 from simple_history.admin import SimpleHistoryAdmin
@@ -18,5 +19,29 @@ class EntryAdmin(ImportExportMixin, SimpleHistoryAdmin):
     search_fields = ['note', 'organisation']
     list_editable = ['amount', 'note']
     list_filter = ['date', 'organisation', 'amount']
+
+    def get_queryset(self, request):
+        qs = super(EntryAdmin, self).get_queryset(request)
+        # superusers should see all entries
+        if request.user.is_superuser:
+            return qs
+        # other users with a correlating person should only see their organisations entries
+        elif hasattr(request.user, 'person'):
+            return qs.filter(organisation=request.user.person.organisation)
+        # users with no superuser role and no related person should not see any entries
+        else:
+            return []
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == 'organisation':
+            if request.user.is_superuser:
+                return qs
+            # other users with a correlating person should only see their organisation
+            elif hasattr(request.user, 'person'):
+                kwargs["queryset"] = Organisation.objects.filter(id=request.user.person.organisation.id)
+            # users with no superuser role and no related person should not see any organisations
+            else:
+                kwargs["queryset"] = []
+        return super(EntryAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
 
 admin.site.register(Entry, EntryAdmin)
