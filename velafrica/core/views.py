@@ -36,7 +36,7 @@ def accounts_logout(request):
 def home(request):
   return render_to_response('base.html', context_instance=RequestContext(request))
 
-
+@login_required
 def counter(request):
   """
   Counter main view
