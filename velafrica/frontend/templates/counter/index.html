@@ -4,16 +4,12 @@
 <li><a href="{% url 'counter' %}">Velo Counter</a></li>
 {% endblock %} 
 
-
+{% block jumbotron-img %}{% endblock %}
 {% block jumbotron-title %}
 Velo Counter
 {% endblock %}
 
 {% block jumbotron %}
-
-{% if user.is_authenticated %}
-add new entry
-{% endif %}
 
 <p>Anzahl verarbeiteter Velos aus dem Velafrica Partner Netzwerk seit dem 1.1.2016</p>
 <p><a href="{% url 'counter' %}"><span class="label {% if org_id == 0 %}label-warning{% else %}label-default{% endif %}" data-org-id=0>Alle</span></a></p>

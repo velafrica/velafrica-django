@@ -34,6 +34,8 @@ class Driver(models.Model):
     organisation = models.ForeignKey(Organisation, blank=True, null=True, help_text='Organisation bei welcher der Fahrer angestellt ist.')
     person = models.ForeignKey(Person, blank=True, null=True, verbose_name='Verknüpfte Person')
 
+    history = HistoricalRecords()
+    
     def __unicode__(self):
         return u"{}".format(self.name)
 
@@ -47,6 +49,8 @@ class VeloState(models.Model):
     """
     name = models.CharField(blank=False, null=False, max_length=40, verbose_name="Name des Zustandes")
     description = models.CharField(blank=True, null=True, max_length=255, verbose_name="Beschreibung")
+    
+    history = HistoricalRecords()
 
     def __unicode__(self):
         return u"{}".format(self.name)

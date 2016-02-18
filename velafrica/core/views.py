@@ -7,15 +7,23 @@ from django.http import HttpResponse
 from django.template import RequestContext
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
-
 from django.core import serializers
 
 from velafrica.stock.models import Category, Product, Stock
 from velafrica.counter.models import Entry
+from velafrica.download.models import File
+
 
 @login_required
 def profile(request):
-  return render_to_response('auth/profile.html', context_instance=RequestContext(request))
+  files = File.objects.all()
+  return render_to_response(
+    'auth/profile.html', {
+      'files': files
+    },
+    context_instance=RequestContext(request)
+    )
+
 
 def accounts_logout(request):
   """
@@ -24,8 +32,10 @@ def accounts_logout(request):
   logout(request)
   return redirect('django.contrib.auth.views.login')
 
+
 def home(request):
   return render_to_response('base.html', context_instance=RequestContext(request))
+
 
 def counter(request):
   """
@@ -102,6 +112,7 @@ def counter_form(request):
   """
   pass
 
+@login_required
 def stock(request):
   """
   Stock
@@ -112,7 +123,7 @@ def stock(request):
     }, context_instance=RequestContext(request)
   )
 
-
+@login_required
 def transport(request):
   """
   transport

@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     # custom velafrica apps
     'velafrica.core',
     'velafrica.counter',
+    'velafrica.download',
     'velafrica.frontend',
     'velafrica.organisation',
     'velafrica.stock',
