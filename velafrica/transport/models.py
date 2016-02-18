@@ -76,4 +76,4 @@ class Ride(models.Model):
         return u"Fahrt {}, {}: {} nach {}".format(self.id, self.date, self.from_warehouse, self.to_warehouse)
 
     class Meta:
-        ordering = ['date', 'from_warehouse']
+        ordering = ['-date', 'from_warehouse']
