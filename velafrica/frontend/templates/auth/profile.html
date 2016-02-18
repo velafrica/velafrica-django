@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block breadcrumb %} 
-<li><a href="/user/profile">Profil</a></li>
+<li><a href="{% url 'profile' %}">Profil</a></li>
 {% endblock %} 
 
 {% block jumbotron-img %}{% endblock %}
@@ -17,15 +17,10 @@ Hallo {{ user.first_name }} {{ user.last_name }}
 {% if user.is_authenticated %}
 <p>Willkommen im Velafrica Partner Portal!</p>
 <p>Diese Seite ist noch im Aufbau, es kann also vorkommen, dass noch nicht alles reibungslos funktioniert und dass sich einige Dinge immer wieder ein bisschen verändern.</p>
-<p>Einen guten Einstieg bietet die Kurz-Anleitung zur Benutzung des VeloCounters weiter unten bei "Downloads"</p>
+<p>Einen guten Einstieg bietet die Kurz-Anleitung zur Benutzung des VeloCounters unter <a href="{% url 'download' %}">'Downloads'</a>.</p>
+<p>Feedback und Anregungen bitte per E-Mail an <strong>nikolai.raeber@velafrica.ch</strong>.</p>
 <p>Viel Spass!</p>
 
-<h2>Downloads</h2>
-<ul>
-{% for file in files %}
-<li><a href="{{ file.file.url }}" target="_blank">{{ file.name }}</a></li>
-{% endfor %}
-</ul>
 <!--
 <p><i>TODO: User Infos anzeigen</i></p>
 <p><i>TODO: Etiketten Bestellformulare</i></p>

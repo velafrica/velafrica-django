@@ -15,12 +15,19 @@ from velafrica.download.models import File
 
 
 @login_required
-def profile(request):
+def downloads(request):
   files = File.objects.all()
   return render_to_response(
-    'auth/profile.html', {
-      'files': files
-    },
+    'download/index.html', 
+    {'files': files}, 
+    context_instance=RequestContext(request)
+    )
+
+
+@login_required
+def profile(request):
+  return render_to_response(
+    'auth/profile.html',
     context_instance=RequestContext(request)
     )
 

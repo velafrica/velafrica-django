@@ -22,6 +22,7 @@ from velafrica.core import views
 urlpatterns = [
 	url(r'^$', views.home, name='home'),
 	url(r'^counter', views.counter, name='counter'),
+    url(r'^download', views.downloads, name='download'),
     url(r'^stock', views.stock, name='stock'),
     url(r'^transport', views.transport, name='transport'),
     url(r'^auth/login', 'django.contrib.auth.views.login', {'template_name':'auth/login.html'}, name='login'),

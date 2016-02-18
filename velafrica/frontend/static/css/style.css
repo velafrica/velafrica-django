@@ -7,3 +7,8 @@
 img#navbar-logo {
 	height: 30px;
 }
+
+#beta-flag {
+	font-size: 60%;
+	opacity: 0.8;
+}
