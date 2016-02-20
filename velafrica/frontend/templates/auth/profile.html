@@ -7,7 +7,7 @@
 {% block jumbotron-img %}{% endblock %}
 {% block jumbotron-title %}
 {% if request.user.is_staff %}
-<p class="pull-right"><a class="btn btn-default" href="{% url 'admin:index' %}"><span class="glyphicon glyphicon-log-in"></span> Zum Adminbereich</a></p>
+<p class="pull-right"><a class="btn btn-default" href="{% url 'admin:index' %}" target="_blank"><span class="glyphicon glyphicon-log-in"></span> Zum Adminbereich</a></p>
 {% endif %}
 Hallo {{ user.first_name }} {{ user.last_name }}
 {% endblock %}

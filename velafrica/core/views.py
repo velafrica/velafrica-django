@@ -47,6 +47,7 @@ def home(request):
 def counter(request):
   """
   Counter main view
+  TODO: fix most productive overall
   """
   org_id = 0
   velos_today = 0
@@ -66,13 +67,8 @@ def counter(request):
     entries = entries.filter(organisation=org_id)
 
   if (entries.count() > 0):
-    latest = entries.first()
     now = date.today()
     first_day_of_week = now - timedelta(days=now.weekday())
-
-    # check if latest entry was from today
-    if now == latest.date:
-        velos_today = latest.amount
 
     for entry in entries:
       # sum up total
@@ -95,7 +91,11 @@ def counter(request):
       if entry.date >= first_day_of_week:
         velos_thisweek += entry.amount
 
-      # todo: get entry from yesterday
+      # check if latest entry was from today
+      if entry.date == now:
+        velos_today += entry.amount
+
+      # get entry from yesterday
       if entry.date == (now - timedelta(days=1)):
         velos_yesterday += entry.amount
 
