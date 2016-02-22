@@ -47,7 +47,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='file',
             name='category',
-            field=models.ForeignKey(default=1, to='download.Category'),
+            field=models.ForeignKey(blank=True, null=True, to='download.Category'),
             preserve_default=False,
         ),
         migrations.AddField(
