@@ -12,10 +12,10 @@ Velo Counter
 {% block jumbotron %}
 
 <p>Anzahl verarbeiteter Velos aus dem Velafrica Partner Netzwerk seit dem 1.1.2016</p>
-<p><a href="{% url 'counter' %}"><span class="label {% if org_id == 0 %}label-warning{% else %}label-default{% endif %}" data-org-id=0>Alle</span></a></p>
-<p><a href="{% url 'counter' %}?id=1"><span class="label {% if org_id == 1 %}label-warning{% else %}label-default{% endif %}" data-org-id=1>Velafrica</span></a>
- <a href="{% url 'counter' %}?id=2"><span class="label {% if org_id == 2 %}label-warning{% else %}label-default{% endif %}">Drahtesel</span></a>
-</p>
+<p><a href="{% url 'counter' %}"><span class="label {% if org_id == 0 %}label-warning{% else %}label-default{% endif %}" data-org-id=0>Alle Netzwerkpartner</span></a> 
+{% if user.person %} 
+<a href="{% url 'counter' %}?id={{ user.person.organisation.id }}"><span class="label {% if org_id == user.person.organisation.id %}label-warning{% else %}label-default{% endif %}" data-org-id={{ user.person.organisation.id }}>{{user.person.organisation.name }}</span></a></p>
+{% endif %}
 
 <div class="row">
 
