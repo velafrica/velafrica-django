@@ -9,9 +9,10 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
 from django.core import serializers
 
-from velafrica.stock.models import Category, Product, Stock
 from velafrica.counter.models import Entry
 from velafrica.download.models import File
+from velafrica.organisation.models import Organisation
+from velafrica.stock.models import Category, Product, Stock
 
 
 @login_required
@@ -62,6 +63,10 @@ def counter(request):
 
   entries = Entry.objects.all()
 
+  # get all organisations that already have entries
+  org_ids = Entry.objects.order_by().values('organisation').distinct()
+  organisations = Organisation.objects.filter(id__in=org_ids)
+
   if ('id' in request.GET):
     org_id = int(request.GET.get('id'))
     entries = entries.filter(organisation=org_id)
@@ -101,6 +106,7 @@ def counter(request):
 
   return render_to_response('counter/index.html', {
     'org_id': org_id,
+    'organisations' : organisations,
     'velos_total': velos_total,
     'velos_thisyear': velos_thisyear,
     'velos_thismonth': velos_thismonth,

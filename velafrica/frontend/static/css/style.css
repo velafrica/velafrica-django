@@ -12,3 +12,8 @@ img#navbar-logo {
 	font-size: 60%;
 	opacity: 0.8;
 }
+
+#velo-counter-filter a:hover {
+  text-decoration: none;
+  opacity: 0.8;
+}

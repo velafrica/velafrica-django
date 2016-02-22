@@ -14,7 +14,7 @@ Downloads
 {% if user.is_authenticated %}
 <ul>
 {% for file in files %}
-<li><a href="{{ file.file.url }}" target="_blank">{{ file.name }}</a></li>
+<li><a href="{{ file.file.url }}" title="{{ file.name }}">{{ file.name }}</a></li>
 {% endfor %}
 </ul>
 
