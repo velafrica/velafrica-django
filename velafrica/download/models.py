@@ -8,7 +8,7 @@ class Category(models.Model):
     """
     Represents a file Category
     """
-    name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Dateiname", help_text="Name der im Frontend angezeigt werden soll")
+    name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Name", help_text="Name der im Frontend angezeigt werden soll")
     description = models.CharField(blank=True, null=True, max_length=255, verbose_name="Beschreibung")
     category_parent = models.ForeignKey('self', help_text="Übergeordnete Kategorie")
     history = HistoricalRecords()
@@ -27,7 +27,7 @@ class File(models.Model):
     timestamp = models.DateTimeField(blank=False, null=False, default=datetime.now, verbose_name="Uploadzeitpunkt")
     name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Dateiname", help_text="Name der im Frontend angezeigt werden soll")
     description = models.CharField(blank=True, null=True, max_length=255, verbose_name="Beschreibung")
-    category = models.ForeignKey(Category)
+    category = models.ForeignKey(Category, blank=True, null=True)
     file = models.FileField()
     history = HistoricalRecords()
 
