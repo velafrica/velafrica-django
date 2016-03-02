@@ -45,14 +45,27 @@ class Container(models.Model):
     """
     Represents a container.
     """
-    organisation_from = models.ForeignKey(Organisation, blank=True, null=True, help_text='Organisation welcher das Fahrzeug gehört.')
-    pickup_date = models.DateField(blank=False, null=False)
-    partner_to = models.ForeignKey(PartnerSud, blank=False, null=False)
-    arrival_date = models.DateField()    
-    container_no = models.CharField(blank=True, null=True, max_length=255, verbose_name='Container Nummer')
-    sealing_no = models.CharField(blank=True, null=True, max_length=255, verbose_name='Container Nummer')
+    organisation_from = models.ForeignKey(Organisation, blank=True, null=True, verbose_name='Verarbeitungspartner', help_text='Ort wo der Container geladen wurde.')
+    partner_to = models.ForeignKey(PartnerSud, blank=False, null=False, verbose_name='Destination')
+
     velos = models.IntegerField(blank=False, null=False, default=0, verbose_name='Anzahl Velos')
     spare_parts = models.BooleanField(default=False, verbose_name='Ersatzteile transportiert?')
+
+    velos_worth = models.IntegerField(blank=False, null=False, default=0, verbose_name='Wert der Velos')   
+    spare_parts_worth = models.IntegerField(blank=False, null=False, default=0, verbose_name='Wert der Ersatzteile')
+    tools_worth = models.IntegerField(blank=False, null=False, default=0, verbose_name='Wert der Ersatzteile')
+    various_worth = models.IntegerField(blank=False, null=False, default=0, verbose_name='Wert der Ersatzteile')
+    
+    pickup_date = models.DateField(blank=False, null=False, verbose_name='Ladedatum')
+    shipment_date = models.DateField(blank=True, null=True, verbose_name='Verschiffungsdatum ab Europa') 
+    arrival_port_date = models.DateField(blank=True, null=True, verbose_name='Ankunft Hafen Partner')
+    arrival_partner_date = models.DateField(blank=True, null=True, verbose_name='Ankunft Partner')
+    logistics = models.CharField(blank=True, null=True, max_length=255, verbose_name='Forwarder', help_text='Logistikunternehmen')
+    
+    container_no = models.CharField(blank=True, null=True, max_length=255, verbose_name='Containernummer')
+    seal_no = models.CharField(blank=True, null=True, max_length=255, verbose_name='Plombennummer')
+    sgs_certified = models.BooleanField(default=False, verbose_name='SGS zertifiziert?')
+
     notes = models.TextField(blank=True, null=True, verbose_name="Bemerkungen zum Container")
     history = HistoricalRecords()
 
