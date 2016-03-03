@@ -44,17 +44,25 @@ class Migration(migrations.Migration):
             name='country',
             options={'ordering': ['-name'], 'verbose_name_plural': 'Countries'},
         ),
-        migrations.AlterField(
+        migrations.RemoveField(
+            model_name='container',
+            name='logistics'
+        ),
+        migrations.AddField(
             model_name='container',
             name='logistics',
-            field=models.ForeignKey(to='velafrica_sud.Forwarder', max_length=255, blank=True, help_text=b'Logistikunternehmen', null=True, verbose_name=b'Forwarder'),
+            field=models.ForeignKey(to='velafrica_sud.Forwarder', blank=True, help_text=b'Logistikunternehmen', null=True, verbose_name=b'Forwarder'),
         ),
         migrations.AlterField(
             model_name='container',
             name='pickup_date',
             field=models.DateField(verbose_name=b'Ladedatum'),
         ),
-        migrations.AlterField(
+        migrations.RemoveField(
+            model_name='historicalcontainer',
+            name='logistics'
+        ),
+        migrations.AddField(
             model_name='historicalcontainer',
             name='logistics',
             field=models.ForeignKey(related_name='+', on_delete=django.db.models.deletion.DO_NOTHING, db_constraint=False, blank=True, to='velafrica_sud.Forwarder', null=True),
