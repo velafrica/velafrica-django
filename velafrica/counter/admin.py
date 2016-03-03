@@ -18,7 +18,7 @@ class EntryAdmin(ImportExportMixin, SimpleHistoryAdmin):
     list_display = ('date', 'organisation', 'amount', 'note')
     search_fields = ['note', 'organisation']
     list_editable = ['amount', 'note']
-    list_filter = ['date', 'organisation', 'amount']
+    list_filter = ['date', 'organisation',]
 
     def get_queryset(self, request):
         qs = super(EntryAdmin, self).get_queryset(request)

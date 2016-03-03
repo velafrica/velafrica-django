@@ -19,6 +19,7 @@ class Country(models.Model):
 
     class Meta:
         ordering = ['-name']
+        verbose_name_plural = "Countries"
 
 
 class PartnerSud(models.Model):
@@ -26,9 +27,8 @@ class PartnerSud(models.Model):
     Represents a partner of the Velafrica Sud Network.
     """
     name = models.CharField(blank=False, null=True, max_length=255, verbose_name="Name der Organisation")
-    street = models.CharField(blank=True, null=True, max_length=255, verbose_name="Strasse")
-    plz = models.IntegerField(blank=True, null=True, verbose_name="PLZ")
-    city = models.CharField(blank=True, null=True, max_length=255, verbose_name="Ort")
+    latitude = models.IntegerField(blank=True, null=True, verbose_name='Breitengrad')
+    longitude = models.IntegerField(blank=True, null=True, verbose_name='Längengrad')
     country = models.ForeignKey(Country, verbose_name='Land')
     website = models.CharField(blank=True, null=True, max_length=255, verbose_name="Website")
 
@@ -36,6 +36,21 @@ class PartnerSud(models.Model):
 
     def __unicode__(self):
         return u"{}, {}".format(self.name, self.country)
+
+    class Meta:
+        ordering = ['name']
+
+
+class Forwarder(models.Model):
+    """
+    Represents a logistics partner.
+    """
+    name = models.CharField(blank=False, null=True, max_length=255, verbose_name="Name des Forwarders")
+
+    history = HistoricalRecords()
+
+    def __unicode__(self):
+        return u"{}".format(self.name)
 
     class Meta:
         ordering = ['name']
@@ -60,8 +75,8 @@ class Container(models.Model):
     shipment_date = models.DateField(blank=True, null=True, verbose_name='Verschiffungsdatum ab Europa') 
     arrival_port_date = models.DateField(blank=True, null=True, verbose_name='Ankunft Hafen Partner')
     arrival_partner_date = models.DateField(blank=True, null=True, verbose_name='Ankunft Partner')
-    logistics = models.CharField(blank=True, null=True, max_length=255, verbose_name='Forwarder', help_text='Logistikunternehmen')
-    
+    logistics = models.ForeignKey(Forwarder, blank=True, null=True, max_length=255, verbose_name='Forwarder', help_text='Logistikunternehmen')
+
     container_no = models.CharField(blank=True, null=True, max_length=255, verbose_name='Containernummer')
     seal_no = models.CharField(blank=True, null=True, max_length=255, verbose_name='Plombennummer')
     sgs_certified = models.BooleanField(default=False, verbose_name='SGS zertifiziert?')

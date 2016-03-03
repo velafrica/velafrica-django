@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
 from simple_history.admin import SimpleHistoryAdmin
-from velafrica.velafrica_sud.models import Country, PartnerSud, Container
+from velafrica.velafrica_sud.models import Country, Forwarder, PartnerSud, Container
 
 
 class ContainerAdmin(SimpleHistoryAdmin):
-    list_display = ['container_no', 'pickup_date', 'organisation_from', 'partner_to', 'velos']
+    list_display = ['pickup_date', 'container_no', 'organisation_from', 'partner_to', 'velos']
     search_fields = ['container_no', 'organisation_from', 'partner_to']
+    list_filter = ['organisation_from', 'partner_to',]
     fieldsets = (
         (None, {
             'fields': ('organisation_from', 'partner_to', 'velos', 'spare_parts', )
@@ -31,3 +32,4 @@ class PartnerSudAdmin(SimpleHistoryAdmin):
 admin.site.register(Container, ContainerAdmin)
 admin.site.register(PartnerSud, PartnerSudAdmin)
 admin.site.register(Country)
+admin.site.register(Forwarder)
