@@ -13,12 +13,16 @@ Velo Counter
 
 <p>Anzahl verarbeiteter Velos aus dem Velafrica Partner Netzwerk seit dem 1.1.2016</p>
 <div id="velo-counter-filter">
+
+	{% if user.is_authenticated %}
 	<p><a href="{% url 'counter' %}"><span class="label {% if org_id == 0 %}label-warning{% else %}label-default{% endif %}" data-org-id=0>Alle Netzwerkpartner</span></a></p>
-	<p>
-	{% for org in organisations %}
-	<a href="{% url 'counter' %}?id={{ org.id }}"><span class="label {% if org_id == org.id %}label-warning{% else %}label-default{% endif %}" data-org-id={{ org.id }}>{{ org.name }}</span></a>
-	{% endfor %}
-	</p>
+		<p>
+		{% for org in organisations %}
+		<a href="{% url 'counter' %}?id={{ org.id }}"><span class="label {% if org_id == org.id %}label-warning{% else %}label-default{% endif %}" data-org-id={{ org.id }}>{{ org.name }}</span></a>
+		{% endfor %}
+		</p>
+	{% endif %}
+
 </div>
 <div class="row">
 
