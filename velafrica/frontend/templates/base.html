@@ -56,6 +56,15 @@
             </li>
           -->
             <li><a href="{% url 'counter' %}" id="velocounter">Velo Counter</a></li>
+            {% if perms.transport %}
+            <li><a href="{% url 'transport' %}" id="transport">Transport</a></li>
+            {% endif %}
+            {% if perms.stock %}
+            <li><a href="{% url 'stock' %}" id="stock">Stock</a></li>
+            {% endif %}
+            {% if perms.velafrica_sud %}
+            <li><a href="{% url 'container' %}" id="container">Container</a></li>
+            {% endif %}
             <li><a href="{% url 'download' %}" id="download">Downloads</a></li>
             <!--
             <li><a href="{% url 'stock' %}" id="velocounter">Stock</a></li>

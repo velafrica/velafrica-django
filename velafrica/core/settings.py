@@ -50,8 +50,13 @@ INSTALLED_APPS = (
     'velafrica.stock',
     #'velafrica.translation'
     'velafrica.transport',
-    'velafrica.velafrica_sud'
+    'velafrica.velafrica_sud',
+    # django storages
+    # 'storages',
 )
+
+# Django Storages Settings for SFTP
+
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',

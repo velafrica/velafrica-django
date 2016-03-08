@@ -13,6 +13,7 @@ from velafrica.counter.models import Entry
 from velafrica.download.models import File
 from velafrica.organisation.models import Organisation
 from velafrica.stock.models import Category, Product, Stock
+from velafrica.velafrica_sud.models import Container
 
 
 @login_required
@@ -143,3 +144,14 @@ def transport(request):
   """
   return render_to_response('transport/index.html',
      context_instance=RequestContext(request))
+
+@login_required
+def container(request):
+  """
+  container
+  """
+  containers = Container.objects.all()
+  return render_to_response('velafrica_sud/container.html', {
+    'containers': containers
+    }, context_instance=RequestContext(request)
+  )

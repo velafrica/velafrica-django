@@ -34,7 +34,7 @@ class Category(models.Model):
 
     class Meta:
         verbose_name_plural = "Categories"
-        ordering = ['name']
+        ordering = ['articlenr_start', 'name']
 
 
 class Product(models.Model):
