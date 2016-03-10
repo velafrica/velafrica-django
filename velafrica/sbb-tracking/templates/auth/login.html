@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block breadcrumb %} 
+<li><a href="{% url 'login' %}">Login</a></li>
+{% endblock %} 
+
+{% block jumbotron-img %}{% endblock %}
+{% block jumbotron-title %}
+Login
+{% endblock %}
+
+{% block jumbotron %}
+
+{% if form.errors %}
+<p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+<form method="post" action="{% url 'django.contrib.auth.views.login' %}" role="form">
+{% csrf_token %}
+
+{{ form.username.label_tag }}
+{{ form.username }}
+<br /> 
+{{ form.password.label_tag }}
+{{ form.password }}
+<br />
+
+<input type="submit" value="login" class="btn btn-default" />
+<input type="hidden" name="next" value="{{ next }}" />
+</form>
+
+{% endblock %}

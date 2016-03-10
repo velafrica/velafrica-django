@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # custom apps
+    'daterange_filter',
     'django_resized',
     'simple_history',
     'import_export',

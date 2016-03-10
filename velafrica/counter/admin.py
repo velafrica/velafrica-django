@@ -1,3 +1,4 @@
+from daterange_filter.filter import DateRangeFilter
 from django.contrib import admin
 from velafrica.counter.models import Entry
 from velafrica.organisation.models import Organisation
@@ -24,7 +25,11 @@ class EntryAdmin(ImportExportMixin, SimpleHistoryAdmin):
     list_display = ('date', 'organisation', 'amount', 'note')
     search_fields = ['note', 'organisation']
     list_editable = ['amount', 'note']
-    list_filter = ['date', 'organisation',]
+    list_filter = (
+        'date', 
+        ('date', DateRangeFilter),
+        'organisation'
+        )
 
     def get_queryset(self, request):
         qs = super(EntryAdmin, self).get_queryset(request)
