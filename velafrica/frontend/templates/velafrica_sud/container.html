@@ -34,7 +34,7 @@ Container
 	<tbody>
 	{% for c in containers %}
 		<tr>
-			<td>{{ c.pickup_date }}</td>
+			<td data-value="{{ c.pickup_date |date:"c" }}">{{ c.pickup_date | date:"d.m.Y"}}</td>
 			<td>{{ c.organisation_from }} </td>
 			<td>{{ c.partner_to }}</td>
 			<td>{{ c.velos }}</td>
