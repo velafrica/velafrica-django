@@ -54,10 +54,11 @@ class StockInline(admin.TabularInline):
 
 
 class StockAdmin(SimpleHistoryAdmin):
-    list_display = ['__unicode__', 'product', 'warehouse', 'amount']
+    list_display = ['__unicode__', 'product', 'warehouse', 'amount', 'last_modified']
     list_editable = ['amount']
     search_fields = ['product']
     list_filter = ['warehouse']
+    readonly_fields = ['last_modified']
 
 
 class WarehouseAdmin(ImportExportMixin, SimpleHistoryAdmin):

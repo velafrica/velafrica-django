@@ -5,12 +5,12 @@ from velafrica.velafrica_sud.models import Country, Forwarder, PartnerSud, Conta
 
 
 class ContainerAdmin(SimpleHistoryAdmin):
-    list_display = ['pickup_date', 'container_no', 'organisation_from', 'partner_to', 'velos']
+    list_display = ['pickup_date', 'container_no', 'organisation_from', 'partner_to', 'velos_loaded', 'velos_unloaded']
     search_fields = ['container_no', 'organisation_from', 'partner_to']
     list_filter = ['organisation_from', 'partner_to',]
     fieldsets = (
         (None, {
-            'fields': ('organisation_from', 'partner_to', 'velos', 'spare_parts', )
+            'fields': ('organisation_from', 'partner_to', 'velos_loaded', 'velos_unloaded', 'spare_parts', )
             }),
         ('Transport', {
             'fields': ('logistics', 'pickup_date', 'shipment_date', 'arrival_port_date', 'arrival_partner_date')

@@ -70,6 +70,7 @@ class Warehouse(models.Model):
     organisation = models.ForeignKey(Organisation, verbose_name="Organisation", help_text='Die Organisation zu welcher das Lager gehört.')
     image = ResizedImageField(size=[500, 500], upload_to='stock/warehouses/', blank=True, null=True, verbose_name="Bild des Lagers")
     stock_management = models.BooleanField(default=False, verbose_name="Automatisches Stock-Management", help_text="Gibt an ob automatisches Stock-Management aktiviert ist, d.h. ob bei Stock Verschiebungen der Stock automatisch angepasst werden soll.")
+    history = HistoricalRecords()
     
     def __unicode__(self):
         return u"{}, {}".format(self.organisation.name, self.name)
@@ -88,7 +89,9 @@ class Stock(models.Model):
     product = models.ForeignKey(Product, verbose_name="Produkt")
     warehouse = models.ForeignKey(Warehouse, verbose_name="Lager", help_text='Das Lager wo sich der Stock befindet')
     amount = models.IntegerField(blank=False, null=False, default=0, verbose_name="Stückzahl", help_text="Anzahl der Produkte an Lager")
-    
+    last_modified = models.DateTimeField(auto_now=True, help_text="Tag und Zeit wann das Objekt zuletzt geändert wurde.")
+    history = HistoricalRecords()
+
     def __unicode__(self):
         return u"{}: {} x {}".format(self.warehouse.name, self.amount, self.product.name)
 
@@ -129,6 +132,7 @@ class StockTransferPosition(models.Model):
     stocktransfer = models.ForeignKey(StockTransfer, verbose_name='Der zugehörige StockTransfer')
     product = models.ForeignKey(Product)
     amount = models.IntegerField(blank=False, null=False, verbose_name="Stückzahl")
+    history = HistoricalRecords()
 
     class Meta:
         unique_together = (("stocktransfer", "product"),)

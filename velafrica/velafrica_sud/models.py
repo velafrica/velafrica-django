@@ -63,7 +63,8 @@ class Container(models.Model):
     organisation_from = models.ForeignKey(Organisation, blank=True, null=True, verbose_name='Verarbeitungspartner', help_text='Ort wo der Container geladen wurde.')
     partner_to = models.ForeignKey(PartnerSud, blank=False, null=False, verbose_name='Destination')
 
-    velos = models.IntegerField(blank=False, null=False, default=0, verbose_name='Anzahl Velos')
+    velos_loaded = models.IntegerField(blank=False, null=False, default=0, verbose_name='Anzahl Velos eingeladen')
+    velos_unloaded = models.IntegerField(blank=False, null=False, default=0, verbose_name='Anzahl Velos ausgeladen')
     spare_parts = models.BooleanField(default=False, verbose_name='Ersatzteile transportiert?')
 
     velos_worth = models.IntegerField(blank=False, null=False, default=0, verbose_name='Wert der Velos')   
