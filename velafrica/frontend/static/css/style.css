@@ -1,7 +1,9 @@
 .breadcrumb {
-
   margin-top: 65px;
+}
 
+img {
+	max-width: 100%;
 }
 
 img#navbar-logo {
