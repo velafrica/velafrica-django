@@ -77,7 +77,7 @@ class TrackingEvent(models.Model):
     Represents an event during tracking of a bicycle.
     """
     datetime = models.DateTimeField(blank=False, null=False, default=datetime.now, verbose_name="Zeitpunkt")
-    #event_type = models.ForeignKey(TrackingEventType, help_text="Art des Events")
+    event_type = models.ForeignKey(TrackingEventType, help_text="Art des Events")
     tracking = models.ForeignKey(Tracking)
     note = models.CharField(blank=True, null=True, max_length=255, verbose_name="Bemerkung")
     history = HistoricalRecords()
