@@ -162,3 +162,6 @@ EMAIL_HOST_USER = 'velos4africa@gmail.com'
 EMAIL_HOST_PASSWORD = 'afrikabaum'
 EMAIL_PORT = 465
 EMAIL_USE_SSL = True
+
+EMAIL_FROM_NAME = 'Velafrica Tracking'
+EMAIL_FROM_EMAIL = 'velos4africa@gmail.com'

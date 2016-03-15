@@ -15,7 +15,9 @@ def send_email(sender, instance, **kwargs):
 		# prepare email fields
 		subject = "SBB Tracking {}".format(instance.tracking.tracking_no)
 		msg = "New Event: {}".format(instance.event_type.name)
-		sender = getattr(settings, 'EMAIL_HOST_USER', 'tracking@velafrica.ch')
+		from_name = getattr(settings, 'EMAIL_FROM_NAME', 'Velafrica Tracking')
+		from_email = getattr(settings, 'EMAIL_FROM_EMAIL', 'tracking@velafrica.ch')
+		sender = u"{} <{}>".format(from_name, from_email)
 		receiver = instance.tracking.email
 
 		# send simple email
