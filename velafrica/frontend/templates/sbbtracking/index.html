@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block breadcrumb %} 
+<li><a href="{% url 'sbb' %}">SBB Tracking</a></li>
+{% endblock %} 
+
+{% block document-head %}
+
+{% endblock %}
+
+{% block jumbotron-img %}{% endblock %}
+{% block jumbotron-title %}
+SBB Tracking
+{% endblock %}
+
+{% block jumbotron %}
+
+<div class="row">
+	<div class="col-lg-6">
+		<form action="/sbb/" method="POST">
+			{% csrf_token %}
+			<div class="input-group">
+			      <input type="text" name="tracking_no" class="form-control" placeholder="Tracking Nummer" value="{% if tno %}{{tno}}{%endif%}">
+			      <span class="input-group-btn">
+			        <submit class="btn btn-primary" type="button">Go!</submit>
+			      </span>
+			</div><!-- /input-group -->
+		</form>
+	</div>
+</div>
+
+{% endblock %}
+
+{% block content %}
+{% if tracking %}
+	<h2>Tracking Infos f&uuml;r #{{ tracking.tracking_no }}</h2>
+	<p>Velo bereit f&uuml;r Export: {{ tracking.ready_for_export }}</p>
+	<p>Velo in Afrika angekommen: {{ tracking.completed }}</p>
+
+	<h3>History</h3>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Datum</th>
+				<th>Zeit</th>
+				<th>Ereignis</th>
+				<th>Bemerkungen</th>
+			</tr>
+		</thead>
+		<tbody>
+	{% for te in tracking_events %}
+		<tr>
+			<td>{{te.datetime | date:"d.m.Y" }}</td>
+			<td>{{te.datetime | date:"h:m" }}</td>
+			<td>{{ te.get_event_type_display }}</td>
+			<td>{{te.notes}}</td>
+	{% endfor %}
+		</tbody>
+	</table>
+{% else %}
+ {% if messages %}
+	{% for message in messages %}
+	<div class="alert alert-danger">{{ message }}</div>
+	{% endfor %}
+  {% endif %}
+
+{% endif %}
+
+{% endblock %}
+
+{% block document-foot %}
+
+{% endblock %}

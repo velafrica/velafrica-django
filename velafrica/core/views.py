@@ -1,5 +1,6 @@
 from datetime import timedelta, date
 from django.conf import settings
+from django.contrib import messages
 from django.shortcuts import render_to_response
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
@@ -12,6 +13,7 @@ from django.core import serializers
 from velafrica.counter.models import Entry
 from velafrica.download.models import File
 from velafrica.organisation.models import Organisation
+from velafrica.sbbtracking.models import Tracking, TrackingEvent
 from velafrica.stock.models import Category, Product, Stock
 from velafrica.velafrica_sud.models import Container
 
@@ -133,6 +135,34 @@ def stock(request):
   stock = Stock.objects.all()
   return render_to_response('stock/index.html', { 
     'stock': stock
+    }, context_instance=RequestContext(request)
+  )
+
+
+def sbbtracking(request, tracking_no=0):
+  """
+  sbb tracking
+  """
+  tracking = []
+  tracking_events = []
+  tno = tracking_no
+
+  if tracking_no == 0:
+    if 'tracking_no' in request.POST:
+      print(request.POST['tracking_no'])
+      tno = request.POST['tracking_no']
+    else:
+      pass
+  tracking = Tracking.objects.filter(tracking_no=tno).first()
+  if tracking: 
+    tracking_events = TrackingEvent.objects.filter(tracking=tracking.id)
+  else:
+    messages.add_message(request, messages.ERROR, "Kein Tracking mit der Nummer {} gefunden.".format(tno))
+
+  return render_to_response('sbbtracking/index.html', {
+    'tno': tno,
+    'tracking': tracking,
+    'tracking_events': tracking_events
     }, context_instance=RequestContext(request)
   )
 
