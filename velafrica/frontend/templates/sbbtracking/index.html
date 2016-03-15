@@ -51,10 +51,10 @@ SBB Tracking
 		<tbody>
 	{% for te in tracking_events %}
 		<tr>
-			<td>{{te.datetime | date:"d.m.Y" }}</td>
-			<td>{{te.datetime | date:"h:m" }}</td>
-			<td>{{ te.get_event_type_display }}</td>
-			<td>{{te.notes}}</td>
+			<td>{{ te.datetime | date:"d.m.Y" }}</td>
+			<td>{{ te.datetime | date:"h:m" }}</td>
+			<td>{{ te.event_type }}</td>
+			<td>{{te.note}}</td>
 	{% endfor %}
 		</tbody>
 	</table>

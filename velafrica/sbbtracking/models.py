@@ -90,6 +90,7 @@ class EmailLog(models.Model):
     """
     """
     tracking = models.ForeignKey(Tracking)
+    tracking_event = models.ForeignKey(TrackingEvent)
     subject = models.CharField(blank=False, null=False, max_length=255)
     sender = models.CharField(blank=False, null=False, max_length=255)
     receiver = models.CharField(blank=False, null=False, max_length=255)
