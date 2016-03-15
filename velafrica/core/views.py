@@ -147,17 +147,19 @@ def sbbtracking(request, tracking_no=0):
   tracking_events = []
   tno = tracking_no
 
-  if tracking_no == 0:
+  if tno == 0:
     if 'tracking_no' in request.POST:
       print(request.POST['tracking_no'])
       tno = request.POST['tracking_no']
     else:
       pass
-  tracking = Tracking.objects.filter(tracking_no=tno).first()
-  if tracking: 
-    tracking_events = TrackingEvent.objects.filter(tracking=tracking.id)
-  else:
-    messages.add_message(request, messages.ERROR, "Kein Tracking mit der Nummer {} gefunden.".format(tno))
+
+  if tno and tno != 0:
+    tracking = Tracking.objects.filter(tracking_no=tno).first()
+    if tracking: 
+      tracking_events = TrackingEvent.objects.filter(tracking=tracking.id)
+    else:
+      messages.add_message(request, messages.ERROR, "Kein Tracking mit der Nummer {} gefunden.".format(tno))
 
   return render_to_response('sbbtracking/index.html', {
     'tno': tno,
