@@ -130,6 +130,28 @@ class StockListPosition(models.Model):
         return u"{}: {} in {}".format(self.product, self.amount, self.stocklist)
 
 
+class StockChange(models.Model):
+    """
+    StockChange objects are used to keep track of all the stock changes per warehouse.
+    StockChange objects never get created by the user directly, but when booking a StockTransfer.
+    On pre_save, the application checks on the warehouse if stock is managed automatically.
+    If so, the stock for all the objects in the StockList will be adjusted depending on the stock change type.
+    On pre_delete, the application undoes the stock changes and then deletes the StocChange object.
+    """
+    STOCK_CHANGE_TYPES = {
+        ('in', 'in'),
+        ('out', 'out')
+    }
+    datetime = models.DateTimeField(default=datetime.now)
+    stocktransfer = models.ForeignKey('StockTransfer')
+    warehouse = models.ForeignKey(Warehouse)
+    stocklist = models.ForeignKey(StockList)
+    stock_change_type = models.CharField(choices=STOCK_CHANGE_TYPES, max_length=255)
+
+    def __unicode__(self):
+        return u"StockChange {}, {} {}".format(self.datetime, self.stock_change_type, self.warehouse)
+
+
 class StockTransfer(models.Model):
     """
     A StockTransfer object represents the moving of a stock from one warehouse to another.
@@ -146,30 +168,110 @@ class StockTransfer(models.Model):
     booked = models.BooleanField(default=False, null=False, blank=False, help_text="Gibt an ob der Stock bereits angepasst wurde.")
     history = HistoricalRecords()
 
+    def book(self):
+        """
+        - check if warehouse enabled auto stock update
+        - adjust stock
+        - create StockChange
+        - set booked to True
+        TODO: email notifications
+        """
+        if self.booked:
+            print("Already booked, no action.")
+            return False
+
+        if self.warehouse_from.stock_management:
+            # for each position in the stock list, update the warehouse stock
+            for pos in StockListPosition.objects.filter(stocklist=self.stocklist.id):
+                stock, created = Stock.objects.get_or_create(
+                    product=pos.product,
+                    warehouse=self.warehouse_from
+                )
+                stock.amount += pos.amount
+                stock.save()
+            # create StockChange
+            sc = StockChange(
+                stocktransfer=self, 
+                warehouse=self.warehouse_from,
+                stocklist=self.stocklist,
+                stock_change_type='out'
+            )
+            sc.save()
+        if self.warehouse_to.stock_management:
+            # for each position in the stock list, update the warehouse stock
+            for pos in StockListPosition.objects.filter(stocklist=self.stocklist.id):
+                stock, created = Stock.objects.update_or_create(
+                    product=pos.product,
+                    warehouse=self.warehouse_to
+                )
+                stock.amount -= pos.amount
+                stock.save()
+            # create StockChange
+            sc = StockChange(
+                stocktransfer=self,
+                warehouse=self.warehouse_to, 
+                stocklist=self.stocklist, 
+                stock_change_type='in'
+            )
+            sc.save()
+        self.booked = True
+        self.save()
+        return True
+
+    def revoke(self):
+        """
+        - check if warehouse enabled auto stock update
+        - adjust stock
+        - create StockChange
+        - set booked to True
+        TODO: email notifications
+        """
+        if not self.booked:
+            print("Not booked yet, no action.")
+            return False
+
+        # TODO: reverse actions
+
+        if self.warehouse_from.stock_management:
+            # for each position in the stock list, update the warehouse stock
+            for pos in StockListPosition.objects.filter(stocklist=self.stocklist.id):
+                stock, created = Stock.objects.get_or_create(
+                    product=pos.product,
+                    warehouse=self.warehouse_from
+                )
+                stock.amount += pos.amount
+                stock.save()
+            # create StockChange
+            sc = StockChange(
+                stocktransfer=self, 
+                warehouse=self.warehouse_from,
+                stocklist=self.stocklist,
+                stock_change_type='out'
+            )
+            sc.save()
+        if self.warehouse_to.stock_management:
+            # for each position in the stock list, update the warehouse stock
+            for pos in StockListPosition.objects.filter(stocklist=self.stocklist.id):
+                stock, created = Stock.objects.update_or_create(
+                    product=pos.product,
+                    warehouse=self.warehouse_to
+                )
+                stock.amount -= pos.amount
+                stock.save()
+            # create StockChange
+            sc = StockChange(
+                stocktransfer=self,
+                warehouse=self.warehouse_to, 
+                stocklist=self.stocklist, 
+                stock_change_type='in'
+            )
+            sc.save()
+        self.booked = True
+        self.save()
+        return True
+
     def __unicode__(self):
         return u"{}: {} nach {}".format(self.date, self.warehouse_from, self.warehouse_to)
 
     class Meta:
         ordering = ['-date']
-
-
-class StockChange(models.Model):
-    """
-    StockChange objects are used to keep track of all the stock changes per warehouse.
-    StockChange objects never get created by the user directly, but when booking a StockTransfer.
-    On pre_save, the application checks on the warehouse if stock is managed automatically.
-    If so, the stock for all the objects in the StockList will be adjusted depending on the stock change type.
-    On pre_delete, the application undoes the stock changes and then deletes the StocChange object.
-    """
-    STOCK_CHANGE_TYPES = {
-        ('in', 'in'),
-        ('out', 'out')
-    }
-    datetime = models.DateTimeField(default=datetime.now)
-    stocktransfer = models.ForeignKey(StockTransfer)
-    warehouse = models.ForeignKey(Warehouse)
-    stocklist = models.ForeignKey(StockList)
-    stock_change_type = models.CharField(choices=STOCK_CHANGE_TYPES, max_length=255)
-
-    def __unicode__(self):
-        return u"StockChange {}, {} {}".format(self.datetime, self.stock_change_type, self.warehouse)

@@ -71,7 +71,7 @@ class WarehouseAdmin(ImportExportMixin, SimpleHistoryAdmin):
 
 class StockChangeInline(admin.TabularInline):
     model = StockChange
-    readonly_fields = []
+    readonly_fields = ['datetime', 'stocktransfer', 'warehouse', 'stocklist', 'stock_change_type']
 
     # do not allow users to create new stock changes themselves
     def has_add_permission(self, request):
@@ -90,12 +90,43 @@ class StockListInline(admin.TabularInline):
 class StockListAdmin(SimpleHistoryAdmin):
     inlines = [StockListPositionInline]
 
-
 class StockTransferAdmin(SimpleHistoryAdmin):
     inlines = [StockChangeInline]
     list_display = ['id', 'date', 'warehouse_from', 'warehouse_to', 'stocklist', 'booked', 'note']
     list_filter = ['date', 'warehouse_from', 'warehouse_to', 'booked']
     readonly_fields = ['booked']
+    actions = ['book_stocktransfer', 'revoke_stocktransfer']
+
+    def book_stocktransfer(self, request, queryset):
+        """
+        Admin action to book StockTransfers.
+        TODO: signals
+        """
+        rows_updated = 0
+        for obj in queryset:
+            if obj.book():
+                rows_updated += 1
+
+        if rows_updated == 1:
+            message_bit = "1 StockTransfer was"
+        else:
+            message_bit = "%s StockTransfer were" % rows_updated
+        self.message_user(request, "%s booked successfully." % message_bit)
+    book_stocktransfer.short_description = "Book selected StrockTransfers"
+
+
+    def revoke_stocktransfer(self, request, queryset):
+        """
+        Admin action to revoke StockTransfers.
+        TODO: signals
+        """
+        rows_updated = queryset.update(booked=False)
+        if rows_updated == 1:
+            message_bit = "1 StockTransfer was"
+        else:
+            message_bit = "%s StockTransfer were" % rows_updated
+        self.message_user(request, "%s revoked successfully." % message_bit)
+    revoke_stocktransfer.short_description = "Revoke selected StrockTransfers"
 
 
 admin.site.register(Category, CategoryAdmin)
