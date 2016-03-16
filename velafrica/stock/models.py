@@ -100,23 +100,51 @@ class Stock(models.Model):
         unique_together = (("product", "warehouse"),)
 
 
+class StockList(models.Model):
+    """
+    A StockList is an universal object that can be used in various contexts,
+    like as a payload inventory of a container or a transport, or as an inventory
+    of an internal stock transfer.
+    """
+    last_change = models.DateTimeField(default=datetime.now)
+    description = models.CharField(blank=True, null=True, max_length=255)
+    history = HistoricalRecords()
+
+    def __unicode__(self):
+        return u"StockList {}, {}".format(self.last_change, self.description)
+
+
+class StockListPosition(models.Model):
+    """
+    One position in a StockList.
+    """
+    stocklist = models.ForeignKey(StockList, verbose_name='StockList')
+    product = models.ForeignKey(Product)
+    amount = models.IntegerField(blank=False, null=False, verbose_name="Stückzahl")
+    history = HistoricalRecords()
+
+    class Meta:
+        unique_together = (("stocklist", "product"),)
+
+    def __unicode__(self):
+        return u"{}: {} in {}".format(self.product, self.amount, self.stocklist)
+
+
 class StockTransfer(models.Model):
     """
-    Used for every inhouse stock movement
-    TODO: everything
-    - date
-    - from
-    - to
-    - products + amount
-    - executor
-    - state (draft / booked)
+    A StockTransfer object represents the moving of a stock from one warehouse to another.
+    It can bee 'booked', which creates a new StockChange object for the 'from' and the 'to' warehouse
+    and sets self.booked to True. The StockChange will get a deep copy of the StockList.
+    Revoking a StockTransfer will delete the StockChange objects and reset
+    self.booked to False.    
     """
-    executor = models.ForeignKey(Person, null=False, blank=False, verbose_name="Ausführende Person", help_text="Die Person welche die Verschiebung vorgenommen hat.")
     date = models.DateField(blank=False, null=False, default=datetime.now, verbose_name="Ausführdatum")
     warehouse_from = models.ForeignKey(Warehouse, related_name="warehouse_from", verbose_name="Herkunfts-Lager")
     warehouse_to = models.ForeignKey(Warehouse, related_name="warehouse_to", verbose_name="Ziel-Lager")
+    stocklist = models.ForeignKey(StockList, verbose_name="Stock List")
     note = models.CharField(blank=True, null=True, max_length=255, verbose_name="Bemerkungen")
     booked = models.BooleanField(default=False, null=False, blank=False, help_text="Gibt an ob der Stock bereits angepasst wurde.")
+    history = HistoricalRecords()
 
     def __unicode__(self):
         return u"{}: {} nach {}".format(self.date, self.warehouse_from, self.warehouse_to)
@@ -125,14 +153,23 @@ class StockTransfer(models.Model):
         ordering = ['-date']
 
 
-class StockTransferPosition(models.Model):
+class StockChange(models.Model):
     """
-    One position in a StockTransfer.
+    StockChange objects are used to keep track of all the stock changes per warehouse.
+    StockChange objects never get created by the user directly, but when booking a StockTransfer.
+    On pre_save, the application checks on the warehouse if stock is managed automatically.
+    If so, the stock for all the objects in the StockList will be adjusted depending on the stock change type.
+    On pre_delete, the application undoes the stock changes and then deletes the StocChange object.
     """
-    stocktransfer = models.ForeignKey(StockTransfer, verbose_name='Der zugehörige StockTransfer')
-    product = models.ForeignKey(Product)
-    amount = models.IntegerField(blank=False, null=False, verbose_name="Stückzahl")
-    history = HistoricalRecords()
+    STOCK_CHANGE_TYPES = {
+        ('in', 'in'),
+        ('out', 'out')
+    }
+    datetime = models.DateTimeField(default=datetime.now)
+    stocktransfer = models.ForeignKey(StockTransfer)
+    warehouse = models.ForeignKey(Warehouse)
+    stocklist = models.ForeignKey(StockList)
+    stock_change_type = models.CharField(choices=STOCK_CHANGE_TYPES, max_length=255)
 
-    class Meta:
-        unique_together = (("stocktransfer", "product"),)
+    def __unicode__(self):
+        return u"StockChange {}, {} {}".format(self.datetime, self.stock_change_type, self.warehouse)

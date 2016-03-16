@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
-from velafrica.stock.models import Product, Category, Warehouse, Stock, StockTransfer, StockTransferPosition
+from velafrica.stock.models import Product, Category, Warehouse, Stock, StockTransfer, StockList, StockListPosition, StockChange
 from import_export import resources
 from import_export.admin import ImportExportMixin
 from simple_history.admin import SimpleHistoryAdmin
@@ -69,14 +69,32 @@ class WarehouseAdmin(ImportExportMixin, SimpleHistoryAdmin):
     list_filter = ['organisation', 'stock_management']
 
 
-class StockTransferPositionInline(admin.TabularInline):
-    model = StockTransferPosition
+class StockChangeInline(admin.TabularInline):
+    model = StockChange
+    readonly_fields = []
+
+    # do not allow users to create new stock changes themselves
+    def has_add_permission(self, request):
+        return False
+
+
+class StockListPositionInline(admin.TabularInline):
+    model = StockListPosition
+
+
+class StockListInline(admin.TabularInline):
+    inlines = [StockListPositionInline]
+    model = StockList
+
+
+class StockListAdmin(SimpleHistoryAdmin):
+    inlines = [StockListPositionInline]
 
 
 class StockTransferAdmin(SimpleHistoryAdmin):
-    inlines = [StockTransferPositionInline,]
-    list_display = ['id', 'date', 'warehouse_from', 'warehouse_to', 'executor', 'booked']
-    list_filter = ['date', 'warehouse_from', 'warehouse_to', 'executor', 'booked']
+    inlines = [StockChangeInline]
+    list_display = ['id', 'date', 'warehouse_from', 'warehouse_to', 'stocklist', 'booked', 'note']
+    list_filter = ['date', 'warehouse_from', 'warehouse_to', 'booked']
     readonly_fields = ['booked']
 
 
@@ -85,4 +103,4 @@ admin.site.register(Product, ProductAdmin)
 admin.site.register(Warehouse, WarehouseAdmin)
 admin.site.register(Stock, StockAdmin)
 admin.site.register(StockTransfer, StockTransferAdmin)
-admin.site.register(StockTransferPosition)
+admin.site.register(StockList, StockListAdmin)
