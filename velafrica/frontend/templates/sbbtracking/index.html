@@ -35,8 +35,11 @@ SBB Tracking
 {% block content %}
 {% if tracking %}
 	<h2>Tracking Infos f&uuml;r #{{ tracking.tracking_no }}</h2>
-	<p>Velo bereit f&uuml;r Export: {{ tracking.ready_for_export }}</p>
-	<p>Velo in Afrika angekommen: {{ tracking.completed }}</p>
+	{% if tracking.completed %}
+	<div class="label label-success">Velo in Afrika angekommen.</div>
+	{% elif tracking.ready_for_export %}
+	<div class="label label-warning">Velo bereit f&uuml;r Export</div>
+	{% endif %}
 
 	<h3>History</h3>
 	<table class="table">
@@ -45,7 +48,6 @@ SBB Tracking
 				<th>Datum</th>
 				<th>Zeit</th>
 				<th>Ereignis</th>
-				<th>Bemerkungen</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -54,7 +56,6 @@ SBB Tracking
 			<td>{{ te.datetime | date:"d.m.Y" }}</td>
 			<td>{{ te.datetime | date:"h:m" }}</td>
 			<td>{{ te.event_type }}</td>
-			<td>{{te.note}}</td>
 	{% endfor %}
 		</tbody>
 	</table>

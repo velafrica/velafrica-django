@@ -14,6 +14,10 @@ class EmailLogInline(admin.TabularInline):
 	readonly_fields = ('datetime', 'receiver', 'subject', 'message')
 	extra = 0
 
+	# do not allow users to create new email logs themselves
+	def has_add_permission(self, request):
+		return False
+
 
 class TrackingAdmin(SimpleHistoryAdmin):
 	inlines = [TrackingEventInline, EmailLogInline]
