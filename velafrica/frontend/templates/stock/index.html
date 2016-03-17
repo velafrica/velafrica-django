@@ -27,8 +27,8 @@ Spare Parts Stock
 <table class="table footable" data-page-size=100 data-filter="#filter">
 	<thead>
 		<tr>
-			<th data-hide="phone,tablet"></th>
 			<th data-sort-initial="true">Artikelnr.</th>
+			<th data-hide="all">Bild</th>
 			<th>Name</th>
 			<th data-hide="phone,tablet">Kategorie</th>
 			<th data-hide="phone,tablet">Lager</th>
@@ -38,8 +38,8 @@ Spare Parts Stock
 	<tbody>
 	{% for s in stock %}
 		<tr>
-			<td>{{ s.product.photo }}</td>
 			<td>{{ s.product.articlenr }} </td>
+			<td>{% if s.product.image %}<img src="{{ s.product.image.url }}" alt="{{s.product.name}}" title="{{s.product.name}}"> {% endif %}</td>
 			<td>{{ s.product.name }}</td>
 			<td>{{ s.product.category.name }}</td>
 			<td>{{ s.warehouse.name }}</td>			
