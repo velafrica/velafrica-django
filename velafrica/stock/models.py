@@ -239,16 +239,9 @@ class StockTransfer(models.Model):
                     product=pos.product,
                     warehouse=self.warehouse_from
                 )
-                stock.amount += pos.amount
+                stock.amount -= pos.amount
                 stock.save()
-            # create StockChange
-            sc = StockChange(
-                stocktransfer=self, 
-                warehouse=self.warehouse_from,
-                stocklist=self.stocklist,
-                stock_change_type='out'
-            )
-            sc.save()
+
         if self.warehouse_to.stock_management:
             # for each position in the stock list, update the warehouse stock
             for pos in StockListPosition.objects.filter(stocklist=self.stocklist.id):
@@ -256,17 +249,12 @@ class StockTransfer(models.Model):
                     product=pos.product,
                     warehouse=self.warehouse_to
                 )
-                stock.amount -= pos.amount
+                stock.amount += pos.amount
                 stock.save()
-            # create StockChange
-            sc = StockChange(
-                stocktransfer=self,
-                warehouse=self.warehouse_to, 
-                stocklist=self.stocklist, 
-                stock_change_type='in'
-            )
-            sc.save()
-        self.booked = True
+
+        sc = StockChange.objects.filter(stocktransfer=self)
+        sc.delete()
+        self.booked = False
         self.save()
         return True
 

@@ -120,7 +120,10 @@ class StockTransferAdmin(SimpleHistoryAdmin):
         Admin action to revoke StockTransfers.
         TODO: signals
         """
-        rows_updated = queryset.update(booked=False)
+        rows_updated = 0
+        for obj in queryset:
+            if obj.revoke():
+                rows_updated += 1
         if rows_updated == 1:
             message_bit = "1 StockTransfer was"
         else:

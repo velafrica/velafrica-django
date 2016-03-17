@@ -149,7 +149,6 @@ def sbbtracking(request, tracking_no=0):
 
   if tno == 0:
     if 'tracking_no' in request.POST:
-      print(request.POST['tracking_no'])
       tno = request.POST['tracking_no']
     else:
       pass

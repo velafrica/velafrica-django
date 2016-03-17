@@ -35,6 +35,12 @@ SBB Tracking
 {% block content %}
 {% if tracking %}
 	<h2>Tracking Infos f&uuml;r #{{ tracking.tracking_no }}</h2>
+	{% if tracking.vpn %}
+	<p>Verarbeitungspartner: {% if tracking.vpn.website %}<a href="{{ tracking.vpn.website }}" target="_blank">{{ tracking.vpn }}</a>{% else %}{{ tracking.vpn }}{% endif %}</p>
+	{% endif %}
+	{% if tracking.destination %}
+	<p>Destination: {% if tracking.destination.website %}<a href="{{ tracking.destination.website }}" target="_blank">{{ tracking.destination }}</a>{% else %}{{ tracking.destination }}{% endif %}</p>
+	{% endif %}
 	{% if tracking.completed %}
 	<div class="label label-success">Velo in Afrika angekommen.</div>
 	{% elif tracking.ready_for_export %}
@@ -54,7 +60,7 @@ SBB Tracking
 	{% for te in tracking_events %}
 		<tr>
 			<td>{{ te.datetime | date:"d.m.Y" }}</td>
-			<td>{{ te.datetime | date:"h:m" }}</td>
+			<td>{{ te.datetime | date:"H:m" }}</td>
 			<td>{{ te.event_type }}</td>
 	{% endfor %}
 		</tbody>
