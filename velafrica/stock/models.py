@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
 from django.core.validators import RegexValidator
+from django.conf import settings
 from django.db import models
 from django_resized import ResizedImageField
 from simple_history.models import HistoricalRecords
@@ -52,6 +53,10 @@ class Product(models.Model):
     image = ResizedImageField(storage=fs, size=[500, 500], upload_to='stock/products/', blank=True, null=True, verbose_name="Produktbild")
     price = models.DecimalField(blank=True, null=True, max_digits=10, decimal_places=2)
     history = HistoricalRecords()
+
+    def admin_image(self):
+        return ('<img src="{}{}" style="max-height: 100px;" />'.format(settings.MEDIA_URL, self.image))
+    admin_image.allow_tags = True
 
     def __unicode__(self):
         return u"{}: {}".format(self.articlenr, self.name)
