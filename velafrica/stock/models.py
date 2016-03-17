@@ -6,6 +6,9 @@ from django_resized import ResizedImageField
 from simple_history.models import HistoricalRecords
 from velafrica.organisation.models import Person, Organisation
 
+from velafrica.core.ftp import MyFTPStorage
+fs = MyFTPStorage()
+
 class Category(models.Model):
     """
     Represents a product category.
@@ -13,7 +16,7 @@ class Category(models.Model):
     articlenr_start = models.CharField(blank=True, null=True, max_length=8, verbose_name="Kategorienummer", unique=True, help_text="")
     name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Kategoriebezeichnung")
     description = models.TextField(blank=True, null=True, verbose_name="Beschreibung")
-    image = ResizedImageField(size=[500, 500], upload_to='stock/categories/', blank=True, null=True, help_text='Product picture.')
+    image = ResizedImageField(storage=fs, size=[500, 500], upload_to='stock/categories/', blank=True, null=True, help_text='Product picture.')
     color = models.CharField(
         validators=[
             RegexValidator(
@@ -46,7 +49,7 @@ class Product(models.Model):
     hscode = models.CharField(blank=False, null=False, max_length=7, verbose_name="Harmonized System Code")
     description = models.TextField(blank=True, null=True, verbose_name="Beschreibung", help_text="Hinweise zur Qualität bzw Hinweise und Ergänzung")
     category = models.ForeignKey('Category', verbose_name="Kategorie", help_text='Die Hauptkategorie des Produktes.')
-    image = ResizedImageField(size=[500, 500], upload_to='stock/products/', blank=True, null=True, verbose_name="Produktbild")
+    image = ResizedImageField(storage=fs, size=[500, 500], upload_to='stock/products/', blank=True, null=True, verbose_name="Produktbild")
     price = models.DecimalField(blank=True, null=True, max_digits=10, decimal_places=2)
     history = HistoricalRecords()
 
@@ -68,7 +71,7 @@ class Warehouse(models.Model):
     name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Name", help_text="Der Name / Bezeichnung des Lagers")
     description = models.CharField(blank=True, null=True, max_length=255, verbose_name="Beschreibung", help_text="Beschreibung / Bemerkungen zum Lager")
     organisation = models.ForeignKey(Organisation, verbose_name="Organisation", help_text='Die Organisation zu welcher das Lager gehört.')
-    image = ResizedImageField(size=[500, 500], upload_to='stock/warehouses/', blank=True, null=True, verbose_name="Bild des Lagers")
+    image = ResizedImageField(storage=fs, size=[500, 500], upload_to='stock/warehouses/', blank=True, null=True, verbose_name="Bild des Lagers")
     stock_management = models.BooleanField(default=False, verbose_name="Automatisches Stock-Management", help_text="Gibt an ob automatisches Stock-Management aktiviert ist, d.h. ob bei Stock Verschiebungen der Stock automatisch angepasst werden soll.")
     history = HistoricalRecords()
     

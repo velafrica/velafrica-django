@@ -3,6 +3,8 @@ from datetime import datetime
 from django.db import models
 from simple_history.models import HistoricalRecords
 
+from velafrica.core.ftp import MyFTPStorage
+fs = MyFTPStorage()
 
 class Category(models.Model):
     """
@@ -28,7 +30,7 @@ class File(models.Model):
     name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Dateiname", help_text="Name der im Frontend angezeigt werden soll")
     description = models.CharField(blank=True, null=True, max_length=255, verbose_name="Beschreibung")
     category = models.ForeignKey(Category, blank=True, null=True)
-    file = models.FileField()
+    file = models.FileField(storage=fs, upload_to='downloads/', blank=True, null=True, help_text='Select file to upload.')
     history = HistoricalRecords()
 
     def __unicode__(self):

@@ -7,6 +7,8 @@ from simple_history.models import HistoricalRecords
 from velafrica.organisation.models import Organisation
 from velafrica.velafrica_sud.models import PartnerSud, Container
 
+from velafrica.core.ftp import MyFTPStorage
+fs = MyFTPStorage()
 
 class Tracking(models.Model):
     """

@@ -54,7 +54,7 @@ INSTALLED_APPS = (
     'velafrica.transport',
     'velafrica.velafrica_sud',
     # django storages
-    # 'storages',
+    'storages',
 )
 
 # Django Storages Settings for SFTP
@@ -148,7 +148,7 @@ STATICFILES_DIRS = (
 
 # Media files (Files uploaded by user)
 
-MEDIA_URL = '/media/'
+MEDIA_URL = 'http://partnertool.velafrica.ch/'
 MEDIA_ROOT = os.path.join(PROJECT_DIR, "media")
 
 # Django Resized
@@ -165,3 +165,8 @@ EMAIL_USE_SSL = True
 
 EMAIL_FROM_NAME = 'Velafrica Tracking'
 EMAIL_FROM_EMAIL = 'velos4africa@gmail.com'
+
+
+# Django Storage settings
+DEFAULT_FILE_STORAGE = 'storages.backends.ftp.FTPStorage'
+FTP_STORAGE_LOCATION = 'ftp://nto5q-partnertoo:B1XqSY78ri0Vb94_hxws-C5nm6co@partnertool.velafrica.ch:21'
