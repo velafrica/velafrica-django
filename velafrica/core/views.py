@@ -139,9 +139,9 @@ def stock(request):
   )
 
 
-def sbbtracking(request, tracking_no=0):
+def tracking(request, tracking_no=0):
   """
-  sbb tracking
+  velo tracking
   """
   tracking = []
   tracking_events = []

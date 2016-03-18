@@ -5,7 +5,7 @@ class MyAppConfig(AppConfig):
 
 	# name needs to be the same as it should be to import the app in INSTALLED_APPS
     name = 'velafrica.sbbtracking'
-    verbose_name = 'SBB Tracking'
+    verbose_name = 'Velo Tracking'
 
     def ready(self):
         # import signal handlers
