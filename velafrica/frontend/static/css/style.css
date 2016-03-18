@@ -20,6 +20,11 @@ img#navbar-logo {
   opacity: 0.8;
 }
 
+.modal-header-img {
+  padding: 90px;
+  background-size: 100%;
+}
+
 div.jumbotron#velotracking {
 	background: url('../img/VfA_VeloTrackingHeader.jpg');
 	background-size: 100%;

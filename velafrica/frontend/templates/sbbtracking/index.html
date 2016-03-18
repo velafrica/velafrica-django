@@ -59,7 +59,12 @@ Velo Tracking
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	        <h4 class="modal-title" id="tracking_event_{{ te.id }}_label">{{ te.event_type }}</h4>
 	      </div>
+	      {% if te.event_type.image %}
+	      <div class="modal-body modal-header-img" style="background-image: url(' {{ te.event_type.image.url }}');">
+	      </div>
+	      {% endif %}
 	      <div class="modal-body">
+
 	        {{ te.event_type.description }}
 	      </div>
 	      <div class="modal-footer">
