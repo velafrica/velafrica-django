@@ -56,7 +56,7 @@
             </li>
           -->
             <li><a href="{% url 'counter' %}" id="velocounter">Velo Counter</a></li>
-            <li><a href="{% url 'sbb' %}" id="sbbtracking">SBB Tracking</a></li>
+            <li><a href="{% url 'tracking' %}" id="tracking">Velo Tracking</a></li>
             {% if perms.transport %}
             <li><a href="{% url 'transport' %}" id="transport">Transport</a></li>
             {% endif %}
@@ -110,7 +110,7 @@
 
     
       <!-- Main component for a primary marketing message or call to action -->
-      <div class="jumbotron">
+      <div class="jumbotron" id="{% block jumbotron_id %}{% endblock jumbotron_id %}">
         {% block jumbotron-img %}<img src="{% static 'img/velafrica_A4.png' %}">{% endblock %}
         <h1>{% block jumbotron-title %}Partner Portal <sup id="beta-flag">Beta</sup>{% endblock jumbotron-title %}</h1>
 

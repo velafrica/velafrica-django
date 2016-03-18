@@ -2,7 +2,7 @@
 {% load staticfiles %}
 
 {% block breadcrumb %} 
-<li><a href="{% url 'sbb' %}">SBB Tracking</a></li>
+<li><a href="{% url 'tracking' %}">Velo Tracking</a></li>
 {% endblock %} 
 
 {% block document-head %}
@@ -11,14 +11,16 @@
 
 {% block jumbotron-img %}{% endblock %}
 {% block jumbotron-title %}
-SBB Tracking
+Velo Tracking
 {% endblock %}
+
+{% block jumbotron_id %}velotracking{% endblock %}
 
 {% block jumbotron %}
 
 <div class="row">
 	<div class="col-lg-6">
-		<form action="/sbb/" method="POST">
+		<form action="/tracking/" method="POST">
 			{% csrf_token %}
 			<div class="input-group">
 			      <input type="text" name="tracking_no" class="form-control" placeholder="Tracking Nummer" value="{% if tno %}{{tno}}{%endif%}">
@@ -34,7 +36,7 @@ SBB Tracking
 
 {% block content %}
 {% if tracking %}
-	<h2>Tracking Infos f&uuml;r #{{ tracking.tracking_no }}</h2>
+	<h2>Tracking Infos f&uuml;r Velo {{ tracking.tracking_no }}</h2>
 	{% if tracking.vpn %}
 	<p>Verarbeitungspartner: {% if tracking.vpn.website %}<a href="{{ tracking.vpn.website }}" target="_blank">{{ tracking.vpn }}</a>{% else %}{{ tracking.vpn }}{% endif %}</p>
 	{% endif %}

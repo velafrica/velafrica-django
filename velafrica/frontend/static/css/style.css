@@ -19,3 +19,15 @@ img#navbar-logo {
   text-decoration: none;
   opacity: 0.8;
 }
+
+div.jumbotron#velotracking {
+	background: url('../img/VfA_VeloTrackingHeader.jpg');
+	background-size: 100%;
+  	background-position: -0px -40px;
+}
+
+@media(min-width: 768px) {
+	div.jumbotron#velotracking {
+		height: 400px;
+	}
+}
