@@ -10,14 +10,13 @@ from velafrica.velafrica_sud.models import PartnerSud, Container
 from velafrica.core.ftp import MyFTPStorage
 fs = MyFTPStorage()
 
+
 class Tracking(models.Model):
     """
     Represents one bicycle that is being tracked.
     """
     tracking_no = models.CharField(blank=False, null=False, max_length=10, unique=True, verbose_name="Tracking Nummer")
-
     number_of_velos = models.IntegerField(blank=False, null=False, default=0, verbose_name="Anzahl Velos")
-
     vpn = models.ForeignKey(Organisation, 
         null=True, 
         blank=True, 
@@ -60,6 +59,7 @@ class TrackingEventType(models.Model):
     """
     name = models.CharField(blank=False, null=False, max_length=255)
     description = models.CharField(blank=True, null=True, max_length=255)
+    image = ResizedImageField(storage=fs, size=[600, 600], upload_to='tracking/eventtypes/', blank=True, null=True, verbose_name="Symbolbild")
     send_email = models.BooleanField(
         blank=False, 
         null=False, 
