@@ -58,7 +58,7 @@ class TrackingEventType(models.Model):
 
     """
     name = models.CharField(blank=False, null=False, max_length=255)
-    description = models.CharField(blank=True, null=True, max_length=255)
+    description = models.TextField(blank=True, null=True)
     image = ResizedImageField(storage=fs, size=[600, 600], upload_to='tracking/eventtypes/', blank=True, null=True, verbose_name="Symbolbild")
     send_email = models.BooleanField(
         blank=False, 
