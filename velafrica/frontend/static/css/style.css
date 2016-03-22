@@ -21,7 +21,7 @@ img#navbar-logo {
 }
 
 .modal-header-img {
-  padding: 160px;
+  padding: 80px;
   background-size: 100%;
 }
 
@@ -31,8 +31,16 @@ div.jumbotron#velotracking {
   	background-position: -0px -40px;
 }
 
+.big-glyphicon {
+	font-size: 1.5em;
+}
+
 @media(min-width: 768px) {
 	div.jumbotron#velotracking {
 		height: 400px;
+	}
+	.modal-header-img {
+	  padding: 160px;
+	  background-size: 100%;
 	}
 }
