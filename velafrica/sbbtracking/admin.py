@@ -22,6 +22,9 @@ class EmailLogInline(admin.TabularInline):
 class TrackingAdmin(SimpleHistoryAdmin):
 	inlines = [TrackingEventInline, EmailLogInline]
 
+class TrackingEventTypeAdmin(SimpleHistoryAdmin):
+	list_display = ('name', 'description', 'send_email')
+
 
 admin.site.register(Tracking, TrackingAdmin)
-admin.site.register(TrackingEventType)
+admin.site.register(TrackingEventType, TrackingEventTypeAdmin)
