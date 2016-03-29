@@ -29,6 +29,7 @@ class PartnerSud(models.Model):
     Represents a partner of the Velafrica Sud Network.
     """
     name = models.CharField(blank=False, null=True, max_length=255, verbose_name="Name der Organisation")
+    description = models.TextField(blank=True, null=True)
     latitude = models.IntegerField(blank=True, null=True, verbose_name='Breitengrad')
     longitude = models.IntegerField(blank=True, null=True, verbose_name='Längengrad')
     country = models.ForeignKey(Country, verbose_name='Land')

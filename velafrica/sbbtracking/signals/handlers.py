@@ -13,8 +13,16 @@ def send_email(sender, instance, **kwargs):
 	if instance.event_type.send_email:
 
 		# prepare email fields
-		subject = "SBB Tracking {}".format(instance.tracking.tracking_no)
-		msg = "New Event: {}".format(instance.event_type.name)
+		subject = "Velafrica Velo Tracking {} - {}".format(
+			instance.tracking.tracking_no, 
+			instance.event_type.name
+		)
+		msg = u"Hallo {} {},\n{}\n\nVerfolge dein Velo online, auf <a href='http://velafrica-admin.herokuapp.com/{}'></a>".format(
+			instance.tracking.first_name, 
+			instance.tracking.last_name, 
+			instance.event_type.email_text,
+			instance.tracking.tracking_no
+		)
 		from_name = getattr(settings, 'EMAIL_FROM_NAME', 'Velafrica Tracking')
 		from_email = getattr(settings, 'EMAIL_FROM_EMAIL', 'tracking@velafrica.ch')
 		sender = u"{} <{}>".format(from_name, from_email)

@@ -33,6 +33,7 @@ class Organisation(models.Model):
     class Meta:
         ordering = ['name']
 
+
 class Person(models.Model):
     """
     Person working at a network partner.
