@@ -17,7 +17,7 @@ def send_email(sender, instance, **kwargs):
 			instance.tracking.tracking_no, 
 			instance.event_type.name
 		)
-		msg = u"Hallo {} {},\n{}\n\nVerfolge dein Velo online, auf <a href='http://velafrica-admin.herokuapp.com/{}'></a>".format(
+		msg = u"Hallo {} {},\n{}\n\nVerfolge dein Velo online, auf http://velafrica-admin.herokuapp.com/{}".format(
 			instance.tracking.first_name, 
 			instance.tracking.last_name, 
 			instance.event_type.email_text,
