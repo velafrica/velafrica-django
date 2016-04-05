@@ -195,7 +195,7 @@ class StockTransfer(models.Model):
                     product=pos.product,
                     warehouse=self.warehouse_from
                 )
-                stock.amount += pos.amount
+                stock.amount -= pos.amount
                 stock.save()
             # create StockChange
             sc = StockChange(
@@ -212,7 +212,7 @@ class StockTransfer(models.Model):
                     product=pos.product,
                     warehouse=self.warehouse_to
                 )
-                stock.amount -= pos.amount
+                stock.amount += pos.amount
                 stock.save()
             # create StockChange
             sc = StockChange(
@@ -238,8 +238,6 @@ class StockTransfer(models.Model):
             print("Not booked yet, no action.")
             return False
 
-        # TODO: reverse actions
-
         if self.warehouse_from.stock_management:
             # for each position in the stock list, update the warehouse stock
             for pos in StockListPosition.objects.filter(stocklist=self.stocklist.id):
@@ -247,7 +245,7 @@ class StockTransfer(models.Model):
                     product=pos.product,
                     warehouse=self.warehouse_from
                 )
-                stock.amount -= pos.amount
+                stock.amount += pos.amount
                 stock.save()
 
         if self.warehouse_to.stock_management:
@@ -257,7 +255,7 @@ class StockTransfer(models.Model):
                     product=pos.product,
                     warehouse=self.warehouse_to
                 )
-                stock.amount += pos.amount
+                stock.amount -= pos.amount
                 stock.save()
 
         sc = StockChange.objects.filter(stocktransfer=self)
