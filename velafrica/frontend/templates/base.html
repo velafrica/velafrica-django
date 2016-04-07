@@ -82,7 +82,9 @@
             {% if perms.velafrica_sud %}
             <li><a href="{% url 'container' %}" id="container">Container</a></li>
             {% endif %}
+            {% if user.is_authenticated %}
             <li><a href="{% url 'download' %}" id="download">Downloads</a></li>
+            {% endif %}
             <!--
             <li><a href="{% url 'stock' %}" id="velocounter">Stock</a></li>
             <li><a href="{% url 'transport' %}" id="velocounter">Transport</a></li>
