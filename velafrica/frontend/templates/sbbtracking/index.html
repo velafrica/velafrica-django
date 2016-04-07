@@ -92,7 +92,7 @@ Velo Tracking
 	{% for te in tracking_events %}
 		<tr>
 			<td>{{ te.datetime | date:"d.m.Y" }}</td>
-			<td>{{ te.datetime | date:"H:m" }}</td>
+			<td>{{ te.datetime | date:"H:i" }}</td>
 			<td>{{ te.event_type }}</td>
 			<td><a href="#" data-toggle="modal" data-target="#tracking_event_{{te.id}}"><span class="big-glyphicon glyphicon glyphicon-info-sign"></span></a></td>
 	{% endfor %}
