@@ -1,3 +1,4 @@
+#-*- coding: utf-8 -*-
 # Signals for sending automated mails
 from django.core.mail import send_mail
 from django.conf import settings
@@ -13,7 +14,7 @@ def send_email(sender, instance, **kwargs):
 	if instance.event_type.send_email:
 
 		# prepare email fields
-		subject = "Velafrica Velo Tracking {} - {}".format(
+		subject = u"Velafrica Velo Tracking {} - {}".format(
 			instance.tracking.tracking_no, 
 			instance.event_type.name
 		)
