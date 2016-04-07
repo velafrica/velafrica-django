@@ -26,7 +26,7 @@ img#navbar-logo {
 }
 
 div.jumbotron#velotracking {
-	background: url('../img/VfA_VeloTrackingHeader.jpg');
+	background: url("../img/VfA_VeloTrackingHeader.a1e1621cf0f1.jpg");
 	background-size: 100%;
   	background-position: -0px -40px;
 }
@@ -47,17 +47,12 @@ div.jumbotron#velotracking {
 
 /* Velo Spende Button */
 
-@media(max-width: 768px) {
-	#donate {
-		display: none;
-	}
-}
-
 #donate {
 	font-family: 'Open Sans';
-    background-image: url(http://velafrica.ch/themes/sinnovativ-group/images/donate_bg_velafrica.ch.png);
-    margin-left: auto;
-    right: 0;
+    background-image: url(http://velafrica.ch/images/donate_bg_velafrica.ch.png);
+    position: absolute;
+    top: 400px;
+    margin-left: 540px;
     width: 180px;
     height: 180px;
     z-index: 999;
@@ -72,6 +67,7 @@ div.jumbotron#velotracking {
     margin-left: 25px;
     margin-top: 22px;
     text-align: center;
+    background: blue;
     z-index: 999;
     color: #FFFFFF;
     font-weight: bold;
