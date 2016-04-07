@@ -17,10 +17,12 @@ from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib import admin
+from django.views.generic import RedirectView
 from velafrica.core import views
 
 urlpatterns = [
-	url(r'^$', views.home, name='home'),
+	#url(r'^$', views.home, name='home'),
+    url(r'^$', RedirectView.as_view(url='/tracking')),
 	url(r'^counter', views.counter, name='counter'),
     url(r'^download', views.downloads, name='download'),
     url(r'^stock', views.stock, name='stock'),
