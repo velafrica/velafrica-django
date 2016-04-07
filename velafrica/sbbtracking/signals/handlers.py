@@ -17,11 +17,25 @@ def send_email(sender, instance, **kwargs):
 			instance.tracking.tracking_no, 
 			instance.event_type.name
 		)
-		msg = u"Hallo {} {},\n{}\n\nVerfolge dein Velo online, auf http://velafrica-admin.herokuapp.com/{}".format(
-			instance.tracking.first_name, 
-			instance.tracking.last_name, 
-			instance.event_type.email_text,
+		if instance.event_type.email_text:
+			msg_header = u"Hallo {} {},\n\n{}".format(
+				instance.tracking.first_name,
+				instance.tracking.last_name,
+				instance.event_type.email_text
+			)
+		else:
+			msg_header = u"Hallo {} {},\n\nNeuer Velo Tracking Event: {}".format(
+				instance.tracking.first_name,
+				instance.tracking.last_name,
+				instance.event_type.name
+			)
+
+		msg_footer = u"Verfolge den Velo online, auf http://velafrica-admin.herokuapp.com/tracking/{}\n\nDiese Email wurde automatisch generiert. Bitte antworten Sie nicht darauf.".format(
 			instance.tracking.tracking_no
+		)
+		msg = u"{}\n\n{}".format(
+			msg_header,
+			msg_footer
 		)
 		from_name = getattr(settings, 'EMAIL_FROM_NAME', 'Velafrica Tracking')
 		from_email = getattr(settings, 'EMAIL_FROM_EMAIL', 'tracking@velafrica.ch')

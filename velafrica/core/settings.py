@@ -157,14 +157,14 @@ DJANGORESIZED_DEFAULT_QUALITY = 75
 DJANGORESIZED_DEFAULT_KEEP_META = True
 
 # Email settings
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'velos4africa@gmail.com'
-EMAIL_HOST_PASSWORD = 'afrikabaum'
-EMAIL_PORT = 465
-EMAIL_USE_SSL = True
+EMAIL_HOST = 'smtpauth.creta.ch'
+EMAIL_HOST_USER = 'tracking@velafrica.ch'
+EMAIL_HOST_PASSWORD = '!0q486ZjXeJilxfmwa#2HOc3PD5n1'
+#EMAIL_PORT = 465
+#EMAIL_USE_SSL = True
 
 EMAIL_FROM_NAME = 'Velafrica Tracking'
-EMAIL_FROM_EMAIL = 'velos4africa@gmail.com'
+EMAIL_FROM_EMAIL = 'tracking@velafrica.ch'
 
 
 # Django Storage settings
