@@ -53,7 +53,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/"><img id="navbar-logo" title="Velafrica" alt="Velafrica" src="{% static 'img/velafrica_logo_small.png' %}"></a>
+          <a class="navbar-brand" href="http://velafrica.ch" target="_blank"><img id="navbar-logo" title="Velafrica" alt="Velafrica" src="{% static 'img/velafrica_logo_small.png' %}"></a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -69,7 +69,9 @@
               </ul>
             </li>
           -->
+            {% if perms.counter %}
             <li><a href="{% url 'counter' %}" id="velocounter">Velo Counter</a></li>
+            {% endif %}
             <li><a href="{% url 'tracking' %}" id="tracking">Velo Tracking</a></li>
             {% if perms.transport %}
             <li><a href="{% url 'transport' %}" id="transport">Transport</a></li>
