@@ -31,7 +31,7 @@ def send_email(sender, instance, **kwargs):
 				instance.event_type.name
 			)
 
-		msg_footer = u"Verfolgen Sie Ihr Velo online, auf http://velafrica-admin.herokuapp.com/tracking/{}\n\nDiese Email wurde automatisch generiert. Bitte antworten Sie nicht darauf.".format(
+		msg_footer = u"Verfolgen Sie Ihr Velo online, auf http://tracking.velafrica.ch/tracking/{}\n\nDiese Email wurde automatisch generiert. Bitte antworten Sie nicht darauf.".format(
 			instance.tracking.tracking_no
 		)
 		msg = u"{}\n\n{}".format(
