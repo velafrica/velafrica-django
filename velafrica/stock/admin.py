@@ -53,7 +53,18 @@ class StockInline(admin.TabularInline):
     model = Stock
 
 
-class StockAdmin(SimpleHistoryAdmin):
+class StockResource(resources.ModelResource):
+    """
+    Define the Stock resource for import / export.
+    """
+
+    class Meta:
+        model = Stock
+        fields = ('product__articlenr', 'product', 'product__name', 'warehouse', 'warehouse__name', 'amount', 'last_modified')
+
+
+class StockAdmin(ImportExportMixin, SimpleHistoryAdmin):
+    resource_class = StockResource
     list_display = ['__unicode__', 'product', 'warehouse', 'amount', 'last_modified']
     list_editable = ['amount']
     search_fields = ['product']
