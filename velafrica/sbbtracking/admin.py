@@ -33,6 +33,7 @@ class TrackingResource(resources.ModelResource):
 
 class TrackingAdmin(ImportExportMixin, SimpleHistoryAdmin):
 	resource_class = TrackingResource
+	list_display = ('tracking_no', 'first_name', 'last_name', 'number_of_velos', 'get_last_event')
 	inlines = [TrackingEventInline, EmailLogInline]
 
 

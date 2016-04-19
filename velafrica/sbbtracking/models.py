@@ -20,45 +20,6 @@ class Donor(models.Model):
         return u"#{} {} <{}>".format(self.tracking_no, self.donor.first_name, self.donor.last_name, self.number_of_velos)
 """
 
-class Tracking(models.Model):
-    """
-    Represents one bicycle that is being tracked.
-    """
-    tracking_no = models.CharField(blank=False, null=False, max_length=10, unique=True, verbose_name="Tracking Nummer")
-    number_of_velos = models.IntegerField(blank=False, null=False, default=0, verbose_name="Anzahl Velos")
-    vpn = models.ForeignKey(Organisation, 
-        null=True, 
-        blank=True, 
-        verbose_name="Partner", 
-        help_text="wird momentan noch nicht berücksichtigt"
-    )
-    destination = models.ForeignKey(PartnerSud, null=True, blank=True, verbose_name="Destination")
-
-    #donor = models.ForeignKey(Person)
-
-    first_name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Vorname")
-    last_name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Nachname")
-    email = models.CharField(blank=False, null=False, max_length=255, verbose_name="Email", validators=[EmailValidator])
-
-    container = models.ForeignKey(Container, blank=True, null=True)
-    ready_for_export = models.BooleanField(blank=False, null=False, default=False, verbose_name="Velo ist exportbereit")
-    completed = models.BooleanField(blank=False, null=False, default=False, verbose_name="Velo ist in Afrika angekommen")
-
-    history = HistoricalRecords()
-
-    def get_last_event(self):
-        """
-        Todo: return the latest event.
-        """
-        return null
-
-    def __unicode__(self):
-        return u"#{}: {} {}, {} Velos".format(self.tracking_no, self.first_name, self.last_name, self.number_of_velos)
-
-    class Meta:
-        ordering = ['-tracking_no']
-
-
 class TrackingEventType(models.Model):
     """
     Tracking event types, recommended:
@@ -95,12 +56,55 @@ class TrackingEvent(models.Model):
     """
     datetime = models.DateTimeField(blank=False, null=False, default=datetime.now, verbose_name="Zeitpunkt")
     event_type = models.ForeignKey(TrackingEventType, help_text="Art des Events")
-    tracking = models.ForeignKey(Tracking)
+    tracking = models.ForeignKey('Tracking')
     note = models.CharField(blank=True, null=True, max_length=255, verbose_name="Bemerkung")
     history = HistoricalRecords()
 
+    def __unicode__(self):
+        return u"{}".format(self.event_type.name)
+
     class Meta:
         ordering = ['-datetime']
+
+
+class Tracking(models.Model):
+    """
+    Represents one bicycle that is being tracked.
+    """
+    tracking_no = models.CharField(blank=False, null=False, max_length=10, unique=True, verbose_name="Tracking Nummer")
+    number_of_velos = models.IntegerField(blank=False, null=False, default=0, verbose_name="Anzahl Velos")
+    vpn = models.ForeignKey(Organisation, 
+        null=True, 
+        blank=True, 
+        verbose_name="Partner", 
+        help_text="wird momentan noch nicht berücksichtigt"
+    )
+    destination = models.ForeignKey(PartnerSud, null=True, blank=True, verbose_name="Destination")
+
+    #donor = models.ForeignKey(Person)
+
+    first_name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Vorname")
+    last_name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Nachname")
+    email = models.CharField(blank=False, null=False, max_length=255, verbose_name="Email", validators=[EmailValidator])
+
+    container = models.ForeignKey(Container, blank=True, null=True)
+    ready_for_export = models.BooleanField(blank=False, null=False, default=False, verbose_name="Velo ist exportbereit")
+    completed = models.BooleanField(blank=False, null=False, default=False, verbose_name="Velo ist in Afrika angekommen")
+
+    history = HistoricalRecords()
+
+    def get_last_event(self):
+        """
+        Todo: return the latest event.
+        """
+        return TrackingEvent.objects.filter(tracking=self.id).first()
+    get_last_event.short_description = 'Last event'
+
+    def __unicode__(self):
+        return u"#{}: {} {}, {} Velos".format(self.tracking_no, self.first_name, self.last_name, self.number_of_velos)
+
+    class Meta:
+        ordering = ['-tracking_no']
 
 
 class EmailLog(models.Model):
