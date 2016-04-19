@@ -2,11 +2,14 @@
 from django.contrib import admin
 from simple_history.admin import SimpleHistoryAdmin
 from velafrica.sbbtracking.models import Tracking, TrackingEvent, TrackingEventType, EmailLog
+from import_export import resources
+from import_export.admin import ImportExportMixin
 
 
 class TrackingEventInline(admin.TabularInline):
 	model = TrackingEvent
 	extra = 0
+
 
 class EmailLogInline(admin.TabularInline):
 	model = EmailLog
@@ -18,9 +21,19 @@ class EmailLogInline(admin.TabularInline):
 	def has_add_permission(self, request):
 		return False
 
+class TrackingResource(resources.ModelResource):
+    """
+    Define the Tracking resource for import / export.
+    """
 
-class TrackingAdmin(SimpleHistoryAdmin):
+    class Meta:
+        model = Tracking
+        fields = ('first_name', 'last_name', 'email', 'tracking_no', 'number_of_velos')
+
+class TrackingAdmin(ImportExportMixin, SimpleHistoryAdmin):
+	resource_class = TrackingResource
 	inlines = [TrackingEventInline, EmailLogInline]
+
 
 class TrackingEventTypeAdmin(SimpleHistoryAdmin):
 	list_display = ('name', 'description', 'send_email')
