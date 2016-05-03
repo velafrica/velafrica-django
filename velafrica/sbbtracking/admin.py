@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
+from django import forms
+from django import template
 from django.contrib import admin
+from django.http import HttpResponseRedirect
+from django.shortcuts import render_to_response
 from simple_history.admin import SimpleHistoryAdmin
 from velafrica.sbbtracking.models import Tracking, TrackingEvent, TrackingEventType, EmailLog
 from import_export import resources
@@ -7,19 +11,19 @@ from import_export.admin import ImportExportMixin
 
 
 class TrackingEventInline(admin.TabularInline):
-	model = TrackingEvent
-	extra = 0
+    model = TrackingEvent
+    extra = 0
 
 
 class EmailLogInline(admin.TabularInline):
-	model = EmailLog
-	fields = ('datetime', 'receiver', 'subject', 'message')
-	readonly_fields = ('datetime', 'receiver', 'subject', 'message')
-	extra = 0
+    model = EmailLog
+    fields = ('datetime', 'receiver', 'subject', 'message')
+    readonly_fields = ('datetime', 'receiver', 'subject', 'message')
+    extra = 0
 
-	# do not allow users to create new email logs themselves
-	def has_add_permission(self, request):
-		return False
+    # do not allow users to create new email logs themselves
+    def has_add_permission(self, request):
+        return False
 
 class TrackingResource(resources.ModelResource):
     """
@@ -32,13 +36,58 @@ class TrackingResource(resources.ModelResource):
         fields = ('first_name', 'last_name', 'email', 'tracking_no', 'number_of_velos')
 
 class TrackingAdmin(ImportExportMixin, SimpleHistoryAdmin):
-	resource_class = TrackingResource
-	list_display = ('tracking_no', 'first_name', 'last_name', 'number_of_velos', 'get_last_event')
-	inlines = [TrackingEventInline, EmailLogInline]
+    resource_class = TrackingResource
+    list_display = ('tracking_no', 'first_name', 'last_name', 'number_of_velos', 'get_last_event')
+    inlines = [TrackingEventInline, EmailLogInline]
+    search_fields = ['tracking_no', 'first_name', 'last_name']
+
+    actions = ['add_event',]
+
+    class AddEventForm(forms.Form):
+        _selected_action = forms.CharField(widget=forms.MultipleHiddenInput)
+        event_type = forms.ModelChoiceField(TrackingEventType.objects)
+
+    def add_event(self, request, queryset):
+        """
+        Admin action to add events to trackings.
+        """
+        form = None
+
+        if 'apply' in request.POST:
+            form = self.AddEventForm(request.POST)
+
+            if form.is_valid():
+                event_type = form.cleaned_data['event_type']
+
+                count = 0
+                for t in queryset:
+                    t.id
+                    tracking_event = TrackingEvent(
+                        event_type=event_type,
+                        tracking=t)
+                    tracking_event.save()
+                    count += 1
+
+                plural = ''
+                if count != 1:
+                    plural = 's'
+
+                self.message_user(request, "Successfully added event %s to %d tracking%s." % (event_type, count, plural))
+                return HttpResponseRedirect(request.get_full_path())
+
+        if not form:
+            form = self.AddEventForm(initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
+
+        return render_to_response(
+            'admin/add_event.html', 
+            {'trackings': queryset, 'tag_form': form },
+            context_instance=template.RequestContext(request)
+        )
+    add_event.short_description = "Add event to trackings"    
 
 
 class TrackingEventTypeAdmin(SimpleHistoryAdmin):
-	list_display = ('name', 'description', 'send_email')
+    list_display = ('name', 'description', 'send_email')
 
 
 admin.site.register(Tracking, TrackingAdmin)

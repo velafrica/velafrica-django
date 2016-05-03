@@ -36,6 +36,13 @@ class TrackingEventType(models.Model):
     description = models.TextField(blank=True, null=True)
     email_text = models.TextField(blank=True, null=True, help_text='Text der im Benachrichtigugsemail den den Spender geschickt wird.')
     image = ResizedImageField(storage=fs, size=[600, 600], upload_to='tracking/eventtypes/', blank=True, null=True, verbose_name="Symbolbild")
+    complete_tracking = models.BooleanField(
+        blank=False,
+        null=False,
+        default=False,
+        verbose_name="Schliesst Tracking ab?",
+        help_text="Gilt ein Tracking mit diesem Event als beendet?"
+    )
     send_email = models.BooleanField(
         blank=False, 
         null=False, 
@@ -90,6 +97,7 @@ class Tracking(models.Model):
     container = models.ForeignKey(Container, blank=True, null=True)
     ready_for_export = models.BooleanField(blank=False, null=False, default=False, verbose_name="Velo ist exportbereit")
     completed = models.BooleanField(blank=False, null=False, default=False, verbose_name="Velo ist in Afrika angekommen")
+    note = models.CharField(blank=True, null=True, max_length=255, verbose_name="Bemerkung")
 
     history = HistoricalRecords()
 

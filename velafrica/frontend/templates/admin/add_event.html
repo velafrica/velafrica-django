@@ -1,0 +1,20 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+
+<p>Select event type to add:</p>
+
+<form action="" method="post">
+	{% csrf_token %}
+
+    {{ tag_form }}
+
+    <p>There will be a new event created for the following trackings:</p>
+
+    <ul>{{ trackings|unordered_list }}</ul>
+
+    <input type="hidden" name="action" value="add_event" />
+    <input type="submit" name="apply" value="Create events" />
+</form>
+
+{% endblock %}
