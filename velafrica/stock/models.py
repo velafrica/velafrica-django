@@ -47,6 +47,8 @@ class Product(models.Model):
     """
     articlenr = models.CharField(blank=False, null=False, max_length=7, verbose_name="Artikelnummer", unique=True, help_text="Die Velafrica Artikelnummer (in der Form 123.123)")
     name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Produktbezeichnung")
+    name_fr = models.CharField(blank=True, null=True, max_length=255, verbose_name="Produktbezeichnung FR")
+    name_en = models.CharField(blank=True, null=True, max_length=255, verbose_name="Produktbezeichnung EN")
     hscode = models.CharField(blank=False, null=False, max_length=7, verbose_name="Harmonized System Code")
     description = models.TextField(blank=True, null=True, verbose_name="Beschreibung", help_text="Hinweise zur Qualität bzw Hinweise und Ergänzung")
     category = models.ForeignKey('Category', verbose_name="Kategorie", help_text='Die Hauptkategorie des Produktes.')
