@@ -36,6 +36,7 @@ class TrackingEventType(models.Model):
     description = models.TextField(blank=True, null=True)
     email_text = models.TextField(blank=True, null=True, help_text='Text der im Benachrichtigugsemail den den Spender geschickt wird.')
     image = ResizedImageField(storage=fs, size=[600, 600], upload_to='tracking/eventtypes/', blank=True, null=True, verbose_name="Symbolbild")
+    label = models.CharField(blank=True, null=True, max_length=255, verbose_name="Label", help_text="Text Label auf der Tracking Seite (optional)")
     complete_tracking = models.BooleanField(
         blank=False,
         null=False,
@@ -65,7 +66,6 @@ class TrackingEvent(models.Model):
     event_type = models.ForeignKey(TrackingEventType, help_text="Art des Events")
     tracking = models.ForeignKey('Tracking')
     note = models.CharField(blank=True, null=True, max_length=255, verbose_name="Bemerkung", help_text="interne Bemerkung, nirgends ersichtlich für Spender (optional)")
-    label = models.CharField(blank=True, null=True, max_length=255, verbose_name="Label", help_text="Text Label auf der Tracking Seite (optional)")
     history = HistoricalRecords()
 
     def __unicode__(self):
