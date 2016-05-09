@@ -31,7 +31,7 @@ class ProductResource(resources.ModelResource):
     class Meta:
         model = Product
         import_id_fields = ('articlenr',)
-        fields = ('category', 'category__name', 'articlenr', 'hscode', 'name', 'price', 'description')
+        fields = ('category', 'category__name', 'articlenr', 'hscode', 'name', 'name_en', 'name_fr', 'packaging_unit', 'price', 'description')
 
 
 class ProductAdmin(ImportExportMixin, SimpleHistoryAdmin):
