@@ -54,6 +54,7 @@ class Product(models.Model):
     category = models.ForeignKey('Category', verbose_name="Kategorie", help_text='Die Hauptkategorie des Produktes.')
     image = ResizedImageField(storage=fs, size=[500, 500], upload_to='stock/products/', blank=True, null=True, verbose_name="Produktbild")
     price = models.DecimalField(blank=True, null=True, max_digits=10, decimal_places=2)
+    packaging_unit = models.IntegerField(blank=True, null=True, verbose_name="Verpackungseinheit (VE)")
     history = HistoricalRecords()
 
     def admin_image(self):
