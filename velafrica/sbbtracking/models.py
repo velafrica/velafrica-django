@@ -64,7 +64,8 @@ class TrackingEvent(models.Model):
     datetime = models.DateTimeField(blank=False, null=False, default=datetime.now, verbose_name="Zeitpunkt")
     event_type = models.ForeignKey(TrackingEventType, help_text="Art des Events")
     tracking = models.ForeignKey('Tracking')
-    note = models.CharField(blank=True, null=True, max_length=255, verbose_name="Bemerkung")
+    note = models.CharField(blank=True, null=True, max_length=255, verbose_name="Bemerkung", help_text="interne Bemerkung, nirgends ersichtlich für Spender (optional)")
+    label = models.CharField(blank=True, null=True, max_length=255, verbose_name="Label", help_text="Text Label auf der Tracking Seite (optional)")
     history = HistoricalRecords()
 
     def __unicode__(self):

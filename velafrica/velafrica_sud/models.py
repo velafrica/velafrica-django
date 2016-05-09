@@ -89,7 +89,7 @@ class Container(models.Model):
     history = HistoricalRecords()
 
     def __unicode__(self):
-        return u"Container {} to {}".format(self.container_no, self.partner_to)
+        return u"Container {} to {} ({})".format(self.container_no, self.partner_to, self.pickup_date)
 
     class Meta:
         ordering = ['-pickup_date']
