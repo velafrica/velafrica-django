@@ -33,13 +33,15 @@ class TrackingResource(resources.ModelResource):
     class Meta:
         model = Tracking
         import_id_fields = ('tracking_no',)
-        fields = ('first_name', 'last_name', 'email', 'tracking_no', 'number_of_velos')
+        fields = ('first_name', 'last_name', 'email', 'tracking_no', 'number_of_velos', 'last_event')
 
 class TrackingAdmin(ImportExportMixin, SimpleHistoryAdmin):
     resource_class = TrackingResource
-    list_display = ('tracking_no', 'first_name', 'last_name', 'number_of_velos', 'get_last_event')
+    list_display = ('tracking_no', 'first_name', 'last_name', 'number_of_velos', 'last_event')
+    list_filter = ['last_event']
     inlines = [TrackingEventInline, EmailLogInline]
     search_fields = ['tracking_no', 'first_name', 'last_name']
+    readonly_fields = ['last_event']
 
     actions = ['add_event',]
 

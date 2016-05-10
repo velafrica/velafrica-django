@@ -9,7 +9,13 @@ from velafrica.sbbtracking.models import TrackingEvent, EmailLog
 @receiver(post_save, sender=TrackingEvent)
 def send_email(sender, instance, **kwargs):
 	"""
+	Send email notification to bicycle donor.
 	"""
+
+	# set last event on tracking
+	instance.tracking.last_event = instance
+	instance.tracking.save()
+	print "blubb!"
 
 	if instance.event_type.send_email:
 

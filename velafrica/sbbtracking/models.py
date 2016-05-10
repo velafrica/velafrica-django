@@ -73,6 +73,7 @@ class TrackingEvent(models.Model):
 
     class Meta:
         ordering = ['-datetime']
+        unique_together = ['event_type', 'tracking']
 
 
 class Tracking(models.Model):
@@ -99,15 +100,27 @@ class Tracking(models.Model):
     ready_for_export = models.BooleanField(blank=False, null=False, default=False, verbose_name="Velo ist exportbereit")
     completed = models.BooleanField(blank=False, null=False, default=False, verbose_name="Velo ist in Afrika angekommen")
     note = models.CharField(blank=True, null=True, max_length=255, verbose_name="Bemerkung")
+    last_event = models.ForeignKey('TrackingEvent', null=True, blank=True, verbose_name='Letzter Event', related_name='tracking_last_event')
 
     history = HistoricalRecords()
 
     def get_last_event(self):
         """
-        Todo: return the latest event.
+        Get the latest event dynamically.
         """
         return TrackingEvent.objects.filter(tracking=self.id).first()
     get_last_event.short_description = 'Last event'
+
+    def set_last_event(self):
+        """
+        Set last event manually.
+        """
+        event = self.get_last_event()
+        if event:
+            self.last_event = event
+            return event
+        else:
+            return None
 
     def __unicode__(self):
         return u"#{}: {} {}, {} Velos".format(self.tracking_no, self.first_name, self.last_name, self.number_of_velos)
