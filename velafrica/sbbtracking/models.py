@@ -109,8 +109,21 @@ class Tracking(models.Model):
     note = models.CharField(blank=True, null=True, max_length=255, verbose_name="Bemerkung")
     velo_type = models.ForeignKey('VeloType', blank=True, null=True)
     last_event = models.ForeignKey('TrackingEvent', null=True, blank=True, verbose_name='Letzter Event', related_name='tracking_last_event')
+    complete = models.BooleanField(default=False, verbose_name='Tracking beendet')
 
     history = HistoricalRecords()
+
+    def check_completion(self):
+        """
+        Manually check if tracking is complete.
+        """
+        last =  get_last_event()
+        if last:
+            if last.complete_tracking:
+                self.complete = True
+                self.save()
+                return True
+        return False
 
     def get_last_event(self):
         """
