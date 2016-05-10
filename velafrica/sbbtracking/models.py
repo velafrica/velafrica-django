@@ -76,6 +76,17 @@ class TrackingEvent(models.Model):
         unique_together = ['event_type', 'tracking']
 
 
+class VeloType(models.Model):
+    """
+    Represents a type of bicycle.
+    """
+    name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Bezeichnung")
+    history = HistoricalRecords()
+
+    def __unicode__(self):
+        return u"{}".format(self.name)
+
+
 class Tracking(models.Model):
     """
     Represents one bicycle that is being tracked.
@@ -96,6 +107,7 @@ class Tracking(models.Model):
     email = models.CharField(blank=False, null=False, max_length=255, verbose_name="Email", validators=[EmailValidator])
     container = models.ForeignKey(Container, blank=True, null=True)
     note = models.CharField(blank=True, null=True, max_length=255, verbose_name="Bemerkung")
+    velo_type = models.ForeignKey('VeloType', blank=True, null=True)
     last_event = models.ForeignKey('TrackingEvent', null=True, blank=True, verbose_name='Letzter Event', related_name='tracking_last_event')
 
     history = HistoricalRecords()
