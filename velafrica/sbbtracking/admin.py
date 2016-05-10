@@ -92,7 +92,7 @@ class TrackingAdmin(ImportExportMixin, SimpleHistoryAdmin):
 
 
 class TrackingEventTypeAdmin(SimpleHistoryAdmin):
-    list_display = ('name', 'description', 'send_email')
+    list_display = ('name', 'description', 'send_email', 'complete_tracking')
 
 
 admin.site.register(VeloType, VeloTypeAdmin)

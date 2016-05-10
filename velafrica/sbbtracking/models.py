@@ -117,7 +117,7 @@ class Tracking(models.Model):
         """
         Manually check if tracking is complete.
         """
-        last =  get_last_event()
+        last = self.get_last_event()
         if last:
             if last.complete_tracking:
                 self.complete = True
