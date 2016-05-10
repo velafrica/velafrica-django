@@ -88,17 +88,13 @@ class Tracking(models.Model):
         verbose_name="Partner", 
         help_text="wird momentan noch nicht berücksichtigt"
     )
-    destination = models.ForeignKey(PartnerSud, null=True, blank=True, verbose_name="Destination")
 
     #donor = models.ForeignKey(Person)
 
     first_name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Vorname")
     last_name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Nachname")
     email = models.CharField(blank=False, null=False, max_length=255, verbose_name="Email", validators=[EmailValidator])
-
     container = models.ForeignKey(Container, blank=True, null=True)
-    ready_for_export = models.BooleanField(blank=False, null=False, default=False, verbose_name="Velo ist exportbereit")
-    completed = models.BooleanField(blank=False, null=False, default=False, verbose_name="Velo ist in Afrika angekommen")
     note = models.CharField(blank=True, null=True, max_length=255, verbose_name="Bemerkung")
     last_event = models.ForeignKey('TrackingEvent', null=True, blank=True, verbose_name='Letzter Event', related_name='tracking_last_event')
 
@@ -118,6 +114,7 @@ class Tracking(models.Model):
         event = self.get_last_event()
         if event:
             self.last_event = event
+            self.save()
             return event
         else:
             return None

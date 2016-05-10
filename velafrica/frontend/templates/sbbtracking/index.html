@@ -45,13 +45,11 @@ Velo Tracking
 	{% if tracking.vpn %}
 	<p>Verarbeitungspartner: {% if tracking.vpn.website %}<a href="{{ tracking.vpn.website }}" target="_blank">{{ tracking.vpn }}</a>{% else %}{{ tracking.vpn }}{% endif %}</p>
 	{% endif %}
-	{% if tracking.destination %}
-	<p>Destination: {% if tracking.destination.website %}<a href="{{ tracking.destination.website }}" target="_blank">{{ tracking.destination }}</a>{% else %}{{ tracking.destination }}{% endif %}</p>
+	{% if tracking.container %}
+	<p>Destination: {% if tracking.container.partner_to.website %}<a href="{{ tracking.container.partner_to.website }}" target="_blank">{{ tracking.container.partner_to }}</a>{% else %}{{ tracking.container.partner_to }}{% endif %}</p>
 	{% endif %}
-	{% if tracking.completed %}
-	<div class="label label-success">Velo in Afrika angekommen.</div>
-	{% elif tracking.ready_for_export %}
-	<div class="label label-warning">Velo bereit f&uuml;r Export</div>
+	{% if tracking.last_event.event_type.label %}
+	<div class="label label-{% if tracking.last_event.event_type.complete_tracking %}success{% else %}info{% endif %}">{{ tracking.last_event.event_type.label }}</div>
 	{% endif %}
 
 	<h3>History</h3>
