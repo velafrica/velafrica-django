@@ -1,5 +1,5 @@
 BeautifulSoup==3.2.1
-Django==1.8.4
+Django==1.9.6
 Markdown==2.6.2
 Pillow==2.9.0
 PyJWT==1.4.0
@@ -11,7 +11,7 @@ django-cors-headers==1.1.0
 django-crispy-forms==1.5.2
 django-daterange-filter==1.2.0
 django-filter==0.11.0
-django-import-export==0.4.2
+django-import-export==0.4.5
 django-resized==0.3.5
 django-simple-history==1.7.0
 django-storages==1.4
