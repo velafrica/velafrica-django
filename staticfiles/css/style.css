@@ -1,5 +1,18 @@
+.navbar-default {
+	border: none;
+	background-color: #F2F2F2;
+}
+#breadcrumb-container {
+	margin-top: 50px;
+	background-color: #F9F9F9;
+}
+.breadcrumb, .jumbotron {
+	border-radius: 0;
+}
+
 .breadcrumb {
-  margin-top: 65px;
+	background-color: transparent !important;
+	margin: 0;
 }
 
 img {
@@ -24,6 +37,19 @@ img#navbar-logo {
   padding: 80px;
   background-size: 100%;
 }
+
+.featured_content {
+	width: 100%;
+	height: 100vh;
+	padding-top: 120px;
+}
+
+
+#featured_content_tracking {
+	background: url('../img/VfA_VeloTrackingHeader.jpg'); 
+	background-size: 100%;
+	background-attachment: fiexed;
+ }
 
 div.jumbotron#velotracking {
 	background: url('../img/VfA_VeloTrackingHeader.jpg');

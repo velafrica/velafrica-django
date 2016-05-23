@@ -14,96 +14,116 @@
 Velo Tracking
 {% endblock %}
 
-{% block jumbotron_id %}velotracking{% endblock %}
+{% block featured_content %}
+<div class="featured_content" id="featured_content_tracking">
+	<div class="container">
+		<h1>Velo Tracking</h1>
+		<div class="row">
+			<div class="col-lg-6">
+				<form action="/tracking/#tracking-details" method="POST">
+					{% csrf_token %}
+					<div class="input-group">
+					      <input type="text" name="tracking_no" class="form-control" placeholder="Tracking Nummer" value="{% if tno %}{{tno}}{%endif%}">
+					      <span class="input-group-btn">
+					        <input class="btn btn-primary" type="submit" value="Go!"/>
+					      </span>
+					</div><!-- /input-group -->
+				</form>
 
-{% block jumbotron %}
+			</div>
+			<div class="col-lg-6">
+				<!-- Velospende Button -->
+				<div id="donate"><a href="http://velafrica.ch/de/Machen-Sie-mit/Sammelstellen" target="_blank"><div id="donateText"><h1>Danke!</h1>Hier klicken für Ihre Velospende.</div></a></div>
+			</div>
+		</div>
 
-<div class="row">
-	<div class="col-lg-6">
-		<form action="/tracking/" method="POST">
-			{% csrf_token %}
-			<div class="input-group">
-			      <input type="text" name="tracking_no" class="form-control" placeholder="Tracking Nummer" value="{% if tno %}{{tno}}{%endif%}">
-			      <span class="input-group-btn">
-			        <input class="btn btn-primary" type="submit" value="Go!"/>
-			      </span>
-			</div><!-- /input-group -->
-		</form>
-
-	</div>
-	<div class="col-lg-6">
-		<!-- Velospende Button -->
-		<div id="donate"><a href="http://velafrica.ch/de/Machen-Sie-mit/Sammelstellen" target="_blank"><div id="donateText"><h1>Danke!</h1>Hier klicken für Ihre Velospende.</div></a></div>
 	</div>
 </div>
-
 {% endblock %}
 
+{% block jumbotron_display %}none{% endblock %}
+
 {% block content %}
-{% if tracking %}
-	<h2>Tracking Infos f&uuml;r Velo {{ tracking.tracking_no }}</h2>
-	{% if tracking.vpn %}
-	<p>Verarbeitungspartner: {% if tracking.vpn.website %}<a href="{{ tracking.vpn.website }}" target="_blank">{{ tracking.vpn }}</a>{% else %}{{ tracking.vpn }}{% endif %}</p>
-	{% endif %}
-	{% if tracking.container %}
-	<p>Destination: {% if tracking.container.partner_to.website %}<a href="{{ tracking.container.partner_to.website }}" target="_blank">{{ tracking.container.partner_to }}</a>{% else %}{{ tracking.container.partner_to }}{% endif %}</p>
-	{% endif %}
-	{% if tracking.last_event.event_type.label %}
-	<div class="label label-{% if tracking.last_event.event_type.complete_tracking %}success{% else %}info{% endif %}">{{ tracking.last_event.event_type.label }}</div>
-	{% endif %}
+<div id="tracking-details">
+	{% if tracking %}
+		<h2>Tracking Infos f&uuml;r Velo {{ tracking.tracking_no }}</h2>
+		<table class="table">
+			<thead>
+				<tr><th></th><th></th></tr>
+			</thead>
+			<tbody>
+				{% if tracking.vpn %}
+				<tr>
+					<td>Verarbeitungspartner</td>
+					<td>{% if tracking.vpn.website %}<a href="{{ tracking.vpn.website }}" target="_blank">{{ tracking.vpn }}</a>{% else %}{{ tracking.vpn }}{% endif %}</td>
+				</tr>
+				{% endif %}
+				{% if tracking.container %}
+				<tr>
+					<td>Destination</td>
+					<td>{% if tracking.container.partner_to.website %}<a href="{{ tracking.container.partner_to.website }}" target="_blank">{{ tracking.container.partner_to }}</a>{% else %}{{ tracking.container.partner_to }}{% endif %}</td>
+				</tr>
+				{% endif %}
+			</tbody>
+		</table>
+		
+		{% if tracking.last_event.event_type.label %}
+		<div class="label tracking-label label-{% if tracking.last_event.event_type.complete_tracking %}success{% else %}info{% endif %}">{{ tracking.last_event.event_type.label }}</div>
+		{% endif %}
 
-	<h3>History</h3>
-	{% for te in tracking_events %}
-	<!-- Modal -->
-	<div class="modal fade" id="tracking_event_{{ te.id }}" tabindex="-1" role="dialog" aria-labelledby="{{ te.event_type}}">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title" id="tracking_event_{{ te.id }}_label">{{ te.event_type }}</h4>
-	      </div>
-	      {% if te.event_type.image %}
-	      <div class="modal-body modal-header-img" style="background-image: url(' {{ te.event_type.image.url }}');">
-	      </div>
-	      {% endif %}
-	      <div class="modal-body">
+		<h3>Tracking Verlauf</h3>
+		{% for te in tracking_events %}
+		<!-- Modal -->
+		<div class="modal fade" id="tracking_event_{{ te.id }}" tabindex="-1" role="dialog" aria-labelledby="{{ te.event_type}}">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="tracking_event_{{ te.id }}_label">{{ te.event_type }}</h4>
+		      </div>
+		      {% if te.event_type.image %}
+		      <div class="modal-body modal-header-img" style="background-image: url(' {{ te.event_type.image.url }}');">
+		      </div>
+		      {% endif %}
+		      <div class="modal-body">
 
-	        {{ te.event_type.description }}
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-	{% endfor %}
-	<table class="table">
-		<thead>
+		        {{ te.event_type.description }}
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Schliessen</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		{% endfor %}
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Datum</th>
+					<th>Zeit</th>
+					<th>Ereignis</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+		{% for te in tracking_events %}
 			<tr>
-				<th>Datum</th>
-				<th>Zeit</th>
-				<th>Ereignis</th>
-				<th></th>
-			</tr>
-		</thead>
-		<tbody>
-	{% for te in tracking_events %}
-		<tr>
-			<td>{{ te.datetime | date:"d.m.Y" }}</td>
-			<td>{{ te.datetime | date:"H:i" }}</td>
-			<td>{{ te.event_type }}</td>
-			<td><a href="#" data-toggle="modal" data-target="#tracking_event_{{te.id}}"><span class="big-glyphicon glyphicon glyphicon-info-sign"></span></a></td>
-	{% endfor %}
-		</tbody>
-	</table>
-{% else %}
- {% if messages %}
-	{% for message in messages %}
-	<div class="alert alert-danger">{{ message }}</div>
-	{% endfor %}
-  {% endif %}
+				<td>{{ te.datetime | date:"d.m.Y" }}</td>
+				<td>{{ te.datetime | date:"H:i" }}</td>
+				<td>{{ te.event_type }}</td>
+				<td><a href="#" data-toggle="modal" data-target="#tracking_event_{{te.id}}" class="btn btn-default">Mehr Infos <span class="big-glyphicon glyphicon glyphicon-info-sign"></span></a></td>
+		{% endfor %}
+			</tbody>
+		</table>
+	{% else %}
+	 {% if messages %}
+		{% for message in messages %}
+		<div class="alert alert-danger">{{ message }}</div>
+		{% endfor %}
+	  {% endif %}
 
-{% endif %}
+	{% endif %}
+</div>
 
 
 {% endblock %}

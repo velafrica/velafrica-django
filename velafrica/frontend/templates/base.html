@@ -42,8 +42,6 @@
 
   <body>
 
-    <div class="container">
-
       <!-- Static navbar -->
       <div class="navbar navbar-default navbar-fixed-top">
       <div class="container">
@@ -119,35 +117,45 @@
       </div>
 
       <!-- Breadcrumbs -->
-      <div>
-        <ol class="breadcrumb">
-          <li><a href="/">Home</a></li>
-          {% block breadcrumb %}{% endblock %}
-        </ol>
+      <div id="breadcrumb-container">
+        <div class="container">
+          <ol class="breadcrumb">
+            <li><a href="/">Home</a></li>
+            {% block breadcrumb %}{% endblock %}
+          </ol>
+        </div>
       </div>
 
-    
-      <!-- Main component for a primary marketing message or call to action -->
-      <div class="jumbotron" id="{% block jumbotron_id %}{% endblock jumbotron_id %}">
-        {% block jumbotron-img %}<img src="{% static 'img/velafrica_A4.png' %}">{% endblock %}
-        <h1>{% block jumbotron-title %}Partner Portal <sup id="beta-flag">Beta</sup>{% endblock jumbotron-title %}</h1>
+      <!-- full width & height featured content -->
 
-        {% block jumbotron %}
-        
-        <p>Die Seite ist noch im Aufbau.</p>
-        
-        <p>&copy; 2016, <a href="http://velafrica.ch" target="_blank">Velafrica</a></p> 
+      {% block featured_content %}
+      {% endblock %}
 
-        {% endblock jumbotron %}
 
-      </div>
+      <div class="container">
 
-      <div>
-        <h2>{% block content-title %}{% endblock %}</h2>
-        {% block content %}{% endblock content %}
-      </div>
+        <!-- Main component for a primary marketing message or call to action -->
+        <div class="jumbotron" id="{% block jumbotron_id %}{% endblock jumbotron_id %}" style="display: {%block jumbotron_display %}block{% endblock %};">
+          {% block jumbotron-img %}<img src="{% static 'img/velafrica_A4.png' %}">{% endblock %}
+          <h1>{% block jumbotron-title %}Partner Portal <sup id="beta-flag">Beta</sup>{% endblock jumbotron-title %}</h1>
 
-    </div> <!-- /container -->
+          {% block jumbotron %}
+          
+          <p>Die Seite ist noch im Aufbau.</p>
+          
+          <p>&copy; 2016, <a href="http://velafrica.ch" target="_blank">Velafrica</a></p> 
+
+          {% endblock jumbotron %}
+
+        </div>
+
+        <div>
+          <h2>{% block content-title %}{% endblock %}</h2>
+          {% block content %}{% endblock content %}
+        </div>
+    </div> <!-- / container -->
+
+
 
     <!-- Footer -->
     <div style="background: #efefef; padding-top: 20px; padding-bottom: 20px;">

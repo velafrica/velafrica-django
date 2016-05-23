@@ -1,0 +1,103 @@
+.navbar-default {
+	border: none;
+	background-color: #F2F2F2;
+}
+#breadcrumb-container {
+	margin-top: 50px;
+	background-color: #F9F9F9;
+}
+.breadcrumb, .jumbotron {
+	border-radius: 0;
+}
+
+.breadcrumb {
+	background-color: transparent !important;
+	margin: 0;
+}
+
+img {
+	max-width: 100%;
+}
+
+img#navbar-logo {
+	height: 30px;
+}
+
+#beta-flag {
+	font-size: 60%;
+	opacity: 0.8;
+}
+
+#velo-counter-filter a:hover {
+  text-decoration: none;
+  opacity: 0.8;
+}
+
+.modal-header-img {
+  padding: 80px;
+  background-size: 100%;
+}
+
+.featured_content {
+	width: 100%;
+	height: 100%;
+}
+
+div.jumbotron#velotracking, #featured_content_tracking {
+	background: url("../img/VfA_VeloTrackingHeader.a1e1621cf0f1.jpg");
+	background-size: 100%;
+  	background-position: -0px -40px;
+}
+
+.big-glyphicon {
+	font-size: 1.5em;
+}
+
+@media(min-width: 768px) {
+	div.jumbotron#velotracking {
+		height: 400px;
+	}
+	.modal-header-img {
+	  padding: 160px;
+	  background-size: 100%;
+	}
+}
+
+/* Velo Spende Button */
+
+@media(max-width: 768px) {
+	#donate {
+		display: none;
+	}
+}
+
+#donate {
+	font-family: 'Open Sans';
+    background-image: url(http://velafrica.ch/themes/sinnovativ-group/images/donate_bg_velafrica.ch.png);
+    margin-left: auto;
+    right: 0;
+    width: 180px;
+    height: 180px;
+    z-index: 999;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+#donateText {
+    float: left;
+    width: 130px;
+    height: 135px;
+    margin-left: 25px;
+    margin-top: 22px;
+    text-align: center;
+    z-index: 999;
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+#donateText h1 {
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    border-bottom: 1px solid #FFFFFF;
+}
