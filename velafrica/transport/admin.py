@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
 from simple_history.admin import SimpleHistoryAdmin
+from velafrica.stock.models import Warehouse
 from velafrica.transport.models import Car, Driver, VeloState, Ride
 from import_export import resources
 from import_export.admin import ImportExportMixin
@@ -25,6 +26,11 @@ class RideResource(resources.ModelResource):
     """
     Define the ride resource for import / export.
     """
+    from_warehouse = fields.Field(
+        column_name='from_warehouse',
+        attribute='from_warehouse',
+        widget=ForeignKeyWidget(Warehouse, 'id'))
+
     date = Field(
         column_name='date',
         attribute='date',
