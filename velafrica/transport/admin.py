@@ -6,7 +6,7 @@ from velafrica.transport.models import Car, Driver, VeloState, Ride
 from import_export import resources
 from import_export.admin import ImportExportMixin
 from import_export.fields import Field
-from import_export.widgets import DateWidget
+from import_export.widgets import DateWidget, ForeignKeyWidget
 
 class CarAdmin(SimpleHistoryAdmin):
     list_display = ['name', 'organisation', 'plate']
