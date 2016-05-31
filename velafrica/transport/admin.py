@@ -30,6 +30,12 @@ class RideResource(resources.ModelResource):
         attribute='date',
         widget=DateWidget(format="%d.%m.%Y"))
 
+    def get_instance(self, instance_loader, row):
+    	"""
+    	Don't check for existing data rows.
+    	"""
+    	return False
+
     class Meta:
         model = Ride
         fields = ('date', 'from_warehouse', 'from_warehouse__name', 'to_warehouse', 'to_warehouse__name', 'driver', 'driver__name', 'car', 'car__name', 'velos', 'velo_state', 'velo_state__name', 'spare_parts', )
