@@ -15,6 +15,17 @@ Container
 {% endblock %}
 
 {% block jumbotron %}
+<table>
+	<tr>
+		<th>Total Container:</th>
+		<td>{{ containers.count }}</td>
+	</tr>
+	<tr>
+		<th>Total Velos:</th>
+		<td>{{ bicycles_total }}</td>
+	</tr>
+</table>
+
 {% endblock %}
 
 {% block content %}
@@ -29,6 +40,7 @@ Container
 			<th>Ladeort</th>
 			<th>Destination</th>
 			<th data-type="numeric">Anzahl Velos</th>
+			<th>Safmarine</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -38,6 +50,7 @@ Container
 			<td>{{ c.organisation_from }} </td>
 			<td>{{ c.partner_to }}</td>
 			<td>{{ c.velos_loaded }}</td>
+			<td>{% if c.container_no %}<a href="https://www.safmarine.com/how-to-ship/tracking?trackingNumber={{ c.get_trimmed_container_no }}" target="_blank">{{ c.get_trimmed_container_no }}</a>{% endif %}</td>
 		</tr>
 	{% endfor %}
 	</tbody>

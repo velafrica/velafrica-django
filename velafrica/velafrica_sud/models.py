@@ -24,26 +24,6 @@ class Country(models.Model):
         verbose_name_plural = "Countries"
 
 
-class PartnerSud(models.Model):
-    """
-    Represents a partner of the Velafrica Sud Network.
-    """
-    name = models.CharField(blank=False, null=True, max_length=255, verbose_name="Name der Organisation")
-    description = models.TextField(blank=True, null=True)
-    latitude = models.IntegerField(blank=True, null=True, verbose_name='Breitengrad')
-    longitude = models.IntegerField(blank=True, null=True, verbose_name='Längengrad')
-    country = models.ForeignKey(Country, verbose_name='Land')
-    website = models.CharField(blank=True, null=True, max_length=255, verbose_name="Website")
-
-    history = HistoricalRecords()
-
-    def __unicode__(self):
-        return u"{}, {}".format(self.name, self.country)
-
-    class Meta:
-        ordering = ['name']
-
-
 class Forwarder(models.Model):
     """
     Represents a logistics partner.
@@ -64,7 +44,7 @@ class Container(models.Model):
     Represents a container.
     """
     organisation_from = models.ForeignKey(Organisation, blank=True, null=True, verbose_name='Verarbeitungspartner', help_text='Ort wo der Container geladen wurde.')
-    partner_to = models.ForeignKey(PartnerSud, blank=False, null=False, verbose_name='Destination')
+    partner_to = models.ForeignKey('PartnerSud', blank=False, null=False, verbose_name='Destination')
 
     velos_loaded = models.IntegerField(blank=False, null=False, default=0, verbose_name='Anzahl Velos eingeladen')
     velos_unloaded = models.IntegerField(blank=False, null=False, default=0, verbose_name='Anzahl Velos ausgeladen')
@@ -88,8 +68,45 @@ class Container(models.Model):
     notes = models.TextField(blank=True, null=True, verbose_name="Bemerkungen zum Container")
     history = HistoricalRecords()
 
+    def get_trimmed_container_no(self):
+        if self.container_no:
+            return self.container_no.replace(" ", "").replace("-", "")
+        else:
+            return None
+
     def __unicode__(self):
         return u"Container {} to {} ({})".format(self.container_no, self.partner_to, self.pickup_date)
 
     class Meta:
         ordering = ['-pickup_date']
+
+
+class PartnerSud(models.Model):
+    """
+    Represents a partner of the Velafrica Sud Network.
+    """
+    name = models.CharField(blank=False, null=True, max_length=255, verbose_name="Name der Organisation")
+    description = models.TextField(blank=True, null=True)
+    latitude = models.IntegerField(blank=True, null=True, verbose_name='Breitengrad')
+    longitude = models.IntegerField(blank=True, null=True, verbose_name='Längengrad')
+    country = models.ForeignKey(Country, verbose_name='Land')
+    website = models.CharField(blank=True, null=True, max_length=255, verbose_name="Website")
+
+    history = HistoricalRecords()
+
+    def get_container_count(self):
+        return Container.objects.filter(partner_to=self).count()
+    get_container_count.short_description = 'Anzahl exp. Container'
+
+    def get_bicycle_count(self):
+        count = 0
+        for c in Container.objects.filter(partner_to=self):
+            count += c.velos_loaded
+        return count
+    get_bicycle_count.short_description = 'Anzahl exp. Velos'
+
+    def __unicode__(self):
+        return u"{}, {}".format(self.name, self.country)
+
+    class Meta:
+        ordering = ['name']

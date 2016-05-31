@@ -55,7 +55,8 @@ img#navbar-logo {
 #featured_content_tracking {
 	background: url('../img/VfA_VeloTrackingHeader.jpg'); 
 	background-size: 100%;
-	background-attachment: fiexed;
+	background-attachment: fixed;
+	background-position: -0px 60px;
  }
 
 div.jumbotron#velotracking {

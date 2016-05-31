@@ -30,6 +30,9 @@ ALLOWED_HOSTS = []
 
 # Application definition
 INSTALLED_APPS = (
+    # autocomplete light
+    'dal',
+    'dal_select2',
     # django core apps
     'django.contrib.admin',
     'django.contrib.auth',
@@ -42,6 +45,7 @@ INSTALLED_APPS = (
     'django_resized',
     'simple_history',
     'import_export',
+    'django_object_actions',
     # custom velafrica apps
     'velafrica.core',
     'velafrica.counter',

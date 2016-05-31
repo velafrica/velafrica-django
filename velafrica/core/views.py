@@ -181,7 +181,13 @@ def container(request):
   container
   """
   containers = Container.objects.all()
+
+  bicycles_total = 0
+  for c in containers:
+    bicycles_total += c.velos_loaded
+
   return render_to_response('velafrica_sud/container.html', {
-    'containers': containers
+    'containers': containers,
+    'bicycles_total': bicycles_total
     }, context_instance=RequestContext(request)
   )
