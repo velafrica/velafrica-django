@@ -26,7 +26,7 @@ class RideResource(resources.ModelResource):
     """
     Define the ride resource for import / export.
     """
-    from_warehouse = fields.Field(
+    from_warehouse = Field(
         column_name='from_warehouse',
         attribute='from_warehouse',
         widget=ForeignKeyWidget(Warehouse, 'id'))
