@@ -35,3 +35,5 @@ DATABASE_URL: postgres://<username>:<password>@<host>/<dbname>
     ----
      11
     alter sequence auth_group_id_seq restart with 12;
+
+ created by Platzh1rsch (www.platzh1rsch.ch)
