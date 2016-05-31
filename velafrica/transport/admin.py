@@ -23,6 +23,10 @@ class RideResource(resources.ModelResource):
     """
     Define the ride resource for import / export.
     """
+    date = Field(
+        column_name='date',
+        attribute='date',
+        widget=DateWidget(format="%d.%m.%Y"))
 
     class Meta:
         model = Ride
