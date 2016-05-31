@@ -26,7 +26,7 @@ class RideResource(resources.ModelResource):
 
     class Meta:
         model = Ride
-        fields = ('id', 'date', 'from_warehouse', 'from_warehouse__name', 'to_warehouse', 'to_warehouse__name', 'driver', 'driver__name', 'car', 'car__name', 'velos', 'velo_state', 'velo_state__name', 'spare_parts', )
+        fields = ('date', 'from_warehouse', 'from_warehouse__name', 'to_warehouse', 'to_warehouse__name', 'driver', 'driver__name', 'car', 'car__name', 'velos', 'velo_state', 'velo_state__name', 'spare_parts', )
 
 
 class RideAdmin(ImportExportMixin, SimpleHistoryAdmin):
