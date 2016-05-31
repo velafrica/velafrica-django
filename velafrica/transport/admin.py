@@ -32,13 +32,6 @@ class RideResource(resources.ModelResource):
         model = Ride
         fields = ('date', 'from_warehouse', 'from_warehouse__name', 'to_warehouse', 'to_warehouse__name', 'driver', 'driver__name', 'car', 'car__name', 'velos', 'velo_state', 'velo_state__name', 'spare_parts', )
 
-    def get_instance(self, instance_loader, row):
-    	"""
-    	Always tell the program that the entry does not exist yet.
-    	https://github.com/django-import-export/django-import-export/issues/295
-    	"""
-    	return False
-
 
 class RideAdmin(ImportExportMixin, SimpleHistoryAdmin):
     resource_class = RideResource
