@@ -77,7 +77,10 @@ class Ride(models.Model):
     history = HistoricalRecords()
 
     def __unicode__(self):
-        return u"Fahrt {}, {}: {} nach {}".format(self.id, self.date, self.from_warehouse, self.to_warehouse)
+        try:
+            return u"Fahrt {}, {}: {} nach {}".format(self.id, self.date, self.from_warehouse, self.to_warehouse)
+        except:
+            return u"Fahrt {}".format(self.id)
 
     class Meta:
         ordering = ['-date', 'from_warehouse']
