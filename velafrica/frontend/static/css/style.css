@@ -1,3 +1,7 @@
+input#tracking_no {
+	text-transform: uppercase;
+}
+
 #tracking-details {
 	padding-top: 60px;
 }

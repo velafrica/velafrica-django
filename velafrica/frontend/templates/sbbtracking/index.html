@@ -23,7 +23,7 @@ Velo Tracking
 				<form action="/tracking/#tracking-details" method="POST">
 					{% csrf_token %}
 					<div class="input-group">
-					      <input type="text" name="tracking_no" class="form-control" placeholder="Tracking Nummer" value="{% if tno %}{{tno}}{%endif%}">
+					      <input id="tracking_no" type="text" name="tracking_no" class="form-control" placeholder="2016AXXX" value="{% if tno %}{{tno}}{%endif%}">
 					      <span class="input-group-btn">
 					        <input class="btn btn-primary" type="submit" value="Go!"/>
 					      </span>
@@ -129,5 +129,16 @@ Velo Tracking
 {% endblock %}
 
 {% block document-foot %}
+
+	{% if direct_access %}
+	<script type="text/javascript">
+	$(document).ready(
+		$('html, body').animate({
+        	scrollTop: $("#tracking-details").offset().top
+    	}, 1000)
+	);
+	</script>
+	
+	{% endif %}
 
 {% endblock %}

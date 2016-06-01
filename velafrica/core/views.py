@@ -147,6 +147,7 @@ def tracking(request, tracking_no=0):
   tracking = []
   tracking_events = []
   tno = tracking_no
+  direct_access = False   # Indicates if visitor accessed tracking over direct url (/tracking/XYZ)
 
   if tno == 0:
     if 'tracking_no' in request.POST:
@@ -155,7 +156,10 @@ def tracking(request, tracking_no=0):
       pass
 
   if tno and tno != 0:
+    if type(tno) == str:
+      tno = tno.upper()
     tracking = Tracking.objects.filter(tracking_no=tno).first()
+    direct_access = True
     if tracking: 
       tracking_events = TrackingEvent.objects.filter(tracking=tracking.id)
     else:
@@ -164,7 +168,8 @@ def tracking(request, tracking_no=0):
   return render_to_response('sbbtracking/index.html', {
     'tno': tno,
     'tracking': tracking,
-    'tracking_events': tracking_events
+    'tracking_events': tracking_events,
+    'direct_access': direct_access,
     }, context_instance=RequestContext(request)
   )
 
