@@ -1,3 +1,14 @@
+#tracking-details {
+	padding-top: 60px;
+}
+
+.tracking-label {
+	display: block;
+	border-radius: 0;
+	font-size: 1em;
+	line-height: 1.5em;
+}
+
 .navbar-default {
 	border: none;
 	background-color: #F2F2F2;
@@ -47,8 +58,9 @@ img#navbar-logo {
 
 #featured_content_tracking {
 	background: url('../img/VfA_VeloTrackingHeader.jpg'); 
-	background-size: 100%;
-	background-attachment: fiexed;
+	background-size: cover;
+	background-attachment: fixed;
+	background-position: -0px 60px;
  }
 
 div.jumbotron#velotracking {
