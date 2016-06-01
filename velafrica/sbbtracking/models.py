@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from datetime import datetime
+from django.utils import timezone
 from django.core.validators import RegexValidator, EmailValidator
 from django.db import models
 from django_resized import ResizedImageField
@@ -62,7 +62,7 @@ class TrackingEvent(models.Model):
     """
     Represents an event during tracking of a bicycle.
     """
-    datetime = models.DateTimeField(blank=False, null=False, default=datetime.now, verbose_name="Zeitpunkt")
+    datetime = models.DateTimeField(blank=False, null=False, default=timezone.now, verbose_name="Zeitpunkt")
     event_type = models.ForeignKey(TrackingEventType, help_text="Art des Events")
     tracking = models.ForeignKey('Tracking')
     note = models.CharField(blank=True, null=True, max_length=255, verbose_name="Bemerkung", help_text="interne Bemerkung, nirgends ersichtlich für Spender (optional)")
@@ -108,7 +108,7 @@ class Tracking(models.Model):
     container = models.ForeignKey(Container, blank=True, null=True)
     note = models.CharField(blank=True, null=True, max_length=255, verbose_name="Bemerkung")
     velo_type = models.ForeignKey('VeloType', blank=True, null=True)
-    #last_update = models.DateTimeField(blank=False, null=False, default=datetime.now, verbose_name="Letztes Update")
+    #last_update = models.DateTimeField(blank=False, null=False, default=timezone.now, verbose_name="Letztes Update")
     last_event = models.ForeignKey('TrackingEvent', null=True, blank=True, verbose_name='Letzter Event', related_name='tracking_last_event')
     complete = models.BooleanField(default=False, verbose_name='Tracking beendet')
 
@@ -172,6 +172,6 @@ class EmailLog(models.Model):
     subject = models.CharField(blank=False, null=False, max_length=255)
     sender = models.CharField(blank=False, null=False, max_length=255)
     receiver = models.CharField(blank=False, null=False, max_length=255)
-    datetime = models.DateTimeField(blank=False, null=False, default=datetime.now)
+    datetime = models.DateTimeField(blank=False, null=False, default=timezone.now)
     message = models.TextField(blank=True, null=True)
     history = HistoricalRecords()

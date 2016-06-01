@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from datetime import datetime
+from django.utils import timezone
 from django.core.validators import RegexValidator
 from django.db import models
 from django_resized import ResizedImageField
@@ -64,7 +64,7 @@ class Ride(models.Model):
     Represents a ride from one destination to the other.
     Used to count how many bicycles went from one place to another in a certain period of time.
     """
-    date = models.DateField(blank=False, null=False, default=datetime.now, verbose_name="Datum")
+    date = models.DateField(blank=False, null=False, default=timezone.now, verbose_name="Datum")
     from_warehouse = models.ForeignKey(Warehouse, verbose_name='Start', related_name='from_warehouse', help_text='Start der Fahrt')
     to_warehouse = models.ForeignKey(Warehouse, verbose_name='Ziel', related_name='to_warehouse', help_text='Ziel der Fahrt')
     driver = models.ForeignKey(Driver, verbose_name='Fahrer', help_text='Person die den Transport durchgeführt hat.')

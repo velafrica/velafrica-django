@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from datetime import datetime
+from django.utils import timezone
 from django.core.validators import RegexValidator
 from django.conf import settings
 from django.db import models
@@ -117,7 +117,7 @@ class StockList(models.Model):
     like as a payload inventory of a container or a transport, or as an inventory
     of an internal stock transfer.
     """
-    last_change = models.DateTimeField(default=datetime.now)
+    last_change = models.DateTimeField(default=timezone.now)
     description = models.CharField(blank=True, null=True, max_length=255)
     history = HistoricalRecords()
 
@@ -153,7 +153,7 @@ class StockChange(models.Model):
         ('in', 'in'),
         ('out', 'out')
     }
-    datetime = models.DateTimeField(default=datetime.now)
+    datetime = models.DateTimeField(default=timezone.now)
     stocktransfer = models.ForeignKey('StockTransfer')
     warehouse = models.ForeignKey(Warehouse)
     stocklist = models.ForeignKey(StockList)
@@ -171,7 +171,7 @@ class StockTransfer(models.Model):
     Revoking a StockTransfer will delete the StockChange objects and reset
     self.booked to False.    
     """
-    date = models.DateField(blank=False, null=False, default=datetime.now, verbose_name="Ausführdatum")
+    date = models.DateField(blank=False, null=False, default=timezone.now, verbose_name="Ausführdatum")
     warehouse_from = models.ForeignKey(Warehouse, related_name="warehouse_from", verbose_name="Herkunfts-Lager")
     warehouse_to = models.ForeignKey(Warehouse, related_name="warehouse_to", verbose_name="Ziel-Lager")
     stocklist = models.ForeignKey(StockList, verbose_name="Stock List")
