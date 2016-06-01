@@ -156,8 +156,9 @@ def tracking(request, tracking_no=0):
       pass
 
   if tno and tno != 0:
-    if type(tno) == str:
-      tno = tno.upper()
+    tno = str(tno)
+    tno = tno.upper()
+    
     tracking = Tracking.objects.filter(tracking_no=tno).first()
     direct_access = True
     if tracking: 
