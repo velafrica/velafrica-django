@@ -37,17 +37,17 @@ urlpatterns = [
     url(r'^auth/password/reset', 
         'django.contrib.auth.views.password_reset', 
         {'post_reset_redirect' : '/auth/password/reset/done/'}, 
-        name='password-reset'
+        name='password_reset'
     ),
-    url(r'^auth/password/reset/done/$', 'django.contrib.auth.views.password_reset_done'),
+    url(r'^auth/password/reset/done/$', 'django.contrib.auth.views.password_reset_done', name='password_reset_done'),
     url(r'^auth/password/reset/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/$', 
         'django.contrib.auth.views.password_reset_confirm', 
-        {'post_reset_redirect' : '/auth/password/done/'}
+        {'post_reset_redirect' : '/auth/password/done/'}, name='password_reset_confirm'
     ),
     url(r'^auth/password/done/$', 
         'django.contrib.auth.views.password_reset_complete'
     ),
-    
+
     url(r'^auth/profile', views.profile, name='profile'),
     url(r'^auth/logout', views.accounts_logout, name='logout'),
     url(r'^admin/', include(admin.site.urls)),
