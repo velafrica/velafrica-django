@@ -1,5 +1,6 @@
 #-*- coding: utf-8 -*-
 # Signals for sending automated mails
+from datetime import datetime
 from django.core.mail import send_mail
 from django.conf import settings
 from django.db.models.signals import post_save
@@ -14,6 +15,7 @@ def send_email(sender, instance, **kwargs):
 
 	# set last event on tracking
 	instance.tracking.last_event = instance
+	#instance.tracking.last_update = instance.datetime
 	instance.tracking.save()
 
 	# check if tracking is complete now

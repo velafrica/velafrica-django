@@ -108,6 +108,7 @@ class Tracking(models.Model):
     container = models.ForeignKey(Container, blank=True, null=True)
     note = models.CharField(blank=True, null=True, max_length=255, verbose_name="Bemerkung")
     velo_type = models.ForeignKey('VeloType', blank=True, null=True)
+    #last_update = models.DateTimeField(blank=False, null=False, default=datetime.now, verbose_name="Letztes Update")
     last_event = models.ForeignKey('TrackingEvent', null=True, blank=True, verbose_name='Letzter Event', related_name='tracking_last_event')
     complete = models.BooleanField(default=False, verbose_name='Tracking beendet')
 
@@ -143,6 +144,18 @@ class Tracking(models.Model):
             return event
         else:
             return None
+
+    def get_last_update(self):
+        """
+        Get last update manually.
+        """
+        event = self.get_last_event()
+        if event:
+            return event.datetime
+        else:
+            return None
+    get_last_update.short_description = 'Last event'
+
 
     def __unicode__(self):
         return u"#{}: {} {}, {} Velos".format(self.tracking_no, self.first_name, self.last_name, self.number_of_velos)
