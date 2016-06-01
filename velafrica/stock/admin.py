@@ -76,7 +76,7 @@ class WarehouseAdmin(ImportExportMixin, SimpleHistoryAdmin):
     inlines = [StockInline,]
     resource_class = WarehouseResource
     list_display = ['name', 'organisation', 'description', 'stock_management']
-    search_fields = ['name', 'description', 'organisation']
+    search_fields = ['name', 'description', 'organisation__name']
     list_filter = ['organisation', 'stock_management']
 
 

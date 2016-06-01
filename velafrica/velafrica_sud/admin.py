@@ -18,7 +18,7 @@ class ContainerResource(resources.ModelResource):
 class ContainerAdmin(ImportExportMixin, SimpleHistoryAdmin):
     resource_class = ContainerResource
     list_display = ['pickup_date', 'container_no', 'organisation_from', 'partner_to', 'velos_loaded', 'velos_unloaded']
-    search_fields = ['container_no', 'organisation_from', 'partner_to']
+    search_fields = ['container_no', 'organisation_from__name', 'partner_to__name']
     list_filter = ['organisation_from', 'partner_to',]
     fieldsets = (
         (None, {
@@ -43,7 +43,7 @@ class ContainerInline(admin.TabularInline):
 
 class PartnerSudAdmin(SimpleHistoryAdmin):
     list_display = ['name', 'country', 'website', 'get_container_count', 'get_bicycle_count']
-    search_fields = ['name', 'country']
+    search_fields = ['name', 'country__name']
     inlines = [ContainerInline]
 
 

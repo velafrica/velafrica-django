@@ -50,7 +50,7 @@ class RideResource(resources.ModelResource):
 class RideAdmin(ImportExportMixin, SimpleHistoryAdmin):
     resource_class = RideResource
     list_display = ['id', 'date', 'from_warehouse', 'to_warehouse', 'driver', 'velos', 'velo_state', 'spare_parts']
-    search_fields = ['from_warehouse', 'to_warehouse', 'driver']
+    search_fields = ['from_warehouse__name', 'to_warehouse__name', 'driver__name']
     list_filter = ['date', 'driver', 'velo_state', 'spare_parts']
 
 

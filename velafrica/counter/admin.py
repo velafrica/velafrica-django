@@ -23,7 +23,7 @@ class EntryResource(resources.ModelResource):
 class EntryAdmin(ImportExportMixin, SimpleHistoryAdmin):
     resource_class = EntryResource
     list_display = ('date', 'organisation', 'amount', 'note')
-    search_fields = ['note', 'organisation']
+    search_fields = ['note', 'organisation__name']
     list_editable = ['amount', 'note']
     list_filter = (
         'date', 
