@@ -175,11 +175,3 @@ EMAIL_FROM_EMAIL = 'tracking@velafrica.ch'
 # Django Storage settings
 DEFAULT_FILE_STORAGE = 'storages.backends.ftp.FTPStorage'
 FTP_STORAGE_LOCATION = 'ftp://nto5q-partnertoo:B1XqSY78ri0Vb94_hxws-C5nm6co@partnertool.velafrica.ch:21'
-
-
-# date format defaults
-from django.conf.locale.es import formats as es_formats
-es_formats.DATETIME_FORMAT = "d.m.Y H:i"
-es_formats.SHORT_DATETIME_FORMAT = "d.m.Y H:i"
-es_formats.DATETIME_INPUT_FORMATS = "d.m.Y H:i"
-es_formats.DATE_INPUT_FORMATS = "d.m.Y"
