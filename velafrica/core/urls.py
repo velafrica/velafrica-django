@@ -40,7 +40,7 @@ urlpatterns = [
         name='password_reset'
     ),
     url(r'^auth/password/reset/done/$', 'django.contrib.auth.views.password_reset_done', name='password_reset_done'),
-    url(r'^auth/password/reset/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/$', 
+    url(r'^auth/password/reset/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/$', 
         'django.contrib.auth.views.password_reset_confirm', 
         {'post_reset_redirect' : '/auth/password/done/'}, name='password_reset_confirm'
     ),
@@ -51,4 +51,5 @@ urlpatterns = [
     url(r'^auth/profile', views.profile, name='profile'),
     url(r'^auth/logout', views.accounts_logout, name='logout'),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', include("massadmin.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

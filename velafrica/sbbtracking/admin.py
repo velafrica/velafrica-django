@@ -43,7 +43,7 @@ class TrackingAdmin(ImportExportMixin, SimpleHistoryAdmin):
     list_display = ('tracking_no', 'first_name', 'last_name', 'number_of_velos', 'velo_type', 'get_last_update', 'last_event', 'complete', 'container')
     list_filter = ['last_event__event_type', 'velo_type', 'complete']
     inlines = [TrackingEventInline, EmailLogInline]
-    search_fields = ['tracking_no', 'first_name', 'last_name']
+    search_fields = ['tracking_no', 'first_name', 'last_name', 'email']
     readonly_fields = ['last_event']
 
     actions = ['add_event',]

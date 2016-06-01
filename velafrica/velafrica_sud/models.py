@@ -86,10 +86,19 @@ class PartnerSud(models.Model):
     """
     name = models.CharField(blank=False, null=True, max_length=255, verbose_name="Name der Organisation")
     description = models.TextField(blank=True, null=True)
+    website = models.URLField(blank=True, null=True, max_length=255, verbose_name="Website")
+
+    street = models.CharField(max_length=255, blank=True, null=True)
+    zipcode = models.IntegerField(blank=True, null=True)
+    area = models.CharField(max_length=255, blank=True, null=True)
+    country = models.ForeignKey(Country, verbose_name='Land')
     latitude = models.IntegerField(blank=True, null=True, verbose_name='Breitengrad')
     longitude = models.IntegerField(blank=True, null=True, verbose_name='Längengrad')
-    country = models.ForeignKey(Country, verbose_name='Land')
-    website = models.CharField(blank=True, null=True, max_length=255, verbose_name="Website")
+
+    org_type = models.CharField(max_length=255, blank=True, null=True)
+    legalform = models.CharField(max_length=255, blank=True, null=True, verbose_name="Organisationsform")
+    partner_since = models.IntegerField(blank=True, null=True, verbose_name="Partner seit...", help_text="Jahr")
+    
 
     history = HistoricalRecords()
 

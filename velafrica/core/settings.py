@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # custom apps
+    'massadmin',
     'daterange_filter',
     'django_resized',
     'simple_history',

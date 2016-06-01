@@ -45,6 +45,17 @@ class PartnerSudAdmin(SimpleHistoryAdmin):
     list_display = ['name', 'country', 'website', 'get_container_count', 'get_bicycle_count']
     search_fields = ['name', 'country__name']
     inlines = [ContainerInline]
+    fieldsets = (
+        (None, {
+            'fields': ('name', 'description', 'website', )
+            }),
+        ('Location', {
+            'fields': ('street', 'zipcode', 'area', 'country', 'longitude', 'latitude')
+            }),
+        ('Organisation', {
+            'fields': ('legalform', 'org_type', 'partner_since', )
+            }),
+    )
 
 
 admin.site.register(Container, ContainerAdmin)
