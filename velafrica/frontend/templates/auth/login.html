@@ -17,12 +17,18 @@ Login
 
 <form method="post" action="{% url 'django.contrib.auth.views.login' %}" role="form">
 {% csrf_token %}
+<table class="table">
+	<tr>
+		<th>{{ form.username.label_tag }}</th>
+		<td>{{ form.username }}</td>
+	</tr>
+	<tr>
+		<th>{{ form.password.label_tag }}</th>
+		<td>{{ form.password }}</td>
+	</tr>
+</table>
 
-{{ form.username.label_tag }}
-{{ form.username }}
 <br /> 
-{{ form.password.label_tag }}
-{{ form.password }}
 <br />
 
 <input type="submit" value="login" class="btn btn-default" />

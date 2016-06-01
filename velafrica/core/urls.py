@@ -17,6 +17,8 @@ from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib import admin
+from django.contrib.auth import views
+from django.contrib.auth.views import password_reset
 from django.views.generic import RedirectView
 from velafrica.core import views
 
@@ -30,7 +32,22 @@ urlpatterns = [
     url(r'^tracking', views.tracking, name='tracking'),
     url(r'^transport', views.transport, name='transport'),
     url(r'^container', views.container, name='container'),
+
     url(r'^auth/login', 'django.contrib.auth.views.login', {'template_name':'auth/login.html'}, name='login'),
+    url(r'^auth/password/reset', 
+        'django.contrib.auth.views.password_reset', 
+        {'post_reset_redirect' : '/auth/password/reset/done/'}, 
+        name='password-reset'
+    ),
+    url(r'^auth/password/reset/done/$', 'django.contrib.auth.views.password_reset_done'),
+    url(r'^auth/password/reset/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/$', 
+        'django.contrib.auth.views.password_reset_confirm', 
+        {'post_reset_redirect' : '/auth/password/done/'}
+    ),
+    url(r'^auth/password/done/$', 
+        'django.contrib.auth.views.password_reset_complete'
+    ),
+    
     url(r'^auth/profile', views.profile, name='profile'),
     url(r'^auth/logout', views.accounts_logout, name='logout'),
     url(r'^admin/', include(admin.site.urls)),
