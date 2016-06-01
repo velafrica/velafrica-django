@@ -15,11 +15,26 @@ Transport Tracking
 {% endblock %}
 
 {% block jumbotron %}
-coming soon
 {% endblock %}
 
 {% block content %}
+<table class="table">
+	<tr>
+		<th>Total Fahrten:</th>
+		<td>{{ rides.count }}</td>
+	</tr>
+	<tr>
+		<th>Total Velos:</th>
+		<td>{{ velos }}</td>
+	</tr>
+</table>
 
+<h2>Fahrzeuge</h2>
+<ul>
+{% for c in cars %}
+<li>{{ c.name }}</li>
+{% endfor %}
+</ul>
 {% endblock %}
 
 {% block document-foot %}

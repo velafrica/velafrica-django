@@ -14,7 +14,8 @@ from velafrica.counter.models import Entry
 from velafrica.download.models import File
 from velafrica.organisation.models import Organisation
 from velafrica.sbbtracking.models import Tracking, TrackingEvent
-from velafrica.stock.models import Category, Product, Stock
+from velafrica.stock.models import Category, Product, Stock, Warehouse
+from velafrica.transport.models import Ride, Car, VeloState
 from velafrica.velafrica_sud.models import Container
 
 
@@ -172,8 +173,17 @@ def transport(request):
   """
   transport
   """
-  return render_to_response('transport/index.html',
-     context_instance=RequestContext(request))
+  rides = Ride.objects.all()
+  velos = 0
+  for r in rides:
+      velos += r.velos
+  cars = Car.objects.all()
+  return render_to_response('transport/index.html', {
+    'rides': rides,
+    'velos': velos,
+    'cars': cars,
+    }, context_instance=RequestContext(request)
+  )
 
 @login_required
 def container(request):
@@ -181,13 +191,12 @@ def container(request):
   container
   """
   containers = Container.objects.all()
-
   bicycles_total = 0
   for c in containers:
     bicycles_total += c.velos_loaded
 
   return render_to_response('velafrica_sud/container.html', {
     'containers': containers,
-    'bicycles_total': bicycles_total
+    'bicycles_total': bicycles_total,
     }, context_instance=RequestContext(request)
   )
