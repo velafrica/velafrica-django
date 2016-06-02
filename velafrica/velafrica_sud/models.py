@@ -92,8 +92,8 @@ class PartnerSud(models.Model):
     zipcode = models.IntegerField(blank=True, null=True)
     area = models.CharField(max_length=255, blank=True, null=True)
     country = models.ForeignKey(Country, verbose_name='Land')
-    latitude = models.IntegerField(blank=True, null=True, verbose_name='Breitengrad')
-    longitude = models.IntegerField(blank=True, null=True, verbose_name='Längengrad')
+    latitude = models.DecimalField(blank=True, null=True, verbose_name='Breitengrad', max_digits=9, decimal_places=6)
+    longitude = models.DecimalField(blank=True, null=True, verbose_name='Längengrad', max_digits=9, decimal_places=6)
 
     org_type = models.CharField(max_length=255, blank=True, null=True)
     legalform = models.CharField(max_length=255, blank=True, null=True, verbose_name="Organisationsform")
