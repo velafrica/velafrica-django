@@ -67,7 +67,7 @@ class StockAdmin(ImportExportMixin, SimpleHistoryAdmin):
     resource_class = StockResource
     list_display = ['__unicode__', 'product', 'warehouse', 'amount', 'last_modified']
     list_editable = ['amount']
-    search_fields = ['product']
+    search_fields = ['product__name']
     list_filter = ['warehouse']
     readonly_fields = ['last_modified']
 
