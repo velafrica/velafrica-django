@@ -5,7 +5,7 @@ from django.db import models
 from django_resized import ResizedImageField
 from simple_history.models import HistoricalRecords
 from velafrica.organisation.models import Person, Organisation
-from velafrica.stock.models import Warehouse
+from velafrica.stock.models import Warehouse, StockList
 
 
 class Car(models.Model):
@@ -72,6 +72,7 @@ class Ride(models.Model):
     velos = models.IntegerField(blank=False, null=False, default=0, verbose_name='Anzahl Velos')
     velo_state = models.ForeignKey(VeloState, verbose_name='Zustand der Velos')
     spare_parts = models.BooleanField(default=False, verbose_name='Ersatzteile transportiert?')
+    stocklist = models.OneToOneField(StockList, null=True, blank=True)
     note = models.CharField(blank=True, null=True, max_length=255, verbose_name="Bemerkung", help_text="Bemerkung zur Fahrt")
     
     history = HistoricalRecords()

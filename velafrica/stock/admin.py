@@ -1,10 +1,15 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
+from django.utils.safestring import mark_safe
+from django.core.urlresolvers import reverse
 from velafrica.stock.models import Product, Category, Warehouse, Stock, StockTransfer, StockList, StockListPosition, StockChange
+from velafrica.transport.models import Ride
+from velafrica.velafrica_sud.models import Container
 from import_export import resources
 from import_export.admin import ImportExportMixin
 from simple_history.admin import SimpleHistoryAdmin
-
+from import_export.fields import Field
+from import_export.widgets import DateWidget, ForeignKeyWidget, ManyToManyWidget
 
 class CategoryResource(resources.ModelResource):
     """
@@ -89,6 +94,29 @@ class StockChangeInline(admin.TabularInline):
         return False
 
 
+class StockListPositionResource(resources.ModelResource):
+    """
+    """
+    class Meta:
+        model = StockListPosition
+
+
+class StockListPositionAdmin(ImportExportMixin, SimpleHistoryAdmin):
+    model = StockListPosition
+    resource_class = StockListPositionResource
+    list_display = ['id', 'product', 'amount', 'stocklist']
+    list_filter = ['stocklist']
+    search_fields = ['product__name', 'product__articlenr', 'stocklist__description']
+
+
+class StockListResource(resources.ModelResource):
+    """
+
+    """
+    class Meta:
+        model = StockList
+
+
 class StockListPositionInline(admin.TabularInline):
     model = StockListPosition
 
@@ -97,12 +125,60 @@ class StockListInline(admin.TabularInline):
     inlines = [StockListPositionInline]
     model = StockList
 
+class RideInline(admin.TabularInline):
+    model = Ride
 
-class StockListAdmin(SimpleHistoryAdmin):
-    inlines = [StockListPositionInline]
+class StockTransferInline(admin.TabularInline):
+    model = StockTransfer
 
-class StockTransferAdmin(SimpleHistoryAdmin):
+class ContainerInline(admin.TabularInline):
+    model = Container
+
+class StockListAdmin(ImportExportMixin, SimpleHistoryAdmin):
+    inlines = [StockListPositionInline, StockTransferInline]
+    resource_class = StockListResource
+    list_display = ['id', 'ride_link', 'stocktransfer_link', 'container_link', 'description', 'last_change', 'size']
+    search_fields = ['description']
+    readonly_fields = ['ride_link', 'stocktransfer_link', 'container_link']
+
+    read_only_fields = ('user_link',)
+
+    def ride_link(self, obj):
+        r = 'admin:{}_{}_change'.format(obj.ride._meta.app_label, obj.ride._meta.model_name)
+        return mark_safe('<a href="{}">{}</a>'.format(
+            reverse(r, args=(obj.ride.id,)),
+            obj.ride
+        ))
+    ride_link.short_description = 'Ride'
+
+    def stocktransfer_link(self, obj):
+        r = 'admin:{}_{}_change'.format(obj.stocktransfer._meta.app_label, obj.stocktransfer._meta.model_name)
+        return mark_safe('<a href="{}">{}</a>'.format(
+            reverse(r, args=(obj.stocktransfer.id,)),
+            obj.stocktransfer
+        ))
+    stocktransfer_link.short_description = 'StockTransfer'
+
+    def container_link(self, obj):
+        r = 'admin:{}_{}_change'.format(obj.container._meta.app_label, obj.container._meta.model_name)
+        return mark_safe('<a href="{}">{}</a>'.format(
+            reverse(r, args=(obj.container.id,)),
+            obj.container
+        ))
+    container_link.short_description = 'Container'
+
+
+class StockTransferResource(resources.ModelResource):
+    """
+
+    """
+    class Meta:
+        model = StockTransfer
+
+
+class StockTransferAdmin(ImportExportMixin, SimpleHistoryAdmin):
     inlines = [StockChangeInline]
+    resource_class = StockTransferResource
     list_display = ['id', 'date', 'warehouse_from', 'warehouse_to', 'stocklist', 'booked', 'note']
     list_filter = ['date', 'warehouse_from', 'warehouse_to', 'booked']
     readonly_fields = ['booked']
@@ -147,5 +223,7 @@ admin.site.register(Category, CategoryAdmin)
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Warehouse, WarehouseAdmin)
 admin.site.register(Stock, StockAdmin)
+admin.site.register(StockChange)
 admin.site.register(StockTransfer, StockTransferAdmin)
 admin.site.register(StockList, StockListAdmin)
+admin.site.register(StockListPosition, StockListPositionAdmin)

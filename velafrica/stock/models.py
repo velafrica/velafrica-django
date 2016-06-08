@@ -119,17 +119,42 @@ class StockList(models.Model):
     """
     last_change = models.DateTimeField(default=timezone.now)
     description = models.CharField(blank=True, null=True, max_length=255)
+    #stocktransfer = models.OneToOneField('StockTransfer', blank=True, null=True)
+
     history = HistoricalRecords()
 
     def __unicode__(self):
-        return u"StockList {}, {}".format(self.last_change, self.description)
+        return u"StockList #{} - {} (last change: {}".format(self.id, self.description, self.last_change)
+
+    def get_stocktransfer(self):
+        if self.stocktransfer:
+            return self.stocktransfer
+        return None
+    get_stocktransfer.short_description = 'Stock Transfer'
+
+    def get_ride(self):
+        if self.ride:
+            return self.ride
+        return None
+    get_ride.short_description = 'Ride'
+
+    def get_container(self):
+        if self.container:
+            return self.container
+        return None
+    get_container.short_description = 'Container'
+
+    def size(self):
+        elem = StockListPosition.objects.filter(stocklist=self)
+        return elem.count()
+    size.short_description = 'Anzahl Positionen'
 
 
 class StockListPosition(models.Model):
     """
     One position in a StockList.
     """
-    stocklist = models.ForeignKey(StockList, verbose_name='StockList')
+    stocklist = models.ForeignKey('StockList', verbose_name='StockList')
     product = models.ForeignKey(Product)
     amount = models.IntegerField(blank=False, null=False, verbose_name="Stückzahl")
     history = HistoricalRecords()
@@ -138,7 +163,7 @@ class StockListPosition(models.Model):
         unique_together = (("stocklist", "product"),)
 
     def __unicode__(self):
-        return u"{}: {} in {}".format(self.product, self.amount, self.stocklist)
+        return u"StockList #{}: {}x {} ".format(self.stocklist.id, self.amount, self.product)
 
 
 class StockChange(models.Model):
@@ -174,7 +199,7 @@ class StockTransfer(models.Model):
     date = models.DateField(blank=False, null=False, default=timezone.now, verbose_name="Ausführdatum")
     warehouse_from = models.ForeignKey(Warehouse, related_name="warehouse_from", verbose_name="Herkunfts-Lager")
     warehouse_to = models.ForeignKey(Warehouse, related_name="warehouse_to", verbose_name="Ziel-Lager")
-    stocklist = models.ForeignKey(StockList, verbose_name="Stock List")
+    stocklist = models.OneToOneField(StockList, verbose_name="Stock List")
     note = models.CharField(blank=True, null=True, max_length=255, verbose_name="Bemerkungen")
     booked = models.BooleanField(default=False, null=False, blank=False, help_text="Gibt an ob der Stock bereits angepasst wurde.")
     history = HistoricalRecords()

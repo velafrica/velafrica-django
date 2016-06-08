@@ -4,7 +4,7 @@ from django.db import models
 from django_resized import ResizedImageField
 from simple_history.models import HistoricalRecords
 from velafrica.organisation.models import Organisation
-
+from velafrica.stock.models import StockList
 from velafrica.core.ftp import MyFTPStorage
 fs = MyFTPStorage()
 
@@ -48,6 +48,7 @@ class Container(models.Model):
     velos_loaded = models.IntegerField(blank=False, null=False, default=0, verbose_name='Anzahl Velos eingeladen')
     velos_unloaded = models.IntegerField(blank=False, null=False, default=0, verbose_name='Anzahl Velos ausgeladen')
     spare_parts = models.BooleanField(default=False, verbose_name='Ersatzteile transportiert?')
+    stocklist = models.OneToOneField(StockList, null=True, blank=True)
 
     velos_worth = models.IntegerField(blank=False, null=False, default=0, verbose_name='Wert der Velos')   
     spare_parts_worth = models.IntegerField(blank=False, null=False, default=0, verbose_name='Wert der Ersatzteile')
