@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from datetime import timedelta, date
 from django.utils import timezone
 from django.db import models
 from simple_history.models import HistoricalRecords
@@ -16,21 +17,83 @@ class Entry(models.Model):
     history = HistoricalRecords()
 
     @staticmethod
-    def get_total_amount():
+    def get_statistics(id=0):
+      statistics = {
+        "org_id": id,
+        "velos_today": 0,
+        "velos_yesterday": 0,
+        "velos_thisweek": 0,
+        "velos_thismonth": 0,
+        "velos_thisyear": 0,
+        "velos_total": 0,
+        "velos_max": 0,
+        "velos_max_date": date.today(),
+        "organisations": {}
+      }
+
+      entries = Entry.objects.all()
+
+      # get all organisations that already have entries
+      org_ids = Entry.objects.order_by().values('organisation').distinct()
+      statistics["organisations"] = Organisation.objects.filter(id__in=org_ids)
+
+      if id > 0:
+        entries = entries.filter(organisation=org_ids)
+
+      if (entries.count() > 0):
+        now = date.today()
+        first_day_of_week = now - timedelta(days=now.weekday())
+
+        for entry in entries:
+          # sum up total
+          statistics["velos_total"] += entry.amount
+
+          # check if it is the biggest amount
+          if entry.amount > statistics["velos_max"]:
+            statistics["velos_max"] = entry.amount
+            statistics["velos_max_date"] = entry.date
+
+          # check if entry is from current year
+          if entry.date.year == now.year:
+            statistics["velos_thisyear"] += entry.amount
+
+            # check if entry is from current month
+            if entry.date.month == now.month:
+              statistics["velos_thismonth"] += entry.amount
+
+          # check if entry is from current week
+          if entry.date >= first_day_of_week:
+            statistics["velos_thisweek"] += entry.amount
+
+          # check if latest entry was from today
+          if entry.date == now:
+            statistics["velos_today"] += entry.amount
+
+          # get entry from yesterday
+          if entry.date == (now - timedelta(days=1)):
+            statistics["velos_yesterday"] += entry.amount
+        return statistics
+
+    @staticmethod
+    def get_amount_year(id=0):
         pass
 
     @staticmethod
-    def get_total_amount_by_org(id):
+    def get_amount_day(id=0):
         pass
 
     @staticmethod
-    def get_max_amount_and_date():
+    def get_amount_week(id=0):
         pass
 
     @staticmethod
-    def get_max_amount_and_date_by_org():
+    def get_amount_month(id=0):
         pass
-    
+
+    @staticmethod
+    def get_amount_yesterday(id=0):
+        pass
+
     def __unicode__(self):
         return u"{}: {}".format(self.date, self.amount)
 
