@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """velafrica_trackingtool URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -24,7 +25,7 @@ from velafrica.core import views
 
 urlpatterns = [
 	#url(r'^$', views.home, name='home'),
-    url(r'^api/?', include('velafrica.api.urls')),
+    url(r'^api/', include('velafrica.api.urls')),
 
     url(r'^$', RedirectView.as_view(url='/tracking')),
 	url(r'^counter', views.counter, name='counter'),

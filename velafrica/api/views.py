@@ -1,6 +1,8 @@
+# -*- coding: utf-8 -*-
 from django.shortcuts import get_object_or_404
 from django.core.mail import send_mail
 from django.contrib.auth import get_user_model
+import markdown
 from rest_framework import generics, permissions
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -17,10 +19,26 @@ def api_root(request, format=None):
     Feel free to use this API. I would love to see what you did with it.
     """
     return Response({
-        '/trackings': {
-            reverse('trackings', request=request, format=format): 'list of all trackings',
-            "{}/<id>".format(reverse('trackings', request=request, format=format)): 'tracking details'
-        }
+        '/tracking': {
+            '/trackings': {
+            reverse('tracking:trackings', request=request, format=format): 'list of all trackings',
+            "{}/<id>".format(reverse('tracking:trackings', request=request, format=format)): 'tracking details'
+            },
+            '/trackingevents': {
+                reverse('tracking:trackingevents', request=request, format=format): 'list of all tracking events',
+                "{}/<id>".format(reverse('tracking:trackingevents', request=request, format=format)): 'tracking event details'
+            },
+            '/trackingeventtypes': {
+                reverse('tracking:trackingeventtypes', request=request, format=format): 'list of all tracking event types',
+                "{}/<id>".format(reverse('tracking:trackingeventtypes', request=request, format=format)): 'tracking event type details'
+            }
+        },
+        '/counter':{},
+        '/transport':{},
+        '/organisation':{},
+        '/stock':{},
+        '/velafrica_sud':{}
+
     })
 
 
@@ -40,6 +58,42 @@ class TrackingDetail(generics.RetrieveAPIView):
 
     queryset = Tracking.objects.all()
     serializer_class = TrackingSerializer
+
+
+class TrackingEventList(generics.ListAPIView):
+    """
+    Get a list of all tracking events.
+    """
+
+    queryset = TrackingEvent.objects.all()
+    serializer_class = TrackingEventSerializer
+
+
+class TrackingEventDetail(generics.RetrieveAPIView):
+    """
+    Get details of a trackings.
+    """
+
+    queryset = TrackingEvent.objects.all()
+    serializer_class = TrackingEventSerializer
+
+
+class TrackingEventTypeList(generics.ListAPIView):
+    """
+    Get a list of all trackings.
+    """
+
+    queryset = TrackingEventType.objects.all()
+    serializer_class = TrackingEventTypeSerializer
+
+
+class TrackingEventTypeDetail(generics.RetrieveAPIView):
+    """
+    Get details of a trackings.
+    """
+
+    queryset = TrackingEventType.objects.all()
+    serializer_class = TrackingEventTypeSerializer
 
 '''
 

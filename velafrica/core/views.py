@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from datetime import timedelta, date
 from django.conf import settings
 from django.contrib import messages
@@ -158,7 +159,7 @@ def tracking(request, tracking_no=0):
   if tno and tno != 0:
     tno = str(tno)
     tno = tno.upper()
-    
+
     tracking = Tracking.objects.filter(tracking_no=tno).first()
     direct_access = True
     if tracking: 
