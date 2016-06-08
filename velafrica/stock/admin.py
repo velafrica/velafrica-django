@@ -151,7 +151,7 @@ class ContainerInline(admin.TabularInline):
     model = Container
 
 class StockListAdmin(ImportExportMixin, SimpleHistoryAdmin):
-    inlines = [StockListPositionInline, StockTransferInline]
+    inlines = [StockListPositionInline]
     resource_class = StockListResource
     list_display = ['id', 'ride_link', 'stocktransfer_link', 'container_link', 'description', 'last_change', 'listpositions_link']
     search_fields = ['description']
@@ -159,14 +159,15 @@ class StockListAdmin(ImportExportMixin, SimpleHistoryAdmin):
 
 
     def listpositions_link(self, obj):
-        print "test"
-        r = 'admin:{}_{}_changelist'.format(obj.stocklistposition_set.first()._meta.app_label, obj.stocklistposition_set.first()._meta.model_name)
-        print r
-        return mark_safe('<a href="{}?stocklist__id__exact={}">{}</a>'.format(
-            reverse(r, args=[]),
-            obj.id,
-            obj.size()
-        ))
+        if obj.stocklistposition_set.first():
+            r = 'admin:{}_{}_changelist'.format(obj.stocklistposition_set.first()._meta.app_label, obj.stocklistposition_set.first()._meta.model_name)
+            print r
+            return mark_safe('<a href="{}?stocklist__id__exact={}">{}</a>'.format(
+                reverse(r, args=[]),
+                obj.id,
+                obj.size()
+            ))
+        return None
     listpositions_link.short_description = 'Anzahl Positionen'
 
     def ride_link(self, obj):
