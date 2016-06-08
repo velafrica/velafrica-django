@@ -47,7 +47,9 @@ INSTALLED_APPS = (
     'simple_history',
     'import_export',
     'django_object_actions',
+    'rest_framework',
     # custom velafrica apps
+    'velafrica.api',
     'velafrica.core',
     'velafrica.counter',
     'velafrica.download',

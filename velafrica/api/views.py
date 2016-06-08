@@ -1,16 +1,14 @@
-from swissrugbystats.core.models import *
-from swissrugbystats.api.serializer import *
+from django.shortcuts import get_object_or_404
+from django.core.mail import send_mail
+from django.contrib.auth import get_user_model
 from rest_framework import generics, permissions
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
-from django_admin_conf_vars.models import ConfigurationVariable
-from django.shortcuts import get_object_or_404
-from django.core.mail import send_mail
-from swissrugbystats.api.http_errors import ResourceAlreadyExists
-from django.contrib.auth import get_user_model
 from rest_framework import status
 from rest_framework import filters
+from velafrica.sbbtracking.models import *
+from velafrica.sbbtracking.serializer import *
 
 @api_view(('GET',))
 def api_root(request, format=None):
@@ -19,71 +17,33 @@ def api_root(request, format=None):
     Feel free to use this API. I would love to see what you did with it.
     """
     return Response({
-        '/leagues': {
-            reverse('leagues', request=request, format=format): 'list of all league objects',
-            "{}/<id>".format(reverse('leagues', request=request, format=format)): 'league details'
-        },
-        '/games': {
-            reverse('games', request=request, format=format): 'list of all games',
-            "{}/<id>".format(reverse('games', request=request, format=format)): 'game details',
-        },
-        '/game-participations': {
-            reverse('game-participations', request=request, format=format): 'list of all game-participations',
-            "{}/<id>".format(reverse('game-participations', request=request, format=format)): 'game-participations detail',
-        },
-        '/clubs': {
-            reverse('clubs', request=request, format=format): 'list of all clubs',
-            "{}/<id>".format(reverse('clubs', request=request, format=format)): 'club detail',
-        },
-        '/config': 'list of all config',
-        '/teams': {
-            reverse('teams', request=request, format=format): 'list of all teams',
-            "{}/<team-id>".format(reverse('teams', request=request, format=format)): {
-                "{}/<team-id>".format(reverse('teams', request=request, format=format)): 'team-details',
-                "{}/<team-id>/games".format(reverse('teams', request=request, format=format)): {
-                    "{}/<team-id>/games".format(reverse('teams', request=request, format=format)): 'all games by team-id',
-                    "{}/<team-id>/games/season/<season-id>".format(reverse('teams', request=request, format=format)): 'all games by team and season id',
-                    "{}/<team-id>/games/next".format(reverse('teams', request=request, format=format)): 'next game',
-                    "{}/<team-id>/games/last".format(reverse('teams', request=request, format=format)): 'last game',
-                }
-            }
-        },
-        '/players': {
-            '/': reverse('players', request=request, format=format),
-            '/{id}' : 'player details'
-        },
-        '/referees': {
-            '/': reverse('referees', request=request, format=format),
-            '/{id}': 'referee details'
-        },
-        '/seasons': {
-            '/': reverse('seasons', request=request, format=format),
-            '/{id}': 'season details'
-        },
-        '/venues': {
-            '/': reverse('venues', request=request, format=format),
-            '/{id}': 'venue details'
-        },
-        '/competitions': {
-            '/': reverse('competitions', request=request, format=format),
+        '/trackings': {
+            reverse('trackings', request=request, format=format): 'list of all trackings',
+            "{}/<id>".format(reverse('trackings', request=request, format=format)): 'tracking details'
         }
     })
 
 
-class ConfigurationVariableList(generics.ListAPIView):
+class TrackingList(generics.ListAPIView):
     """
-    Get a list of all configuration variables.
-    Only visible to authenticated users.
+    Get a list of all trackings.
     """
 
-    queryset = ConfigurationVariable.objects.all()
-    serializer_class = ConfigurationVariableSerializer
+    queryset = Tracking.objects.all()
+    serializer_class = TrackingSerializer
 
+
+class TrackingDetail(generics.RetrieveAPIView):
+    """
+    Get details of a trackings.
+    """
+
+    queryset = Tracking.objects.all()
+    serializer_class = TrackingSerializer
+
+'''
 
 class LeagueList(generics.ListAPIView):
-    """
-    Get a list of all the leagues.
-    """
     queryset = League.objects.all()
     serializer_class = LeagueSerializer
     filter_backends = [filters.OrderingFilter]
@@ -93,17 +53,13 @@ class LeagueList(generics.ListAPIView):
 
 # League detail
 class LeagueDetail(generics.RetrieveAPIView):
-    """
-    Get details about a special league.
-    """
+
     queryset = League.objects.all()
     serializer_class = LeagueDetailSerializer
 
 
 class ClubList(generics.ListAPIView):
-    """
-    Get a list of all the clubs.
-    """
+
     queryset = Club.objects.all()
     serializer_class = ClubSerializer
     filter_backends = [filters.OrderingFilter]
@@ -112,17 +68,13 @@ class ClubList(generics.ListAPIView):
 
 
 class ClubDetail(generics.RetrieveAPIView):
-    """
-    Get details about a special club.
-    """
+
     queryset = Club.objects.all()
     serializer_class = ClubSerializer
 
 
 class PlayerList(generics.ListAPIView):
-    """
-    Get a list of all the players.
-    """
+
     queryset = Player.objects.all()
     serializer_class = PlayerSerializer
     filter_backends = [filters.OrderingFilter]
@@ -373,3 +325,4 @@ class CreateFavorite(generics.ListCreateAPIView):
             raise ResourceAlreadyExists()
         f = Favorite(team=t, user=u)
         f.save()
+'''

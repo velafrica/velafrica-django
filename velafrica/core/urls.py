@@ -24,6 +24,8 @@ from velafrica.core import views
 
 urlpatterns = [
 	#url(r'^$', views.home, name='home'),
+    url(r'^api/?', include('velafrica.api.urls')),
+
     url(r'^$', RedirectView.as_view(url='/tracking')),
 	url(r'^counter', views.counter, name='counter'),
     url(r'^download', views.downloads, name='download'),
@@ -50,6 +52,7 @@ urlpatterns = [
 
     url(r'^auth/profile', views.profile, name='profile'),
     url(r'^auth/logout', views.accounts_logout, name='logout'),
+
     url(r'^admin/', include(admin.site.urls)),
     url(r'^admin/', include("massadmin.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
