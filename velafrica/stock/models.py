@@ -173,6 +173,7 @@ class StockChange(models.Model):
     On pre_save, the application checks on the warehouse if stock is managed automatically.
     If so, the stock for all the objects in the StockList will be adjusted depending on the stock change type.
     On pre_delete, the application undoes the stock changes and then deletes the StocChange object.
+
     """
     STOCK_CHANGE_TYPES = {
         ('in', 'in'),

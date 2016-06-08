@@ -77,6 +77,22 @@ class StockAdmin(ImportExportMixin, SimpleHistoryAdmin):
     readonly_fields = ['last_modified']
 
 
+class StockChangeResource(resources.ModelResource):
+    """
+    Define the StockChange resource for import / export.
+    """
+
+    class Meta:
+        model = StockChange
+
+
+class StockChangeAdmin(ImportExportMixin, SimpleHistoryAdmin):
+    resource_class = StockChangeResource
+    model = StockChange
+    list_display = ['datetime', 'stocktransfer', 'warehouse', 'stocklist', 'stock_change_type']
+    list_filter = ['warehouse', 'stock_change_type']
+    search_fields = ['warehouse__name']
+
 class WarehouseAdmin(ImportExportMixin, SimpleHistoryAdmin):
     inlines = [StockInline,]
     resource_class = WarehouseResource
@@ -137,11 +153,21 @@ class ContainerInline(admin.TabularInline):
 class StockListAdmin(ImportExportMixin, SimpleHistoryAdmin):
     inlines = [StockListPositionInline, StockTransferInline]
     resource_class = StockListResource
-    list_display = ['id', 'ride_link', 'stocktransfer_link', 'container_link', 'description', 'last_change', 'size']
+    list_display = ['id', 'ride_link', 'stocktransfer_link', 'container_link', 'description', 'last_change', 'listpositions_link']
     search_fields = ['description']
     readonly_fields = ['ride_link', 'stocktransfer_link', 'container_link']
 
-    read_only_fields = ('user_link',)
+
+    def listpositions_link(self, obj):
+        print "test"
+        r = 'admin:{}_{}_changelist'.format(obj.stocklistposition_set.first()._meta.app_label, obj.stocklistposition_set.first()._meta.model_name)
+        print r
+        return mark_safe('<a href="{}?stocklist__id__exact={}">{}</a>'.format(
+            reverse(r, args=[]),
+            obj.id,
+            obj.size()
+        ))
+    listpositions_link.short_description = 'Anzahl Positionen'
 
     def ride_link(self, obj):
         r = 'admin:{}_{}_change'.format(obj.ride._meta.app_label, obj.ride._meta.model_name)
@@ -223,7 +249,7 @@ admin.site.register(Category, CategoryAdmin)
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Warehouse, WarehouseAdmin)
 admin.site.register(Stock, StockAdmin)
-admin.site.register(StockChange)
+admin.site.register(StockChange, StockChangeAdmin)
 admin.site.register(StockTransfer, StockTransferAdmin)
 admin.site.register(StockList, StockListAdmin)
 admin.site.register(StockListPosition, StockListPositionAdmin)
