@@ -18,6 +18,19 @@ class Entry(models.Model):
 
     @staticmethod
     def get_statistics(id=0):
+      """
+      Returns a dict with the following keys:
+      "org_id": int,
+      "velos_today": int,
+      "velos_yesterday": int,
+      "velos_thisweek": int,
+      "velos_thismonth": int,
+      "velos_thisyear": int,
+      "velos_total": int,
+      "velos_max": int,
+      "velos_max_date": date,
+      "organisations": QuerySet<Organisation>
+      """
       statistics = {
         "org_id": id,
         "velos_today": 0,
@@ -73,26 +86,6 @@ class Entry(models.Model):
           if entry.date == (now - timedelta(days=1)):
             statistics["velos_yesterday"] += entry.amount
         return statistics
-
-    @staticmethod
-    def get_amount_year(id=0):
-        pass
-
-    @staticmethod
-    def get_amount_day(id=0):
-        pass
-
-    @staticmethod
-    def get_amount_week(id=0):
-        pass
-
-    @staticmethod
-    def get_amount_month(id=0):
-        pass
-
-    @staticmethod
-    def get_amount_yesterday(id=0):
-        pass
 
     def __unicode__(self):
         return u"{}: {}".format(self.date, self.amount)
