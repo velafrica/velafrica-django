@@ -22,13 +22,14 @@ from django.contrib.auth import views
 from django.contrib.auth.views import password_reset
 from django.views.generic import RedirectView
 from velafrica.core import views
+from velafrica.counter import views as counter_views
 
 urlpatterns = [
 	#url(r'^$', views.home, name='home'),
     url(r'^api/', include('velafrica.api.urls')),
 
     url(r'^$', RedirectView.as_view(url='/tracking')),
-	url(r'^counter', views.counter, name='counter'),
+	url(r'^counter', counter_views.counter, name='counter'),
     url(r'^download', views.downloads, name='download'),
     url(r'^stock', views.stock, name='stock'),
     url(r'^tracking/(?P<tracking_no>\w+)', views.tracking, name='tracking_detail'),

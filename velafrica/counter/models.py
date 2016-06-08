@@ -15,6 +15,22 @@ class Entry(models.Model):
     note = models.CharField(blank=True, null=True, max_length=255, verbose_name="Bemerkungen")
     history = HistoricalRecords()
 
+    @staticmethod
+    def get_total_amount():
+        pass
+
+    @staticmethod
+    def get_total_amount_by_org(id):
+        pass
+
+    @staticmethod
+    def get_max_amount_and_date():
+        pass
+
+    @staticmethod
+    def get_max_amount_and_date_by_org():
+        pass
+    
     def __unicode__(self):
         return u"{}: {}".format(self.date, self.amount)
 
