@@ -9,8 +9,13 @@ from rest_framework.response import Response
 from rest_framework.reverse import reverse
 from rest_framework import status
 from rest_framework import filters
+from velafrica.organisation.models import *
+from velafrica.organisation.serializer import *
 from velafrica.sbbtracking.models import *
 from velafrica.sbbtracking.serializer import *
+from velafrica.stock.models import *
+from velafrica.stock.serializer import *
+
 
 @api_view(('GET',))
 def api_root(request, format=None):
@@ -21,8 +26,8 @@ def api_root(request, format=None):
     return Response({
         '/tracking': {
             '/trackings': {
-            reverse('tracking:trackings', request=request, format=format): 'list of all trackings',
-            "{}/<id>".format(reverse('tracking:trackings', request=request, format=format)): 'tracking details'
+                reverse('tracking:trackings', request=request, format=format): 'list of all trackings',
+                "{}/<id>".format(reverse('tracking:trackings', request=request, format=format)): 'tracking details'
             },
             '/trackingevents': {
                 reverse('tracking:trackingevents', request=request, format=format): 'list of all tracking events',
@@ -35,8 +40,18 @@ def api_root(request, format=None):
         },
         '/counter':{},
         '/transport':{},
-        '/organisation':{},
-        '/stock':{},
+        '/organisation':{
+            '/organisations': {
+                reverse('organisation:organisations', request=request, format=format): 'list of all Swiss partner organisations',
+                "{}/<id>".format(reverse('organisation:organisations', request=request, format=format)): 'organisation details'
+            },
+        },
+        '/stock':{
+            '/warehouses': {
+                reverse('stock:warehouses', request=request, format=format): 'list of all warehouses',
+                "{}/<id>".format(reverse('stock:warehouses', request=request, format=format)): 'warehouse details'
+            },
+        },
         '/velafrica_sud':{}
 
     })
@@ -57,7 +72,7 @@ class TrackingDetail(generics.RetrieveAPIView):
     """
 
     queryset = Tracking.objects.all()
-    serializer_class = TrackingSerializer
+    serializer_class = TrackingDetailSerializer
 
 
 class TrackingEventList(generics.ListAPIView):
@@ -94,6 +109,42 @@ class TrackingEventTypeDetail(generics.RetrieveAPIView):
 
     queryset = TrackingEventType.objects.all()
     serializer_class = TrackingEventTypeSerializer
+
+
+class OrganisationList(generics.ListAPIView):
+    """
+    Get a list of all organisations.
+    """
+
+    queryset = Organisation.objects.all()
+    serializer_class = OrganisationSerializer
+
+
+class OrganisationDetail(generics.RetrieveAPIView):
+    """
+    Get details of an organisation.
+    """
+
+    queryset = Organisation.objects.all()
+    serializer_class = OrganisationSerializer
+
+
+class WarehouseList(generics.ListAPIView):
+    """
+    Get a list of all warehouses.
+    """
+
+    queryset = Warehouse.objects.all()
+    serializer_class = WarehouseSerializer
+
+
+class WarehouseDetail(generics.RetrieveAPIView):
+    """
+    Get details of an warehouse.
+    """
+
+    queryset = Warehouse.objects.all()
+    serializer_class = WarehouseSerializer
 
 '''
 

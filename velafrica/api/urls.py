@@ -3,6 +3,18 @@ from django.conf.urls import include, patterns, url
 from rest_framework.urlpatterns import format_suffix_patterns
 from velafrica.api import views
 
+
+
+stock = patterns('',
+    url(r'^warehouses/?$', views.WarehouseList.as_view(), name="warehouses"),
+    url(r'^warehouses/(?P<pk>[0-9]+)/?$', views.WarehouseDetail.as_view(), name='warehouses_detail'),
+)
+
+organisation = patterns('',
+    url(r'^organisations/?$', views.OrganisationList.as_view(), name="organisations"),
+    url(r'^organisations/(?P<pk>[0-9]+)/?$', views.OrganisationDetail.as_view(), name='organisations_detail'),
+)
+
 tracking = patterns('',
     url(r'^trackings/?$', views.TrackingList.as_view(), name="trackings"),
     url(r'^trackings/(?P<pk>[0-9]+)/?$', views.TrackingDetail.as_view(), name='trackings_detail'),
@@ -12,8 +24,11 @@ tracking = patterns('',
     url(r'^trackingeventtypes/(?P<pk>[0-9]+)/?$', views.TrackingEventTypeDetail.as_view(), name='trackingeventtypes_detail'),
 )
 
+# where it all comes together
 urlpatterns = patterns('',
     url(r'^$', views.api_root),
+    url(r'^organisation/', include(organisation, namespace="organisation")),
+    url(r'^stock/', include(stock, namespace="stock")),
     url(r'^tracking/', include(tracking, namespace="tracking")),
 )
 
