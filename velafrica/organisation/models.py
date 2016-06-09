@@ -6,6 +6,29 @@ from django.db import models
 from django_resized import ResizedImageField
 from simple_history.models import HistoricalRecords
 
+class Canton(models.Model):
+    """
+    """
+    name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Name des Kantons")
+    short = models.CharField(blank=False, null=False, max_length=2, unique=True, verbose_name="Kürzel der Gemeinde")
+    
+    def __unicode__(self):
+        return u"{} {}".format(self.name, self.short)
+
+class Muncipality(models.Model):
+    """
+    """
+    name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Name der Gemeinde")
+    gdenr = models.IntegerField(blank=False, null=False, unique=True, verbose_name="Gemeindenr. des BFS")
+    name_short = models.CharField(blank=False, null=False, max_length=255, verbose_name="Name der Gemeinde (kurz)")
+    plz = models.IntegerField(blank=False, null=False, verbose_name="Postleitzahl")
+    plz_name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Name der Gemeinde (Post)")
+    canton = models.ForeignKey(Canton)
+
+    def __unicode__(self):
+        return u"{} {}".format(self.plz, self.plz_name)
+
+
 class Organisation(models.Model):
     """
     Represents a network partner.
@@ -23,7 +46,7 @@ class Organisation(models.Model):
     plz = models.IntegerField(blank=True, null=True, verbose_name="PLZ")
     city = models.CharField(blank=True, null=True, max_length=255, verbose_name="Ort")
 
-    website = models.CharField(blank=True, null=True, max_length=255, verbose_name="Website")
+    website = models.URLField(blank=True, null=True, max_length=255, verbose_name="Website")
 
     history = HistoricalRecords()
 
