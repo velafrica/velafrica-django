@@ -53,6 +53,7 @@ INSTALLED_APPS = (
     'velafrica.api',
     'velafrica.core',
     'velafrica.counter',
+    'velafrica.collection',
     'velafrica.download',
     'velafrica.frontend',
     'velafrica.organisation',
