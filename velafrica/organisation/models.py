@@ -15,7 +15,7 @@ class Canton(models.Model):
     def __unicode__(self):
         return u"{} {}".format(self.name, self.short)
 
-class Muncipality(models.Model):
+class Municipality(models.Model):
     """
     """
     name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Name der Gemeinde")

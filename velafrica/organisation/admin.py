@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
-from velafrica.organisation.models import Organisation, Person
+from velafrica.organisation.models import Organisation, Person, Canton, Municipality
 from velafrica.stock.models import Warehouse
 from import_export import resources
 from import_export.admin import ImportExportMixin
@@ -28,3 +28,6 @@ class OrganisationAdmin(ImportExportMixin, SimpleHistoryAdmin):
 
 admin.site.register(Organisation, OrganisationAdmin)
 admin.site.register(Person)
+admin.site.register(Municipality)
+admin.site.register(Canton)
+
