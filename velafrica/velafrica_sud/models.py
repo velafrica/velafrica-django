@@ -88,6 +88,7 @@ class PartnerSud(models.Model):
     name = models.CharField(blank=False, null=True, max_length=255, verbose_name="Name der Organisation")
     description = models.TextField(blank=True, null=True)
     website = models.URLField(blank=True, null=True, max_length=255, verbose_name="Website")
+    image = ResizedImageField(storage=fs, size=[800, 800], upload_to='velafrica_sud/partner/', blank=True, null=True, help_text='Foto vom Partner vor Ort.')
 
     street = models.CharField(max_length=255, blank=True, null=True)
     zipcode = models.IntegerField(blank=True, null=True)

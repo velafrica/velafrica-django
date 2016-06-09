@@ -8,10 +8,14 @@ from django.dispatch import receiver
 from velafrica.sbbtracking.models import TrackingEvent, EmailLog
 
 @receiver(post_save, sender=TrackingEvent)
-def send_email(sender, instance, **kwargs):
+def send_email(sender, instance, created, **kwargs):
 	"""
 	Send email notification to bicycle donor.
 	"""
+
+	# check if the event has been newly created or just updated
+	if not created:
+		return
 
 	# set last event on tracking
 	instance.tracking.last_event = instance
@@ -31,23 +35,31 @@ def send_email(sender, instance, **kwargs):
 			instance.event_type.name
 		)
 		if instance.event_type.email_text:
-			msg_header = u"Hallo {} {},\n\n{}".format(
+			msg_body = u"Hallo {} {},\n\n{}".format(
 				instance.tracking.first_name,
 				instance.tracking.last_name,
 				instance.event_type.email_text
 			)
+
 		else:
-			msg_header = u"Hallo {} {},\n\nNeuer Velo Tracking Event: {}".format(
+			msg_body = u"Hallo {} {},\n\nNeuer Velo Tracking Event: {}".format(
 				instance.tracking.first_name,
 				instance.tracking.last_name,
 				instance.event_type.name
 			)
 
+		# check if partner info needs to be included and if it is available
+		if instance.event_type.show_partner_info and instance.tracking.container:
+			partner = instance.tracking.container.partner_to
+			msg_body += "\n\n{}\n{}\n".format(partner.name, partner.description)
+			if partner.website:
+				msg_body += partner.website
+
 		msg_footer = u"Verfolgen Sie Ihr Velo online, auf http://tracking.velafrica.ch/tracking/{}\n\nDiese Email wurde automatisch generiert. Bitte antworten Sie nicht darauf.".format(
 			instance.tracking.tracking_no
 		)
 		msg = u"{}\n\n{}".format(
-			msg_header,
+			msg_body,
 			msg_footer
 		)
 		from_name = getattr(settings, 'EMAIL_FROM_NAME', 'Velafrica Tracking')

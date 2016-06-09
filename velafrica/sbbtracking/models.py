@@ -33,6 +33,7 @@ class TrackingEventType(models.Model):
 
     """
     name = models.CharField(blank=False, null=False, max_length=255)
+    show_partner_info = models.BooleanField(default=False, help_text="Zeige Partnerinfo an wenn vorhanden (Wird aus hinterlegtem Container ausgelesen).")
     description = models.TextField(blank=True, null=True)
     email_text = models.TextField(blank=True, null=True, help_text='Text der im Benachrichtigugsemail den den Spender geschickt wird.')
     image = ResizedImageField(storage=fs, size=[600, 600], upload_to='tracking/eventtypes/', blank=True, null=True, verbose_name="Symbolbild")
@@ -70,6 +71,29 @@ class TrackingEvent(models.Model):
 
     def __unicode__(self):
         return u"{}".format(self.event_type.name)
+
+    def get_description(self):
+        """
+        Get the description to display.
+        """
+        description = self.event_type.description
+        if self.event_type.show_partner_info and self.tracking.container:
+            partner = self.tracking.container.partner_to
+            if partner.description:
+                description += "\n<h3>{}</h3>{}\n<a href='{}' target='blank'>{}</a>".format(partner.name, partner.description, partner.website, partner.website)
+        return description
+
+    def get_image(self):
+        """
+        Get the image to display together with the description.
+        """
+        if self.event_type.show_partner_info and self.tracking.container:
+            print "almost return partner image"
+            if self.tracking.container.partner_to.image:
+                print "return partner image"
+                return self.tracking.container.partner_to.image
+        print "return event type image"
+        return self.event_type.image
 
     class Meta:
         ordering = ['-datetime']

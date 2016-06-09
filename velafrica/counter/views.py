@@ -12,7 +12,6 @@ from velafrica.organisation.models import Organisation
 def counter(request):
   """
   Counter main view
-  TODO: fix most productive overall
   """
 
   org_id = 0
