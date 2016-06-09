@@ -11,6 +11,7 @@ class TrackingSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Tracking
+        fields = [ "id", "tracking_no", "number_of_velos", "note", "complete", "vpn", "container", "velo_type", "last_event" ]
 
 
 class TrackingEventSerializer(serializers.ModelSerializer):
