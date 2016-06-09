@@ -13,6 +13,10 @@ input#tracking_no {
 	line-height: 1.5em;
 }
 
+.navbar-brand {
+	padding: 10px;
+}
+
 .navbar-default {
 	border: none;
 	background-color: #F2F2F2;

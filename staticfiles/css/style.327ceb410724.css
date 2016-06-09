@@ -65,14 +65,14 @@ img#navbar-logo {
 
 
 #featured_content_tracking {
-	background: url('../img/VfA_VeloTrackingHeader.jpg'); 
+	background: url("../img/VfA_VeloTrackingHeader.a1e1621cf0f1.jpg"); 
 	background-size: cover;
 	background-attachment: fixed;
 	background-position: -0px 60px;
  }
 
 div.jumbotron#velotracking {
-	background: url('../img/VfA_VeloTrackingHeader.jpg');
+	background: url("../img/VfA_VeloTrackingHeader.a1e1621cf0f1.jpg");
 	background-size: 100%;
   	background-position: -0px -40px;
 }
