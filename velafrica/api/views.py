@@ -36,7 +36,11 @@ def api_root(request, format=None):
             '/trackingeventtypes': {
                 reverse('tracking:trackingeventtypes', request=request, format=format): 'list of all tracking event types',
                 "{}/<id>".format(reverse('tracking:trackingeventtypes', request=request, format=format)): 'tracking event type details'
-            }
+            },
+            '/velotypes': {
+                reverse('tracking:velotypes', request=request, format=format): 'list of all velo types',
+                "{}/<id>".format(reverse('tracking:velotypes', request=request, format=format)): 'velo type details'
+            },
         },
         '/counter':{},
         '/transport':{},
@@ -56,6 +60,22 @@ def api_root(request, format=None):
 
     })
 
+class VeloTypeList(generics.ListAPIView):
+    """
+    Get a list of all velo types.
+    """
+
+    queryset = VeloType.objects.all()
+    serializer_class = VeloTypeSerializer
+
+
+class VeloTypeDetail(generics.RetrieveAPIView):
+    """
+    Get details of a trackings.
+    """
+
+    queryset = VeloType.objects.all()
+    serializer_class = VeloTypeSerializer
 
 class TrackingList(generics.ListAPIView):
     """

@@ -22,6 +22,8 @@ tracking = patterns('',
     url(r'^trackingevents/(?P<pk>[0-9]+)/?$', views.TrackingEventDetail.as_view(), name='trackingevents'),
     url(r'^trackingeventtypes/?$', views.TrackingEventTypeList.as_view(), name="trackingeventtypes"),
     url(r'^trackingeventtypes/(?P<pk>[0-9]+)/?$', views.TrackingEventTypeDetail.as_view(), name='trackingeventtypes_detail'),
+    url(r'^velotypes/?$', views.VeloTypeList.as_view(), name="velotypes"),
+    url(r'^velotypes/(?P<pk>[0-9]+)/?$', views.VeloTypeDetail.as_view(), name='velotypes_detail'),
 )
 
 # where it all comes together

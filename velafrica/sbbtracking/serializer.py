@@ -44,8 +44,8 @@ class TrackingDetailSerializer(serializers.ModelSerializer):
     """
     Todo: write doc.
     """
+    velo_type = VeloTypeSerializer(many=False, read_only=True)
+    last_event = TrackingEventSerializer(many=False, read_only=True)
 
     class Meta:
-    	velo_type = VeloTypeSerializer(many=False, read_only=True)
-    	last_event = TrackingEventSerializer(many=False, read_only=True)
         model = Tracking
