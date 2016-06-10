@@ -72,9 +72,9 @@ def get_default_task_status():
     """
     c = CollectionEventTaskStatus.objects.filter(is_default=True)
     if c:
-        return c.first()
+        return c.first().id
     else:
-        return CollectionEventTaskStatus.objects.all()
+        return None
 
 
 class CollectionEventTaskProgress(models.Model):
