@@ -50,14 +50,15 @@ class MunicipalityResource(resources.ModelResource):
     """
     Define the organisation resource for import / export.
     """
-
-    class Meta:
-        model = Canton
-        canton = Field(
+    canton = Field(
             column_name='canton',
             attribute='canton',
-            widget=ForeignKeyWidget(Warehouse, 'short'))
-        import_id_fields = ('gdenr',)
+            widget=ForeignKeyWidget(Canton, 'short'))
+    
+    class Meta:
+        model = Municipality
+        import_id_fields = ['gdenr']
+        fields = ['gdenr', 'name', 'name_short', 'plz', 'plz_name', 'canton']
 
 
 class MunicipalityAdmin(ImportExportMixin, SimpleHistoryAdmin):
