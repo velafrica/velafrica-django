@@ -28,7 +28,7 @@ class CollectionEventType(models.Model):
     """
     """
     name = models.CharField(max_length=255)
-    description = models.TextField()
+    description = models.TextField(blank=True, null=True)
 
     def __unicode__(self):
         return u"{}".format(self.name)
@@ -94,24 +94,24 @@ class CollectionEvent(models.Model):
     from_date = models.DateField()
     to_date = models.DateField()
     ort = models.ForeignKey(Municipality)
-    time = models.CharField(max_length=255)
-    host = models.CharField(max_length=255)
-    notes = models.TextField()
+    time = models.CharField(max_length=255, blank=True, help_text="Zeit für Veloannahme")
+    host = models.CharField(max_length=255, blank=True, help_text="Veranstalter des Sammelanlasses")
+    notes = models.TextField(blank=True, help_text="Weitere Infos / Bemerkungen")
 
-    presence_velafrica = models.CharField(max_length=255)
-    pickup = models.CharField(max_length=255)
-    processing = models.CharField(max_length=255)
+    presence_velafrica = models.CharField(max_length=255, blank=True, help_text="Infos zur Präsenz von Velafrica am Event")
+    pickup = models.CharField(max_length=255, blank=True, help_text="Infos zur Abholung der Velos")
+    processing = models.CharField(max_length=255, help_text="Infos zur Verarbeitung der gesammelten Velos")
 
     organisation_done = models.BooleanField(default=False)
-    website = models.URLField()
+    website = models.URLField(blank=True, help_text="Website des Events")
     
 
     #collection_partner
 
-    velo_amount = models.IntegerField()
-    people_amount = models.IntegerField()
-    hours_amount = models.IntegerField()
-    additional_results = models.TextField()
+    velo_amount = models.IntegerField(default=0)
+    people_amount = models.IntegerField(default=0)
+    hours_amount = models.IntegerField(default=0)
+    additional_results = models.TextField(blank=True, help_text="Zusätzliche Resultate / Erkenntnisse")
 
     def __unicode__(self):
         return u"{}".format(self.name)
