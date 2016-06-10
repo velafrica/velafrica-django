@@ -18,7 +18,7 @@ class Canton(models.Model):
 class Municipality(models.Model):
     """
     """
-    gdenr = models.IntegerField(blank=False, null=False, unique=True, verbose_name="Gemeindenr. des BFS", primary_key=True)
+    gdenr = models.IntegerField(blank=False, null=False, unique=True, verbose_name="Gemeindenr. des BFS")
     name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Name der Gemeinde")
     name_short = models.CharField(blank=False, null=False, max_length=255, verbose_name="Name der Gemeinde (kurz)")
     plz = models.IntegerField(blank=False, null=False, verbose_name="Postleitzahl")
