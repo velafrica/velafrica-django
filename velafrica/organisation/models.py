@@ -15,10 +15,11 @@ class Canton(models.Model):
     def __unicode__(self):
         return u"{} {}".format(self.name, self.short)
 
+
 class Municipality(models.Model):
     """
     """
-    gdenr = models.IntegerField(blank=False, null=False, unique=True, verbose_name="Gemeindenr. des BFS")
+    gdenr = models.IntegerField(blank=False, null=False, verbose_name="Gemeindenr. des BFS")
     name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Name der Gemeinde")
     name_short = models.CharField(blank=False, null=False, max_length=255, verbose_name="Name der Gemeinde (kurz)")
     plz = models.IntegerField(blank=False, null=False, verbose_name="Postleitzahl")

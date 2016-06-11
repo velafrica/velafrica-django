@@ -3,7 +3,7 @@ from datetime import timedelta, date
 from django.utils import timezone
 from django.db import models
 from simple_history.models import HistoricalRecords
-from velafrica.organisation.models import Organisation, Municipality
+from velafrica.organisation.models import Organisation
 
 # Create your models here.
 """
@@ -24,7 +24,7 @@ class EventContext(models.Model):
         ordering = ['-date']
     """
 
-class CollectionEventType(models.Model):
+class EventType(models.Model):
     """
     """
     name = models.CharField(max_length=255)
@@ -43,7 +43,7 @@ class CollectionPartner(models.Model):
         return u"{}".format(self.name)    
 
 
-class CollectionEventTask(models.Model):
+class Task(models.Model):
     """
     """
     name = models.CharField(max_length=255)
@@ -52,7 +52,7 @@ class CollectionEventTask(models.Model):
         return u"{}".format(self.name)        
 
 
-class CollectionEventTaskStatus(models.Model):
+class TaskStatus(models.Model):
     """
     """
     name = models.CharField(max_length=255)
@@ -70,30 +70,30 @@ def get_default_task_status():
     """
     Get the default value
     """
-    c = CollectionEventTaskStatus.objects.filter(is_default=True)
+    c = TaskStatus.objects.filter(is_default=True)
     if c:
         return c.first().id
     else:
         return None
 
 
-class CollectionEventTaskProgress(models.Model):
+class TaskProgress(models.Model):
     """
     """
-    task = models.ForeignKey(CollectionEventTask)
+    task = models.ForeignKey(Task)
     notes = models.TextField()
-    status = models.ForeignKey(CollectionEventTaskStatus, blank=True, null=True, default=get_default_task_status)
+    status = models.ForeignKey(TaskStatus, blank=True, null=True, default=get_default_task_status)
 
     def __unicode__(self):
         return u"{}".format(self.name)
 
 
-class CollectionEvent(models.Model):
+class Event(models.Model):
     """
     """
     from_date = models.DateField()
     to_date = models.DateField()
-    ort = models.ForeignKey(Municipality)
+    #ort = models.ForeignKey(Municipality)
     time = models.CharField(max_length=255, blank=True, help_text="Zeit für Veloannahme")
     host = models.CharField(max_length=255, blank=True, help_text="Veranstalter des Sammelanlasses")
     notes = models.TextField(blank=True, help_text="Weitere Infos / Bemerkungen")
