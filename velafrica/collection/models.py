@@ -107,8 +107,6 @@ class Event(models.Model):
     website = models.URLField(blank=True, help_text="Website des Events")
     
 
-    #collection_partner
-
     velo_amount = models.IntegerField(default=0)
     people_amount = models.IntegerField(default=0)
     hours_amount = models.IntegerField(default=0)

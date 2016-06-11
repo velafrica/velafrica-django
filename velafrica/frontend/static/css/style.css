@@ -21,6 +21,9 @@ input#tracking_no {
 	border: none;
 	background-color: #F2F2F2;
 }
+.breadcrumb {
+	padding: 0px 15px;
+}
 #breadcrumb-container {
 	margin-top: 50px;
 	background-color: #F9F9F9;
