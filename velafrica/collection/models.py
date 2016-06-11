@@ -3,7 +3,7 @@ from datetime import timedelta, date
 from django.utils import timezone
 from django.db import models
 from simple_history.models import HistoricalRecords
-from velafrica.organisation.models import Organisation
+from velafrica.organisation.models import Organisation, Municipality
 
 # Create your models here.
 """
@@ -60,8 +60,8 @@ class TaskStatus(models.Model):
 
     def save(self, *args, **kwargs):
         if self.is_default:
-            CollectionEventTaskStatus.objects.all().update(**{'is_default': False})
-        super(CollectionEventTaskStatus, self).save(*args, **kwargs)
+            TaskStatus.objects.all().update(**{'is_default': False})
+        super(TaskStatus, self).save(*args, **kwargs)
 
     def __unicode__(self):
         return self.name
@@ -93,7 +93,7 @@ class Event(models.Model):
     """
     from_date = models.DateField()
     to_date = models.DateField()
-    #ort = models.ForeignKey(Municipality)
+    municipality = models.ForeignKey(Municipality)
     time = models.CharField(max_length=255, blank=True, help_text="Zeit für Veloannahme")
     host = models.CharField(max_length=255, blank=True, help_text="Veranstalter des Sammelanlasses")
     notes = models.TextField(blank=True, help_text="Weitere Infos / Bemerkungen")
