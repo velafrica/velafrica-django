@@ -29,6 +29,9 @@ class Municipality(models.Model):
     def __unicode__(self):
         return u"{} {}".format(self.plz, self.plz_name)
 
+    class Meta:
+        verbose_name_plural = "Municipalities"
+
 
 class Organisation(models.Model):
     """
