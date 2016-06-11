@@ -77,23 +77,21 @@ def get_default_task_status():
         return None
 
 
-class TaskProgress(models.Model):
+class EventType(models.Model):
     """
     """
-    task = models.ForeignKey(Task)
-    notes = models.TextField()
-    status = models.ForeignKey(TaskStatus, blank=True, null=True, default=get_default_task_status)
+    name = models.CharField(max_length=255)
 
     def __unicode__(self):
-        return u"{}".format(self.name)
-
+        return self.name
 
 class Event(models.Model):
     """
     """
-    from_date = models.DateField()
-    to_date = models.DateField()
+    date_start = models.DateField()
+    date_end = models.DateField()
     municipality = models.ForeignKey(Municipality)
+    type = models.ForeignKey(EventType)
     time = models.CharField(max_length=255, blank=True, help_text="Zeit für Veloannahme")
     host = models.CharField(max_length=255, blank=True, help_text="Veranstalter des Sammelanlasses")
     notes = models.TextField(blank=True, help_text="Weitere Infos / Bemerkungen")
@@ -102,7 +100,10 @@ class Event(models.Model):
     pickup = models.CharField(max_length=255, blank=True, help_text="Infos zur Abholung der Velos")
     processing = models.CharField(max_length=255, help_text="Infos zur Verarbeitung der gesammelten Velos")
 
-    organisation_done = models.BooleanField(default=False)
+    collection_type = models.CharField(max_length=255, blank=True)
+    collection_partner = models.ForeignKey(CollectionPartner, blank=True, null=True)
+    feedback = models.TextField(max_length=255, blank=True)
+
     website = models.URLField(blank=True, help_text="Website des Events")
     
 
@@ -113,6 +114,24 @@ class Event(models.Model):
     hours_amount = models.IntegerField(default=0)
     additional_results = models.TextField(blank=True, help_text="Zusätzliche Resultate / Erkenntnisse")
 
-    def __unicode__(self):
-        return u"{}".format(self.name)
+    def get_task_progress_summary_string(self):
+        result = ""
+        tp = TaskProgress.objects.all()
+        for t in tp:
+            result += "{}: {}\n".format(t.task.name, t.status.name)
+        return result
 
+    def __unicode__(self):
+        return u"{} bis {} in {}".format(self.date_start, self.date_end, self.municipality.plz_name)
+
+
+class TaskProgress(models.Model):
+    """
+    """
+    event = models.ForeignKey(Event)
+    task = models.ForeignKey(Task)
+    notes = models.TextField()
+    status = models.ForeignKey(TaskStatus, blank=True, null=True, default=get_default_task_status)
+
+    def __unicode__(self):
+        return u"{}: {}".format(self.task, self.status)
