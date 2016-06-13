@@ -55,7 +55,8 @@ class CollectionEvent(models.Model):
     notes = models.TextField(blank=True, verbose_name="weitere Infos", help_text="Weitere Infos / Bemerkungen")
 
     # logistics
-    presence_velafrica = models.TextField(
+    presence_velafrica = models.BooleanField(default=False)
+    presence_velafrica_info = models.TextField(
         blank=True, 
         help_text="Infos zur Präsenz von Velafrica am Event",
         verbose_name="Präsenz Velafrica")
@@ -63,16 +64,17 @@ class CollectionEvent(models.Model):
         blank=True,
         help_text="Infos zur Abholung der Velos",
         verbose_name="Abtransport")
-    processing = models.TextField(
-        blank=True,
-        help_text="Infos zur Verarbeitung der gesammelten Velos",
-        verbose_name="Velo Verarbeitung")
+    processing = models.ForeignKey(
+        Organisation,
+        verbose_name="Velo Verarbeitung",
+        related_name="processing_organisation")
     collection_partner_vrn = models.ForeignKey(
         Organisation, 
         blank=True, 
         null=True,
         verbose_name="Abtransport durch VRN Partner",
-        help_text="Velafrica Partner der die Velos abholt")
+        help_text="Velafrica Partner der die Velos abholt",
+        related_name="collection_organisation")
     collection_partner_other = models.CharField(
         max_length=255, 
         blank=True, 

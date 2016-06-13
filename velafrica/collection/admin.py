@@ -29,7 +29,7 @@ class CollectionEventAdmin(SimpleHistoryAdmin):
             'fields': ('date_start', 'date_end', 'event', 'time', 'notes')
             }),
         ('Logistik', {
-            'fields': ('presence_velafrica', 'pickup', 'processing', 'collection_partner_vrn', 'collection_partner_other')
+            'fields': ('presence_velafrica', 'presence_velafrica_info', 'pickup', 'processing', 'collection_partner_vrn', 'collection_partner_other', 'collection_partner_confirmed')
             }),
         ('Marketing', {
             'fields': ('website',)
