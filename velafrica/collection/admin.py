@@ -19,8 +19,8 @@ class CollectionEventAdmin(SimpleHistoryAdmin):
     """
     """
     form = CollectionEventForm
-    list_display = ['date_start', 'event', 'municipality_name' 'notes', 'get_task_progress_summary_string', 'velo_amount' ]
-    search_fields = ['municipality_name', 'event__name']
+    list_display = ['date_start', 'event', 'municipality', 'notes', 'get_task_progress_summary_string', 'velo_amount' ]
+    search_fields = ['municipality__name', 'event__name']
     inlines = [TaskProgressInline]
 
 
