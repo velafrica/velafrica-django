@@ -81,13 +81,6 @@ class CollectionEvent(models.Model):
     def get_status_results(self):
         pass
 
-    def get_task_progress_summary_string(self):
-        result = ""
-        tp = TaskProgress.objects.all()
-        for t in tp:
-            result += "{}: {}\n".format(t.task.name, t.status.name)
-        return result
-
     def __unicode__(self):
         return u"{} bis {} in {}".format(self.date_start, self.date_end, self.municipality.plz_name)
 
