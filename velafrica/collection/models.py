@@ -5,42 +5,34 @@ from django.db import models
 from simple_history.models import HistoricalRecords
 from velafrica.organisation.models import Organisation, Municipality
 
-# Create your models here.
-"""
-class EventContext(models.Model):
-    
-    Todo: write doc.
-    
-    name
-    description
-    history = HistoricalRecords()
-
-    def __unicode__(self):
-        return u"{}: {}".format(self.date, self.amount)
-
-    class Meta:
-        unique_together = ['organisation', 'date']
-        verbose_name_plural = "Entries"
-        ordering = ['-date']
+def get_default_task_status():
     """
+    just here for migrations, delete later
+    """
+    pass
 
-class EventType(models.Model):
+
+class EventCategory(models.Model):
     """
     """
     name = models.CharField(max_length=255)
-    description = models.TextField(blank=True, null=True)
 
     def __unicode__(self):
         return u"{}".format(self.name)
 
 
-class CollectionPartner(models.Model):
+class Event(models.Model):
     """
     """
     name = models.CharField(max_length=255)
+    description = models.TextField(blank=True, null=True)
+    category = models.ForeignKey(EventCategory)
+    host = models.CharField(max_length=255)
+    address = models.TextField(blank=True)
+    yearly = models.BooleanField(default=False, verbose_name="Jährlich wiederkehrend?")
 
     def __unicode__(self):
-        return u"{}".format(self.name)    
+        return u"{}".format(self.name)
 
 
 class Task(models.Model):
@@ -49,67 +41,35 @@ class Task(models.Model):
     name = models.CharField(max_length=255)
 
     def __unicode__(self):
-        return u"{}".format(self.name)        
+        return u"{}".format(self.name)
 
 
-class TaskStatus(models.Model):
-    """
-    """
-    name = models.CharField(max_length=255)
-    is_default = models.BooleanField(default=False)
-
-    def save(self, *args, **kwargs):
-        if self.is_default:
-            TaskStatus.objects.all().update(**{'is_default': False})
-        super(TaskStatus, self).save(*args, **kwargs)
-
-    def __unicode__(self):
-        return self.name
-
-def get_default_task_status():
-    """
-    Get the default value
-    """
-    c = TaskStatus.objects.filter(is_default=True)
-    if c:
-        return c.first().id
-    else:
-        return None
-
-
-class EventType(models.Model):
-    """
-    """
-    name = models.CharField(max_length=255)
-
-    def __unicode__(self):
-        return self.name
-
-class Event(models.Model):
+class CollectionEvent(models.Model):
     """
     """
     date_start = models.DateField()
     date_end = models.DateField()
     municipality = models.ForeignKey(Municipality)
-    type = models.ForeignKey(EventType)
+    event = models.ForeignKey(Event)
     time = models.CharField(max_length=255, blank=True, help_text="Zeit für Veloannahme")
     host = models.CharField(max_length=255, blank=True, help_text="Veranstalter des Sammelanlasses")
     notes = models.TextField(blank=True, help_text="Weitere Infos / Bemerkungen")
 
+    # logistics
     presence_velafrica = models.CharField(max_length=255, blank=True, help_text="Infos zur Präsenz von Velafrica am Event")
     pickup = models.CharField(max_length=255, blank=True, help_text="Infos zur Abholung der Velos")
     processing = models.CharField(max_length=255, help_text="Infos zur Verarbeitung der gesammelten Velos")
+    collection_partner_vrn = models.ForeignKey(Organisation, blank=True, null=True, help_text="Velafrica Partner der die Velos abholt")
+    collection_partner_other = models.CharField(max_length=255, blank=True, help_text="Wenn die Velos nicht von einem Velafrica Partner abgeholt werden, bitte hier eintragen von wem")
 
-    collection_type = models.CharField(max_length=255, blank=True)
-    collection_partner = models.ForeignKey(CollectionPartner, blank=True, null=True)
-    feedback = models.TextField(max_length=255, blank=True)
-
+    # marketing
     website = models.URLField(blank=True, help_text="Website des Events")
-    
 
-    velo_amount = models.IntegerField(default=0)
-    people_amount = models.IntegerField(default=0)
-    hours_amount = models.IntegerField(default=0)
+    # results
+    feedback = models.BooleanField(default=False, verbose_name="Feedback eingeholt?")
+    velo_amount = models.IntegerField(default=0, verbose_name="Anzahl gesammelte Velos")
+    people_amount = models.IntegerField(default=0, verbose_name='Anzahl Helfer vor Ort')
+    hours_amount = models.IntegerField(default=0, verbose_name='Geleistete Stunden', help_text="Anzahl geleistete Stunden von allen Helfern zusammen")
     additional_results = models.TextField(blank=True, help_text="Zusätzliche Resultate / Erkenntnisse")
 
     def get_task_progress_summary_string(self):
@@ -126,10 +86,10 @@ class Event(models.Model):
 class TaskProgress(models.Model):
     """
     """
-    event = models.ForeignKey(Event)
+    collection_event = models.ForeignKey(CollectionEvent)
     task = models.ForeignKey(Task)
-    notes = models.TextField()
-    status = models.ForeignKey(TaskStatus, blank=True, null=True, default=get_default_task_status)
+    notes = models.TextField(blank=True)
+    status = models.BooleanField(default=False)
 
     def __unicode__(self):
         return u"{}: {}".format(self.task, self.status)

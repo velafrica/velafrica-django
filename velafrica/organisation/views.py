@@ -1,4 +1,5 @@
 from dal import autocomplete
+from django.db.models import Q
 from django.shortcuts import render
 from velafrica.organisation.models import Municipality
 
@@ -12,6 +13,6 @@ class MunicipalityAutocomplete(autocomplete.Select2QuerySetView):
         qs = Municipality.objects.all()
 
         if self.q:
-            qs = qs.filter(name__istartswith=self.q)
+            qs = qs.filter(Q(plz_name__contains=self.q) | Q(plz__startswith=self.q))
 
         return qs
