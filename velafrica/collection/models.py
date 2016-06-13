@@ -27,9 +27,10 @@ class Event(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True, verbose_name="Beschreibung")
     category = models.ForeignKey(EventCategory, verbose_name="Kategorie")
-    host = models.CharField(max_length=255, verbose_name="Veranstalter")
-    address = models.TextField(blank=True)
     yearly = models.BooleanField(default=False, verbose_name="Jährlich wiederkehrend?")
+    host = models.CharField(max_length=255, verbose_name="Veranstalter")
+    municipality = models.ForeignKey(Municipality, verbose_name="Ort")
+    address = models.TextField(blank=True)
 
     def __unicode__(self):
         return u"{}".format(self.name)
@@ -49,18 +50,34 @@ class CollectionEvent(models.Model):
     """
     date_start = models.DateField()
     date_end = models.DateField()
-    municipality = models.ForeignKey(Municipality)
     event = models.ForeignKey(Event)
-    time = models.CharField(max_length=255, blank=True, help_text="Zeit für Veloannahme")
-    host = models.CharField(max_length=255, blank=True, help_text="Veranstalter des Sammelanlasses")
-    notes = models.TextField(blank=True, help_text="Weitere Infos / Bemerkungen")
+    time = models.CharField(max_length=255, blank=True, verbose_name="Veloannahme", help_text="Zeit für Veloannahme")
+    notes = models.TextField(blank=True, verbose_name="weitere Infos", help_text="Weitere Infos / Bemerkungen")
 
     # logistics
-    presence_velafrica = models.CharField(max_length=255, blank=True, help_text="Infos zur Präsenz von Velafrica am Event")
-    pickup = models.CharField(max_length=255, blank=True, help_text="Infos zur Abholung der Velos")
-    processing = models.CharField(max_length=255, help_text="Infos zur Verarbeitung der gesammelten Velos")
-    collection_partner_vrn = models.ForeignKey(Organisation, blank=True, null=True, help_text="Velafrica Partner der die Velos abholt")
-    collection_partner_other = models.CharField(max_length=255, blank=True, help_text="Wenn die Velos nicht von einem Velafrica Partner abgeholt werden, bitte hier eintragen von wem")
+    presence_velafrica = models.TextField(
+        blank=True, 
+        help_text="Infos zur Präsenz von Velafrica am Event",
+        verbose_name="Präsenz Velafrica")
+    pickup = models.TextField(
+        blank=True,
+        help_text="Infos zur Abholung der Velos",
+        verbose_name="Abtransport")
+    processing = models.TextField(
+        blank=True,
+        help_text="Infos zur Verarbeitung der gesammelten Velos",
+        verbose_name="Velo Verarbeitung")
+    collection_partner_vrn = models.ForeignKey(
+        Organisation, 
+        blank=True, 
+        null=True,
+        verbose_name="Abtransport durch VRN Partner",
+        help_text="Velafrica Partner der die Velos abholt")
+    collection_partner_other = models.CharField(
+        max_length=255, 
+        blank=True, 
+        verbose_name="Abtransport durch andere Organisation",
+        help_text="Wenn die Velos nicht von einem Velafrica Partner abgeholt werden, bitte hier eintragen von wem")
 
     # marketing
     website = models.URLField(blank=True, help_text="Website des Events")
@@ -70,9 +87,9 @@ class CollectionEvent(models.Model):
     velo_amount = models.IntegerField(default=0, verbose_name="Anzahl gesammelte Velos")
     people_amount = models.IntegerField(default=0, verbose_name='Anzahl Helfer vor Ort')
     hours_amount = models.IntegerField(default=0, verbose_name='Geleistete Stunden', help_text="Anzahl geleistete Stunden von allen Helfern zusammen")
-    additional_results = models.TextField(blank=True, help_text="Zusätzliche Resultate / Erkenntnisse")
+    additional_results = models.TextField(blank=True, verbose_name="weitere Resultate", help_text="Zusätzliche Resultate / Erkenntnisse")
 
-    def get_status_logitics(self):
+    def get_status_logistics(self):
         pass
 
     def get_status_marketing(self):

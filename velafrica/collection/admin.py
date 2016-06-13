@@ -19,9 +19,23 @@ class CollectionEventAdmin(SimpleHistoryAdmin):
     """
     """
     form = CollectionEventForm
-    list_display = ['date_start', 'event', 'municipality', 'notes', 'get_task_progress_summary_string', 'velo_amount' ]
-    search_fields = ['municipality__name', 'event__name']
+    list_display = ['date_start', 'event', 'notes', 'get_status_logistics', 'get_status_marketing', 'get_status_results', 'velo_amount' ]
+    search_fields = ['event__name', 'event__municipality__name']
     inlines = [TaskProgressInline]
+    fieldsets = (
+        ('Event', {
+            'fields': ('date_start', 'date_end', 'event', 'time', 'notes')
+            }),
+        ('Logistik', {
+            'fields': ('presence_velafrica', 'pickup', 'processing', 'collection_partner_vrn', 'collection_partner_other')
+            }),
+        ('Marketing', {
+            'fields': ('website',)
+            }),
+        ('Resultate', {
+            'fields': ('feedback', 'velo_amount', 'people_amount', 'hours_amount', 'additional_results')
+            }),
+    )
 
 
 admin.site.register(Event)
