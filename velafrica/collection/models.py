@@ -25,9 +25,9 @@ class Event(models.Model):
     """
     """
     name = models.CharField(max_length=255)
-    description = models.TextField(blank=True, null=True)
-    category = models.ForeignKey(EventCategory)
-    host = models.CharField(max_length=255)
+    description = models.TextField(blank=True, null=True, verbose_name="Beschreibung")
+    category = models.ForeignKey(EventCategory, verbose_name="Kategorie")
+    host = models.CharField(max_length=255, verbose_name="Veranstalter")
     address = models.TextField(blank=True)
     yearly = models.BooleanField(default=False, verbose_name="Jährlich wiederkehrend?")
 
@@ -72,6 +72,15 @@ class CollectionEvent(models.Model):
     hours_amount = models.IntegerField(default=0, verbose_name='Geleistete Stunden', help_text="Anzahl geleistete Stunden von allen Helfern zusammen")
     additional_results = models.TextField(blank=True, help_text="Zusätzliche Resultate / Erkenntnisse")
 
+    def get_status_logitics(self):
+        pass
+
+    def get_status_marketing(self):
+        pass
+
+    def get_status_results(self):
+        pass
+
     def get_task_progress_summary_string(self):
         result = ""
         tp = TaskProgress.objects.all()
@@ -88,8 +97,8 @@ class TaskProgress(models.Model):
     """
     collection_event = models.ForeignKey(CollectionEvent)
     task = models.ForeignKey(Task)
-    notes = models.TextField(blank=True)
-    status = models.BooleanField(default=False)
+    notes = models.TextField(blank=True, verbose_name="Notizen")
+    status = models.BooleanField(default=False, verbose_name="Erledigt?")
 
     def __unicode__(self):
         return u"{}: {}".format(self.task, self.status)
