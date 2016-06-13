@@ -6,7 +6,7 @@ from import_export.fields import Field
 from import_export.widgets import DateWidget
 from simple_history.admin import SimpleHistoryAdmin
 from velafrica.collection.models import *
-from velafrica.collection.forms import CollectionEventForm
+from velafrica.collection.forms import EventForm
 
 
 class TaskProgressInline(admin.TabularInline):
@@ -15,10 +15,12 @@ class TaskProgressInline(admin.TabularInline):
     extra = 0
 
 
+class EventAdmin(SimpleHistoryAdmin):
+    form = EventForm
+
 class CollectionEventAdmin(SimpleHistoryAdmin):
     """
     """
-    form = CollectionEventForm
     list_display = ['date_start', 'event', 'notes', 'get_status_logistics', 'get_status_marketing', 'get_status_results', 'velo_amount' ]
     search_fields = ['event__name', 'event__municipality__name']
     inlines = [TaskProgressInline]
@@ -38,7 +40,7 @@ class CollectionEventAdmin(SimpleHistoryAdmin):
     )
 
 
-admin.site.register(Event)
+admin.site.register(Event, EventAdmin)
 admin.site.register(EventCategory)
 admin.site.register(CollectionEvent, CollectionEventAdmin)
 admin.site.register(Task)

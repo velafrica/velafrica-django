@@ -78,6 +78,7 @@ class CollectionEvent(models.Model):
         blank=True, 
         verbose_name="Abtransport durch andere Organisation",
         help_text="Wenn die Velos nicht von einem Velafrica Partner abgeholt werden, bitte hier eintragen von wem")
+    collection_partner_confirmed = models.BooleanField(default=False)
 
     # marketing
     website = models.URLField(blank=True, help_text="Website des Events")
@@ -99,7 +100,7 @@ class CollectionEvent(models.Model):
         pass
 
     def __unicode__(self):
-        return u"{} bis {} in {}".format(self.date_start, self.date_end, self.municipality.plz_name)
+        return u"{} ({} bis {})".format(self.event.name, self.date_start, self.date_end)
 
 
 class TaskProgress(models.Model):

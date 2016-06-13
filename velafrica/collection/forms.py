@@ -1,15 +1,15 @@
 from dal import autocomplete
 from velafrica.organisation.models import Municipality
-from velafrica.collection.models import CollectionEvent
+from velafrica.collection.models import Event
 from django import forms
 
 
-class CollectionEventForm(forms.ModelForm):
+class EventForm(forms.ModelForm):
     municipality = forms.ModelChoiceField(
         queryset=Municipality.objects.all(),
         widget=autocomplete.ModelSelect2(url='municipality-autocomplete')
     )
 
     class Meta:
-        model = CollectionEvent
+        model = Event
         fields = ('__all__')
