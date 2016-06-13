@@ -8,10 +8,14 @@ from simple_history.admin import SimpleHistoryAdmin
 from import_export.fields import Field
 from import_export.widgets import ForeignKeyWidget
 
-"""
-class WarehouseInline(admin.StackedInline):
-	model = Warehouse
-"""
+
+class PersonAdmin(SimpleHistoryAdmin):
+    """
+    """
+    list_display = ['__str__', 'user', 'organisation']
+    list_filter = ['organisation']
+    search_fields = ['organisation__name', 'user__username']
+
 
 class OrganisationResource(resources.ModelResource):
     """
@@ -71,7 +75,7 @@ class MunicipalityAdmin(ImportExportMixin, SimpleHistoryAdmin):
 
 
 admin.site.register(Organisation, OrganisationAdmin)
-admin.site.register(Person)
+admin.site.register(Person, PersonAdmin)
 admin.site.register(Municipality, MunicipalityAdmin)
 admin.site.register(Canton, CantonAdmin)
 
