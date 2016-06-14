@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from daterange_filter.filter import DateRangeFilter
 from django.contrib import admin
 from import_export import resources

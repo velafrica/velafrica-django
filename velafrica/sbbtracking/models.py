@@ -76,11 +76,11 @@ class TrackingEvent(models.Model):
         """
         Get the description to display.
         """
-        description = self.event_type.description
+        description = u"{}".format(self.event_type.description)
         if self.event_type.show_partner_info and self.tracking.container:
             partner = self.tracking.container.partner_to
             if partner.description:
-                description += "\n<h3>{}</h3>{}\n<a href='{}' target='blank'>{}</a>".format(partner.name, partner.description, partner.website, partner.website)
+                description += u"\n<h3>{}</h3>{}\n<a href='{}' target='blank'>{}</a>".format(partner.name, partner.description, partner.website, partner.website)
         return description
 
     def get_image(self):
