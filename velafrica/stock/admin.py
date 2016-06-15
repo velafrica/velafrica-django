@@ -88,7 +88,7 @@ class StockAdmin(ImportExportMixin, SimpleHistoryAdmin):
             return qs.filter(warehouse__organisation=request.user.person.organisation)
         # users with no superuser role and no related person should not see any entries
         else:
-            return []
+            return qs.none()
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == 'warehouse':
