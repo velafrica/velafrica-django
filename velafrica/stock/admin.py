@@ -81,7 +81,8 @@ class StockAdmin(ImportExportMixin, SimpleHistoryAdmin):
     def get_queryset(self, request):
         qs = super(StockAdmin, self).get_queryset(request)
         # superusers should see all entries
-        if request.user.is_superuser:
+        if request.user.is_superuser or request.user.has_perm('stock.is_admin'):
+            print "stock is admin"
             return qs
         # other users with a correlating person should only see their organisations entries
         elif hasattr(request.user, 'person'):
@@ -92,10 +93,12 @@ class StockAdmin(ImportExportMixin, SimpleHistoryAdmin):
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == 'warehouse':
-            if request.user.is_superuser:
+            if request.user.is_superuser or request.user.has_perm('stock.is_admin'):
+                print "stock is admin"
                 pass
             # other users with a correlating person should only see their organisation
             elif hasattr(request.user, 'person'):
+                print "stock is not admin"
                 kwargs["queryset"] = Warehouse.objects.filter(organisation=request.user.person.organisation.id)
             # users with no superuser role and no related person should not see any organisations
             else:

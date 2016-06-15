@@ -109,6 +109,9 @@ class Stock(models.Model):
     class Meta:
         ordering = ['warehouse', 'product']
         unique_together = (("product", "warehouse"),)
+        permissions = (
+            ("is_admin", "Stock Admin - Can edit all stocks from every warehouse."),
+        )
 
 
 class StockList(models.Model):
