@@ -52,7 +52,7 @@ class EntryAdmin(ImportExportMixin, SimpleHistoryAdmin):
                 kwargs["queryset"] = Organisation.objects.filter(id=request.user.person.organisation.id)
             # users with no superuser role and no related person should not see any organisations
             else:
-                kwargs["queryset"] = []
+                kwargs["queryset"] = Organisation.objects.none()
         return super(EntryAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
 
 admin.site.register(Entry, EntryAdmin)

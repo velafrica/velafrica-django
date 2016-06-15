@@ -99,7 +99,7 @@ class StockAdmin(ImportExportMixin, SimpleHistoryAdmin):
                 kwargs["queryset"] = Warehouse.objects.filter(organisation=request.user.person.organisation.id)
             # users with no superuser role and no related person should not see any organisations
             else:
-                kwargs["queryset"] = []
+                kwargs["queryset"] = Warehouse.objects.none()
         return super(StockAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
 
 
