@@ -1,8 +1,32 @@
 # -*- coding: utf-8 -*-
 from dal import autocomplete
+from django.contrib.auth.decorators import login_required
 from django.db.models import Q
-from django.shortcuts import render
-from velafrica.stock.models import Product, Warehouse
+from django.shortcuts import render, render_to_response
+from django.template import RequestContext
+from velafrica.stock.models import Product, Warehouse, Stock
+
+
+@login_required
+def stock(request):
+  """
+  Stock
+  """
+  stock = Stock.objects.all()
+
+  if request.user.is_superuser or request.user.has_perm('stock.is_admin'):
+  	stock = Stock.objects.all()
+  # other users with a correlating person should only see their organisations entries
+  elif hasattr(request.user, 'person'):
+    stock = stock.filter(warehouse__organisation=request.user.person.organisation)
+  # users with no superuser role and no related person should not see any entries
+  else:	
+  	stock = stock.none()
+            
+  return render_to_response('stock/index.html', { 
+    'stock': stock
+    }, context_instance=RequestContext(request)
+  )
 
 
 class ProductAutocomplete(autocomplete.Select2QuerySetView):

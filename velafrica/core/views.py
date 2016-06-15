@@ -48,19 +48,6 @@ def accounts_logout(request):
 def home(request):
   return render_to_response('base.html', context_instance=RequestContext(request))
 
-
-@login_required
-def stock(request):
-  """
-  Stock
-  """
-  stock = Stock.objects.all()
-  return render_to_response('stock/index.html', { 
-    'stock': stock
-    }, context_instance=RequestContext(request)
-  )
-
-
 def tracking(request, tracking_no=0):
   """
   velo tracking
