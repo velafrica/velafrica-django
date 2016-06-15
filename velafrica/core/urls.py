@@ -23,6 +23,7 @@ from django.views.generic import RedirectView
 from velafrica.core import views
 from velafrica.counter import views as counter_views
 from velafrica.organisation.views import MunicipalityAutocomplete
+from velafrica.stock.views import ProductAutocomplete, WarehouseAutocomplete
 
 urlpatterns = [
 	#url(r'^$', views.home, name='home'),
@@ -56,9 +57,9 @@ urlpatterns = [
     url(r'^auth/logout', views.accounts_logout, name='logout'),
 
     # autocomplete urls
-    url(r'^municipality-autocomplete/$',
-        MunicipalityAutocomplete.as_view(),
-        name='municipality-autocomplete'),
+    url(r'^municipality-autocomplete/$', MunicipalityAutocomplete.as_view(), name='municipality-autocomplete'),
+    url(r'^product-autocomplete/$', ProductAutocomplete.as_view(), name='product-autocomplete'),
+    url(r'^warehouse-autocomplete/$', WarehouseAutocomplete.as_view(), name='warehouse-autocomplete'),
 
     # admin urls
     url(r'^admin/', include(admin.site.urls)),

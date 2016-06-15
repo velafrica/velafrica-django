@@ -2,7 +2,8 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 from django.core.urlresolvers import reverse
-from velafrica.stock.models import Product, Category, Warehouse, Stock, StockTransfer, StockList, StockListPosition, StockChange
+from velafrica.stock.models import *
+from velafrica.stock.forms import StockForm, StockListPositionForm
 from velafrica.transport.models import Ride
 from velafrica.velafrica_sud.models import Container
 from import_export import resources
@@ -69,12 +70,37 @@ class StockResource(resources.ModelResource):
 
 
 class StockAdmin(ImportExportMixin, SimpleHistoryAdmin):
+    form = StockForm
     resource_class = StockResource
     list_display = ['__unicode__', 'product', 'warehouse', 'amount', 'last_modified']
     list_editable = ['amount']
     search_fields = ['product__name']
     list_filter = ['warehouse']
     readonly_fields = ['last_modified']
+
+    def get_queryset(self, request):
+        qs = super(StockAdmin, self).get_queryset(request)
+        # superusers should see all entries
+        if request.user.is_superuser:
+            return qs
+        # other users with a correlating person should only see their organisations entries
+        elif hasattr(request.user, 'person'):
+            return qs.filter(warehouse__organisation=request.user.person.organisation)
+        # users with no superuser role and no related person should not see any entries
+        else:
+            return []
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == 'warehouse':
+            if request.user.is_superuser:
+                pass
+            # other users with a correlating person should only see their organisation
+            elif hasattr(request.user, 'person'):
+                kwargs["queryset"] = Warehouse.objects.filter(organisation=request.user.person.organisation.id)
+            # users with no superuser role and no related person should not see any organisations
+            else:
+                kwargs["queryset"] = []
+        return super(StockAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
 
 
 class StockChangeResource(resources.ModelResource):
@@ -92,6 +118,7 @@ class StockChangeAdmin(ImportExportMixin, SimpleHistoryAdmin):
     list_display = ['datetime', 'stocktransfer', 'warehouse', 'stocklist', 'stock_change_type']
     list_filter = ['warehouse', 'stock_change_type']
     search_fields = ['warehouse__name']
+
 
 class WarehouseAdmin(ImportExportMixin, SimpleHistoryAdmin):
     inlines = [StockInline,]
@@ -118,6 +145,7 @@ class StockListPositionResource(resources.ModelResource):
 
 
 class StockListPositionAdmin(ImportExportMixin, SimpleHistoryAdmin):
+    form = StockListPositionForm
     model = StockListPosition
     resource_class = StockListPositionResource
     list_display = ['id', 'product', 'amount', 'stocklist']
@@ -134,6 +162,7 @@ class StockListResource(resources.ModelResource):
 
 
 class StockListPositionInline(admin.TabularInline):
+    form = StockListPositionForm
     model = StockListPosition
 
 
