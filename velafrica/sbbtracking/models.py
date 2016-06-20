@@ -5,7 +5,7 @@ from django.db import models
 from django_resized import ResizedImageField
 from simple_history.models import HistoricalRecords
 from velafrica.organisation.models import Organisation, Person
-from velafrica.velafrica_sud.models import PartnerSud, Container
+from velafrica.velafrica_sud.models import Container
 
 from velafrica.core.ftp import MyFTPStorage
 fs = MyFTPStorage()
@@ -44,6 +44,13 @@ class TrackingEventType(models.Model):
         null=True,
         verbose_name="Vorangehender Event",
         help_text="Wird dieses Feld ausgefüllt, muss der letzte Event auf dem Tracking vom angegebenen Typ sein, sonst kann kein Event dieses Event Typs hinzugefügt werden. Dies soll verhindern dass Events vergessen gehen.")
+    arrival_africa = models.BooleanField(
+        blank=False,
+        null=False,
+        default=False,
+        verbose_name="Steht für Ankunft in Afrika",
+        help_text="Wird diese Option aktiviert, wird dieser Event Typ verwendet beim Container verbuchen um verlinkte Trackings zu markieren"
+        )    
     complete_tracking = models.BooleanField(
         blank=False,
         null=False,
@@ -118,6 +125,12 @@ class VeloType(models.Model):
     def __unicode__(self):
         return u"{}".format(self.name)
 
+def get_last_event(self, tracking_id):
+        """
+        Get the latest event dynamically.
+        """
+        return TrackingEvent.objects.filter(tracking=tracking_id).first()
+
 
 class Tracking(models.Model):
     """
@@ -141,7 +154,14 @@ class Tracking(models.Model):
     note = models.CharField(blank=True, null=True, max_length=255, verbose_name="Bemerkung")
     velo_type = models.ForeignKey('VeloType', blank=True, null=True)
     #last_update = models.DateTimeField(blank=False, null=False, default=timezone.now, verbose_name="Letztes Update")
-    last_event = models.ForeignKey('TrackingEvent', null=True, blank=True, verbose_name='Letzter Event', related_name='tracking_last_event')
+    last_event = models.ForeignKey(
+        'TrackingEvent',
+        null=True, 
+        blank=True,
+        verbose_name='Letzter Event',
+        related_name='tracking_last_event',
+        on_delete=models.SET(None)
+    )
     complete = models.BooleanField(default=False, verbose_name='Tracking beendet')
 
     history = HistoricalRecords()
@@ -188,6 +208,20 @@ class Tracking(models.Model):
             return None
     get_last_update.short_description = 'Last event'
 
+
+    def add_event(self, t_event_type):
+        """
+        """
+        last_event = self.get_last_event()
+        if last_event:
+            if last_event.event_type == t_event_type.required_previous_event:
+                te = TrackingEvent(event_type=t_event_type, tracking=self)
+                te.save()
+                return True
+            else:
+                print "Sorry, last event was not {}, but {}".format(t_event_type.required_previous_event, last_event.event_type)
+                return False
+        return None
 
     def __unicode__(self):
         return u"#{}: {} {}, {} Velos".format(self.tracking_no, self.first_name, self.last_name, self.number_of_velos)

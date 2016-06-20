@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from django_object_actions import DjangoObjectActions
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 from django.core.urlresolvers import reverse
@@ -235,15 +236,32 @@ class StockTransferResource(resources.ModelResource):
         model = StockTransfer
 
 
-class StockTransferAdmin(ImportExportMixin, SimpleHistoryAdmin):
+class StockTransferAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
     inlines = [StockChangeInline]
     resource_class = StockTransferResource
     list_display = ['id', 'date', 'warehouse_from', 'warehouse_to', 'stocklist', 'booked', 'note']
     list_filter = ['date', 'warehouse_from', 'warehouse_to', 'booked']
     readonly_fields = ['booked']
-    actions = ['book_stocktransfer', 'revoke_stocktransfer']
+    actions = ['book_stocktransfers', 'revoke_stocktransfer']
+    changelist_actions = ['book_stocktransfers', 'revoke_stocktransfers']
+    change_actions = ['book_stocktransfer', 'revoke_stocktransfer']
 
-    def book_stocktransfer(self, request, queryset):
+    def book_stocktransfer(self, request, obj):
+        """
+        Admin action to book a single StockTransfer.
+        """
+        if obj:
+            if obj.book():
+                self.message_user(request, "StockTransfer %s erfolgreich verbucht." % obj.id)
+            else:
+                self.message_user(request, "StockTransfer %s wurde bereits verbucht." % obj.id)
+        else:
+            self.message_user(request, "Not sure which StockTransfer to book." % obj.id)
+        
+    book_stocktransfer.short_description = "StockTransfer Verbuchen"
+    book_stocktransfer.label = "Verbuchen"
+
+    def book_stocktransfers(self, request, queryset):
         """
         Admin action to book StockTransfers.
         TODO: signals
@@ -254,14 +272,29 @@ class StockTransferAdmin(ImportExportMixin, SimpleHistoryAdmin):
                 rows_updated += 1
 
         if rows_updated == 1:
-            message_bit = "1 StockTransfer was"
+            message_bit = "1 StockTransfer "
         else:
-            message_bit = "%s StockTransfer were" % rows_updated
-        self.message_user(request, "%s booked successfully." % message_bit)
-    book_stocktransfer.short_description = "Book selected StrockTransfers"
+            message_bit = "%s StockTransfer " % rows_updated
+        self.message_user(request, "%s erfolgreich verbucht." % message_bit)
+    book_stocktransfers.short_description = "Ausgewählte StrockTransfers verbuchen"
+    book_stocktransfers.label = "Verbuchen"
 
+    def revoke_stocktransfer(self, request, obj):
+        """
+        Admin action to book a single StockTransfer.
+        """
+        if obj:
+            if obj.revoke():
+                self.message_user(request, "StockTransfer %s erfolgreich zurück gebucht." % obj.id)
+            else:
+                self.message_user(request, "StockTransfer %s ist momentan noch nicht verbucht." % obj.id)
+        else:
+            self.message_user(request, "Not sure which StockTransfer to revoke." % obj.id)
+        
+    revoke_stocktransfer.short_description = "StockTransfer zurückbuchen"
+    revoke_stocktransfer.label = "Zurückbuchen"
 
-    def revoke_stocktransfer(self, request, queryset):
+    def revoke_stocktransfers(self, request, queryset):
         """
         Admin action to revoke StockTransfers.
         TODO: signals
@@ -275,7 +308,9 @@ class StockTransferAdmin(ImportExportMixin, SimpleHistoryAdmin):
         else:
             message_bit = "%s StockTransfer were" % rows_updated
         self.message_user(request, "%s revoked successfully." % message_bit)
-    revoke_stocktransfer.short_description = "Revoke selected StrockTransfers"
+    
+    revoke_stocktransfer.short_description = "StockTransfer zurückbuchen"
+    revoke_stocktransfer.label = "Zurückbuchen"
 
 
 admin.site.register(Category, CategoryAdmin)

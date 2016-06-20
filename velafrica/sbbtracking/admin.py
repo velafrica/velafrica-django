@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from django_object_actions import DjangoObjectActions
 from django import forms
 from django import template
 from django.contrib import admin
@@ -38,7 +39,7 @@ class TrackingResource(resources.ModelResource):
         import_id_fields = ('tracking_no',)
         fields = ('first_name', 'last_name', 'email', 'tracking_no', 'number_of_velos', 'last_event__event_type__name', 'velo_type__name')
 
-class TrackingAdmin(ImportExportMixin, SimpleHistoryAdmin):
+class TrackingAdmin(DjangoObjectActions, ImportExportMixin, SimpleHistoryAdmin):
     resource_class = TrackingResource
     list_display = ('tracking_no', 'first_name', 'last_name', 'number_of_velos', 'velo_type', 'get_last_update', 'last_event', 'complete', 'container')
     list_filter = ['last_event__event_type', 'velo_type', 'complete']
@@ -47,10 +48,19 @@ class TrackingAdmin(ImportExportMixin, SimpleHistoryAdmin):
     readonly_fields = ['last_event']
 
     actions = ['add_event',]
+    change_actions = ['fix_last_event']
 
     class AddEventForm(forms.Form):
         _selected_action = forms.CharField(widget=forms.MultipleHiddenInput)
         event_type = forms.ModelChoiceField(TrackingEventType.objects)
+
+    def fix_last_event(self, request, obj):
+        """
+        """
+        if obj.set_last_event():
+            self.message_user(request, "Successfully set last_event.")
+    fix_last_event.label = "Letzter Event korrigieren"
+
 
     def add_event(self, request, queryset):
         """

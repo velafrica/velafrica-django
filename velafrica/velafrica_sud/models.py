@@ -68,6 +68,29 @@ class Container(models.Model):
     notes = models.TextField(blank=True, null=True, verbose_name="Bemerkungen zum Container")
     history = HistoricalRecords()
 
+    def book(self):
+        """
+        Mark container as booked and add event to tracking.
+        Returns (Success (bool), Amount of trackings edited (int))
+        """
+
+        from django.apps import apps
+
+        Tracking = apps.get_model('sbbtracking', 'Tracking')
+        TrackingEventType = apps.get_model('sbbtracking', 'TrackingEventType')
+
+        trackings = Tracking.objects.filter(container=self)
+        count = trackings.count()
+
+        tet = TrackingEventType.objects.filter(arrival_africa=True).first()
+        count_success = 0
+
+        for t in trackings:
+            if t.add_event(tet):
+                count_success += 1
+
+        return (True, count, count_success)
+
     def get_trimmed_container_no(self):
         if self.container_no:
             return self.container_no.replace(" ", "").replace("-", "")
@@ -100,7 +123,6 @@ class PartnerSud(models.Model):
     org_type = models.CharField(max_length=255, blank=True, null=True)
     legalform = models.CharField(max_length=255, blank=True, null=True, verbose_name="Organisationsform")
     partner_since = models.IntegerField(blank=True, null=True, verbose_name="Partner seit...", help_text="Jahr")
-    
 
     history = HistoricalRecords()
 
