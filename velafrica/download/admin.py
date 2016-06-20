@@ -1,5 +1,5 @@
 from django.contrib import admin
-from velafrica.download.models import File, Category
+from velafrica.download.models import File
 from import_export import resources
 from simple_history.admin import SimpleHistoryAdmin
 
@@ -9,4 +9,3 @@ class FileAdmin(SimpleHistoryAdmin):
     search_fields = ['name', 'description']
 
 admin.site.register(File, FileAdmin)
-admin.site.register(Category)

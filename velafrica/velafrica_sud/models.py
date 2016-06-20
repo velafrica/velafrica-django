@@ -59,7 +59,7 @@ class Container(models.Model):
     shipment_date = models.DateField(blank=True, null=True, verbose_name='Verschiffungsdatum ab Europa') 
     arrival_port_date = models.DateField(blank=True, null=True, verbose_name='Ankunft Hafen Partner')
     arrival_partner_date = models.DateField(blank=True, null=True, verbose_name='Ankunft Partner')
-    logistics = models.ForeignKey(Forwarder, blank=True, null=True, max_length=255, verbose_name='Forwarder', help_text='Logistikunternehmen')
+    logistics = models.ForeignKey(Forwarder, blank=True, null=True, verbose_name='Forwarder', help_text='Logistikunternehmen')
 
     container_no = models.CharField(blank=True, null=True, max_length=255, verbose_name='Containernummer')
     seal_no = models.CharField(blank=True, null=True, max_length=255, verbose_name='Plombennummer')
