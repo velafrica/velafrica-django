@@ -85,6 +85,10 @@ class Container(models.Model):
         tet = TrackingEventType.objects.filter(arrival_africa=True).first()
         count_success = 0
 
+        if not tet:
+            print "No arrival_africa event type defined"
+            return (False, count, 0)
+
         for t in trackings:
             if t.add_event(tet):
                 count_success += 1

@@ -212,6 +212,9 @@ class Tracking(models.Model):
     def add_event(self, t_event_type):
         """
         """
+        if not t_event_type:
+            print "t_event_type not defined"
+            return False
         last_event = self.get_last_event()
         if last_event:
             if last_event.event_type == t_event_type.required_previous_event:
