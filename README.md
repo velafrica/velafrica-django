@@ -1,3 +1,19 @@
+# Installed Apps
+
+Django==1.9.7
+django-autocomplete-light==3.1.6
+django-daterange-filter==1.3.0
+django-import-export==0.4.5
+django-mass-edit==2.6
+django-object-actions==0.8.2
+django-resized==0.3.5
+django-simple-history==1.8.1
+django-storages==1.4.1
+djangorestframework==3.3.3
+Markdown==2.6.6
+Pillow==3.2.0
+tablib==0.11.2
+
 # Setup
 
 1. Install Postgres
