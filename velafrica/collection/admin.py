@@ -19,7 +19,9 @@ class TaskProgressInline(admin.TabularInline):
 class EventAdmin(SimpleHistoryAdmin):
     form = EventForm
 
-class CollectionEventAdmin(SimpleHistoryAdmin):
+class CollectionEventAdminResource()
+
+class CollectionEventAdmin(ImportExportMixin, SimpleHistoryAdmin):
     """
     """
     list_display = ['date_start', 'event', 'notes', 'get_status_logistics', 'get_status_marketing', 'get_status_results', 'velo_amount' ]
@@ -30,7 +32,7 @@ class CollectionEventAdmin(SimpleHistoryAdmin):
             'fields': ('date_start', 'date_end', 'event', 'time', 'notes')
             }),
         ('Logistik', {
-            'fields': ('presence_velafrica', 'presence_velafrica_info', 'pickup', 'processing', 'collection_partner_vrn', 'collection_partner_other', 'collection_partner_confirmed')
+            'fields': ('presence_velafrica', 'presence_velafrica_info', 'collection_partner_vrn', 'collection_partner_other', 'collection_partner_confirmed', 'pickup', 'processing', )
             }),
         ('Marketing', {
             'fields': ('website',)

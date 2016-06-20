@@ -55,7 +55,7 @@ class CollectionEvent(models.Model):
     notes = models.TextField(blank=True, verbose_name="weitere Infos", help_text="Weitere Infos / Bemerkungen")
 
     # logistics
-    presence_velafrica = models.BooleanField(default=False)
+    presence_velafrica = models.BooleanField(default=False, verbose_name="Präsenz Velafrica?")
     presence_velafrica_info = models.TextField(
         blank=True, 
         help_text="Infos zur Präsenz von Velafrica am Event",
@@ -80,7 +80,7 @@ class CollectionEvent(models.Model):
         blank=True, 
         verbose_name="Abtransport durch andere Organisation",
         help_text="Wenn die Velos nicht von einem Velafrica Partner abgeholt werden, bitte hier eintragen von wem")
-    collection_partner_confirmed = models.BooleanField(default=False)
+    collection_partner_confirmed = models.BooleanField(default=False, verbose_name="Transport Partner bestätigt?")
 
     # marketing
     website = models.URLField(blank=True, help_text="Website des Events")
