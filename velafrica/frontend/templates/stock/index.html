@@ -20,7 +20,7 @@ Spare Parts Stock
 	<p><span class="label label-warning warehouse_filter reset_filter" data-org-id=0>Alle Lager</span></p>
 	<p>
 	{% for w in warehouses %}
-		<span class="label label-default warehouse_filter single_warehouse" data-warehouse={{ w.name }}>{{ w.name }}</span>
+		<span class="label label-default warehouse_filter single_warehouse" data-warehouse="{{ w.name }}">{{ w.name }}</span>
 	{% endfor %}
 	</p>
 </div>
