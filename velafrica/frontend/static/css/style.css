@@ -55,6 +55,10 @@ img#navbar-logo {
   opacity: 0.8;
 }
 
+#velo-counter-filter .label {
+	cursor: pointer;
+}
+
 .modal-header-img {
   padding: 80px;
   background-size: 100%;

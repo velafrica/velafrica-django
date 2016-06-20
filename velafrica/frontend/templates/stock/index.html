@@ -15,12 +15,20 @@ Spare Parts Stock
 {% endblock %}
 
 {% block jumbotron %}
+<div id="velo-counter-filter">
+
+	<p><span class="label label-warning warehouse_filter reset_filter" data-org-id=0>Alle Lager</span></p>
+	<p>
+	{% for w in warehouses %}
+		<span class="label label-default warehouse_filter single_warehouse" data-warehouse={{ w.name }}>{{ w.name }}</span>
+	{% endfor %}
+	</p>
+</div>
 {% endblock %}
 
 {% block content %}
 
-<p><i>TODO: Filter nach Lager</i></p>
-<p><i>TODO: Produktbilder</i></p>
+
 <!-- seach box -->
 <div class="input-group"><span class="input-group-addon">Search:</span> <input id="filter" type="text" class="form-control" /></div>
 
@@ -59,6 +67,22 @@ Spare Parts Stock
 <script type="text/javascript">
 	$(function () {
 		$('.footable').footable();
+	});
+
+	/* On click event on single warehouse filter */
+	$('span.warehouse_filter.single_warehouse').click(function() {
+		$('.footable').trigger('footable_filter', {filter: $(this).data('warehouse')});
+		$('.warehouse_filter').removeClass('label-warning');
+		$('.warehouse_filter').addClass('label-default');
+		$(this).addClass('label-warning');
+	});
+
+	/* On click event on single warehouse filter */
+	$('span.warehouse_filter.reset_filter').click(function() {
+		$('.footable').trigger('footable_clear_filter');
+		$('.warehouse_filter').removeClass('label-warning');
+		$('.warehouse_filter').addClass('label-default');
+		$(this).addClass('label-warning');
 	});
 </script>
 

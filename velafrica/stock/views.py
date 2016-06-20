@@ -13,6 +13,10 @@ def stock(request):
   Stock
   """
   stock = Stock.objects.all()
+  warehouse_ids = stock.order_by().values('warehouse').distinct()
+  warehouses = Warehouse.objects.filter(id__in=warehouse_ids)
+
+  print warehouses
 
   if request.user.is_superuser or request.user.has_perm('stock.is_admin'):
   	stock = Stock.objects.all()
@@ -24,7 +28,8 @@ def stock(request):
   	stock = stock.none()
             
   return render_to_response('stock/index.html', { 
-    'stock': stock
+    'stock': stock, 
+    'warehouses': warehouses,
     }, context_instance=RequestContext(request)
   )
 
