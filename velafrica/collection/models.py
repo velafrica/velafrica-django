@@ -60,7 +60,7 @@ class CollectionEvent(models.Model):
         blank=True, 
         help_text="Infos zur Präsenz von Velafrica am Event",
         verbose_name="Präsenz Velafrica")
-    pickup = models.TextField(
+    collection = models.TextField(
         blank=True,
         help_text="Infos zur Abholung der Velos",
         verbose_name="Abtransport")

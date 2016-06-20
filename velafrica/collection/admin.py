@@ -26,10 +26,33 @@ class CollectionEventAdminResource(resources.ModelResource):
 
     class Meta:
         model = CollectionEvent
+        fields = [
+            'date_start',
+            'date_end',
+            'event',
+            'event__name',
+            'time',
+            'notes',
+            'presence_velafrica',
+            'presence_velafrica_info',
+            'collection',
+            'collection_partner_vrn',
+            'collection_partner_vrn__name',
+            'collection_partner_other',
+            'collection_partner_confirmed',
+            'processing',
+            'website',
+            'feedback',
+            'velo_amount',
+            'people_amount',
+            'hours_amount',
+            'additional_results'
+        ]
 
 class CollectionEventAdmin(ImportExportMixin, SimpleHistoryAdmin):
     """
     """
+    resource_class = CollectionEventAdminResource
     list_display = ['date_start', 'event', 'notes', 'get_status_logistics', 'get_status_marketing', 'get_status_results', 'velo_amount' ]
     search_fields = ['event__name', 'event__municipality__name']
     inlines = [TaskProgressInline]
@@ -38,7 +61,7 @@ class CollectionEventAdmin(ImportExportMixin, SimpleHistoryAdmin):
             'fields': ('date_start', 'date_end', 'event', 'time', 'notes')
             }),
         ('Logistik', {
-            'fields': ('presence_velafrica', 'presence_velafrica_info', 'collection_partner_vrn', 'collection_partner_other', 'collection_partner_confirmed', 'pickup', 'processing', )
+            'fields': ('presence_velafrica', 'presence_velafrica_info', 'collection_partner_vrn', 'collection_partner_other', 'collection_partner_confirmed', 'collection', 'processing', )
             }),
         ('Marketing', {
             'fields': ('website',)
