@@ -19,7 +19,13 @@ class TaskProgressInline(admin.TabularInline):
 class EventAdmin(SimpleHistoryAdmin):
     form = EventForm
 
-class CollectionEventAdminResource()
+class CollectionEventAdminResource(resources.ModelResource):
+    """
+    Define the collection event resource for import / export.
+    """
+
+    class Meta:
+        model = CollectionEvent
 
 class CollectionEventAdmin(ImportExportMixin, SimpleHistoryAdmin):
     """
