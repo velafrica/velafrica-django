@@ -11,6 +11,7 @@ django-resized==0.3.5
 django-simple-history==1.8.1
 django-storages==1.4.1
 djangorestframework==3.3.3
+gunicorn==19.6.0
 Markdown==2.6.6
 Pillow==3.2.0
 psycopg2==2.6.1
