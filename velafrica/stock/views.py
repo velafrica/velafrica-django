@@ -43,7 +43,7 @@ class ProductAutocomplete(autocomplete.Select2QuerySetView):
         qs = Product.objects.all()
 
         if self.q:
-            qs = qs.filter(Q(name__contains=self.q) | Q(articlenr__contains=self.q))
+            qs = qs.filter(Q(name__icontains=self.q) | Q(articlenr__icontains=self.q))
 
         return qs
 
@@ -56,6 +56,6 @@ class WarehouseAutocomplete(autocomplete.Select2QuerySetView):
         qs = Warehouse.objects.all()
 
         if self.q:
-            qs = qs.filter(Q(name__contains=self.q) | Q(organisation__name__contains=self.q))
+            qs = qs.filter(Q(name__icontains=self.q) | Q(organisation__name__icontains=self.q))
 
         return qs
