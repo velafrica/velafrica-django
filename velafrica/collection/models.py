@@ -20,6 +20,10 @@ class EventCategory(models.Model):
     def __unicode__(self):
         return u"{}".format(self.name)
 
+    class Meta:
+        verbose_name = "Event Kategorie"
+        verbose_name_plural = "Event Kategorien"
+
 
 class Event(models.Model):
     """
@@ -34,6 +38,9 @@ class Event(models.Model):
 
     def __unicode__(self):
         return u"{}".format(self.name)
+
+    class Meta:
+        verbose_name = "Event"
 
 
 class Task(models.Model):
@@ -122,6 +129,10 @@ class CollectionEvent(models.Model):
     def __unicode__(self):
         return u"{} ({} bis {})".format(self.event.name, self.date_start, self.date_end)
 
+    class Meta:
+        verbose_name = "Sammelanlass"
+        verbose_name_plural = "Sammelanlässe"
+
 
 class TaskProgress(models.Model):
     """
@@ -133,3 +144,7 @@ class TaskProgress(models.Model):
 
     def __unicode__(self):
         return u"{}: {}".format(self.task, self.status)
+
+    class Meta:
+        verbose_name = "Task Fortschritt"
+        verbose_name_plural = "Task Fortschritte"
