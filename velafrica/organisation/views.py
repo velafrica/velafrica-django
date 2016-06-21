@@ -13,6 +13,6 @@ class MunicipalityAutocomplete(autocomplete.Select2QuerySetView):
         qs = Municipality.objects.all()
 
         if self.q:
-            qs = qs.filter(Q(plz_name__contains=self.q) | Q(plz__startswith=self.q))
+            qs = qs.filter(Q(plz_name__icontains=self.q) | Q(name__icontains=self.q) | Q(name_short__icontains=self.q) | Q(plz__startswith=self.q))
 
         return qs

@@ -27,7 +27,7 @@ class Municipality(models.Model):
     canton = models.ForeignKey(Canton)
 
     def __unicode__(self):
-        return u"{} {}".format(self.plz, self.plz_name)
+        return u"{} {} ({})".format(self.plz, self.name, self.name_short)
 
     class Meta:
         verbose_name_plural = "Municipalities"

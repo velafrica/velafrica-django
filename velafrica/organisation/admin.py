@@ -61,7 +61,7 @@ class MunicipalityResource(resources.ModelResource):
     
     class Meta:
         model = Municipality
-        import_id_fields = ['gdenr', 'plz']
+        import_id_fields = ['gdenr', 'plz', 'name']
         fields = ['gdenr', 'name', 'name_short', 'plz', 'plz_name', 'canton']
 
 
