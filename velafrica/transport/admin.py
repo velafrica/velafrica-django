@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
-from simple_history.admin import SimpleHistoryAdmin
-from velafrica.stock.models import Warehouse
-from velafrica.transport.models import Car, Driver, VeloState, Ride
 from import_export import resources
 from import_export.admin import ImportExportMixin
 from import_export.fields import Field
 from import_export.widgets import DateWidget, ForeignKeyWidget
+from simple_history.admin import SimpleHistoryAdmin
+from velafrica.stock.models import Warehouse
+from velafrica.transport.models import Car, Driver, VeloState, Ride
+from velafrica.transport.forms import RideForm
 
 class CarAdmin(SimpleHistoryAdmin):
     list_display = ['name', 'organisation', 'plate']
@@ -48,6 +49,7 @@ class RideResource(resources.ModelResource):
 
 
 class RideAdmin(ImportExportMixin, SimpleHistoryAdmin):
+    form = RideForm
     resource_class = RideResource
     list_display = ['id', 'date', 'from_warehouse', 'to_warehouse', 'driver', 'velos', 'velo_state', 'spare_parts']
     search_fields = ['from_warehouse__name', 'to_warehouse__name', 'driver__name']
