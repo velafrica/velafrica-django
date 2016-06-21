@@ -40,19 +40,27 @@ urlpatterns = [
     url(r'^container', views.container, name='container'),
 
     url(r'^auth/login', auth_views.login, {'template_name':'auth/login.html'}, name='login'),
-    url(r'^auth/password/reset', 
+
+    # url to request Password reset
+    url(r'^auth/password/reset/$', 
         auth_views.password_reset, 
         {'post_reset_redirect' : '/auth/password/reset/done/'}, 
         name='password_reset'
-    ),
-    url(r'^auth/password/reset/done/$', auth_views.password_reset_done, name='password_reset_done'),
+        ),
+    # url to show after password reset request
+    url(r'^auth/password/reset/done/$', 
+        auth_views.password_reset_done, 
+        name='password_reset_done'
+        ),
+    # url that gets sent via email to the user
     url(r'^auth/password/reset/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/$', 
         auth_views.password_reset_confirm, 
-        {'post_reset_redirect' : '/auth/password/done/'}, name='password_reset_confirm'
-    ),
-    url(r'^auth/password/done/$', 
+        {'post_reset_redirect' : '/auth/password/reset/complete/'}, name='password_reset_confirm'
+        ),
+    # final site of password reset
+    url(r'^auth/password/reset/complete/$', 
         auth_views.password_reset_complete, name='password_reset_complete'
-    ),
+        ),
 
     url(r'^auth/profile', views.profile, name='profile'),
     url(r'^auth/logout', views.accounts_logout, name='logout'),

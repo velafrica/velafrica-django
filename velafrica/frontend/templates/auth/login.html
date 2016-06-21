@@ -15,24 +15,30 @@ Login
 <p>Your username and password didn't match. Please try again.</p>
 {% endif %}
 
-<form method="post" action="{% url 'django.contrib.auth.views.login' %}" role="form">
-{% csrf_token %}
-<table class="table">
-	<tr>
-		<th>{{ form.username.label_tag }}</th>
-		<td>{{ form.username }}</td>
-	</tr>
-	<tr>
-		<th>{{ form.password.label_tag }}</th>
-		<td>{{ form.password }}</td>
-	</tr>
-</table>
+<div>
+	<form method="post" action="{% url 'django.contrib.auth.views.login' %}" role="form">
+	{% csrf_token %}
+	<table class="table">
+		<tr>
+			<th>{{ form.username.label_tag }}</th>
+			<td>{{ form.username }}</td>
+		</tr>
+		<tr>
+			<th>{{ form.password.label_tag }}</th>
+			<td>{{ form.password }}</td>
+		</tr>
+	</table>
+	<br />
 
-<br /> 
+	<input type="submit" value="Login" class="btn btn-default" />
+	<input type="hidden" name="next" value="{{ next }}" />
+	</form>
+</div>
+
 <br />
 
-<input type="submit" value="login" class="btn btn-default" />
-<input type="hidden" name="next" value="{{ next }}" />
-</form>
+<div>
+<a href="{% url 'password_reset' %}">Passwort vergessen?</a>
+</div>
 
 {% endblock %}
