@@ -44,7 +44,7 @@ def send_email(sender, instance, created, **kwargs):
         r = 'admin:{}_{}_change'.format(instance._meta.app_label, instance._meta.model_name)
         admin_url = "http://tracking.velafrica.ch{}".format(reverse(r, args=[instance.id]))
 
-        msg = u"Eine neue Lieferung vom Transport ist soeben im Lager {} eingetroffen.\n\nDatum: {}Fahrzeug: {}\nFahrer: {}\nHerkunft: {}\nBemerkungen: {}\n\nFahrt anschauen: {}".format(warehouse, instance.date, instance.car, instance.driver, instance.from_warehouse, instance.note, admin_url)
+        msg = u"Eine neue Lieferung vom Transport ist soeben im Lager {} eingetroffen.\n\nDatum: {}\nFahrzeug: {}\nFahrer: {}\nHerkunft: {}\nBemerkungen: {}\n\nFahrt anschauen: {}".format(warehouse, instance.date, instance.car, instance.driver, instance.from_warehouse, instance.note, admin_url)
         from_name = getattr(settings, 'EMAIL_FROM_NAME', 'Velafrica Tracking')
         from_email = getattr(settings, 'EMAIL_FROM_EMAIL', 'tracking@velafrica.ch')
         sender = u"{} <{}>".format(from_name, from_email)
