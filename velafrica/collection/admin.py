@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from daterange_filter.filter import DateRangeFilter
 from django.contrib import admin
+from django.utils.safestring import mark_safe
 from import_export import resources
 from import_export.admin import ImportExportMixin
 from import_export.fields import Field
@@ -53,7 +54,7 @@ class CollectionEventAdmin(ImportExportMixin, SimpleHistoryAdmin):
     """
     """
     resource_class = CollectionEventAdminResource
-    list_display = ['date_start', 'event', 'notes', 'get_status_logistics', 'get_status_marketing', 'get_status_results', 'velo_amount' ]
+    list_display = ['date_start', 'event', 'notes', 'status_logistics', 'status_marketing', 'status_results', 'velo_amount' ]
     search_fields = ['event__name', 'event__municipality__name']
     inlines = [TaskProgressInline]
     fieldsets = (
@@ -71,6 +72,33 @@ class CollectionEventAdmin(ImportExportMixin, SimpleHistoryAdmin):
             }),
     )
 
+    def get_status_style(self, status):
+        """
+        Helper function to get css styles in regards to task status.
+        """
+        print "get status style"
+        style = "border-radius: 50%; width: 20px; height: 20px;"
+        if status == "success":
+            style += " background-color: #4DFA90;"
+        elif status == "warning":
+            style += " background-color: #FABE4D;"
+        else:
+            style += " background-color: #FF5468;"
+
+        print style
+        return style
+
+    def status_marketing(self, obj):
+        return mark_safe('<div span style="{}">&nbsp;</div>'.format(self.get_status_style(obj.get_status_marketing())))
+    status_marketing.short_description = 'Marketing Status'
+
+    def status_results(self, obj):
+        return mark_safe('<div span style="{}">&nbsp;</div>'.format(self.get_status_style(obj.get_status_results())))
+    status_results.short_description = 'Feedback Status'
+
+    def status_logistics(self, obj):
+        return mark_safe('<div span style="{}">&nbsp;</div>'.format(self.get_status_style(obj.get_status_logistics())))
+    status_logistics.short_description = 'Abholung Status'
 
 admin.site.register(Event, EventAdmin)
 admin.site.register(EventCategory)

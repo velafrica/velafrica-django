@@ -93,13 +93,31 @@ class CollectionEvent(models.Model):
     additional_results = models.TextField(blank=True, verbose_name="weitere Resultate", help_text="Zusätzliche Resultate / Erkenntnisse")
 
     def get_status_logistics(self):
-        pass
+        if self.collection_partner_confirmed:
+            return "success"
+        else:
+            return "danger"
 
     def get_status_marketing(self):
-        pass
+        print "HALLOOOO"
+        tasks_count = self.taskprogress_set.all().count()
+        print tasks_count
+        if tasks_count == 0:
+            return "danger"
+        else:
+            success_count = 0
+            for t in self.taskprogress_set.all():
+                if t.status:
+                    success_count += 1
+            if tasks_count == success_count:
+                return "success"
+            else:
+                return "warning"
 
     def get_status_results(self):
-        pass
+        if self.feedback:
+            return "success"
+        return "danger"
 
     def __unicode__(self):
         return u"{} ({} bis {})".format(self.event.name, self.date_start, self.date_end)
