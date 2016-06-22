@@ -177,24 +177,24 @@ class Tracking(models.Model):
                 return True
         return False
 
-    def get_last_event(self):
-        """
-        Get the latest event dynamically.
-        """
-        return TrackingEvent.objects.filter(tracking=self.id).first()
-    get_last_event.short_description = 'Last event'
-
     def set_last_event(self):
         """
         Set last event manually.
         """
-        event = self.get_last_event()
+        event = TrackingEvent.objects.filter(tracking=self.id).first()
         if event:
             self.last_event = event
             self.save()
             return event
         else:
             return None
+
+    def get_last_event(self):
+        """
+        Get the latest event dynamically.
+        """
+        return self.set_last_event()
+    get_last_event.short_description = 'Last event'
 
     def get_last_update(self):
         """

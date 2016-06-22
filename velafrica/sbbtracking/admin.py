@@ -12,7 +12,7 @@ from import_export import resources
 from import_export.admin import ImportExportMixin
 
 
-def create_trackingevent_form(series):
+def create_trackingevent_form(tracking):
     """
     """
     class TrackingEventForm(forms.ModelForm):
@@ -25,7 +25,8 @@ def create_trackingevent_form(series):
             May not be needed anymore, since event type choices are limited when creating new event.
             """
             next_eventtype = self.cleaned_data['event_type']
-            tracking = self.cleaned_data['tracking']           
+            tracking = self.cleaned_data['tracking']
+            # get last event, this also ensures last_event gets updated everytime the change form for TrackingEvent is loaded
             last_eventtype = tracking.set_last_event()
 
             if last_eventtype:
@@ -50,11 +51,12 @@ def create_trackingevent_form(series):
             return self.cleaned_data
 
         def __init__(self, *args, **kwargs):
-            # You can use the outer function's 'series' here
-            self.parent_object = series
+            # You can use the outer function's 'tracking' here
+            self.parent_object = tracking
 
             super(TrackingEventForm, self).__init__(*args, **kwargs)
-            self.fields['event_type'].queryset = series.next_tracking_eventtype_options()
+            self.fields['event_type'].queryset = tracking.next_tracking_eventtype_options()
+            #self.fields['event_type'].limit_choices_to = tracking.next_tracking_eventtype_options()
 
     return TrackingEventForm
 
