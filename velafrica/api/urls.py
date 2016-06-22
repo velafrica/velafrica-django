@@ -4,14 +4,50 @@ from rest_framework.urlpatterns import format_suffix_patterns
 from velafrica.api import utils
 from velafrica.api import views
 
+
+collection = [
+    url(r'^eventcategories/?$', utils.get_listview('collection', 'EventCategory').as_view(), name="eventcategories"),
+    url(r'^eventcategories/(?P<pk>[0-9]+)/?$', utils.get_listview('collection', 'EventCategory').as_view(), name='eventcategory'),
+    url(r'^events/?$', utils.get_listview('collection', 'Event').as_view(), name="events"),
+    url(r'^events/(?P<pk>[0-9]+)/?$', utils.get_listview('collection', 'Event').as_view(), name='event'),
+    url(r'^tasks/?$', utils.get_listview('collection', 'Task').as_view(), name="tasks"),
+    url(r'^tasks/(?P<pk>[0-9]+)/?$', utils.get_listview('collection', 'Task').as_view(), name='tasks'),
+    url(r'^taskprogresses/?$', utils.get_listview('collection', 'TaskProgress').as_view(), name="tasksprogresses"),
+    url(r'^taskprogresses/(?P<pk>[0-9]+)/?$', utils.get_listview('collection', 'TaskProgress').as_view(), name='taskprogress'),
+    url(r'^collectionevents/?$', utils.get_listview('collection', 'CollectionEvent').as_view(), name="collectionevents"),
+    url(r'^collectionevents/(?P<pk>[0-9]+)/?$', utils.get_listview('collection', 'CollectionEvent').as_view(), name='collectionevent'),
+]
+
+counter = [
+    url(r'^entries/?$', utils.get_listview('counter', 'Entry').as_view(), name="entries"),
+    url(r'^entries/(?P<pk>[0-9]+)/?$', utils.get_listview('counter', 'entry').as_view(), name='entry'),
+]
+
 stock = [
     url(r'^warehouses/?$', views.WarehouseList.as_view(), name="warehouses"),
     url(r'^warehouses/(?P<pk>[0-9]+)/?$', views.WarehouseDetail.as_view(), name='warehouses_detail'),
+
+    url(r'^categories/?$', utils.get_listview('stock', 'Category').as_view(), name="categories"),
+    url(r'^categories/(?P<pk>[0-9]+)/?$', utils.get_listview('stock', 'Category').as_view(), name='category'),
+]
+
+transport = [
+    url(r'^cars/?$', utils.get_listview('transport', 'Car').as_view(), name="cars"),
+    url(r'^cars/(?P<pk>[0-9]+)/?$', utils.get_listview('transport', 'Car').as_view(), name='car'),
+    url(r'^velostates/?$', utils.get_listview('transport', 'VeloState').as_view(), name="velostates"),
+    url(r'^velostates/(?P<pk>[0-9]+)/?$', utils.get_listview('transport', 'VeloState').as_view(), name='velostate'),
+    url(r'^rides/?$', utils.get_listview('transport', 'Ride').as_view(), name="rides"),
+    url(r'^rides/(?P<pk>[0-9]+)/?$', utils.get_listview('transport', 'Ride').as_view(), name='ride'),
 ]
 
 organisation = [
     url(r'^organisations/?$', views.OrganisationList.as_view(), name="organisations"),
     url(r'^organisations/(?P<pk>[0-9]+)/?$', views.OrganisationDetail.as_view(), name='organisations_detail'),
+
+    url(r'^municipalities/?$', utils.get_listview('organisation', 'Municipality').as_view(), name="municipalities"),
+    url(r'^municipalities/(?P<pk>[0-9]+)/?$', utils.get_retrieveview('organisation', 'Municipality').as_view(), name='municipality'),
+    url(r'^cantons/?$', utils.get_listview('organisation', 'Canton').as_view(), name="cantons"),
+    url(r'^cantons/(?P<pk>[0-9]+)/?$', utils.get_retrieveview('organisation', 'Canton').as_view(), name='canton'),
 ]
 
 tracking = [
@@ -43,7 +79,10 @@ urlpatterns = [
     url(r'^organisation/', include(organisation, namespace="organisation")),
     url(r'^stock/', include(stock, namespace="stock")),
     url(r'^tracking/', include(tracking, namespace="tracking")),
+    url(r'^transport/', include(transport, namespace="transport")),
     url(r'^velafrica_sud/', include(velafrica_sud, namespace="velafrica_sud")),
+    url(r'^counter/', include(counter, namespace="counter")),
+    url(r'^collections/', include(collection, namespace="collections")),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
