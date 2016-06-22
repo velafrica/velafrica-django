@@ -20,45 +20,62 @@ from velafrica.stock.serializer import *
 @api_view(('GET',))
 def api_root(request, format=None):
     """
-    Todo: complete available urls
-    Feel free to use this API. I would love to see what you did with it.
-    """
-    return Response({
-        '/tracking': {
-            '/trackings': {
-                reverse('tracking:trackings', request=request, format=format): 'list of all trackings',
-                "{}/<id>".format(reverse('tracking:trackings', request=request, format=format)): 'tracking details'
-            },
-            '/trackingevents': {
-                reverse('tracking:trackingevents', request=request, format=format): 'list of all tracking events',
-                "{}/<id>".format(reverse('tracking:trackingevents', request=request, format=format)): 'tracking event details'
-            },
-            '/trackingeventtypes': {
-                reverse('tracking:trackingeventtypes', request=request, format=format): 'list of all tracking event types',
-                "{}/<id>".format(reverse('tracking:trackingeventtypes', request=request, format=format)): 'tracking event type details'
-            },
-            '/velotypes': {
-                reverse('tracking:velotypes', request=request, format=format): 'list of all velo types',
-                "{}/<id>".format(reverse('tracking:velotypes', request=request, format=format)): 'velo type details'
-            },
-        },
-        '/counter':{},
-        '/transport':{},
-        '/organisation':{
-            '/organisations': {
-                reverse('organisation:organisations', request=request, format=format): 'list of all Swiss partner organisations',
-                "{}/<id>".format(reverse('organisation:organisations', request=request, format=format)): 'organisation details'
-            },
-        },
-        '/stock':{
-            '/warehouses': {
-                reverse('stock:warehouses', request=request, format=format): 'list of all warehouses',
-                "{}/<id>".format(reverse('stock:warehouses', request=request, format=format)): 'warehouse details'
-            },
-        },
-        '/velafrica_sud':{}
+    This is the open API of Velafrica (www.velafrica.ch)
 
-    })
+    Feel free to use it as you wish, we have nothing to hide :-)
+
+    If you build something cool and want to show it to us, please do not hesitate!
+
+    Send a link with description to niklai.raeber (at) velafrica.ch
+
+    Have fun!
+    """
+
+    from velafrica.api import urls
+    from django.core.urlresolvers import RegexURLPattern, RegexURLResolver
+
+    URL_NAMES = []
+    def load_url_pattern_names(namespace, patterns):
+        """Retrieve a list of urlpattern names"""
+        URL_NAMES = []
+        
+        for pat in patterns:
+            if pat.__class__.__name__ == 'RegexURLResolver':            # load patterns from this RegexURLResolver
+                URL_NAMES.append(load_url_pattern_names(pat.namespace, pat.url_patterns))
+            elif pat.__class__.__name__ == 'RegexURLPattern':           # load name from this RegexURLPattern
+                # fully qualified pattern name :) (namespace::name)
+                
+                if pat.name is not None and pat.name not in URL_NAMES:
+                    URL_NAMES.append((pat.name, pat.callback.__doc__))
+        return (namespace, URL_NAMES)
+
+    #root_urlconf = __import__(settings.ROOT_URLCONF)        # access the root urls.py file
+    url_tree = load_url_pattern_names(None, urls.urlpatterns)   # access the "urlpatterns" from the ROOT_URLCONF
+
+    response = {}
+    for namespace_set in url_tree[1]:
+        namespace = namespace_set[0]
+        urls = namespace_set[1]
+        namespace_urls = {}
+        for ur in urls:
+            if namespace:
+                fqpn = '{}:{}'.format(namespace, ur[0])
+                rev = ""
+                try:
+                    rev = reverse(str(fqpn), request=request, format=format)
+                except:
+                    try:
+                        rev = reverse(str(fqpn), request=request, format=format, kwargs={'pk':1})
+                    except:
+                        print "something went wrong.. who cares :)"
+                        pass
+                    pass
+
+                description = "{}".format(ur[1])
+                namespace_urls[rev] = description.strip()
+        response[namespace] = namespace_urls
+
+    return Response(response)
 
 class VeloTypeList(generics.ListAPIView):
     """

@@ -66,6 +66,12 @@ class TrackingEventType(models.Model):
     )
     history = HistoricalRecords()
 
+    def next_tracking_eventtype_options(self):
+        """
+        Returns a list of the tracking event types that can be added next
+        """
+        return TrackingEventType.objects.filter(required_previous_event=self.event_type)
+
     def __unicode__(self):
         return u"{}".format(self.name)
 
