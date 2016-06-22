@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import inspect
 from django_object_actions import DjangoObjectActions
 from django import forms
 from django import template
@@ -11,9 +12,81 @@ from import_export import resources
 from import_export.admin import ImportExportMixin
 
 
+def create_trackingevent_form(series):
+    """
+    """
+    class TrackingEventForm(forms.ModelForm):
+        """
+        Form for Tracking Event Inline
+        """
+
+        def clean(self):
+            """
+            May not be needed anymore, since event type choices are limited when creating new event.
+            """
+            next_eventtype = self.cleaned_data['event_type']
+            tracking = self.cleaned_data['tracking']           
+            last_eventtype = tracking.set_last_event()
+
+            if last_eventtype:
+                last_eventtype = last_eventtype.event_type
+
+            pk = self.instance.pk
+            insert = pk == None
+            # check if the event is updated or newly created
+            if insert:
+                if next_eventtype.required_previous_event == last_eventtype:
+                    pass
+                else:
+                    raise forms.ValidationError('"{}" requires "{}" as last event, "{}" found. Possible next events: {}'.format(
+                        next_eventtype, 
+                        next_eventtype.required_previous_event, 
+                        last_eventtype,
+                        '"%s" ' % ', '.join(map(str, [x.name for x in  tracking.next_tracking_eventtype_options()]))
+                        )
+                    )
+            else:
+                pass
+            return self.cleaned_data
+
+        def __init__(self, *args, **kwargs):
+            # You can use the outer function's 'series' here
+            self.parent_object = series
+
+            super(TrackingEventForm, self).__init__(*args, **kwargs)
+            self.fields['event_type'].queryset = series.next_tracking_eventtype_options()
+
+    return TrackingEventForm
+
+
 class TrackingEventInline(admin.TabularInline):
+    #form = MyForm
+    #formset = MyFormSet
+
     model = TrackingEvent
     extra = 0
+
+    #readonly_fields = ['datetime', 'event_type', 'note']
+
+    def has_add_permission(self, request):
+        return False
+
+    
+
+class AddTrackingEventInline(admin.TabularInline):
+    model = TrackingEvent
+    extra = 0
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    def queryset(self, request): 
+        return super(AddTrackingEventInline, self).queryset(request).none()
+
+    def get_formset(self, request, obj=None, **kwargs):
+        if obj:
+            self.form = create_trackingevent_form(obj)
+        return super(AddTrackingEventInline, self).get_formset(request, obj, **kwargs)
 
 
 class EmailLogInline(admin.TabularInline):
@@ -43,7 +116,7 @@ class TrackingAdmin(DjangoObjectActions, ImportExportMixin, SimpleHistoryAdmin):
     resource_class = TrackingResource
     list_display = ('tracking_no', 'first_name', 'last_name', 'number_of_velos', 'velo_type', 'get_last_update', 'last_event', 'complete', 'container')
     list_filter = ['last_event__event_type', 'velo_type', 'complete']
-    inlines = [TrackingEventInline, EmailLogInline]
+    inlines = [TrackingEventInline, AddTrackingEventInline, EmailLogInline]
     search_fields = ['tracking_no', 'first_name', 'last_name', 'email']
     readonly_fields = ['last_event']
 

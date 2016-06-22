@@ -34,10 +34,11 @@ class TrackingSerializer(serializers.ModelSerializer):
     """
     Todo: write doc.
     """
-
+    next_tracking_eventtype_options = TrackingEventTypeSerializer(many=True, read_only=True)
+    
     class Meta:
         model = Tracking
-        fields = [ "id", "tracking_no", "number_of_velos", "note", "complete", "vpn", "container", "velo_type", "last_event" ]
+        fields = [ "id", "tracking_no", "number_of_velos", "note", "complete", "vpn", "container", "velo_type", "last_event", "next_tracking_eventtype_options" ]
 
 
 class TrackingDetailSerializer(serializers.ModelSerializer):

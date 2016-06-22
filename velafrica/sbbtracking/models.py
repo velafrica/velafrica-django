@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.utils import timezone
 from django.core.validators import RegexValidator, EmailValidator
+from django.core.exceptions import ValidationError
 from django.db import models
 from django_resized import ResizedImageField
 from simple_history.models import HistoricalRecords
@@ -81,8 +82,6 @@ class TrackingEvent(models.Model):
     tracking = models.ForeignKey('Tracking')
     note = models.CharField(blank=True, null=True, max_length=255, verbose_name="Bemerkung", help_text="interne Bemerkung, nirgends ersichtlich für Spender (optional)")
     history = HistoricalRecords()
-
-
 
     def __unicode__(self):
         return u"{}".format(self.event_type.name)
@@ -215,7 +214,9 @@ class Tracking(models.Model):
         if not t_event_type:
             print "t_event_type not defined"
             return False
-        last_event = self.get_last_event()
+
+        # first off, set last event to be sure it is correct
+        last_event = self.set_last_event()
         if last_event:
             if last_event.event_type == t_event_type.required_previous_event:
                 te = TrackingEvent(event_type=t_event_type, tracking=self)
@@ -228,6 +229,15 @@ class Tracking(models.Model):
 
     def __unicode__(self):
         return u"#{}: {} {}, {} Velos".format(self.tracking_no, self.first_name, self.last_name, self.number_of_velos)
+
+    def next_tracking_eventtype_options(self):
+        """
+        Returns a list of the tracking event types that can be added next
+        """
+        # first off, set last event to be sure it is correct
+        last_event = self.set_last_event()
+
+        return TrackingEventType.objects.filter(required_previous_event=last_event.event_type)
 
     class Meta:
         ordering = ['-tracking_no']
