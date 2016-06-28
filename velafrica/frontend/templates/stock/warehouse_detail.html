@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block breadcrumb %} 
+<li><a href="{% url 'warehouse_detail' warehouse.id %}">Warehouse</a></li>
+{% endblock %} 
+
+{% block document-head %}
+
+{% endblock %}
+
+{% block jumbotron-img %}{% endblock %}
+{% block jumbotron-title %}
+{{ warehouse.name }}
+{% endblock %}
+
+{% block jumbotron %}
+Organisation: {{ warehouse.organisation }}
+{% endblock %}
+
+{% block content %}
+
+Rides in: {{ rides_in }} <br />
+Rides out: {{ rides_out }}<br />
+Container out: {{ container_out }} <br /><br />
+
+Velos in: {{ velos_in }}<br/>
+Velos out: {{ velos_out }}<br />
+Container Velos out: {{ container_velos_out }} <br /><br/>
+
+Stock*: {{ velo_stock }}<br />
+* Velos in - Velos out - Container Velos out
+{% endblock %}
+
+{% block document-foot %}
+
+
+{% endblock %}

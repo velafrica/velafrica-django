@@ -82,6 +82,51 @@ def tracking(request, tracking_no=0):
     }, context_instance=RequestContext(request)
   )
 
+def warehouse(request, pk):
+  """
+  velo tracking
+  """
+  warehouse = Warehouse.objects.get(id=pk)
+  rides_in = 0
+  rides_out = 0
+  velos_in = 0
+  velos_out = 0
+  velo_stock = 0
+  container_out = 0
+  container_velos_out = 0
+
+  if not warehouse: 
+    messages.add_message(request, messages.ERROR, "Kein Lager mit der ID {} gefunden.".format(pk))
+  else:
+    rides_in_list = Ride.objects.filter(to_warehouse=pk)
+    rides_out_list = Ride.objects.filter(from_warehouse=pk)
+    rides_in = rides_in_list.count()
+    rides_out = rides_out_list.count()
+    for r in rides_in_list:
+      velos_in += r.velos
+    for r in rides_out_list:
+      velos_out += r.velos
+
+    containers = Container.objects.filter(organisation_from=pk)
+    container_out = containers.count()
+    for c in containers:
+      container_velos_out += c.velos
+
+    velo_stock = velos_in - velos_out - container_out
+
+
+  return render_to_response('stock/warehouse_detail.html', {
+    'warehouse': warehouse,
+    'rides_in': rides_in,
+    'rides_out': rides_out,
+    'velos_in': velos_in,
+    'velos_out': velos_out,
+    'velo_stock': velo_stock,
+    'container_out': container_out,
+    'container_velos_out': container_velos_out,
+    }, context_instance=RequestContext(request)
+  )
+
 @login_required
 def transport(request):
   """
