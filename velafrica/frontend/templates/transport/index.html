@@ -6,6 +6,7 @@
 {% endblock %} 
 
 {% block document-head %}
+<script src="/static/js/Chart.min.js"></script>
 
 {% endblock %}
 
@@ -29,14 +30,92 @@ Transport Tracking
 	</tr>
 </table>
 
-<h2>Fahrzeuge</h2>
-<ul>
-{% for c in cars %}
-<li>{{ c.name }}</li>
-{% endfor %}
-</ul>
+<h2>Charts</h2>
+
+<div class="row">
+	{% for key, val in charts.iteritems %}
+
+	<div class="col-md-3">
+	<canvas id="{{key}}" width="300" height="300"></canvas>
+	</div>
+	<div class="col-md-1">
+	</div>
+
+	{% endfor %}
+</div>
+
+<div class="row">
+
+</div>
+
 {% endblock %}
 
 {% block document-foot %}
+
+
+
+
+
+<script>
+    
+
+	$(function () {
+
+		{% for key, val in charts.iteritems %}
+			var labels = [];
+			var data = [];
+			{% for subkey, subval in val.iteritems %}
+				labels.push("{{ subkey}}");
+				data.push({{ subval }});
+			{% endfor %}
+				// Any of the following formats may be used
+	var ctx = document.getElementById("{{key}}");
+	var ctx = document.getElementById("{{key}}").getContext("2d");
+	var ctx = $("#{{key}}");
+	var myChart = new Chart(ctx, {
+	    type: 'pie',
+	    data: {
+	        labels: labels,
+	        datasets: [{
+	            label: 'Anzahl Velos',
+	            data: data,
+	            backgroundColor: [
+	            	'rgba(241,88,84,0.5)',
+		            'rgba(77, 77, 77, 0.5)',
+					'rgba(93,165,218,0.5)',
+					'rgba(250,164,	58,0.5)',
+					'rgba(96,189,	104,0.5)',
+					'rgba(241,124,	176,0.5)',
+					'rgba(178,145,	47,0.5)',
+					'rgba(178,118,	178,0.5)',
+					'rgba(222,207,63,0.5)',
+		            ],
+	            borderColor: [
+	            	'rgba(241,88,84,1)',
+	               	'rgba(77, 77, 77, 1)',
+					'rgba(93,165,218,1)',
+					'rgba(250,164,	58,1)',
+					'rgba(96,189,	104,1)',
+					'rgba(241,124,	176,1)',
+					'rgba(178,145,	47,1)',
+					'rgba(178,118,	178,1)',
+					'rgba(222,207,63,1)',
+					
+	            ],
+	            borderWidth: 1
+	        }]
+	    },
+	    options: {
+	        responsive: true,
+	        title: {
+	        	text: "Rides by {{key}}",
+	        	display: true
+	        }
+	    }
+	});
+{% endfor %}
+});
+
+</script>
 
 {% endblock %}

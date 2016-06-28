@@ -15,7 +15,7 @@ from velafrica.download.models import File
 from velafrica.organisation.models import Organisation
 from velafrica.sbbtracking.models import Tracking, TrackingEvent
 from velafrica.stock.models import Category, Product, Stock, Warehouse
-from velafrica.transport.models import Ride, Car, VeloState
+from velafrica.transport.models import Ride, Car, VeloState, Driver
 from velafrica.velafrica_sud.models import Container
 
 
@@ -112,7 +112,7 @@ def warehouse(request, pk):
     for c in containers:
       container_velos_out += c.velos_loaded
 
-    velo_stock = velos_in - velos_out - container_out
+    velo_stock = velos_in - velos_out - container_velos_out
 
 
   return render_to_response('stock/warehouse_detail.html', {
@@ -137,10 +137,36 @@ def transport(request):
   for r in rides:
       velos += r.velos
   cars = Car.objects.all()
+
+  # chart data
+
+  charts = {}
+
+  # by car
+  charts_car = {}
+  for c in cars:
+    rs = rides.filter(car=c.id)
+    charts_car[c.name] = rs.count()
+  charts['Cars'] = charts_car
+
+  # by driver
+  charts_driver = {}
+  for d in Driver.objects.all():
+    rs = rides.filter(driver=d.id)
+    charts_driver[d.name] = rs.count()
+  charts['Driver'] = charts_driver
+
+  # by spare parts / no spare parts
+  charts['Freight'] = {
+    'Spare Parts': rides.filter(spare_parts=True).count(), 
+    'Velos': rides.filter(spare_parts=False).count()
+  }
+
   return render_to_response('transport/index.html', {
     'rides': rides,
     'velos': velos,
     'cars': cars,
+    'charts': charts,
     }, context_instance=RequestContext(request)
   )
 
