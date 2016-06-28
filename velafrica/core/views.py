@@ -82,9 +82,18 @@ def tracking(request, tracking_no=0):
     }, context_instance=RequestContext(request)
   )
 
+def warehouses(request):
+  """
+  """
+  return render_to_response('stock/warehouses.html', {
+    'warehouses': Warehouse.objects.all(),
+    }, context_instance=RequestContext(request)
+  )
+
+
 def warehouse(request, pk):
   """
-  velo tracking
+  warehouse details
   """
   warehouse = Warehouse.objects.get(id=pk)
   rides_in = 0

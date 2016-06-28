@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block breadcrumb %} 
+<li><a href="{% url 'warehouses' %}">Warehouses</a></li>
+{% endblock %} 
+
+{% block document-head %}
+
+
+{% endblock %}
+
+{% block jumbotron-img %}{% endblock %}
+{% block jumbotron-title %}
+Warehouses
+{% endblock %}
+
+{% block jumbotron %}
+
+{% endblock %}
+
+{% block content %}
+
+<table class="table">
+	<thead>
+		<tr><th>Lager</th><th>Organisation</th></tr>
+	</thead>
+	<tbody>
+	{% for w in warehouses %}
+		<tr>
+			<td><a href="{% url 'warehouse_detail' w.id %}">{{w.name}}</a></td>
+			<td>{{w.organisation.name}}</td>
+		</tr>
+	{% endfor %}
+
+	</tbody>
+</table>
+
+{% endblock %}
+
+{% block document-foot %}
+
+{% endblock %}

@@ -20,6 +20,8 @@ def counter(request):
   
   statistics = Entry.get_statistics(org_id)
 
+  print "STATS: {}".format(statistics)
+
   return render_to_response('counter/index.html', {
     'org_id': statistics["org_id"],
     'organisations' : statistics["organisations"],

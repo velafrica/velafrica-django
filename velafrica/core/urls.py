@@ -37,6 +37,7 @@ urlpatterns = [
     url(r'^tracking/(?P<tracking_no>\w+)', views.tracking, name='tracking_detail'),
     url(r'^tracking', views.tracking, name='tracking'),
     url(r'^transport', views.transport, name='transport'),
+    url(r'^warehouses', views.warehouses, name='warehouses'),
     url(r'^warehouse/(?P<pk>[0-9]+)', views.warehouse, name='warehouse_detail'),
     url(r'^container', views.container, name='container'),
 

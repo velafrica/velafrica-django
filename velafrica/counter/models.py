@@ -48,10 +48,11 @@ class Entry(models.Model):
 
       # get all organisations that already have entries
       org_ids = Entry.objects.order_by().values('organisation').distinct()
-      statistics["organisations"] = Organisation.objects.filter(id__in=org_ids)
+      if org_ids:
+        statistics["organisations"] = Organisation.objects.filter(id__in=org_ids)
 
       if id > 0:
-        entries = entries.filter(organisation=org_ids)
+        entries = entries.filter(organisation=id)
 
       if (entries.count() > 0):
         now = date.today()
@@ -85,7 +86,8 @@ class Entry(models.Model):
           # get entry from yesterday
           if entry.date == (now - timedelta(days=1)):
             statistics["velos_yesterday"] += entry.amount
-        return statistics
+
+      return statistics
 
     def __unicode__(self):
         return u"{}: {}".format(self.date, self.amount)
