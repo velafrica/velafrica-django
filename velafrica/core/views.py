@@ -107,7 +107,7 @@ def warehouse(request, pk):
     for r in rides_out_list:
       velos_out += r.velos
 
-    containers = Container.objects.filter(organisation_from=pk)
+    containers = Container.objects.filter(warehouse_from=pk)
     container_out = containers.count()
     for c in containers:
       container_velos_out += c.velos_loaded

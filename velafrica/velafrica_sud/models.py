@@ -4,7 +4,7 @@ from django.db import models
 from django_resized import ResizedImageField
 from simple_history.models import HistoricalRecords
 from velafrica.organisation.models import Organisation
-from velafrica.stock.models import StockList
+from velafrica.stock.models import StockList, Warehouse
 from velafrica.core.ftp import MyFTPStorage
 fs = MyFTPStorage()
 
@@ -43,6 +43,7 @@ class Container(models.Model):
     Represents a container.
     """
     organisation_from = models.ForeignKey(Organisation, blank=True, null=True, verbose_name='Verarbeitungspartner', help_text='Ort wo der Container geladen wurde.')
+    warehouse_from = models.ForeignKey(Warehouse, blank=True, null=True, verbose_name='Export Lager', help_text='Lager wo die Velos verladen wurden')
     partner_to = models.ForeignKey('PartnerSud', blank=False, null=False, verbose_name='Destination')
 
     velos_loaded = models.IntegerField(blank=False, null=False, default=0, verbose_name='Anzahl Velos eingeladen')
