@@ -27,8 +27,20 @@ stock = [
     url(r'^warehouses/?$', views.WarehouseList.as_view(), name="warehouses"),
     url(r'^warehouses/(?P<pk>[0-9]+)/?$', views.WarehouseDetail.as_view(), name='warehouses_detail'),
 
+    url(r'^products/?$', utils.get_listview('stock', 'Product').as_view(), name="products"),
+    url(r'^products/(?P<pk>[0-9]+)/?$', utils.get_listview('stock', 'Product').as_view(), name='product'),
     url(r'^categories/?$', utils.get_listview('stock', 'Category').as_view(), name="categories"),
     url(r'^categories/(?P<pk>[0-9]+)/?$', utils.get_listview('stock', 'Category').as_view(), name='category'),
+    url(r'^stocks/?$', utils.get_listview('stock', 'Stock').as_view(), name="stocks"),
+    url(r'^stocks/(?P<pk>[0-9]+)/?$', utils.get_listview('stock', 'Stock').as_view(), name='stock'),
+    url(r'^stocklists/?$', utils.get_listview('stock', 'StockList').as_view(), name="stocklists"),
+    url(r'^stocklists/(?P<pk>[0-9]+)/?$', utils.get_listview('stock', 'StockList').as_view(), name='stocklist'),
+    url(r'^stocklistpositions/?$', utils.get_listview('stock', 'StockListPosition').as_view(), name="stocklistpositions"),
+    url(r'^stocklistposition/(?P<pk>[0-9]+)/?$', utils.get_listview('stock', 'StockListPosition').as_view(), name='stocklistposition'),
+    url(r'^stocktransfers/?$', utils.get_listview('stock', 'StockTransfer').as_view(), name="stocktransfers"),
+    url(r'^stocktransfers/(?P<pk>[0-9]+)/?$', utils.get_listview('stock', 'StockTransfer').as_view(), name='stocktransfer'),
+    url(r'^stockchanges/?$', utils.get_listview('stock', 'StockChange').as_view(), name="stockchanges"),
+    url(r'^stockchange/(?P<pk>[0-9]+)/?$', utils.get_listview('stock', 'StockChange').as_view(), name='stockchange'),
 ]
 
 transport = [
@@ -38,6 +50,8 @@ transport = [
     url(r'^velostates/(?P<pk>[0-9]+)/?$', utils.get_listview('transport', 'VeloState').as_view(), name='velostate'),
     url(r'^rides/?$', utils.get_listview('transport', 'Ride').as_view(), name="rides"),
     url(r'^rides/(?P<pk>[0-9]+)/?$', utils.get_listview('transport', 'Ride').as_view(), name='ride'),
+    url(r'^drivers/?$', utils.get_listview('transport', 'Driver').as_view(), name="drivers"),
+    url(r'^drivers/(?P<pk>[0-9]+)/?$', utils.get_listview('transport', 'Driver').as_view(), name='driver'),
 ]
 
 organisation = [
@@ -63,8 +77,8 @@ tracking = [
 
 # first attempt at generic views
 velafrica_sud = [
-    url(r'^container/?$', utils.get_listview('velafrica_sud', 'Container').as_view(), kwargs={'test':'test'}, name="containers"),
-    url(r'^container/(?P<pk>[0-9]+)/?$', utils.get_retrieveview('velafrica_sud', 'Container').as_view(), name='container'),
+    url(r'^containers/?$', utils.get_listview('velafrica_sud', 'Container').as_view(), kwargs={'test':'test'}, name="containers"),
+    url(r'^containers/(?P<pk>[0-9]+)/?$', utils.get_retrieveview('velafrica_sud', 'Container').as_view(), name='container'),
     url(r'^countries/?$', utils.get_listview('velafrica_sud', 'Country').as_view(), name='countries'),
     url(r'^countries/(?P<pk>[0-9]+)/?$', utils.get_retrieveview('velafrica_sud', 'Country').as_view(), name='country'),
     url(r'^forwarders/?$', utils.get_listview('velafrica_sud', 'Forwarder').as_view(), name="forwarders"),
@@ -83,6 +97,8 @@ urlpatterns = [
     url(r'^velafrica_sud/', include(velafrica_sud, namespace="velafrica_sud")),
     url(r'^counter/', include(counter, namespace="counter")),
     url(r'^collections/', include(collection, namespace="collections")),
+    url(r'^api-auth/', include('rest_framework.urls',
+                               namespace='rest_framework'))
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

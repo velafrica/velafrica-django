@@ -180,3 +180,10 @@ EMAIL_FROM_EMAIL = 'tracking@velafrica.ch'
 # Django Storage settings
 DEFAULT_FILE_STORAGE = 'storages.backends.ftp.FTPStorage'
 FTP_STORAGE_LOCATION = 'ftp://nto5q-partnertoo:B1XqSY78ri0Vb94_hxws-C5nm6co@partnertool.velafrica.ch:21'
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    )
+}

@@ -7,8 +7,7 @@ from rest_framework import generics, permissions
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
-from rest_framework import status
-from rest_framework import filters
+from rest_framework import status, filters, permissions
 from velafrica.organisation.models import *
 from velafrica.organisation.serializer import *
 from velafrica.sbbtracking.models import *
@@ -81,7 +80,6 @@ class VeloTypeList(generics.ListAPIView):
     """
     Get a list of all velo types.
     """
-
     queryset = VeloType.objects.all()
     serializer_class = VeloTypeSerializer
 
@@ -98,7 +96,7 @@ class TrackingList(generics.ListAPIView):
     """
     Get a list of all trackings.
     """
-
+    permission_classes = (permissions.IsAuthenticated,)
     queryset = Tracking.objects.all()
     serializer_class = TrackingSerializer
 
