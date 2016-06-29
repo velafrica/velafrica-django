@@ -242,8 +242,10 @@ class Tracking(models.Model):
         """
         # first off, set last event to be sure it is correct
         last_event = self.set_last_event()
-
-        return TrackingEventType.objects.filter(required_previous_event=last_event.event_type)
+        if last_event:
+            return TrackingEventType.objects.filter(required_previous_event=last_event.event_type)
+        else:
+            return TrackingEventType.objects.filter(required_previous_event=None)
 
     class Meta:
         ordering = ['-tracking_no']

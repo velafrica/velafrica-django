@@ -39,6 +39,7 @@ class TrackingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tracking
         fields = [ "id", "tracking_no", "number_of_velos", "note", "complete", "vpn", "container", "velo_type", "last_event", "next_tracking_eventtype_options" ]
+        read_only = ["next_tracking_eventtype_options", "last_event"]
 
 
 class TrackingDetailSerializer(serializers.ModelSerializer):

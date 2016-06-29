@@ -33,7 +33,7 @@ def get_listview_by_model(viewmodel):
 	"""
 	"""
 
-	class GenericListAPIView(generics.ListAPIView):
+	class GenericListAPIView(generics.ListCreateAPIView):
 		queryset = viewmodel.objects.all()
 		serializer_class = get_serializer_by_model(viewmodel)
 
@@ -53,7 +53,7 @@ def get_retrieveview_by_model(viewmodel):
 	"""
 	"""
 
-	class GenericRetrieveAPIView(generics.RetrieveAPIView):
+	class GenericRetrieveAPIView(generics.RetrieveUpdateAPIView):
 		queryset = viewmodel.objects.all()
 		serializer_class = get_serializer_by_model(viewmodel)
 

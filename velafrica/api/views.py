@@ -15,6 +15,9 @@ from velafrica.sbbtracking.serializer import *
 from velafrica.stock.models import *
 from velafrica.stock.serializer import *
 
+class DjangoModelPermissionsMixin(generics.GenericAPIView):
+    permission_classes = (permissions.IsAuthenticated, permissions.DjangoModelPermissions,)
+
 
 @api_view(('GET',))
 def api_root(request, format=None):
@@ -29,6 +32,8 @@ def api_root(request, format=None):
 
     Have fun!
     """
+
+    queryset = Tracking.objects.none()
 
     from velafrica.api import urls
     from django.core.urlresolvers import RegexURLPattern, RegexURLResolver
@@ -76,7 +81,7 @@ def api_root(request, format=None):
 
     return Response(response)
 
-class VeloTypeList(generics.ListAPIView):
+class VeloTypeList(DjangoModelPermissionsMixin, generics.ListCreateAPIView):
     """
     Get a list of all velo types.
     """
@@ -84,7 +89,7 @@ class VeloTypeList(generics.ListAPIView):
     serializer_class = VeloTypeSerializer
 
 
-class VeloTypeDetail(generics.RetrieveAPIView):
+class VeloTypeDetail(DjangoModelPermissionsMixin, generics.RetrieveUpdateAPIView):
     """
     Get details of a trackings.
     """
@@ -92,7 +97,7 @@ class VeloTypeDetail(generics.RetrieveAPIView):
     queryset = VeloType.objects.all()
     serializer_class = VeloTypeSerializer
 
-class TrackingList(generics.ListAPIView):
+class TrackingList(DjangoModelPermissionsMixin, generics.ListCreateAPIView):
     """
     Get a list of all trackings.
     """
@@ -101,7 +106,7 @@ class TrackingList(generics.ListAPIView):
     serializer_class = TrackingSerializer
 
 
-class TrackingDetail(generics.RetrieveAPIView):
+class TrackingDetail(DjangoModelPermissionsMixin, generics.RetrieveUpdateAPIView):
     """
     Get details of a trackings.
     """
@@ -110,7 +115,7 @@ class TrackingDetail(generics.RetrieveAPIView):
     serializer_class = TrackingDetailSerializer
 
 
-class TrackingEventList(generics.ListAPIView):
+class TrackingEventList(DjangoModelPermissionsMixin, generics.ListCreateAPIView):
     """
     Get a list of all tracking events.
     """
@@ -119,7 +124,7 @@ class TrackingEventList(generics.ListAPIView):
     serializer_class = TrackingEventSerializer
 
 
-class TrackingEventDetail(generics.RetrieveAPIView):
+class TrackingEventDetail(DjangoModelPermissionsMixin, generics.RetrieveUpdateAPIView):
     """
     Get details of a trackings.
     """
@@ -128,7 +133,7 @@ class TrackingEventDetail(generics.RetrieveAPIView):
     serializer_class = TrackingEventSerializer
 
 
-class TrackingEventTypeList(generics.ListAPIView):
+class TrackingEventTypeList(DjangoModelPermissionsMixin, generics.ListCreateAPIView):
     """
     Get a list of all trackings.
     """
@@ -137,7 +142,7 @@ class TrackingEventTypeList(generics.ListAPIView):
     serializer_class = TrackingEventTypeSerializer
 
 
-class TrackingEventTypeDetail(generics.RetrieveAPIView):
+class TrackingEventTypeDetail(DjangoModelPermissionsMixin, generics.RetrieveUpdateAPIView):
     """
     Get details of a trackings.
     """
@@ -146,7 +151,7 @@ class TrackingEventTypeDetail(generics.RetrieveAPIView):
     serializer_class = TrackingEventTypeSerializer
 
 
-class OrganisationList(generics.ListAPIView):
+class OrganisationList(DjangoModelPermissionsMixin, generics.ListCreateAPIView):
     """
     Get a list of all organisations.
     """
@@ -155,7 +160,7 @@ class OrganisationList(generics.ListAPIView):
     serializer_class = OrganisationSerializer
 
 
-class OrganisationDetail(generics.RetrieveAPIView):
+class OrganisationDetail(DjangoModelPermissionsMixin, generics.RetrieveUpdateAPIView):
     """
     Get details of an organisation.
     """
@@ -164,7 +169,7 @@ class OrganisationDetail(generics.RetrieveAPIView):
     serializer_class = OrganisationSerializer
 
 
-class WarehouseList(generics.ListAPIView):
+class WarehouseList(DjangoModelPermissionsMixin, generics.ListCreateAPIView):
     """
     Get a list of all warehouses.
     """
@@ -173,7 +178,7 @@ class WarehouseList(generics.ListAPIView):
     serializer_class = WarehouseSerializer
 
 
-class WarehouseDetail(generics.RetrieveAPIView):
+class WarehouseDetail(DjangoModelPermissionsMixin, generics.RetrieveUpdateAPIView):
     """
     Get details of an warehouse.
     """
@@ -183,7 +188,7 @@ class WarehouseDetail(generics.RetrieveAPIView):
 
 '''
 
-class LeagueList(generics.ListAPIView):
+class LeagueList(generics.ListCreateAPIView):
     queryset = League.objects.all()
     serializer_class = LeagueSerializer
     filter_backends = [filters.OrderingFilter]
@@ -192,13 +197,13 @@ class LeagueList(generics.ListAPIView):
 
 
 # League detail
-class LeagueDetail(generics.RetrieveAPIView):
+class LeagueDetail(generics.RetrieveUpdateAPIView):
 
     queryset = League.objects.all()
     serializer_class = LeagueDetailSerializer
 
 
-class ClubList(generics.ListAPIView):
+class ClubList(generics.ListCreateAPIView):
 
     queryset = Club.objects.all()
     serializer_class = ClubSerializer
@@ -207,13 +212,13 @@ class ClubList(generics.ListAPIView):
     ordering = ['name']
 
 
-class ClubDetail(generics.RetrieveAPIView):
+class ClubDetail(generics.RetrieveUpdateAPIView):
 
     queryset = Club.objects.all()
     serializer_class = ClubSerializer
 
 
-class PlayerList(generics.ListAPIView):
+class PlayerList(generics.ListCreateAPIView):
 
     queryset = Player.objects.all()
     serializer_class = PlayerSerializer
@@ -222,7 +227,7 @@ class PlayerList(generics.ListAPIView):
     ordering = ['last_name', 'first_name']
 
 
-class PlayerDetail(generics.RetrieveAPIView):
+class PlayerDetail(generics.RetrieveUpdateAPIView):
     """
     Get details about a special player.
     """
@@ -230,7 +235,7 @@ class PlayerDetail(generics.RetrieveAPIView):
     serializer_class = PlayerSerializer
 
 
-class CompetitionList(generics.ListAPIView):
+class CompetitionList(generics.ListCreateAPIView):
     """
     Get a list of all the competitions.
     """
@@ -241,7 +246,7 @@ class CompetitionList(generics.ListAPIView):
     ordering = ['name']
 
 
-class GameList(generics.ListAPIView):
+class GameList(generics.ListCreateAPIView):
     """
     Todo: document.
     """
@@ -249,7 +254,7 @@ class GameList(generics.ListAPIView):
     serializer_class = GameSerializer
 
 
-class GameDetail(generics.RetrieveAPIView):
+class GameDetail(generics.RetrieveUpdateAPIView):
     """
     Todo: document.
     """
@@ -257,7 +262,7 @@ class GameDetail(generics.RetrieveAPIView):
     serializer_class = GameDetailSerializer
 
 
-class GameParticipationList(generics.ListAPIView):
+class GameParticipationList(generics.ListCreateAPIView):
     """
     Todo: document.
     """
@@ -265,7 +270,7 @@ class GameParticipationList(generics.ListAPIView):
     serializer_class = GameParticipationSerializer
 
 
-class GameParticipationDetail(generics.RetrieveAPIView):
+class GameParticipationDetail(generics.RetrieveUpdateAPIView):
     """
     Todo: document.
     """
@@ -273,7 +278,7 @@ class GameParticipationDetail(generics.RetrieveAPIView):
     serializer_class = GameParticipationSerializer
 
 
-class TeamList(generics.ListAPIView):
+class TeamList(generics.ListCreateAPIView):
     """
     Todo: document.
     """
@@ -284,7 +289,7 @@ class TeamList(generics.ListAPIView):
     ordering = ['name']
 
 
-class TeamDetail(generics.RetrieveAPIView):
+class TeamDetail(generics.RetrieveUpdateAPIView):
     """
     Todo: document.
     """
@@ -292,7 +297,7 @@ class TeamDetail(generics.RetrieveAPIView):
     serializer_class = TeamInsightSerializer
 
 
-class GameSchedule(generics.ListAPIView):
+class GameSchedule(generics.ListCreateAPIView):
     """
     Todo: document.
     """
@@ -314,7 +319,7 @@ class GameSchedule(generics.ListAPIView):
         return obj.get_games()
 
 
-class RefereeList(generics.ListAPIView):
+class RefereeList(generics.ListCreateAPIView):
     """
     Todo: document.
     """
@@ -325,7 +330,7 @@ class RefereeList(generics.ListAPIView):
     ordering = ['name']
 
 
-class RefereeDetail(generics.RetrieveAPIView):
+class RefereeDetail(generics.RetrieveUpdateAPIView):
     """
     Todo: document.
     """
@@ -333,7 +338,7 @@ class RefereeDetail(generics.RetrieveAPIView):
     serializer_class = VenueSerializer
 
 
-class VenueList(generics.ListAPIView):
+class VenueList(generics.ListCreateAPIView):
     """
     Todo: document.
     """
@@ -344,7 +349,7 @@ class VenueList(generics.ListAPIView):
     ordering = ['name']
 
 
-class VenueDetail(generics.RetrieveAPIView):
+class VenueDetail(generics.RetrieveUpdateAPIView):
     """
     Todo: document.
     """
@@ -352,7 +357,7 @@ class VenueDetail(generics.RetrieveAPIView):
     serializer_class = VenueSerializer
 
 
-class SeasonList(generics.ListAPIView):
+class SeasonList(generics.ListCreateAPIView):
     """
     Todo: document.
     """
@@ -363,7 +368,7 @@ class SeasonList(generics.ListAPIView):
     ordering = ['name']
 
 
-class NextGameByTeamId(generics.RetrieveAPIView):
+class NextGameByTeamId(generics.RetrieveUpdateAPIView):
     """
     Todo: document.
     """
@@ -386,7 +391,7 @@ class NextGameByTeamId(generics.RetrieveAPIView):
         return obj.get_next_game()
 
 
-class LastGameByTeamId(generics.RetrieveAPIView):
+class LastGameByTeamId(generics.RetrieveUpdateAPIView):
     queryset = Team.objects.all()
     serializer_class = GameSerializer
 
