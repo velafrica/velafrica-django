@@ -22,13 +22,11 @@ class DjangoModelPermissionsMixin(generics.GenericAPIView):
 @api_view(('GET',))
 def api_root(request, format=None):
     """
-    This is the open API of Velafrica (www.velafrica.ch)
+    This is the API of Velafrica (www.velafrica.ch)
 
-    Feel free to use it as you wish, we have nothing to hide :-)
+    If you build something cool with it and want to show it to us, please do not hesitate!
 
-    If you build something cool and want to show it to us, please do not hesitate!
-
-    Send a link with description to niklai.raeber (at) velafrica.ch
+    Send a link with description to nikolai.raeber (at) velafrica.ch
 
     Have fun!
     """

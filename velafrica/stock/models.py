@@ -5,7 +5,7 @@ from django.conf import settings
 from django.db import models
 from django_resized import ResizedImageField
 from simple_history.models import HistoricalRecords
-from velafrica.organisation.models import Person, Organisation
+from velafrica.organisation.models import Person, Organisation, Municipality
 
 from velafrica.core.ftp import MyFTPStorage
 fs = MyFTPStorage()
@@ -83,6 +83,14 @@ class Warehouse(models.Model):
     stock_management = models.BooleanField(default=False, verbose_name="Automatisches Stock-Management", help_text="Gibt an ob automatisches Stock-Management aktiviert ist, d.h. ob bei Stock Verschiebungen der Stock automatisch angepasst werden soll.")
     notify_on_incoming_transport = models.TextField(null=True, blank=True, verbose_name="Über angeliferte Ersatzteile informieren", help_text="Eine Emailadressen pro Zeile. Hier eingetragene Emailadressen werden jedesmal benachrichtigt, sobald eine neue Fahrt  mit Ersatzteilen zu diesem Lager erfasst wird.")
     history = HistoricalRecords()
+
+    # address
+    municipality = models.ForeignKey(Municipality, null=True)
+    street = models.CharField(blank=True, null=True, verbose_name="Strasse", max_length=255)
+    street_no = models.CharField(blank=True, null=True, verbose_name="Strassennummer", max_length=255)
+    lng = models.DecimalField(blank=True,null=True,verbose_name="Longitude (Längengrad)", max_digits=9, decimal_places=6)
+    lat = models.DecimalField(blank=True,null=True,verbose_name="Latitude (Breitengrad)", max_digits=9, decimal_places=6)
+
     
     def __unicode__(self):
         return u"{}, {}".format(self.organisation.name, self.name)

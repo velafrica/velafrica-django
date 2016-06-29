@@ -1,3 +1,17 @@
+.glyph-ride-out, .glyph-ride-in {
+	font-size: 2em;
+}
+.glyph-ride-in {
+	color: #4cae4c;
+}
+.glyph-ride-out {
+	color: #c9302c;
+}
+.stock-image {
+	max-height: 300px;
+	max-width: 300px;
+
+}
 input#tracking_no {
 	text-transform: uppercase;
 }

@@ -19,23 +19,57 @@
 {% endblock %}
 
 {% block jumbotron %}
-Organisation: {{ warehouse.organisation }}
+Organisation: {{ warehouse.organisation }}<br/>
+{% if warehouse.municipality and warehouse.street %}
+	Adress: {{warehouse.street}} {{warehouse.street_no}}, {{warehouse.municipality.plz}} {{warehouse.municipality.name}}<br/>
+<!--
+	<iframe width="600" height="450" frameborder="0" style="border:0"
+	src="https://www.google.com/maps/embed/v1/search?q={{ warehouse.street }}+{{warehouse.street_no}},+{{warehouse.municipality.plz}}+{{warehouse.municipality.name}},+Schweiz&key=AIzaSyAzdwjRWqj_TTq-jW30NpLWK3La6_i2yRM" allowfullscreen></iframe>
+	-->
+{% endif %}<br/>
+Anzahl Velos Eingang / Ausgang, sowie Differenz (Stock).
+<canvas id="myChart" width="400" height="400"></canvas>
 {% endblock %}
 
 {% block content %}
 
-<canvas id="myChart" width="400" height="400"></canvas>
+<h2>Fahrten</h2>
 
-Rides in: {{ rides_in }} <br />
-Rides out: {{ rides_out }}<br />
-Container out: {{ container_out }} <br /><br />
+<table class="table">
+	<tr>
+		<th>In / Out</th>
+		<th>Datum</th>
+		<th>Von</th>
+		<th>Nach</th>
+		<th>Fahrer</th>
+		<th>Fahrzeug</th>
+		<th>Velos</th>
+		<th>Zustand</th>
+		<th>Spare Parts</th>
+	</tr>
 
-Velos in: {{ velos_in }}<br/>
-Velos out: {{ velos_out }}<br />
-Container Velos out: {{ container_velos_out }} <br /><br/>
+	{% for r in rides %}
+	<tr>
+		<td>
+			{% if r.from_warehouse = warehouse %}
+			<span class="glyphicon glyphicon-arrow-left glyph-ride-out"></span>
+			{% else %}
+			<span class="glyphicon glyphicon-arrow-right glyph-ride-in"></span>
+			{% endif %}
+		</td>
+		<td>{{ r.date }}</td>
+		<td>{{ r.from_warehouse }}</td>
+		<td>{{ r.to_warehouse }}</td>
+		<td>{{ r.driver }}</td>
+		<td>{{ r.car }}</td>
+		<td>{% if r.velos <= 0 %}<span class="label label-danger">{% else %}<span class="label label-success">{% endif %}{{ r.velos }}</span></td>
+		<td>{{ r.velo_state }}</td>
+		<td>{% if r.spare_parts %}<span class="glyph-ride-in glyphicon glyphicon-ok">{% else %}<span class="glyph-ride-out glyphicon glyphicon-remove">{% endif %}</td>
+	</tr>
 
-Velo Stock*: {{ velo_stock }}<br /><br/>
-* (Velo Stock = (Velos in) - (Velos out) - (Container Velos out))
+
+	{% endfor %}
+</table>
 {% endblock %}
 
 {% block document-foot %}
@@ -54,7 +88,7 @@ Velo Stock*: {{ velo_stock }}<br /><br/>
 	        labels: ["Velos angeliefert", "Velos abtransportiert", "Velos verschifft (Container)", "Stock"],
 	        datasets: [{
 	            label: 'Anzahl Velos',
-	            data: [{{ velos_in }}, {{ velos_out }}, {{container_velos_out}}, {{ velo_stock}} ],
+	            data: [{{ velos_in }}, -{{ velos_out }}, -{{container_velos_out}}, {{ velo_stock}} ],
 	            backgroundColor: [
 	                'rgba(255, 99, 132, 0.2)',
 	                'rgba(54, 162, 235, 0.2)',

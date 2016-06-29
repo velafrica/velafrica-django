@@ -16,9 +16,6 @@ Transport Tracking
 {% endblock %}
 
 {% block jumbotron %}
-{% endblock %}
-
-{% block content %}
 <table class="table">
 	<tr>
 		<th>Total Fahrten:</th>
@@ -29,9 +26,6 @@ Transport Tracking
 		<td>{{ velos }}</td>
 	</tr>
 </table>
-
-<h2>Charts</h2>
-
 <div class="row">
 	{% for key, val in charts.iteritems %}
 
@@ -44,9 +38,38 @@ Transport Tracking
 	{% endfor %}
 </div>
 
-<div class="row">
+{% endblock %}
 
-</div>
+
+{% block content %}
+<h2>Fahrten</h2>
+<table class="table">
+	<tr>
+		<th>Datum</th>
+		<th>Von</th>
+		<th>Nach</th>
+		<th>Fahrer</th>
+		<th>Fahrzeug</th>
+		<th>Velos</th>
+		<th>Zustand</th>
+		<th>Spare Parts</th>
+	</tr>
+
+	{% for r in rides %}
+	<tr>
+		<td>{{ r.date }}</td>
+		<td>{{ r.from_warehouse }}</td>
+		<td>{{ r.to_warehouse }}</td>
+		<td>{{ r.driver }}</td>
+		<td>{{ r.car }}</td>
+		<td>{% if r.velos <= 0 %}<span class="label label-danger">{% else %}<span class="label label-success">{% endif %}{{ r.velos }}</span></td>
+		<td>{{ r.velo_state }}</td>
+		<td>{% if r.spare_parts %}<span class="glyph-ride-in glyphicon glyphicon-ok">{% else %}<span class="glyph-ride-out glyphicon glyphicon-remove">{% endif %}</td>
+	</tr>
+
+
+	{% endfor %}
+</table>
 
 {% endblock %}
 

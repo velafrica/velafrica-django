@@ -6,6 +6,16 @@ from django.db import models
 from django_resized import ResizedImageField
 from simple_history.models import HistoricalRecords
 
+"""
+class Adress(models.Model):
+
+    municipality = ForeignKey(municipality)
+    street 
+    street_no
+    country
+
+"""
+
 class Canton(models.Model):
     """
     """

@@ -97,6 +97,7 @@ class CollectionEvent(models.Model):
     velo_amount = models.IntegerField(default=0, verbose_name="Anzahl gesammelte Velos")
     people_amount = models.IntegerField(default=0, verbose_name='Anzahl Helfer vor Ort')
     hours_amount = models.IntegerField(default=0, verbose_name='Geleistete Stunden', help_text="Anzahl geleistete Stunden von allen Helfern zusammen")
+    money_amount = models.IntegerField(default=0, verbose_name='Gesammeltes Geld', help_text="Betrag in CHF der am Event gesammelt wurde")
     additional_results = models.TextField(blank=True, verbose_name="weitere Resultate", help_text="Zusätzliche Resultate / Erkenntnisse")
 
     def get_status_logistics(self):

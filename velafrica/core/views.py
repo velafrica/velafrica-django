@@ -10,6 +10,7 @@ from django.template import RequestContext
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
 from django.core import serializers
+from itertools import chain
 
 from velafrica.download.models import File
 from velafrica.organisation.models import Organisation
@@ -82,6 +83,7 @@ def tracking(request, tracking_no=0):
     }, context_instance=RequestContext(request)
   )
 
+@login_required
 def warehouses(request):
   """
   """
@@ -90,7 +92,7 @@ def warehouses(request):
     }, context_instance=RequestContext(request)
   )
 
-
+@login_required
 def warehouse(request, pk):
   """
   warehouse details
@@ -103,6 +105,7 @@ def warehouse(request, pk):
   velo_stock = 0
   container_out = 0
   container_velos_out = 0
+  rides = Ride.objects.none()
 
   if not warehouse: 
     messages.add_message(request, messages.ERROR, "Kein Lager mit der ID {} gefunden.".format(pk))
@@ -123,9 +126,14 @@ def warehouse(request, pk):
 
     velo_stock = velos_in - velos_out - container_velos_out
 
+    rides = sorted(
+    chain(rides_in_list, rides_out_list),
+    key=lambda instance: instance.date)
+
 
   return render_to_response('stock/warehouse_detail.html', {
     'warehouse': warehouse,
+    'rides': rides,
     'rides_in': rides_in,
     'rides_out': rides_out,
     'velos_in': velos_in,
