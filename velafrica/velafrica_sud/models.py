@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.core.validators import RegexValidator
 from django.db import models
+from django.utils import timezone
 from django_resized import ResizedImageField
 from simple_history.models import HistoricalRecords
 from velafrica.organisation.models import Organisation
@@ -148,3 +149,108 @@ class PartnerSud(models.Model):
     class Meta:
         ordering = ['name']
         verbose_name_plural = "Partner Süd"
+
+
+class Report(models.Model):
+    """
+    """
+    creation = models.DateField(default=timezone.now,)
+    partner_sud = models.ForeignKey(PartnerSud)
+
+    # employment opportunities -> Jahrangabe?
+    employment_fulltime_men = models.IntegerField(verbose_name="Angestellte Vollzeit Männer")
+    employment_fulltime_women = models.IntegerField(verbose_name="Angestellte Vollzeit Frauen")
+    employment_parttime_men = models.IntegerField(verbose_name="Angestellte Teilzeit Männer")
+    employment_parttime_women = models.IntegerField(verbose_name="Angestellte Teilzeit Frauen")
+    employment_volunteer_men = models.IntegerField(verbose_name="Angestellte Freiwillige Männer")
+    employment_volunteer_women = models.IntegerField(verbose_name="Angestellte Freiwillige Frauen")
+    employment_internship_men = models.IntegerField(verbose_name="Angestellte Internship Männer")
+    employment_internship_women = models.IntegerField(verbose_name="Angestellte Internship Frauen")
+    employment_trainee_men = models.IntegerField(verbose_name="Angestellte Trainee Männer")
+    employment_trainee_women = models.IntegerField(verbose_name="Angestellte Trainee Frauen")
+
+    # economic data
+    economic_bicycles_amount = models.IntegerField(verbose_name="Anzahl verkaufte Fahrräder")
+    economic_bicycles_turnover = models.IntegerField(verbose_name="Umsatz Fahrräder")
+    economic_spareparts_amount = models.IntegerField(verbose_name="Anzahl verkaufte Ersatzteile")
+    economic_spareparts_turnover = models.IntegerField(verbose_name="Umsatz Ersatzteile")
+    economic_services_amount = models.IntegerField(verbose_name="Anzahl verkaufte Dienstleistungen")
+    economic_services_turnover = models.IntegerField(verbose_name="Umsatz Dienstleistungen")
+    economic_turnover_total = models.IntegerField(verbose_name="Total Umsatz")
+
+    economic_category1_name = models.CharField(verbose_name="Kategorie 1", max_length=255)
+    economic_category1_pricerange = models.CharField(verbose_name="Preisrange Kategorie 1", max_length=255)
+    economic_category2_name = models.CharField(verbose_name="Kategorie 2", max_length=255)
+    economic_category2_pricerange = models.CharField(verbose_name="Preisrange Kategorie 2", max_length=255)
+    economic_category3_name = models.CharField(verbose_name="Kategorie 3", max_length=255)
+    economic_category3_pricerange = models.CharField(verbose_name="Preisrange Kategorie 3", max_length=255)
+    economic_category4_name = models.CharField(verbose_name="Kategorie 4", max_length=255)
+    economic_category4_pricerange = models.CharField(verbose_name="Preisrange Kategorie 4", max_length=255)
+    economic_category5_name = models.CharField(verbose_name="Kategorie 5", max_length=255)
+    economic_category5_pricerange = models.CharField(verbose_name="Preisrange Kategorie 5", max_length=255)
+    economic_category6_name = models.CharField(verbose_name="Kategorie 6", max_length=255)
+    economic_category6_pricerange = models.CharField(verbose_name="Preisrange Kategorie 6", max_length=255)
+    economic_category7_name = models.CharField(verbose_name="Kategorie 7", max_length=255)
+    economic_category7_pricerange = models.CharField(verbose_name="Preisrange Kategorie 7", max_length=255)
+    economic_category8_name = models.CharField(verbose_name="Kategorie 8", max_length=255)
+    economic_category8_pricerange = models.CharField(verbose_name="Preisrange Kategorie 8", max_length=255)
+
+    PAYMENT_TYPE_CHOICES = (
+        ('cash', 'Cash Payment'),
+        ('installment', 'Installment'),
+        ('card', 'Payment with Credit/Debit Card'),
+        ('phone', 'Payment with Mobile Phone'),
+        ('microloan', 'Micro Loan (e.g. in cooperation with Micro Finance Institution)'),
+        ('other', 'Other'),
+    )
+
+    economic_payment_types = models.CharField(max_length=20, choices=PAYMENT_TYPE_CHOICES)
+
+    # vocational program and schooling
+
+    DURATION_CHOICES = (
+        ('0', 'less than 3 months'),
+        ('1', '6 - 12 months'),
+        ('2', '12 - 18 months'),
+        ('3', '18 - 24 months'),
+        ('4', 'more than 24 months'),
+    )
+
+    vocational_program_duration = models.CharField(max_length=1, choices=DURATION_CHOICES)
+    vocational_program_girls = models.IntegerField(verbose_name="Anzahl Mädchen im Ausbildungsprogramm")
+    vocational_program_boys = models.IntegerField(verbose_name="Anzahl Jungen im Ausbildungsprogramm")
+    vocational_completed_girls = models.IntegerField(verbose_name="Anzahl Mädchen Ausbildungsprogramm abgeschlossen")
+    vocational_completed_boys = models.IntegerField(verbose_name="Anzahl Jungen Ausbildungsprogramm abgeschlossen")
+    vocational_exstudents_employed = models.IntegerField(verbose_name="Studenten vom letzten Jahr die jetzt angestellt sind")
+    vocational_exstudents_selfemployed_new = models.IntegerField(verbose_name="Studenten vom letzten Jahr die jetzt bei einem anderen Betrieb angestellt sind")
+    vocational_exstudents_selfemployed_link = models.IntegerField(verbose_name="Studenten vom letzten Jahr die jetzt bei einem Partnerbetrieb angestellt sind")
+
+    # mobility program
+    mobilityprogram = models.BooleanField(default=False)
+    mobilityprogram_people_benefitted = models.IntegerField(verbose_name="Number of people that benefitted from mobility programm")
+    mobilityprogram_financial_support = models.BooleanField(default=False, verbose_name="Mobilitätsprogramm finanziell von Velafrica unterstützt?")
+
+    # community and social impact
+    communityproject_reinvest_profit = models.BooleanField(default=False, verbose_name="Gewinn vom letzten Jahr in Community Projekte investiert?")
+    
+    COMMUNITY_AREA_TYPES_CHOICES = (
+        ('0', 'Schooling / Education'),
+        ('1', 'Entrepreneuership'),
+        ('2', 'Evnironment / Environmental protection'),
+        ('3', 'Mobility'),
+        ('4', 'Women\'s empowerment'),
+        ('5', 'Children\'s empowerment'),
+        ('6', 'Sports activities'),
+        ('7', 'Other'),
+    )
+    communityproject_areas = models.CharField(max_length=1, choices=COMMUNITY_AREA_TYPES_CHOICES, verbose_name="Feld der Gemeinschaftsarbeit")
+    communityproject_reinvest_profit_total = models.IntegerField(verbose_name="In Gemeinschaftsprojekte re-investierter Betrag")
+    communityproject_people_benefitted = models.CharField(max_length=255, verbose_name="Anzahl Personen die profitiert haben vom Gemeinschaftsprojekt")
+
+    # Quality Assessment (values: 1 - 10)
+    #quality_bicycles
+    #quality_spares
+    #quality_tools
+    
+    class Meta:
+        ordering = ['-creation']

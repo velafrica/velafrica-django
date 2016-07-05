@@ -3,7 +3,7 @@ from django_object_actions import DjangoObjectActions
 from django.contrib import admin
 from simple_history.admin import SimpleHistoryAdmin
 from velafrica.sbbtracking.models import Tracking
-from velafrica.velafrica_sud.models import Country, Forwarder, PartnerSud, Container
+from velafrica.velafrica_sud.models import Country, Forwarder, PartnerSud, Container, Report
 from import_export import resources
 from import_export.admin import ImportExportMixin
 
@@ -98,8 +98,87 @@ class PartnerSudAdmin(SimpleHistoryAdmin):
             }),
     )
 
+class ReportAdmin(SimpleHistoryAdmin):
+    list_display = ['creation', 'partner_sud']
+    search_fields = ['partner_sud']
+    fieldsets = (
+        (None, {
+            'fields': ('creation', 'partner_sud')
+            }),
+        ('Employment', {
+            'fields': (
+                'employment_fulltime_men', 
+                'employment_fulltime_women', 
+                'employment_parttime_men', 
+                'employment_parttime_women', 
+                'employment_volunteer_men', 
+                'employment_volunteer_women', 
+                'employment_internship_men',
+                'employment_internship_women',
+                'employment_trainee_men',
+                'employment_trainee_women'
+                )
+            }),
+        ('Economic', {
+            'fields': (
+                'economic_bicycles_amount',
+                'economic_bicycles_turnover',
+                'economic_spareparts_amount',
+                'economic_spareparts_turnover',
+                'economic_services_amount',
+                'economic_services_turnover',
+                'economic_turnover_total',
+                'economic_category1_name',
+                'economic_category1_pricerange',
+                'economic_category2_name',
+                'economic_category2_pricerange',
+                'economic_category3_name',
+                'economic_category3_pricerange',
+                'economic_category4_name',
+                'economic_category4_pricerange',
+                'economic_category5_name',
+                'economic_category5_pricerange',
+                'economic_category6_name',
+                'economic_category6_pricerange',
+                'economic_category7_name',
+                'economic_category7_pricerange',
+                'economic_category8_name',
+                'economic_category8_pricerange',
+                'economic_payment_types',
+                )
+            }),
+        ('Vocational', {
+            'fields': (
+                'vocational_program_duration',
+                'vocational_program_girls',
+                'vocational_program_boys',
+                'vocational_completed_girls',
+                'vocational_completed_boys',
+                'vocational_exstudents_employed',
+                'vocational_exstudents_selfemployed_new',
+                'vocational_exstudents_selfemployed_link',
+                )
+            }),
+        ('Mobility', {
+            'fields': (
+                'mobilityprogram',
+                'mobilityprogram_people_benefitted',
+                'mobilityprogram_financial_support'
+                )
+            }),
+        ('Community', {
+            'fields': (
+                'communityproject_reinvest_profit',
+                'communityproject_areas',
+                'communityproject_reinvest_profit_total',
+                'communityproject_people_benefitted'
+                )
+            })
+
+    )
 
 admin.site.register(Container, ContainerAdmin)
 admin.site.register(PartnerSud, PartnerSudAdmin)
 admin.site.register(Country)
 admin.site.register(Forwarder)
+admin.site.register(Report, ReportAdmin)
