@@ -190,7 +190,7 @@ class Tracking(models.Model):
         event = TrackingEvent.objects.filter(tracking=self.id).first()
         if event:
             # check if is already set correctly to save performance
-            if event == self.event:
+            if event == self.last_event:
                 self.last_event = event
                 self.save()
             return event
