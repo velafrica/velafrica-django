@@ -58,8 +58,8 @@ Transport Tracking
 	{% for r in rides %}
 	<tr>
 		<td>{{ r.date }}</td>
-		<td>{{ r.from_warehouse }}</td>
-		<td>{{ r.to_warehouse }}</td>
+		<td><a href="{% url 'warehouse_detail' r.from_warehouse.id %}">{{ r.from_warehouse }}</a></td>
+		<td><a href="{% url 'warehouse_detail' r.to_warehouse.id %}">{{ r.to_warehouse }}</a></td>
 		<td>{{ r.driver }}</td>
 		<td>{{ r.car }}</td>
 		<td>{% if r.velos <= 0 %}<span class="label label-danger">{% else %}<span class="label label-success">{% endif %}{{ r.velos }}</span></td>
@@ -89,7 +89,7 @@ Transport Tracking
 			var data = [];
 			{% for subkey, subval in val.iteritems %}
 				labels.push("{{ subkey}}");
-				data.push({{ subval }});
+				data.push("{{ subval }}");
 			{% endfor %}
 				// Any of the following formats may be used
 	var ctx = document.getElementById("{{key}}");
@@ -131,7 +131,7 @@ Transport Tracking
 	        responsive: true,
 	        title: {
 	        	text: "Rides by {{key}}",
-	        	display: true
+	        	display: true,
 	        }
 	    }
 	});

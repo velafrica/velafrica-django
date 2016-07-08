@@ -1,14 +1,19 @@
 from dal import autocomplete
 from velafrica.stock.models import Product, Stock, StockListPosition, Warehouse
 from velafrica.collection.models import Event
+from velafrica.organisation.models import Municipality
 from django import forms
 
 
 class WarehouseForm(forms.ModelForm):
     municipality = forms.ModelChoiceField(
-        queryset=Warehouse.objects.all(),
+        queryset=Municipality.objects.all(),
         widget=autocomplete.ModelSelect2(url='warehouse-autocomplete')
     )
+
+    class Meta:
+        model = Warehouse
+        fields = ('__all__')
 
 class StockForm(forms.ModelForm):
     product = forms.ModelChoiceField(
