@@ -8,7 +8,7 @@ from django import forms
 class WarehouseForm(forms.ModelForm):
     municipality = forms.ModelChoiceField(
         queryset=Municipality.objects.all(),
-        widget=autocomplete.ModelSelect2(url='warehouse-autocomplete')
+        widget=autocomplete.ModelSelect2(url='municipality-autocomplete')
     )
 
     class Meta:
