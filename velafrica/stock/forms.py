@@ -4,6 +4,12 @@ from velafrica.collection.models import Event
 from django import forms
 
 
+class WarehouseForm(forms.ModelForm):
+    municipality = forms.ModelChoiceField(
+        queryset=Warehouse.objects.all(),
+        widget=autocomplete.ModelSelect2(url='warehouse-autocomplete')
+    )
+
 class StockForm(forms.ModelForm):
     product = forms.ModelChoiceField(
         queryset=Product.objects.all(),

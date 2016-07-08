@@ -106,6 +106,7 @@ class ReportAdmin(SimpleHistoryAdmin):
             'fields': ('creation', 'partner_sud')
             }),
         ('Employment', {
+            'classes': ('collapse', ),
             'fields': (
                 'employment_fulltime_men', 
                 'employment_fulltime_women', 
@@ -120,6 +121,7 @@ class ReportAdmin(SimpleHistoryAdmin):
                 )
             }),
         ('Economic', {
+            'classes': ('collapse', ),
             'fields': (
                 'economic_bicycles_amount',
                 'economic_bicycles_turnover',
@@ -148,6 +150,7 @@ class ReportAdmin(SimpleHistoryAdmin):
                 )
             }),
         ('Vocational', {
+            'classes': ('collapse', ),
             'fields': (
                 'vocational_program_duration',
                 'vocational_program_girls',
@@ -160,6 +163,7 @@ class ReportAdmin(SimpleHistoryAdmin):
                 )
             }),
         ('Mobility', {
+            'classes': ('collapse', ),
             'fields': (
                 'mobilityprogram',
                 'mobilityprogram_people_benefitted',
@@ -167,6 +171,7 @@ class ReportAdmin(SimpleHistoryAdmin):
                 )
             }),
         ('Community', {
+            'classes': ('collapse', ),
             'fields': (
                 'communityproject_reinvest_profit',
                 'communityproject_areas',

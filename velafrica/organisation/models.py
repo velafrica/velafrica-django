@@ -59,6 +59,7 @@ class Organisation(models.Model):
     street = models.CharField(blank=True, null=True, max_length=255, verbose_name="Strasse")
     plz = models.IntegerField(blank=True, null=True, verbose_name="PLZ")
     city = models.CharField(blank=True, null=True, max_length=255, verbose_name="Ort")
+    municipality = models.ForeignKey(Municipality, blank=True, null=True, verbose_name="Ort")
 
     website = models.URLField(blank=True, null=True, max_length=255, verbose_name="Website")
 

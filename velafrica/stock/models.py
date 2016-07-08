@@ -80,16 +80,17 @@ class Warehouse(models.Model):
     description = models.CharField(blank=True, null=True, max_length=255, verbose_name="Beschreibung", help_text="Beschreibung / Bemerkungen zum Lager")
     organisation = models.ForeignKey(Organisation, verbose_name="Organisation", help_text='Die Organisation zu welcher das Lager gehört.')
     image = ResizedImageField(storage=fs, size=[500, 500], upload_to='stock/warehouses/', blank=True, null=True, verbose_name="Bild des Lagers")
+    
+
+    # address
+    municipality = models.ForeignKey(Municipality, null=True, blank=True, verbose_name="Ort")
+    street = models.CharField(blank=True, null=True, verbose_name="Strasse", max_length=255)
+    lng = models.DecimalField(blank=True,null=True,verbose_name="Longitude (Längengrad)", max_digits=9, decimal_places=6)
+    lat = models.DecimalField(blank=True,null=True,verbose_name="Latitude (Breitengrad)", max_digits=9, decimal_places=6)
+
     stock_management = models.BooleanField(default=False, verbose_name="Automatisches Stock-Management", help_text="Gibt an ob automatisches Stock-Management aktiviert ist, d.h. ob bei Stock Verschiebungen der Stock automatisch angepasst werden soll.")
     notify_on_incoming_transport = models.TextField(null=True, blank=True, verbose_name="Über angeliferte Ersatzteile informieren", help_text="Eine Emailadressen pro Zeile. Hier eingetragene Emailadressen werden jedesmal benachrichtigt, sobald eine neue Fahrt  mit Ersatzteilen zu diesem Lager erfasst wird.")
     history = HistoricalRecords()
-
-    # address
-    municipality = models.ForeignKey(Municipality, null=True)
-    street = models.CharField(blank=True, null=True, verbose_name="Strasse", max_length=255)
-    street_no = models.CharField(blank=True, null=True, verbose_name="Strassennummer", max_length=255)
-    lng = models.DecimalField(blank=True,null=True,verbose_name="Longitude (Längengrad)", max_digits=9, decimal_places=6)
-    lat = models.DecimalField(blank=True,null=True,verbose_name="Latitude (Breitengrad)", max_digits=9, decimal_places=6)
 
     
     def __unicode__(self):

@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.utils.safestring import mark_safe
 from django.core.urlresolvers import reverse
 from velafrica.stock.models import *
-from velafrica.stock.forms import StockForm, StockListPositionForm
+from velafrica.stock.forms import StockForm, StockListPositionForm, WarehouseForm
 from velafrica.transport.models import Ride
 from velafrica.velafrica_sud.models import Container
 from import_export import resources
@@ -125,6 +125,7 @@ class StockChangeAdmin(ImportExportMixin, SimpleHistoryAdmin):
 
 
 class WarehouseAdmin(ImportExportMixin, SimpleHistoryAdmin):
+    form = WarehouseForm
     inlines = [StockInline,]
     resource_class = WarehouseResource
     list_display = ['name', 'organisation', 'description', 'stock_management']
@@ -183,12 +184,16 @@ class StockTransferInline(admin.TabularInline):
 class ContainerInline(admin.TabularInline):
     model = Container
 
-class StockListAdmin(ImportExportMixin, SimpleHistoryAdmin):
+class StockListAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
     inlines = [StockListPositionInline]
     resource_class = StockListResource
     list_display = ['id', 'ride_link', 'stocktransfer_link', 'container_link', 'description', 'last_change', 'listpositions_link']
     search_fields = ['description']
     readonly_fields = ['ride_link', 'stocktransfer_link', 'container_link']
+    change_actions = ['test']
+
+    def test(self, obj):
+        pass
 
 
     def listpositions_link(self, obj):
