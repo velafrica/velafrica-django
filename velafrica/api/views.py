@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
+import markdown
 from django.shortcuts import get_object_or_404
 from django.core.mail import send_mail
 from django.contrib.auth import get_user_model
-import markdown
 from rest_framework import generics, permissions
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -122,6 +122,8 @@ class TrackingEventList(DjangoModelPermissionsMixin, generics.ListCreateAPIView)
 
     queryset = TrackingEvent.objects.all()
     serializer_class = TrackingEventSerializer
+    filter_backends = (filters.DjangoFilterBackend, )
+    filter_fields = ['tracking']
 
 
 class TrackingEventDetail(DjangoModelPermissionsMixin, generics.RetrieveUpdateAPIView):
