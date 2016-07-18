@@ -68,6 +68,9 @@ class Container(models.Model):
     sgs_certified = models.BooleanField(default=False, verbose_name='SGS zertifiziert?')
 
     notes = models.TextField(blank=True, null=True, verbose_name="Bemerkungen zum Container")
+
+    booked = models.BooleanField(default=False, verbose_name="Container angekommen & verbucht")
+
     history = HistoricalRecords()
 
     def book(self):
@@ -86,6 +89,9 @@ class Container(models.Model):
 
         tet = TrackingEventType.objects.filter(arrival_africa=True).first()
         count_success = 0
+
+        self.booked = True
+        self.save()
 
         if not tet:
             print "No arrival_africa event type defined"
