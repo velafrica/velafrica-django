@@ -53,10 +53,10 @@ class Container(models.Model):
     spare_parts = models.BooleanField(default=False, verbose_name='Ersatzteile transportiert?')
     stocklist = models.OneToOneField(StockList, null=True, blank=True)
 
-    velos_worth = models.IntegerField(blank=False, null=False, default=0, verbose_name='Wert der Velos')   
-    spare_parts_worth = models.IntegerField(blank=False, null=False, default=0, verbose_name='Wert der Ersatzteile')
-    tools_worth = models.IntegerField(blank=False, null=False, default=0, verbose_name='Wert der Ersatzteile')
-    various_worth = models.IntegerField(blank=False, null=False, default=0, verbose_name='Wert der Ersatzteile')
+    velos_worth = models.IntegerField(blank=False, null=False, default=0, verbose_name='Wert Velos')   
+    spare_parts_worth = models.IntegerField(blank=False, null=False, default=0, verbose_name='Wert Ersatzteile')
+    tools_worth = models.IntegerField(blank=False, null=False, default=0, verbose_name='Wert Werkzeuge')
+    various_worth = models.IntegerField(blank=False, null=False, default=0, verbose_name='Wert Anderes')
     
     pickup_date = models.DateField(blank=False, null=False, verbose_name='Ladedatum')
     shipment_date = models.DateField(blank=True, null=True, verbose_name='Verschiffungsdatum ab Europa') 
