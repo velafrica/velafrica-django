@@ -98,7 +98,18 @@ class PartnerSudAdmin(SimpleHistoryAdmin):
             }),
     )
 
-class ReportAdmin(SimpleHistoryAdmin):
+
+class ReportResource(resources.ModelResource):
+    """
+    Define the Conainter resource for import / export.
+    """
+
+    class Meta:
+        model = Report
+
+
+class ReportAdmin(ImportExportMixin, SimpleHistoryAdmin):
+    resource_class = ReportResource
     list_display = ['creation', 'partner_sud']
     search_fields = ['partner_sud']
     fieldsets = (
@@ -117,7 +128,8 @@ class ReportAdmin(SimpleHistoryAdmin):
                 'employment_internship_men',
                 'employment_internship_women',
                 'employment_trainee_men',
-                'employment_trainee_women'
+                'employment_trainee_women',
+                'employment_notes'
                 )
             }),
         ('Economic', {
@@ -147,6 +159,7 @@ class ReportAdmin(SimpleHistoryAdmin):
                 'economic_category8_name',
                 'economic_category8_pricerange',
                 'economic_payment_types',
+                'economic_notes'
                 )
             }),
         ('Vocational', {
@@ -160,6 +173,7 @@ class ReportAdmin(SimpleHistoryAdmin):
                 'vocational_exstudents_employed',
                 'vocational_exstudents_selfemployed_new',
                 'vocational_exstudents_selfemployed_link',
+                'vocational_notes'
                 )
             }),
         ('Mobility', {
@@ -167,7 +181,8 @@ class ReportAdmin(SimpleHistoryAdmin):
             'fields': (
                 'mobilityprogram',
                 'mobilityprogram_people_benefitted',
-                'mobilityprogram_financial_support'
+                'mobilityprogram_financial_support',
+                'mobilityprogram_notes'
                 )
             }),
         ('Community', {
@@ -176,7 +191,8 @@ class ReportAdmin(SimpleHistoryAdmin):
                 'communityproject_reinvest_profit',
                 'communityproject_areas',
                 'communityproject_reinvest_profit_total',
-                'communityproject_people_benefitted'
+                'communityproject_people_benefitted',
+                'communityproject_notes'
                 )
             })
 

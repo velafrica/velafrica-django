@@ -158,42 +158,43 @@ class Report(models.Model):
     partner_sud = models.ForeignKey(PartnerSud)
 
     # employment opportunities -> Jahrangabe?
-    employment_fulltime_men = models.IntegerField(verbose_name="Angestellte Vollzeit Männer")
-    employment_fulltime_women = models.IntegerField(verbose_name="Angestellte Vollzeit Frauen")
-    employment_parttime_men = models.IntegerField(verbose_name="Angestellte Teilzeit Männer")
-    employment_parttime_women = models.IntegerField(verbose_name="Angestellte Teilzeit Frauen")
-    employment_volunteer_men = models.IntegerField(verbose_name="Angestellte Freiwillige Männer")
-    employment_volunteer_women = models.IntegerField(verbose_name="Angestellte Freiwillige Frauen")
-    employment_internship_men = models.IntegerField(verbose_name="Angestellte Internship Männer")
-    employment_internship_women = models.IntegerField(verbose_name="Angestellte Internship Frauen")
-    employment_trainee_men = models.IntegerField(verbose_name="Angestellte Trainee Männer")
-    employment_trainee_women = models.IntegerField(verbose_name="Angestellte Trainee Frauen")
+    employment_fulltime_men = models.IntegerField(verbose_name="Angestellte Vollzeit Männer",blank=True, null=True)
+    employment_fulltime_women = models.IntegerField(verbose_name="Angestellte Vollzeit Frauen",blank=True, null=True)
+    employment_parttime_men = models.IntegerField(verbose_name="Angestellte Teilzeit Männer",blank=True, null=True)
+    employment_parttime_women = models.IntegerField(verbose_name="Angestellte Teilzeit Frauen",blank=True, null=True)
+    employment_volunteer_men = models.IntegerField(verbose_name="Angestellte Freiwillige Männer",blank=True, null=True)
+    employment_volunteer_women = models.IntegerField(verbose_name="Angestellte Freiwillige Frauen",blank=True, null=True)
+    employment_internship_men = models.IntegerField(verbose_name="Angestellte Internship Männer",blank=True, null=True)
+    employment_internship_women = models.IntegerField(verbose_name="Angestellte Internship Frauen",blank=True, null=True)
+    employment_trainee_men = models.IntegerField(verbose_name="Angestellte Trainee Männer",blank=True, null=True)
+    employment_trainee_women = models.IntegerField(verbose_name="Angestellte Trainee Frauen",blank=True, null=True)
+    employment_notes = models.TextField(verbose_name="Bemerkungen",blank=True, null=True)
 
     # economic data
-    economic_bicycles_amount = models.IntegerField(verbose_name="Anzahl verkaufte Fahrräder")
-    economic_bicycles_turnover = models.IntegerField(verbose_name="Umsatz Fahrräder")
-    economic_spareparts_amount = models.IntegerField(verbose_name="Anzahl verkaufte Ersatzteile")
-    economic_spareparts_turnover = models.IntegerField(verbose_name="Umsatz Ersatzteile")
-    economic_services_amount = models.IntegerField(verbose_name="Anzahl verkaufte Dienstleistungen")
-    economic_services_turnover = models.IntegerField(verbose_name="Umsatz Dienstleistungen")
-    economic_turnover_total = models.IntegerField(verbose_name="Total Umsatz")
+    economic_bicycles_amount = models.IntegerField(verbose_name="Anzahl verkaufte Fahrräder",blank=True, null=True)
+    economic_bicycles_turnover = models.IntegerField(verbose_name="Umsatz Fahrräder",blank=True, null=True)
+    economic_spareparts_amount = models.IntegerField(verbose_name="Anzahl verkaufte Ersatzteile",blank=True, null=True)
+    economic_spareparts_turnover = models.IntegerField(verbose_name="Umsatz Ersatzteile",blank=True, null=True)
+    economic_services_amount = models.IntegerField(verbose_name="Anzahl verkaufte Dienstleistungen",blank=True, null=True)
+    economic_services_turnover = models.IntegerField(verbose_name="Umsatz Dienstleistungen",blank=True, null=True)
+    economic_turnover_total = models.IntegerField(verbose_name="Total Umsatz",blank=True, null=True)
 
-    economic_category1_name = models.CharField(verbose_name="Kategorie 1", max_length=255)
-    economic_category1_pricerange = models.CharField(verbose_name="Preisrange Kategorie 1", max_length=255)
-    economic_category2_name = models.CharField(verbose_name="Kategorie 2", max_length=255)
-    economic_category2_pricerange = models.CharField(verbose_name="Preisrange Kategorie 2", max_length=255)
-    economic_category3_name = models.CharField(verbose_name="Kategorie 3", max_length=255)
-    economic_category3_pricerange = models.CharField(verbose_name="Preisrange Kategorie 3", max_length=255)
-    economic_category4_name = models.CharField(verbose_name="Kategorie 4", max_length=255)
-    economic_category4_pricerange = models.CharField(verbose_name="Preisrange Kategorie 4", max_length=255)
-    economic_category5_name = models.CharField(verbose_name="Kategorie 5", max_length=255)
-    economic_category5_pricerange = models.CharField(verbose_name="Preisrange Kategorie 5", max_length=255)
-    economic_category6_name = models.CharField(verbose_name="Kategorie 6", max_length=255)
-    economic_category6_pricerange = models.CharField(verbose_name="Preisrange Kategorie 6", max_length=255)
-    economic_category7_name = models.CharField(verbose_name="Kategorie 7", max_length=255)
-    economic_category7_pricerange = models.CharField(verbose_name="Preisrange Kategorie 7", max_length=255)
-    economic_category8_name = models.CharField(verbose_name="Kategorie 8", max_length=255)
-    economic_category8_pricerange = models.CharField(verbose_name="Preisrange Kategorie 8", max_length=255)
+    economic_category1_name = models.CharField(verbose_name="Kategorie 1", max_length=255,blank=True, null=True)
+    economic_category1_pricerange = models.CharField(verbose_name="Preisrange Kategorie 1", max_length=255,blank=True, null=True)
+    economic_category2_name = models.CharField(verbose_name="Kategorie 2", max_length=255,blank=True, null=True)
+    economic_category2_pricerange = models.CharField(verbose_name="Preisrange Kategorie 2", max_length=255,blank=True, null=True)
+    economic_category3_name = models.CharField(verbose_name="Kategorie 3", max_length=255,blank=True, null=True)
+    economic_category3_pricerange = models.CharField(verbose_name="Preisrange Kategorie 3", max_length=255,blank=True, null=True)
+    economic_category4_name = models.CharField(verbose_name="Kategorie 4", max_length=255,blank=True, null=True)
+    economic_category4_pricerange = models.CharField(verbose_name="Preisrange Kategorie 4", max_length=255,blank=True, null=True)
+    economic_category5_name = models.CharField(verbose_name="Kategorie 5", max_length=255,blank=True, null=True)
+    economic_category5_pricerange = models.CharField(verbose_name="Preisrange Kategorie 5", max_length=255,blank=True, null=True)
+    economic_category6_name = models.CharField(verbose_name="Kategorie 6", max_length=255,blank=True, null=True)
+    economic_category6_pricerange = models.CharField(verbose_name="Preisrange Kategorie 6", max_length=255,blank=True, null=True)
+    economic_category7_name = models.CharField(verbose_name="Kategorie 7", max_length=255,blank=True, null=True)
+    economic_category7_pricerange = models.CharField(verbose_name="Preisrange Kategorie 7", max_length=255,blank=True, null=True)
+    economic_category8_name = models.CharField(verbose_name="Kategorie 8", max_length=255,blank=True, null=True)
+    economic_category8_pricerange = models.CharField(verbose_name="Preisrange Kategorie 8", max_length=255,blank=True, null=True)
 
     PAYMENT_TYPE_CHOICES = (
         ('cash', 'Cash Payment'),
@@ -205,6 +206,7 @@ class Report(models.Model):
     )
 
     economic_payment_types = models.CharField(max_length=20, choices=PAYMENT_TYPE_CHOICES)
+    economic_notes = models.TextField(verbose_name="Bemerkungen",blank=True, null=True)
 
     # vocational program and schooling
 
@@ -216,19 +218,21 @@ class Report(models.Model):
         ('4', 'more than 24 months'),
     )
 
-    vocational_program_duration = models.CharField(max_length=1, choices=DURATION_CHOICES)
-    vocational_program_girls = models.IntegerField(verbose_name="Anzahl Mädchen im Ausbildungsprogramm")
-    vocational_program_boys = models.IntegerField(verbose_name="Anzahl Jungen im Ausbildungsprogramm")
-    vocational_completed_girls = models.IntegerField(verbose_name="Anzahl Mädchen Ausbildungsprogramm abgeschlossen")
-    vocational_completed_boys = models.IntegerField(verbose_name="Anzahl Jungen Ausbildungsprogramm abgeschlossen")
-    vocational_exstudents_employed = models.IntegerField(verbose_name="Studenten vom letzten Jahr die jetzt angestellt sind")
-    vocational_exstudents_selfemployed_new = models.IntegerField(verbose_name="Studenten vom letzten Jahr die jetzt bei einem anderen Betrieb angestellt sind")
-    vocational_exstudents_selfemployed_link = models.IntegerField(verbose_name="Studenten vom letzten Jahr die jetzt bei einem Partnerbetrieb angestellt sind")
+    vocational_program_duration = models.CharField(max_length=1, choices=DURATION_CHOICES,blank=True, null=True)
+    vocational_program_girls = models.IntegerField(verbose_name="Anzahl Mädchen im Ausbildungsprogramm",blank=True, null=True)
+    vocational_program_boys = models.IntegerField(verbose_name="Anzahl Jungen im Ausbildungsprogramm",blank=True, null=True)
+    vocational_completed_girls = models.IntegerField(verbose_name="Anzahl Mädchen Ausbildungsprogramm abgeschlossen",blank=True, null=True)
+    vocational_completed_boys = models.IntegerField(verbose_name="Anzahl Jungen Ausbildungsprogramm abgeschlossen",blank=True, null=True)
+    vocational_exstudents_employed = models.IntegerField(verbose_name="Studenten vom letzten Jahr die jetzt angestellt sind",blank=True, null=True)
+    vocational_exstudents_selfemployed_new = models.IntegerField(verbose_name="Studenten vom letzten Jahr die jetzt bei einem anderen Betrieb angestellt sind",blank=True, null=True)
+    vocational_exstudents_selfemployed_link = models.IntegerField(verbose_name="Studenten vom letzten Jahr die jetzt bei einem Partnerbetrieb angestellt sind",blank=True, null=True)
+    vocational_notes = models.TextField(verbose_name="Bemerkungen",blank=True, null=True)
 
     # mobility program
     mobilityprogram = models.BooleanField(default=False)
-    mobilityprogram_people_benefitted = models.IntegerField(verbose_name="Number of people that benefitted from mobility programm")
+    mobilityprogram_people_benefitted = models.IntegerField(verbose_name="Number of people that benefitted from mobility programm",blank=True, null=True)
     mobilityprogram_financial_support = models.BooleanField(default=False, verbose_name="Mobilitätsprogramm finanziell von Velafrica unterstützt?")
+    mobilityprogram_notes = models.TextField(verbose_name="Bemerkungen",blank=True, null=True)
 
     # community and social impact
     communityproject_reinvest_profit = models.BooleanField(default=False, verbose_name="Gewinn vom letzten Jahr in Community Projekte investiert?")
@@ -243,9 +247,10 @@ class Report(models.Model):
         ('6', 'Sports activities'),
         ('7', 'Other'),
     )
-    communityproject_areas = models.CharField(max_length=1, choices=COMMUNITY_AREA_TYPES_CHOICES, verbose_name="Feld der Gemeinschaftsarbeit")
-    communityproject_reinvest_profit_total = models.IntegerField(verbose_name="In Gemeinschaftsprojekte re-investierter Betrag")
-    communityproject_people_benefitted = models.CharField(max_length=255, verbose_name="Anzahl Personen die profitiert haben vom Gemeinschaftsprojekt")
+    communityproject_areas = models.CharField(max_length=1, choices=COMMUNITY_AREA_TYPES_CHOICES, verbose_name="Feld der Gemeinschaftsarbeit",blank=True, null=True)
+    communityproject_reinvest_profit_total = models.IntegerField(verbose_name="In Gemeinschaftsprojekte re-investierter Betrag",blank=True, null=True)
+    communityproject_people_benefitted = models.CharField(max_length=255, verbose_name="Anzahl Personen die profitiert haben vom Gemeinschaftsprojekt",blank=True, null=True)
+    communityproject_notes = models.TextField(verbose_name="Bemerkungen",blank=True, null=True)
 
     # Quality Assessment (values: 1 - 10)
     #quality_bicycles
