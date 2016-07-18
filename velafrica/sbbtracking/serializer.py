@@ -47,6 +47,8 @@ class TrackingDetailSerializer(serializers.ModelSerializer):
     """
     velo_type = VeloTypeSerializer(many=False, read_only=True)
     last_event = TrackingEventSerializer(many=False, read_only=True)
+    next_tracking_eventtype_options = TrackingEventTypeSerializer(many=True, read_only=True)
 
     class Meta:
         model = Tracking
+        read_only = ["next_tracking_eventtype_options", "last_event"]
