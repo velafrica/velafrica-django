@@ -51,7 +51,7 @@ def send_email(sender, instance, created, **kwargs):
 		# check if partner info needs to be included and if it is available
 		if instance.event_type.show_partner_info and instance.tracking.container:
 			partner = instance.tracking.container.partner_to
-			msg_body += "\n\n{}\n{}\n".format(partner.name, partner.description)
+			msg_body += u"\n\n{}\n{}\n".format(partner.name, partner.description)
 			if partner.website:
 				msg_body += partner.website
 
