@@ -110,6 +110,25 @@ class Container(models.Model):
         else:
             return None
 
+    def container_n_of_all(self):
+
+        ct = self
+        # get oldest container by pickup date
+        first = Container.objects.all().last()
+        pos = Container.objects.filter(pickup_date__range=[first.pickup_date, ct.pickup_date]).count()
+        return pos
+    container_n_of_all.verbose_name = "Container Nummer"
+
+    def container_n_of_partner(self, partner):
+        ct = self
+        # get oldest container by pickup date
+        first = Container.objects.all().last()
+        pos = Container.objects.filter(partner_to=partner).filter(pickup_date__range=[first.pickup_date, ct.pickup_date]).count()
+        return pos
+
+    def container_n_of_year(self, year):
+        pass
+
     def __unicode__(self):
         return u"Container {} to {} ({})".format(self.container_no, self.partner_to, self.pickup_date)
 
