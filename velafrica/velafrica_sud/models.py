@@ -118,6 +118,7 @@ class Container(models.Model):
         pos = Container.objects.filter(pickup_date__range=[first.pickup_date, ct.pickup_date]).count()
         return pos
     container_n_of_all.verbose_name = "Container Nummer"
+    container_n_of_all.short_description = "#"
 
     def container_n_of_partner(self, partner):
         ct = self

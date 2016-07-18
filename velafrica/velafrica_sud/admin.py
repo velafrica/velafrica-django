@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from daterange_filter.filter import DateRangeFilter
 from django_object_actions import DjangoObjectActions
 from django.contrib import admin
 from simple_history.admin import SimpleHistoryAdmin
@@ -34,20 +35,20 @@ class ContainerResource(resources.ModelResource):
 
     class Meta:
         model = Container
-        fields = ('container_no', 'container_no', 'organisation_from', 'organisation_from__name', 'partner_to', 'partner_to__name', 'velos_loaded', 'velos_unloaded', 'spare_parts', 'logistics', 'logistics__name', 'pickup_date', 'shipment_date', 'arrival_port_date', 'arrival_partner_date', 'velos_worth', 'spare_parts_worth', 'tools_worth', 'various_worth', 'seal_no', 'sgs_certified', 'notes')
+        fields = ('container_no', 'organisation_from', 'organisation_from__name', 'partner_to', 'partner_to__name', 'velos_loaded', 'velos_unloaded', 'spare_parts', 'logistics', 'logistics__name', 'pickup_date', 'shipment_date', 'arrival_port_date', 'arrival_partner_date', 'velos_worth', 'spare_parts_worth', 'tools_worth', 'various_worth', 'seal_no', 'sgs_certified', 'notes')
 
 
 class ContainerAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
     resource_class = ContainerResource
-    list_display = ['pickup_date', 'container_no', 'container_n_of_all', 'organisation_from', 'warehouse_from', 'partner_to', 'velos_loaded', 'velos_unloaded', 'spare_parts', 'booked']
+    list_display = ['pickup_date', 'container_n_of_all', 'container_no', 'organisation_from', 'warehouse_from', 'partner_to', 'velos_loaded', 'velos_unloaded', 'spare_parts', 'booked', 'notes']
     search_fields = ['container_no', 'organisation_from__name', 'partner_to__name']
-    list_filter = ['organisation_from', 'partner_to',]
+    list_filter = ['pickup_date', ('pickup_date', DateRangeFilter), 'organisation_from', 'partner_to',]
     change_actions = ('book_container',)
     readonly_fields = ['container_n_of_all']
     inlines = [TrackingInline]
     fieldsets = (
         (None, {
-            'fields': ('container_no', 'container_n_of_all', 'warehouse_from', 'organisation_from', 'partner_to', 'velos_loaded', 'velos_unloaded', 'spare_parts', 'stocklist', 'booked')
+            'fields': ('container_n_of_all', 'container_no', 'warehouse_from', 'organisation_from', 'partner_to', 'velos_loaded', 'velos_unloaded', 'spare_parts', 'stocklist', 'booked')
             }),
         ('Transport', {
             'fields': ('logistics', 'pickup_date', 'shipment_date', 'arrival_port_date', 'arrival_partner_date')
