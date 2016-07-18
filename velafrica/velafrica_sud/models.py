@@ -3,6 +3,7 @@ from django.core.validators import RegexValidator
 from django.db import models
 from django.utils import timezone
 from django_resized import ResizedImageField
+from multiselectfield import MultiSelectField
 from simple_history.models import HistoricalRecords
 from velafrica.organisation.models import Organisation
 from velafrica.stock.models import StockList, Warehouse
@@ -211,7 +212,7 @@ class Report(models.Model):
         ('other', 'Other'),
     )
 
-    economic_payment_types = models.CharField(max_length=20, choices=PAYMENT_TYPE_CHOICES)
+    economic_payment_types = MultiSelectField(max_length=20, choices=PAYMENT_TYPE_CHOICES)
     economic_notes = models.TextField(verbose_name="Bemerkungen",blank=True, null=True)
 
     # vocational program and schooling
