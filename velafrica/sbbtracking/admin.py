@@ -112,11 +112,11 @@ class TrackingResource(resources.ModelResource):
     class Meta:
         model = Tracking
         import_id_fields = ('tracking_no',)
-        fields = ('first_name', 'last_name', 'email', 'tracking_no', 'number_of_velos', 'last_event__event_type__name', 'velo_type__name')
+        fields = ('first_name', 'last_name', 'email', 'tracking_no', 'last_event__event_type__name', 'velo_type__name')
 
 class TrackingAdmin(DjangoObjectActions, ImportExportMixin, SimpleHistoryAdmin):
     resource_class = TrackingResource
-    list_display = ('tracking_no', 'first_name', 'last_name', 'number_of_velos', 'velo_type', 'get_last_update', 'last_event', 'complete', 'container', 'note')
+    list_display = ('tracking_no', 'first_name', 'last_name', 'velo_type', 'get_last_update', 'last_event', 'complete', 'container', 'note')
     list_filter = ['last_event__event_type', 'velo_type', 'complete']
     inlines = [TrackingEventInline, AddTrackingEventInline, EmailLogInline]
     search_fields = ['tracking_no', 'first_name', 'last_name', 'email']

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # apps.py
 from django.apps import AppConfig
 

@@ -167,7 +167,7 @@ class Tracking(models.Model):
         related_name='tracking_last_event',
         on_delete=models.SET(None)
     )
-    complete = models.BooleanField(default=False, verbose_name='Tracking beendet')
+    complete = models.BooleanField(default=False, verbose_name='Abgeschlossen')
 
     history = HistoricalRecords()
 
