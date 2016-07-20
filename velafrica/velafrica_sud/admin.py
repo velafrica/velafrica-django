@@ -100,7 +100,7 @@ class PartnerSudAdmin(SimpleHistoryAdmin):
     inlines = [ContainerInline, ]
     fieldsets = (
         (None, {
-            'fields': ('name', 'description', 'website', 'image' )
+            'fields': ('name', 'description', 'website', 'image', 'contact' )
             }),
         ('Location', {
             'fields': ('street', 'zipcode', 'area', 'country', 'longitude', 'latitude')
@@ -186,6 +186,33 @@ class ReportAdmin(ImportExportMixin, SimpleHistoryAdmin):
                 'economic_notes'
                 )
             }),
+        ('Marketing Channels', {
+            'classes': ('collapse', ),
+            'fields': (
+                'marketing_customer_segments',
+                'marketing_customer_segments_other',
+                'marketing_customer_segments_top3',
+                'marketing_channels_mouth',
+                'marketing_channels_radio',
+                'marketing_channels_tv',
+                'marketing_channels_socialmedia',
+                'marketing_channels_poster',
+                'marketing_channels_flyer',
+                'marketing_channels_event_organisation',
+                'marketing_channels_event_attendance',
+                'marketing_channels_other',
+                )
+            }),
+        ('Selling Channels', {
+            'classes': ('collapse', ),
+            'fields': (
+                'marketing_sales_shop',
+                'marketing_sales_outlets',
+                'marketing_sales_retail',
+                'marketing_sales_wholesale',
+                'marketing_sales_other',
+                )
+            }),
         ('Vocational', {
             'classes': ('collapse', ),
             'fields': (
@@ -194,9 +221,15 @@ class ReportAdmin(ImportExportMixin, SimpleHistoryAdmin):
                 'vocational_program_boys',
                 'vocational_completed_girls',
                 'vocational_completed_boys',
+                'vocational_certificates',
+                'vocational_certificates_ack',
                 'vocational_exstudents_employed',
                 'vocational_exstudents_selfemployed_new',
                 'vocational_exstudents_selfemployed_link',
+                'vocational_exstudents_bicycle_industry',
+                'vocational_exstudents_agriculture',
+                'vocational_exstudents_familiybusiness',
+                'vocational_exstudents_energy',
                 'vocational_notes'
                 )
             }),
@@ -216,7 +249,25 @@ class ReportAdmin(ImportExportMixin, SimpleHistoryAdmin):
                 'communityproject_areas',
                 'communityproject_reinvest_profit_total',
                 'communityproject_people_benefitted',
+                'communityproject_manager',
                 'communityproject_notes'
+                )
+            }),
+        ('Cooperation with Velafrica', {
+            'classes': ('collapse', ),
+            'fields': (
+                'cooperation_quality_bicycles',
+                'cooperation_quality_spares',
+                'cooperation_quality_tools',
+                'cooperation_ordering_experience',
+                'cooperation_comments',
+                )
+            }),
+        ('Final comments', {
+            'classes': ('collapse', ),
+            'fields': (
+                'final_biggest_success',
+                'final_future_challenges'
                 )
             })
 

@@ -137,7 +137,7 @@ class StockList(models.Model):
     history = HistoricalRecords()
 
     def __unicode__(self):
-        return u"StockList #{} - {} (last change: {}".format(self.id, self.description, self.last_change)
+        return u"SL#{0} - {1} ({2:%d.%m.%Y}, {3}:{2:%M})".format(self.id, self.description, self.last_change, self.last_change.hour+2)
 
     def get_stocktransfer(self):
         if self.stocktransfer:

@@ -148,6 +148,7 @@ class PartnerSud(models.Model):
     description = models.TextField(blank=True, null=True)
     website = models.URLField(blank=True, null=True, max_length=255, verbose_name="Website")
     image = ResizedImageField(storage=fs, size=[800, 800], upload_to='velafrica_sud/partner/', blank=True, null=True, help_text='Foto vom Partner vor Ort.')
+    contact = models.TextField(verbose_name="Kontaktperson", help_text="Name, Email, Telefon, Skype etc", blank=True, null=True)
 
     street = models.CharField(max_length=255, blank=True, null=True)
     zipcode = models.IntegerField(blank=True, null=True)
@@ -203,6 +204,55 @@ class Report(models.Model):
     employment_notes = models.TextField(verbose_name="Bemerkungen",blank=True, null=True)
     employment_salary_calculation = models.TextField(verbose_name="Berechnung der Saläre", help_text="Wie werden die Saläre / Kompensationen berechnet?", blank=True, null=True)
 
+    # marketing
+    CUSTOMER_SEGMENT_CHOICES = (
+        ('men', 'Men'),
+        ('women', 'Women'),
+        ('children_students', 'Children/Students'),
+        ('teachers', 'Teachers'),
+        ('businessmen', 'Business Men'),
+        ('retail', 'Bicycle Retail Agents'),
+        ('wholesale', 'Bicycle Wholesale Agents'),
+        ('farmers', 'Farmers'),
+        ('safari', 'Safari companies'),
+        ('hospitals', 'Hospitals'),
+        ('other', 'other'),
+    )
+    marketing_customer_segments = models.CharField(max_length=255, choices=CUSTOMER_SEGMENT_CHOICES, blank=True, null=True, verbose_name="Kundensegmente")
+    marketing_customer_segments_other = models.CharField(max_length=255, blank=True, null=True, verbose_name="Andere", help_text="Bitte ausfüllen, wenn bei der vorherigen Frage 'others' ausgewählt wurde.")
+    marketing_customer_segments_top3 = MultiSelectField(choices=CUSTOMER_SEGMENT_CHOICES, max_choices=3, max_length=255, verbose_name="Kundensegmente Top 3", blank=True, null=True)
+
+    CHANNEL_CHOICES = (
+        ('1', 'We don\'t use it'),
+        ('2', 'rarely'),
+        ('3', 'occasionally'),
+        ('4', 'often'),
+        ('5', 'very often'),
+    )
+
+    SELLING_CHANNEL_CHOICES = (
+        ('1', 'not good'),
+        ('2', 'ok'),
+        ('3', 'successful'),
+        ('4', 'we do not use it (yet)'),
+    )
+
+    marketing_channels_mouth = models.CharField(max_length=1, choices=CHANNEL_CHOICES, blank=True, null=True)
+    marketing_channels_radio = models.CharField(max_length=1, choices=CHANNEL_CHOICES, blank=True, null=True)
+    marketing_channels_tv = models.CharField(max_length=1, choices=CHANNEL_CHOICES, blank=True, null=True)
+    marketing_channels_socialmedia = models.CharField(max_length=1, choices=CHANNEL_CHOICES, blank=True, null=True)
+    marketing_channels_poster = models.CharField(max_length=1, choices=CHANNEL_CHOICES, blank=True, null=True)
+    marketing_channels_flyer = models.CharField(max_length=1, choices=CHANNEL_CHOICES, blank=True, null=True)
+    marketing_channels_event_organisation = models.CharField(max_length=1, choices=CHANNEL_CHOICES, blank=True, null=True)
+    marketing_channels_event_attendance = models.CharField(max_length=1, choices=CHANNEL_CHOICES, blank=True, null=True)
+    marketing_channels_other = models.CharField(max_length=1, choices=CHANNEL_CHOICES, blank=True, null=True)
+
+    marketing_sales_shop = models.CharField(verbose_name="Shop", max_length=1, choices=SELLING_CHANNEL_CHOICES, blank=True, null=True)
+    marketing_sales_outlets = models.CharField(verbose_name="Outlet", max_length=1, choices=SELLING_CHANNEL_CHOICES, blank=True, null=True)
+    marketing_sales_retail = models.CharField(verbose_name="Retail", max_length=1, choices=SELLING_CHANNEL_CHOICES, blank=True, null=True)
+    marketing_sales_wholesale = models.CharField(verbose_name="Wholesale", max_length=1, choices=SELLING_CHANNEL_CHOICES, blank=True, null=True)
+    marketing_sales_other = models.CharField(verbose_name="Andere", max_length=1, choices=SELLING_CHANNEL_CHOICES, blank=True, null=True)
+
     # economic data
     economic_bicycles_amount = models.IntegerField(verbose_name="Anzahl verkaufte Fahrräder",blank=True, null=True)
     economic_bicycles_turnover = models.IntegerField(verbose_name="Umsatz Fahrräder",blank=True, null=True)
@@ -254,19 +304,27 @@ class Report(models.Model):
         ('4', 'more than 24 months'),
     )
 
-    vocational_program_duration = models.CharField(max_length=1, choices=DURATION_CHOICES,blank=True, null=True)
+    vocational_program_duration = models.CharField(verbose_name="Dauer des Beschäftigungsprogramms", max_length=1, choices=DURATION_CHOICES,blank=True, null=True)
     vocational_program_girls = models.IntegerField(verbose_name="Anzahl Mädchen im Ausbildungsprogramm",blank=True, null=True)
     vocational_program_boys = models.IntegerField(verbose_name="Anzahl Jungen im Ausbildungsprogramm",blank=True, null=True)
     vocational_completed_girls = models.IntegerField(verbose_name="Anzahl Mädchen Ausbildungsprogramm abgeschlossen",blank=True, null=True)
     vocational_completed_boys = models.IntegerField(verbose_name="Anzahl Jungen Ausbildungsprogramm abgeschlossen",blank=True, null=True)
+    vocational_certificates = models.IntegerField(verbose_name="Ausgestellte Zertifikate dieses Jahr", blank=True, null=True)
+    vocational_certificates_ack = models.IntegerField(verbose_name="Davon staatlich anerkannte Zertifikate", blank=True, null=True)
     vocational_exstudents_employed = models.IntegerField(verbose_name="Studenten vom letzten Jahr die jetzt angestellt sind",blank=True, null=True)
     vocational_exstudents_selfemployed_new = models.IntegerField(verbose_name="Studenten vom letzten Jahr die jetzt bei einem anderen Betrieb angestellt sind",blank=True, null=True)
     vocational_exstudents_selfemployed_link = models.IntegerField(verbose_name="Studenten vom letzten Jahr die jetzt bei einem Partnerbetrieb angestellt sind",blank=True, null=True)
     vocational_notes = models.TextField(verbose_name="Bemerkungen",blank=True, null=True)
+    
+
+    vocational_exstudents_bicycle_industry = models.IntegerField(verbose_name="Anzahl Ex-Studenten die jetzt im Velogewerbe arbeiten",blank=True, null=True)
+    vocational_exstudents_agriculture = models.IntegerField(verbose_name="Anzahl Ex-Studenten die jetzt in der Landwirtschaft arbeiten",blank=True, null=True)
+    vocational_exstudents_familiybusiness = models.IntegerField(verbose_name="Anzahl Ex-Studenten die jetzt im Familienbetrieb arbeiten",blank=True, null=True)
+    vocational_exstudents_energy = models.IntegerField(verbose_name="Anzahl Ex-Studenten die jetzt im Energie Sektor arbeiten",blank=True, null=True)
 
     # mobility program
     mobilityprogram = models.BooleanField(default=False)
-    mobilityprogram_people_benefitted = models.IntegerField(verbose_name="Number of people that benefitted from mobility programm",blank=True, null=True)
+    mobilityprogram_people_benefitted = models.IntegerField(verbose_name="Anzahl Personen die vom Mobilitätsprogramm profitiert haben",blank=True, null=True)
     mobilityprogram_financial_support = models.BooleanField(default=False, verbose_name="Mobilitätsprogramm finanziell von Velafrica unterstützt?")
     mobilityprogram_notes = models.TextField(verbose_name="Bemerkungen",blank=True, null=True)
 
@@ -283,15 +341,37 @@ class Report(models.Model):
         ('6', 'Sports activities'),
         ('7', 'Other'),
     )
-    communityproject_areas = models.CharField(max_length=1, choices=COMMUNITY_AREA_TYPES_CHOICES, verbose_name="Feld der Gemeinschaftsarbeit",blank=True, null=True)
-    communityproject_reinvest_profit_total = models.IntegerField(verbose_name="In Gemeinschaftsprojekte re-investierter Betrag",blank=True, null=True)
-    communityproject_people_benefitted = models.CharField(max_length=255, verbose_name="Anzahl Personen die profitiert haben vom Gemeinschaftsprojekt",blank=True, null=True)
+    communityproject_areas = models.CharField(max_length=1, choices=COMMUNITY_AREA_TYPES_CHOICES, verbose_name="Feld der Community Arbeit",blank=True, null=True)
+    communityproject_reinvest_profit_total = models.IntegerField(verbose_name="In Community Projekt re-investierter Betrag",blank=True, null=True)
+    communityproject_people_benefitted = models.CharField(max_length=255, verbose_name="Anzahl Personen die vom Community Projekt profitiert haben",blank=True, null=True)
+    communityproject_manager = models.BooleanField(default=False, verbose_name="Community Manager vorhanden?")
     communityproject_notes = models.TextField(verbose_name="Bemerkungen",blank=True, null=True)
 
     # Quality Assessment (values: 1 - 10)
     #quality_bicycles
     #quality_spares
     #quality_tools
+    QUALITY_CHOICES = (
+        ('1', '1'),
+        ('2', '2'),
+        ('3', '3'),
+        ('4', '4'),
+        ('5', '5'),
+        ('6', '6'),
+        ('7', '7'),
+        ('8', '8'),
+        ('9', '9'),
+        ('10', '10'),
+    )
+    cooperation_quality_bicycles = models.CharField(verbose_name="Qualität der gelieferten Velos", max_length=2, choices=QUALITY_CHOICES, blank=True, null=True)
+    cooperation_quality_spares = models.CharField(verbose_name="Qualität der gelieferten Ersatzteile", max_length=2, choices=QUALITY_CHOICES, blank=True, null=True)
+    cooperation_quality_tools = models.CharField(verbose_name="Qualität der gelieferten Werkzeuge", max_length=2, choices=QUALITY_CHOICES, blank=True, null=True)
+    cooperation_ordering_experience = models.TextField(verbose_name="Bestellerlebnis", help_text="Wie wird das Bestellen der Fahrräder und Ersatzteile empfunden?", blank=True, null=True)
+    cooperation_comments = models.TextField(verbose_name="Allgemeine Kommentare zur Partnerschaft", blank=True, null=True)
+
+    # final comments
+    final_biggest_success = models.TextField(blank=True, null=True, verbose_name="Grösste Erfolge dieses Jahres?")
+    final_future_challenges = models.TextField(blank=True, null=True, verbose_name="Grösste Herausforderungen der Zukunft?")
 
     history = HistoricalRecords()
     
