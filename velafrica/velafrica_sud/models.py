@@ -70,7 +70,7 @@ class Container(models.Model):
 
     notes = models.TextField(blank=True, null=True, verbose_name="Bemerkungen zum Container")
 
-    booked = models.BooleanField(default=False, verbose_name="Container angekommen & verbucht")
+    booked = models.BooleanField(default=False, verbose_name="Abgeschlossen")
 
     history = HistoricalRecords()
 
@@ -131,7 +131,10 @@ class Container(models.Model):
         pass
 
     def __unicode__(self):
-        return u"Container {} to {} ({})".format(self.container_no, self.partner_to, self.pickup_date)
+        if self.container_no:
+            return u"{} - {} ({})".format(self.container_no, self.partner_to, self.pickup_date)
+        else:
+            return u"{} ({})".format(self.partner_to, self.pickup_date)
 
     class Meta:
         ordering = ['-pickup_date']
@@ -156,6 +159,8 @@ class PartnerSud(models.Model):
     org_type = models.CharField(max_length=255, blank=True, null=True)
     legalform = models.CharField(max_length=255, blank=True, null=True, verbose_name="Organisationsform")
     partner_since = models.IntegerField(blank=True, null=True, verbose_name="Partner seit...", help_text="Jahr")
+    vocational_training = models.BooleanField(default=False, verbose_name="Bietet Berufsbildung an")
+    infrastructure = models.TextField(verbose_name="Infrastruktur", help_text="Übersicht über die Infrastruktur vor Ort (Anzahl Arbeitsplätze, Lagermöglichkeiten, Art der Gebäude etc)", blank=True, null=True)
 
     history = HistoricalRecords()
 
@@ -196,6 +201,7 @@ class Report(models.Model):
     employment_trainee_men = models.IntegerField(verbose_name="Angestellte Trainee Männer",blank=True, null=True)
     employment_trainee_women = models.IntegerField(verbose_name="Angestellte Trainee Frauen",blank=True, null=True)
     employment_notes = models.TextField(verbose_name="Bemerkungen",blank=True, null=True)
+    employment_salary_calculation = models.TextField(verbose_name="Berechnung der Saläre", help_text="Wie werden die Saläre / Kompensationen berechnet?", blank=True, null=True)
 
     # economic data
     economic_bicycles_amount = models.IntegerField(verbose_name="Anzahl verkaufte Fahrräder",blank=True, null=True)
@@ -205,6 +211,9 @@ class Report(models.Model):
     economic_services_amount = models.IntegerField(verbose_name="Anzahl verkaufte Dienstleistungen",blank=True, null=True)
     economic_services_turnover = models.IntegerField(verbose_name="Umsatz Dienstleistungen",blank=True, null=True)
     economic_turnover_total = models.IntegerField(verbose_name="Total Umsatz",blank=True, null=True)
+
+    economic_import_taxes = models.IntegerField(verbose_name="Aktuelle Importzölle für gebrauchte Fahrräder", blank=True,null=True)
+    economic_transport_costs_port_to_organisation = models.IntegerField(verbose_name="Aktuelle Kosten für Transport von Eingangshafen zur Organisation", blank=True, null=True)
 
     economic_category1_name = models.CharField(verbose_name="Kategorie 1", max_length=255,blank=True, null=True)
     economic_category1_pricerange = models.CharField(verbose_name="Preisrange Kategorie 1", max_length=255,blank=True, null=True)
@@ -283,6 +292,33 @@ class Report(models.Model):
     #quality_bicycles
     #quality_spares
     #quality_tools
+
+    history = HistoricalRecords()
     
     class Meta:
         ordering = ['-creation']
+
+
+    def __unicode__(self):
+        return u"{}, Report vom {}".format(self.partner_sud, self.creation)
+
+
+class Role(models.Model):
+    """
+    """
+    name = models.CharField(verbose_name="Name", max_length=255)
+
+    def __unicode__(self):
+        return self.name
+
+class Staff(models.Model):
+    """
+    """
+    role = models.ForeignKey(Role,verbose_name="Rolle")
+    salary = models.IntegerField(verbose_name="Salär (USD)")
+    number = models.IntegerField(verbose_name="Anzahl Angestellte")
+    report = models.ForeignKey(Report, verbose_name="Report")
+    history = HistoricalRecords()
+
+    def __unicode__(self):
+        return u"{}".format()

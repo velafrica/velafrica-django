@@ -1,0 +1,1 @@
+default_app_config = 'velafrica.velafrica_sud.apps.MyAppConfig'

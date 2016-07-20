@@ -4,9 +4,18 @@ from django_object_actions import DjangoObjectActions
 from django.contrib import admin
 from simple_history.admin import SimpleHistoryAdmin
 from velafrica.sbbtracking.models import Tracking
-from velafrica.velafrica_sud.models import Country, Forwarder, PartnerSud, Container, Report
+from velafrica.velafrica_sud.models import Country, Forwarder, PartnerSud, Container, Report, Staff, Role
 from import_export import resources
 from import_export.admin import ImportExportMixin
+
+class ReportInline(admin.TabularInline):
+    """
+    """
+    model = Report
+    extra = 0
+    fields = ['creation']
+    readonly_fields = ['creation']
+
 
 class TrackingInline(admin.TabularInline):
     """
@@ -81,13 +90,14 @@ class ContainerAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin)
 
 class ContainerInline(admin.TabularInline):
     model = Container
-    fields = ('pickup_date', 'container_no', 'organisation_from', 'velos_loaded', 'velos_unloaded')
+    fields = ('pickup_date', 'container_no', 'organisation_from', 'velos_loaded', 'velos_unloaded', 'booked')
     extra = 0
+    readonly_fields = ['booked']
 
 class PartnerSudAdmin(SimpleHistoryAdmin):
     list_display = ['name', 'country', 'website', 'get_container_count', 'get_bicycle_count']
     search_fields = ['name', 'country__name']
-    inlines = [ContainerInline]
+    inlines = [ContainerInline, ]
     fieldsets = (
         (None, {
             'fields': ('name', 'description', 'website', 'image' )
@@ -96,9 +106,16 @@ class PartnerSudAdmin(SimpleHistoryAdmin):
             'fields': ('street', 'zipcode', 'area', 'country', 'longitude', 'latitude')
             }),
         ('Organisation', {
-            'fields': ('legalform', 'org_type', 'partner_since', )
+            'fields': ('legalform', 'org_type', 'partner_since', 'vocational_training', 'infrastructure' )
             }),
     )
+
+
+class StaffInline(admin.TabularInline):
+    """
+    """
+    model = Staff
+    extra = 0
 
 
 class ReportResource(resources.ModelResource):
@@ -114,6 +131,8 @@ class ReportAdmin(ImportExportMixin, SimpleHistoryAdmin):
     resource_class = ReportResource
     list_display = ['creation', 'partner_sud']
     search_fields = ['partner_sud']
+    list_filter = ['partner_sud', 'creation']
+    inlines = [StaffInline]
     fieldsets = (
         (None, {
             'fields': ('creation', 'partner_sud')
@@ -121,6 +140,7 @@ class ReportAdmin(ImportExportMixin, SimpleHistoryAdmin):
         ('Employment', {
             'classes': ('collapse', ),
             'fields': (
+                'employment_salary_calculation',
                 'employment_fulltime_men', 
                 'employment_fulltime_women', 
                 'employment_parttime_men', 
@@ -131,7 +151,7 @@ class ReportAdmin(ImportExportMixin, SimpleHistoryAdmin):
                 'employment_internship_women',
                 'employment_trainee_men',
                 'employment_trainee_women',
-                'employment_notes'
+                'employment_notes',
                 )
             }),
         ('Economic', {
@@ -144,6 +164,8 @@ class ReportAdmin(ImportExportMixin, SimpleHistoryAdmin):
                 'economic_services_amount',
                 'economic_services_turnover',
                 'economic_turnover_total',
+                'economic_import_taxes',
+                'economic_transport_costs_port_to_organisation',
                 'economic_category1_name',
                 'economic_category1_pricerange',
                 'economic_category2_name',
@@ -204,4 +226,5 @@ admin.site.register(Container, ContainerAdmin)
 admin.site.register(PartnerSud, PartnerSudAdmin)
 admin.site.register(Country)
 admin.site.register(Forwarder)
+admin.site.register(Role)
 admin.site.register(Report, ReportAdmin)
