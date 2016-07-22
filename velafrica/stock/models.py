@@ -126,6 +126,7 @@ class Stock(models.Model):
 
 class StockList(models.Model):
     """
+    TODO: remove
     A StockList is an universal object that can be used in various contexts,
     like as a payload inventory of a container or a transport, or as an inventory
     of an internal stock transfer.
@@ -165,6 +166,7 @@ class StockList(models.Model):
 
 class StockListPosition(models.Model):
     """
+    TODO: remove
     One position in a StockList.
     """
     stocklist = models.ForeignKey('StockList', verbose_name='StockList')
@@ -179,6 +181,18 @@ class StockListPosition(models.Model):
         return u"StockList #{}: {}x {} ".format(self.stocklist.id, self.amount, self.product)
 
 
+class StockListPos(models.Model):
+    """
+    Abstract BaseClass for all stock list position models.
+    """
+    product = models.ForeignKey(Product)
+    amount = models.IntegerField(blank=False, null=False, verbose_name="Stückzahl", default=0)
+    history = HistoricalRecords()
+
+    class Meta:
+        abstract = True
+
+
 class StockChange(models.Model):
     """
     StockChange objects are used to keep track of all the stock changes per warehouse.
@@ -186,7 +200,8 @@ class StockChange(models.Model):
     On pre_save, the application checks on the warehouse if stock is managed automatically.
     If so, the stock for all the objects in the StockList will be adjusted depending on the stock change type.
     On pre_delete, the application undoes the stock changes and then deletes the StocChange object.
-
+    
+    TODO: change usage, implement book()
     """
     STOCK_CHANGE_TYPES = {
         ('in', 'in'),
@@ -197,9 +212,13 @@ class StockChange(models.Model):
     warehouse = models.ForeignKey(Warehouse)
     stocklist = models.ForeignKey(StockList)
     stock_change_type = models.CharField(choices=STOCK_CHANGE_TYPES, max_length=255)
+    booked = models.BooleanField(default=False)
 
     def __unicode__(self):
         return u"StockChange {}, {} {}".format(self.datetime, self.stock_change_type, self.warehouse)
+
+class StockChangeListPos(StockListPos):
+    stockchange = models.ForeignKey(StockChange)
 
 
 class StockTransfer(models.Model):
@@ -311,3 +330,121 @@ class StockTransfer(models.Model):
 
     class Meta:
         ordering = ['-date']
+
+
+class StockTransferListPos(StockListPos):
+    stocktransfer = models.ForeignKey(StockTransfer)
+
+    class Meta:
+        unique_together = (("stocktransfer", "product"),)
+
+class Invoice(models.Model):
+    """
+    """
+    from_org = models.ForeignKey(Organisation, related_name='invoice_from')
+    to_org = models.ForeignKey(Organisation, related_name='invoice_to')
+    comments = models.TextField(blank=True, null=True, verbose_name="Kommentare")
+    purchaseorder = models.ForeignKey('PurchaseOrder', blank=True, null=True)
+    salesorder = models.ForeignKey('SalesOrder', blank=True, null=True)
+    history = HistoricalRecords()
+
+
+class InvoiceListPos(StockListPos):
+    """
+    """
+    invoice = models.ForeignKey(Invoice)
+
+    class Meta:
+        unique_together = (("invoice", "product"),)
+
+
+class PurchaseOrder(StockListPos):
+    """
+    PurchaseOrders represent orders from the issueing organisation to another (procurement).
+    TODO:
+    - states
+    - methods:
+        - create invoice
+        - create procurement (stock in)
+        - mark as paid
+    """
+    to = models.ForeignKey(Organisation)
+    comments = models.TextField(blank=True, null=True, verbose_name="Kommentare")
+    history = HistoricalRecords()
+
+    # ride = models.ForeignKey(Ride, blank=True, null=True)
+    
+
+class PurchaseOrderListPos(StockListPos):
+    """
+    """
+    purchaseorder = models.ForeignKey(PurchaseOrder)
+
+    def __unicode__(self):
+        return u"PurchaseOrder #{}: {}x {} ".format(self.purchoseorder.id, self.amount, self.product)
+        
+    class Meta:
+        unique_together = (("purchaseorder", "product"),)
+
+
+class SalesOrder(models.Model):
+    """
+    SalesOrders represent offers from the issueing organisation to another (sales).
+    TODO:
+    - states
+    - methods:
+        - create picking list
+        - create invoice
+        - create picking (stock out)
+        - create payment (partial?)
+    """
+    to = models.ForeignKey(Organisation)
+    comments = models.TextField(blank=True, null=True, verbose_name="Kommentare")
+    history = HistoricalRecords()
+
+    # container = models.ForeignKey(Container)
+
+class SalesOrderListPos(StockListPos):
+    """
+    """
+    salesorder = models.ForeignKey(SalesOrder)
+
+    def __unicode__(self):
+        return u"PurchaseOrder #{}: {}x {} ".format(self.purchoseorder.id, self.amount, self.product)
+        
+    class Meta:
+        unique_together = (("salesorder", "product"),)
+
+
+class PartnerSud(models.Model):
+    """
+    Represents a partner of the Velafrica Sud Network.
+    """
+    organisation = models.ForeignKey(Organisation)
+    image = ResizedImageField(storage=fs, size=[800, 800], upload_to='velafrica_sud/partner/', blank=True, null=True, help_text='Foto vom Partner vor Ort.')
+
+    org_form = models.CharField(max_length=255, blank=True, null=True)
+    legalform = models.CharField(max_length=255, blank=True, null=True, verbose_name="Organisationsform")
+    partner_since = models.IntegerField(blank=True, null=True, verbose_name="Partner seit...", help_text="Jahr")
+    vocational_training = models.BooleanField(default=False, verbose_name="Bietet Berufsbildung an")
+    infrastructure = models.TextField(verbose_name="Infrastruktur", help_text="Übersicht über die Infrastruktur vor Ort (Anzahl Arbeitsplätze, Lagermöglichkeiten, Art der Gebäude etc)", blank=True, null=True)
+
+    history = HistoricalRecords()
+
+    def get_container_count(self):
+        return Container.objects.filter(partner_to=self).count()
+    get_container_count.short_description = 'Anzahl exp. Container'
+
+    def get_bicycle_count(self):
+        count = 0
+        for c in Container.objects.filter(partner_to=self):
+            count += c.velos_loaded
+        return count
+    get_bicycle_count.short_description = 'Anzahl exp. Velos'
+
+    def __unicode__(self):
+        return u"{}, {}".format(self.organisation.name, self.organisation.address.country)
+
+    class Meta:
+        ordering = ['organisation__name']
+        verbose_name_plural = "Partner Süd"

@@ -43,25 +43,64 @@ class Municipality(models.Model):
         verbose_name_plural = "Municipalities"
 
 
+class Country(models.Model):
+    """
+    Represents a country of the world.
+    """
+    name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Name des Landes")
+    code = models.CharField(blank=False, null=False, max_length=255, verbose_name="Ländercode (ISO 3166-1 alpha-2)")
+
+    def __unicode__(self):
+        return u"{}".format(self.name)
+
+    class Meta:
+        ordering = ['-name']
+        verbose_name_plural = "Countries"
+
+
+class Address(models.Model):
+    """
+    Represents the address of an organisation / partner / warehouse.
+    """
+    street = models.CharField(blank=True, null=True, max_length=255, verbose_name="Strasse und Hausnummer")
+    zipcode = models.IntegerField(blank=True, null=True, verbose_name="Zipcode / PLZ")
+    city = models.CharField(blank=False, null=False, max_length=255, verbose_name="Ort")
+    state = models.CharField(blank=True, null=True, max_length=255, verbose_name="Kanton / Region")
+    country = models.ForeignKey(Country, verbose_name="Land")
+
+    latitude = models.DecimalField(blank=True, null=True, verbose_name='Breitengrad', max_digits=9, decimal_places=6)
+    longitude = models.DecimalField(blank=True, null=True, verbose_name='Längengrad', max_digits=9, decimal_places=6)
+
+    def __unicode__(self):
+        return u"{}, {} {}, {}".format(self.street, self.zipcode, self.city, self.country)
+
 class Organisation(models.Model):
     """
     Represents a network partner.
     TODO:
-    - name
-    - Adresse
-    - Kontaktperson (Vorname / Nachname)
-    - Tel
-    - Email
-    - Bemerkungen
-    - Website
+    - differentiate between org types (string rep, admin)
     """
+
+    # general information
     name = models.CharField(blank=False, null=True, max_length=255, verbose_name="Name der Organisation")
-    street = models.CharField(blank=True, null=True, max_length=255, verbose_name="Strasse")
+    website = models.URLField(blank=True, null=True, max_length=255, verbose_name="Website")
+    description = models.TextField(blank=True, null=True)
+    contact = models.TextField(verbose_name="Kontaktperson", help_text="Name, Email, Telefon, Skype etc", blank=True, null=True)
+
+    ORG_TYPE_CHOICES = {
+        ('vpn', 'Velorecyclingnetz Schweiz'),
+        ('africa', 'Partner Velafrica Süd (Afrika)'),
+        ('other', 'Andere')
+    }
+    org_type = models.CharField(choices=ORG_TYPE_CHOICES, max_length=20, blank=False, null=False, default='other', verbose_name="Organisations Typ")
+    
+    # address
+    address = models.ForeignKey(Address, verbose_name="Adresse", blank=True, null=True)
+
+    # TODO: following fields will be removed in the future
+    street = models.CharField(blank=True, null=True, max_length=255, verbose_name="Strasse") 
     plz = models.IntegerField(blank=True, null=True, verbose_name="PLZ")
     city = models.CharField(blank=True, null=True, max_length=255, verbose_name="Ort")
-    municipality = models.ForeignKey(Municipality, blank=True, null=True, verbose_name="Ort")
-
-    website = models.URLField(blank=True, null=True, max_length=255, verbose_name="Website")
 
     history = HistoricalRecords()
 
@@ -70,6 +109,8 @@ class Organisation(models.Model):
 
     class Meta:
         ordering = ['name']
+
+
 
 
 class Person(models.Model):

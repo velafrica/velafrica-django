@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
+from django import template
 from django_object_actions import DjangoObjectActions
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 from django.core.urlresolvers import reverse
+from django.shortcuts import render_to_response
 from velafrica.stock.models import *
-from velafrica.stock.forms import StockForm, StockListPositionForm, WarehouseForm
+from velafrica.stock.forms import StockForm, StockListPositionForm, WarehouseForm, StockListPosForm
 from velafrica.transport.models import Ride
 from velafrica.velafrica_sud.models import Container
 from import_export import resources
@@ -148,6 +150,28 @@ class StockListPositionResource(resources.ModelResource):
     class Meta:
         model = StockListPosition
 
+class AdvancedStockListPositionResource(resources.ModelResource):
+    """
+    """
+
+    def __init__(self, stocklist=None):
+        if type(stocklist) == int:
+            try:
+                sl = StockList.objects.get(id=stocklist)
+                self.stocklist = sl
+            except e:
+                print e
+
+    def before_import_row(row, **kwargs):
+        print row
+
+    class Meta:
+        model = StockListPosition
+
+class AdvancedStockListPositionAdmin(ImportExportMixin):
+    model = StockListPosition
+    resource_class = AdvancedStockListPositionResource
+
 
 class StockListPositionAdmin(ImportExportMixin, SimpleHistoryAdmin):
     form = StockListPositionForm
@@ -178,6 +202,10 @@ class StockListInline(admin.TabularInline):
 class RideInline(admin.TabularInline):
     model = Ride
 
+class StockTransferListPosInline(admin.TabularInline):
+    model = StockTransferListPos
+    form = StockListPosForm
+
 class StockTransferInline(admin.TabularInline):
     model = StockTransfer
 
@@ -190,11 +218,6 @@ class StockListAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin)
     list_display = ['id', 'ride_link', 'stocktransfer_link', 'container_link', 'description', 'last_change', 'listpositions_link']
     search_fields = ['description']
     readonly_fields = ['ride_link', 'stocktransfer_link', 'container_link']
-    change_actions = ['test']
-
-    def test(self, obj):
-        pass
-
 
     def listpositions_link(self, obj):
         if obj.stocklistposition_set.first():
@@ -242,7 +265,7 @@ class StockTransferResource(resources.ModelResource):
 
 
 class StockTransferAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
-    inlines = [StockChangeInline]
+    inlines = [StockChangeInline, StockTransferListPosInline]
     resource_class = StockTransferResource
     list_display = ['id', 'date', 'warehouse_from', 'warehouse_to', 'stocklist', 'booked', 'note']
     list_filter = ['date', 'warehouse_from', 'warehouse_to', 'booked']
