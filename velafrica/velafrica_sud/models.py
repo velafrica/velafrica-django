@@ -144,19 +144,24 @@ class PartnerSud(models.Model):
     """
     Represents a partner of the Velafrica Sud Network.
     """
-    name = models.CharField(blank=False, null=True, max_length=255, verbose_name="Name der Organisation")
-    description = models.TextField(blank=True, null=True)
-    contact = models.TextField(verbose_name="Kontaktperson", help_text="Name, Email, Telefon, Skype etc", blank=True, null=True)
-    website = models.URLField(blank=True, null=True, max_length=255, verbose_name="Website")
+    organisation = models.OneToOneField(Organisation, blank=True, null=True, related_name="partnersud")
+    
+    name = models.CharField(blank=False, null=True, max_length=255, verbose_name="Name der Organisation", help_text="WARNING: Will be removed soon")
+    description = models.TextField(blank=True, null=True, help_text="WARNING: Will be removed soon")
+    contact = models.TextField(verbose_name="Kontaktperson", blank=True, null=True, help_text="WARNING: Will be removed soon")
+    website = models.URLField(blank=True, null=True, max_length=255, verbose_name="Website", help_text="WARNING: Will be removed soon")
+
+
     image = ResizedImageField(storage=fs, size=[800, 800], upload_to='velafrica_sud/partner/', blank=True, null=True, help_text='Foto vom Partner vor Ort.')
 
-    street = models.CharField(max_length=255, blank=True, null=True)
-    zipcode = models.IntegerField(blank=True, null=True)
-    area = models.CharField(max_length=255, blank=True, null=True)
-    country = models.ForeignKey(Country, verbose_name='Land')
-    latitude = models.DecimalField(blank=True, null=True, verbose_name='Breitengrad', max_digits=9, decimal_places=6)
-    longitude = models.DecimalField(blank=True, null=True, verbose_name='Längengrad', max_digits=9, decimal_places=6)
+    street = models.CharField(max_length=255, blank=True, null=True, help_text="WARNING: Will be removed soon")
+    zipcode = models.IntegerField(blank=True, null=True, help_text="WARNING: Will be removed soon")
+    area = models.CharField(max_length=255, blank=True, null=True, help_text="WARNING: Will be removed soon")
+    country = models.ForeignKey(Country, verbose_name='Land', help_text="WARNING: Will be removed soon")
+    latitude = models.DecimalField(blank=True, null=True, verbose_name='Breitengrad', max_digits=9, decimal_places=6, help_text="WARNING: Will be removed soon")
+    longitude = models.DecimalField(blank=True, null=True, verbose_name='Längengrad', max_digits=9, decimal_places=6, help_text="WARNING: Will be removed soon")
 
+    # partner sud info
     org_type = models.CharField(max_length=255, blank=True, null=True)
     legalform = models.CharField(max_length=255, blank=True, null=True, verbose_name="Organisationsform")
     partner_since = models.IntegerField(blank=True, null=True, verbose_name="Partner seit...", help_text="Jahr")

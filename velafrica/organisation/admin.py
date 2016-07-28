@@ -7,7 +7,10 @@ from import_export.admin import ImportExportMixin
 from simple_history.admin import SimpleHistoryAdmin
 from import_export.fields import Field
 from import_export.widgets import ForeignKeyWidget
+from velafrica.velafrica_sud.models import PartnerSud
 
+class PartnerSudInline(admin.StackedInline):
+    model = PartnerSud
 
 class PersonAdmin(SimpleHistoryAdmin):
     """
@@ -29,8 +32,9 @@ class OrganisationResource(resources.ModelResource):
 class OrganisationAdmin(ImportExportMixin, SimpleHistoryAdmin):
     resource_class = OrganisationResource
     # inlines = [WarehouseInline,]
-    list_display = ('name', 'street', 'plz', 'city', 'website')
+    list_display = ['name', 'street', 'plz', 'city', 'website', 'has_partnersud']
     search_fields = ['name', 'city']
+    inlines = [PartnerSudInline]
 
 
 class CantonResource(resources.ModelResource):
@@ -40,7 +44,7 @@ class CantonResource(resources.ModelResource):
 
     class Meta:
         model = Canton
-        import_id_fields = ('short',)
+        import_id_fields = ['short',]
 
 class CantonAdmin(ImportExportMixin, SimpleHistoryAdmin):
     """

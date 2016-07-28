@@ -101,7 +101,7 @@ class PartnerSudAdmin(SimpleHistoryAdmin):
     inlines = [ContainerInline, ]
     fieldsets = (
         (None, {
-            'fields': ('name', 'description', 'website', 'image', 'contact' )
+            'fields': ('organisation', 'name', 'description', 'website', 'image', 'contact' )
             }),
         ('Location', {
             'fields': ('street', 'zipcode', 'area', 'country', 'longitude', 'latitude')

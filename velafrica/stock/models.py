@@ -5,7 +5,7 @@ from django.conf import settings
 from django.db import models
 from django_resized import ResizedImageField
 from simple_history.models import HistoricalRecords
-from velafrica.organisation.models import Person, Organisation, Municipality
+from velafrica.organisation.models import Person, Organisation, Municipality, Address
 
 from velafrica.core.ftp import MyFTPStorage
 fs = MyFTPStorage()
@@ -53,7 +53,8 @@ class Product(models.Model):
     description = models.TextField(blank=True, null=True, verbose_name="Beschreibung", help_text="Hinweise zur Qualität bzw Hinweise und Ergänzung")
     category = models.ForeignKey('Category', verbose_name="Kategorie", help_text='Die Hauptkategorie des Produktes.')
     image = ResizedImageField(storage=fs, size=[500, 500], upload_to='stock/products/', blank=True, null=True, verbose_name="Produktbild")
-    price = models.DecimalField(blank=True, null=True, max_digits=10, decimal_places=2)
+    sales_price = models.DecimalField(blank=False, null=False, max_digits=10, decimal_places=2, verbose_name="Einkaufspreis", default=0.00)
+    purchase_price = models.DecimalField(blank=False, null=False, max_digits=10, decimal_places=2, verbose_name="Verkaufspreis", default=0.00)
     packaging_unit = models.IntegerField(blank=True, null=True, verbose_name="Verpackungseinheit (VE)")
     history = HistoricalRecords()
 
@@ -71,22 +72,15 @@ class Product(models.Model):
 class Warehouse(models.Model):
     """
     TODO: everything
-    - Name
-    - Organisation
-    - Adresse
-    - Beschreibung
     """
     name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Name", help_text="Der Name / Bezeichnung des Lagers")
     description = models.CharField(blank=True, null=True, max_length=255, verbose_name="Beschreibung", help_text="Beschreibung / Bemerkungen zum Lager")
-    organisation = models.ForeignKey(Organisation, verbose_name="Organisation", help_text='Die Organisation zu welcher das Lager gehört.')
+    organisation = models.ForeignKey(Organisation, verbose_name="Organisation", help_text='Die Organisation zu welcher das Lager gehört. (Nur VPN Schweiz Partner)', limit_choices_to={'partnersud': None})
     image = ResizedImageField(storage=fs, size=[500, 500], upload_to='stock/warehouses/', blank=True, null=True, verbose_name="Bild des Lagers")
     
 
     # address
-    municipality = models.ForeignKey(Municipality, null=True, blank=True, verbose_name="Ort")
-    street = models.CharField(blank=True, null=True, verbose_name="Strasse", max_length=255)
-    lng = models.DecimalField(blank=True,null=True,verbose_name="Longitude (Längengrad)", max_digits=9, decimal_places=6)
-    lat = models.DecimalField(blank=True,null=True,verbose_name="Latitude (Breitengrad)", max_digits=9, decimal_places=6)
+    address = models.ForeignKey(Address, null=True, blank=True, verbose_name="Andere Adresse als Organisation", help_text="Nur angeben wenn die Lageradresse von Organisationsadresse abweicht.")
 
     stock_management = models.BooleanField(default=False, verbose_name="Automatisches Stock-Management", help_text="Gibt an ob automatisches Stock-Management aktiviert ist, d.h. ob bei Stock Verschiebungen der Stock automatisch angepasst werden soll.")
     notify_on_incoming_transport = models.TextField(null=True, blank=True, verbose_name="Über angeliferte Ersatzteile informieren", help_text="Eine Emailadressen pro Zeile. Hier eingetragene Emailadressen werden jedesmal benachrichtigt, sobald eine neue Fahrt  mit Ersatzteilen zu diesem Lager erfasst wird.")
@@ -188,6 +182,14 @@ class StockListPos(models.Model):
     product = models.ForeignKey(Product)
     amount = models.IntegerField(blank=False, null=False, verbose_name="Stückzahl", default=0)
     history = HistoricalRecords()
+
+    def get_sales_price(self):
+        return self.product.sales_price
+    get_sales_price.short_description = "Einkaufspreis"
+
+    def get_purchase_price(self):
+        return self.product.sales_price
+    get_purchase_price.short_description = "Verkaufspreis"
 
     class Meta:
         abstract = True
@@ -337,114 +339,3 @@ class StockTransferListPos(StockListPos):
 
     class Meta:
         unique_together = (("stocktransfer", "product"),)
-
-class Invoice(models.Model):
-    """
-    """
-    from_org = models.ForeignKey(Organisation, related_name='invoice_from')
-    to_org = models.ForeignKey(Organisation, related_name='invoice_to')
-    comments = models.TextField(blank=True, null=True, verbose_name="Kommentare")
-    purchaseorder = models.ForeignKey('PurchaseOrder', blank=True, null=True)
-    salesorder = models.ForeignKey('SalesOrder', blank=True, null=True)
-    history = HistoricalRecords()
-
-
-class InvoiceListPos(StockListPos):
-    """
-    """
-    invoice = models.ForeignKey(Invoice)
-
-    class Meta:
-        unique_together = (("invoice", "product"),)
-
-
-class PurchaseOrder(StockListPos):
-    """
-    PurchaseOrders represent orders from the issueing organisation to another (procurement).
-    TODO:
-    - states
-    - methods:
-        - create invoice
-        - create procurement (stock in)
-        - mark as paid
-    """
-    to = models.ForeignKey(Organisation)
-    comments = models.TextField(blank=True, null=True, verbose_name="Kommentare")
-    history = HistoricalRecords()
-
-    # ride = models.ForeignKey(Ride, blank=True, null=True)
-    
-
-class PurchaseOrderListPos(StockListPos):
-    """
-    """
-    purchaseorder = models.ForeignKey(PurchaseOrder)
-
-    def __unicode__(self):
-        return u"PurchaseOrder #{}: {}x {} ".format(self.purchoseorder.id, self.amount, self.product)
-        
-    class Meta:
-        unique_together = (("purchaseorder", "product"),)
-
-
-class SalesOrder(models.Model):
-    """
-    SalesOrders represent offers from the issueing organisation to another (sales).
-    TODO:
-    - states
-    - methods:
-        - create picking list
-        - create invoice
-        - create picking (stock out)
-        - create payment (partial?)
-    """
-    to = models.ForeignKey(Organisation)
-    comments = models.TextField(blank=True, null=True, verbose_name="Kommentare")
-    history = HistoricalRecords()
-
-    # container = models.ForeignKey(Container)
-
-class SalesOrderListPos(StockListPos):
-    """
-    """
-    salesorder = models.ForeignKey(SalesOrder)
-
-    def __unicode__(self):
-        return u"PurchaseOrder #{}: {}x {} ".format(self.purchoseorder.id, self.amount, self.product)
-        
-    class Meta:
-        unique_together = (("salesorder", "product"),)
-
-
-class PartnerSud(models.Model):
-    """
-    Represents a partner of the Velafrica Sud Network.
-    """
-    organisation = models.ForeignKey(Organisation)
-    image = ResizedImageField(storage=fs, size=[800, 800], upload_to='velafrica_sud/partner/', blank=True, null=True, help_text='Foto vom Partner vor Ort.')
-
-    org_form = models.CharField(max_length=255, blank=True, null=True)
-    legalform = models.CharField(max_length=255, blank=True, null=True, verbose_name="Organisationsform")
-    partner_since = models.IntegerField(blank=True, null=True, verbose_name="Partner seit...", help_text="Jahr")
-    vocational_training = models.BooleanField(default=False, verbose_name="Bietet Berufsbildung an")
-    infrastructure = models.TextField(verbose_name="Infrastruktur", help_text="Übersicht über die Infrastruktur vor Ort (Anzahl Arbeitsplätze, Lagermöglichkeiten, Art der Gebäude etc)", blank=True, null=True)
-
-    history = HistoricalRecords()
-
-    def get_container_count(self):
-        return Container.objects.filter(partner_to=self).count()
-    get_container_count.short_description = 'Anzahl exp. Container'
-
-    def get_bicycle_count(self):
-        count = 0
-        for c in Container.objects.filter(partner_to=self):
-            count += c.velos_loaded
-        return count
-    get_bicycle_count.short_description = 'Anzahl exp. Velos'
-
-    def __unicode__(self):
-        return u"{}, {}".format(self.organisation.name, self.organisation.address.country)
-
-    class Meta:
-        ordering = ['organisation__name']
-        verbose_name_plural = "Partner Süd"

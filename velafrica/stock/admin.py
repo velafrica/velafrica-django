@@ -40,14 +40,14 @@ class ProductResource(resources.ModelResource):
     class Meta:
         model = Product
         import_id_fields = ('articlenr',)
-        fields = ('category', 'category__name', 'articlenr', 'hscode', 'name', 'name_en', 'name_fr', 'packaging_unit', 'price', 'description')
+        fields = ('category', 'category__name', 'articlenr', 'hscode', 'name', 'name_en', 'name_fr', 'packaging_unit', 'sales_price', 'description')
 
 
 class ProductAdmin(ImportExportMixin, SimpleHistoryAdmin):
     """
     """
     resource_class = ProductResource
-    list_display = ('admin_image', 'articlenr', 'hscode', 'category', 'name', 'price', 'description')
+    list_display = ('admin_image', 'articlenr', 'hscode', 'category', 'name', 'sales_price', 'description')
     search_fields = ['articlenr', 'name', 'description']
     list_filter = ['category']
 
@@ -150,28 +150,6 @@ class StockListPositionResource(resources.ModelResource):
     class Meta:
         model = StockListPosition
 
-class AdvancedStockListPositionResource(resources.ModelResource):
-    """
-    """
-
-    def __init__(self, stocklist=None):
-        if type(stocklist) == int:
-            try:
-                sl = StockList.objects.get(id=stocklist)
-                self.stocklist = sl
-            except e:
-                print e
-
-    def before_import_row(row, **kwargs):
-        print row
-
-    class Meta:
-        model = StockListPosition
-
-class AdvancedStockListPositionAdmin(ImportExportMixin):
-    model = StockListPosition
-    resource_class = AdvancedStockListPositionResource
-
 
 class StockListPositionAdmin(ImportExportMixin, SimpleHistoryAdmin):
     form = StockListPositionForm
@@ -199,20 +177,27 @@ class StockListInline(admin.TabularInline):
     inlines = [StockListPositionInline]
     model = StockList
 
+
 class RideInline(admin.TabularInline):
     model = Ride
+
 
 class StockTransferListPosInline(admin.TabularInline):
     model = StockTransferListPos
     form = StockListPosForm
 
+
 class StockTransferInline(admin.TabularInline):
     model = StockTransfer
+
 
 class ContainerInline(admin.TabularInline):
     model = Container
 
 class StockListAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
+    """
+    TODO: remove, StockList is deprecated
+    """
     inlines = [StockListPositionInline]
     resource_class = StockListResource
     list_display = ['id', 'ride_link', 'stocktransfer_link', 'container_link', 'description', 'last_change', 'listpositions_link']

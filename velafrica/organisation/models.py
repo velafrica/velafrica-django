@@ -6,18 +6,9 @@ from django.db import models
 from django_resized import ResizedImageField
 from simple_history.models import HistoricalRecords
 
-"""
-class Adress(models.Model):
-
-    municipality = ForeignKey(municipality)
-    street 
-    street_no
-    country
-
-"""
-
 class Canton(models.Model):
     """
+    TODO: delete
     """
     name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Name des Kantons")
     short = models.CharField(blank=False, null=False, max_length=2, unique=True, verbose_name="Kürzel der Gemeinde")
@@ -28,6 +19,7 @@ class Canton(models.Model):
 
 class Municipality(models.Model):
     """
+    TODO: delete
     """
     gdenr = models.IntegerField(blank=False, null=False, verbose_name="Gemeindenr. des BFS")
     name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Name der Gemeinde")
@@ -86,31 +78,28 @@ class Organisation(models.Model):
     website = models.URLField(blank=True, null=True, max_length=255, verbose_name="Website")
     description = models.TextField(blank=True, null=True)
     contact = models.TextField(verbose_name="Kontaktperson", help_text="Name, Email, Telefon, Skype etc", blank=True, null=True)
-
-    ORG_TYPE_CHOICES = {
-        ('vpn', 'Velorecyclingnetz Schweiz'),
-        ('africa', 'Partner Velafrica Süd (Afrika)'),
-        ('other', 'Andere')
-    }
-    org_type = models.CharField(choices=ORG_TYPE_CHOICES, max_length=20, blank=False, null=False, default='other', verbose_name="Organisations Typ")
     
     # address
     address = models.ForeignKey(Address, verbose_name="Adresse", blank=True, null=True)
 
     # TODO: following fields will be removed in the future
-    street = models.CharField(blank=True, null=True, max_length=255, verbose_name="Strasse") 
-    plz = models.IntegerField(blank=True, null=True, verbose_name="PLZ")
-    city = models.CharField(blank=True, null=True, max_length=255, verbose_name="Ort")
+    street = models.CharField(blank=True, null=True, max_length=255, verbose_name="Strasse", help_text="WARNING: Will be removed soon") 
+    plz = models.IntegerField(blank=True, null=True, verbose_name="PLZ", help_text="WARNING: Will be removed soon")
+    city = models.CharField(blank=True, null=True, max_length=255, verbose_name="Ort", help_text="WARNING: Will be removed soon")
 
     history = HistoricalRecords()
+
+    def has_partnersud(self):
+        if self.partnersud:
+            return True
+        else:
+            return False
 
     def __unicode__(self):
         return u"{}, {}".format(self.name, self.city)
 
     class Meta:
         ordering = ['name']
-
-
 
 
 class Person(models.Model):

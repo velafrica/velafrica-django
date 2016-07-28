@@ -8,7 +8,7 @@ from django import forms
 class WarehouseForm(forms.ModelForm):
     municipality = forms.ModelChoiceField(
         queryset=Municipality.objects.all(),
-        widget=autocomplete.ModelSelect2(url='municipality-autocomplete')
+        widget=autocomplete.ModelSelect2(url='autocomplete:municipality')
     )
 
     class Meta:
@@ -18,7 +18,7 @@ class WarehouseForm(forms.ModelForm):
 class StockForm(forms.ModelForm):
     product = forms.ModelChoiceField(
         queryset=Product.objects.all(),
-        widget=autocomplete.ModelSelect2(url='product-autocomplete')
+        widget=autocomplete.ModelSelect2(url='autocomplete:product')
     )
 
     class Meta:
@@ -29,7 +29,7 @@ class StockForm(forms.ModelForm):
 class StockListPosForm(forms.ModelForm):
     product = forms.ModelChoiceField(
         queryset=Product.objects.all(),
-        widget=autocomplete.ModelSelect2(url='product-autocomplete')
+        widget=autocomplete.ModelSelect2(url='autocomplete:product')
     )
 
     class Meta:
@@ -40,7 +40,7 @@ class StockListPosForm(forms.ModelForm):
 class StockListPositionForm(forms.ModelForm):
     product = forms.ModelChoiceField(
         queryset=Product.objects.all(),
-        widget=autocomplete.ModelSelect2(url='product-autocomplete')
+        widget=autocomplete.ModelSelect2(url='autocomplete:product')
     )
 
     class Meta:

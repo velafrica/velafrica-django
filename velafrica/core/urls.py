@@ -53,9 +53,9 @@ auth = [
 
 autocomplete = [
     # autocomplete urls
-    url(r'^municipality/$', MunicipalityAutocomplete.as_view(), name='municipality-autocomplete'),
-    url(r'^product/$', stock_views.ProductAutocomplete.as_view(), name='product-autocomplete'),
-    url(r'^warehouse/$', stock_views.WarehouseAutocomplete.as_view(), name='warehouse-autocomplete'),
+    url(r'^municipality/$', MunicipalityAutocomplete.as_view(), name='municipality'),
+    url(r'^product/$', stock_views.ProductAutocomplete.as_view(), name='product'),
+    url(r'^warehouse/$', stock_views.WarehouseAutocomplete.as_view(), name='warehouse'),
 ]
 
 urlpatterns = [
