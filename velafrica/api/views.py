@@ -67,9 +67,17 @@ def api_root(request, format=None):
                     rev = reverse(str(fqpn), request=request, format=format)
                 except:
                     try:
-                        rev = reverse(str(fqpn), request=request, format=format, kwargs={'pk':1})
+                        rev = reverse(str("api:{}".format(fqpn)), request=request, format=format)
                     except:
-                        print "something went wrong.. who cares :)"
+                        try:
+                            rev = reverse(str(fqpn), request=request, format=format, kwargs={'pk':1})
+                        except:
+                            try:
+                                rev = reverse(str("api:{}".format(fqpn)), request=request, format=format, kwargs={'pk':1})
+                            except:
+                                print "something went wrong.. who cares :)"
+                                pass
+                            pass
                         pass
                     pass
 

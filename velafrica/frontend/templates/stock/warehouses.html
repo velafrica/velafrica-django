@@ -2,7 +2,7 @@
 {% load staticfiles %}
 
 {% block breadcrumb %} 
-<li><a href="{% url 'warehouses' %}">Warehouses</a></li>
+<li><a href="{% url 'frontend:warehouses' %}">Warehouses</a></li>
 {% endblock %} 
 
 {% block document-head %}
@@ -28,7 +28,7 @@ Warehouses
 	<tbody>
 	{% for w in warehouses %}
 		<tr>
-			<td><a href="{% url 'warehouse_detail' w.id %}">{{w.name}}</a></td>
+			<td><a href="{% url 'frontend:warehouse_detail' w.id %}">{{w.name}}</a></td>
 			<td>{{w.organisation.name}}</td>
 		</tr>
 	{% endfor %}

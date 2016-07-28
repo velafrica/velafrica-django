@@ -22,28 +22,49 @@ from django.contrib.auth import views as auth_views
 from django.views.generic import RedirectView
 from velafrica.core import views
 from velafrica.counter import views as counter_views
+from velafrica.download import views as download_views
 from velafrica.stock import views as stock_views
+from velafrica.sbbtracking import views as sbbtracking_views
+from velafrica.transport import views as transport_views
 from velafrica.organisation.views import MunicipalityAutocomplete
+from velafrica.velafrica_sud import views as velafrica_sud_views
 
+# TODO: namespaces
+
+frontend = [
+    url(r'^$', RedirectView.as_view(url='/tracking')),
+    url(r'^counter', counter_views.counter, name='counter'),
+    url(r'^download', download_views.downloads, name='download'),
+    url(r'^stock', stock_views.stock, name='stock'),
+    url(r'^tracking/(?P<tracking_no>\w+)', sbbtracking_views.tracking, name='tracking_detail'),
+    url(r'^tracking', sbbtracking_views.tracking, name='tracking'),
+    url(r'^transport', transport_views.transport, name='transport'),
+    url(r'^warehouses', stock_views.warehouses, name='warehouses'),
+    url(r'^warehouse/(?P<pk>[0-9]+)', stock_views.warehouse, name='warehouse_detail'),
+    url(r'^container', velafrica_sud_views.container, name='container'),
+
+]
+
+auth = [
+    url(r'^login', auth_views.login, {'template_name':'auth/login.html'}, name='login'),
+    url(r'^profile', views.profile, name='profile'),
+    url(r'^logout', views.accounts_logout, name='logout'),
+]
+
+autocomplete = [
+    # autocomplete urls
+    url(r'^municipality/$', MunicipalityAutocomplete.as_view(), name='municipality-autocomplete'),
+    url(r'^product/$', stock_views.ProductAutocomplete.as_view(), name='product-autocomplete'),
+    url(r'^warehouse/$', stock_views.WarehouseAutocomplete.as_view(), name='warehouse-autocomplete'),
+]
 
 urlpatterns = [
 	#url(r'^$', views.home, name='home'),
-    url(r'^api/', include('velafrica.api.urls')),
+    url(r'^api/', include('velafrica.api.urls', namespace="api")),
 
-    url(r'^$', RedirectView.as_view(url='/tracking')),
-	url(r'^counter', counter_views.counter, name='counter'),
-    url(r'^download', views.downloads, name='download'),
-    url(r'^stock', stock_views.stock, name='stock'),
-    url(r'^tracking/(?P<tracking_no>\w+)', views.tracking, name='tracking_detail'),
-    url(r'^tracking', views.tracking, name='tracking'),
-    url(r'^transport', views.transport, name='transport'),
-    url(r'^warehouses', views.warehouses, name='warehouses'),
-    url(r'^warehouse/(?P<pk>[0-9]+)', views.warehouse, name='warehouse_detail'),
-    url(r'^container', views.container, name='container'),
-
-    url(r'^auth/login', auth_views.login, {'template_name':'auth/login.html'}, name='login'),
-
-    # url to request Password reset
+    url(r'^', include(frontend, namespace="frontend")),
+    url(r'^auth/', include(auth, namespace="auth")),
+        # url to request Password reset
     url(r'^auth/password/reset/$', 
         auth_views.password_reset, 
         {'post_reset_redirect' : '/auth/password/reset/done/'}, 
@@ -64,15 +85,12 @@ urlpatterns = [
         auth_views.password_reset_complete, name='password_reset_complete'
         ),
 
-    url(r'^auth/profile', views.profile, name='profile'),
-    url(r'^auth/logout', views.accounts_logout, name='logout'),
+    url(r'^autocomplete/', include(autocomplete, namespace="autocomplete")),
 
-    # autocomplete urls
-    url(r'^municipality-autocomplete/$', MunicipalityAutocomplete.as_view(), name='municipality-autocomplete'),
-    url(r'^product-autocomplete/$', stock_views.ProductAutocomplete.as_view(), name='product-autocomplete'),
-    url(r'^warehouse-autocomplete/$', stock_views.WarehouseAutocomplete.as_view(), name='warehouse-autocomplete'),
+    # admin doc urls
+    url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # admin urls
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^admin/', include("massadmin.urls")),
+    url(r'^admin/', include("massadmin.urls", namespace='massadmin')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

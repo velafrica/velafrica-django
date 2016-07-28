@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block breadcrumb %} 
-<li><a href="{% url 'counter' %}">Velo Counter</a></li>
+<li><a href="{% url 'frontend:counter' %}">Velo Counter</a></li>
 {% endblock %} 
 
 {% block jumbotron-img %}{% endblock %}
@@ -15,10 +15,10 @@ Velo Counter
 <div id="velo-counter-filter">
 
 	{% if user.is_authenticated %}
-	<p><a href="{% url 'counter' %}"><span class="label {% if org_id == 0 %}label-warning{% else %}label-default{% endif %}" data-org-id=0>Alle Netzwerkpartner</span></a></p>
+	<p><a href="{% url 'frontend:counter' %}"><span class="label {% if org_id == 0 %}label-warning{% else %}label-default{% endif %}" data-org-id=0>Alle Netzwerkpartner</span></a></p>
 		<p>
 		{% for org in organisations %}
-		<a href="{% url 'counter' %}?id={{ org.id }}"><span class="label {% if org_id == org.id %}label-warning{% else %}label-default{% endif %}" data-org-id={{ org.id }}>{{ org.name }}</span></a>
+		<a href="{% url 'frontend:counter' %}?id={{ org.id }}"><span class="label {% if org_id == org.id %}label-warning{% else %}label-default{% endif %}" data-org-id={{ org.id }}>{{ org.name }}</span></a>
 		{% endfor %}
 		</p>
 	{% endif %}

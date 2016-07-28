@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     # django core apps
     'django.contrib.contenttypes',
     'django.contrib.admin',
+    'django.contrib.admindocs',
     'django.contrib.auth',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -52,6 +53,7 @@ INSTALLED_APPS = (
     # custom velafrica apps
     'velafrica.api',
     'velafrica.core',
+    'velafrica.commission',
     'velafrica.counter',
     'velafrica.collection',
     'velafrica.download',

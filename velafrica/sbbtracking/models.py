@@ -142,7 +142,6 @@ class Tracking(models.Model):
     Represents one bicycle that is being tracked.
     """
     tracking_no = models.CharField(blank=False, null=False, max_length=10, unique=True, verbose_name="Tracking Nummer")
-    number_of_velos = models.IntegerField(blank=False, null=False, default=0, verbose_name="Anzahl Velos")
     vpn = models.ForeignKey(Organisation, 
         null=True, 
         blank=True, 
@@ -152,9 +151,9 @@ class Tracking(models.Model):
 
     #donor = models.ForeignKey(Person)
 
-    first_name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Vorname")
-    last_name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Nachname")
-    email = models.CharField(blank=False, null=False, max_length=255, verbose_name="Email", validators=[EmailValidator])
+    first_name = models.CharField(blank=True, null=True, max_length=255, verbose_name="Vorname")
+    last_name = models.CharField(blank=True, null=True, max_length=255, verbose_name="Nachname")
+    email = models.CharField(blank=True, null=True, max_length=255, verbose_name="Email", validators=[EmailValidator])
     container = models.ForeignKey(Container, blank=True, null=True)
     note = models.CharField(blank=True, null=True, max_length=255, verbose_name="Bemerkung")
     velo_type = models.ForeignKey('VeloType', blank=True, null=True)

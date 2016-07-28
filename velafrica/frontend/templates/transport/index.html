@@ -2,7 +2,7 @@
 {% load staticfiles %}
 
 {% block breadcrumb %} 
-<li><a href="{% url 'transport' %}">Transport</a></li>
+<li><a href="{% url 'frontend:transport' %}">Transport</a></li>
 {% endblock %} 
 
 {% block document-head %}
@@ -58,8 +58,8 @@ Transport Tracking
 	{% for r in rides %}
 	<tr>
 		<td>{{ r.date }}</td>
-		<td><a href="{% url 'warehouse_detail' r.from_warehouse.id %}">{{ r.from_warehouse }}</a></td>
-		<td><a href="{% url 'warehouse_detail' r.to_warehouse.id %}">{{ r.to_warehouse }}</a></td>
+		<td><a href="{% url 'frontend:warehouse_detail' r.from_warehouse.id %}">{{ r.from_warehouse }}</a></td>
+		<td><a href="{% url 'frontend:warehouse_detail' r.to_warehouse.id %}">{{ r.to_warehouse }}</a></td>
 		<td>{{ r.driver }}</td>
 		<td>{{ r.car }}</td>
 		<td>{% if r.velos <= 0 %}<span class="label label-danger">{% else %}<span class="label label-success">{% endif %}{{ r.velos }}</span></td>

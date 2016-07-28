@@ -77,7 +77,7 @@ tracking = [
 
 # first attempt at generic views
 velafrica_sud = [
-    url(r'^containers/?$', utils.get_listview('velafrica_sud', 'Container').as_view(), kwargs={'test':'test'}, name="containers"),
+    url(r'^containers/?$', utils.get_listview('velafrica_sud', 'Container').as_view(), name="containers"),
     url(r'^containers/(?P<pk>[0-9]+)/?$', utils.get_retrieveview('velafrica_sud', 'Container').as_view(), name='container'),
     url(r'^countries/?$', utils.get_listview('velafrica_sud', 'Country').as_view(), name='countries'),
     url(r'^countries/(?P<pk>[0-9]+)/?$', utils.get_retrieveview('velafrica_sud', 'Country').as_view(), name='country'),

@@ -2,8 +2,8 @@
 {% load staticfiles %}
 
 {% block breadcrumb %} 
-<li><a href="{% url 'warehouses' %}">Warehouses</a></li>
-<li><a href="{% url 'warehouse_detail' warehouse.id %}">{{warehouse.name}}</a></li>
+<li><a href="{% url 'frontend:warehouses' %}">Warehouses</a></li>
+<li><a href="{% url 'frontend:warehouse_detail' warehouse.id %}">{{warehouse.name}}</a></li>
 {% endblock %} 
 
 {% block document-head %}

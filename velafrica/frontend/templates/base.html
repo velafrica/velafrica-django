@@ -55,61 +55,33 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <!--
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Leagues <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Liga A</a></li>
-                <li><a href="#">Liga B</a></li>
-                <li><a href="#">Liga C</a></li>
-                <li><a href="#">1. Liga Ost</a></li>
-                <li><a href="#">1. Liga West</a></li>                
-              </ul>
-            </li>
-          -->
             {% if perms.counter %}
-            <li><a href="{% url 'counter' %}" id="velocounter">Velo Counter</a></li>
+            <li><a href="{% url 'frontend:counter' %}" id="velocounter">Velo Counter</a></li>
             {% endif %}
-            <li><a href="{% url 'tracking' %}" id="tracking">Velo Tracking</a></li>
+            <li><a href="{% url 'frontend:tracking' %}" id="tracking">Velo Tracking</a></li>
             {% if perms.transport %}
-            <li><a href="{% url 'transport' %}" id="transport">Transport</a></li>
+            <li><a href="{% url 'frontend:transport' %}" id="transport">Transport</a></li>
             {% endif %}
             {% if perms.stock %}
-            <li><a href="{% url 'stock' %}" id="stock">Stock</a></li>
+            <li><a href="{% url 'frontend:stock' %}" id="stock">Stock</a></li>
+            {% endif %}
+            {% if perms.stock %}
+            <li><a href="{% url 'frontend:warehouses' %}" id="warehouses">Warehouses</a></li>
             {% endif %}
             {% if perms.velafrica_sud %}
-            <li><a href="{% url 'container' %}" id="container">Container</a></li>
+            <li><a href="{% url 'frontend:container' %}" id="container">Container</a></li>
             {% endif %}
             {% if user.is_authenticated %}
-            <li><a href="{% url 'download' %}" id="download">Downloads</a></li>
+            <li><a href="{% url 'frontend:download' %}" id="download">Downloads</a></li>
             {% endif %}
-            <!--
-            <li><a href="{% url 'stock' %}" id="velocounter">Stock</a></li>
-            <li><a href="{% url 'transport' %}" id="velocounter">Transport</a></li>
-            -->
-            <!--<li><a href="/games" id="games">Games</a></li>
-            <li><a href="/players" id="players">Players</a></li>
-            <li><a href="/about" id="about">About</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li class="divider"></li>
-                <li class="dropdown-header">Nav header</li>
-                <li><a href="#">Separated link</a></li>
-                <li><a href="#">One more separated link</a></li>
-              </ul>
-            </li>-->
           </ul>
           <ul class="nav navbar-nav navbar-right">
 
 {% if user.is_authenticated %}
-            <li><a href="{% url 'profile' %}"><span class="glyphicon glyphicon-user"></span> {{ user.username }}</a></li>
-            <li><a href="{% url 'logout' %}">Logout</a></li>
+            <li><a href="{% url 'auth:profile' %}"><span class="glyphicon glyphicon-user"></span> {{ user.username }}</a></li>
+            <li><a href="{% url 'auth:logout' %}">Logout</a></li>
 {% else %}
-            <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a href="{% url 'auth:login' %}">Login</a></li>
 {% endif %}
           </ul>
         </div><!--/.nav-collipse -->

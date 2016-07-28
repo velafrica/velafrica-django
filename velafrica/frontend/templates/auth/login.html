@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block breadcrumb %} 
-<li><a href="{% url 'login' %}">Login</a></li>
+<li><a href="{% url 'auth:login' %}">Login</a></li>
 {% endblock %} 
 
 {% block jumbotron-img %}{% endblock %}
@@ -16,7 +16,7 @@ Login
 {% endif %}
 
 <div>
-	<form method="post" action="{% url 'django.contrib.auth.views.login' %}" role="form">
+	<form method="post" action="{% url 'auth:django.contrib.auth.views.login' %}" role="form">
 	{% csrf_token %}
 	<table class="table">
 		<tr>

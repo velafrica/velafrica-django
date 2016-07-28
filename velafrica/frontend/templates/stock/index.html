@@ -2,7 +2,7 @@
 {% load staticfiles %}
 
 {% block breadcrumb %} 
-<li><a href="{% url 'stock' %}">Stock</a></li>
+<li><a href="{% url 'frontend:stock' %}">Stock</a></li>
 {% endblock %} 
 
 {% block document-head %}
@@ -50,7 +50,7 @@ Spare Parts Stock
 			<td>{% if s.product.image %}<img class="stock-image" src="{{ s.product.image.url }}" alt="{{s.product.name}}" title="{{s.product.name}}"> {% endif %}</td>
 			<td>{{ s.product.name }}</td>
 			<td>{{ s.product.category.name }}</td>
-			<td><a href="{% url 'warehouse_detail' s.warehouse.id %}">{{ s.warehouse.name }}</a></td>
+			<td><a href="{% url 'frontend:warehouse_detail' s.warehouse.id %}">{{ s.warehouse.name }}</a></td>
 			<td>{{ s.amount }}</td>
 		</tr>
 	{% endfor %}
