@@ -86,9 +86,15 @@ class AddressAdmin(SimpleHistoryAdmin):
     search_fields = ['street', 'zipcode', 'city', 'country']
     list_filter = ['state', 'country']
 
+class CountryAdmin(SimpleHistoryAdmin):
+    """
+    """
+    list_display = ['name', 'code']
+    search_fields = ['name', 'code']
+
 admin.site.register(Organisation, OrganisationAdmin)
 admin.site.register(Person, PersonAdmin)
 admin.site.register(Municipality, MunicipalityAdmin)
 admin.site.register(Canton, CantonAdmin)
 admin.site.register(Address, AddressAdmin)
-admin.site.register(Country)
+admin.site.register(Country, CountryAdmin)

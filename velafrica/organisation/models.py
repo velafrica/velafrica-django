@@ -39,8 +39,8 @@ class Country(models.Model):
     """
     Represents a country of the world.
     """
-    name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Name des Landes")
-    code = models.CharField(blank=False, null=False, max_length=255, verbose_name="Ländercode (ISO 3166-1 alpha-2)")
+    name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Name des Landes", unique=True)
+    code = models.CharField(blank=True, null=True, max_length=255, verbose_name="Ländercode (ISO 3166-1 alpha-2)", unique=True)
 
     def __unicode__(self):
         return u"{}".format(self.name)

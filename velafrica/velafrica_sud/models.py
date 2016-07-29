@@ -177,7 +177,7 @@ class PartnerSud(models.Model):
             print "no organisation found"
             from velafrica.organisation.models import Country as Country2
             print self.country.name
-            c = Country2(code="XX", name=self.country.name)
+            c = Country2(name=self.country.name)
             c.save()
             print c
             a = Address(
@@ -206,7 +206,7 @@ class PartnerSud(models.Model):
         """
         """
         from velafrica.organisation.models import Country as Country2
-        c, created = Country2.objects.get_or_create(code="XX", name=self.country.name)
+        c, created = Country2.objects.get_or_create(name=self.country.name)
         if self.organisation:
             a = self.organisation.address
             a.street = self.street
