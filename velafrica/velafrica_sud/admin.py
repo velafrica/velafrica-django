@@ -98,6 +98,7 @@ class ContainerInline(admin.TabularInline):
 class PartnerSudAdmin(SimpleHistoryAdmin):
     list_display = ['name', 'country', 'website', 'get_container_count', 'get_bicycle_count']
     search_fields = ['name', 'country__name']
+    readonly_fields = ['name', 'description', 'website', 'contact', 'street', 'zipcode', 'area', 'country', 'longitude', 'latitude']
     inlines = [ContainerInline, ]
     fieldsets = (
         (None, {

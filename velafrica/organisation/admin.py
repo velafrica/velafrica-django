@@ -34,6 +34,7 @@ class OrganisationAdmin(ImportExportMixin, SimpleHistoryAdmin):
     # inlines = [WarehouseInline,]
     list_display = ['name', 'street', 'plz', 'city', 'website', 'has_partnersud']
     search_fields = ['name', 'city']
+    readonly_fields = ['street', 'plz', 'city']
     inlines = [PartnerSudInline]
 
 
