@@ -202,6 +202,22 @@ class PartnerSud(models.Model):
             self.organisation = o
             self.save()
 
+    def migrate_address(self):
+        """
+        """
+        from velafrica.organisation.models import Country as Country2
+        c, created = Country2.objects.get_or_create(code="XX", name=self.country.name)
+        if self.organisation:
+            a = self.organisation.address
+            a.street = self.street
+            a.zipcode = self.zipcode
+            a.state = self.area
+            a.country = c
+            a.longitude = self.longitude
+            a.latitude = self.latitude
+            a.save()
+            print u"{} address migrated".format(self)
+
     def get_container_count(self):
         return Container.objects.filter(partner_to=self).count()
     get_container_count.short_description = 'Anzahl exp. Container'
