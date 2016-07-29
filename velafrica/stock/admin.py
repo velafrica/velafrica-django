@@ -47,7 +47,7 @@ class ProductAdmin(ImportExportMixin, SimpleHistoryAdmin):
     """
     """
     resource_class = ProductResource
-    list_display = ('admin_image', 'articlenr', 'hscode', 'category', 'name', 'sales_price', 'description')
+    list_display = ('admin_image', 'articlenr', 'hscode', 'category', 'name', 'purchase_price', 'sales_price', 'description')
     search_fields = ['articlenr', 'name', 'description']
     list_filter = ['category']
 

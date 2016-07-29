@@ -235,7 +235,7 @@ class Tracking(models.Model):
         return None
 
     def __unicode__(self):
-        return u"#{}: {} {}, {} Velos".format(self.tracking_no, self.first_name, self.last_name, self.number_of_velos)
+        return u"#{}: {} {}".format(self.tracking_no, self.first_name, self.last_name)
 
     def next_tracking_eventtype_options(self):
         """

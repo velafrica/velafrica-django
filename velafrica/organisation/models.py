@@ -66,6 +66,9 @@ class Address(models.Model):
     def __unicode__(self):
         return u"{}, {} {}, {}".format(self.street, self.zipcode, self.city, self.country)
 
+    class Meta:
+        verbose_name_plural = "Addresses"
+
 class Organisation(models.Model):
     """
     Represents a network partner.
@@ -76,11 +79,10 @@ class Organisation(models.Model):
     # general information
     name = models.CharField(blank=False, null=True, max_length=255, verbose_name="Name der Organisation")
     website = models.URLField(blank=True, null=True, max_length=255, verbose_name="Website")
+    address = models.ForeignKey(Address, verbose_name="Adresse", blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     contact = models.TextField(verbose_name="Kontaktperson", help_text="Name, Email, Telefon, Skype etc", blank=True, null=True)
-    
-    # address
-    address = models.ForeignKey(Address, verbose_name="Adresse", blank=True, null=True)
+
 
     # TODO: following fields will be removed in the future
     street = models.CharField(blank=True, null=True, max_length=255, verbose_name="Strasse", help_text="WARNING: Will be removed soon") 
@@ -88,6 +90,22 @@ class Organisation(models.Model):
     city = models.CharField(blank=True, null=True, max_length=255, verbose_name="Ort", help_text="WARNING: Will be removed soon")
 
     history = HistoricalRecords()
+    
+    def migrate_address(self):
+        """
+        Create address from deprecated fields
+        """
+        if not self.address:
+            c, created = Country.objects.get_or_create(code="ch", name="Schweiz")
+            a =  Address(
+                    street = self.street,
+                    zipcode = self.plz,
+                    city = self.city,
+                    country = c
+                )
+            a.save()
+            self.address = a
+            self.save()
 
     def has_partnersud(self):
         if self.partnersud:

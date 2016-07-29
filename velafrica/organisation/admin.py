@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
-from velafrica.organisation.models import Organisation, Person, Canton, Municipality
+from velafrica.organisation.models import Organisation, Person, Canton, Municipality, Address
 from velafrica.stock.models import Warehouse
 from import_export import resources
 from import_export.admin import ImportExportMixin
@@ -78,8 +78,15 @@ class MunicipalityAdmin(ImportExportMixin, SimpleHistoryAdmin):
     list_filter = ['canton__name']
 
 
+class AddressAdmin(SimpleHistoryAdmin):
+    """
+    """
+    list_display = ['street', 'zipcode', 'city', 'state', 'country', 'longitude', 'latitude']
+    search_fields = ['street', 'zipcode', 'city', 'country']
+    list_filter = ['state', 'country']
+
 admin.site.register(Organisation, OrganisationAdmin)
 admin.site.register(Person, PersonAdmin)
 admin.site.register(Municipality, MunicipalityAdmin)
 admin.site.register(Canton, CantonAdmin)
-
+admin.site.register(Address, AddressAdmin)

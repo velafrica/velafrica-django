@@ -53,8 +53,8 @@ class Product(models.Model):
     description = models.TextField(blank=True, null=True, verbose_name="Beschreibung", help_text="Hinweise zur Qualität bzw Hinweise und Ergänzung")
     category = models.ForeignKey('Category', verbose_name="Kategorie", help_text='Die Hauptkategorie des Produktes.')
     image = ResizedImageField(storage=fs, size=[500, 500], upload_to='stock/products/', blank=True, null=True, verbose_name="Produktbild")
-    sales_price = models.DecimalField(blank=False, null=False, max_digits=10, decimal_places=2, verbose_name="Einkaufspreis", default=0.00)
-    purchase_price = models.DecimalField(blank=False, null=False, max_digits=10, decimal_places=2, verbose_name="Verkaufspreis", default=0.00)
+    purchase_price = models.DecimalField(blank=False, null=False, max_digits=10, decimal_places=2, verbose_name="Einkaufspreis", default=0.00)
+    sales_price = models.DecimalField(blank=False, null=False, max_digits=10, decimal_places=2, verbose_name="Verkaufspreis", default=0.00)
     packaging_unit = models.IntegerField(blank=True, null=True, verbose_name="Verpackungseinheit (VE)")
     history = HistoricalRecords()
 

@@ -5,7 +5,7 @@ from django.utils import timezone
 from django_resized import ResizedImageField
 from multiselectfield import MultiSelectField
 from simple_history.models import HistoricalRecords
-from velafrica.organisation.models import Organisation
+from velafrica.organisation.models import Organisation, Address
 from velafrica.stock.models import StockList, Warehouse
 from velafrica.core.ftp import MyFTPStorage
 fs = MyFTPStorage()
@@ -151,7 +151,6 @@ class PartnerSud(models.Model):
     contact = models.TextField(verbose_name="Kontaktperson", blank=True, null=True, help_text="WARNING: Will be removed soon")
     website = models.URLField(blank=True, null=True, max_length=255, verbose_name="Website", help_text="WARNING: Will be removed soon")
 
-
     image = ResizedImageField(storage=fs, size=[800, 800], upload_to='velafrica_sud/partner/', blank=True, null=True, help_text='Foto vom Partner vor Ort.')
 
     street = models.CharField(max_length=255, blank=True, null=True, help_text="WARNING: Will be removed soon")
@@ -169,6 +168,39 @@ class PartnerSud(models.Model):
     infrastructure = models.TextField(verbose_name="Infrastruktur", help_text="Übersicht über die Infrastruktur vor Ort (Anzahl Arbeitsplätze, Lagermöglichkeiten, Art der Gebäude etc)", blank=True, null=True)
 
     history = HistoricalRecords()
+
+    def create_organisation(self):
+        """
+        only used for migration to new database scheme
+        """
+        if not self.organisation:
+            print "no organisation found"
+            from velafrica.organisation.models import Country as Country2
+            print self.country.name
+            c = Country2(code="XX", name=self.country.name)
+            c.save()
+            print c
+            a = Address(
+                street = self.street,
+                zipcode = self.zipcode,
+                state = self.area,
+                country = c,
+
+                latitude = self.latitude,
+                longitude = self.longitude
+                )
+            a.save()
+            o = Organisation(
+                    name = self.name,
+                    website = self.website,
+                    description = self.description,
+                    contact = self.contact,
+                    address = a
+                )
+            o.save()
+
+            self.organisation = o
+            self.save()
 
     def get_container_count(self):
         return Container.objects.filter(partner_to=self).count()
