@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
-from velafrica.organisation.models import Organisation, Person, Canton, Municipality, Address
+from velafrica.organisation.models import Organisation, Person, Canton, Municipality, Address, Country
 from velafrica.stock.models import Warehouse
 from import_export import resources
 from import_export.admin import ImportExportMixin
