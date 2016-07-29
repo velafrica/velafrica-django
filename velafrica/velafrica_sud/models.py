@@ -111,6 +111,9 @@ class Container(models.Model):
             return None
 
     def container_n_of_all(self):
+        """
+        Returns number of how many containers have been shipped up to this one.
+        """
 
         ct = self
         # get oldest container by pickup date
@@ -121,6 +124,9 @@ class Container(models.Model):
     container_n_of_all.short_description = "#"
 
     def container_n_of_partner(self, partner):
+        """
+        Returns number of how many containers have been shipped to this partner up to this one.
+        """
         ct = self
         # get oldest container by pickup date
         first = Container.objects.all().last()
@@ -128,6 +134,9 @@ class Container(models.Model):
         return pos
 
     def container_n_of_year(self, year):
+        """
+        TODO: implement
+        """
         pass
 
     def __unicode__(self):
@@ -204,6 +213,8 @@ class PartnerSud(models.Model):
 
     def migrate_address(self):
         """
+        Only for migration purposes.
+        TODO: delete after final model changes
         """
         from velafrica.organisation.models import Country as Country2
         c, created = Country2.objects.get_or_create(name=self.country.name)
@@ -219,10 +230,16 @@ class PartnerSud(models.Model):
             print u"{} address migrated".format(self)
 
     def get_container_count(self):
+        """
+        Get number of containers that have been shipped to this partner.
+        """
         return Container.objects.filter(partner_to=self).count()
     get_container_count.short_description = 'Anzahl exp. Container'
 
     def get_bicycle_count(self):
+        """
+        Get number of bicycles that have been shipped to this partner.
+        """
         count = 0
         for c in Container.objects.filter(partner_to=self):
             count += c.velos_loaded
@@ -239,6 +256,7 @@ class PartnerSud(models.Model):
 
 class Report(models.Model):
     """
+    Reports are used to gather feedback and detailed information about a partner.
     """
     creation = models.DateField(default=timezone.now,)
     partner_sud = models.ForeignKey(PartnerSud)
@@ -401,9 +419,6 @@ class Report(models.Model):
     communityproject_notes = models.TextField(verbose_name="Bemerkungen",blank=True, null=True)
 
     # Quality Assessment (values: 1 - 10)
-    #quality_bicycles
-    #quality_spares
-    #quality_tools
     QUALITY_CHOICES = (
         ('1', '1'),
         ('2', '2'),
@@ -438,6 +453,7 @@ class Report(models.Model):
 
 class Role(models.Model):
     """
+    Name of a role of PartnerSud staff.
     """
     name = models.CharField(verbose_name="Name", max_length=255)
 
@@ -446,6 +462,7 @@ class Role(models.Model):
 
 class Staff(models.Model):
     """
+    Used to add information about personal staff at partner.
     """
     role = models.ForeignKey(Role,verbose_name="Rolle")
     salary = models.IntegerField(verbose_name="Salär (USD)")

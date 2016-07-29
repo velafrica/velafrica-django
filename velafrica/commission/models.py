@@ -70,6 +70,7 @@ class Invoice(models.Model):
 
 class PurchaseOrderListPos(StockListPos):
     """
+    One position of a :model:`commission.PurchaseOrder` including product and amount.
     """
     purchaseorder = models.ForeignKey('PurchaseOrder')
 
@@ -84,11 +85,7 @@ class PurchaseOrder(models.Model):
     """
     PurchaseOrders represent orders from the issueing organisation to another (procurement).
     TODO:
-    - states
-    - methods:
-        - create invoice
-        - create procurement (stock in)
-        - mark as paid
+      - create procurement (stock in)
     """
     from_org = models.ForeignKey(Organisation, related_name="purchaseorder_from", blank=True, null=True, verbose_name="Anbieter")
     to_org = models.ForeignKey(Organisation, related_name="purchaseorder_to", blank=True, null=True, verbose_name="Kunde")
@@ -106,6 +103,7 @@ class PurchaseOrder(models.Model):
 
     def get_total(self):
         """
+        Calculate total value of all :model:`commission.PurchaseOrderListPos` related to this PurchaseOrder.
         """
         total = Decimal(0.00)
         pos = PurchaseOrderListPos.objects.all().filter(purchaseorder=self.id)
@@ -117,6 +115,7 @@ class PurchaseOrder(models.Model):
 
     def copy_to_draft(self):
         """
+        Copy current PurchaseOrder to a new one.
         """
         p = PurchaseOrder(from_org=self.from_org, to_org=self.to_org, state='0', comments="Kopie von {}".format(self))
         p.save()
@@ -130,8 +129,10 @@ class PurchaseOrder(models.Model):
         return p
 
 
-    # ride = models.ForeignKey(Ride, blank=True, null=True)
     def create_invoice(self):
+        """
+        Create an invoice based on the PurchaseOrder.
+        """
         sopos = PurchaseOrderListPos.objects.filter(purchaseorder=self.id)
         if sopos.count() > 0:
             inv = Invoice(from_org=self.from_org, to_org=self.to_org, purchaseorder=self, comments="Rechnung für {}".format(self))
@@ -149,6 +150,7 @@ class PurchaseOrder(models.Model):
 
 class SalesOrderListPos(StockListPos):
     """
+
     """
     salesorder = models.ForeignKey('SalesOrder')
 
@@ -180,6 +182,7 @@ class SalesOrder(models.Model):
 
     def get_total(self):
         """
+        Get total value of SalesOrder.
         """
         total = Decimal(0.00)
         pos = SalesOrderListPos.objects.all().filter(salesorder=self.id)
@@ -190,6 +193,9 @@ class SalesOrder(models.Model):
     get_total.short_description = "Betrag"
 
     def create_invoice(self):
+        """
+        Create invoice based on SalesOrder.
+        """
         sopos = SalesOrderListPos.objects.filter(salesorder=self.id)
         if sopos.count() > 0:
             inv = Invoice(from_org=self.from_org, to_org=self.to_org, salesorder=self)

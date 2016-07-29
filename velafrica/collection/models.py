@@ -14,8 +14,9 @@ def get_default_task_status():
 
 class EventCategory(models.Model):
     """
+    Category of collection event.
     """
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, help_text="Name der Kategorie")
 
     def __unicode__(self):
         return u"{}".format(self.name)
@@ -27,6 +28,7 @@ class EventCategory(models.Model):
 
 class Event(models.Model):
     """
+    Recurring CollectionEvent
     """
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True, verbose_name="Beschreibung")
@@ -54,6 +56,9 @@ class Task(models.Model):
 
 class CollectionEvent(models.Model):
     """
+    An occurrence of :model:`collection.Event` with a specific start and end date.
+
+    This is the really interesting object holding all the information.
     """
     date_start = models.DateField()
     date_end = models.DateField()
@@ -101,13 +106,18 @@ class CollectionEvent(models.Model):
     additional_results = models.TextField(blank=True, verbose_name="weitere Resultate", help_text="Zusätzliche Resultate / Erkenntnisse")
 
     def get_status_logistics(self):
+        """
+        Get status of logistic tasks.
+        """
         if self.collection_partner_confirmed:
             return "success"
         else:
             return "danger"
 
     def get_status_marketing(self):
-        print "HALLOOOO"
+        """
+        Get status of logistic tasks.
+        """
         tasks_count = self.taskprogress_set.all().count()
         print tasks_count
         if tasks_count == 0:
@@ -123,6 +133,9 @@ class CollectionEvent(models.Model):
                 return "warning"
 
     def get_status_results(self):
+        """
+        Get status of feedback tasks.
+        """
         if self.feedback:
             return "success"
         return "danger"
@@ -137,6 +150,7 @@ class CollectionEvent(models.Model):
 
 class TaskProgress(models.Model):
     """
+    Represents the progress of a task.
     """
     collection_event = models.ForeignKey(CollectionEvent)
     task = models.ForeignKey(Task)

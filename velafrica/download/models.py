@@ -6,9 +6,6 @@ from simple_history.models import HistoricalRecords
 from velafrica.core.ftp import MyFTPStorage
 fs = MyFTPStorage()
 
-
-
-
 class File(models.Model):
     """
     Represents one entry of the velocounter app.

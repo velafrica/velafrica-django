@@ -63,6 +63,8 @@ class Ride(models.Model):
     """
     Represents a ride from one destination to the other.
     Used to count how many bicycles went from one place to another in a certain period of time.
+
+    :model:`stock.StockList`
     """
     date = models.DateField(blank=False, null=False, default=timezone.now, verbose_name="Datum")
     from_warehouse = models.ForeignKey(Warehouse, verbose_name='Start', related_name='from_warehouse', help_text='Start der Fahrt')

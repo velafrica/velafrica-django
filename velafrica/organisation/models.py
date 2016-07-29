@@ -8,6 +8,8 @@ from simple_history.models import HistoricalRecords
 
 class Canton(models.Model):
     """
+    deprecated
+
     TODO: delete
     """
     name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Name des Kantons")
@@ -19,6 +21,8 @@ class Canton(models.Model):
 
 class Municipality(models.Model):
     """
+    deprecated
+
     TODO: delete
     """
     gdenr = models.IntegerField(blank=False, null=False, verbose_name="Gemeindenr. des BFS")
@@ -53,6 +57,8 @@ class Country(models.Model):
 class Address(models.Model):
     """
     Represents the address of an organisation / partner / warehouse.
+
+    :model:`organisation.Country`
     """
     street = models.CharField(blank=True, null=True, max_length=255, verbose_name="Strasse und Hausnummer")
     zipcode = models.IntegerField(blank=True, null=True, verbose_name="Zipcode / PLZ")
@@ -72,11 +78,12 @@ class Address(models.Model):
 class Organisation(models.Model):
     """
     Represents a network partner.
-    TODO:
-    - differentiate between org types (string rep, admin)
+    
+    Both Swiss and African partners are represented as organisations.
+
+    African partners do have a linked :model:`velafrica_sud.PartnerSud` instance.
     """
 
-    # general information
     name = models.CharField(blank=False, null=True, max_length=255, verbose_name="Name der Organisation")
     website = models.URLField(blank=True, null=True, max_length=255, verbose_name="Website")
     address = models.ForeignKey(Address, verbose_name="Adresse", blank=True, null=True)
@@ -129,8 +136,6 @@ class Person(models.Model):
         on_delete=models.CASCADE,
         verbose_name="Django User Account"
         )
-    #first_name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Vorname")
-    #last_name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Nachname")
     organisation = models.ForeignKey('Organisation', verbose_name="Arbeitgeber")
 
     def __unicode__(self):

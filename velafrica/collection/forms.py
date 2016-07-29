@@ -5,6 +5,9 @@ from django import forms
 
 
 class EventForm(forms.ModelForm):
+    """
+    Add autocomplete functionality to municipality field.
+    """
     municipality = forms.ModelChoiceField(
         queryset=Municipality.objects.all(),
         widget=autocomplete.ModelSelect2(url='municipality-autocomplete')

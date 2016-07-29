@@ -12,6 +12,8 @@ from velafrica.organisation.models import Organisation
 def counter(request):
   """
   Counter main view
+
+  :model:`counter.Entry`
   """
 
   org_id = 0
@@ -35,10 +37,3 @@ def counter(request):
     'velos_max_date': statistics["velos_max_date"],
     }, context_instance=RequestContext(request)
   )
-
-@login_required
-def counter_form(request):
-  """
-  Show to create new entries.
-  """
-  pass

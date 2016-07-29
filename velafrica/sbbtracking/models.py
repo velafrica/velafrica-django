@@ -32,6 +32,7 @@ class TrackingEventType(models.Model):
     4. Containerverlad
     5. Ankunft Partner in Afrika
 
+
     """
     name = models.CharField(blank=False, null=False, max_length=255)
     show_partner_info = models.BooleanField(default=False, help_text="Zeige Partnerinfo an wenn vorhanden (Wird aus hinterlegtem Container ausgelesen).")
@@ -157,7 +158,6 @@ class Tracking(models.Model):
     container = models.ForeignKey(Container, blank=True, null=True)
     note = models.CharField(blank=True, null=True, max_length=255, verbose_name="Bemerkung")
     velo_type = models.ForeignKey('VeloType', blank=True, null=True)
-    #last_update = models.DateTimeField(blank=False, null=False, default=timezone.now, verbose_name="Letztes Update")
     last_event = models.ForeignKey(
         'TrackingEvent',
         null=True, 
@@ -217,6 +217,9 @@ class Tracking(models.Model):
 
     def add_event(self, t_event_type):
         """
+        Add :model:`sbbtracking.TrackingEvent` to :model:`sbbtracking.Tracking` 
+
+        Checks if event requirements are met.
         """
         if not t_event_type:
             print "t_event_type not defined"
@@ -239,8 +242,9 @@ class Tracking(models.Model):
 
     def next_tracking_eventtype_options(self):
         """
-        Returns a list of the tracking event types that can be added next
+        Returns a list of :model:`sbbtracking.TrackingEventType` that can be added next.
         """
+        
         # first off, set last event to be sure it is correct
         last_event = self.set_last_event()
         if last_event:
@@ -254,6 +258,7 @@ class Tracking(models.Model):
 
 class EmailLog(models.Model):
     """
+    Helper class, used to log sent emails.
     """
     tracking = models.ForeignKey(Tracking)
     tracking_event = models.ForeignKey(TrackingEvent)

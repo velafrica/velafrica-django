@@ -58,7 +58,16 @@ class Product(models.Model):
     packaging_unit = models.IntegerField(blank=True, null=True, verbose_name="Verpackungseinheit (VE)")
     history = HistoricalRecords()
 
+    def get_purchase_price(self):
+        """
+        Purchase price of a product is 1/6 of sales price.
+        """
+        return self.sales_price / 6
+
     def admin_image(self):
+        """
+        Return image for admin list view.
+        """
         return ('<img src="{}{}" style="max-height: 100px;" />'.format(settings.MEDIA_URL, self.image))
     admin_image.allow_tags = True
 
@@ -71,7 +80,11 @@ class Product(models.Model):
 
 class Warehouse(models.Model):
     """
-    TODO: everything
+    Represents a warehouse. Warehouses can hold :model:`stock.Stock` .
+
+    Only Swiss organisations can have warehouses.
+
+    Warehouses are also used to record :model:`transport.Ride`
     """
     name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Name", help_text="Der Name / Bezeichnung des Lagers")
     description = models.CharField(blank=True, null=True, max_length=255, verbose_name="Beschreibung", help_text="Beschreibung / Bemerkungen zum Lager")
@@ -96,10 +109,7 @@ class Warehouse(models.Model):
 
 class Stock(models.Model):
     """
-    TODO: everything
-    - Warehouse
-    - Product
-    - amount
+    Used to hold information on product stock in a specific :model:`stock.Warehouse`
     """
     product = models.ForeignKey(Product, verbose_name="Produkt")
     warehouse = models.ForeignKey(Warehouse, verbose_name="Lager", help_text='Das Lager wo sich der Stock befindet')
@@ -120,10 +130,17 @@ class Stock(models.Model):
 
 class StockList(models.Model):
     """
-    TODO: remove
     A StockList is an universal object that can be used in various contexts,
     like as a payload inventory of a container or a transport, or as an inventory
     of an internal stock transfer.
+
+    Models that can reference to a stocklist:
+
+    :model:`transport.Ride`
+
+    :model:`stock.StockTransfer`
+
+    :model:`velafrica_sud.Container`
     """
     last_change = models.DateTimeField(default=timezone.now)
     description = models.CharField(blank=True, null=True, max_length=255)
@@ -135,18 +152,27 @@ class StockList(models.Model):
         return u"SL#{0} - {1} ({2:%d.%m.%Y}, {3}:{2:%M})".format(self.id, self.description, self.last_change, self.last_change.hour+2)
 
     def get_stocktransfer(self):
+        """
+        Get related :model:`stock.StockTransfer` if available.
+        """
         if self.stocktransfer:
             return self.stocktransfer
         return None
     get_stocktransfer.short_description = 'Stock Transfer'
 
     def get_ride(self):
+        """
+        Get related :model:`transport.Ride` if available.
+        """
         if self.ride:
             return self.ride
         return None
     get_ride.short_description = 'Ride'
 
     def get_container(self):
+        """
+        Get related :model:`velafrica_sud.Container` if available.
+        """
         if self.container:
             return self.container
         return None
@@ -220,6 +246,8 @@ class StockChange(models.Model):
         return u"StockChange {}, {} {}".format(self.datetime, self.stock_change_type, self.warehouse)
 
 class StockChangeListPos(StockListPos):
+    """
+    """
     stockchange = models.ForeignKey(StockChange)
 
 
@@ -245,7 +273,6 @@ class StockTransfer(models.Model):
         - adjust stock
         - create StockChange
         - set booked to True
-        TODO: email notifications
         """
         if self.booked:
             print("Already booked, no action.")
@@ -295,7 +322,6 @@ class StockTransfer(models.Model):
         - adjust stock
         - create StockChange
         - set booked to True
-        TODO: email notifications
         """
         if not self.booked:
             print("Not booked yet, no action.")
@@ -335,6 +361,10 @@ class StockTransfer(models.Model):
 
 
 class StockTransferListPos(StockListPos):
+    """
+    Not in use yet.
+    TODO: implement properly.
+    """
     stocktransfer = models.ForeignKey(StockTransfer)
 
     class Meta:
