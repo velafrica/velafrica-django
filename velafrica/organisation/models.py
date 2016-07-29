@@ -5,6 +5,7 @@ from django.conf import settings
 from django.db import models
 from django_resized import ResizedImageField
 from simple_history.models import HistoricalRecords
+from velafrica.core import utils
 
 class Canton(models.Model):
     """
@@ -62,12 +63,24 @@ class Address(models.Model):
     """
     street = models.CharField(blank=True, null=True, max_length=255, verbose_name="Strasse und Hausnummer")
     zipcode = models.IntegerField(blank=True, null=True, verbose_name="Zipcode / PLZ")
-    city = models.CharField(blank=False, null=False, max_length=255, verbose_name="Ort")
+    city = models.CharField(blank=True, null=True, max_length=255, verbose_name="Ort")
     state = models.CharField(blank=True, null=True, max_length=255, verbose_name="Kanton / Region")
     country = models.ForeignKey(Country, verbose_name="Land")
 
     latitude = models.DecimalField(blank=True, null=True, verbose_name='Breitengrad', max_digits=9, decimal_places=6)
     longitude = models.DecimalField(blank=True, null=True, verbose_name='Längengrad', max_digits=9, decimal_places=6)
+
+    def get_geolocation(self):
+        """
+        """
+        loc = utils.get_geolocation(self.__unicode__())
+        if loc:
+            self.latitude = loc['lat']
+            self.longitude = loc['lng']
+            self.save()
+            return loc
+        else:
+            return None
 
     def __unicode__(self):
         return u"{}, {} {}, {}".format(self.street, self.zipcode, self.city, self.country)
@@ -90,38 +103,31 @@ class Organisation(models.Model):
     description = models.TextField(blank=True, null=True)
     contact = models.TextField(verbose_name="Kontaktperson", help_text="Name, Email, Telefon, Skype etc", blank=True, null=True)
 
-
-    # TODO: following fields will be removed in the future
-    street = models.CharField(blank=True, null=True, max_length=255, verbose_name="Strasse", help_text="WARNING: Will be removed soon") 
-    plz = models.IntegerField(blank=True, null=True, verbose_name="PLZ", help_text="WARNING: Will be removed soon")
-    city = models.CharField(blank=True, null=True, max_length=255, verbose_name="Ort", help_text="WARNING: Will be removed soon")
-
     history = HistoricalRecords()
-    
-    def migrate_address(self):
-        """
-        Create address from deprecated fields
-        """
-        if not self.address:
-            c, created = Country.objects.get_or_create(code="ch", name="Schweiz")
-            a =  Address(
-                    street = self.street,
-                    zipcode = self.plz,
-                    city = self.city,
-                    country = c
-                )
-            a.save()
-            self.address = a
-            self.save()
 
-    def has_partnersud(self):
+    def is_partnersud(self):
+        """
+        """
         if self.partnersud:
             return True
         else:
             return False
+    is_partnersud.short_description = "Süd Partner"
+
+    def get_partnersud(self):
+        """
+        """
+        if self.partnersud:
+            return self.partnersud
+        else:
+            return "-"
+    get_partnersud.short_description = "Süd Partner"
 
     def __unicode__(self):
-        return u"{}, {}".format(self.name, self.city)
+        if self.address:
+            return u"{}, {}".format(self.name, self.address.city)
+        else:
+            return u"{}".format(self.name)
 
     class Meta:
         ordering = ['name']

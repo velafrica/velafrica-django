@@ -3,7 +3,7 @@ from datetime import timedelta, date
 from django.utils import timezone
 from django.db import models
 from simple_history.models import HistoricalRecords
-from velafrica.organisation.models import Organisation, Municipality
+from velafrica.organisation.models import Organisation, Municipality, Address
 
 def get_default_task_status():
     """
@@ -35,8 +35,11 @@ class Event(models.Model):
     category = models.ForeignKey(EventCategory, verbose_name="Kategorie")
     yearly = models.BooleanField(default=False, verbose_name="Jährlich wiederkehrend?")
     host = models.CharField(max_length=255, verbose_name="Veranstalter")
+    
     municipality = models.ForeignKey(Municipality, verbose_name="Ort")
     address = models.TextField(blank=True)
+
+    address_new = models.ForeignKey(Address, verbose_name="Adresse", blank=True, null=True)
 
     def __unicode__(self):
         return u"{}".format(self.name)

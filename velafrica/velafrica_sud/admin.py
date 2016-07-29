@@ -45,13 +45,13 @@ class ContainerResource(resources.ModelResource):
 
     class Meta:
         model = Container
-        fields = ('container_no', 'organisation_from', 'organisation_from__name', 'partner_to', 'partner_to__name', 'velos_loaded', 'velos_unloaded', 'spare_parts', 'logistics', 'logistics__name', 'pickup_date', 'shipment_date', 'arrival_port_date', 'arrival_partner_date', 'velos_worth', 'spare_parts_worth', 'tools_worth', 'various_worth', 'seal_no', 'sgs_certified', 'notes')
+        fields = ('container_no', 'organisation_from', 'organisation_from__name', 'partner_to', 'partner_to__organisation__name', 'velos_loaded', 'velos_unloaded', 'spare_parts', 'logistics', 'logistics__name', 'pickup_date', 'shipment_date', 'arrival_port_date', 'arrival_partner_date', 'velos_worth', 'spare_parts_worth', 'tools_worth', 'various_worth', 'seal_no', 'sgs_certified', 'notes')
 
 
 class ContainerAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
     resource_class = ContainerResource
     list_display = ['pickup_date', 'container_n_of_all', 'container_no', 'organisation_from', 'warehouse_from', 'partner_to', 'velos_loaded', 'velos_unloaded', 'spare_parts', 'booked', 'notes']
-    search_fields = ['container_no', 'organisation_from__name', 'partner_to__name']
+    search_fields = ['container_no', 'organisation_from__name', 'partner_to__organisation__name']
     list_filter = ['pickup_date', ('pickup_date', DateRangeFilter), 'organisation_from', 'partner_to',]
     change_actions = ('book_container',)
     readonly_fields = ['container_n_of_all']
@@ -96,16 +96,16 @@ class ContainerInline(admin.TabularInline):
     readonly_fields = ['booked']
 
 class PartnerSudAdmin(SimpleHistoryAdmin):
-    list_display = ['name', 'country', 'website', 'get_container_count', 'get_bicycle_count']
-    search_fields = ['name', 'country__name']
-    readonly_fields = ['name', 'description', 'website', 'contact', 'street', 'zipcode', 'area', 'country', 'longitude', 'latitude']
+    list_display = ['organisation', 'get_country', 'get_container_count', 'get_bicycle_count']
+    search_fields = ['organisation__name', 'country__name']
+    readonly_fields = ['get_address', 'get_name', 'get_website', 'get_description', 'get_country']
     inlines = [ContainerInline, ]
     fieldsets = (
         (None, {
-            'fields': ('organisation', 'name', 'description', 'website', 'image', 'contact' )
+            'fields': ('organisation', 'get_name', 'get_website', 'get_description', 'image')
             }),
         ('Location', {
-            'fields': ('street', 'zipcode', 'area', 'country', 'longitude', 'latitude')
+            'fields': ('get_address',)
             }),
         ('Organisation', {
             'fields': ('legalform', 'org_type', 'partner_since', 'vocational_training', 'infrastructure' )

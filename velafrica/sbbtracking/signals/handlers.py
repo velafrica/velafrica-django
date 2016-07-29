@@ -54,9 +54,9 @@ def send_email(sender, instance, created, **kwargs):
 			# check if partner info needs to be included and if it is available
 			if instance.event_type.show_partner_info and instance.tracking.container:
 				partner = instance.tracking.container.partner_to
-				msg_body += u"\n\n{}\n{}\n".format(partner.name, partner.description)
-				if partner.website:
-					msg_body += partner.website
+				msg_body += u"\n\n{}\n{}\n".format(partner.get_name(), partner.get_description())
+				if partner.get_website():
+					msg_body += partner.get_website()
 
 			msg_footer = u"Verfolgen Sie Ihr Velo online, auf http://tracking.velafrica.ch/tracking/{}\n\nDiese Email wurde automatisch generiert. Bitte antworten Sie nicht darauf.".format(
 				instance.tracking.tracking_no

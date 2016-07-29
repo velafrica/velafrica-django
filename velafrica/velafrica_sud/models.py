@@ -153,21 +153,8 @@ class PartnerSud(models.Model):
     """
     Represents a partner of the Velafrica Sud Network.
     """
-    organisation = models.OneToOneField(Organisation, blank=True, null=True, related_name="partnersud")
-    
-    name = models.CharField(blank=False, null=True, max_length=255, verbose_name="Name der Organisation", help_text="WARNING: Will be removed soon")
-    description = models.TextField(blank=True, null=True, help_text="WARNING: Will be removed soon")
-    contact = models.TextField(verbose_name="Kontaktperson", blank=True, null=True, help_text="WARNING: Will be removed soon")
-    website = models.URLField(blank=True, null=True, max_length=255, verbose_name="Website", help_text="WARNING: Will be removed soon")
-
+    organisation = models.OneToOneField(Organisation, blank=False, null=False, related_name="partnersud")
     image = ResizedImageField(storage=fs, size=[800, 800], upload_to='velafrica_sud/partner/', blank=True, null=True, help_text='Foto vom Partner vor Ort.')
-
-    street = models.CharField(max_length=255, blank=True, null=True, help_text="WARNING: Will be removed soon")
-    zipcode = models.IntegerField(blank=True, null=True, help_text="WARNING: Will be removed soon")
-    area = models.CharField(max_length=255, blank=True, null=True, help_text="WARNING: Will be removed soon")
-    country = models.ForeignKey(Country, verbose_name='Land', help_text="WARNING: Will be removed soon")
-    latitude = models.DecimalField(blank=True, null=True, verbose_name='Breitengrad', max_digits=9, decimal_places=6, help_text="WARNING: Will be removed soon")
-    longitude = models.DecimalField(blank=True, null=True, verbose_name='Längengrad', max_digits=9, decimal_places=6, help_text="WARNING: Will be removed soon")
 
     # partner sud info
     org_type = models.CharField(max_length=255, blank=True, null=True)
@@ -178,56 +165,38 @@ class PartnerSud(models.Model):
 
     history = HistoricalRecords()
 
-    def create_organisation(self):
+    def get_name(self):
         """
-        only used for migration to new database scheme
         """
-        if not self.organisation:
-            print "no organisation found"
-            from velafrica.organisation.models import Country as Country2
-            print self.country.name
-            c = Country2(name=self.country.name)
-            c.save()
-            print c
-            a = Address(
-                street = self.street,
-                zipcode = self.zipcode,
-                state = self.area,
-                country = c,
+        return self.organisation.name
+    get_name.short_description = "Name"
 
-                latitude = self.latitude,
-                longitude = self.longitude
-                )
-            a.save()
-            o = Organisation(
-                    name = self.name,
-                    website = self.website,
-                    description = self.description,
-                    contact = self.contact,
-                    address = a
-                )
-            o.save()
-
-            self.organisation = o
-            self.save()
-
-    def migrate_address(self):
+    def get_address(self):
         """
-        Only for migration purposes.
-        TODO: delete after final model changes
         """
-        from velafrica.organisation.models import Country as Country2
-        c, created = Country2.objects.get_or_create(name=self.country.name)
-        if self.organisation:
-            a = self.organisation.address
-            a.street = self.street
-            a.zipcode = self.zipcode
-            a.state = self.area
-            a.country = c
-            a.longitude = self.longitude
-            a.latitude = self.latitude
-            a.save()
-            print u"{} address migrated".format(self)
+        return self.organisation.address
+    get_address.short_description = "Adresse"
+
+    def get_website(self):
+        """
+        """
+        return self.organisation.website
+    get_website.short_description = "Website"
+
+    def get_description(self):
+        """
+        """
+        return self.organisation.description
+    get_description.short_description = "Description"
+
+    def get_country(self):
+        """
+        """
+        if self.organisation.address:
+            return self.organisation.address.country
+        else:
+            return None
+    get_country.short_description = "Land"
 
     def get_container_count(self):
         """
@@ -247,10 +216,10 @@ class PartnerSud(models.Model):
     get_bicycle_count.short_description = 'Anzahl exp. Velos'
 
     def __unicode__(self):
-        return u"{}, {}".format(self.name, self.country)
+        return u"{}, {}".format(self.organisation.name, self.organisation.address.country)
 
     class Meta:
-        ordering = ['name']
+        ordering = ['organisation__name']
         verbose_name_plural = "Partner Süd"
 
 

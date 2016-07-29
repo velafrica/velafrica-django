@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django import template
 from django_object_actions import DjangoObjectActions
-from django.contrib import admin
+from django.contrib import admin, messages
 from django.utils.safestring import mark_safe
 from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response
