@@ -4,6 +4,7 @@ from django.core.validators import RegexValidator
 from django.db import models
 from django_resized import ResizedImageField
 from simple_history.models import HistoricalRecords
+from velafrica.core import utils
 from velafrica.organisation.models import Person, Organisation
 from velafrica.stock.models import Warehouse, StockList
 
@@ -77,7 +78,24 @@ class Ride(models.Model):
     stocklist = models.OneToOneField(StockList, null=True, blank=True)
     note = models.CharField(blank=True, null=True, max_length=255, verbose_name="Bemerkung", help_text="Bemerkung zur Fahrt")
     
+    distance = models.IntegerField(verbose_name="Ungefähre Distanz in Meter", blank=True, null=True)
+
     history = HistoricalRecords()
+
+    def get_distance(self):
+        """
+        Get distance from start to end of the driven way, using the Google Maps API.
+        """
+        loc1 = self.from_warehouse.get_geolocation()
+        loc2 = self.to_warehouse.get_geolocation()
+        if loc1 and loc2:
+            result = utils.get_distance(loc1, loc2)
+            if type(result) == int:
+                self.distance = result
+                self.save()
+                return result
+        return None
+
 
     def __unicode__(self):
         try:

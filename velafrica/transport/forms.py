@@ -8,11 +8,11 @@ from django import forms
 class RideForm(forms.ModelForm):
     from_warehouse = forms.ModelChoiceField(
         queryset=Warehouse.objects.all(),
-        widget=autocomplete.ModelSelect2(url='warehouse-autocomplete')
+        widget=autocomplete.ModelSelect2(url='autocomplete:warehouse')
     )
     to_warehouse = forms.ModelChoiceField(
         queryset=Warehouse.objects.all(),
-        widget=autocomplete.ModelSelect2(url='warehouse-autocomplete')
+        widget=autocomplete.ModelSelect2(url='autocomplete:warehouse')
     )
 
     class Meta:

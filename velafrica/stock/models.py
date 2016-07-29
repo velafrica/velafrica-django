@@ -91,7 +91,6 @@ class Warehouse(models.Model):
     organisation = models.ForeignKey(Organisation, verbose_name="Organisation", help_text='Die Organisation zu welcher das Lager gehört. (Nur VPN Schweiz Partner)', limit_choices_to={'partnersud': None})
     image = ResizedImageField(storage=fs, size=[500, 500], upload_to='stock/warehouses/', blank=True, null=True, verbose_name="Bild des Lagers")
     
-
     # address
     address = models.ForeignKey(Address, null=True, blank=True, verbose_name="Andere Adresse als Organisation", help_text="Nur angeben wenn die Lageradresse von Organisationsadresse abweicht.")
 
@@ -99,6 +98,19 @@ class Warehouse(models.Model):
     notify_on_incoming_transport = models.TextField(null=True, blank=True, verbose_name="Über angeliferte Ersatzteile informieren", help_text="Eine Emailadressen pro Zeile. Hier eingetragene Emailadressen werden jedesmal benachrichtigt, sobald eine neue Fahrt  mit Ersatzteilen zu diesem Lager erfasst wird.")
     history = HistoricalRecords()
 
+    def get_address(self):
+        """
+        """
+        if self.address:
+            return self.address
+        else:
+            return self.organisation.address
+
+    def get_geolocation(self):
+        """
+        """
+        address = self.get_address()
+        return address.get_geolocation()
     
     def __unicode__(self):
         return u"{}, {}".format(self.organisation.name, self.name)

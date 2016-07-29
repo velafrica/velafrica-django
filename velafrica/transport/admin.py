@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-from django.contrib import admin
+from django.contrib import admin, messages
+from django_object_actions import DjangoObjectActions
 from import_export import resources
 from import_export.admin import ImportExportMixin
 from import_export.fields import Field
@@ -48,12 +49,32 @@ class RideResource(resources.ModelResource):
         fields = ('date', 'from_warehouse', 'from_warehouse__name', 'to_warehouse', 'to_warehouse__name', 'driver', 'driver__name', 'car', 'car__name', 'velos', 'velo_state', 'velo_state__name', 'spare_parts', )
 
 
-class RideAdmin(ImportExportMixin, SimpleHistoryAdmin):
+class RideAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
     form = RideForm
     resource_class = RideResource
-    list_display = ['id', 'date', 'from_warehouse', 'to_warehouse', 'driver', 'velos', 'velo_state', 'spare_parts']
+    list_display = ['id', 'date', 'from_warehouse', 'to_warehouse', 'driver', 'velos', 'velo_state', 'spare_parts', 'distance']
     search_fields = ['from_warehouse__name', 'to_warehouse__name', 'driver__name']
     list_filter = ['date', 'driver', 'velo_state', 'spare_parts']
+    changelist_actions = ['get_distances']
+    change_actions = ['get_distance']
+
+    def get_distance(self, request, obj):
+        result = obj.get_distance()
+        print result
+        if type(result) == int: 
+            self.message_user(request, "Die Distanz zwischen {} und {} beträgt {} Meter.".format(obj.from_warehouse, obj.to_warehouse, result))
+        else:
+            self.message_user(request, "Die Distanz konnte nicht ermittelt werden.", level=messages.WARNING)
+
+    def get_distances(self, request, queryset):
+        count = 0
+        for r in queryset:
+            if not r.distance:
+                result = r.get_distance()
+                if result:
+                    count += 1
+        self.message_user(request, "GeoLocation set on {} addresses".format(count))
+
 
 
 admin.site.register(Car, CarAdmin)

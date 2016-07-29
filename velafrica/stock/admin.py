@@ -127,7 +127,6 @@ class StockChangeAdmin(ImportExportMixin, SimpleHistoryAdmin):
 
 
 class WarehouseAdmin(ImportExportMixin, SimpleHistoryAdmin):
-    form = WarehouseForm
     inlines = [StockInline,]
     resource_class = WarehouseResource
     list_display = ['name', 'organisation', 'description', 'stock_management']
