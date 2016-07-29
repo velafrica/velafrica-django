@@ -10,7 +10,7 @@ class EventForm(forms.ModelForm):
     """
     municipality = forms.ModelChoiceField(
         queryset=Municipality.objects.all(),
-        widget=autocomplete.ModelSelect2(url='municipality-autocomplete')
+        widget=autocomplete.ModelSelect2(url='autocomplete:municipality')
     )
 
     class Meta:
