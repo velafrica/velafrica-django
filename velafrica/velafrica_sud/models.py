@@ -302,7 +302,7 @@ class Report(models.Model):
     economic_services_turnover = models.IntegerField(verbose_name="Umsatz Dienstleistungen",blank=True, null=True)
     economic_turnover_total = models.IntegerField(verbose_name="Total Umsatz",blank=True, null=True)
 
-    economic_import_taxes = models.IntegerField(verbose_name="Aktuelle Importzölle für gebrauchte Fahrräder", blank=True,null=True)
+    economic_import_taxes = models.CharField(verbose_name="Aktuelle Importzölle für gebrauchte Fahrräder", blank=True,null=True, max_length=255)
     economic_transport_costs_port_to_organisation = models.IntegerField(verbose_name="Aktuelle Kosten für Transport von Eingangshafen zur Organisation", blank=True, null=True)
 
     economic_category1_name = models.CharField(verbose_name="Kategorie 1", max_length=255,blank=True, null=True)
