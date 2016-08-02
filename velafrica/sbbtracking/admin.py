@@ -132,8 +132,9 @@ class TrackingAdmin(DjangoObjectActions, ImportExportMixin, SimpleHistoryAdmin):
     def fix_last_event(self, request, obj):
         """
         """
-        if obj.set_last_event():
-            self.message_user(request, "Successfully set last_event.")
+        event = obj.set_last_event()
+        if event:
+            self.message_user(request, "Letzten Event erfolgreich aktualisiert zu {}.".format(event.last_event))
     fix_last_event.label = "Letzter Event korrigieren"
 
 

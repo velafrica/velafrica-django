@@ -33,7 +33,7 @@ class OrganisationAdmin(ImportExportMixin, SimpleHistoryAdmin):
     # inlines = [WarehouseInline,]
     list_display = ['name', 'address', 'website', 'is_partnersud']
     search_fields = ['name', 'address__city']
-    fields = ['name', 'website', 'get_partnersud', 'address', 'contact','description']
+    fields = ['name', 'website', 'facebook', 'get_partnersud', 'address', 'contact','description']
     readonly_fields = ['get_partnersud']
 
 
@@ -82,7 +82,7 @@ class AddressAdmin(DjangoObjectActions, SimpleHistoryAdmin):
     """
     """
     list_display = ['__str__', 'street', 'zipcode', 'city', 'state', 'country', 'longitude', 'latitude']
-    search_fields = ['street', 'zipcode', 'city', 'country']
+    search_fields = ['street', 'zipcode', 'city', 'country__name']
     list_filter = ['state', 'country']
     change_actions = ['get_geolocation']
     changelist_actions = ['get_geolocations']

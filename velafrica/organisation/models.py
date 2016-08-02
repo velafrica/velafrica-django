@@ -98,7 +98,8 @@ class Organisation(models.Model):
     """
 
     name = models.CharField(blank=False, null=True, max_length=255, verbose_name="Name der Organisation")
-    website = models.URLField(blank=True, null=True, max_length=255, verbose_name="Website")
+    website = models.URLField(blank=True, null=True, max_length=255, verbose_name="Website (URL)")
+    facebook = models.URLField(blank=True, null=True, max_length=255, verbose_name="Facebook Page (URL)")
     address = models.ForeignKey(Address, verbose_name="Adresse", blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     contact = models.TextField(verbose_name="Kontaktperson", help_text="Name, Email, Telefon, Skype etc", blank=True, null=True)

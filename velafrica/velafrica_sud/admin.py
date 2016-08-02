@@ -102,7 +102,7 @@ class PartnerSudAdmin(SimpleHistoryAdmin):
     inlines = [ContainerInline, ]
     fieldsets = (
         (None, {
-            'fields': ('organisation', 'get_name', 'get_website', 'get_description', 'image')
+            'fields': ('organisation', 'get_name', 'get_contact', 'get_website', 'get_facebook', 'get_description', 'image')
             }),
         ('Location', {
             'fields': ('get_address',)
@@ -142,7 +142,6 @@ class ReportAdmin(ImportExportMixin, SimpleHistoryAdmin):
         ('Employment', {
             'classes': ('collapse', ),
             'fields': (
-                'employment_salary_calculation',
                 'employment_fulltime_men', 
                 'employment_fulltime_women', 
                 'employment_parttime_men', 
@@ -154,6 +153,7 @@ class ReportAdmin(ImportExportMixin, SimpleHistoryAdmin):
                 'employment_trainee_men',
                 'employment_trainee_women',
                 'employment_notes',
+                'employment_salary_calculation',
                 )
             }),
         ('Economic', {
@@ -193,6 +193,8 @@ class ReportAdmin(ImportExportMixin, SimpleHistoryAdmin):
             'fields': (
                 'marketing_customer_segments',
                 'marketing_customer_segments_other',
+                'marketing_customer_segments_top1',
+                'marketing_customer_segments_top2',
                 'marketing_customer_segments_top3',
                 'marketing_channels_mouth',
                 'marketing_channels_radio',

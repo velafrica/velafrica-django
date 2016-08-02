@@ -183,6 +183,18 @@ class PartnerSud(models.Model):
         return self.organisation.website
     get_website.short_description = "Website"
 
+    def get_facebook(self):
+        """
+        """
+        return self.organisation.facebook
+    get_facebook.short_description = "Facebook"
+
+    def get_contact(self):
+        """
+        """
+        return self.organisation.contact
+    get_facebook.short_description = "Kontaktperson"
+
     def get_description(self):
         """
         """
@@ -241,7 +253,7 @@ class Report(models.Model):
     employment_internship_women = models.IntegerField(verbose_name="Angestellte Internship Frauen",blank=True, null=True)
     employment_trainee_men = models.IntegerField(verbose_name="Angestellte Trainee Männer",blank=True, null=True)
     employment_trainee_women = models.IntegerField(verbose_name="Angestellte Trainee Frauen",blank=True, null=True)
-    employment_notes = models.TextField(verbose_name="Bemerkungen",blank=True, null=True)
+    employment_notes = models.TextField(verbose_name="Jobs Beschreibung",blank=True, null=True)
     employment_salary_calculation = models.TextField(verbose_name="Berechnung der Saläre", help_text="Wie werden die Saläre / Kompensationen berechnet?", blank=True, null=True)
 
     # marketing
@@ -258,9 +270,11 @@ class Report(models.Model):
         ('hospitals', 'Hospitals'),
         ('other', 'other'),
     )
-    marketing_customer_segments = models.CharField(max_length=255, choices=CUSTOMER_SEGMENT_CHOICES, blank=True, null=True, verbose_name="Kundensegmente")
+    marketing_customer_segments = MultiSelectField(max_length=255, choices=CUSTOMER_SEGMENT_CHOICES, blank=True, null=True, verbose_name="Kundensegmente")
     marketing_customer_segments_other = models.CharField(max_length=255, blank=True, null=True, verbose_name="Andere", help_text="Bitte ausfüllen, wenn bei der vorherigen Frage 'others' ausgewählt wurde.")
-    marketing_customer_segments_top3 = MultiSelectField(choices=CUSTOMER_SEGMENT_CHOICES, max_choices=3, max_length=255, verbose_name="Kundensegmente Top 3", blank=True, null=True)
+    marketing_customer_segments_top1 = models.CharField(choices=CUSTOMER_SEGMENT_CHOICES, max_length=255, verbose_name="Kundensegmente Top 1", blank=True, null=True)
+    marketing_customer_segments_top2 = models.CharField(choices=CUSTOMER_SEGMENT_CHOICES, max_length=255, verbose_name="Kundensegmente Top 2", blank=True, null=True)
+    marketing_customer_segments_top3 = models.CharField(choices=CUSTOMER_SEGMENT_CHOICES, max_length=255, verbose_name="Kundensegmente Top 3", blank=True, null=True)
 
     CHANNEL_CHOICES = (
         ('1', 'We don\'t use it'),
@@ -364,7 +378,7 @@ class Report(models.Model):
 
     # mobility program
     mobilityprogram = models.BooleanField(default=False)
-    mobilityprogram_people_benefitted = models.IntegerField(verbose_name="Anzahl Personen die vom Mobilitätsprogramm profitiert haben",blank=True, null=True)
+    mobilityprogram_people_benefitted = models.CharField(max_length=255, verbose_name="Anzahl Personen die vom Mobilitätsprogramm profitiert haben",blank=True, null=True)
     mobilityprogram_financial_support = models.BooleanField(default=False, verbose_name="Mobilitätsprogramm finanziell von Velafrica unterstützt?")
     mobilityprogram_notes = models.TextField(verbose_name="Bemerkungen",blank=True, null=True)
 
@@ -424,7 +438,7 @@ class Role(models.Model):
     """
     Name of a role of PartnerSud staff.
     """
-    name = models.CharField(verbose_name="Name", max_length=255)
+    name = models.CharField(verbose_name="Name", max_length=255, unique=True)
 
     def __unicode__(self):
         return self.name
