@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin, messages
 from django_object_actions import DjangoObjectActions
+from django.utils.safestring import mark_safe
 from velafrica.organisation.models import Organisation, Person, Canton, Municipality, Address, Country
 from velafrica.stock.models import Warehouse
 from import_export import resources
@@ -81,7 +82,7 @@ class MunicipalityAdmin(ImportExportMixin, SimpleHistoryAdmin):
 class AddressAdmin(DjangoObjectActions, SimpleHistoryAdmin):
     """
     """
-    list_display = ['__str__', 'street', 'zipcode', 'city', 'state', 'country', 'latitude', 'longitude', 'get_googlemaps_url']
+    list_display = ['__str__', 'street', 'zipcode', 'city', 'state', 'country', 'latitude', 'longitude', 'get_googlemaps_link']
     search_fields = ['street', 'zipcode', 'city', 'country__name']
     list_filter = ['state', 'country']
     change_actions = ['get_geolocation']
@@ -100,7 +101,18 @@ class AddressAdmin(DjangoObjectActions, SimpleHistoryAdmin):
                 result = a.get_geolocation()
                 if result:
                     count += 1
-        self.message_user(request, "GeoLocation set on {} addresses".format(count))
+        self.message_user(request, u"GeoLocation set on {} addresses".format(count))
+
+    def get_googlemaps_link(self, obj):
+        url = obj.get_googlemaps_url()
+        if url:
+            return mark_safe(u"<a href='{}' target='_blank'>{}</a>".format(
+                url,
+                "Google Maps"
+            ))
+        else:
+            return ""
+    get_googlemaps_link.short_description = 'Google Maps'
 
 
 

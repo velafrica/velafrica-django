@@ -86,7 +86,10 @@ class Address(models.Model):
     def get_googlemaps_url(self):
         """
         """
-        return utils.get_googlemaps_url_place(self.__unicode__())
+        # address should at least have country and city provided, everything else is to inacurate
+        if self.country and self.city:
+            return utils.get_googlemaps_url_place(self.__unicode__())
+        return None
 
     def __unicode__(self):
         __str = u""
@@ -111,6 +114,7 @@ class Address(models.Model):
 
     class Meta:
         verbose_name_plural = "Addresses"
+
 
 class Organisation(models.Model):
     """

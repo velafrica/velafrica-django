@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin, messages
 from django_object_actions import DjangoObjectActions
+from django.utils.safestring import mark_safe
 from import_export import resources
 from import_export.admin import ImportExportMixin
 from import_export.fields import Field
@@ -9,6 +10,7 @@ from simple_history.admin import SimpleHistoryAdmin
 from velafrica.stock.models import Warehouse
 from velafrica.transport.models import Car, Driver, VeloState, Ride
 from velafrica.transport.forms import RideForm
+
 
 class CarAdmin(SimpleHistoryAdmin):
     list_display = ['name', 'organisation', 'plate']
@@ -23,6 +25,7 @@ class DriverAdmin(SimpleHistoryAdmin):
 class VeloStateAdmin(SimpleHistoryAdmin):
     list_display = ['name']
     search_fields = ['name']
+
 
 class RideResource(resources.ModelResource):
     """
@@ -52,7 +55,7 @@ class RideResource(resources.ModelResource):
 class RideAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
     form = RideForm
     resource_class = RideResource
-    list_display = ['id', 'date', 'from_warehouse', 'to_warehouse', 'driver', 'velos', 'velo_state', 'spare_parts', 'distance', 'get_googlemaps_url']
+    list_display = ['id', 'date', 'from_warehouse', 'to_warehouse', 'driver', 'velos', 'velo_state', 'spare_parts', 'distance', 'get_googlemaps_link']
     search_fields = ['from_warehouse__name', 'to_warehouse__name', 'driver__name']
     list_filter = ['date', 'driver', 'velo_state', 'spare_parts']
     changelist_actions = ['get_distances']
@@ -75,6 +78,16 @@ class RideAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
                     count += 1
         self.message_user(request, "GeoLocation set on {} addresses".format(count))
 
+    def get_googlemaps_link(self, obj):
+        url = obj.get_googlemaps_url()
+        if url:
+            return mark_safe(u"<a href='{}' target='_blank'>{}</a>".format(
+                url,
+                "Google Maps"
+            ))
+        else:
+            return ""
+    get_googlemaps_link.short_description = 'Google Maps'
 
 
 admin.site.register(Car, CarAdmin)
