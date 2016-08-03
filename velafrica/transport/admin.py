@@ -58,8 +58,10 @@ class RideAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
     list_display = ['id', 'date', 'from_warehouse', 'to_warehouse', 'driver', 'velos', 'velo_state', 'spare_parts', 'distance', 'get_googlemaps_link']
     search_fields = ['from_warehouse__name', 'to_warehouse__name', 'driver__name']
     list_filter = ['date', 'driver', 'velo_state', 'spare_parts']
+    readonly_fields = ['get_googlemaps_link']
     changelist_actions = ['get_distances']
     change_actions = ['get_distance']
+    actions = ['get_distances']
 
     def get_distance(self, request, obj):
         result = obj.get_distance()
@@ -68,15 +70,17 @@ class RideAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
             self.message_user(request, "Die Distanz zwischen {} und {} beträgt {} Meter.".format(obj.from_warehouse, obj.to_warehouse, result))
         else:
             self.message_user(request, "Die Distanz konnte nicht ermittelt werden.", level=messages.WARNING)
+    get_distance.short_description = "Distanz berechnen"
+    get_distance.label = "Distanz berechnen"
 
     def get_distances(self, request, queryset):
         count = 0
         for r in queryset:
-            if not r.distance:
-                result = r.get_distance()
-                if result:
-                    count += 1
-        self.message_user(request, "GeoLocation set on {} addresses".format(count))
+            result = r.get_distance()
+            if result:
+                count += 1
+        self.message_user(request, "Die Distanz wurde auf {} Adressen gesetzt.".format(count))
+    get_distances.short_description = "Distanz berechnen"
 
     def get_googlemaps_link(self, obj):
         url = obj.get_googlemaps_url()
