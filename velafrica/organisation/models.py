@@ -73,17 +73,41 @@ class Address(models.Model):
     def get_geolocation(self):
         """
         """
-        loc = utils.get_geolocation(self.__unicode__())
-        if loc:
-            self.latitude = loc['lat']
-            self.longitude = loc['lng']
-            self.save()
-            return loc
-        else:
-            return None
+        # first check if at least city and country are provided, otherwise don't get geolocation
+        if self.city and self.country:
+            loc = utils.get_geolocation(self.__unicode__())
+            if loc:
+                self.latitude = loc['lat']
+                self.longitude = loc['lng']
+                self.save()
+                return loc
+        return None
+
+    def get_googlemaps_url(self):
+        """
+        """
+        return utils.get_googlemaps_url_place(self.__unicode__())
 
     def __unicode__(self):
-        return u"{}, {} {}, {}".format(self.street, self.zipcode, self.city, self.country)
+        __str = u""
+        if self.street:
+            __str += u"{}".format(self.street)
+        if self.zipcode:
+            if len(__str) > 0:
+                __str += u", "
+            __str += u"{}".format(self.zipcode)
+        if self.city:
+            if len(__str) > 0:
+                if not self.zipcode:
+                    __str += u", "
+                else:
+                    __str += u" "
+            __str += u"{}".format(self.city)
+        if self.country:
+            if len(__str) > 0:
+                __str += u", "
+            __str += u"{}".format(self.country)
+        return __str
 
     class Meta:
         verbose_name_plural = "Addresses"

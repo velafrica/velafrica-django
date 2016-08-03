@@ -81,7 +81,7 @@ class MunicipalityAdmin(ImportExportMixin, SimpleHistoryAdmin):
 class AddressAdmin(DjangoObjectActions, SimpleHistoryAdmin):
     """
     """
-    list_display = ['__str__', 'street', 'zipcode', 'city', 'state', 'country', 'longitude', 'latitude']
+    list_display = ['__str__', 'street', 'zipcode', 'city', 'state', 'country', 'latitude', 'longitude', 'get_googlemaps_url']
     search_fields = ['street', 'zipcode', 'city', 'country__name']
     list_filter = ['state', 'country']
     change_actions = ['get_geolocation']
