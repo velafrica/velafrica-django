@@ -133,7 +133,7 @@ class CountryAdmin(SimpleHistoryAdmin):
 
 admin.site.register(Organisation, OrganisationAdmin)
 admin.site.register(Person, PersonAdmin)
-admin.site.register(Municipality, MunicipalityAdmin)
-admin.site.register(Canton, CantonAdmin)
+#admin.site.register(Municipality, MunicipalityAdmin)
+#admin.site.register(Canton, CantonAdmin)
 admin.site.register(Address, AddressAdmin)
 admin.site.register(Country, CountryAdmin)

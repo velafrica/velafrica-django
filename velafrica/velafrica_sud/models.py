@@ -10,20 +10,6 @@ from velafrica.stock.models import StockList, Warehouse
 from velafrica.core.ftp import MyFTPStorage
 fs = MyFTPStorage()
 
-class Country(models.Model):
-    """
-    Represents a country of the world.
-    """
-    name = models.CharField(blank=False, null=True, max_length=255, verbose_name="Name des Landes")
-    flag = ResizedImageField(storage=fs, size=[500, 500], upload_to='velafrica_sud/country/flags/', blank=True, null=True, help_text='Flagge des Landes.')
-
-    def __unicode__(self):
-        return u"{}".format(self.name)
-
-    class Meta:
-        ordering = ['-name']
-        verbose_name_plural = "Countries"
-
 
 class Forwarder(models.Model):
     """
@@ -193,7 +179,7 @@ class PartnerSud(models.Model):
         """
         """
         return self.organisation.contact
-    get_facebook.short_description = "Kontaktperson"
+    get_contact.short_description = "Kontaktperson"
 
     def get_description(self):
         """

@@ -4,7 +4,7 @@ from django_object_actions import DjangoObjectActions
 from django.contrib import admin
 from simple_history.admin import SimpleHistoryAdmin
 from velafrica.sbbtracking.models import Tracking
-from velafrica.velafrica_sud.models import Country, Forwarder, PartnerSud, Container, Report, Staff, Role
+from velafrica.velafrica_sud.models import Forwarder, PartnerSud, Container, Report, Staff, Role
 from import_export import resources
 from import_export.admin import ImportExportMixin
 from django.shortcuts import render_to_response
@@ -98,7 +98,7 @@ class ContainerInline(admin.TabularInline):
 class PartnerSudAdmin(SimpleHistoryAdmin):
     list_display = ['organisation', 'get_country', 'get_container_count', 'get_bicycle_count']
     search_fields = ['organisation__name', 'country__name']
-    readonly_fields = ['get_address', 'get_name', 'get_website', 'get_description', 'get_country']
+    readonly_fields = ['get_address', 'get_name', 'get_website', 'get_description', 'get_country', 'get_facebook', 'get_contact']
     inlines = [ContainerInline, ]
     fieldsets = (
         (None, {
@@ -279,7 +279,6 @@ class ReportAdmin(ImportExportMixin, SimpleHistoryAdmin):
 
 admin.site.register(Container, ContainerAdmin)
 admin.site.register(PartnerSud, PartnerSudAdmin)
-admin.site.register(Country)
 admin.site.register(Forwarder)
 admin.site.register(Role)
 admin.site.register(Report, ReportAdmin)
