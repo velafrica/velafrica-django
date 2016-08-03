@@ -99,7 +99,12 @@ class Ride(models.Model):
     def get_googlemaps_url(self):
         """
         """
-        return utils.get_googlemaps_url_distance(self.from_warehouse.get_address(), self.to_warehouse.get_address())
+        start = self.from_warehouse.get_address()
+        end = self.to_warehouse.get_address()
+        if start and end:
+            if start.city and start.country and end.city and end.country:
+                return utils.get_googlemaps_url_distance(self.from_warehouse.get_address(), self.to_warehouse.get_address())
+        return None
 
 
     def __unicode__(self):
