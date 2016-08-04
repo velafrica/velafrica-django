@@ -45,7 +45,7 @@ class Invoice(models.Model):
 
         if self.purchaseorder:
             for p in pos:
-                total += p.product.purchase_price
+                total += p.product.get_purchase_price()
         else:
             for p in pos:
                 print p.product.sales_price
@@ -109,7 +109,7 @@ class PurchaseOrder(models.Model):
         pos = PurchaseOrderListPos.objects.all().filter(purchaseorder=self.id)
 
         for p in pos:
-            total += p.product.purchase_price
+            total += p.product.get_purchase_price()
         return total
     get_total.short_description = "Betrag"
 

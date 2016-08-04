@@ -38,7 +38,7 @@ class TrackingSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Tracking
-        read_only = ["next_tracking_eventtype_options", "last_event"]
+        read_only = ["next_tracking_eventtype_options", "last_event", "complete"]
 
 
 class TrackingDetailSerializer(serializers.ModelSerializer):
@@ -51,4 +51,4 @@ class TrackingDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Tracking
-        read_only = ["next_tracking_eventtype_options", "last_event"]
+        read_only = ["next_tracking_eventtype_options", "last_event", "complete"]

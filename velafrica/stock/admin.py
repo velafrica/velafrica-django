@@ -47,7 +47,8 @@ class ProductAdmin(ImportExportMixin, SimpleHistoryAdmin):
     """
     """
     resource_class = ProductResource
-    list_display = ('admin_image', 'articlenr', 'hscode', 'category', 'name', 'purchase_price', 'sales_price', 'description')
+    readonly_fields = ['get_purchase_price']
+    list_display = ('admin_image', 'articlenr', 'hscode', 'category', 'name', 'get_purchase_price', 'sales_price', 'description')
     search_fields = ['articlenr', 'name', 'description']
     list_filter = ['category']
 
@@ -129,9 +130,23 @@ class StockChangeAdmin(ImportExportMixin, SimpleHistoryAdmin):
 class WarehouseAdmin(ImportExportMixin, SimpleHistoryAdmin):
     inlines = [StockInline,]
     resource_class = WarehouseResource
-    list_display = ['name', 'organisation', 'description', 'stock_management']
+    list_display = ['name', 'organisation', 'description', 'stock_management', 'get_googlemaps_link']
     search_fields = ['name', 'description', 'organisation__name']
     list_filter = ['organisation', 'stock_management']
+    readonly_fields = ['get_googlemaps_link']
+
+    def get_googlemaps_link(self, obj):
+        a = obj.get_address()
+        if a:
+            url = a.get_googlemaps_url()
+            if url:
+                return mark_safe(u"<a href='{}' target='_blank'>{}</a>".format(
+                    url,
+                    a
+                ))
+            else:
+                return ""
+    get_googlemaps_link.short_description = 'Google Maps'
 
 
 class StockChangeInline(admin.TabularInline):

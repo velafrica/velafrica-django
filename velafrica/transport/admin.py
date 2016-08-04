@@ -87,7 +87,7 @@ class RideAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
         if url:
             return mark_safe(u"<a href='{}' target='_blank'>{}</a>".format(
                 url,
-                "Google Maps"
+                "Auf Google Maps zeigen"
             ))
         else:
             return ""

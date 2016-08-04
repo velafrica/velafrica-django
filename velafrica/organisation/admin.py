@@ -32,11 +32,22 @@ class OrganisationResource(resources.ModelResource):
 class OrganisationAdmin(ImportExportMixin, SimpleHistoryAdmin):
     resource_class = OrganisationResource
     # inlines = [WarehouseInline,]
-    list_display = ['name', 'address', 'website', 'is_partnersud']
+    list_display = ['name', 'get_googlemaps_link', 'website', 'is_partnersud']
     search_fields = ['name', 'address__city']
-    fields = ['name', 'website', 'facebook', 'get_partnersud', 'address', 'contact','description']
-    readonly_fields = ['get_partnersud']
+    fields = ['name', 'website', 'facebook', 'get_partnersud', 'get_googlemaps_link', 'contact','description']
+    readonly_fields = ['get_partnersud', 'get_googlemaps_link']
 
+    def get_googlemaps_link(self, obj):
+        if obj.address:
+            url = obj.address.get_googlemaps_url()
+            if url:
+                return mark_safe(u"<a href='{}' target='_blank'>{}</a>".format(
+                    url,
+                    obj.address
+                ))
+            else:
+                return ""
+    get_googlemaps_link.short_description = 'Google Maps'
 
 class CantonResource(resources.ModelResource):
     """
