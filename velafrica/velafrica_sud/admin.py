@@ -2,6 +2,7 @@
 from daterange_filter.filter import DateRangeFilter
 from django_object_actions import DjangoObjectActions
 from django.contrib import admin
+from django.utils.safestring import mark_safe
 from simple_history.admin import SimpleHistoryAdmin
 from velafrica.sbbtracking.models import Tracking
 from velafrica.velafrica_sud.models import Forwarder, PartnerSud, Container, Report, Staff, Role
@@ -96,22 +97,35 @@ class ContainerInline(admin.TabularInline):
     readonly_fields = ['booked']
 
 class PartnerSudAdmin(SimpleHistoryAdmin):
-    list_display = ['organisation', 'get_country', 'get_container_count', 'get_bicycle_count']
+    list_display = ['organisation', 'get_googlemaps_link', 'get_container_count', 'get_bicycle_count']
     search_fields = ['organisation__name', 'country__name']
-    readonly_fields = ['get_address', 'get_name', 'get_website', 'get_description', 'get_country', 'get_facebook', 'get_contact']
+    readonly_fields = ['get_googlemaps_link', 'get_name', 'get_website', 'get_description', 'get_country', 'get_facebook', 'get_contact']
     inlines = [ContainerInline, ]
     fieldsets = (
         (None, {
             'fields': ('organisation', 'get_name', 'get_contact', 'get_website', 'get_facebook', 'get_description', 'image')
             }),
         ('Location', {
-            'fields': ('get_address',)
+            'fields': ('get_googlemaps_link',)
             }),
         ('Organisation', {
             'fields': ('legalform', 'org_type', 'partner_since', 'vocational_training', 'infrastructure' )
             }),
     )
 
+    def get_googlemaps_link(self, obj):
+        a = obj.get_address()
+        if a:
+            url = a.get_googlemaps_url()
+            if url:
+                return mark_safe(u"<a href='{}' target='_blank'>{}</a>".format(
+                    url,
+                    a
+                ))
+            else:
+                return ""
+    get_googlemaps_link.short_description = 'Google Maps'
+    
 
 class StaffInline(admin.TabularInline):
     """

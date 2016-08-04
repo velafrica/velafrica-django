@@ -3,7 +3,7 @@ from datetime import timedelta, date
 from django.utils import timezone
 from django.db import models
 from simple_history.models import HistoricalRecords
-from velafrica.organisation.models import Organisation, Municipality, Address
+from velafrica.organisation.models import Organisation, Address
 
 def get_default_task_status():
     """
@@ -16,7 +16,7 @@ class EventCategory(models.Model):
     """
     Category of collection event.
     """
-    name = models.CharField(max_length=255, help_text="Name der Kategorie")
+    name = models.CharField(max_length=255, help_text="Name der Kategorie", unique=True)
 
     def __unicode__(self):
         return u"{}".format(self.name)
@@ -25,6 +25,18 @@ class EventCategory(models.Model):
         verbose_name = "Event Kategorie"
         verbose_name_plural = "Event Kategorien"
 
+class HostType(models.Model):
+    """
+    Category of collection event host.
+    """
+    name = models.CharField(max_length=255, help_text="Name der Veranstalter Kategorie", unique=True)
+
+    def __unicode__(self):
+        return u"{}".format(self.name)
+
+    class Meta:
+        verbose_name = "Veranstalter Kategorie"
+        verbose_name_plural = "Veranstalter Kategorien"
 
 class Event(models.Model):
     """
@@ -35,11 +47,10 @@ class Event(models.Model):
     category = models.ForeignKey(EventCategory, verbose_name="Kategorie")
     yearly = models.BooleanField(default=False, verbose_name="Jährlich wiederkehrend?")
     host = models.CharField(max_length=255, verbose_name="Veranstalter")
+    host_type = models.ForeignKey(HostType, null=True)
     
-    municipality = models.ForeignKey(Municipality, verbose_name="Ort")
-    address = models.TextField(blank=True)
-
-    address_new = models.ForeignKey(Address, verbose_name="Adresse", blank=True, null=True)
+    address = models.ForeignKey(Address, verbose_name="Adresse", blank=True, null=True)
+    address_notes = models.TextField(blank=True, verbose_name="Genauer Standort")
 
     def __unicode__(self):
         return u"{}".format(self.name)
@@ -108,6 +119,41 @@ class CollectionEvent(models.Model):
     money_amount = models.IntegerField(default=0, verbose_name='Gesammeltes Geld', help_text="Betrag in CHF der am Event gesammelt wurde")
     additional_results = models.TextField(blank=True, verbose_name="weitere Resultate", help_text="Zusätzliche Resultate / Erkenntnisse")
 
+    def get_event_name(self):
+        return self.event.name
+    get_event_name.short_description = "Name"
+
+    def get_event_description(self):
+        return self.event.description
+    get_event_description.short_description = "Beschreibung"
+
+    def get_event_category(self):
+        return self.event.category
+    get_event_category.short_description = "Kategorie"
+
+    def get_event_yearly(self):
+        return self.event.yearly
+    get_event_yearly.short_description = "Jährlich wiederkehrend?"
+
+    def get_event_host(self):
+        return self.event.host
+    get_event_host.short_description = "Veranstalter"
+
+    def get_event_host_type(self):
+        return self.event.host_type
+    get_event_host_type.short_description = "Veranstalter Kategorie"
+
+    def get_event_address(self):
+        return self.event.address
+    get_event_address.short_description = "Adresse"
+
+    def get_event_address_notes(self):
+        return self.event.notes
+    get_event_address_notes.short_description = "Genauer Standort"
+    
+    address_new = models.ForeignKey(Address, verbose_name="Adresse", blank=True, null=True)
+    address_notes = models.TextField(blank=True)
+
     def get_status_logistics(self):
         """
         Get status of logistic tasks.
@@ -149,6 +195,7 @@ class CollectionEvent(models.Model):
     class Meta:
         verbose_name = "Sammelanlass"
         verbose_name_plural = "Sammelanlässe"
+        ordering = ['-date_start']
 
 
 class TaskProgress(models.Model):
