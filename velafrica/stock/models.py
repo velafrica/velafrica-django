@@ -68,7 +68,7 @@ class Product(models.Model):
         """
         Return image for admin list view.
         """
-        return ('<img src="{0}{1}" style="max-height: 100px;" alt="{2}" title="{2}" />'.format(settings.MEDIA_URL, self.image, self.name))
+        return (u"<img src='{0}{1}' style='max-height: 100px;' alt='{2}' title='{2}'' />".format(settings.MEDIA_URL, self.image, self.name))
 
     admin_image.allow_tags = True
     admin_image.short_description = "Produkt"
