@@ -16,6 +16,8 @@ collection = [
     url(r'^taskprogresses/(?P<pk>[0-9]+)/?$', utils.get_listview('collection', 'TaskProgress').as_view(), name='taskprogress'),
     url(r'^collectionevents/?$', utils.get_listview('collection', 'CollectionEvent').as_view(), name="collectionevents"),
     url(r'^collectionevents/(?P<pk>[0-9]+)/?$', utils.get_listview('collection', 'CollectionEvent').as_view(), name='collectionevent'),
+    url(r'^hosttypes/?$', utils.get_listview('collection', 'HostType').as_view(), name="hosttypes"),
+    url(r'^hosttypes/(?P<pk>[0-9]+)/?$', utils.get_listview('collection', 'HostType').as_view(), name='hosttypes'),
 ]
 
 counter = [

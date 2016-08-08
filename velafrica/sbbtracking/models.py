@@ -27,10 +27,11 @@ class TrackingEventType(models.Model):
 
     1. Tracking erstellt
     2. Eingang Velafrica
-    3. Eingang Velowerkstatt
-    5. Bereit für Export
-    4. Containerverlad
-    5. Ankunft Partner in Afrika
+        3a. Bereit für Export
+            4. Containerverlad
+            5. Ankunft Partner in Afrika
+        3b. Zerlegung in Einzelteile
+        3c. Verkauf
 
 
     """
@@ -65,6 +66,9 @@ class TrackingEventType(models.Model):
         null=False, 
         help_text="Aktivieren falls bei Erstellung eines Events dieser Art automatisch ein Email an den Spender versandt werden soll."
     )
+    latitude_default = models.DecimalField(blank=True, null=True, verbose_name='Breitengrad Standard', max_digits=9, decimal_places=6)
+    longitude_default = models.DecimalField(blank=True, null=True, verbose_name='Längengrad Standard', max_digits=9, decimal_places=6)
+
     history = HistoricalRecords()
 
     def next_tracking_eventtype_options(self):
@@ -87,6 +91,8 @@ class TrackingEvent(models.Model):
     datetime = models.DateTimeField(blank=False, null=False, default=timezone.now, verbose_name="Zeitpunkt")
     event_type = models.ForeignKey(TrackingEventType, help_text="Art des Events")
     tracking = models.ForeignKey('Tracking')
+    latitude = models.DecimalField(blank=True, null=True, verbose_name='Breitengrad', max_digits=9, decimal_places=6)
+    longitude = models.DecimalField(blank=True, null=True, verbose_name='Längengrad', max_digits=9, decimal_places=6)
     note = models.CharField(blank=True, null=True, max_length=255, verbose_name="Bemerkung", help_text="interne Bemerkung, nirgends ersichtlich für Spender (optional)")
     history = HistoricalRecords()
 

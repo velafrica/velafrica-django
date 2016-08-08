@@ -17,6 +17,8 @@ def send_email(sender, instance, created, **kwargs):
 	if not created:
 		return
 
+	# TODO: set gps default if none has been set
+
 	# set last event on tracking
 	instance.tracking.last_event = instance
 	#instance.tracking.last_update = instance.datetime
