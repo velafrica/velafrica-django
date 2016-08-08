@@ -47,7 +47,7 @@ class Event(models.Model):
     category = models.ForeignKey(EventCategory, verbose_name="Kategorie")
     yearly = models.BooleanField(default=False, verbose_name="Jährlich wiederkehrend?")
     host = models.CharField(max_length=255, verbose_name="Veranstalter")
-    host_type = models.ForeignKey(HostType, null=True)
+    host_type = models.ForeignKey(HostType, null=True, verbose_name="Veranstalter Typ")
     
     address = models.ForeignKey(Address, verbose_name="Adresse", blank=True, null=True)
     address_notes = models.TextField(blank=True, verbose_name="Genauer Standort")
