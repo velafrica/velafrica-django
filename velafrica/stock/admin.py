@@ -162,6 +162,7 @@ class StockListPositionResource(resources.ModelResource):
     """
     """
     class Meta:
+        fields = ['stocklist', 'stocklist__description', 'stocklist__container', 'stocklist__container', 'stocklist__container__partner_to', 'stocklist__container__partner_to__organisation__address__country__name', 'stocklist__container__partner_to__organisation__name', 'product', 'product__name', 'amount']
         model = StockListPosition
 
 
@@ -264,7 +265,8 @@ class StockTransferResource(resources.ModelResource):
 
 
 class StockTransferAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
-    inlines = [StockChangeInline, StockTransferListPosInline]
+    #inlines = [StockChangeInline, StockTransferListPosInline]
+    inlines = [StockChangeInline]
     resource_class = StockTransferResource
     list_display = ['id', 'date', 'warehouse_from', 'warehouse_to', 'stocklist', 'booked', 'note']
     list_filter = ['date', 'warehouse_from', 'warehouse_to', 'booked']
