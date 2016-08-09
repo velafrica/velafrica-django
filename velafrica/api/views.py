@@ -14,6 +14,8 @@ from velafrica.sbbtracking.models import *
 from velafrica.sbbtracking.serializer import *
 from velafrica.stock.models import *
 from velafrica.stock.serializer import *
+from velafrica.velafrica_sud.models import *
+from velafrica.velafrica_sud.serializer import *
 
 class DjangoModelPermissionsMixin(generics.GenericAPIView):
     permission_classes = (permissions.IsAuthenticated, permissions.DjangoModelPermissions,)
@@ -196,3 +198,37 @@ class WarehouseDetail(DjangoModelPermissionsMixin, generics.RetrieveUpdateAPIVie
     queryset = Warehouse.objects.all()
     serializer_class = WarehouseSerializer
 
+
+class PartnerSudList(DjangoModelPermissionsMixin, generics.ListCreateAPIView):
+    """
+    Get a list of all African partners.
+    """
+
+    queryset = PartnerSud.objects.all()
+    serializer_class = PartnerSudSerializer
+
+
+class PartnerSudDetail(DjangoModelPermissionsMixin, generics.RetrieveUpdateAPIView):
+    """
+    Get details about African partner.
+    """
+
+    queryset = PartnerSud.objects.all()
+    serializer_class = PartnerSudSerializer
+
+class ReportList(DjangoModelPermissionsMixin, generics.ListCreateAPIView):
+    """
+    Get a list of all partner Reports.
+    """
+
+    queryset = Report.objects.all()
+    serializer_class = ReportSerializer
+
+
+class ReportDetail(DjangoModelPermissionsMixin, generics.RetrieveUpdateAPIView):
+    """
+    Get details about on a specific partner report.
+    """
+
+    queryset = Report.objects.all()
+    serializer_class = ReportSerializer

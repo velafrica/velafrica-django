@@ -20,56 +20,97 @@
 
 {% block jumbotron %}
 Organisation: {{ warehouse.organisation }}<br/>
-{% if warehouse.municipality and warehouse.street %}
-	Adress: {{warehouse.street}} {{warehouse.street_no}}, {{warehouse.municipality.plz}} {{warehouse.municipality.name}}<br/>
+{% if warehouse.get_address %}
+	Adresse: {{warehouse.get_address }} (<a href="{{warehouse.get_address.get_googlemaps_url}}" target="_blank">Auf Google Maps anzeigen</a>)<br/>
 <!--
 	<iframe width="600" height="450" frameborder="0" style="border:0"
 	src="https://www.google.com/maps/embed/v1/search?q={{ warehouse.street }}+{{warehouse.street_no}},+{{warehouse.municipality.plz}}+{{warehouse.municipality.name}},+Schweiz&key=AIzaSyAzdwjRWqj_TTq-jW30NpLWK3La6_i2yRM" allowfullscreen></iframe>
 	-->
 {% endif %}<br/>
-Anzahl Velos Eingang / Ausgang, sowie Differenz (Stock).
-<canvas id="myChart" width="400" height="400"></canvas>
 {% endblock %}
 
 {% block content %}
 
-<h2>Fahrten</h2>
-
-<table class="table">
-	<tr>
-		<th>In / Out</th>
-		<th>Datum</th>
-		<th>Von</th>
-		<th>Nach</th>
-		<th>Fahrer</th>
-		<th>Fahrzeug</th>
-		<th>Velos</th>
-		<th>Zustand</th>
-		<th>Spare Parts</th>
-	</tr>
-
-	{% for r in rides %}
-	<tr>
-		<td>
-			{% if r.from_warehouse = warehouse %}
-			<span class="glyphicon glyphicon-arrow-left glyph-ride-out"></span>
-			{% else %}
-			<span class="glyphicon glyphicon-arrow-right glyph-ride-in"></span>
-			{% endif %}
-		</td>
-		<td>{{ r.date }}</td>
-		<td>{{ r.from_warehouse }}</td>
-		<td>{{ r.to_warehouse }}</td>
-		<td>{{ r.driver }}</td>
-		<td>{{ r.car }}</td>
-		<td>{% if r.velos <= 0 %}<span class="label label-danger">{% else %}<span class="label label-success">{% endif %}{{ r.velos }}</span></td>
-		<td>{{ r.velo_state }}</td>
-		<td>{% if r.spare_parts %}<span class="glyph-ride-in glyphicon glyphicon-ok">{% else %}<span class="glyph-ride-out glyphicon glyphicon-remove">{% endif %}</td>
-	</tr>
+<ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#rides" aria-controls="rides" role="tab" data-toggle="tab">Fahrten</a></li>
+    <li role="presentation"><a href="#velos" aria-controls="velos" role="tab" data-toggle="tab">Velos</a></li>
+    <li role="presentation"><a href="#stockmv" aria-controls="stockmv" role="tab" data-toggle="tab">Stock</a></li>
+  </ul>
 
 
-	{% endfor %}
-</table>
+  <!-- Tab panes -->
+  <div class="tab-content">
+  	<div role="tabpanel" class="tab-pane fade" id="stockmv">
+
+  		<p>Einige Statistiken zu Ein- und Ausgängen von Produkten in diesem Lager. Die Anzahl Ein- und Ausgänge werden über die StockChange Objekte ermittelt, welche beim Verbuchen von StockTransfers erstellt werden.</p>
+  		
+	  	<table class="table">
+	  		<thead>
+				<tr>
+					<th>Produkt #</th>
+					<th>Produkt</th>
+					<th>in</th>
+					<th>out</th>
+					<th>aktueller Stock</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for key, values in stock_movements.items %}
+				<tr>
+	   				<td>{{key.product.article_no}}</td>
+	   				<td>{{key.product.name}}</td>
+	   				<td>{{values.0}}</td>
+	   				<td>{{values.1}}</td>
+	   				<td>{{key.amount}}</td>
+	   			</tr>
+	    		{% endfor %}
+			</tbody>
+		</table>
+	   		
+	</div>
+  <div role="tabpanel" class="tab-pane fade" id="velos">
+    	Anzahl Velos Eingang / Ausgang, sowie Differenz (Stock).
+		<canvas id="myChart" width="400" height="400"></canvas>
+	</div>
+    <div role="tabpanel" class="tab-pane fade in active" id="rides">
+    	<table class="table">
+			<tr>
+				<th>In / Out</th>
+				<th>Datum</th>
+				<th>Von</th>
+				<th>Nach</th>
+				<th>Fahrer</th>
+				<th>Fahrzeug</th>
+				<th>Velos</th>
+				<th>Zustand</th>
+				<th>Spare Parts</th>
+			</tr>
+
+			{% for r in rides %}
+			<tr>
+				<td>
+					{% if r.from_warehouse = warehouse %}
+					<span class="glyphicon glyphicon-arrow-left glyph-ride-out"></span>
+					{% else %}
+					<span class="glyphicon glyphicon-arrow-right glyph-ride-in"></span>
+					{% endif %}
+				</td>
+				<td>{{ r.date }}</td>
+				<td>{{ r.from_warehouse }}</td>
+				<td>{{ r.to_warehouse }}</td>
+				<td>{{ r.driver }}</td>
+				<td>{{ r.car }}</td>
+				<td>{% if r.velos <= 0 %}<span class="label label-danger">{% else %}<span class="label label-success">{% endif %}{{ r.velos }}</span></td>
+				<td>{{ r.velo_state }}</td>
+				<td>{% if r.spare_parts %}<span class="glyph-ride-in glyphicon glyphicon-ok">{% else %}<span class="glyph-ride-out glyphicon glyphicon-remove">{% endif %}</td>
+			</tr>
+
+
+			{% endfor %}
+		</table>
+    </div>
+  </div>
+
 {% endblock %}
 
 {% block document-foot %}

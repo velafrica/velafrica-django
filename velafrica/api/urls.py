@@ -84,8 +84,10 @@ velafrica_sud = [
     url(r'^containers/(?P<pk>[0-9]+)/?$', utils.get_retrieveview('velafrica_sud', 'Container').as_view(), name='container'),
     url(r'^forwarders/?$', utils.get_listview('velafrica_sud', 'Forwarder').as_view(), name="forwarders"),
     url(r'^forwarders/(?P<pk>[0-9]+)/?$', utils.get_retrieveview('velafrica_sud', 'Forwarder').as_view(), name='forwarder'),
-    url(r'^partners/?$', utils.get_listview('velafrica_sud', 'PartnerSud').as_view(), name="partners"),
-    url(r'^partners/(?P<pk>[0-9]+)/?$', utils.get_retrieveview('velafrica_sud', 'PartnerSud').as_view(), name='partner'),
+    url(r'^partners/?$', views.PartnerSudList.as_view(), name="partners"),
+    url(r'^partners/(?P<pk>[0-9]+)/?$', views.PartnerSudDetail.as_view(), name='partner'),
+    url(r'^reports/?$', views.ReportList.as_view(), name="reports"),
+    url(r'^reports/(?P<pk>[0-9]+)/?$', views.ReportDetail.as_view(), name='report'),
 ]
 
 # where it all comes together

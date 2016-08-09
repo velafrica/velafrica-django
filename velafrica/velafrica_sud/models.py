@@ -109,21 +109,29 @@ class Container(models.Model):
     container_n_of_all.verbose_name = "Container Nummer"
     container_n_of_all.short_description = "#"
 
-    def container_n_of_partner(self, partner):
+    def container_n_of_partner(self):
         """
         Returns number of how many containers have been shipped to this partner up to this one.
         """
         ct = self
         # get oldest container by pickup date
         first = Container.objects.all().last()
-        pos = Container.objects.filter(partner_to=partner).filter(pickup_date__range=[first.pickup_date, ct.pickup_date]).count()
+        pos = Container.objects.filter(partner_to=self.partner_to).filter(pickup_date__range=[first.pickup_date, ct.pickup_date]).count()
         return pos
+    container_n_of_all.verbose_name = "Container Nummer Partner"
+    container_n_of_all.short_description = "#"
 
-    def container_n_of_year(self, year):
+    def container_n_of_year(self):
         """
-        TODO: implement
+        Returns number of how many containers have been shipped this year up to this one.
         """
-        pass
+        ct = self
+        # get oldest container by pickup date
+        first = Container.objects.all().filter(pickup_date__range=[timezone.datetime(ct.pickup_date.year,1,1), ct.pickup_date]).last()
+        pos = Container.objects.filter(partner_to=self.partner_to).filter(pickup_date__range=[first.pickup_date, ct.pickup_date]).count()
+        return pos
+    container_n_of_year.verbose_name = "Container dieses Jahr"
+    container_n_of_year.short_description = "# / Jahr"
 
     def __unicode__(self):
         if self.container_no:
@@ -219,6 +227,29 @@ class PartnerSud(models.Model):
     class Meta:
         ordering = ['organisation__name']
         verbose_name_plural = "Partner Süd"
+
+
+class Role(models.Model):
+    """
+    Name of a role of PartnerSud staff.
+    """
+    name = models.CharField(verbose_name="Name", max_length=255, unique=True)
+
+    def __unicode__(self):
+        return self.name
+
+class Staff(models.Model):
+    """
+    Used to add information about personal staff at partner.
+    """
+    role = models.ForeignKey(Role,verbose_name="Rolle")
+    salary = models.IntegerField(verbose_name="Salär (USD)")
+    number = models.IntegerField(verbose_name="Anzahl Angestellte")
+    report = models.ForeignKey('Report', verbose_name="Report")
+    history = HistoricalRecords()
+
+    def __unicode__(self):
+        return u"{} {}s earning a total of {} USD".format(self.number, self.role, self.salary)
 
 
 class Report(models.Model):
@@ -411,33 +442,15 @@ class Report(models.Model):
     final_future_challenges = models.TextField(blank=True, null=True, verbose_name="Grösste Herausforderungen der Zukunft?")
 
     history = HistoricalRecords()
-    
+
     class Meta:
         ordering = ['-creation']
 
+    def get_staff(self):
+        """
+        Return list of staff objects.
+        """
+        return Staff.objects.filter(report=self.id)
 
     def __unicode__(self):
         return u"{}, Report vom {}".format(self.partner_sud, self.creation)
-
-
-class Role(models.Model):
-    """
-    Name of a role of PartnerSud staff.
-    """
-    name = models.CharField(verbose_name="Name", max_length=255, unique=True)
-
-    def __unicode__(self):
-        return self.name
-
-class Staff(models.Model):
-    """
-    Used to add information about personal staff at partner.
-    """
-    role = models.ForeignKey(Role,verbose_name="Rolle")
-    salary = models.IntegerField(verbose_name="Salär (USD)")
-    number = models.IntegerField(verbose_name="Anzahl Angestellte")
-    report = models.ForeignKey(Report, verbose_name="Report")
-    history = HistoricalRecords()
-
-    def __unicode__(self):
-        return u"{}".format()

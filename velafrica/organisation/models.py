@@ -45,7 +45,7 @@ class Country(models.Model):
     Represents a country of the world.
     """
     name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Name des Landes", unique=True)
-    code = models.CharField(blank=True, null=True, max_length=255, verbose_name="Ländercode (ISO 3166-1 alpha-2)", unique=True)
+    code = models.CharField(blank=True, null=True, max_length=255, verbose_name=u"Ländercode (ISO 3166-1 alpha-2)", unique=True)
 
     def __unicode__(self):
         return u"{}".format(self.name)
@@ -88,7 +88,7 @@ class Address(models.Model):
         """
         # address should at least have country and city provided, everything else is to inacurate
         if self.country and self.city:
-            return utils.get_googlemaps_url_place(self.__unicode__())
+            return u"{}".format(utils.get_googlemaps_url_place(self.__unicode__()))
         return None
 
     def __unicode__(self):

@@ -5,66 +5,66 @@ from django.db.models import Q
 from django.shortcuts import render, render_to_response
 from django.template import RequestContext
 from itertools import chain
-from velafrica.stock.models import Product, Warehouse, Stock
+from velafrica.stock.models import Product, Warehouse, Stock, StockChange, StockListPosition
 from velafrica.transport.models import Ride
 from velafrica.velafrica_sud.models import Container
 
 
 @login_required
 def stock(request):
-  """
-  Show stock overview.
+    """
+    Show stock overview.
 
-  **Context**
+    **Context**
 
-  ``stock``
-    List of instances of :model:`stock.Stock`
+    ``stock``
+        List of instances of :model:`stock.Stock`
 
-  ``warehouses``
-    List of instances of :model:`stock.Warehouse`
+    ``warehouses``
+        List of instances of :model:`stock.Warehouse`
 
-  **
-  """
-  stock = Stock.objects.all()
-  warehouse_ids = stock.order_by().values('warehouse').distinct()
-  warehouses = Warehouse.objects.filter(id__in=warehouse_ids)
+    **
+    """
+    stock = Stock.objects.all()
+    warehouse_ids = stock.order_by().values('warehouse').distinct()
+    warehouses = Warehouse.objects.filter(id__in=warehouse_ids)
 
-  print warehouses
+    print warehouses
 
-  if request.user.is_superuser or request.user.has_perm('stock.is_admin'):
-  	stock = Stock.objects.all()
-  # other users with a correlating person should only see their organisations entries
-  elif hasattr(request.user, 'person'):
-    stock = stock.filter(warehouse__organisation=request.user.person.organisation)
-  # users with no superuser role and no related person should not see any entries
-  else:	
-  	stock = stock.none()
+    if request.user.is_superuser or request.user.has_perm('stock.is_admin'):
+      	stock = Stock.objects.all()
+    # other users with a correlating person should only see their organisations entries
+    elif hasattr(request.user, 'person'):
+        stock = stock.filter(warehouse__organisation=request.user.person.organisation)
+    # users with no superuser role and no related person should not see any entries
+    else:	
+      	stock = stock.none()
             
-  return render_to_response('stock/index.html', { 
-    'stock': stock, 
-    'warehouses': warehouses,
-    }, context_instance=RequestContext(request)
-  )
+    return render_to_response('stock/index.html', { 
+        'stock': stock, 
+        'warehouses': warehouses,
+        }, context_instance=RequestContext(request)
+    )
 
 
 @login_required
 def warehouses(request):
-  """
-  Show a list of all warehouses.
-
-  **Context**
-
-  ``warehouses``
-    List of instances of :model:`stock.Warehouse`
+    """
+    Show a list of all warehouses.
+    
+    **Context**
+    
+    ``warehouses``
+        List of instances of :model:`stock.Warehouse`
   
-  **Template**
+    **Template**
 
-  :template:`stock/warehouses.html`
-  """
-  return render_to_response('stock/warehouses.html', {
-    'warehouses': Warehouse.objects.all(),
-    }, context_instance=RequestContext(request)
-  )
+    :template:`stock/warehouses.html`
+    """
+    return render_to_response('stock/warehouses.html', {
+        'warehouses': Warehouse.objects.all(),
+        }, context_instance=RequestContext(request)
+    )
 
 @login_required
 def warehouse(request, pk):
@@ -138,12 +138,44 @@ def warehouse(request, pk):
         chain(rides_in_list, rides_out_list),
         key=lambda instance: instance.date)
 
+    # get stock statistics 
+    # TODO: needs performance improvement, also create separate function
+    stockchanges = StockChange.objects.filter(warehouse=warehouse)
+    stockchanges_in = stockchanges.filter(stock_change_type='in')
+    stockchanges_out = stockchanges.filter(stock_change_type='out')
+
+    stocklists_in = []
+    for sci in stockchanges_in:
+        stocklists_in.append(sci.stocklist)
+
+    stocklists_out = []
+    for sco in stockchanges_out:
+        stocklists_out.append(sco.stocklist)
+    
+    listpos_in = StockListPosition.objects.filter(stocklist__in=stocklists_in)
+    listpos_out = StockListPosition.objects.filter(stocklist__in=stocklists_out)
+
+    # prepare dict in form of "product" : (current stock, total in, total out)
+    stock_movements = {}
+
+    stocks = Stock.objects.filter(warehouse=warehouse)
+
+    for s in stocks:
+        s_in = 0
+        s_out = 0
+        for l in listpos_in.filter(product=s.product):
+            s_in += l.amount
+        for l in listpos_out.filter(product=s.product):
+            s_out += l.amount
+
+        stock_movements[s] = (s_in, s_out)
 
     return render_to_response('stock/warehouse_detail.html', {
         'warehouse': warehouse,
         'rides': rides,
         'rides_in': rides_in,
         'rides_out': rides_out,
+        'stock_movements': stock_movements,
         'velos_in': velos_in,
         'velos_out': velos_out,
         'velo_stock': velo_stock,
