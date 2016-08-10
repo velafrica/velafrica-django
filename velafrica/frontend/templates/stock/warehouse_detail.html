@@ -62,9 +62,9 @@ Organisation: {{ warehouse.organisation }}<br/>
 				<tr>
 	   				<td>{{key.product.articlenr}}</td>
 	   				<td>{{key.product.name}}</td>	
-	   				<td><span class="label label-success">{{values.0}}</span></td>
-	   				<td><span class="label label-danger">{{values.1}}</span></td>
-	   				<td><span class="label label-{% if values.2 > 0 %}success{% elif values.2 < 0 %}danger{% else %}default{% endif %}">{{values.2}}</span></td>
+	   				<td data-value={{values.0}}><span class="label label-success">{{values.0}}</span></td>
+	   				<td data-value={{values.1}}><span class="label label-danger">{{values.1}}</span></td>
+	   				<td data-value={{values.2}}><span class="label label-{% if values.2 > 0 %}success{% elif values.2 < 0 %}danger{% else %}default{% endif %}">{{values.2}}</span></td>
 	   				<td>{{key.amount}}</td>
 	   			</tr>
 	    		{% endfor %}
