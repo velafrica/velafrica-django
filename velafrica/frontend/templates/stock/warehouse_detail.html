@@ -43,14 +43,17 @@ Organisation: {{ warehouse.organisation }}<br/>
   	<div role="tabpanel" class="tab-pane fade" id="stockmv">
 
   		<p>Einige Statistiken zu Ein- und Ausgängen von Produkten in diesem Lager. Die Anzahl Ein- und Ausgänge werden über die StockChange Objekte ermittelt, welche beim Verbuchen von StockTransfers erstellt werden.</p>
-  		
-	  	<table class="table">
+
+	  	<div class="input-group"><span class="input-group-addon">Search:</span> <input id="filter" type="text" class="form-control" /></div>
+
+		<table class="table footable" data-page-size=100 data-filter="#filter">
 	  		<thead>
 				<tr>
 					<th>Produkt #</th>
 					<th>Produkt</th>
 					<th>in</th>
 					<th>out</th>
+					<th>Differenz</th>
 					<th>aktueller Stock</th>
 				</tr>
 			</thead>
@@ -58,9 +61,10 @@ Organisation: {{ warehouse.organisation }}<br/>
 				{% for key, values in stock_movements.items %}
 				<tr>
 	   				<td>{{key.product.articlenr}}</td>
-	   				<td>{{key.product.name}}</td>
-	   				<td>{{values.0}}</td>
-	   				<td>{{values.1}}</td>
+	   				<td>{{key.product.name}}</td>	
+	   				<td><span class="label label-success">{{values.0}}</span></td>
+	   				<td><span class="label label-danger">{{values.1}}</span></td>
+	   				<td><span class="label label-{% if values.2 > 0 %}success{% elif values.2 < 0 %}danger{% else %}default{% endif %}">{{values.2}}</span></td>
 	   				<td>{{key.amount}}</td>
 	   			</tr>
 	    		{% endfor %}
@@ -115,8 +119,15 @@ Organisation: {{ warehouse.organisation }}<br/>
 
 {% block document-foot %}
 
-<script>
-    
+<!-- include footable -->
+<link rel="stylesheet" type="text/css" href="{% static "css/footable.core.min.css" %}" />
+<script type="text/javascript" src="{% static "js/footable.all.min.js" %}"></script>
+
+<!-- init footable -->
+<script type="text/javascript">
+	$(function () {
+		$('.footable').footable();
+	});    
 
 	$(function () {
 	// Any of the following formats may be used

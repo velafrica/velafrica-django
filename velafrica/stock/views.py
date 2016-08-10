@@ -29,8 +29,6 @@ def stock(request):
     warehouse_ids = stock.order_by().values('warehouse').distinct()
     warehouses = Warehouse.objects.filter(id__in=warehouse_ids)
 
-    print warehouses
-
     if request.user.is_superuser or request.user.has_perm('stock.is_admin'):
       	stock = Stock.objects.all()
     # other users with a correlating person should only see their organisations entries
@@ -168,7 +166,8 @@ def warehouse(request, pk):
         for l in listpos_out.filter(product=s.product):
             s_out += l.amount
 
-        stock_movements[s] = (s_in, s_out)
+        # save in tuple (in, out, diff)
+        stock_movements[s] = (s_in, s_out, (s_in - s_out))
 
     return render_to_response('stock/warehouse_detail.html', {
         'warehouse': warehouse,
