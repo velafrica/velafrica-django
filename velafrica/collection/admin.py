@@ -42,6 +42,7 @@ class CollectionEventAdminResource(resources.ModelResource):
             'collection_partner_other',
             'collection_partner_confirmed',
             'processing',
+            'processing_notes',
             'website',
             'feedback',
             'velo_amount',
@@ -75,7 +76,7 @@ class CollectionEventAdmin(ImportExportMixin, SimpleHistoryAdmin):
             'fields': ('get_event_name', 'get_event_description', 'get_event_category', 'get_event_yearly', 'get_event_host', 'get_event_host_type', 'get_googlemaps_link', 'get_event_address_notes')
             }),
         ('Logistik', {
-            'fields': ('presence_velafrica', 'presence_velafrica_info', 'collection_partner_vrn', 'collection_partner_other', 'collection_partner_confirmed', 'collection', 'processing', )
+            'fields': ('presence_velafrica', 'presence_velafrica_info', 'collection_partner_vrn', 'collection_partner_other', 'collection_partner_confirmed', 'collection', 'processing', 'processing_notes',)
             }),
         ('Marketing', {
             'fields': ('website',)

@@ -82,7 +82,8 @@ class CollectionEvent(models.Model):
 
     # logistics
     presence_velafrica = models.BooleanField(default=False, verbose_name="Präsenz Velafrica?")
-    presence_velafrica_info = models.TextField(
+    presence_velafrica_info = models.CharField(
+        max_length=255,
         blank=True, 
         help_text="Infos zur Präsenz von Velafrica am Event",
         verbose_name="Präsenz Velafrica")
@@ -94,6 +95,12 @@ class CollectionEvent(models.Model):
         Organisation,
         verbose_name="Velo Verarbeitung",
         related_name="processing_organisation")
+    processing_notes = models.CharField(
+        max_length=255,
+        blank=True,
+        null=True,
+        verbose_name="Velo Verarbeitung Notizen",
+        )
     collection_partner_vrn = models.ForeignKey(
         Organisation, 
         blank=True, 
