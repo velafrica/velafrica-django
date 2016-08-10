@@ -122,7 +122,7 @@ class StockChangeResource(resources.ModelResource):
 class StockChangeAdmin(ImportExportMixin, SimpleHistoryAdmin):
     resource_class = StockChangeResource
     model = StockChange
-    list_display = ['datetime', 'stocktransfer', 'warehouse', 'stocklist', 'stock_change_type']
+    list_display = ['datetime', 'stocktransfer', 'warehouse', 'stocklist', 'stock_change_type', 'booked']
     list_filter = ['warehouse', 'stock_change_type']
     search_fields = ['warehouse__name']
 
@@ -151,7 +151,7 @@ class WarehouseAdmin(ImportExportMixin, SimpleHistoryAdmin):
 
 class StockChangeInline(admin.TabularInline):
     model = StockChange
-    readonly_fields = ['datetime', 'stocktransfer', 'warehouse', 'stocklist', 'stock_change_type']
+    readonly_fields = ['datetime', 'stocktransfer', 'warehouse', 'stocklist', 'stock_change_type', 'booked']
 
     # do not allow users to create new stock changes themselves
     def has_add_permission(self, request):
@@ -271,9 +271,24 @@ class StockTransferAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAd
     list_display = ['id', 'date', 'warehouse_from', 'warehouse_to', 'stocklist', 'booked', 'note']
     list_filter = ['date', 'warehouse_from', 'warehouse_to', 'booked']
     readonly_fields = ['booked']
-    actions = ['book_stocktransfers', 'revoke_stocktransfer']
-    changelist_actions = ['book_stocktransfers', 'revoke_stocktransfers']
-    change_actions = ['book_stocktransfer', 'revoke_stocktransfer']
+    actions = ['book_stocktransfers', 'fake_book_stocktransfers', 'revoke_stocktransfer']
+    changelist_actions = ['book_stocktransfers', 'fake_book_stocktransfers', 'revoke_stocktransfers']
+    change_actions = ['book_stocktransfer', 'fake_book_stocktransfer', 'revoke_stocktransfer']
+
+    def fake_book_stocktransfer(self, request, obj):
+        """
+        Admin action to book a single StockTransfer without changing any stocks.
+        """
+        if obj:
+            if obj.book(fake=True):
+                self.message_user(request, "StockTransfer %s erfolgreich fake verbucht." % obj.id)
+            else:
+                self.message_user(request, "StockTransfer %s wurde bereits verbucht." % obj.id)
+        else:
+            self.message_user(request, "Not sure which StockTransfer to book." % obj.id)
+        
+    fake_book_stocktransfer.short_description = "StockTransfer Fake Verbuchen"
+    fake_book_stocktransfer.label = "Fake Verbuchen"
 
     def book_stocktransfer(self, request, obj):
         """
@@ -290,14 +305,14 @@ class StockTransferAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAd
     book_stocktransfer.short_description = "StockTransfer Verbuchen"
     book_stocktransfer.label = "Verbuchen"
 
-    def book_stocktransfers(self, request, queryset):
+    def book_stocktransfers(self, request, queryset, fake=False):
         """
         Admin action to book StockTransfers.
         TODO: signals
         """
         rows_updated = 0
         for obj in queryset:
-            if obj.book():
+            if obj.book(fake=fake):
                 rows_updated += 1
 
         if rows_updated == 1:
@@ -307,6 +322,11 @@ class StockTransferAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAd
         self.message_user(request, "%s erfolgreich verbucht." % message_bit)
     book_stocktransfers.short_description = "Ausgewählte StrockTransfers verbuchen"
     book_stocktransfers.label = "Verbuchen"
+
+    def fake_book_stocktransfers(self, request, queryset):
+        self.book_stocktransfers(request, queryset, fake=True)
+    fake_book_stocktransfers.short_description = "Ausgewählte StrockTransfers Fake verbuchen"
+    fake_book_stocktransfers.label = "Fake Verbuchen"
 
     def revoke_stocktransfer(self, request, obj):
         """

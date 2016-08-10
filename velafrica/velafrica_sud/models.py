@@ -255,9 +255,13 @@ class Staff(models.Model):
 class Report(models.Model):
     """
     Reports are used to gather feedback and detailed information about a partner.
+
+    TODO: currency to USD functions & add these to Resource
     """
     creation = models.DateField(default=timezone.now,)
     partner_sud = models.ForeignKey(PartnerSud)
+    currency = models.CharField(blank=False, null=True, default="", max_length=10, verbose_name="Verwendete Währung bei Finanzangaben")
+    currency_rate = models.DecimalField(blank=False, null=False, decimal_places=2, max_digits=4, default=1.0, verbose_name="Währungskurs zu USD")
 
     # employment opportunities -> Jahrangabe?
     employment_fulltime_men = models.IntegerField(verbose_name="Angestellte Vollzeit Männer",blank=True, null=True)
@@ -294,18 +298,18 @@ class Report(models.Model):
     marketing_customer_segments_top3 = models.CharField(choices=CUSTOMER_SEGMENT_CHOICES, max_length=255, verbose_name="Kundensegmente Top 3", blank=True, null=True)
 
     CHANNEL_CHOICES = (
-        ('1', 'We don\'t use it'),
-        ('2', 'rarely'),
-        ('3', 'occasionally'),
-        ('4', 'often'),
-        ('5', 'very often'),
+        ('not_using_it', 'We don\'t use it'),
+        ('rarely', 'rarely'),
+        ('occasionally', 'occasionally'),
+        ('often', 'often'),
+        ('very often', 'very often'),
     )
 
     SELLING_CHANNEL_CHOICES = (
-        ('1', 'not good'),
-        ('2', 'ok'),
-        ('3', 'successful'),
-        ('4', 'we do not use it (yet)'),
+        ('not_good', 'not good'),
+        ('ok', 'ok'),
+        ('successful', 'successful'),
+        ('not_using_it_yet', 'we do not use it (yet)'),
     )
 
     marketing_channels_mouth = models.CharField(max_length=1, choices=CHANNEL_CHOICES, blank=True, null=True)
@@ -362,17 +366,17 @@ class Report(models.Model):
         ('other', 'Other'),
     )
 
-    economic_payment_types = MultiSelectField(max_length=20, choices=PAYMENT_TYPE_CHOICES)
+    economic_payment_types = MultiSelectField(max_length=20, choices=PAYMENT_TYPE_CHOICES, blank=True, null=True)
     economic_notes = models.TextField(verbose_name="Bemerkungen",blank=True, null=True)
 
     # vocational program and schooling
 
     DURATION_CHOICES = (
-        ('0', 'less than 3 months'),
-        ('1', '6 - 12 months'),
-        ('2', '12 - 18 months'),
-        ('3', '18 - 24 months'),
-        ('4', 'more than 24 months'),
+        ('less_than_3_months', 'less than 3 months'),
+        ('6_to_12_months', '6 - 12 months'),
+        ('12_to_18_months', '12 - 18 months'),
+        ('18_to_24_months', '18 - 24 months'),
+        ('more_than_24_months', 'more than 24 months'),
     )
 
     vocational_program_duration = models.CharField(verbose_name="Dauer des Beschäftigungsprogramms", max_length=1, choices=DURATION_CHOICES,blank=True, null=True)
@@ -403,14 +407,14 @@ class Report(models.Model):
     communityproject_reinvest_profit = models.BooleanField(default=False, verbose_name="Gewinn vom letzten Jahr in Community Projekte investiert?")
     
     COMMUNITY_AREA_TYPES_CHOICES = (
-        ('0', 'Schooling / Education'),
-        ('1', 'Entrepreneuership'),
-        ('2', 'Evnironment / Environmental protection'),
-        ('3', 'Mobility'),
-        ('4', 'Women\'s empowerment'),
-        ('5', 'Children\'s empowerment'),
-        ('6', 'Sports activities'),
-        ('7', 'Other'),
+        ('education', 'Schooling / Education'),
+        ('entrepreneurship', 'Entrepreneuership'),
+        ('environment', 'Evnironment / Environmental protection'),
+        ('mobility', 'Mobility'),
+        ('women_empowerment', 'Women\'s empowerment'),
+        ('children_empowerment', 'Children\'s empowerment'),
+        ('sports_activist', 'Sports activities'),
+        ('other', 'Other'),
     )
     communityproject_areas = models.CharField(max_length=1, choices=COMMUNITY_AREA_TYPES_CHOICES, verbose_name="Feld der Community Arbeit",blank=True, null=True)
     communityproject_reinvest_profit_total = models.IntegerField(verbose_name="In Community Projekt re-investierter Betrag",blank=True, null=True)
@@ -445,6 +449,44 @@ class Report(models.Model):
 
     class Meta:
         ordering = ['-creation']
+
+    # TODO: add to admin
+    def economic_bicycles_turnover_USD(self):
+        if self.economic_bicycles_turnover:
+            return self.economic_bicycles_turnover * self.currency_rate
+        return None
+    economic_bicycles_turnover_USD.short_description = "Umsatz Fahrräder USD"
+
+    def economic_spareparts_turnover_USD(self):
+        if self.economic_spareparts_turnover:
+            return self.economic_spareparts_turnover * self.currency_rate
+        return None
+    economic_spareparts_turnover_USD.short_description = "Umsatz Ersatzteile USD"
+
+    def economic_services_turnover_USD(self):
+        if self.economic_services_turnover:
+            return self.economic_services_turnover * self.currency_rate
+        return None
+    economic_services_turnover_USD.short_description = "Umsatz Dienstleistungen USD"
+
+    def economic_turnover_total_USD(self):
+        if self.economic_turnover_total:
+            return self.economic_turnover_total * self.currency_rate
+        return None
+    economic_turnover_total_USD.short_description = "Umsatz Total USD"
+
+    def economic_transport_costs_port_to_organisation_USD(self):
+        if self.economic_transport_costs_port_to_organisation:
+            return self.economic_transport_costs_port_to_organisation * self.currency_rate
+        return None
+    economic_transport_costs_port_to_organisation_USD.short_description = "Transportkosten Hafen bis Organisation USD"
+
+    def communityproject_reinvest_profit_total_USD(self):
+        if self.communityproject_reinvest_profit_total:
+            return self.communityproject_reinvest_profit_total * self.currency_rate
+        return None
+    communityproject_reinvest_profit_total_USD.short_description = "In Gemeinschaftsprojekt investierter Betrag USD"
+    
 
     def get_staff(self):
         """

@@ -1,3 +1,25 @@
+# -*- coding: utf-8 -*-
 from django.test import TestCase
+from velafrica.sbbtracking.models import *
+from velafrica.velafrica_sud.models import *
 
-# Create your tests here.
+
+class ContainerBookingTest(TestCase):
+	
+    def setUp(self):
+    	# create org
+    	# create partner
+    	# create container
+    	pass
+
+
+    def test_stocktransfer_book_and_revoke_incoming(self):
+    	"""
+    	Test if the stock adjustments are made correctly when booking and revoking a Stock Transfer.
+    	"""
+    	# create 2 trackings
+    	# create tracking event types
+    	# add tracking events
+    	# book container
+    	# test trackings
+    	pass

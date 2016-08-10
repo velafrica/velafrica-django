@@ -255,10 +255,55 @@ class StockChange(models.Model):
     warehouse = models.ForeignKey(Warehouse)
     stocklist = models.ForeignKey(StockList)
     stock_change_type = models.CharField(choices=STOCK_CHANGE_TYPES, max_length=255)
-    booked = models.BooleanField(default=False)
+    booked = models.BooleanField(default=False, help_text="Indicates if stock adjustments have been made.")
+
+    def book(self, fake=False):
+        """
+        """
+        if self.warehouse.stock_management and not self.booked and not fake:
+            # for each position in the stock list, update the warehouse stock
+            for pos in StockListPosition.objects.filter(stocklist=self.stocklist.id):
+                stock, created = Stock.objects.get_or_create(
+                    product=pos.product,
+                    warehouse=self.warehouse
+                )
+                if self.stock_change_type == 'out':
+                    stock.amount -= pos.amount
+                else:
+                    stock.amount += pos.amount
+                stock.save()
+
+            self.booked = True
+            self.save()
+            return True
+        else:
+            return False
+
+    def revoke(self):
+        """
+        """
+        if self.warehouse.stock_management and self.booked:
+            # for each position in the stock list, update the warehouse stock
+            for pos in StockListPosition.objects.filter(stocklist=self.stocklist.id):
+                stock, created = Stock.objects.get_or_create(
+                    product=pos.product,
+                    warehouse=self.warehouse
+                )
+                if self.stock_change_type == 'out':
+                    stock.amount += pos.amount
+                else:
+                    stock.amount -= pos.amount
+                stock.save()
+            self.booked = False
+            self.save()
+            return True
+        else:
+            return False
+
 
     def __unicode__(self):
         return u"StockChange {}, {} {}".format(self.datetime, self.stock_change_type, self.warehouse)
+
 
 class StockChangeListPos(StockListPos):
     """
@@ -282,7 +327,8 @@ class StockTransfer(models.Model):
     booked = models.BooleanField(default=False, null=False, blank=False, help_text="Gibt an ob der Stock bereits angepasst wurde.")
     history = HistoricalRecords()
 
-    def book(self):
+
+    def book(self, fake=False):
         """
         - check if warehouse enabled auto stock update
         - adjust stock
@@ -293,40 +339,26 @@ class StockTransfer(models.Model):
             print("Already booked, no action.")
             return False
 
-        if self.warehouse_from.stock_management:
-            # for each position in the stock list, update the warehouse stock
-            for pos in StockListPosition.objects.filter(stocklist=self.stocklist.id):
-                stock, created = Stock.objects.get_or_create(
-                    product=pos.product,
-                    warehouse=self.warehouse_from
-                )
-                stock.amount -= pos.amount
-                stock.save()
-            # create StockChange
-            sc = StockChange(
-                stocktransfer=self, 
-                warehouse=self.warehouse_from,
-                stocklist=self.stocklist,
-                stock_change_type='out'
-            )
-            sc.save()
-        if self.warehouse_to.stock_management:
-            # for each position in the stock list, update the warehouse stock
-            for pos in StockListPosition.objects.filter(stocklist=self.stocklist.id):
-                stock, created = Stock.objects.update_or_create(
-                    product=pos.product,
-                    warehouse=self.warehouse_to
-                )
-                stock.amount += pos.amount
-                stock.save()
-            # create StockChange
-            sc = StockChange(
-                stocktransfer=self,
-                warehouse=self.warehouse_to, 
-                stocklist=self.stocklist, 
-                stock_change_type='in'
-            )
-            sc.save()
+        # always create outgoing StockChange
+        sc = StockChange(
+            stocktransfer=self, 
+            warehouse=self.warehouse_from,
+            stocklist=self.stocklist,
+            stock_change_type='out',
+        )
+        sc.save()
+        sc.book(fake=fake)
+
+        # always create incoming StockChange
+        sc = StockChange(
+            stocktransfer=self,
+            warehouse=self.warehouse_to, 
+            stocklist=self.stocklist, 
+            stock_change_type='in'
+        )
+        sc.save()
+        sc.book(fake=fake)
+
         self.booked = True
         self.save()
         return True
@@ -342,28 +374,11 @@ class StockTransfer(models.Model):
             print("Not booked yet, no action.")
             return False
 
-        if self.warehouse_from.stock_management:
-            # for each position in the stock list, update the warehouse stock
-            for pos in StockListPosition.objects.filter(stocklist=self.stocklist.id):
-                stock, created = Stock.objects.get_or_create(
-                    product=pos.product,
-                    warehouse=self.warehouse_from
-                )
-                stock.amount += pos.amount
-                stock.save()
-
-        if self.warehouse_to.stock_management:
-            # for each position in the stock list, update the warehouse stock
-            for pos in StockListPosition.objects.filter(stocklist=self.stocklist.id):
-                stock, created = Stock.objects.update_or_create(
-                    product=pos.product,
-                    warehouse=self.warehouse_to
-                )
-                stock.amount -= pos.amount
-                stock.save()
-
         sc = StockChange.objects.filter(stocktransfer=self)
+        for s in sc:
+            s.revoke()
         sc.delete()
+
         self.booked = False
         self.save()
         return True

@@ -7,6 +7,7 @@ from simple_history.admin import SimpleHistoryAdmin
 from velafrica.sbbtracking.models import Tracking
 from velafrica.velafrica_sud.models import Forwarder, PartnerSud, Container, Report, Staff, Role
 from import_export import resources
+from import_export.fields import Field
 from import_export.admin import ImportExportMixin
 from django.shortcuts import render_to_response
 
@@ -138,6 +139,12 @@ class ReportResource(resources.ModelResource):
     """
     Define the Conainter resource for import / export.
     """
+    economic_bicycles_turnover_USD = Field(readonly=True, attribute='economic_bicycles_turnover_USD', column_name='economic_bicycles_turnover_USD')
+    economic_turnover_total_USD = Field(readonly=True, attribute='economic_turnover_total_USD', column_name='economic_turnover_total_USD')
+    economic_spareparts_turnover_USD = Field(readonly=True, attribute='economic_spareparts_turnover_USD', column_name='economic_spareparts_turnover_USD')
+    economic_services_turnover_USD = Field(readonly=True, attribute='economic_services_turnover_USD', column_name='economic_services_turnover_USD')
+    economic_transport_costs_port_to_organisation_USD = Field(readonly=True, attribute='economic_transport_costs_port_to_organisation_USD', column_name='economic_transport_costs_port_to_organisation_USD')
+    communityproject_reinvest_profit_total_USD = Field(readonly=True, attribute='communityproject_reinvest_profit_total_USD', column_name='communityproject_reinvest_profit_total_USD')
 
     class Meta:
         model = Report
@@ -149,9 +156,10 @@ class ReportAdmin(ImportExportMixin, SimpleHistoryAdmin):
     search_fields = ['partner_sud']
     list_filter = ['partner_sud', 'creation']
     inlines = [StaffInline]
+    readonly_fields = ['economic_bicycles_turnover_USD', 'economic_turnover_total_USD', 'economic_spareparts_turnover_USD', 'economic_services_turnover_USD', 'economic_transport_costs_port_to_organisation_USD', 'communityproject_reinvest_profit_total_USD']
     fieldsets = (
         (None, {
-            'fields': ('creation', 'partner_sud')
+            'fields': ('creation', 'partner_sud', 'currency', 'currency_rate')
             }),
         ('Employment', {
             'classes': ('collapse', ),
@@ -175,13 +183,18 @@ class ReportAdmin(ImportExportMixin, SimpleHistoryAdmin):
             'fields': (
                 'economic_bicycles_amount',
                 'economic_bicycles_turnover',
+                'economic_bicycles_turnover_USD',
                 'economic_spareparts_amount',
                 'economic_spareparts_turnover',
+                'economic_spareparts_turnover_USD',
                 'economic_services_amount',
                 'economic_services_turnover',
+                'economic_services_turnover_USD',
                 'economic_turnover_total',
+                'economic_turnover_total_USD',
                 'economic_import_taxes',
                 'economic_transport_costs_port_to_organisation',
+                'economic_transport_costs_port_to_organisation_USD',
                 'economic_category1_name',
                 'economic_category1_pricerange',
                 'economic_category2_name',
@@ -266,6 +279,7 @@ class ReportAdmin(ImportExportMixin, SimpleHistoryAdmin):
                 'communityproject_reinvest_profit',
                 'communityproject_areas',
                 'communityproject_reinvest_profit_total',
+                'communityproject_reinvest_profit_total_USD',
                 'communityproject_people_benefitted',
                 'communityproject_manager',
                 'communityproject_notes'
