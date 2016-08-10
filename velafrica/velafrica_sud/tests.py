@@ -5,7 +5,7 @@ from velafrica.velafrica_sud.models import *
 
 
 class ContainerBookingTest(TestCase):
-	
+
     def setUp(self):
     	# create org
     	# create partner
@@ -15,7 +15,7 @@ class ContainerBookingTest(TestCase):
 
     def test_stocktransfer_book_and_revoke_incoming(self):
     	"""
-    	Test if the stock adjustments are made correctly when booking and revoking a Stock Transfer.
+    	Test if the trackings are correctly completed when booking a Container.
     	"""
     	# create 2 trackings
     	# create tracking event types
