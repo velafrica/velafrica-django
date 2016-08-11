@@ -92,5 +92,5 @@ urlpatterns = [
 
     # admin urls
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^admin/', include("massadmin.urls", namespace='massadmin')),
+    url(r'^admin/', include("massadmin.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
