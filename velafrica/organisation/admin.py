@@ -49,6 +49,7 @@ class OrganisationAdmin(ImportExportMixin, SimpleHistoryAdmin):
                 return ""
     get_googlemaps_link.short_description = 'Google Maps'
 
+
 class CantonResource(resources.ModelResource):
     """
     Define the organisation resource for import / export.
