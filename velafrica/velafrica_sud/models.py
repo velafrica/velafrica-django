@@ -261,7 +261,7 @@ class Report(models.Model):
     creation = models.DateField(default=timezone.now,)
     partner_sud = models.ForeignKey(PartnerSud)
     currency = models.CharField(blank=False, null=True, default="", max_length=10, verbose_name="Verwendete Währung bei Finanzangaben")
-    currency_rate = models.DecimalField(blank=False, null=False, decimal_places=2, max_digits=4, default=1.0, verbose_name="Währungskurs zu USD")
+    currency_rate = models.DecimalField(blank=False, null=False, decimal_places=2, max_digits=10, default=1.0, verbose_name="Währungskurs zu USD")
 
     # employment opportunities -> Jahrangabe?
     employment_fulltime_men = models.IntegerField(verbose_name="Angestellte Vollzeit Männer",blank=True, null=True)

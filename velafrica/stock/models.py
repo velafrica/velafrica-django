@@ -162,6 +162,10 @@ class StockList(models.Model):
 
     history = HistoricalRecords()
 
+    class Meta:
+        verbose_name = "Stock Liste"
+        verbose_name_plural = "Stock Listen"
+
     def __unicode__(self):
         return u"SL#{0} - {1} ({2:%d.%m.%Y}, {3}:{2:%M})".format(self.id, self.description, self.last_change, self.last_change.hour+2)
 
@@ -210,6 +214,8 @@ class StockListPosition(models.Model):
 
     class Meta:
         unique_together = (("stocklist", "product"),)
+        verbose_name = "Stock List Position"
+        verbose_name_plural = "Stock List Positionen"
 
     def __unicode__(self):
         return u"StockList #{}: {}x {} ".format(self.stocklist.id, self.amount, self.product)
@@ -304,11 +310,19 @@ class StockChange(models.Model):
     def __unicode__(self):
         return u"StockChange {}, {} {}".format(self.datetime, self.stock_change_type, self.warehouse)
 
+    class Meta:
+        verbose_name = "Stock Change"
+        verbose_name_plural = "Stock Changes"
+
 
 class StockChangeListPos(StockListPos):
     """
     """
     stockchange = models.ForeignKey(StockChange)
+
+    class Meta:
+        verbose_name = "Stock Change List Position"
+        verbose_name_plural = "Stock Change List Positions"
 
 
 class StockTransfer(models.Model):
@@ -388,6 +402,8 @@ class StockTransfer(models.Model):
 
     class Meta:
         ordering = ['-date']
+        verbose_name = "Stock Transfer"
+        verbose_name_plural = "Stock Transfers"
 
 
 class StockTransferListPos(StockListPos):
@@ -399,3 +415,5 @@ class StockTransferListPos(StockListPos):
 
     class Meta:
         unique_together = (("stocktransfer", "product"),)
+        verbose_name = "Stock Transfer List Position"
+        verbose_name_plural = "Stock Transfers List Positionen"
