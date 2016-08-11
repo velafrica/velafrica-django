@@ -34,7 +34,7 @@ class OrganisationAdmin(ImportExportMixin, SimpleHistoryAdmin):
     # inlines = [WarehouseInline,]
     list_display = ['name', 'get_googlemaps_link', 'website', 'is_partnersud']
     search_fields = ['name', 'address__city']
-    fields = ['name', 'website', 'facebook', 'get_partnersud', 'get_googlemaps_link', 'contact','description']
+    fields = ['name', 'website', 'facebook', 'get_partnersud', 'address', 'get_googlemaps_link', 'contact','description']
     readonly_fields = ['get_partnersud', 'get_googlemaps_link']
 
     def get_googlemaps_link(self, obj):
