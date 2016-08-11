@@ -1,5 +1,5 @@
 from dal import autocomplete
-from velafrica.stock.models import Product, Stock, StockListPosition, StockListPos, Warehouse
+from velafrica.stock.models import Product, Stock, StockListPosition, StockListPos, Warehouse, StockTransfer
 from velafrica.collection.models import Event
 from velafrica.organisation.models import Municipality
 from django import forms
@@ -41,6 +41,23 @@ class StockListPosForm(forms.ModelForm):
 
     class Meta:
         model = StockListPos
+        fields = ('__all__')
+
+
+class StockTransferForm(forms.ModelForm):
+    """
+    """
+    warehouse_from = forms.ModelChoiceField(
+        queryset=Warehouse.objects.all(),
+        widget=autocomplete.ModelSelect2(url='autocomplete:warehouse')
+    )
+    warehouse_to = forms.ModelChoiceField(
+        queryset=Warehouse.objects.all(),
+        widget=autocomplete.ModelSelect2(url='autocomplete:warehouse')
+    )
+
+    class Meta:
+        model = StockTransfer
         fields = ('__all__')
 
 

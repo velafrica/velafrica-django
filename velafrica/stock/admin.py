@@ -6,7 +6,7 @@ from django.utils.safestring import mark_safe
 from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response
 from velafrica.stock.models import *
-from velafrica.stock.forms import StockForm, StockListPositionForm, WarehouseForm, StockListPosForm
+from velafrica.stock.forms import StockForm, StockListPositionForm, WarehouseForm, StockListPosForm, StockTransferForm
 from velafrica.transport.models import Ride
 from velafrica.velafrica_sud.models import Container
 from import_export import resources
@@ -267,6 +267,7 @@ class StockTransferResource(resources.ModelResource):
 class StockTransferAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
     #inlines = [StockChangeInline, StockTransferListPosInline]
     inlines = [StockChangeInline]
+    form = StockTransferForm
     resource_class = StockTransferResource
     list_display = ['id', 'date', 'warehouse_from', 'warehouse_to', 'stocklist', 'booked', 'note']
     list_filter = ['date', 'warehouse_from', 'warehouse_to', 'booked']
