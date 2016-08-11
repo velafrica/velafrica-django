@@ -128,7 +128,7 @@ class Container(models.Model):
         ct = self
         # get oldest container by pickup date
         first = Container.objects.all().filter(pickup_date__range=[timezone.datetime(ct.pickup_date.year,1,1), ct.pickup_date]).last()
-        pos = Container.objects.filter(partner_to=self.partner_to).filter(pickup_date__range=[first.pickup_date, ct.pickup_date]).count()
+        pos = Container.objects.filter(pickup_date__range=[first.pickup_date, ct.pickup_date]).count()
         return pos
     container_n_of_year.verbose_name = "Container dieses Jahr"
     container_n_of_year.short_description = "# / Jahr"
