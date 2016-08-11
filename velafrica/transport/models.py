@@ -33,7 +33,6 @@ class Driver(models.Model):
     """
     name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Name des Fahrers")
     organisation = models.ForeignKey(Organisation, blank=True, null=True, help_text='Organisation bei welcher der Fahrer angestellt ist.')
-    person = models.ForeignKey(Person, blank=True, null=True, verbose_name='Verknüpfte Person')
 
     history = HistoricalRecords()
     
