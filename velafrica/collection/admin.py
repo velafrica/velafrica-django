@@ -8,7 +8,6 @@ from import_export.fields import Field
 from import_export.widgets import DateWidget
 from simple_history.admin import SimpleHistoryAdmin
 from velafrica.collection.models import *
-from velafrica.collection.forms import EventForm
 
 
 class TaskProgressInline(admin.TabularInline):
@@ -18,8 +17,8 @@ class TaskProgressInline(admin.TabularInline):
 
 
 class EventAdmin(SimpleHistoryAdmin):
-    form = EventForm
     list_filter = ['yearly']
+    list_display = ['name', 'yearly']
 
 class CollectionEventAdminResource(resources.ModelResource):
     """
