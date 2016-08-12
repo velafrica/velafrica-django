@@ -24,6 +24,7 @@ def get_distance(origin, destination):
 	Returns the distance in metres between two destinations.
 	"""
 	distance_result = gmaps.distance_matrix(origin, destination, mode="driving")
+	print distance_result
 	if distance_result:
 		return distance_result['rows'][0]['elements'][0]['distance']['value']
 	else:

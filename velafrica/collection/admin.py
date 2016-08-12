@@ -19,6 +19,7 @@ class TaskProgressInline(admin.TabularInline):
 
 class EventAdmin(SimpleHistoryAdmin):
     form = EventForm
+    list_filter = ['yearly']
 
 class CollectionEventAdminResource(resources.ModelResource):
     """
@@ -65,7 +66,8 @@ class CollectionEventAdmin(ImportExportMixin, SimpleHistoryAdmin):
     """
     resource_class = CollectionEventAdminResource
     list_display = ['date_start', 'date_end', 'event', 'notes', 'status_logistics', 'status_marketing', 'status_results', 'velo_amount' ]
-    search_fields = ['event__name', 'event__municipality__name']
+    search_fields = ['event__name', 'event__address__city']
+
     inlines = [TaskProgressInline]
     readonly_fields = ['get_googlemaps_link', 'get_event_name', 'get_event_description', 'get_event_category', 'get_event_yearly', 'get_event_host', 'get_event_host_type', 'get_event_address', 'get_event_address_notes']
     fieldsets = (
@@ -85,7 +87,7 @@ class CollectionEventAdmin(ImportExportMixin, SimpleHistoryAdmin):
             'fields': ('feedback', 'velo_amount', 'people_amount', 'hours_amount', 'additional_results')
             }),
     )
-
+    list_filter = ['date_start', 'event']
     def get_googlemaps_link(self, obj):
         if obj.event.address:
             url = obj.address.event.get_googlemaps_url()
