@@ -133,7 +133,7 @@ class TrackingAdmin(ImportExportMixin, SimpleHistoryAdmin):
     def fix_last_events(self, request, queryset):
         for o in queryset:
             self.fix_last_event(request, o)
-    fix_last_event.label = "Letzten Event korrigieren"
+    fix_last_events.label = "Letzten Event korrigieren"
 
     def fix_last_event(self, request, obj):
         """
