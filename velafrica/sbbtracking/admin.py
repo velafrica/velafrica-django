@@ -114,20 +114,26 @@ class TrackingResource(resources.ModelResource):
         import_id_fields = ('tracking_no',)
         fields = ('first_name', 'last_name', 'email', 'tracking_no', 'last_event__event_type__name', 'velo_type__name')
 
-class TrackingAdmin(DjangoObjectActions, ImportExportMixin, SimpleHistoryAdmin):
+class TrackingAdmin(ImportExportMixin, SimpleHistoryAdmin):
     resource_class = TrackingResource
     list_display = ('tracking_no', 'first_name', 'last_name', 'velo_type', 'get_last_update', 'last_event', 'complete', 'container', 'note')
     list_filter = ['last_event__event_type', 'velo_type', 'complete']
     inlines = [TrackingEventInline, AddTrackingEventInline, EmailLogInline]
+    massadmin_exclude = ['get_last_update', 'last_event', ]
     search_fields = ['tracking_no', 'first_name', 'last_name', 'email']
     readonly_fields = ['last_event']
 
-    actions = ['add_event',]
+    actions = ['add_event', 'fix_last_events']
     change_actions = ['fix_last_event']
 
     class AddEventForm(forms.Form):
         _selected_action = forms.CharField(widget=forms.MultipleHiddenInput)
         event_type = forms.ModelChoiceField(TrackingEventType.objects)
+
+    def fix_last_events(self, request, queryset):
+        for o in queryset:
+            self.fix_last_event(request, o)
+    fix_last_event.label = "Letzten Event korrigieren"
 
     def fix_last_event(self, request, obj):
         """
@@ -135,7 +141,7 @@ class TrackingAdmin(DjangoObjectActions, ImportExportMixin, SimpleHistoryAdmin):
         event = obj.set_last_event()
         if event:
             self.message_user(request, "Letzten Event erfolgreich aktualisiert zu {}.".format(event))
-    fix_last_event.label = "Letzter Event korrigieren"
+    fix_last_event.label = "Letzten Event korrigieren"
 
 
     def add_event(self, request, queryset):
