@@ -59,6 +59,7 @@ class Event(models.Model):
 
     class Meta:
         verbose_name = "Event"
+        ordering = "name"
 
 
 class Task(models.Model):
@@ -208,7 +209,7 @@ class CollectionEvent(models.Model):
     class Meta:
         verbose_name = "Sammelanlass"
         verbose_name_plural = "Sammelanlässe"
-        ordering = ['-date_start']
+        ordering = ['date_start']
 
 
 class TaskProgress(models.Model):
