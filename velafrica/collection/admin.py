@@ -3,8 +3,8 @@ from daterange_filter.filter import DateRangeFilter
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 from import_export import resources
-from import_export.admin import ImportExportMixin
-from import_export.fields import Field
+from import_export.admin import ImportExportMixin, ExportMixin
+from import_export import fields
 from import_export.widgets import DateWidget
 from simple_history.admin import SimpleHistoryAdmin
 from velafrica.collection.models import *
@@ -16,6 +16,28 @@ class TaskProgressInline(admin.TabularInline):
     extra = 0
 
 
+class TaskProgressResource(resources.ModelResource):
+    """
+    Define the collection event resource for import / export.
+    """
+
+    class Meta:
+        model = TaskProgress
+        fields = [
+            'task',
+            'task__name',
+            'notes',
+            'status',
+            'collection_event',
+            'collection_event__event__name',
+        ]
+
+class TaskProgressAdmin(ExportMixin, SimpleHistoryAdmin):
+    resource_class = TaskProgressResource
+    list_filter = ['status']
+    list_display = ['__unicode__', 'collection_event', 'task', 'notes', 'status']
+
+
 class EventAdmin(SimpleHistoryAdmin):
     list_filter = ['yearly']
     list_display = ['name', 'yearly']
@@ -24,6 +46,19 @@ class CollectionEventAdminResource(resources.ModelResource):
     """
     Define the collection event resource for import / export.
     """
+
+    marketing_status = fields.Field()
+    transport_status = fields.Field()
+    feedback_status = fields.Field()
+
+    def dehydrate_marketing_status(self, book):
+        return book.get_status_marketing()
+
+    def dehydrate_transport_status(self, book):
+        return book.get_status_logistics()
+
+    def dehydrate_feedback_status(self, book):
+        return book.get_status_results()
 
     class Meta:
         model = CollectionEvent
@@ -42,6 +77,7 @@ class CollectionEventAdminResource(resources.ModelResource):
             'collection_partner_other',
             'collection_partner_confirmed',
             'processing',
+            'processing__name',
             'processing_notes',
             'website',
             'feedback',
@@ -57,8 +93,12 @@ class CollectionEventAdminResource(resources.ModelResource):
             'event__address__street',
             'event__address__city',
             'event__address__zipcode',
-            'event__address_notes'
+            'event__address_notes',
+            'marketing_status',
+            'transport_status',
+            'feedback_status'
         ]
+
 
 class CollectionEventAdmin(ImportExportMixin, SimpleHistoryAdmin):
     """
@@ -74,7 +114,7 @@ class CollectionEventAdmin(ImportExportMixin, SimpleHistoryAdmin):
             'fields': ('date_start', 'date_end', 'event', 'time', 'notes')
             }),
         ('Event', {
-            'fields': ('get_event_name', 'get_event_description', 'get_event_category', 'get_event_yearly', 'get_event_host', 'get_event_host_type', 'get_googlemaps_link', 'get_event_address_notes')
+            'fields': ('get_event_description', 'get_event_category', 'get_event_yearly', 'get_event_host', 'get_event_host_type', 'get_googlemaps_link', 'get_event_address_notes')
             }),
         ('Logistik', {
             'fields': ('presence_velafrica', 'presence_velafrica_info', 'collection_partner_vrn', 'collection_partner_other', 'collection_partner_confirmed', 'collection', 'processing', 'processing_notes',)
@@ -117,19 +157,19 @@ class CollectionEventAdmin(ImportExportMixin, SimpleHistoryAdmin):
 
     def status_marketing(self, obj):
         return mark_safe('<div span style="{}">&nbsp;</div>'.format(self.get_status_style(obj.get_status_marketing())))
-    status_marketing.short_description = 'Marketing Status'
+    status_marketing.short_description = 'Marketing'
 
     def status_results(self, obj):
         return mark_safe('<div span style="{}">&nbsp;</div>'.format(self.get_status_style(obj.get_status_results())))
-    status_results.short_description = 'Feedback Status'
+    status_results.short_description = 'Feedback'
 
     def status_logistics(self, obj):
         return mark_safe('<div span style="{}">&nbsp;</div>'.format(self.get_status_style(obj.get_status_logistics())))
-    status_logistics.short_description = 'Abholung Status'
+    status_logistics.short_description = 'Abholung'
 
 admin.site.register(Event, EventAdmin)
 admin.site.register(EventCategory)
 admin.site.register(HostType)
 admin.site.register(CollectionEvent, CollectionEventAdmin)
 admin.site.register(Task)
-admin.site.register(TaskProgress)
+admin.site.register(TaskProgress,TaskProgressAdmin)

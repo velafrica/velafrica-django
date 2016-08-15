@@ -48,6 +48,7 @@ class Event(models.Model):
     yearly = models.BooleanField(default=False, verbose_name="Jährlich wiederkehrend?")
     host = models.CharField(max_length=255, verbose_name="Veranstalter")
     host_type = models.ForeignKey(HostType, null=True, verbose_name="Veranstalter Typ")
+    contact = models.CharField(max_length=255, verbose_name="Kontaktperson", null=True, blank=True)
     
     address = models.ForeignKey(Address, verbose_name="Adresse", blank=True, null=True)
     address_notes = models.TextField(blank=True, verbose_name="Genauer Standort")
@@ -78,7 +79,7 @@ class CollectionEvent(models.Model):
     date_end = models.DateField()
     event = models.ForeignKey(Event)
     time = models.CharField(max_length=255, blank=True, verbose_name="Veloannahme", help_text="Zeit für Veloannahme")
-    notes = models.TextField(blank=True, verbose_name="weitere Infos", help_text="Weitere Infos / Bemerkungen")
+    notes = models.TextField(blank=True, verbose_name="To do", help_text="Sachen die noch zu erledigen sind / Weitere Infos / Bemerkungen")
 
     # logistics
     presence_velafrica = models.BooleanField(default=False, verbose_name="Präsenz Velafrica?")
@@ -90,11 +91,13 @@ class CollectionEvent(models.Model):
     collection = models.TextField(
         blank=True,
         help_text="Infos zur Abholung der Velos",
-        verbose_name="Abtransport")
+        verbose_name="Notizen Abtransport")
     processing = models.ForeignKey(
         Organisation,
         verbose_name="Velo Verarbeitung",
-        related_name="processing_organisation")
+        related_name="processing_organisation",
+        null=True,
+        blank=True)
     processing_notes = models.CharField(
         max_length=255,
         blank=True,
@@ -120,7 +123,7 @@ class CollectionEvent(models.Model):
 
     # results
     feedback = models.BooleanField(default=False, verbose_name="Feedback eingeholt?")
-    velo_amount = models.IntegerField(default=0, verbose_name="Anzahl gesammelte Velos")
+    velo_amount = models.IntegerField(default=0, verbose_name="Anzahl Velos", help_text="Anzahl gesammelter Velos")
     people_amount = models.IntegerField(default=0, verbose_name='Anzahl Helfer vor Ort')
     hours_amount = models.IntegerField(default=0, verbose_name='Geleistete Stunden', help_text="Anzahl geleistete Stunden von allen Helfern zusammen")
     money_amount = models.IntegerField(default=0, verbose_name='Gesammeltes Geld', help_text="Betrag in CHF der am Event gesammelt wurde")
