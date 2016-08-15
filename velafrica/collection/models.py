@@ -22,7 +22,7 @@ class EventCategory(models.Model):
         return u"{}".format(self.name)
 
     class Meta:
-        ordering = "-name"
+        ordering = ["-name"]
         verbose_name = "Event Kategorie"
         verbose_name_plural = "Event Kategorien"
 
@@ -59,7 +59,7 @@ class Event(models.Model):
 
     class Meta:
         verbose_name = "Event"
-        ordering = "name"
+        ordering = ["name"]
 
 
 class Task(models.Model):
