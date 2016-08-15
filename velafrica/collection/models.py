@@ -129,6 +129,8 @@ class CollectionEvent(models.Model):
     money_amount = models.IntegerField(default=0, verbose_name='Gesammeltes Geld', help_text="Betrag in CHF der am Event gesammelt wurde")
     additional_results = models.TextField(blank=True, verbose_name="weitere Resultate", help_text="Zusätzliche Resultate / Erkenntnisse")
 
+    complete = models.BooleanField(default=False, verbose_name="Abgeschlossen")
+
     def get_event_name(self):
         return self.event.name
     get_event_name.short_description = "Name"
