@@ -22,6 +22,7 @@ class EventCategory(models.Model):
         return u"{}".format(self.name)
 
     class Meta:
+        ordering = "-name"
         verbose_name = "Event Kategorie"
         verbose_name_plural = "Event Kategorien"
 
