@@ -238,7 +238,7 @@ class Role(models.Model):
     def __unicode__(self):
         return self.name
 
-class Staff(models.Model):
+class ReportStaff(models.Model):
     """
     Used to add information about personal staff at partner.
     """
@@ -250,6 +250,19 @@ class Staff(models.Model):
 
     def __unicode__(self):
         return u"{} {}s earning a total of {} USD".format(self.number, self.role, self.salary)
+
+
+class PartnerStaff(models.Model):
+    """
+    Used to add information about personal staff at partner.
+    """
+    role = models.ForeignKey(Role,verbose_name="Rolle")
+    name = models.CharField(max_length=255, verbose_name="Name des Angestellten")
+    partner = models.ForeignKey('PartnerSud', verbose_name="Arbeitgeber")
+    history = HistoricalRecords()
+
+    def __unicode__(self):
+        return u"{}, {} at {}.".format(self.name, self.role, self.partner)
 
 
 class Report(models.Model):
@@ -492,7 +505,7 @@ class Report(models.Model):
         """
         Return list of staff objects.
         """
-        return Staff.objects.filter(report=self.id)
+        return ReportStaff.objects.filter(report=self.id)
 
     def __unicode__(self):
         return u"{}, Report vom {}".format(self.partner_sud, self.creation)

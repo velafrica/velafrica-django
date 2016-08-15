@@ -3,7 +3,7 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 from velafrica.organisation.serializer import OrganisationSerializer
-from velafrica.velafrica_sud.models import Container, Forwarder, PartnerSud, Report, Role, Staff
+from velafrica.velafrica_sud.models import Container, Forwarder, PartnerSud, Report, Role, ReportStaff, PartnerStaff
 
 class ContainerSerializer(serializers.ModelSerializer):
 	"""
@@ -23,6 +23,23 @@ class ForwarderSerializer(serializers.ModelSerializer):
         model = Forwarder
 
 
+class RoleSerializer(serializers.ModelSerializer):
+    """
+    """
+
+    class Meta:
+        model = Role
+
+
+class PartnerStaffSerializer(serializers.ModelSerializer):
+    """
+    """
+    role = RoleSerializer(many=False, read_only=True)
+    #staff = PartnerStaffSerializer(source='get_staff', many=True)
+    class Meta:
+        model = PartnerStaff
+
+
 class PartnerSudSerializer(serializers.ModelSerializer):
     """
     Todo: write doc.
@@ -33,27 +50,19 @@ class PartnerSudSerializer(serializers.ModelSerializer):
         model = PartnerSud       
 
 
-class RoleSerializer(serializers.ModelSerializer):
-    """
-    """
-
-    class Meta:
-        model = Role
-
-
-class StaffSerializer(serializers.ModelSerializer):
+class ReportStaffSerializer(serializers.ModelSerializer):
     """
     """
     role = RoleSerializer(many=False, read_only=True)
     class Meta:
-        model = Staff
+        model = ReportStaff
 
 
 class ReportSerializer(serializers.ModelSerializer):
     """
     Todo: write doc.
     """
-    staff = StaffSerializer(source='get_staff', many=True)
+    staff = ReportStaffSerializer(source='get_staff', many=True)
 
     class Meta:
         model = Report       

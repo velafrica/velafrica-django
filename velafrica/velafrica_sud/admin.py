@@ -5,7 +5,7 @@ from django.contrib import admin
 from django.utils.safestring import mark_safe
 from simple_history.admin import SimpleHistoryAdmin
 from velafrica.sbbtracking.models import Tracking
-from velafrica.velafrica_sud.models import Forwarder, PartnerSud, Container, Report, Staff, Role
+from velafrica.velafrica_sud.models import Forwarder, PartnerSud, Container, Report, ReportStaff, PartnerStaff, Role
 from import_export import resources
 from import_export.fields import Field
 from import_export.admin import ImportExportMixin
@@ -97,11 +97,19 @@ class ContainerInline(admin.TabularInline):
     extra = 0
     readonly_fields = ['booked']
 
+
+class PartnerStaffInline(admin.TabularInline):
+    """
+    """
+    model = PartnerStaff
+    extra = 0
+
+
 class PartnerSudAdmin(SimpleHistoryAdmin):
     list_display = ['organisation', 'get_googlemaps_link', 'get_container_count', 'get_bicycle_count']
     search_fields = ['organisation__name', 'country__name']
     readonly_fields = ['get_googlemaps_link', 'get_name', 'get_website', 'get_description', 'get_country', 'get_facebook', 'get_contact']
-    inlines = [ContainerInline, ]
+    inlines = [ContainerInline, PartnerStaffInline]
     fieldsets = (
         (None, {
             'fields': ('organisation', 'get_name', 'get_contact', 'get_website', 'get_facebook', 'get_description', 'image')
@@ -126,12 +134,11 @@ class PartnerSudAdmin(SimpleHistoryAdmin):
             else:
                 return ""
     get_googlemaps_link.short_description = 'Google Maps'
-    
 
-class StaffInline(admin.TabularInline):
+class ReportStaffInline(admin.TabularInline):
     """
     """
-    model = Staff
+    model = ReportStaff
     extra = 0
 
 
@@ -155,7 +162,7 @@ class ReportAdmin(ImportExportMixin, SimpleHistoryAdmin):
     list_display = ['creation', 'partner_sud']
     search_fields = ['partner_sud']
     list_filter = ['partner_sud', 'creation']
-    inlines = [StaffInline]
+    inlines = [ReportStaffInline]
     readonly_fields = ['economic_bicycles_turnover_USD', 'economic_turnover_total_USD', 'economic_spareparts_turnover_USD', 'economic_services_turnover_USD', 'economic_transport_costs_port_to_organisation_USD', 'communityproject_reinvest_profit_total_USD']
     fieldsets = (
         (None, {
