@@ -128,6 +128,7 @@ if 'ON_HEROKU' in os.environ:
 
 LANGUAGE_CODE = 'de-ch'
 
+
 # list of time zones https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 TIME_ZONE = 'Europe/Zurich'
 
