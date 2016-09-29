@@ -127,7 +127,7 @@ ROOT_URLCONF = 'velafrica.core.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['velafrica/cms/templates'],
+        'DIRS': ['frontend'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -143,7 +143,7 @@ TEMPLATES = [
 ]
 
 CMS_TEMPLATES = (
-    ('cms_base.html', 'Base'),
+    ('cms/base.html', 'Base'),
 )
 
 SITE_ID = 1
