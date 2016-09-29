@@ -94,6 +94,7 @@ urlpatterns = [
     # admin urls
     url(r'^admin/', include(admin.site.urls)),
     url(r'^admin/', include("massadmin.urls")),
+    url(r'^taggit_autosuggest/', include('taggit_autosuggest.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += i18n_patterns(url(r'^pages/', include('cms.urls')))

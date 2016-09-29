@@ -56,6 +56,13 @@ INSTALLED_APPS = (
     'sekizai',  # for JavaScript and CSS management
     'easy_thumbnails',
     'filer',
+    'aldryn_apphooks_config',
+    'cmsplugin_filer_image',
+    'parler',
+    'taggit',
+    'taggit_autosuggest',
+    'meta',
+    'djangocms_blog',
     # TODO: 'reversion', - do we need this?
     # django cms plugins
     'djangocms_file',
@@ -140,6 +147,27 @@ CMS_TEMPLATES = (
 )
 
 SITE_ID = 1
+
+# Settings for Blog
+THUMBNAIL_PROCESSORS = (
+    'easy_thumbnails.processors.colorspace',
+    'easy_thumbnails.processors.autocrop',
+    'filer.thumbnail_processors.scale_and_crop_with_subject_location',
+    'easy_thumbnails.processors.filters',
+)
+META_SITE_PROTOCOL = 'http'
+META_USE_SITES = True
+
+PARLER_LANGUAGES = {
+    1: (
+        {'code': 'de'},
+    ),
+    'default': {
+        'fallbacks': ['de'],
+    }
+}
+
+
 
 WSGI_APPLICATION = 'velafrica.core.wsgi.application'
 
