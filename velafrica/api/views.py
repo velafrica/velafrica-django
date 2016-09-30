@@ -1,21 +1,15 @@
 # -*- coding: utf-8 -*-
-import markdown
-from django.shortcuts import get_object_or_404
-from django.core.mail import send_mail
-from django.contrib.auth import get_user_model
-from rest_framework import generics, permissions
+from rest_framework import filters, permissions
+from rest_framework import generics
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
-from rest_framework import status, filters, permissions
-from velafrica.organisation.models import *
-from velafrica.organisation.serializer import *
-from velafrica.sbbtracking.models import *
+
 from velafrica.sbbtracking.serializer import *
-from velafrica.stock.models import *
 from velafrica.stock.serializer import *
 from velafrica.velafrica_sud.models import *
 from velafrica.velafrica_sud.serializer import *
+
 
 class DjangoModelPermissionsMixin(generics.GenericAPIView):
     permission_classes = (permissions.IsAuthenticated, permissions.DjangoModelPermissions,)
@@ -36,7 +30,6 @@ def api_root(request, format=None):
     queryset = Tracking.objects.none()
 
     from velafrica.api import urls
-    from django.core.urlresolvers import RegexURLPattern, RegexURLResolver
 
     URL_NAMES = []
     def load_url_pattern_names(namespace, patterns):

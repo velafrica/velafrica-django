@@ -1,8 +1,8 @@
 from dal import autocomplete
-from velafrica.stock.models import Product, Stock, StockListPosition, StockListPos, Warehouse, StockTransfer
-from velafrica.collection.models import Event
-from velafrica.organisation.models import Municipality
 from django import forms
+
+from velafrica.organisation.models import Municipality
+from velafrica.stock.models import Product, Stock, StockListPosition, StockListPos, Warehouse, StockTransfer
 
 
 class WarehouseForm(forms.ModelForm):

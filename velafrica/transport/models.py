@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-from django.utils import timezone
-from django.core.validators import RegexValidator
 from django.db import models
+from django.utils import timezone
 from django_resized import ResizedImageField
 from simple_history.models import HistoricalRecords
+
 from velafrica.core import utils
-from velafrica.organisation.models import Person, Organisation
+from velafrica.organisation.models import Organisation
 from velafrica.stock.models import Warehouse, StockList
 
 

@@ -1,19 +1,19 @@
 # -*- coding: utf-8 -*-
 from django import template
 from django_object_actions import DjangoObjectActions
-from django.contrib import admin, messages
+from django.contrib import admin
 from django.utils.safestring import mark_safe
 from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response
 from velafrica.stock.models import *
-from velafrica.stock.forms import StockForm, StockListPositionForm, WarehouseForm, StockListPosForm, StockTransferForm
+from velafrica.stock.forms import StockForm, StockListPositionForm, StockListPosForm, StockTransferForm
 from velafrica.transport.models import Ride
 from velafrica.velafrica_sud.models import Container
 from import_export import resources
 from import_export.admin import ImportExportMixin
 from simple_history.admin import SimpleHistoryAdmin
 from import_export.fields import Field
-from import_export.widgets import DateWidget, ForeignKeyWidget, ManyToManyWidget
+
 
 class CategoryResource(resources.ModelResource):
     """

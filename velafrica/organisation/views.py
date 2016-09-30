@@ -1,6 +1,6 @@
 from dal import autocomplete
 from django.db.models import Q
-from django.shortcuts import render
+
 from velafrica.organisation.models import Municipality
 
 

@@ -9,4 +9,4 @@ class MyAppConfig(AppConfig):
 
     def ready(self):
         # import signal handlers
-        import velafrica.stock.signals.handlers
+        pass

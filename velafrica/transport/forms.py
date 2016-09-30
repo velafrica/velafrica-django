@@ -1,8 +1,8 @@
 from dal import autocomplete
+from django import forms
+
 from velafrica.stock.models import Warehouse
 from velafrica.transport.models import Ride
-from velafrica.collection.models import Event
-from django import forms
 
 
 class RideForm(forms.ModelForm):

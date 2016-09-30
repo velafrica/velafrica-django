@@ -1,16 +1,17 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin, messages
-from django_object_actions import DjangoObjectActions
 from django.utils.safestring import mark_safe
+from django_object_actions import DjangoObjectActions
 from import_export import resources
 from import_export.admin import ImportExportMixin
 from import_export.fields import Field
 from import_export.widgets import DateWidget, ForeignKeyWidget
 from simple_history.admin import SimpleHistoryAdmin
-from velafrica.stock.models import Warehouse
+
 from velafrica.organisation.models import Organisation
-from velafrica.transport.models import Car, Driver, VeloState, Ride
+from velafrica.stock.models import Warehouse
 from velafrica.transport.forms import RideForm
+from velafrica.transport.models import Car, Driver, VeloState, Ride
 
 
 class CarAdmin(SimpleHistoryAdmin):

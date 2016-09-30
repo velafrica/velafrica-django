@@ -1,15 +1,15 @@
 #-*- coding: utf-8 -*-
 # Signals for sending automated mails
-from datetime import datetime
-from django.core.mail import send_mail
+from django.conf import settings
 from django.core.exceptions import ValidationError
+from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
 from django.core.validators import validate_email
-from django.conf import settings
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+
 from velafrica.transport.models import Ride
-from velafrica.stock.models import Warehouse
+
 
 @receiver(post_save, sender=Ride)
 def send_email(sender, instance, created, **kwargs):

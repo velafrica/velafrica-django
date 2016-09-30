@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.db import models, migrations
 import django_resized.forms
+from django.db import migrations
+
 import velafrica.core.ftp
 
 

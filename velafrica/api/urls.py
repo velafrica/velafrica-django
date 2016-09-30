@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-from django.conf.urls import include, patterns, url
+from django.conf.urls import include, url
 from rest_framework.urlpatterns import format_suffix_patterns
+
 from velafrica.api import utils
 from velafrica.api import views
-
 
 collection = [
     url(r'^eventcategories/?$', utils.get_listview('collection', 'EventCategory').as_view(), name="eventcategories"),

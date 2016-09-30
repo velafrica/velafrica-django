@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
-from daterange_filter.filter import DateRangeFilter
 from django.contrib import admin
 from django.utils.safestring import mark_safe
+from import_export import fields
 from import_export import resources
 from import_export.admin import ImportExportMixin, ExportMixin
-from import_export import fields
-from import_export.widgets import DateWidget
 from simple_history.admin import SimpleHistoryAdmin
+
 from velafrica.collection.models import *
 
 

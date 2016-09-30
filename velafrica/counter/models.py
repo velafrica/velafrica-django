@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
 from datetime import timedelta, date
-from django.utils import timezone
+
 from django.db import models
+from django.utils import timezone
 from simple_history.models import HistoricalRecords
+
 from velafrica.organisation.models import Organisation
+
 
 # Create your models here.
 class Entry(models.Model):

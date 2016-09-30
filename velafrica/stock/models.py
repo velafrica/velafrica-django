@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
-from django.utils import timezone
-from django.core.validators import RegexValidator
 from django.conf import settings
+from django.core.validators import RegexValidator
 from django.db import models
+from django.utils import timezone
 from django_resized import ResizedImageField
 from simple_history.models import HistoricalRecords
-from velafrica.organisation.models import Person, Organisation, Municipality, Address
 
 from velafrica.core.ftp import MyFTPStorage
+from velafrica.organisation.models import Organisation, Address
+
 fs = MyFTPStorage()
 
 class Category(models.Model):

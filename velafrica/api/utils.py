@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from django.apps import apps
-from rest_framework import serializers
 from rest_framework import generics
+from rest_framework import serializers
+
 
 def get_serializer_by_model(serialize):
 	"""

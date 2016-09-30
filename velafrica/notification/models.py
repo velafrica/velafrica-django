@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-from datetime import timedelta, date
-from django.utils import timezone
 from django.db import models
 
 EVENT_TYPES = {

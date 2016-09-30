@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 from decimal import Decimal
-from django.utils import timezone
-from django.conf import settings
+
 from django.db import models
-from django_resized import ResizedImageField
+from django.utils import timezone
 from simple_history.models import HistoricalRecords
-from velafrica.organisation.models import Person, Organisation, Municipality
+
+from velafrica.organisation.models import Organisation
 from velafrica.stock.models import StockListPos
 
 

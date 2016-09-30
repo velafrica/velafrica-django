@@ -10,4 +10,4 @@ class MyAppConfig(AppConfig):
 
     def ready(self):
         # import signal handlers
-        import velafrica.velafrica_sud.signals.handlers
+        pass
