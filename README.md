@@ -1,20 +1,82 @@
-# Installed Apps
+# Info
 
-Django==1.9.7
-django-autocomplete-light==3.1.6
-django-daterange-filter==1.3.0
-django-import-export==0.4.5
-django-mass-edit==2.6
-django-object-actions==0.8.2
-django-resized==0.3.5
-django-simple-history==1.8.1
-django-storages==1.4.1
-djangorestframework==3.3.3
-Markdown==2.6.6
-Pillow==3.2.0
-tablib==0.11.2
+`ch.velafrica.admin` can be looked at on [http://tracking.velafrica.ch](http://tracking.velafrica.ch) at the moment.
+
+This project is kind of an ERP (Enterprise resource planning) system for the people at Velafrica ( [http://velafrica.ch](http://velafrica.ch) ).
+It is consisting of different modules, all serving the purpose to manage specific processes and teams inside Velafrica.
+
+The modules are:
+
+- collection
+- commission
+- core
+- counter
+- download
+- organisation
+- sbbtracking
+- stock
+- transport
+- velafrica_sud
+
+Furthermore there are two special modules:
+
+- api (specification and handling for the rest api)
+- frontend (all the html stuff for the frontend)
+
+## Technology
+`ch.velafrica.admin` is a Django application, using various 3rd party packages for additional features. Django is a very well known python framework to develop web applications. On the frontend, bootstrap is used to avoid the pain of building yet another responsive website from scratch.
+
+## Learning resources
+If you do not know much about Django or Bootstrap yet, we can recommend the following sites to extend your knowledge:
+
+- [https://www.djangoproject.com/](https://www.djangoproject.com/)
+- [http://getbootstrap.com/](http://getbootstrap.com/)
+
+## Recommended tools
+We recommend using [PyCharm by IntelliJ](https://www.jetbrains.com/pycharm/) (full IDE) or Sublime Text (enhanced Text editor) to work on the code.
 
 # Setup
+
+## Required software
+
+- python
+- python-pip
+- virtualenv
+- sqlite3
+
+## Getting started
+The 5 steps to get you started.
+
+### 1. Activate virtualenv
+
+#### Windows
+
+    ./win_env/Scripts/activate
+
+#### Linux / Mac
+
+    source env/bin/activate
+
+### 2. Install packages
+
+    pip install -r requirements.txt
+
+### 3. Create database (apply migrations)
+   
+    python manage.py migrate
+
+### 4. Start development server
+
+    python manage.py runserver
+
+### 5. Enjoy
+
+Take a look at the result on [http://localhost:8000/](http://localhost:8000/) :-)
+
+-----------------------------------------------------------------------------
+
+# [deprecated]
+The following sections are outdated and need an update
 
 1. Install Postgres
 on ubuntu: https://help.ubuntu.com/community/PostgreSQL
