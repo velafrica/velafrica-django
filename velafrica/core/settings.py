@@ -16,6 +16,7 @@ import os
 gettext = lambda s: s # "To make your life easer" - http://docs.django-cms.org/en/release-3.3.x/how_to/install.html#configure-django-cms
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROJECT_DIR = os.path.join(BASE_DIR)
+PROJECT_BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
@@ -97,6 +98,8 @@ INSTALLED_APPS = (
     'velafrica.velafrica_sud',
     # django storages
     'storages',
+
+    'webpack_loader',
 )
 
 # Django Storages Settings for SFTP
@@ -225,6 +228,7 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
+    os.path.join(PROJECT_BASE_DIR, 'staticfiles', 'dist'),
 )
 
 # Media files (Files uploaded by user)
@@ -257,4 +261,17 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
     )
+}
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'BUNDLE_DIR_NAME': 'build/' if DEBUG else 'dist/',
+        'STATS_FILE': os.path.join(
+            PROJECT_BASE_DIR,
+            'tmp',
+            'webpack-stats.json' if DEBUG else 'webpack-stats-prod.json',
+        ),
+        'POLL_DELAY': 0.2,
+        'IGNORE': ['.+\.hot-update.js', '.+\.map']
+    },
 }
