@@ -17,3 +17,4 @@ tests/report/
 
 env/
 env_win/
+venv/
