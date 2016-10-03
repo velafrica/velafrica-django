@@ -33,7 +33,7 @@ from velafrica.velafrica_sud import views as velafrica_sud_views
 # TODO: namespaces
 
 frontend = [
-    url(r'^$', RedirectView.as_view(url='/tracking')),
+    url(r'^$', RedirectView.as_view(url='/pages')),
     url(r'^counter', counter_views.counter, name='counter'),
     url(r'^download', download_views.downloads, name='download'),
     url(r'^stock', stock_views.stock, name='stock'),
@@ -97,4 +97,4 @@ urlpatterns = [
     url(r'^taggit_autosuggest/', include('taggit_autosuggest.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-urlpatterns += i18n_patterns(url(r'^pages/', include('cms.urls')))
+urlpatterns += i18n_patterns(url(r'^pages/', include('cms.urls'), name="cms"))
