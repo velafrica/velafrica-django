@@ -1,14 +1,35 @@
+{% load staticfiles %}
 {% load cms_tags sekizai_tags %}
+
 <html>
-  <head>
-      <title>{% page_attribute "page_title" %}</title>
-      {% render_block "css" %}
-  </head>
-  <body>
-      {% cms_toolbar %}
-      {% placeholder base_content %}
-      {% block base_content %}{% endblock %}
-      {% block content %}{% endblock %}
-      {% render_block "js" %}
-  </body>
+    <head>
+        <title>{% page_attribute "page_title" %}</title>
+        {% addtoblock "css" %}
+            <link href="{% static "bootstrap-3.3.6-dist/css/bootstrap.css" %}" rel="stylesheet">
+            <link href="{% static "css/style.css" %}" rel="stylesheet">
+        {% endaddtoblock %}
+        {% render_block "css" %}
+    </head>
+    <body>
+        {% cms_toolbar %}
+        {% block topbar %}
+            {# TODO: topbar html #}
+        {% endblock %}
+        {% placeholder content %}
+        {% block content %}
+
+        {% endblock %}
+
+        {% placeholder footer %}
+        {% block footer %}
+            {# TODO: footer #}
+        {% endblock %}
+
+        {% addtoblock "js" %}
+            <script src="{% static "js/jquery-2.2.0.min.js" %}"></script>
+            <script src="{% static "bootstrap-3.3.6-dist/js/bootstrap.min.js" %}"></script>
+        {% endaddtoblock %}
+
+        {% render_block "js" %}
+    </body>
 </html>
