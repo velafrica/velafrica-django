@@ -5,7 +5,6 @@ Django==1.9.7
 django-cms>=3.0
 djangocms-text-ckeditor==3.2.1
 djangocms-file==2.0.1
-djangocms-googlemap==0.5.2
 djangocms-inherit==0.2.2
 djangocms-picture==2.0.2
 djangocms-teaser==0.2.0
