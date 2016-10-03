@@ -67,7 +67,6 @@ INSTALLED_APPS = (
     # TODO: 'reversion', - do we need this?
     # django cms plugins
     'djangocms_file',
-    'djangocms_googlemap',
     'djangocms_inherit',
     'djangocms_picture',
     'djangocms_teaser',
