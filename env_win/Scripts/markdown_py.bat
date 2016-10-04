@@ -1,1 +1,0 @@
-@"d:\dev\ch.velafrica.admin\env_win\scripts\python.exe" "d:\dev\ch.velafrica.admin\env_win\Scripts\markdown_py" %*

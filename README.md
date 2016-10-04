@@ -39,37 +39,46 @@ We recommend using [PyCharm by IntelliJ](https://www.jetbrains.com/pycharm/) (fu
 
 ## Required software
 
-- python
+- python (>2.7, <3.0)
 - python-pip
 - virtualenv
 - sqlite3
 
-## Getting started
-The 5 steps to get you started.
+For help on how to get pip and virtualenv running on Windows, take a look at [this](http://pymote.readthedocs.io/en/latest/install/windows_virtualenv.html).
 
-### 1. Activate virtualenv
+## Getting started
+The 6 steps to get you started.
+
+### 1. Setup virtualenv
+Virtualenv is here to provide an isolated environment for your app, with its own python runtime and python packages.
+Navigate into the project directory and type the following command:
+
+    virtualenv env
+
+This creates a virtual environment in a newly created `env` folder, inside of your project directory.
+### 2. Activate virtualenv
 
 #### Windows
 
-    ./win_env/Scripts/activate
+    ./env/Scripts/activate
 
 #### Linux / Mac
 
     source env/bin/activate
 
-### 2. Install packages
+### 3. Install packages
 
     pip install -r requirements.txt
 
-### 3. Create database (apply migrations)
+### 4. Create database (apply migrations)
    
     python manage.py migrate
 
-### 4. Start development server
+### 5. Start development server
 
     python manage.py runserver
 
-### 5. Enjoy
+### 6. Enjoy
 
 Take a look at the result on [http://localhost:8000/](http://localhost:8000/) :-)
 
