@@ -91,6 +91,7 @@ class TrackingEvent(models.Model):
     datetime = models.DateTimeField(blank=False, null=False, default=timezone.now, verbose_name="Zeitpunkt")
     event_type = models.ForeignKey(TrackingEventType, help_text="Art des Events")
     tracking = models.ForeignKey('Tracking')
+    organisation = models.ForeignKey(Organisation, null=True, blank=True, verbose_name="Organisation", help_text="Organisation welche den Event erstellt hat.")
     latitude = models.DecimalField(blank=True, null=True, verbose_name='Breitengrad', max_digits=9, decimal_places=6)
     longitude = models.DecimalField(blank=True, null=True, verbose_name='Längengrad', max_digits=9, decimal_places=6)
     note = models.CharField(blank=True, null=True, max_length=255, verbose_name="Bemerkung", help_text="interne Bemerkung, nirgends ersichtlich für Spender (optional)")
@@ -147,6 +148,8 @@ def get_last_event(self, tracking_id):
 class Tracking(models.Model):
     """
     Represents one bicycle that is being tracked.
+    Last_event is a link to the last event that has been added on the tracking, it is representing the last known status.
+    Via the last_event, one can also find out where (last_event.organisation) the bicycle has been scanned the last time.
     """
     tracking_no = models.CharField(blank=False, null=False, max_length=10, unique=True, verbose_name="Tracking Nummer")
     vpn = models.ForeignKey(Organisation, 

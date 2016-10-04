@@ -3,67 +3,70 @@ from django.apps import apps
 from rest_framework import generics
 from rest_framework import serializers
 
+"""
+1. Serializer & View Utils
+"""
 
 def get_serializer_by_model(serialize):
-	"""
-	"""
+    """
+    """
 
-	class GenericSerializer(serializers.ModelSerializer):
+    class GenericSerializer(serializers.ModelSerializer):
 
-		class Meta:
-			model = serialize
+        class Meta:
+            model = serialize
 
-	g = GenericSerializer
+    g = GenericSerializer
 
-	return GenericSerializer
-			
+    return GenericSerializer
+            
 
 def get_serializer(module, classname, __doc__):
-	"""
-	"""
+    """
+    """
 
-	model = apps.get_model(module, classname)
+    model = apps.get_model(module, classname)
 
-	if model:
-		return get_serializer_by_model(model)
-	else:
-		return None
+    if model:
+        return get_serializer_by_model(model)
+    else:
+        return None
 
 
 def get_listview_by_model(viewmodel):
-	"""
-	"""
+    """
+    """
 
-	class GenericListAPIView(generics.ListCreateAPIView):
-		queryset = viewmodel.objects.all()
-		serializer_class = get_serializer_by_model(viewmodel)
+    class GenericListAPIView(generics.ListCreateAPIView):
+        queryset = viewmodel.objects.all()
+        serializer_class = get_serializer_by_model(viewmodel)
 
-	return GenericListAPIView
+    return GenericListAPIView
 
 
 def get_listview(module, classname):
-	model = apps.get_model(module, classname)
+    model = apps.get_model(module, classname)
 
-	if model:
-		return get_listview_by_model(model)
-	else:
-		return None
+    if model:
+        return get_listview_by_model(model)
+    else:
+        return None
 
 
 def get_retrieveview_by_model(viewmodel):
-	"""
-	"""
+    """
+    """
 
-	class GenericRetrieveAPIView(generics.RetrieveUpdateAPIView):
-		queryset = viewmodel.objects.all()
-		serializer_class = get_serializer_by_model(viewmodel)
+    class GenericRetrieveAPIView(generics.RetrieveUpdateAPIView):
+        queryset = viewmodel.objects.all()
+        serializer_class = get_serializer_by_model(viewmodel)
 
-	return GenericRetrieveAPIView
+    return GenericRetrieveAPIView
 
 def get_retrieveview(module, classname):
-	model = apps.get_model(module, classname)
+    model = apps.get_model(module, classname)
 
-	if model:
-		return get_listview_by_model(model)
-	else:
-		return None
+    if model:
+        return get_listview_by_model(model)
+    else:
+        return None
