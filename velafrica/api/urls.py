@@ -3,6 +3,7 @@ from django.conf.urls import include, patterns, url
 from rest_framework.urlpatterns import format_suffix_patterns
 from velafrica.api import utils
 from velafrica.api import views
+from velafrica.api import views_public
 
 
 collection = [
@@ -90,6 +91,10 @@ velafrica_sud = [
     url(r'^reports/(?P<pk>[0-9]+)/?$', views.ReportDetail.as_view(), name='report'),
 ]
 
+public = [
+    url(r'^collection/$', views_public.get_collection, name="public_collection")
+]
+
 # where it all comes together
 urlpatterns = [
     url(r'^$', views.api_root),
@@ -100,6 +105,7 @@ urlpatterns = [
     url(r'^velafrica_sud/', include(velafrica_sud, namespace="velafrica_sud")),
     url(r'^counter/', include(counter, namespace="counter")),
     url(r'^collections/', include(collection, namespace="collections")),
+    url(r'^public/', include(public, namespace="public")),
     url(r'^api-auth/', include('rest_framework.urls',
                                namespace='rest_framework'))
 ]
