@@ -82,6 +82,8 @@ This creates a virtual environment in a newly created `env` folder, inside of yo
 
 Take a look at the result on [http://localhost:8000/](http://localhost:8000/) :-)
 
+TODO: describe required env variables
+
 -----------------------------------------------------------------------------
 
 # [deprecated]

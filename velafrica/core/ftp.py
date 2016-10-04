@@ -4,4 +4,7 @@ from storages.backends.ftp import FTPStorage
 
 @deconstructible
 class MyFTPStorage(FTPStorage):
+    """
+    TODO: write doc
+    """
     pass

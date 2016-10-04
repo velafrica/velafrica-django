@@ -30,8 +30,6 @@ from velafrica.stock import views as stock_views
 from velafrica.transport import views as transport_views
 from velafrica.velafrica_sud import views as velafrica_sud_views
 
-# TODO: namespaces
-
 frontend = [
     url(r'^$', RedirectView.as_view(url='/tracking')),
     url(r'^counter', counter_views.counter, name='counter'),
