@@ -3,7 +3,7 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 from velafrica.collection.models import CollectionEvent, EventCategory, Event, Dropoff
-
+from velafrica.organisation.serializer import AdressSerializer
 
 class EventCategorySerializer(serializers.ModelSerializer):
 
@@ -26,6 +26,8 @@ class CollectionEventSerializer(serializers.ModelSerializer):
 
 
 class DropoffSerializer(serializers.ModelSerializer):
+
+    address = AdressSerializer(many=False, read_only=True)
 
     class Meta:
         model = Dropoff
