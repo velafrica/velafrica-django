@@ -125,11 +125,13 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = 'velafrica.core.urls'
-
+print(os.path.join(PROJECT_DIR, 'frontend/templates/'))
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['frontend'],
+        'DIRS': [
+            os.path.join(PROJECT_DIR, 'frontend/templates/')
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
