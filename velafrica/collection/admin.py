@@ -173,16 +173,13 @@ class CollectionEventAdmin(ImportExportMixin, SimpleHistoryAdmin):
 class DropoffAdmin(admin.ModelAdmin):
     fieldsets = (
         ('Allgemein', {
-            'classes': ('collapse',),
             'fields': ('name', 'active', 'sbb', 'address', 'contact_person',
                        'phone_number', 'opening_time', 'notes')
         }),
         ('Temporäre Abgabestelle', {
-            'classes': ('collapse',),
             'fields': ('temp', 'temp_start', 'temp_end',)
         }),
         ('Benutzerdefinierter Pin auf Karte', {
-            'classes': ('collapse',),
             'fields': ('custom_lat', 'custom_lon'),
         }),
     )

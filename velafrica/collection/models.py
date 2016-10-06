@@ -249,6 +249,9 @@ class Dropoff(models.Model):
     custom_lat = models.CharField(max_length=255, blank=True, verbose_name="Latitude")
     custom_lon = models.CharField(max_length=255, blank=True, verbose_name="Longitude")
 
+    def __unicode__(self):
+        return u"{}".format(self.name)
+
     class Meta:
         verbose_name = "Abgabstelle"
         verbose_name_plural = "Abgabstellen"
