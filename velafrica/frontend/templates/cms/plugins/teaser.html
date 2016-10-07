@@ -1,13 +1,22 @@
 {% load i18n %}
-<section class="teaser">
-    <h2>{{ object.title }}</h2>
-    {% if object.image %}
-        {% if link %}<a href="{{ link }}">{% endif %}
-        <img src="{{ object.image.url }}" alt="{{ object.title }}"/>
-        {% if link %}</a>{% endif %}
-    {% endif %}
-    {% if object.description %}
-        <p>{{ object.description }}</p>
-    {% endif %}
-    {% if link %}<a href="{{ link }}">{% trans "more" %} &#187;</a>{% endif %}
+<section class="teaser" {% if object.image %}style="background:url({{ object.image.url }}) center/cover;"{% endif %}>
+
+  <div class="container">
+    <div class="content">
+      <div class="content-overlay">
+
+        {% if object.title %}
+          <h1>{{ object.title }}</h1>
+        {% endif %}
+
+        {% if object.description %}
+          <p>{{ object.description }}</p>
+        {% endif %}
+
+        {% if link %}<a href="{{ link }}">{% trans "more" %} &#187;</a>{% endif %}
+
+      </div>
+    </div>
+  </div>
+
 </section>
