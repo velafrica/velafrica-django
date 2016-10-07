@@ -1,0 +1,26 @@
+section.teaser {
+  height: 100%;
+  max-height: 700px;
+
+  .content {
+    text-align: center;
+    color: white;
+
+    .content-overlay {
+      h1 {
+        align-items: center;
+        font-size: 60px;
+        font-weight: bold;
+      }
+
+      p {
+        font-size: 24px;
+        font-weight: normal;
+      }
+
+      a {
+        color: orange;
+      }
+    }
+  }
+}
