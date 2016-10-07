@@ -84,6 +84,9 @@ Take a look at the result on [http://localhost:8000/](http://localhost:8000/) :-
 
 TODO: describe required env variables
 
+TODO: [make ready for prod deployment](https://docs.djangoproject.com/en/1.10/ref/django-admin/#cmdoption-check--deploy)
+
+
 -----------------------------------------------------------------------------
 
 # [deprecated]

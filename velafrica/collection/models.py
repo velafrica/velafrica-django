@@ -25,6 +25,7 @@ class EventCategory(models.Model):
         verbose_name = "Event Kategorie"
         verbose_name_plural = "Event Kategorien"
 
+
 class HostType(models.Model):
     """
     Category of collection event host.
@@ -37,6 +38,7 @@ class HostType(models.Model):
     class Meta:
         verbose_name = "Veranstalter Kategorie"
         verbose_name_plural = "Veranstalter Kategorien"
+
 
 class Event(models.Model):
     """
