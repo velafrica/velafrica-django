@@ -21,12 +21,14 @@ PROJECT_BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspa
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
+# TODO: get from env variable
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'b2j_&e=rzafa+zo874%tc^h!nbp#%0#442*19@(i&h-&s=v*hh'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# TODO: define for production
 ALLOWED_HOSTS = []
 
 LANGUAGES = [
@@ -241,6 +243,7 @@ DJANGORESIZED_DEFAULT_SIZE = [1920, 1080]
 DJANGORESIZED_DEFAULT_QUALITY = 75
 DJANGORESIZED_DEFAULT_KEEP_META = True
 
+# TODO: get from env variables, no passwords in code!
 # Email settings
 EMAIL_HOST = 'smtpauth.creta.ch'
 EMAIL_HOST_USER = 'tracking@velafrica.ch'
@@ -252,6 +255,7 @@ EMAIL_FROM_NAME = 'Velafrica Tracking'
 EMAIL_FROM_EMAIL = 'tracking@velafrica.ch'
 
 
+# TODO: get from env variables, no passwords in code!
 # Django Storage settings
 DEFAULT_FILE_STORAGE = 'storages.backends.ftp.FTPStorage'
 FTP_STORAGE_LOCATION = 'ftp://nto5q-partnertoo:B1XqSY78ri0Vb94_hxws-C5nm6co@partnertool.velafrica.ch:21'

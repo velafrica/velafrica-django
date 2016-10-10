@@ -13,6 +13,14 @@ build/
 tests/report/
 *.sqlite3
 
+# ignore intelliJ configs
+**.idea**
+# ignore virtual envs
+env/**
+*env*/**
+
+# ignore env file
+.env
 **.idea**
 
 env/

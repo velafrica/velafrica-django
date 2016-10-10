@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
-from datetime import timedelta, date
-from django.utils import timezone
 from django.db import models
-from simple_history.models import HistoricalRecords
+
 from velafrica.organisation.models import Organisation, Address
 
 
@@ -27,6 +25,7 @@ class EventCategory(models.Model):
         verbose_name = "Event Kategorie"
         verbose_name_plural = "Event Kategorien"
 
+
 class HostType(models.Model):
     """
     Category of collection event host.
@@ -39,6 +38,7 @@ class HostType(models.Model):
     class Meta:
         verbose_name = "Veranstalter Kategorie"
         verbose_name_plural = "Veranstalter Kategorien"
+
 
 class Event(models.Model):
     """

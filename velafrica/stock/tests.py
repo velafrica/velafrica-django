@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 from django.test import TestCase
-from velafrica.organisation.models import Organisation, Address, Country
+
+from velafrica.organisation.models import Country
 from velafrica.stock.models import *
+
 
 class StockTransferBookingTest(TestCase):
     def setUp(self):

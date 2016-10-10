@@ -1,24 +1,96 @@
-# Velafrica
+# Info
 
-# Development Setup
+`ch.velafrica.admin` can be looked at on [http://tracking.velafrica.ch](http://tracking.velafrica.ch) at the moment.
 
-```bash
-virtualenv venv --python=python
-source venv/bin/activate
-pip install -r requirements.txt
-python manage.py migrate
-python manage.py createsuperuserw
+This project is kind of an ERP (Enterprise resource planning) system for the people at Velafrica ( [http://velafrica.ch](http://velafrica.ch) ).
+It is consisting of different modules, all serving the purpose to manage specific processes and teams inside Velafrica.
 
-python manage.py runserver
+The modules are:
 
-# start the scss in a seperate terminal
-./node_modules/.bin/webpack -d --watch --config webpack.config.js
+- collection
+- commission
+- core
+- counter
+- download
+- organisation
+- sbbtracking
+- stock
+- transport
+- velafrica_sud
 
-# start the server serving the changes
-node server.js
-```
+Furthermore there are two special modules:
+
+- api (specification and handling for the rest api)
+- frontend (all the html stuff for the frontend)
+
+## Technology
+`ch.velafrica.admin` is a Django application, using various 3rd party packages for additional features. Django is a very well known python framework to develop web applications. On the frontend, bootstrap is used to avoid the pain of building yet another responsive website from scratch.
+
+## Learning resources
+If you do not know much about Django or Bootstrap yet, we can recommend the following sites to extend your knowledge:
+
+- [https://www.djangoproject.com/](https://www.djangoproject.com/)
+- [http://getbootstrap.com/](http://getbootstrap.com/)
+
+## Recommended tools
+We recommend using [PyCharm by IntelliJ](https://www.jetbrains.com/pycharm/) (full IDE) or Sublime Text (enhanced Text editor) to work on the code.
 
 # Setup
+
+## Required software
+
+- python (>2.7, <3.0)
+- python-pip
+- virtualenv
+- sqlite3
+
+For help on how to get pip and virtualenv running on Windows, take a look at [this](http://pymote.readthedocs.io/en/latest/install/windows_virtualenv.html).
+
+## Getting started
+The 6 steps to get you started.
+
+### 1. Setup virtualenv
+Virtualenv is here to provide an isolated environment for your app, with its own python runtime and python packages.
+Navigate into the project directory and type the following command:
+
+    virtualenv env
+
+This creates a virtual environment in a newly created `env` folder, inside of your project directory.
+### 2. Activate virtualenv
+
+#### Windows
+
+    ./env/Scripts/activate
+
+#### Linux / Mac
+
+    source env/bin/activate
+
+### 3. Install packages
+
+    pip install -r requirements.txt
+
+### 4. Create database (apply migrations)
+   
+    python manage.py migrate
+
+### 5. Start development server
+
+    python manage.py runserver
+
+### 6. Enjoy
+
+Take a look at the result on [http://localhost:8000/](http://localhost:8000/) :-)
+
+TODO: describe required env variables
+
+TODO: [make ready for prod deployment](https://docs.djangoproject.com/en/1.10/ref/django-admin/#cmdoption-check--deploy)
+
+
+-----------------------------------------------------------------------------
+
+# [deprecated]
+The following sections are outdated and need an update
 
 1. Install Postgres
 on ubuntu: https://help.ubuntu.com/community/PostgreSQL

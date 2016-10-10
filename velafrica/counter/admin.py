@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
 from daterange_filter.filter import DateRangeFilter
 from django.contrib import admin
-from velafrica.counter.models import Entry
-from velafrica.organisation.models import Organisation
 from import_export import resources
 from import_export.admin import ImportExportMixin
 from import_export.fields import Field
 from import_export.widgets import DateWidget
 from simple_history.admin import SimpleHistoryAdmin
+
+from velafrica.counter.models import Entry
+from velafrica.organisation.models import Organisation
+
 
 class EntryResource(resources.ModelResource):
     """

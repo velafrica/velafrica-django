@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
-from django.utils import timezone
 from django.db import models
+from django.utils import timezone
 from simple_history.models import HistoricalRecords
 
 from velafrica.core.ftp import MyFTPStorage
+
 fs = MyFTPStorage()
 
 class File(models.Model):

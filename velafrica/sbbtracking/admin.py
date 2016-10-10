@@ -1,15 +1,14 @@
 # -*- coding: utf-8 -*-
-import inspect
-from django_object_actions import DjangoObjectActions
 from django import forms
 from django import template
 from django.contrib import admin
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
-from simple_history.admin import SimpleHistoryAdmin
-from velafrica.sbbtracking.models import Tracking, TrackingEvent, TrackingEventType, EmailLog, VeloType
 from import_export import resources
 from import_export.admin import ImportExportMixin
+from simple_history.admin import SimpleHistoryAdmin
+
+from velafrica.sbbtracking.models import Tracking, TrackingEvent, TrackingEventType, EmailLog, VeloType
 
 
 def create_trackingevent_form(tracking):

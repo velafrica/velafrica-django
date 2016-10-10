@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from rest_framework import serializers
-from django.contrib.auth.models import User
-from django.contrib.auth import get_user_model
+
 from velafrica.organisation.serializer import OrganisationSerializer
 from velafrica.velafrica_sud.models import Container, Forwarder, PartnerSud, Report, Role, ReportStaff, PartnerStaff
+
 
 class ContainerSerializer(serializers.ModelSerializer):
 	"""

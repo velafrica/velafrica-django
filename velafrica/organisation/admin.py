@@ -1,15 +1,14 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin, messages
-from django_object_actions import DjangoObjectActions
 from django.utils.safestring import mark_safe
-from velafrica.organisation.models import Organisation, Person, Canton, Municipality, Address, Country
-from velafrica.stock.models import Warehouse
+from django_object_actions import DjangoObjectActions
 from import_export import resources
 from import_export.admin import ImportExportMixin
-from simple_history.admin import SimpleHistoryAdmin
 from import_export.fields import Field
 from import_export.widgets import ForeignKeyWidget
-from velafrica.velafrica_sud.models import PartnerSud
+from simple_history.admin import SimpleHistoryAdmin
+
+from velafrica.organisation.models import Organisation, Person, Canton, Municipality, Address, Country
 
 
 class PersonAdmin(SimpleHistoryAdmin):

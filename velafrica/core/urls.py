@@ -14,6 +14,7 @@ Including another URLconf
     1. Add an import:  from blog import urls as blog_urls
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
+from django.conf import settings
 from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.conf.urls.i18n import i18n_patterns
@@ -21,16 +22,15 @@ from django.conf import settings
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.views.generic import RedirectView
+
 from velafrica.core import views
 from velafrica.counter import views as counter_views
 from velafrica.download import views as download_views
-from velafrica.stock import views as stock_views
-from velafrica.sbbtracking import views as sbbtracking_views
-from velafrica.transport import views as transport_views
 from velafrica.organisation.views import MunicipalityAutocomplete
+from velafrica.sbbtracking import views as sbbtracking_views
+from velafrica.stock import views as stock_views
+from velafrica.transport import views as transport_views
 from velafrica.velafrica_sud import views as velafrica_sud_views
-
-# TODO: namespaces
 
 frontend = [
     url(r'^$', RedirectView.as_view(url='/pages')),

@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
-from datetime import timedelta, date
-from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response
-from django.shortcuts import render
 from django.template import RequestContext
+
 from velafrica.counter.models import Entry
-from velafrica.organisation.models import Organisation
+
 
 # Create your views here.
 

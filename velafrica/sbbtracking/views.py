@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 from django.contrib import messages
-from django.shortcuts import render
-from django.template import RequestContext
 from django.shortcuts import render_to_response
+from django.template import RequestContext
+
 from velafrica.sbbtracking.models import Tracking, TrackingEvent
+
 
 def tracking(request, tracking_no=0):
   """

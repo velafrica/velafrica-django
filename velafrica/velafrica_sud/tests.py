@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 from django.test import TestCase
-from velafrica.sbbtracking.models import *
-from velafrica.velafrica_sud.models import *
 
 
 class ContainerBookingTest(TestCase):

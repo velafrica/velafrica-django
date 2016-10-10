@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
+from itertools import chain
+
 from dal import autocomplete
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
-from django.shortcuts import render, render_to_response
+from django.shortcuts import render_to_response
 from django.template import RequestContext
-from itertools import chain
+
 from velafrica.stock.models import Product, Warehouse, Stock, StockChange, StockListPosition
 from velafrica.transport.models import Ride
 from velafrica.velafrica_sud.models import Container

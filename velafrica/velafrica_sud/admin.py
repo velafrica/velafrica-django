@@ -1,15 +1,16 @@
 # -*- coding: utf-8 -*-
 from daterange_filter.filter import DateRangeFilter
-from django_object_actions import DjangoObjectActions
 from django.contrib import admin
 from django.utils.safestring import mark_safe
+from django_object_actions import DjangoObjectActions
+from import_export import resources
+from import_export.admin import ImportExportMixin
+from import_export.fields import Field
 from simple_history.admin import SimpleHistoryAdmin
+
 from velafrica.sbbtracking.models import Tracking
 from velafrica.velafrica_sud.models import Forwarder, PartnerSud, Container, Report, ReportStaff, PartnerStaff, Role
-from import_export import resources
-from import_export.fields import Field
-from import_export.admin import ImportExportMixin
-from django.shortcuts import render_to_response
+
 
 class ReportInline(admin.TabularInline):
     """

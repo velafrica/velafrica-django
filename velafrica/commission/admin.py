@@ -4,18 +4,15 @@ from django_object_actions import DjangoObjectActions
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 from django.core.urlresolvers import reverse
-from django.shortcuts import render_to_response, redirect
+from django.shortcuts import redirect
 from velafrica.commission.models import *
-from velafrica.stock.admin import StockInline
 from velafrica.stock.forms import StockListPosForm
 from velafrica.stock.models import StockTransfer
-from velafrica.transport.models import Ride
 from velafrica.velafrica_sud.models import Container
 from import_export import resources
 from import_export.admin import ImportExportMixin
 from simple_history.admin import SimpleHistoryAdmin
 from import_export.fields import Field
-from import_export.widgets import DateWidget, ForeignKeyWidget, ManyToManyWidget
 
 
 class SalesOrderListPosInline(admin.TabularInline):
