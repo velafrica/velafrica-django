@@ -228,3 +228,30 @@ class TaskProgress(models.Model):
     class Meta:
         verbose_name = "Task Fortschritt"
         verbose_name_plural = "Task Fortschritte"
+
+
+class Dropoff(models.Model):
+    """
+    Represents a dropoff (where you can drop or turn in your bike)
+    """
+
+    name = models.CharField(max_length=255, verbose_name="Name der Sammelstelle")
+    active = models.BooleanField(verbose_name="Aktiv", default=True)
+    sbb = models.BooleanField(verbose_name="SBB", default=False)
+    contact_person = models.CharField(max_length=255, blank=True, verbose_name="Kontaktperson")
+    phone_number = models.CharField(max_length=255, blank=True, verbose_name="Telefonnummer")
+    temp = models.BooleanField(verbose_name="Temporär", default=False)
+    temp_start = models.DateField(blank=True, null=True, verbose_name="Temporär Start")
+    temp_end = models.DateField(blank=True, null=True, verbose_name="Temporär Ende")
+    opening_time = models.TextField(blank=True, verbose_name="Öffnungszeiten")
+    notes = models.TextField(blank=True, verbose_name="Optionale Textinfo")
+    address = models.ForeignKey(Address, verbose_name="Adresse")
+    custom_lat = models.CharField(max_length=255, blank=True, verbose_name="Latitude")
+    custom_lon = models.CharField(max_length=255, blank=True, verbose_name="Longitude")
+
+    def __unicode__(self):
+        return u"{}".format(self.name)
+
+    class Meta:
+        verbose_name = "Abgabstelle"
+        verbose_name_plural = "Abgabstellen"

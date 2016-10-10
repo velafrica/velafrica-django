@@ -21,3 +21,8 @@ env/**
 
 # ignore env file
 .env
+**.idea**
+
+env/
+env_win/
+venv/

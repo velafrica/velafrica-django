@@ -1,0 +1,99 @@
+{% load staticfiles %}
+{% load cms_tags sekizai_tags %}
+{% load render_bundle from webpack_loader %}
+{% load menu_tags %}
+
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+  <title>{% page_attribute "page_title" %}</title>
+  {% addtoblock "css" %}
+    <link href="{% static "bootstrap-3.3.6-dist/css/bootstrap.css" %}" rel="stylesheet">
+    <link href="{% static "css/style.css" %}" rel="stylesheet">
+  {% endaddtoblock %}
+  {% render_block "css" %}
+  {% render_bundle 'main' %}
+</head>
+<body>
+
+{% cms_toolbar %}
+
+{% block topbar %}
+  <div class="header-wrap">
+
+    <header>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-6 left">
+
+            <a class="logo" href="/">
+              <img src="{% static "img/velafrica_logo_claim.svg" %}" alt="">
+            </a>
+
+          </div>
+          <div class="col-sm-6 right">
+
+            <a class="support-button" onclick="navToggle()" id="support-button" href="#">Velafrica unterstützen</a>
+
+            <ul>
+              <li><a href="#">DE</a></li>
+              <li><a href="#">EN</a></li>
+              <li><a href="#">FR</a></li>
+            </ul>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="big-nav">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12">
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </header>
+
+  </div>
+{% endblock %}
+
+<main>
+
+  {% placeholder content %}
+  {% block content %}
+  {% endblock %}
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    {% placeholder footer %}
+    {% block footer %}
+      {# TODO: footer #}
+    {% endblock %}
+  </div>
+</footer>
+
+{% addtoblock "js" %}
+  <script src="{% static "js/jquery-2.2.0.min.js" %}"></script>
+  <script src="{% static "bootstrap-3.3.6-dist/js/bootstrap.min.js" %}"></script>
+  <script>
+    function navToggle() {
+      var nav = $(".big-nav");
+
+      if (nav.hasClass('open')) {
+        nav.css("visibility", "hidden").css("height", "0");
+        nav.removeClass('open');
+      } else {
+        nav.css("visibility", "visible").css("height", "500");
+        nav.addClass('open');
+      }
+    }
+  </script>
+{% endaddtoblock %}
+
+{% render_block "js" %}
+
+</body>
+</html>
