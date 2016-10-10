@@ -8,4 +8,10 @@ class HelloPlugin(CMSPluginBase):
     render_template = "cms/plugins/test.html"
     cache = False
 
+class TrackingStations(CMSPluginBase):
+    model = CMSPlugin
+    render_template = "cms/plugins/tracking_stations.html"
+    name = "Tracking Stationen"
+
 plugin_pool.register_plugin(HelloPlugin)
+plugin_pool.register_plugin(TrackingStations)
