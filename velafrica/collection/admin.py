@@ -168,6 +168,23 @@ class CollectionEventAdmin(ImportExportMixin, SimpleHistoryAdmin):
         return mark_safe('<div span style="{}">&nbsp;</div>'.format(self.get_status_style(obj.get_status_logistics())))
     status_logistics.short_description = 'Abholung'
 
+
+class DropoffAdmin(admin.ModelAdmin):
+    fieldsets = (
+        ('Allgemein', {
+            'fields': ('name', 'active', 'sbb', 'address', 'contact_person',
+                       'phone_number', 'opening_time', 'notes')
+        }),
+        ('Temporäre Abgabestelle', {
+            'fields': ('temp', 'temp_start', 'temp_end',)
+        }),
+        ('Benutzerdefinierter Pin auf Karte', {
+            'fields': ('custom_lat', 'custom_lon'),
+        }),
+    )
+
+
+admin.site.register(Dropoff, DropoffAdmin)
 admin.site.register(Event, EventAdmin)
 admin.site.register(EventCategory)
 admin.site.register(HostType)

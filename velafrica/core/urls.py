@@ -17,6 +17,8 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls import include, url
 from django.conf.urls.static import static
+from django.conf.urls.i18n import i18n_patterns
+from django.conf import settings
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.views.generic import RedirectView
@@ -31,7 +33,7 @@ from velafrica.transport import views as transport_views
 from velafrica.velafrica_sud import views as velafrica_sud_views
 
 frontend = [
-    url(r'^$', RedirectView.as_view(url='/tracking')),
+    url(r'^$', RedirectView.as_view(url='/pages')),
     url(r'^counter', counter_views.counter, name='counter'),
     url(r'^download', download_views.downloads, name='download'),
     url(r'^stock', stock_views.stock, name='stock'),
@@ -92,4 +94,7 @@ urlpatterns = [
     # admin urls
     url(r'^admin/', include(admin.site.urls)),
     url(r'^admin/', include("massadmin.urls")),
+    url(r'^taggit_autosuggest/', include('taggit_autosuggest.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+urlpatterns += i18n_patterns(url(r'^pages/', include('cms.urls'), name="cms"))

@@ -1,0 +1,61 @@
+.header-wrap {
+
+  .row {
+    display: flex;
+  }
+
+  header {
+    padding-top: 1rem;
+
+    .big-nav {
+      background-color: $velafrica;
+      visibility: hidden;
+      height: 0;
+    }
+
+    .left {
+      .logo {
+        img {
+          flex: 0 0 100px;
+          height: 80px;
+          padding-bottom: 1rem;
+        }
+      }
+    }
+
+    .right {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+
+      .support-button {
+        background-color: $velafrica;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        padding: 1rem;
+        font-size: 20px;
+
+        &:after {
+          content: '\0025BE';
+          padding-left: 1rem;
+        }
+
+        &:hover {
+          background-color: $velafrica-hover;
+        }
+      }
+
+      ul {
+        list-style: none;
+        margin: 0;
+        display: flex;
+        align-self: center;
+
+        li {
+          padding: 1rem;
+        }
+      }
+    }
+  }
+}
