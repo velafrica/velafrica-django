@@ -85,6 +85,7 @@ INSTALLED_APPS = (
     'rest_framework',
     # custom velafrica apps
     'velafrica.api',
+    'velafrica.cms_plugins',
     'velafrica.core',
     'velafrica.commission',
     'velafrica.counter',
