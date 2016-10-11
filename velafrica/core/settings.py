@@ -282,8 +282,10 @@ WEBPACK_LOADER = {
 }
 
 ROLLBAR = {
-    'access_token': os.environ['ROLLBAR_ACCESS_TOKEN'],
+    'access_token': '',
     'environment': 'development' if DEBUG else 'production',
     'branch': 'master',
     'root': '/app',
 }
+if 'ROLLBAR_ACCESS_TOKEN' in os.environ:
+    ROLLBAR['access_token'] = os.environ['ROLLBAR_ACCESS_TOKEN']
