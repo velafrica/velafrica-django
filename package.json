@@ -35,6 +35,6 @@
   },
   "scripts": {
     "clean": "rm -rf staticfiles/dist/",
-    "prod": "./node_modules/.bin/webpack --config webpack.prod.config.js"
+    "postinstall": "./node_modules/.bin/webpack --config webpack.prod.config.js"
   }
 }
