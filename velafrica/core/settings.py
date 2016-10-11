@@ -282,7 +282,7 @@ WEBPACK_LOADER = {
 }
 
 ROLLBAR = {
-    'access_token': 'POST_SERVER_ITEM_ACCESS_TOKEN',
+    'access_token': os.environ['ROLLBAR_ACCESS_TOKEN'],
     'environment': 'development' if DEBUG else 'production',
     'branch': 'master',
     'root': '/app',
