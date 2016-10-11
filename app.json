@@ -5,9 +5,6 @@
     "ON_HEROKU": "1"
   },
   "formation": {
-    "release": {
-      "quantity": 1
-    },
     "web": {
       "quantity": 1
     }
