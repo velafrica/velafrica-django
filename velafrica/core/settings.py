@@ -124,6 +124,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'simple_history.middleware.HistoryRequestMiddleware',
+    'rollbar.contrib.django.middleware.RollbarNotifierMiddleware',
 )
 
 ROOT_URLCONF = 'velafrica.core.urls'
@@ -279,3 +280,12 @@ WEBPACK_LOADER = {
         'IGNORE': ['.+\.hot-update.js', '.+\.map']
     },
 }
+
+ROLLBAR = {
+    'access_token': '',
+    'environment': 'development' if DEBUG else 'production',
+    'branch': 'master',
+    'root': '/app',
+}
+if 'ROLLBAR_ACCESS_TOKEN' in os.environ:
+    ROLLBAR['access_token'] = os.environ['ROLLBAR_ACCESS_TOKEN']
