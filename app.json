@@ -1,0 +1,29 @@
+{
+  "name": "velafrica-django",
+  "scripts": {},
+  "env": {
+    "ON_HEROKU": "1"
+  },
+  "formation": {
+    "release": {
+      "quantity": 1
+    },
+    "web": {
+      "quantity": 1
+    }
+  },
+  "addons": [
+    "heroku-postgresql"
+  ],
+  "buildpacks": [
+    {
+      "url": "https://github.com/philippkueng/heroku-buildpack-sassc"
+    },
+    {
+      "url": "heroku/nodejs"
+    },
+    {
+      "url": "heroku/python"
+    }
+  ]
+}
