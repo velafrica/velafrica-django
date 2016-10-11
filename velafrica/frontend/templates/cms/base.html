@@ -12,11 +12,22 @@
     <link href="{% static "css/style.css" %}" rel="stylesheet">
   {% endaddtoblock %}
   {% render_block "css" %}
-  {% render_bundle 'main' %}
+
+  {% if debug %}
+    {% render_bundle 'main' %}
+  {% else %}
+    {% render_bundle 'styles' 'css' %}
+  {% endif %}
 </head>
 <body>
 
 {% cms_toolbar %}
+
+{% if debug %}
+<h1>we're in debug mode</h1>
+{% else %}
+<h1>we're in production mode</h1>
+{% endif %}
 
 {% block topbar %}
   <div class="header-wrap">
