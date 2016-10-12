@@ -26,10 +26,20 @@ PROJECT_BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspa
 SECRET_KEY = 'b2j_&e=rzafa+zo874%tc^h!nbp#%0#442*19@(i&h-&s=v*hh'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+if 'DEBUG' in os.environ:
+    if os.environ['DEBUG'] == 'True':
+        DEBUG = True
+    else:
+        DEBUG = False
+else:
+    DEBUG = False
+
+INTERNAL_IPS = (
+    '127.0.0.1',
+)
 
 # TODO: define for production
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 LANGUAGES = [
     ('de', 'Deutsch')
