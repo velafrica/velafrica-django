@@ -54,7 +54,7 @@ We recommend using [PyCharm by IntelliJ](https://www.jetbrains.com/pycharm/) (fu
 - python (>2.7, <3.0)
 - python-pip
 - virtualenv
-- sqlite3
+- postgresql
 
 For help on how to get pip and virtualenv running on Windows, take a look at [this](http://pymote.readthedocs.io/en/latest/install/windows_virtualenv.html).
 
