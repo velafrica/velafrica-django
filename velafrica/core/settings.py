@@ -191,21 +191,10 @@ WSGI_APPLICATION = 'velafrica.core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
+import dj_database_url
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    'default': dj_database_url.config()
 }
-if 'ON_HEROKU' in os.environ:
-    if int(os.environ['ON_HEROKU']) == 1:
-        # Parse database configuration from $DATABASE_URL
-        import dj_database_url
-        DATABASES['default'] =  dj_database_url.config()
-        # fasten up database access
-        # not working smoothly with free plan 
-        # DATABASES['default']['CONN_MAX_AGE'] = 500
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
