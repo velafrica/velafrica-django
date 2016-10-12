@@ -55,7 +55,7 @@ config.module.loaders = [
 ];
 config.output = {
   path: path.resolve('./staticfiles/dist/'),
-  publicPath: '/static/app/dist/',
+  publicPath: '/static/dist/',
   filename: '[name]-[hash].js',
 };
 
