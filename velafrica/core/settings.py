@@ -26,10 +26,20 @@ PROJECT_BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspa
 SECRET_KEY = 'b2j_&e=rzafa+zo874%tc^h!nbp#%0#442*19@(i&h-&s=v*hh'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+if 'DEBUG' in os.environ:
+    if os.environ['DEBUG'] == 'True':
+        DEBUG = True
+    else:
+        DEBUG = False
+else:
+    DEBUG = False
+
+INTERNAL_IPS = (
+    '127.0.0.1',
+)
 
 # TODO: define for production
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 LANGUAGES = [
     ('de', 'Deutsch')
@@ -125,6 +135,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'simple_history.middleware.HistoryRequestMiddleware',
+    'rollbar.contrib.django.middleware.RollbarNotifierMiddleware',
 )
 
 ROOT_URLCONF = 'velafrica.core.urls'
@@ -280,3 +291,12 @@ WEBPACK_LOADER = {
         'IGNORE': ['.+\.hot-update.js', '.+\.map']
     },
 }
+
+ROLLBAR = {
+    'access_token': '',
+    'environment': 'development' if DEBUG else 'production',
+    'branch': 'master',
+    'root': '/app',
+}
+if 'ROLLBAR_ACCESS_TOKEN' in os.environ:
+    ROLLBAR['access_token'] = os.environ['ROLLBAR_ACCESS_TOKEN']
