@@ -1,9 +1,21 @@
-# Info
+# tracking.velafrica.ch
+
+This project is an ERP (Enterprise resource planning) system for the people at Velafrica ( [http://velafrica.ch](http://velafrica.ch) ).
+It consists of different modules, all serving the purpose to manage specific processes and teams inside Velafrica.
+
+# Table of contents
+
+  * [Detailed description](#detailed-description)
+  * [Technology](#technology)
+  * [Learning resources](#learning-resources)
+  * [Recommended tools](#recommended-tools)
+  * [Setup](#setup)
+    * [Required software](#required-software)
+    * [Getting started](#getting-started)
+
+## Detailed description
 
 `ch.velafrica.admin` can be looked at on [http://tracking.velafrica.ch](http://tracking.velafrica.ch) at the moment.
-
-This project is kind of an ERP (Enterprise resource planning) system for the people at Velafrica ( [http://velafrica.ch](http://velafrica.ch) ).
-It is consisting of different modules, all serving the purpose to manage specific processes and teams inside Velafrica.
 
 The modules are:
 
