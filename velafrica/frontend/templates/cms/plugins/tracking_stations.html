@@ -5,11 +5,11 @@
                 <h4>Aktuelle Anzahl Velos:</h4>
             </div>
             <ul>
-                {% for key, value in instance.get_tracking_types.items %}
-                    <li class="col-sm-2" data-title="{{ key }}">
+                {% for query in queries %}
+                    <li class="col-sm-2" data-title="{{ query.label }}">
                         <div>
                             <a href="#" >
-                                {{ value }}
+                                {{ query.event_types }}
                             </a>
                         </div>
                     </li>
