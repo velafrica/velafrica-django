@@ -52,14 +52,16 @@ We recommend using [PyCharm by IntelliJ](https://www.jetbrains.com/pycharm/) (fu
 ## Required software
 
 - python (>2.7, <3.0)
+    - macOS: `brew install python`
+    - Windows: download installer from https://www.python.org/downloads/release/python-2712/
 - python-pip
 - virtualenv
-- postgresql
-
-For help on how to get pip and virtualenv running on Windows, take a look at [this](http://pymote.readthedocs.io/en/latest/install/windows_virtualenv.html).
+    - Windows: http://pymote.readthedocs.io/en/latest/install/windows_virtualenv.html
+- postgresql (9.4)
+- node (5.5): https://nodejs.org/download/release/v5.5.0/
+- heroku toolbelt: https://devcenter.heroku.com/articles/heroku-command-line#download-and-install
 
 ## Getting started
-The 6 steps to get you started.
 
 ### 1. Setup virtualenv
 Virtualenv is here to provide an isolated environment for your app, with its own python runtime and python packages.
