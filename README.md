@@ -64,38 +64,60 @@ We recommend using [PyCharm by IntelliJ](https://www.jetbrains.com/pycharm/) (fu
 ## Getting started
 
 ### 1. Setup virtualenv
+
 Virtualenv is here to provide an isolated environment for your app, with its own python runtime and python packages.
 Navigate into the project directory and type the following command:
 
-    virtualenv env
+```bash
+virtualenv venv
+```
 
-This creates a virtual environment in a newly created `env` folder, inside of your project directory.
+This creates a virtual environment in a newly created `venv` folder, inside of your project directory.
+
 ### 2. Activate virtualenv
 
 #### Windows
 
-    ./env/Scripts/activate
+```bash
+./venv/Scripts/activate
+```
 
 #### Linux / Mac
 
-    source env/bin/activate
+```bash
+source venv/bin/activate
+```
 
 ### 3. Install packages
 
-    pip install -r requirements.txt
+```bash
+pip install -r requirements.txt
+```
 
-### 4. Create database (apply migrations)
+### 4. Define the environment variables
+
+```bash
+cp .env_dist .env
+```
+
+And then fill in your database credentials (eg. username, password & database name) in `.env`
+
+### 5. Create database (apply migrations)
    
-    python manage.py migrate
+```bash
+heroku local:run python manage.py migrate
+```
 
-### 5. Start development server
+### 6. Start development server & livereload tools
 
-    python manage.py runserver
+```bash
+heroku local:start -f Procfile_dev
+```
 
-### 6. Enjoy
+### 7. Enjoy
 
-Take a look at the result on [http://localhost:8000/](http://localhost:8000/) :-)
-
-TODO: describe required env variables
+```bash
+open http://localhost:5000/
+```
 
 TODO: [make ready for prod deployment](https://docs.djangoproject.com/en/1.10/ref/django-admin/#cmdoption-check--deploy)
