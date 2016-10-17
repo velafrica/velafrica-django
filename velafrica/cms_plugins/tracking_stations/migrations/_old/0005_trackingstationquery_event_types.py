@@ -8,7 +8,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cms_plugins', '0004_remove_trackingstationquery_event_types'),
+        ('tracking_stations', '0004_remove_trackingstationquery_event_types'),
     ]
 
     operations = [

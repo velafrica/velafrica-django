@@ -9,7 +9,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cms_plugins', '0005_trackingstationquery_event_types'),
+        ('tracking_stations', '0005_trackingstationquery_event_types'),
     ]
 
     operations = [

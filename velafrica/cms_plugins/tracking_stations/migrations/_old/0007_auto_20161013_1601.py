@@ -9,7 +9,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('sbbtracking', '0034_auto_20161004_2150'),
-        ('cms_plugins', '0006_trackingstationquery_plugin'),
+        ('tracking_stations', '0006_trackingstationquery_plugin'),
     ]
 
     operations = [

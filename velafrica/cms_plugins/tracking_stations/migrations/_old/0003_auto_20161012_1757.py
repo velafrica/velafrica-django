@@ -9,7 +9,7 @@ import multiselectfield.db.fields
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cms_plugins', '0002_auto_20161012_1751'),
+        ('tracking_stations', '0002_auto_20161012_1751'),
     ]
 
     operations = [

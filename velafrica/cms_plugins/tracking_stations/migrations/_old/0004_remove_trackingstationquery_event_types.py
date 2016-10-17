@@ -8,7 +8,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cms_plugins', '0003_auto_20161012_1757'),
+        ('tracking_stations', '0003_auto_20161012_1757'),
     ]
 
     operations = [
