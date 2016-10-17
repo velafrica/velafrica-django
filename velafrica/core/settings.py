@@ -76,7 +76,6 @@ INSTALLED_APPS = (
     'taggit_autosuggest',
     'meta',
     'djangocms_blog',
-    # TODO: 'reversion', - do we need this?
     # django cms plugins
     'djangocms_file',
     'djangocms_inherit',
@@ -84,7 +83,8 @@ INSTALLED_APPS = (
     'djangocms_teaser',
     'djangocms_video',
     'djangocms_link',
-    # TODO: 'djangocms_snippet', - security hazard?
+    # custom cms plugins
+    'velafrica.cms_plugins.tracking_stations',
     # custom apps
     'massadmin',
     'daterange_filter',
@@ -95,7 +95,6 @@ INSTALLED_APPS = (
     'rest_framework',
     # custom velafrica apps
     'velafrica.api',
-    'velafrica.cms_plugins',
     'velafrica.core',
     'velafrica.commission',
     'velafrica.counter',
