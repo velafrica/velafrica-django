@@ -9,7 +9,7 @@
                     <li class="col-sm-2">
                         <div data-title="{{ query.label }}">
                             <a href="#" >
-                                {{ query.event_types }}
+                                {{ query.get_count }}
                             </a>
                         </div>
                     </li>
@@ -18,3 +18,12 @@
         </div>
     </div>
 </section>
+{% for query in queries %}
+    <br><br><br>
+    name: {{ query.label }}<br/>
+    count: {{ query.get_count }}<br>
+    {{ query.event_types.all.count }}
+    {% for et in query.event_types.all %}
+        {{ et }}<br>
+    {% endfor %}
+{% endfor %}
