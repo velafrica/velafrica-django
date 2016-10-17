@@ -1,6 +1,6 @@
 from cms.models.pluginmodel import CMSPlugin
 from django.db import models
-from velafrica.sbbtracking.models import TrackingEventType
+from velafrica.sbbtracking.models import TrackingEventType, Tracking
 
 
 def get_event_types_as_choice():
@@ -38,9 +38,20 @@ class TrackingStationQuery(models.Model):
     label = models.CharField(max_length=255, verbose_name="Label")
     # TODO: find better solution!
     #event_types = MultiSelectField(choices=lazy(get_event_types_as_choice, list)())
-    event_types = models.CharField(max_length=255, verbose_name="Event Typen")
+    event_types = models.ManyToManyField(TrackingEventType, related_name='tracking_station_queries')
+    # event_types = models.CharField(max_length=255, verbose_name="Event Typen")
+
     query_order = models.IntegerField(verbose_name="Reihenfolge", default=0)
     plugin = models.ForeignKey(
         TrackingStation,
         related_name="queries"
     )
+
+    def get_count(self):
+        count = -1
+        for event_type in self.event_types.all():
+            count += Tracking.objects.all().filter(last_event_id=event_type.id).count()
+            count += 1
+
+        return count
+
