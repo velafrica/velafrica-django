@@ -1,13 +1,9 @@
 from django.contrib import admin
-from django.utils.safestring import mark_safe
-from import_export import fields
-from import_export import resources
-from import_export.admin import ImportExportMixin, ExportMixin
-from simple_history.admin import SimpleHistoryAdmin
 from .models import TrackingStation, TrackingStationQuery
-
+from .forms import TrackingStationQueryInlineAdminForm
 
 class TrackingStationQueryInlineAdmin(admin.TabularInline):
+    # form = TrackingStationQueryInlineAdminForm
     model = TrackingStationQuery
     extra = 0
     min_num = 0
