@@ -1,0 +1,10 @@
+<section id="moneydonate-{{ instance.id }}">
+    {% if form %}
+        <h1>gimme money snitch!</h1>
+        {{ form.render }}
+    {% endif %}
+    <br><br><br><br>
+    {% for amount in amounts %}
+        {{ amount.amount }}<br>
+    {% endfor %}
+</section>
