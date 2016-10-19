@@ -10,21 +10,21 @@
     $(document).ready(changePayPalAmount)
   </script>
 {% endaddtoblock %}
-<section id="moneydonate-{{ instance.id }}">
-    <div class="md-header">
-        <h1 class="md-header-title">
+<section id="moneydonate-{{ instance.id }}" class="container-fluid">
+    <div class="md-header row">
+        <h1 class="md-header-title col-sm-12 text-center">
             {{ instance.title }}
         </h1>
-        <h3 class="md-header-subtitle">
+        <h3 class="md-header-subtitle col-sm-12 text-center">
             {{ instance.subtitle }}
         </h3>
     </div>
-    <div class="md-donate">
-        <h2 class="md-donate-heading">
+    <div class="md-donate row">
+        <h2 class="md-donate-heading col-sm-12 text-center">
             {% trans "Individuelle Spende" %}
         </h2>
-        <div class="md-amounts">
-            <h2 class="md-amounts-heading">
+        <div class="md-amounts col-sm-12">
+            <h2 class="md-amounts-heading text-center">
                 {% trans "Spendenbetrag CHF" %}
             </h2>
             <ul class="nav nav-tabs" id="md-amounts-tabs" role="tablist">
@@ -42,7 +42,7 @@
             <div class="tab-content">
                 {% for amount in amounts %}
                     <div class="tab-pane md-amount-content {% if forloop.first %}active{% endif %}" id="md-amount-{{ amount.id }}-content">
-                        {{ amount.description }}
+                        <p>{{ amount.description }}</p>
                     </div>
                 {% endfor %}
             </div>
@@ -69,6 +69,35 @@
                 <div class="tab-pane md-payment-content" id="md-invoice">
                     meep2.
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="md-footprint container">
+        <div class="row text-center">
+            <h2 class="col-sm-12">{% trans "CO2-Footprint kompensieren" %}</h2>
+            <p class="col-sm-12">
+                {% trans "Sie möchten Ihren CO2-Footprint kompensieren und gleichzeitig Velafrica unterstützen? Dank der Zusammenarbeit mit South Pole Carbon geht das ganz einfach: Im Webshop mit dem CO2-Rechner den individuellen Ausstoss berechnen und als Kompensations-Projekt 'Bicycles for Africa' wählen." %}
+            </p>
+            <a href="" class="col-sm-12">Zu South Pole Carbon</a>
+        </div>
+    </div>
+    <div class="md-more container">
+        <h1 class="row text-center">{% trans "Weitere Spendenarten" %}</h1>
+        <div class="row">
+            <div class="col-sm-4">
+                <h3>{% trans "Velospende" %}</h3>
+                <p>{% trans "Spenden Sie sicher, schnell und unkompliziert online via PayPal" %}</p>
+                <a href="">{% trans "Mehr erfahren" %}</a>
+            </div>
+            <div class="col-sm-4">
+                <h3>{% trans "Patenschaft" %}</h3>
+                <p>{% trans "Spenden Sie sicher, schnell und unkompliziert online via PayPal" %}</p>
+                <a href="">{% trans "Mehr erfahren" %}</a>
+            </div>
+            <div class="col-sm-4">
+                <h3>{% trans "Geschenkideen" %}</h3>
+                <p>{% trans "Spenden Sie sicher, schnell und unkompliziert online via PayPal" %}</p>
+                <a href="">{% trans "Mehr erfahren" %}</a>
             </div>
         </div>
     </div>
