@@ -33,15 +33,15 @@ class Moneydonate(CMSPluginBase):
 
     def render(self, context, instance, placeholder):
         context = super(Moneydonate, self).render(context, instance, placeholder)
-        amounts = instance.amounts.filter(is_active=True)
+        amounts = instance.amounts.filter(is_active=True).order_by('amount')
 
         paypal_dict = {
             "business": PAYPAL_RECEIVER_MAIL,
-            "amount": "5",
+            "amount": amounts.first().amount,
             "currency_code": "CHF",
             "item_name": "Velafrica Donation",
             "invoice": "unique-invoice-id",
-            "notify_url": "http://5dacf3f3.eu.ngrok.io" + reverse('paypal-ipn'),
+            "notify_url": "https://5dacf3f3.eu.ngrok.io" + reverse('paypal-ipn'),
             "return_url": instance.paypal_return_url,
             "cancel_return": instance.paypal_cancel_url,
             "rm": "1",
