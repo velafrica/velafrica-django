@@ -4,6 +4,24 @@
 {% load menu_tags %}
 {% load static %}
 
+{% addtoblock "js" %}<script src="{% static "js/jquery-2.2.0.min.js" %}"></script>{% endaddtoblock %}
+{% addtoblock "js" %}<script src="{% static "bootstrap-3.3.6-dist/js/bootstrap.min.js" %}"></script>{% endaddtoblock %}
+{% addtoblock "js" %}
+  <script>
+    function navToggle() {
+      var nav = $(".big-nav");
+
+      if (nav.hasClass('open')) {
+        nav.css("visibility", "hidden").css("height", "0");
+        nav.removeClass('open');
+      } else {
+        nav.css("visibility", "visible").css("height", "500");
+        nav.addClass('open');
+      }
+    }
+  </script>
+{% endaddtoblock %}
+
 <html lang="{{ LANGUAGE_CODE }}">
 <head>
   <title>{% page_attribute "page_title" %}</title>
@@ -86,24 +104,6 @@
     {% endblock %}
   </div>
 </footer>
-
-{% addtoblock "js" %}
-  <script src="{% static "js/jquery-2.2.0.min.js" %}"></script>
-  <script src="{% static "bootstrap-3.3.6-dist/js/bootstrap.min.js" %}"></script>
-  <script>
-    function navToggle() {
-      var nav = $(".big-nav");
-
-      if (nav.hasClass('open')) {
-        nav.css("visibility", "hidden").css("height", "0");
-        nav.removeClass('open');
-      } else {
-        nav.css("visibility", "visible").css("height", "500");
-        nav.addClass('open');
-      }
-    }
-  </script>
-{% endaddtoblock %}
 
 {% render_block "js" %}
 
