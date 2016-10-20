@@ -41,7 +41,7 @@ class Moneydonate(CMSPluginBase):
             "currency_code": "CHF",
             "item_name": "Velafrica Donation",
             "invoice": "unique-invoice-id",
-            "notify_url": "http://71336ba9.eu.ngrok.io" + reverse('paypal-ipn'),
+            "notify_url": "https://velafrica-staging-pr-21.herokuapp.com" + reverse('paypal-ipn'),
             "return_url": instance.return_url,
             "cancel_return": "",
             "rm": "1",
