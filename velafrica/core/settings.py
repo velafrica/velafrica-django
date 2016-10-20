@@ -295,3 +295,5 @@ PAYPAL_TEST = True
 
 if 'PAYPAL_RECEIVER_MAIL' in os.environ:
     PAYPAL_RECEIVER_MAIL = os.environ['PAYPAL_RECEIVER_MAIL']
+else:
+    PAYPAL_RECEIVER_MAIL = ""
