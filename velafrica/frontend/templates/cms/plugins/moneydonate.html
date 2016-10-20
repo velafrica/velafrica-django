@@ -2,12 +2,34 @@
 {% load sekizai_tags %}
 {% addtoblock "js" %}
   <script>
-    function changePayPalAmount() {
-        $('#md-amounts-tabs a').click(function(e) {
-            $('#id_amount').val($(this).data('amount'))
-        })
+    function changeAmount(amount) {
+        $('#id_amount').val(amount)
+        $('#id_donation_amount').val(amount)
     }
-    $(document).ready(changePayPalAmount)
+
+    function emptyAndReadOnly() {
+        var checkbox = $(this);
+        var donation_amount = $('#id_donation_amount');
+        if(checkbox.is(':checked')) {
+            donation_amount.val(0);
+            donation_amount.attr('readonly', true);
+
+        } else {
+            donation_amount.attr('readonly', false);
+            donation_amount.val($('#md-amounts-tabs li.active a').data('amount'));
+        }
+    }
+
+    $(document).ready(function() {
+        $('#md-amounts-tabs a').click(function(e) {
+            var amount = $(this).data('amount');
+            changeAmount(amount)
+        });
+        changeAmount($('#md-amounts-tabs a:first').data('amount'));
+        $('#id_empty_invoice').change(emptyAndReadOnly);
+        $('#id_cancel_return').val('{{ request.build_absolute_uri }}');
+        $('#id_invoice_redirect_url').val('{{ instance.return_url }}');
+    })
   </script>
 {% endaddtoblock %}
 <section id="moneydonate-{{ instance.id }}" class="container-fluid">
@@ -39,9 +61,9 @@
                     <input type="text">
                 </li>
             </ul>
-            <div class="tab-content">
+            <div class="tab-content md-amount-content">
                 {% for amount in amounts %}
-                    <div class="tab-pane md-amount-content {% if forloop.first %}active{% endif %}" id="md-amount-{{ amount.id }}-content">
+                    <div class="tab-pane {% if forloop.first %}active{% endif %}" id="md-amount-{{ amount.id }}-content">
                         <p>{{ amount.description }}</p>
                     </div>
                 {% endfor %}
@@ -59,15 +81,20 @@
                     <a href="#md-invoice" aria-controls="md-invoice" role="tab" data-toggle="tab">{% trans "Einzahlungsschein" %}</a>
                 </li>
             </ul>
-            <div class="tab-content">
-                <div class="tab-pane md-payment-content active" id="md-paypal">
-                    {{ form.render }}
+            <div class="tab-content md-payment-content">
+                <div class="tab-pane active" id="md-paypal">
+                    {{ paypalform.render }}
                 </div>
-                <div class="tab-pane md-payment-content" id="md-onba">
+                <div class="tab-pane" id="md-onba">
                     meep1.
                 </div>
-                <div class="tab-pane md-payment-content" id="md-invoice">
-                    meep2.
+                <div class="tab-pane" id="md-invoice">
+                    <form action="{% url 'orderinvoice' %}" method="POST">
+                        {% csrf_token %}
+                        {{ invoiceform.as_p }}
+                        <input type="submit">
+                    </form>
+
                 </div>
             </div>
         </div>

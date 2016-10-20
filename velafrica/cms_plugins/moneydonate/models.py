@@ -12,11 +12,10 @@ class Moneydonate(CMSPlugin):
 
     title = models.CharField(max_length=255, blank=True)
     subtitle = models.CharField(max_length=255, blank=True)
+    return_url = models.URLField(verbose_name='Weiterleitungs-URL')
 
     paypal_active = models.BooleanField(verbose_name='PayPal aktiv')
     paypal_text = models.TextField(blank=True, verbose_name='Beschreibung PayPal')
-    paypal_cancel_url = models.URLField(verbose_name='Abbruch URL', blank=True)
-    paypal_return_url = models.URLField(verbose_name='Weiterleitungsadresse', blank=True)
 
     onba_active = models.BooleanField(verbose_name='E-Banking aktiv')
     onba_text = models.TextField(max_length=255, blank=True, verbose_name='Beschreibung E-Banking')
@@ -42,5 +41,20 @@ class MoneydonateAmount(models.Model):
     is_active = models.BooleanField(default=True, verbose_name='Aktiv')
 
     class Meta:
-        verbose_name = 'Geldspendebeträge'
-        verbose_name = 'Geldspendebeträge'
+        verbose_name = 'Geldspendebetrag'
+        verbose_name_plural = 'Geldspendebeträge'
+
+
+class InvoiceOrder(models.Model):
+    donation_amount = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Betrag")
+    empty_invoice = models.BooleanField(default=False, verbose_name="Leerer Einzahlungsschein")
+    number_invoices = models.IntegerField(default=1, verbose_name="Menge")
+    first_name = models.CharField(max_length=255, verbose_name="Vorname")
+    last_name = models.CharField(max_length=255, verbose_name="Nachname")
+    address = models.CharField(max_length=255, verbose_name="Adresse")
+    zip = models.CharField(max_length=255, verbose_name="PLZ, Ort")
+    comment = models.TextField(verbose_name="Anmerkung", blank=True)
+
+    class Meta:
+        verbose_name = 'Einzahlungschein'
+        verbose_name_plural = 'Einzahlungsscheine'

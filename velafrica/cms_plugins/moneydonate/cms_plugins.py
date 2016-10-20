@@ -5,6 +5,7 @@ from django.core.urlresolvers import reverse
 from paypal.standard.forms import PayPalPaymentsForm
 from .models import Moneydonate
 from .admin import MoneydonateAmountInlineAdmin
+from .forms import InvoiceForm
 from velafrica.core.settings import PAYPAL_RECEIVER_MAIL
 
 
@@ -16,11 +17,10 @@ class Moneydonate(CMSPluginBase):
 
     fieldsets = (
         ('Allgemein', {
-            'fields': ('title', 'subtitle',)
+            'fields': ('title', 'subtitle', 'return_url')
         }),
         ('PayPal', {
-            'fields': ('paypal_active', 'paypal_text',
-                       'paypal_return_url', 'paypal_cancel_url',)
+            'fields': ('paypal_active', 'paypal_text',)
         }),
         ('E-Banking', {
             'fields': ('onba_active', 'onba_text', 'onba_account',
@@ -41,17 +41,19 @@ class Moneydonate(CMSPluginBase):
             "currency_code": "CHF",
             "item_name": "Velafrica Donation",
             "invoice": "unique-invoice-id",
-            "notify_url": "https://5dacf3f3.eu.ngrok.io" + reverse('paypal-ipn'),
-            "return_url": instance.paypal_return_url,
-            "cancel_return": instance.paypal_cancel_url,
+            "notify_url": "http://71336ba9.eu.ngrok.io" + reverse('paypal-ipn'),
+            "return_url": instance.return_url,
+            "cancel_return": "",
             "rm": "1",
             "custom": "Upgrade all users!",  # Custom command to correlate to some function later (optional)
         }
-        form = PayPalPaymentsForm(initial=paypal_dict)
+        paypalform = PayPalPaymentsForm(initial=paypal_dict)
+        invoiceform = InvoiceForm()
 
         context.update({
             'amounts': amounts,
-            'form': form
+            'paypalform': paypalform,
+            'invoiceform': invoiceform
         })
         return context
 

@@ -96,6 +96,7 @@ urlpatterns = [
     url(r'^admin/', include("massadmin.urls")),
     url(r'^taggit_autosuggest/', include('taggit_autosuggest.urls')),
     url(r'^paypal/', include('paypal.standard.ipn.urls')),
+    url(r'^donations/', include('velafrica.cms_plugins.moneydonate.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += i18n_patterns(url(r'^pages/', include('cms.urls'), name="cms"))
