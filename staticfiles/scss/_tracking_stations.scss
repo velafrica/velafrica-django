@@ -1,0 +1,55 @@
+section[id*="tracking-stations-"] {
+  & .tracking-stations-header {
+    h4 {
+      font-size: 30px;
+      font-weight: bold;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+
+      li {
+        div {
+          text-align: center;
+
+          a {
+            margin: 0 auto;
+            display: block;
+            width: 100px;
+            height: 100px;
+            border-radius: 50px;
+            font-size: 30px;
+            font-weight: bold;
+            color: purple;
+            line-height: 100px;
+            text-align: center;
+            background: lightgrey;
+            border: 3px solid dimgrey;
+          }
+
+          &:after {
+            content: attr(data-title);
+            text-align: center;
+          }
+        }
+      }
+
+      li:not(:last-child) {
+        div {
+          a {
+            &:before{
+              content: '';
+              position: absolute;
+              top: 48%;
+              z-index: -1;
+              height: 10px;
+              width: 100%;
+              background-color: dimgrey;
+            }
+          }
+        }
+      }
+    }
+  }
+}
