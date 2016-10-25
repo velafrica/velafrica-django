@@ -1,11 +1,18 @@
 {% load i18n %}
+{% load static %}
 
 <html lang="{{ LANGUAGE_CODE }}">
 <head>
   {% include "public_site/partials/head.html" %}
 </head>
+
 <body>
+
   {% block content %}{% endblock %}
   {% include "public_site/partials/footer.html" %}
+
+  <script src="{% static "js/jquery-2.2.0.min.js" %}"></script>
+  <script src="{% static "bootstrap-3.3.6-dist/js/bootstrap.min.js" %}"></script>
+
 </body>
 </html>

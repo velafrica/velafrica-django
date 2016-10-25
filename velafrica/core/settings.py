@@ -41,10 +41,18 @@ INTERNAL_IPS = (
 # TODO: define for production
 ALLOWED_HOSTS = ['*']
 
+LANGUAGES_CODE = 'de-ch'
+
 LANGUAGES = [
-    ('de', 'Deutsch')
+    ('de', 'Deutsch'),
+    ('en', 'English'),
 ]
 
+
+
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, "velafrica/frontend/locale"),
+)
 
 # Application definition
 INSTALLED_APPS = (
