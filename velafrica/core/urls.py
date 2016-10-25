@@ -31,14 +31,15 @@ from velafrica.sbbtracking import views as sbbtracking_views
 from velafrica.stock import views as stock_views
 from velafrica.transport import views as transport_views
 from velafrica.velafrica_sud import views as velafrica_sud_views
+from velafrica.public_site import views as velafrica_public_site_views
 
 frontend = [
     url(r'^$', RedirectView.as_view(url='/pages')),
     url(r'^counter', counter_views.counter, name='counter'),
     url(r'^download', download_views.downloads, name='download'),
     url(r'^stock', stock_views.stock, name='stock'),
-    url(r'^tracking/(?P<tracking_no>\w+)', sbbtracking_views.tracking, name='tracking_detail'),
-    url(r'^tracking', sbbtracking_views.tracking, name='tracking'),
+    url(r'^chregi_tracking/(?P<tracking_no>\w+)', sbbtracking_views.tracking, name='tracking_detail'),
+    url(r'^chregi_tracking', sbbtracking_views.tracking, name='tracking'),
     url(r'^transport', transport_views.transport, name='transport'),
     url(r'^warehouses', stock_views.warehouses, name='warehouses'),
     url(r'^warehouse/(?P<pk>[0-9]+)', stock_views.warehouse, name='warehouse_detail'),
@@ -60,7 +61,12 @@ autocomplete = [
 ]
 
 urlpatterns = [
-	#url(r'^$', views.home, name='home'),
+    # urls for the public pages
+    url(r'^$', velafrica_public_site_views.render_template, name='home'),
+    url(r'^socialwall$', velafrica_public_site_views.render_template, name='home'),
+    url(r'^tracking$', velafrica_public_site_views.render_template, name='home'),
+    url(r'^my-tracking$', velafrica_public_site_views.render_template, name='home'),
+
     url(r'^api/', include('velafrica.api.urls', namespace="api")),
 
     url(r'^', include(frontend, namespace="frontend")),
