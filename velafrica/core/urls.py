@@ -61,8 +61,10 @@ autocomplete = [
 ]
 
 urlpatterns = [
-	#url(r'^$', views.home, name='home'),
-    url(r'^$', velafrica_public_site_views.index, name='home'),
+    # urls for the public pages
+    url(r'^$', velafrica_public_site_views.render_template, name='home'),
+    url(r'^socialwall$', velafrica_public_site_views.render_template, name='home'),
+
     url(r'^api/', include('velafrica.api.urls', namespace="api")),
 
     url(r'^', include(frontend, namespace="frontend")),
