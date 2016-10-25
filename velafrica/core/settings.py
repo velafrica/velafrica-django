@@ -76,7 +76,6 @@ INSTALLED_APPS = (
     'taggit_autosuggest',
     'meta',
     'djangocms_blog',
-    # TODO: 'reversion', - do we need this?
     # django cms plugins
     'djangocms_file',
     'djangocms_inherit',
@@ -84,6 +83,8 @@ INSTALLED_APPS = (
     'djangocms_teaser',
     'djangocms_video',
     'djangocms_link',
+    # custom cms plugins
+    'velafrica.cms_plugins.tracking_stations',
     # TODO: 'djangocms_snippet', - security hazard?
     'velafrica.cms_plugins.moneydonate',
     # custom apps
