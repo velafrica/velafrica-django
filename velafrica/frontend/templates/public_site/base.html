@@ -1,0 +1,11 @@
+{% load i18n %}
+
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+  {% include "public_site/partials/head.html" %}
+</head>
+<body>
+  {% block content %}{% endblock %}
+  {% include "public_site/partials/footer.html" %}
+</body>
+</html>
