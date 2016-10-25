@@ -24,9 +24,9 @@
 {% cms_toolbar %}
 
 {% if debug %}
-<h1>we're in debug mode</h1>
+  <h1>we're in debug mode</h1>
 {% else %}
-<h1>we're in production mode</h1>
+  <h1>we're in production mode</h1>
 {% endif %}
 
 {% block topbar %}
@@ -42,16 +42,21 @@
             </a>
 
           </div>
-          <div class="col-sm-6 right">
+          <div class="col-sm-6 navbar-right right">
 
-            <a class="support-button" onclick="navToggle()" id="support-button" href="#">Velafrica unterstützen</a>
-
-            <ul>
-              <li><a href="#">DE</a></li>
-              <li><a href="#">EN</a></li>
-              <li><a href="#">FR</a></li>
-            </ul>
-
+            <div class="dropdown">
+              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
+                      aria-haspopup="true" aria-expanded="false">
+                Spenden
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li><a href="#">Geldspende</a></li>
+                <li><a href="#">Velospende</a></li>
+                <li><a href="#">Patenschaft</a></li>
+                <li><a href="#">Geschenkidee</a></li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -71,11 +76,12 @@
 {% endblock %}
 
 <main>
+  <div class="container-fluid">
+    {% placeholder content %}
+    {% block content %}
+    {% endblock %}
 
-  {% placeholder content %}
-  {% block content %}
-  {% endblock %}
-
+  </div>
 </main>
 
 <footer class="footer">
@@ -90,19 +96,6 @@
 {% addtoblock "js" %}
   <script src="{% static "js/jquery-2.2.0.min.js" %}"></script>
   <script src="{% static "bootstrap-3.3.6-dist/js/bootstrap.min.js" %}"></script>
-  <script>
-    function navToggle() {
-      var nav = $(".big-nav");
-
-      if (nav.hasClass('open')) {
-        nav.css("visibility", "hidden").css("height", "0");
-        nav.removeClass('open');
-      } else {
-        nav.css("visibility", "visible").css("height", "500");
-        nav.addClass('open');
-      }
-    }
-  </script>
 {% endaddtoblock %}
 
 {% render_block "js" %}
