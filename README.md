@@ -12,6 +12,7 @@ It consists of different modules, all serving the purpose to manage specific pro
   * [Setup](#setup)
     * [Required software](#required-software)
     * [Getting started](#getting-started)
+  * [Deployment](#deployment)
 
 ## Detailed description
 
@@ -120,4 +121,44 @@ heroku local:start -f Procfile_dev
 open http://localhost:5000/
 ```
 
-TODO: [make ready for prod deployment](https://docs.djangoproject.com/en/1.10/ref/django-admin/#cmdoption-check--deploy)
+### (Optional)
+
+```bash
+# Export database to file
+pg_dump -U <your-username> velafrica_dev > dbexport.pgsql
+
+# Import database form file
+psql -U <your-username> velafrica_dev < dbexport.pgsql
+```
+
+# Deployment
+
+The instructions here are meant for a fresh deployment to heroku. For consecutive deployments, heroku and github are currently set up in a way that successful builds of the `master` branch trigger a deployment to heroku. The current configuration (`npm run postinstall` & the heroku release commands) make sure that the assets are being compiled and the schema migrations are applied.
+
+```bash
+# Create a new heroku application
+heroku create <your-app-name> --region=eu
+
+# Add a postgresql database
+heroku addons:create heroku-postgresql:hobby-dev --app <your-app-name>
+
+# Add rollbar to log errors in production
+heroku addons:create rollbar:free --app <your-app-name>
+
+# Set the debugging to false, to make sure we're not leaking information to the user in case of an error
+heroku config:set DEBUG=False --app <your-app-name>
+
+# Make sure all the required buildpacks are defined and the order is the same.
+open https://dashboard.heroku.com/apps/<your-app-name>/settings
+
+1st buildpack: https://github.com/heroku/heroku-buildpack-addon-wait
+2nd buildpack: https://github.com/philippkueng/heroku-buildpack-sassc
+3rd buildpack: heroku/nodejs
+4th buildpack: heroku/python
+
+# The deploy the code for the first time.
+git push heroku master
+
+# (Optional) setup automatic deployments
+open https://dashboard.heroku.com/apps/<your-app-name>/deploy/github
+```
