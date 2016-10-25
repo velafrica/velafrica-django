@@ -31,6 +31,7 @@ from velafrica.sbbtracking import views as sbbtracking_views
 from velafrica.stock import views as stock_views
 from velafrica.transport import views as transport_views
 from velafrica.velafrica_sud import views as velafrica_sud_views
+from velafrica.public_site import views as velafrica_public_site_views
 
 frontend = [
     url(r'^$', RedirectView.as_view(url='/pages')),
@@ -61,6 +62,7 @@ autocomplete = [
 
 urlpatterns = [
 	#url(r'^$', views.home, name='home'),
+    url(r'^$', velafrica_public_site_views.index, name='home'),
     url(r'^api/', include('velafrica.api.urls', namespace="api")),
 
     url(r'^', include(frontend, namespace="frontend")),
