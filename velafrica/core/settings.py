@@ -85,6 +85,7 @@ INSTALLED_APPS = (
     'djangocms_video',
     'djangocms_link',
     # TODO: 'djangocms_snippet', - security hazard?
+    'velafrica.cms_plugins.moneydonate',
     # custom apps
     'massadmin',
     'daterange_filter',
@@ -93,6 +94,7 @@ INSTALLED_APPS = (
     'import_export',
     'django_object_actions',
     'rest_framework',
+    'paypal.standard.ipn',
     # custom velafrica apps
     'velafrica.api',
     'velafrica.core',
@@ -288,3 +290,16 @@ ROLLBAR = {
 }
 if 'ROLLBAR_ACCESS_TOKEN' in os.environ:
     ROLLBAR['access_token'] = os.environ['ROLLBAR_ACCESS_TOKEN']
+
+if 'PAYPAL_TEST' in os.environ:
+    if os.environ['PAYPAL_TEST'] == 'True':
+        PAYPAL_TEST = True
+    else:
+        PAYPAL_TEST = False
+else:
+    PAYPAL_TEST = False
+
+if 'PAYPAL_RECEIVER_MAIL' in os.environ:
+    PAYPAL_RECEIVER_MAIL = os.environ['PAYPAL_RECEIVER_MAIL']
+else:
+    PAYPAL_RECEIVER_MAIL = ""
