@@ -1,20 +1,8 @@
-{% load staticfiles %}
-{% load render_bundle from webpack_loader %}
-{% load static %}
 {% load i18n %}
 
 <html lang="{{ LANGUAGE_CODE }}">
 <head>
-  <title>{% trans "Velafrica - Startseite" %}</title>
-
-  <link href="{% static "bootstrap-3.3.6-dist/css/bootstrap.css" %}" rel="stylesheet">
-  <link href="{% static "css/style.css" %}" rel="stylesheet">
-
-  {% if debug %}
-    {% render_bundle 'main' %}
-  {% else %}
-    {% render_bundle 'styles' 'css' %}
-  {% endif %}
+  {% include "public_site/head.html" %}
 </head>
 <body>
   <h1>public site for velafrica</h1>
