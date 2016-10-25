@@ -291,7 +291,13 @@ ROLLBAR = {
 if 'ROLLBAR_ACCESS_TOKEN' in os.environ:
     ROLLBAR['access_token'] = os.environ['ROLLBAR_ACCESS_TOKEN']
 
-PAYPAL_TEST = True
+if 'PAYPAL_TEST' in os.environ:
+    if os.environ['PAYPAL_TEST'] == 'True':
+        PAYPAL_TEST = True
+    else:
+        PAYPAL_TEST = False
+else:
+    PAYPAL_TEST = False
 
 if 'PAYPAL_RECEIVER_MAIL' in os.environ:
     PAYPAL_RECEIVER_MAIL = os.environ['PAYPAL_RECEIVER_MAIL']
