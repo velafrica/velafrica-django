@@ -1,7 +1,8 @@
 from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 from cms.models.pluginmodel import CMSPlugin
-from .models import TrackingStation
+from velafrica.sbbtracking.models import Tracking
+from .models import TrackingStation, TrackingStationQuery
 from .admin import TrackingStationQueryInlineAdmin
 from django.utils.translation import ugettext_lazy as _
 
@@ -21,6 +22,15 @@ class TrackingStations(CMSPluginBase):
     def render(self, context, instance, placeholder):
         context = super(TrackingStations, self).render(context, instance, placeholder)
         queries = instance.queries.all()
+
+        # for query in queries:
+        #     count = -1
+        #
+        #     for event_type in query.event_types.all():
+        #         count += Tracking.objects.all().filter(last_event__event_type_id=event_type.id).count()
+        #
+        #     query.count = count
+
         context.update({
             'queries': queries
         })

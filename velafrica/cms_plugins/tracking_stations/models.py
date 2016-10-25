@@ -31,6 +31,12 @@ class TrackingStation(CMSPlugin):
             query.pk = None
             query.plugin = self
             query.save()
+         
+        # for query in old_instance.queries.all():
+        #     for event_type in query.event_types.all():
+        #         event_type.pk = None
+        #         event_type.query = query
+        #         event_type.save()
 
 
 class TrackingStationQuery(models.Model):
@@ -50,8 +56,9 @@ class TrackingStationQuery(models.Model):
     def get_count(self):
         count = -1
         for event_type in self.event_types.all():
-            count += Tracking.objects.all().filter(last_event_id=event_type.id).count()
-            count += 1
+            count += Tracking.objects.all().filter(last_event__event_type_id=event_type.id).count()
+            # count =
+            # count += 1
 
         return count
 
