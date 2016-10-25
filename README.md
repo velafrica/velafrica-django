@@ -121,6 +121,16 @@ heroku local:start -f Procfile_dev
 open http://localhost:5000/
 ```
 
+### (Optional)
+
+```bash
+# Export database to file
+pg_dump -U <your-username> velafrica_dev > dbexport.pgsql
+
+# Import database form file
+psql -U <your-username> velafrica_dev < dbexport.pgsql
+```
+
 # Deployment
 
 The instructions here are meant for a fresh deployment to heroku. For consecutive deployments, heroku and github are currently set up in a way that successful builds of the `master` branch trigger a deployment to heroku. The current configuration (`npm run postinstall` & the heroku release commands) make sure that the assets are being compiled and the schema migrations are applied.
