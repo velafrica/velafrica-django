@@ -92,7 +92,10 @@ source venv/bin/activate
 
 ```bash
 pip install -r requirements.txt
+npm install
 ```
+
+*There is a problem installing libxml on Windows machines, follow [this](http://stackoverflow.com/questions/30493031/installing-lxml-libxml2-libxslt-on-windows-8-1) to get it working.
 
 ### 4. Define the environment variables
 
