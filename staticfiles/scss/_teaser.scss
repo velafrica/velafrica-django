@@ -23,4 +23,39 @@ section.teaser {
       }
     }
   }
+
+  .bicycle {
+    h1 {
+      text-align: center;
+      color: white;
+    }
+
+    .bicycle-submit {
+      display: flex;
+      justify-content: center;
+      padding-top: 3rem;
+
+      input.address {
+        height: 4.5rem;
+        border-radius: $vel-border-radius;
+        padding: 1rem;
+        font-size: 18px;
+        border-color: transparent;
+      }
+
+      a.bicycle-submit-button {
+        margin-left: 1rem;
+        padding: 1rem 1.5rem;
+        color: white;
+        font-size: 22px;
+        background-color: $velafrica;
+        border-radius: $vel-border-radius;
+        text-decoration: none;
+
+        &:hover {
+          background-color: $velafrica-hover;
+        }
+      }
+    }
+  }
 }

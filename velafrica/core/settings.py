@@ -85,6 +85,8 @@ INSTALLED_APPS = (
     'djangocms_link',
     # custom cms plugins
     'velafrica.cms_plugins.tracking_stations',
+    # TODO: 'djangocms_snippet', - security hazard?
+    'velafrica.cms_plugins.moneydonate',
     # custom apps
     'massadmin',
     'daterange_filter',
@@ -93,6 +95,7 @@ INSTALLED_APPS = (
     'import_export',
     'django_object_actions',
     'rest_framework',
+    'paypal.standard.ipn',
     # custom velafrica apps
     'velafrica.api',
     'velafrica.core',
@@ -191,21 +194,10 @@ WSGI_APPLICATION = 'velafrica.core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
+import dj_database_url
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    'default': dj_database_url.config()
 }
-if 'ON_HEROKU' in os.environ:
-    if int(os.environ['ON_HEROKU']) == 1:
-        # Parse database configuration from $DATABASE_URL
-        import dj_database_url
-        DATABASES['default'] =  dj_database_url.config()
-        # fasten up database access
-        # not working smoothly with free plan 
-        # DATABASES['default']['CONN_MAX_AGE'] = 500
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
@@ -299,3 +291,16 @@ ROLLBAR = {
 }
 if 'ROLLBAR_ACCESS_TOKEN' in os.environ:
     ROLLBAR['access_token'] = os.environ['ROLLBAR_ACCESS_TOKEN']
+
+if 'PAYPAL_TEST' in os.environ:
+    if os.environ['PAYPAL_TEST'] == 'True':
+        PAYPAL_TEST = True
+    else:
+        PAYPAL_TEST = False
+else:
+    PAYPAL_TEST = False
+
+if 'PAYPAL_RECEIVER_MAIL' in os.environ:
+    PAYPAL_RECEIVER_MAIL = os.environ['PAYPAL_RECEIVER_MAIL']
+else:
+    PAYPAL_RECEIVER_MAIL = ""

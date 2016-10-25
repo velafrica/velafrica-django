@@ -1,8 +1,10 @@
 {
   "name": "velafrica-django",
-  "scripts": {},
+  "scripts": {
+    "postdeploy": "echo \"from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'admin@example.com', 'pass')\" | python manage.py shell"
+  },
   "env": {
-    "ON_HEROKU": "1"
+    "DEBUG": "False"
   },
   "formation": {
     "web": {

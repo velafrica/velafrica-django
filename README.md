@@ -1,9 +1,22 @@
-# Info
+# tracking.velafrica.ch
+
+This project is an ERP (Enterprise resource planning) system for the people at Velafrica ( [http://velafrica.ch](http://velafrica.ch) ).
+It consists of different modules, all serving the purpose to manage specific processes and teams inside Velafrica.
+
+# Table of contents
+
+  * [Detailed description](#detailed-description)
+  * [Technology](#technology)
+  * [Learning resources](#learning-resources)
+  * [Recommended tools](#recommended-tools)
+  * [Setup](#setup)
+    * [Required software](#required-software)
+    * [Getting started](#getting-started)
+  * [Deployment](#deployment)
+
+## Detailed description
 
 `ch.velafrica.admin` can be looked at on [http://tracking.velafrica.ch](http://tracking.velafrica.ch) at the moment.
-
-This project is kind of an ERP (Enterprise resource planning) system for the people at Velafrica ( [http://velafrica.ch](http://velafrica.ch) ).
-It is consisting of different modules, all serving the purpose to manage specific processes and teams inside Velafrica.
 
 The modules are:
 
@@ -40,92 +53,112 @@ We recommend using [PyCharm by IntelliJ](https://www.jetbrains.com/pycharm/) (fu
 ## Required software
 
 - python (>2.7, <3.0)
+    - macOS: `brew install python`
+    - Windows: download installer from https://www.python.org/downloads/release/python-2712/
 - python-pip
 - virtualenv
-- sqlite3
-
-For help on how to get pip and virtualenv running on Windows, take a look at [this](http://pymote.readthedocs.io/en/latest/install/windows_virtualenv.html).
+    - Windows: http://pymote.readthedocs.io/en/latest/install/windows_virtualenv.html
+- postgresql (9.4)
+- node (5.5): https://nodejs.org/download/release/v5.5.0/
+- heroku toolbelt: https://devcenter.heroku.com/articles/heroku-command-line#download-and-install
 
 ## Getting started
-The 6 steps to get you started.
 
 ### 1. Setup virtualenv
+
 Virtualenv is here to provide an isolated environment for your app, with its own python runtime and python packages.
 Navigate into the project directory and type the following command:
 
-    virtualenv env
+```bash
+virtualenv venv
+```
 
-This creates a virtual environment in a newly created `env` folder, inside of your project directory.
+This creates a virtual environment in a newly created `venv` folder, inside of your project directory.
+
 ### 2. Activate virtualenv
 
 #### Windows
 
-    ./env/Scripts/activate
+```bash
+./venv/Scripts/activate
+```
 
 #### Linux / Mac
 
-    source env/bin/activate
+```bash
+source venv/bin/activate
+```
 
 ### 3. Install packages
 
-    pip install -r requirements.txt
+```bash
+pip install -r requirements.txt
+```
 
-### 4. Create database (apply migrations)
+### 4. Define the environment variables
+
+```bash
+cp .env_dist .env
+```
+
+And then fill in your database credentials (eg. username, password & database name) in `.env`
+
+### 5. Create database (apply migrations)
    
-    python manage.py migrate
+```bash
+heroku local:run python manage.py migrate
+```
 
-### 5. Start development server
+### 6. Start development server & livereload tools
 
-    python manage.py runserver
+```bash
+heroku local:start -f Procfile_dev
+```
 
-### 6. Enjoy
+### 7. Enjoy
 
-Take a look at the result on [http://localhost:8000/](http://localhost:8000/) :-)
+```bash
+open http://localhost:5000/
+```
 
-TODO: describe required env variables
+### (Optional)
 
-TODO: [make ready for prod deployment](https://docs.djangoproject.com/en/1.10/ref/django-admin/#cmdoption-check--deploy)
+```bash
+# Export database to file
+pg_dump -U <your-username> velafrica_dev > dbexport.pgsql
 
+# Import database form file
+psql -U <your-username> velafrica_dev < dbexport.pgsql
+```
 
------------------------------------------------------------------------------
+# Deployment
 
-# [deprecated]
-The following sections are outdated and need an update
+The instructions here are meant for a fresh deployment to heroku. For consecutive deployments, heroku and github are currently set up in a way that successful builds of the `master` branch trigger a deployment to heroku. The current configuration (`npm run postinstall` & the heroku release commands) make sure that the assets are being compiled and the schema migrations are applied.
 
-1. Install Postgres
-on ubuntu: https://help.ubuntu.com/community/PostgreSQL
-1.1. download and install
-sudo apt-get install postgresql postgresql-contrib
-ssudo apt-get install postgresql-client
-1.1.1. (optional) install pgadmin
-sudo apt-get install pgadmin3
-1.2. create user
-sudo -u postgres createuser --superuser $USER
-1.3. create database
-sudo -u postgres createdb $USER 
+```bash
+# Create a new heroku application
+heroku create <your-app-name> --region=eu
 
+# Add a postgresql database
+heroku addons:create heroku-postgresql:hobby-dev --app <your-app-name>
 
-# Getting started with Django on Heroku
-https://devcenter.heroku.com/articles/django-app-configuration#creating-a-new-django-project
+# Add rollbar to log errors in production
+heroku addons:create rollbar:free --app <your-app-name>
 
-# Database
-https://devcenter.heroku.com/articles/heroku-postgresql#local-setup
-DATABASE_URL: postgres://<username>:<password>@<host>/<dbname>
+# Set the debugging to false, to make sure we're not leaking information to the user in case of an error
+heroku config:set DEBUG=False --app <your-app-name>
 
-# Most helpful heroku toolkit cmds
-`heroku login` login to heroku
+# Make sure all the required buildpacks are defined and the order is the same.
+open https://dashboard.heroku.com/apps/<your-app-name>/settings
 
-`heroku config --app velafrica-admin` show all env variables
+1st buildpack: https://github.com/heroku/heroku-buildpack-addon-wait
+2nd buildpack: https://github.com/philippkueng/heroku-buildpack-sassc
+3rd buildpack: heroku/nodejs
+4th buildpack: heroku/python
 
-`heroku config:set ON_HEROKU=1 --app velafrica-admin` set ENV variable (necessary for choosing the right database)
+# The deploy the code for the first time.
+git push heroku master
 
-`heroku pg:psql --app velafrica-admin
-
-# Postgres command to reset currentt id
-    select id from auth_group order by id DESC LIMIT 1;
-     id 
-    ----
-     11
-    alter sequence auth_group_id_seq restart with 12;
-
- created by Platzh1rsch (www.platzh1rsch.ch)
+# (Optional) setup automatic deployments
+open https://dashboard.heroku.com/apps/<your-app-name>/deploy/github
+```
