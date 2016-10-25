@@ -1,0 +1,116 @@
+{% extends "public_site/base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+
+  <div class="header-wrap">
+
+    <header>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-6 left">
+
+            <a class="logo" href="/">
+              <img src="{% static "img/velafrica_logo_claim.svg" %}" alt="">
+            </a>
+
+          </div>
+          <div class="col-sm-6 navbar-right right">
+
+            <div class="dropdown">
+              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
+                      aria-haspopup="true" aria-expanded="false">
+                Spenden
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li><a href="#">Geldspende</a></li>
+                <li><a href="#">Velospende</a></li>
+                <li><a href="#">Patenschaft</a></li>
+                <li><a href="#">Geschenkidee</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="big-nav">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12">
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </header>
+
+  </div>
+
+  <main>
+    <div class="container-fluid">
+
+      <section class="teaser">
+
+        <div class="container">
+          <div class="content">
+            <div class="content-overlay">
+
+              <h1>Unsere Mission</h1>
+
+              <p>
+                Wir machen alte Velos flott und verschiffen sie nach Afrika. Hier geben wir erwerbslosen Frauen und
+                Männer eine Perspektive, dort erleichtern wir den Alltag, schaffen Arbeitsplätze und bilden
+                Mechanikerinnen und Mechaniker aus.
+              </p>
+
+              <a href="{{ link }}">{% trans "Erfahren Sie mehr" %}</a>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="container bicycle-search">
+          <div>
+            <h1>Velo abgeben</h1>
+          </div>
+
+          <div class="bicycle-submit">
+            <form>
+              <input class="address" type="text" placeholder="{% trans "Adresse / PLZ eingeben" %}">
+              <a href="#sammelstelle?=xyz" type="submit"
+                 class="bicycle-submit-button">{% trans "Sammelstelle suchen" %}</a>
+            </form>
+          </div>
+        </div>
+
+      </section>
+
+      <section>
+        <div class="bycicle">
+
+          <h1>170'204</h1>
+          <h3>Velos sind schon in Afrika angekommen!</h3>
+          <a href="#erfahren-sie-mehr">{% trans "Erfahren Sie mehr" %}</a>
+          <img src="{% static "img/frau_kind.png" %}" alt="">
+          <h3>Wo befindet sich meines?</h3>
+
+          <div class="bicycle-tracking">
+            <form>
+              <input class="address" type="text" placeholder="{% trans "Tracking-Code eingeben" %}">
+              <a href="#sammelstelle?=xyz" type="submit"
+                 class="bicycle-submit-button">{% trans "Aktuellen Standort abfragen" %}</a>
+            </form>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  {% include "public_site/partials/socialwall_with_limited_height.html" %}
+  
+{% endblock %}
+

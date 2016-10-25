@@ -41,10 +41,18 @@ INTERNAL_IPS = (
 # TODO: define for production
 ALLOWED_HOSTS = ['*']
 
+LANGUAGES_CODE = 'de-ch'
+
 LANGUAGES = [
-    ('de', 'Deutsch')
+    ('de', 'Deutsch'),
+    ('en', 'English'),
 ]
 
+
+
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, "velafrica/frontend/locale"),
+)
 
 # Application definition
 INSTALLED_APPS = (
@@ -76,7 +84,6 @@ INSTALLED_APPS = (
     'taggit_autosuggest',
     'meta',
     'djangocms_blog',
-    # TODO: 'reversion', - do we need this?
     # django cms plugins
     'djangocms_file',
     'djangocms_inherit',
@@ -84,7 +91,10 @@ INSTALLED_APPS = (
     'djangocms_teaser',
     'djangocms_video',
     'djangocms_link',
+    # custom cms plugins
+    'velafrica.cms_plugins.tracking_stations',
     # TODO: 'djangocms_snippet', - security hazard?
+    'velafrica.cms_plugins.moneydonate',
     # custom apps
     'massadmin',
     'daterange_filter',
@@ -93,6 +103,7 @@ INSTALLED_APPS = (
     'import_export',
     'django_object_actions',
     'rest_framework',
+    'paypal.standard.ipn',
     # custom velafrica apps
     'velafrica.api',
     'velafrica.core',
@@ -288,3 +299,16 @@ ROLLBAR = {
 }
 if 'ROLLBAR_ACCESS_TOKEN' in os.environ:
     ROLLBAR['access_token'] = os.environ['ROLLBAR_ACCESS_TOKEN']
+
+if 'PAYPAL_TEST' in os.environ:
+    if os.environ['PAYPAL_TEST'] == 'True':
+        PAYPAL_TEST = True
+    else:
+        PAYPAL_TEST = False
+else:
+    PAYPAL_TEST = False
+
+if 'PAYPAL_RECEIVER_MAIL' in os.environ:
+    PAYPAL_RECEIVER_MAIL = os.environ['PAYPAL_RECEIVER_MAIL']
+else:
+    PAYPAL_RECEIVER_MAIL = ""

@@ -1,0 +1,29 @@
+<section id="tracking-stations-{{ instance.id }}">
+    <div class="container-fluid">
+        <div class="row tracking-stations-header">
+            <div class="col-sm-12 text-center">
+                <h4>Aktuelle Anzahl Velos:</h4>
+            </div>
+            <ul>
+                {% for query in queries %}
+                    <li class="col-sm-2">
+                        <div data-title="{{ query.label }}">
+                            <a href="#" >
+                                {{ query.get_count }}
+                            </a>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</section>
+{% for query in queries %}
+    <br><br><br>
+    name: {{ query.label }}<br/>
+    count: {{ query.get_count }}<br>
+    {{ query.event_types.all.count }}
+    {% for et in query.event_types.all %}
+        {{ et }}<br>
+    {% endfor %}
+{% endfor %}

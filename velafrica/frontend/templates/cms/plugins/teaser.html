@@ -1,5 +1,5 @@
 {% load i18n %}
-<section class="teaser" {% if object.image %}style="background:url({{ object.image.url }}) center/cover;"{% endif %}>
+<section class="teaser" {% if object.image %}style="background:url({{ object.image.url }}) center/cover"{% endif %}>
 
   <div class="container">
     <div class="content">
@@ -16,6 +16,19 @@
         {% if link %}<a href="{{ link }}">{% trans "more" %} &#187;</a>{% endif %}
 
       </div>
+    </div>
+  </div>
+
+  <div class="container bicycle-search">
+    <div>
+      <h1>Velo abgeben</h1>
+    </div>
+
+    <div class="bicycle-submit">
+      <form>
+        <input class="address" type="text" placeholder="Adresse / PLZ eingeben">
+        <a href="#sammelstelle?=xyz" type="submit" class="bicycle-submit-button">Sammelstelle suchen</a>
+      </form>
     </div>
   </div>
 
