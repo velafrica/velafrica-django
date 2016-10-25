@@ -121,13 +121,11 @@ heroku local:start -f Procfile_dev
 open http://localhost:5000/
 ```
 
-TODO: [make ready for prod deployment](https://docs.djangoproject.com/en/1.10/ref/django-admin/#cmdoption-check--deploy)
-
 # Deployment
 
 The instructions here are meant for a fresh deployment to heroku. For consecutive deployments, heroku and github are currently set up in a way that successful builds of the `master` branch trigger a deployment to heroku. The current configuration (`npm run postinstall` & the heroku release commands) make sure that the assets are being compiled and the schema migrations are applied.
 
-```
+```bash
 # Create a new heroku application
 heroku create <your-app-name> --region=eu
 
