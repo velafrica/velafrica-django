@@ -58,8 +58,8 @@
                 id="md-amount-{{ amount.id }}-tab">
               <a href="#md-amount-{{ amount.id }}-content"
                  aria-controls="md-amount-{{ amount.id }}-content" role="tab" data-toggle="tab"
-                 data-amount="{{ amount.amount }}">
-                {{ amount.amount }}
+                 data-amount="{{ amount.amount|floatformat }}">
+                {{ amount.amount|floatformat }}
               </a>
             </li>
           {% endfor %}
