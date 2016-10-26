@@ -113,6 +113,7 @@ INSTALLED_APPS = (
     'velafrica.download',
     'velafrica.frontend',
     'velafrica.organisation',
+    'velafrica.public_site',
     'velafrica.stock',
     'velafrica.sbbtracking',
     #'velafrica.translation'

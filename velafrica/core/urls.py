@@ -66,7 +66,8 @@ urlpatterns = [
     url(r'^socialwall$', velafrica_public_site_views.render_template, name='home'),
     url(r'^tracking$', velafrica_public_site_views.render_template, name='home'),
     url(r'^my-tracking$', velafrica_public_site_views.render_template, name='home'),
-    url(r'^donation$', velafrica_public_site_views.render_template, name='home'),
+    url(r'^donation$', velafrica_public_site_views.render_donation_template, name='donation'),
+    url(r'^donation/order-invoice$', velafrica_public_site_views.order_invoice, name='orderinvoice'),
     url(r'^collection-point$', velafrica_public_site_views.render_template, name='home'),
 
     url(r'^api/', include('velafrica.api.urls', namespace="api")),
