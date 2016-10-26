@@ -1,6 +1,142 @@
 {% extends "public_site/base.html" %}
 {% load i18n %}
+{% load sekizai_tags %}
+{% addtoblock "js" %}
+  <script>
+    function changeAmount(amount) {
+        $('#id_amount').val(amount)
+        $('#id_donation_amount').val(amount)
+    }
+
+    function emptyAndReadOnly() {
+        var checkbox = $(this);
+        var donation_amount = $('#id_donation_amount');
+        if(checkbox.is(':checked')) {
+            donation_amount.val(0);
+            donation_amount.attr('readonly', true);
+
+        } else {
+            donation_amount.attr('readonly', false);
+            donation_amount.val($('#md-amounts-tabs li.active a').data('amount'));
+        }
+    }
+
+    $(document).ready(function() {
+        $('#md-amounts-tabs a').click(function(e) {
+            var amount = $(this).data('amount');
+            changeAmount(amount)
+        });
+        changeAmount($('#md-amounts-tabs a:first').data('amount'));
+        $('#id_empty_invoice').change(emptyAndReadOnly);
+        $('#id_cancel_return').val('{{ request.build_absolute_uri }}');
+        $('#id_invoice_redirect_url').val('{{ instance.return_url }}');
+    })
+  </script>
+{% endaddtoblock %}
 
 {% block content %}
-  <h1>donation</h1>
+  <section id="donation" class="container-fluid">
+    <div class="md-header row">
+      <h1 class="md-header-title col-sm-12 text-center">
+        {% trans "Ihre Spende bewegt" %}
+      </h1>
+      <h3 class="md-header-subtitle col-sm-12 text-center">
+        {% trans "Mit Ihrer Spende helfen Sie, dass Menschen im Leben vorwörts kommen. Vielen Dank für Ihre Unterstützung" %}
+      </h3>
+    </div>
+    <div class="md-donate row">
+      <h2 class="md-donate-heading col-sm-12 text-center">
+        {% trans "Individuelle Spende" %}
+      </h2>
+      <div class="md-amounts col-sm-12">
+        <h2 class="md-amounts-heading text-center">
+          {% trans "Spendenbetrag CHF" %}
+        </h2>
+        <ul class="nav nav-tabs" id="md-amounts-tabs" role="tablist">
+          {% for amount in amounts %}
+            <li role="presentation" class="md-amount-tab {% if forloop.first %}active{% endif %}"
+                id="md-amount-{{ amount.id }}-tab">
+              <a href="#md-amount-{{ amount.id }}-content"
+                 aria-controls="md-amount-{{ amount.id }}-content" role="tab" data-toggle="tab"
+                 data-amount="{{ amount.amount }}">
+                {{ amount.amount }}
+              </a>
+            </li>
+          {% endfor %}
+          <li role="presentation">
+            <input type="text">
+          </li>
+        </ul>
+        <div class="tab-content md-amount-content">
+          {% for amount in amounts %}
+            <div class="tab-pane {% if forloop.first %}active{% endif %}"
+                 id="md-amount-{{ amount.id }}-content">
+              <p>{{ amount.description }}</p>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="md-paymentoptions">
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="md-paypal active">
+            <a href="#md-paypal" aria-controls="md-paypal" role="tab"
+               data-toggle="tab">{% trans "PayPal" %}</a>
+          </li>
+          <li role="presentation" class="md-onba">
+            <a href="#md-onba" aria-controls="md-onba" role="tab"
+               data-toggle="tab">{% trans "E-Banking" %}</a>
+          </li>
+          <li role="presentation" class="md-invoice">
+            <a href="#md-invoice" aria-controls="md-invoice" role="tab"
+               data-toggle="tab">{% trans "Einzahlungsschein" %}</a>
+          </li>
+        </ul>
+        <div class="tab-content md-payment-content">
+          <div class="tab-pane active" id="md-paypal">
+            {{ paypalform.render }}
+          </div>
+          <div class="tab-pane" id="md-onba">
+            meep1.
+          </div>
+          <div class="tab-pane" id="md-invoice">
+            <form action="{% url 'orderinvoice' %}" method="POST">
+              {% csrf_token %}
+              {{ invoiceform.as_p }}
+              <input type="submit">
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="md-footprint container">
+      <div class="row text-center">
+        <h2 class="col-sm-12">{% trans "CO2-Footprint kompensieren" %}</h2>
+        <p class="col-sm-12">
+          {% trans "Sie möchten Ihren CO2-Footprint kompensieren und gleichzeitig Velafrica unterstützen? Dank der Zusammenarbeit mit South Pole Carbon geht das ganz einfach: Im Webshop mit dem CO2-Rechner den individuellen Ausstoss berechnen und als Kompensations-Projekt 'Bicycles for Africa' wählen." %}
+        </p>
+        <a href="" class="col-sm-12">Zu South Pole Carbon</a>
+      </div>
+    </div>
+    <div class="md-more container">
+      <h1 class="row text-center">{% trans "Weitere Spendenarten" %}</h1>
+      <div class="row">
+        <div class="col-sm-4">
+          <h3>{% trans "Velospende" %}</h3>
+          <p>{% trans "Spenden Sie sicher, schnell und unkompliziert online via PayPal" %}</p>
+          <a href="">{% trans "Mehr erfahren" %}</a>
+        </div>
+        <div class="col-sm-4">
+          <h3>{% trans "Patenschaft" %}</h3>
+          <p>{% trans "Spenden Sie sicher, schnell und unkompliziert online via PayPal" %}</p>
+          <a href="">{% trans "Mehr erfahren" %}</a>
+        </div>
+        <div class="col-sm-4">
+          <h3>{% trans "Geschenkideen" %}</h3>
+          <p>{% trans "Spenden Sie sicher, schnell und unkompliziert online via PayPal" %}</p>
+          <a href="">{% trans "Mehr erfahren" %}</a>
+        </div>
+      </div>
+    </div>
+  </section>
 {% endblock %}
