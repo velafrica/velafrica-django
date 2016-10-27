@@ -1,5 +1,6 @@
 {% load i18n %}
 {% load static %}
+{% load sekizai_tags %}
 
 <html lang="{{ LANGUAGE_CODE }}">
 <head>
@@ -13,6 +14,6 @@
 
   <script src="{% static "js/jquery-2.2.0.min.js" %}"></script>
   <script src="{% static "bootstrap-3.3.6-dist/js/bootstrap.min.js" %}"></script>
-
+  {% render_block "js" %}
 </body>
 </html>
