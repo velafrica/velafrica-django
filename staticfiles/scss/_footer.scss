@@ -1,11 +1,3 @@
 footer {
-  .container {
-    display: flex;
-    width: $footer-width;
-
-    & > section {
-      flex: 1 1 33%;
-      background-color: red;
-    }
-  }
+  background-color: $velafrica-brown-3;
 }
