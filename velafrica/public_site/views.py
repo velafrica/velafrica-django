@@ -26,9 +26,9 @@ def render_donation_template(request):
         "currency_code": "CHF",
         "item_name": "Velafrica Donation",
         "invoice": "unique-invoice-id",
-        "notify_url": "https://velafrica-staging-pr-21.herokuapp.com" + reverse('paypal-ipn'),
-        "return_url": '',  # TODO: return url
-        "cancel_return": "",
+        "notify_url": request.build_absolute_uri(reverse('paypal-ipn')),
+        "return_url":  request.build_absolute_uri(reverse('home:donation:thank_you')),
+        "cancel_return": request.build_absolute_uri(),
         "rm": "1",
         "custom": "Upgrade all users!",  # Custom command to correlate to some function later (optional)
     }
@@ -49,3 +49,7 @@ def order_invoice(request):
         if form.is_valid():
             form.save()
             return redirect(form.cleaned_data['invoice_redirect_url'])
+
+
+def thank_you(request):
+    template_name = ''
