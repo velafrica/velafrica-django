@@ -6,8 +6,8 @@
   {% addtoblock "js" %}
     <script>
       function changeAmount(amount) {
-        $('#id_amount').val(amount)
-        $('#id_donation_amount').val(amount)
+        $('#id_amount').val(amount);
+        $('#id_donation_amount').val(amount);
       }
 
       function emptyAndReadOnly() {
@@ -24,11 +24,16 @@
       }
 
       $(document).ready(function() {
-        $('#md-amounts-tabs a').click(function(e) {
-          var amount = $(this).data('amount');
-          changeAmount(amount)
+        $('#custom-amount').change(function(e) {
+          var customAmount = $(this);
+          customAmount.closest('.md-amount-panel').data('amount', customAmount.val());
+          changeAmount(customAmount.val());
         });
-        changeAmount($('#md-amounts-tabs a:first').data('amount'));
+        $('.md-amount-panel').click(function(e) {
+          var amountPanel = $(this);
+          changeAmount(amountPanel.data('amount'));
+        });
+        changeAmount({{ amounts.first.amount }});
         $('#id_empty_invoice').change(emptyAndReadOnly);
         $('#id_invoice_redirect_url').val('{% url "home:donation:thank_you" %}');
       })
@@ -43,39 +48,65 @@
         {% trans "Mit Ihrer Spende helfen Sie, dass Menschen im Leben vorwörts kommen. Vielen Dank für Ihre Unterstützung" %}
       </h3>
     </div>
-    <div class="md-donate row">
+    <div class="md-donate">
       <h2 class="md-donate-heading col-sm-12 text-center">
         {% trans "Individuelle Spende" %}
       </h2>
-      <div class="md-amounts col-sm-12">
-        <h2 class="md-amounts-heading text-center">
+      <div class="md-amounts row">
+        <h2 class="md-amounts-heading col-sm-12 text-center">
           {% trans "Spendenbetrag CHF" %}
         </h2>
-        <ul class="nav nav-tabs" id="md-amounts-tabs" role="tablist">
+        <div class="md-amounts-panels container">
           {% for amount in amounts %}
-            <li role="presentation" class="md-amount-tab {% if forloop.first %}active{% endif %}"
-                id="md-amount-{{ amount.id }}-tab">
-              <a href="#md-amount-{{ amount.id }}-content"
-                 aria-controls="md-amount-{{ amount.id }}-content" role="tab" data-toggle="tab"
-                 data-amount="{{ amount.amount|floatformat }}">
-                {{ amount.amount|floatformat }}
-              </a>
-            </li>
-          {% endfor %}
-          <li role="presentation">
-            <input type="text">
-          </li>
-        </ul>
-        <div class="tab-content md-amount-content">
-          {% for amount in amounts %}
-            <div class="tab-pane {% if forloop.first %}active{% endif %}"
-                 id="md-amount-{{ amount.id }}-content">
-              <p>{{ amount.description }}</p>
+            <div class="md-amount-panel col-sm-4 {% cycle 'col-sm-offset-2' '' %} {% if forloop.first %}active{% endif %}" data-amount="{{ amount.amount|floatformat }}">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h3 class="panel-title text-center">CHF {{ amount.amount|floatformat }}</h3>
+                </div>
+                <div class="panel-body text-center">
+                  <p>{{ amount.description }}</p>
+                </div>
+              </div>
             </div>
           {% endfor %}
+            <div class="md-amount-panel col-sm-4">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h3 class="panel-title text-center">{% trans "Ihr Betrag" %}</h3>
+                </div>
+                <div class="panel-body text-center">
+                  <p>
+                    CHF <input id="custom-amount" type="number">
+                  </p>
+                </div>
+              </div>
+            </div>
         </div>
+{#        <ul class="nav nav-tabs" id="md-amounts-tabs" role="tablist">#}
+{#          {% for amount in amounts %}#}
+{#            <li role="presentation" class="md-amount-tab {% if forloop.first %}active{% endif %}"#}
+{#                id="md-amount-{{ amount.id }}-tab">#}
+{#              <a href="#md-amount-{{ amount.id }}-content"#}
+{#                 aria-controls="md-amount-{{ amount.id }}-content" role="tab" data-toggle="tab"#}
+{#                 data-amount="{{ amount.amount|floatformat }}">#}
+{#                {{ amount.amount|floatformat }}#}
+{#              </a>#}
+{#            </li>#}
+{#          {% endfor %}#}
+{#          <li role="presentation">#}
+{#            <input type="text">#}
+{#          </li>#}
+{#        </ul>#}
+{#        <div class="tab-content md-amount-content">#}
+{#          {% for amount in amounts %}#}
+{#            <div class="tab-pane {% if forloop.first %}active{% endif %}"#}
+{#                 id="md-amount-{{ amount.id }}-content">#}
+{#              <p>{{ amount.description }}</p>#}
+{#            </div>#}
+{#          {% endfor %}#}
+{#        </div>#}
       </div>
-      <div class="md-paymentoptions">
+      <div class="md-paymentoptions row">
         <ul class="nav nav-tabs" role="tablist">
           <li role="presentation" class="md-paypal active">
             <a href="#md-paypal" aria-controls="md-paypal" role="tab"
@@ -103,22 +134,19 @@
               {{ invoiceform.as_p }}
               <input type="submit">
             </form>
-
           </div>
         </div>
       </div>
     </div>
-    <div class="md-footprint container">
-      <div class="row text-center">
-        <h2 class="col-sm-12">{% trans "CO2-Footprint kompensieren" %}</h2>
-        <p class="col-sm-12">
-          {% trans "Sie möchten Ihren CO2-Footprint kompensieren und gleichzeitig Velafrica unterstützen? Dank der Zusammenarbeit mit South Pole Carbon geht das ganz einfach: Im Webshop mit dem CO2-Rechner den individuellen Ausstoss berechnen und als Kompensations-Projekt 'Bicycles for Africa' wählen." %}
-        </p>
-        <a href="" class="col-sm-12">Zu South Pole Carbon</a>
-      </div>
+    <div class="md-footprint row text-center">
+      <h2 class="col-sm-12">{% trans "CO2-Footprint kompensieren" %}</h2>
+      <p class="col-sm-12">
+        {% trans "Sie möchten Ihren CO2-Footprint kompensieren und gleichzeitig Velafrica unterstützen? Dank der Zusammenarbeit mit South Pole Carbon geht das ganz einfach: Im Webshop mit dem CO2-Rechner den individuellen Ausstoss berechnen und als Kompensations-Projekt 'Bicycles for Africa' wählen." %}
+      </p>
+      <a href="" class="col-sm-12">Zu South Pole Carbon</a>
     </div>
-    <div class="md-more container">
-      <h1 class="row text-center">{% trans "Weitere Spendenarten" %}</h1>
+    <div class="md-more row">
+      <h1 class="col-sm-12 text-center">{% trans "Weitere Spendenarten" %}</h1>
       <div class="row">
         <div class="col-sm-4">
           <h3>{% trans "Velospende" %}</h3>
