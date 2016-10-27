@@ -1,40 +1,39 @@
 {% extends "public_site/base.html" %}
 {% load i18n %}
 {% load sekizai_tags %}
-{% addtoblock "js" %}
-  <script>
-    function changeAmount(amount) {
+
+{% block content %}
+  {% addtoblock "js" %}
+    <script>
+      function changeAmount(amount) {
         $('#id_amount').val(amount)
         $('#id_donation_amount').val(amount)
-    }
+      }
 
-    function emptyAndReadOnly() {
+      function emptyAndReadOnly() {
         var checkbox = $(this);
         var donation_amount = $('#id_donation_amount');
         if(checkbox.is(':checked')) {
-            donation_amount.val(0);
-            donation_amount.attr('readonly', true);
+          donation_amount.val(0);
+          donation_amount.attr('readonly', true);
 
         } else {
-            donation_amount.attr('readonly', false);
-            donation_amount.val($('#md-amounts-tabs li.active a').data('amount'));
+          donation_amount.attr('readonly', false);
+          donation_amount.val($('#md-amounts-tabs li.active a').data('amount'));
         }
-    }
+      }
 
-    $(document).ready(function() {
+      $(document).ready(function() {
         $('#md-amounts-tabs a').click(function(e) {
-            var amount = $(this).data('amount');
-            changeAmount(amount)
+          var amount = $(this).data('amount');
+          changeAmount(amount)
         });
         changeAmount($('#md-amounts-tabs a:first').data('amount'));
         $('#id_empty_invoice').change(emptyAndReadOnly);
-        $('#id_cancel_return').val('{{ request.build_absolute_uri }}');
-        $('#id_invoice_redirect_url').val('{{ instance.return_url }}');
-    })
-  </script>
-{% endaddtoblock %}
-
-{% block content %}
+        $('#id_invoice_redirect_url').val('{% url "home:donation:thank_you" %}');
+      })
+    </script>
+  {% endaddtoblock %}
   <section id="donation" class="container-fluid">
     <div class="md-header row">
       <h1 class="md-header-title col-sm-12 text-center">
@@ -99,7 +98,7 @@
             meep1.
           </div>
           <div class="tab-pane" id="md-invoice">
-            <form action="{% url 'orderinvoice' %}" method="POST">
+            <form action="{% url "home:donation:order_invoice" %}" method="POST">
               {% csrf_token %}
               {{ invoiceform.as_p }}
               <input type="submit">
