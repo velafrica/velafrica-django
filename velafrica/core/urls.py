@@ -62,11 +62,10 @@ autocomplete = [
 
 urlpatterns = [
     # urls for the public pages
-    url(r'^$', velafrica_public_site_views.render_template, name='home'),
+    url(r'^', include('velafrica.public_site.urls', namespace='home')),
     url(r'^socialwall$', velafrica_public_site_views.render_template, name='home'),
     url(r'^tracking$', velafrica_public_site_views.render_template, name='home'),
     url(r'^my-tracking$', velafrica_public_site_views.render_template, name='home'),
-    url(r'^donation$', velafrica_public_site_views.render_template, name='home'),
     url(r'^collection-point$', velafrica_public_site_views.render_template, name='home'),
     url(r'^collection-event$', velafrica_public_site_views.render_template, name='home'),
 
@@ -105,7 +104,6 @@ urlpatterns = [
     url(r'^admin/', include("massadmin.urls")),
     url(r'^taggit_autosuggest/', include('taggit_autosuggest.urls')),
     url(r'^paypal/', include('paypal.standard.ipn.urls')),
-    url(r'^donations/', include('velafrica.cms_plugins.moneydonate.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += i18n_patterns(url(r'^pages/', include('cms.urls'), name="cms"))
