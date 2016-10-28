@@ -3,21 +3,54 @@
 {% load i18n %}
 
 {% block content %}
-  <div id="map"></div>
-
+  <section class="map">
+    <div id="map"></div>
+    <div class="searchfield">
+      <input type="text">
+      <button>{% trans "Suchen" %}</button>
+    </div>
+  </section>
   {% addtoblock "js" %}
     <script>
-      var map;
+      var VAM = {
+        map: {
+          instance: {},
+          marker: {},
+          addMarker: function(options) {
+            var marker = new google.maps.Marker({
+              map: VAM.map.instance,
+              title: options.title,
+              position: { lat: options.lat, lng: options.lng }
+            });
+          }
+        },
+        objects: {},
+        initMap: function() {
+            this.map.instance = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 46.798473, lng: 8.231726 },
+            zoom: 8
+          });
+          this.getMapData();
+        },
+        getMapData: function() {
+          $.getJSON('{{ map_data_url }}', function(data) {
+            $.each(data, function(index, value) {
+              VAM.objects[value.id] = value;
+              options = {
+                title: value.name,
+                lat: Number(value.address.latitude),
+                lng: Number(value.address.longitude)
+              };
+              VAM.map.addMarker(options);
+            });
+          })
+        }
+      };
 
-      function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: 46.798473, lng: 8.231726 },
-          zoom: 8
-        })
-      }
+
     </script>
     <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key={{ api_key }}&callback=initMap">
+        src="https://maps.googleapis.com/maps/api/js?key={{ api_key }}&callback=VAM.initMap">
     </script>
   {% endaddtoblock %}
 
