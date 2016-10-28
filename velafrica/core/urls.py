@@ -67,6 +67,7 @@ urlpatterns = [
     url(r'^tracking$', velafrica_public_site_views.render_template, name='home'),
     url(r'^my-tracking$', velafrica_public_site_views.render_template, name='home'),
     url(r'^collection-point$', velafrica_public_site_views.render_template, name='home'),
+    url(r'^collection-event$', velafrica_public_site_views.render_template, name='home'),
 
     url(r'^api/', include('velafrica.api.urls', namespace="api")),
 
