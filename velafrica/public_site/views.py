@@ -17,6 +17,11 @@ def render_template(request):
     }, context_instance=RequestContext(request))
 
 
+def render_map_template(request):
+    template_name = 'public_site/map.html'
+    return render_to_response(template_name, { 'nofooter': True}, context_instance=RequestContext(request))
+
+
 def render_donation_template(request):
     template_name = 'public_site/donation.html'
     donation_amounts = DonationAmount.objects.filter(is_active=True).order_by('amount')
