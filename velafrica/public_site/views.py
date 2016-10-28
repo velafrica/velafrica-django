@@ -3,7 +3,7 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext
 from paypal.standard.forms import PayPalPaymentsForm
-from velafrica.core.settings import PAYPAL_RECEIVER_MAIL
+from velafrica.core.settings import PAYPAL_RECEIVER_MAIL, GMAP_API_KEY
 from .forms import InvoiceForm
 from .models import DonationAmount
 
@@ -19,7 +19,7 @@ def render_template(request):
 
 def render_map_template(request):
     template_name = 'public_site/map.html'
-    return render_to_response(template_name, { 'nofooter': True}, context_instance=RequestContext(request))
+    return render_to_response(template_name, { 'nofooter': True, 'api_key': GMAP_API_KEY}, context_instance=RequestContext(request))
 
 
 def render_donation_template(request):
