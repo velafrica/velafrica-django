@@ -1,3 +1,8 @@
 section#donation {
+  .md-amount-panel.active {
+    & .panel-heading {
+      background-color: orange;
 
+    }
+  }
 }
