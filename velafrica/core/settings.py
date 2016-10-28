@@ -313,3 +313,8 @@ if 'PAYPAL_RECEIVER_MAIL' in os.environ:
     PAYPAL_RECEIVER_MAIL = os.environ['PAYPAL_RECEIVER_MAIL']
 else:
     PAYPAL_RECEIVER_MAIL = ""
+
+if 'GMAP_API_KEY' in os.environ:
+    GMAP_API_KEY = os.environ['GMAP_API_KEY']
+else:
+    GMAP_API_KEY = ''
