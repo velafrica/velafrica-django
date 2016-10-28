@@ -52,4 +52,5 @@ def order_invoice(request):
 
 
 def thank_you(request):
-    template_name = ''
+    template_name = 'public_site/donation-thank-you.html'
+    return render_to_response(template_name, {}, context_instance=RequestContext(request))
