@@ -92,7 +92,7 @@ velafrica_sud = [
 ]
 
 public = [
-    url(r'^dropoffs/$', views_public.get_dropoffs, name="public_dropoffs")
+    url(r'^dropoffs/$', views_public.get_dropoffs, name="dropoffs")
 ]
 
 # where it all comes together
