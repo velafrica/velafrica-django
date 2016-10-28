@@ -32,6 +32,8 @@
         $('.md-amount-panel').click(function(e) {
           var amountPanel = $(this);
           changeAmount(amountPanel.data('amount'));
+          $('.md-amount-panel.active').removeClass('active');
+          amountPanel.addClass('active');
         });
         changeAmount({{ amounts.first.amount }});
         $('#id_empty_invoice').change(emptyAndReadOnly);
