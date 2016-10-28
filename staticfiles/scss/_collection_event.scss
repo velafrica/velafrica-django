@@ -1,0 +1,19 @@
+section.collection-event {
+  .events {
+    & > .first-event {
+      //background: url(../../velafrica/frontend/static/img/home_teaser.jpg);
+      background: url(http://placehold.it/300) center/cover;
+      min-height: 300px;
+    }
+
+    & > .second-event {
+      background: url(http://placehold.it/300) center/cover;
+      min-height: 300px;
+    }
+
+    & > .third-event {
+      background: url(http://placehold.it/300) center/cover;
+      min-height: 300px;
+    }
+  }
+}
