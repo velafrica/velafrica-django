@@ -4,4 +4,22 @@
 
 {% block content %}
   <div id="map"></div>
+
+  {% addtoblock "js" %}
+    <script>
+      var map;
+
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 46.798473, lng: 8.231726 },
+          zoom: 8
+        })
+      }
+    </script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key={{ api_key }}&callback=initMap">
+    </script>
+  {% endaddtoblock %}
+
 {% endblock %}
+
