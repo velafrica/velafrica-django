@@ -16,12 +16,41 @@
         map: {
           instance: {},
           marker: {},
+          openedInfoWindow: undefined,
           addMarker: function(options) {
             var marker = new google.maps.Marker({
               map: VAM.map.instance,
               title: options.title,
               position: { lat: options.lat, lng: options.lng }
             });
+
+
+            var content = options.content;
+            var infoWindow = new google.maps.InfoWindow();
+
+            google.maps.event.addListener(marker, 'click', (function(marker, content, infowindow) {
+
+              return function() {
+                if(VAM.map.openedInfoWindow !== undefined) {
+                VAM.map.openedInfoWindow.close();
+              }
+              VAM.map.openedInfoWindow = infowindow;
+                 infowindow.setContent(content);
+                 infowindow.open(VAM.map.instance,marker);
+              };
+            })(marker, content, infoWindow));
+            /*
+            marker.content = ;
+            infoWindow = new google.maps.InfoWindow({
+              content: marker.content
+            });
+             marker.addListener('click', function() {
+             if(VAM.map.openedInfoWindow !== undefined) {
+             VAM.map.openedInfoWindow.close();
+             }
+             infoWindow.open(VAM.map.instance, marker);
+             VAM.map.openedInfoWindow = infoWindow;
+             })*/
           }
         },
         objects: {},
@@ -39,8 +68,13 @@
               options = {
                 title: value.name,
                 lat: Number(value.address.latitude),
-                lng: Number(value.address.longitude)
+                lng: Number(value.address.longitude),
+                content: '',
               };
+
+              var content = '<h3>' + value.name + '</h3>' +
+                        '<p>' + value.opening_time + '</p>';
+              options.content = content;
               VAM.map.addMarker(options);
             });
           })
