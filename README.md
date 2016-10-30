@@ -112,13 +112,19 @@ And then fill in your database credentials (eg. username, password & database na
 heroku local:run python manage.py migrate
 ```
 
-### 6. Start development server & livereload tools
+### 6. Compile the translation files
+
+```bash
+python manage.py compilemessages
+```
+
+### 7. Start development server & livereload tools
 
 ```bash
 heroku local:start -f Procfile_dev
 ```
 
-### 7. Enjoy
+### 8. Enjoy
 
 ```bash
 open http://localhost:5000/
@@ -132,6 +138,13 @@ pg_dump -U <your-username> velafrica_dev > dbexport.pgsql
 
 # Import database form file
 psql -U <your-username> velafrica_dev < dbexport.pgsql
+
+# Extract translations from the templates & code into a .po file
+python manage.py makemessages -a \
+-i node_modules \
+-i staticfiles \
+-i tmp \
+-i venv
 ```
 
 # Deployment
