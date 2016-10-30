@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 
-echo "this is the post_compile hook being executed"
+echo "Compiling the .po files to .mo files"
+python manage.py compilemessages
