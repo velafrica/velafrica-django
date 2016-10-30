@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
 echo "Compiling the .po files to .mo files"
+export PATH=$PATH:/app/.heroku/gettext/bin/usr/local/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/app/.heroku/gettext/bin/usr/local/lib
 echo $PATH
 ls -la /app/.heroku/
 ls -la /app/.heroku/gettext/bin/usr/local/bin/
