@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
 
 echo "Compiling the .po files to .mo files"
+echo $PATH
+ls -la /app/.heroku/
+ls -la /app/.heroku/gettext/bin/usr/local/bin/
 python manage.py compilemessages
