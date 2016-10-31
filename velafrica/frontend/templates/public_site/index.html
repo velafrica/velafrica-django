@@ -9,13 +9,13 @@
 
       <section class="teaser">
 
-        <div class="container">
-          <div class="content">
-            <div class="content-overlay">
+        <div class="container mission">
+          <div class="row">
+            <div class="col-lg-6">
 
               <h1>{% trans "Unsere Mission" %}</h1>
 
-              <p>
+              <p class="lead">
                 {% trans "Wir machen alte Velos flott und verschiffen sie nach Afrika. Hier geben wir erwerbslosen Frauen und Männer eine Perspektive, dort erleichtern wir den Alltag, schaffen Arbeitsplätze und bilden Mechanikerinnen und Mechaniker aus." %}
               </p>
 
@@ -26,16 +26,22 @@
         </div>
 
         <div class="container bicycle-search">
-          <div>
-            <h1>{% trans "Velo abgeben" %}</h1>
-          </div>
+          <div class="row">
+            <div class="col-lg-6">
 
-          <div class="bicycle-submit">
-            <form>
-              <input class="address" type="text" placeholder="{% trans "Adresse / PLZ eingeben" %}">
-              <a href="#sammelstelle?=xyz" type="submit"
-                 class="bicycle-submit-button">{% trans "Sammelstelle suchen" %}</a>
-            </form>
+              <h2>{% trans "Velo abgeben:" %}</h2>
+
+              <div class="bicycle-submit">
+                <form>
+                  <input class="address" type="text" placeholder="{% trans "PLZ eingeben" %}">
+                  <a href="#sammelstelle?=xyz" type="submit"
+                     class="bicycle-submit-button">{% trans "Sammelstelle suchen" %}</a>
+                </form>
+              </div>
+
+              <a href="#">{% trans "Samellanlass organisieren" %}</a>
+
+            </div>
           </div>
         </div>
 
@@ -44,7 +50,7 @@
       <section>
         <div class="bycicle">
 
-          <h1>{% trans "170'204" %}</h1>
+          <h1 class="big-number">{% trans "170'204" %}</h1>
 
           <h3>{% trans "Velos sind schon in Afrika angekommen!" %}</h3>
 
