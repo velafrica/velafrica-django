@@ -19,7 +19,18 @@ def render_template(request):
 
 def render_map_template(request):
     template_name = 'public_site/map.html'
-    return render_to_response(template_name, { 'nofooter': True, 'api_key': GMAP_API_KEY}, context_instance=RequestContext(request))
+    template_context = {
+        'nofooter': True,
+        'api_key': GMAP_API_KEY,
+        'map_data_url': reverse('api:public:dropoffs')
+    }
+
+    if 'zip' in request.GET:
+        template_context.update({
+            'zip': request.GET['zip']
+        })
+
+    return render_to_response(template_name, template_context, context_instance=RequestContext(request))
 
 
 def render_donation_template(request):

@@ -1,0 +1,112 @@
+{% extends "public_site/base.html" %}
+{% load sekizai_tags %}
+{% load i18n %}
+
+{% block content %}
+  <section class="map">
+    <div id="map"></div>
+    <div class="searchfield">
+      <input id="map-search" type="text">
+      <button id="map-search-submit" onclick="VAM.handleZip()">{% trans "Suchen" %}</button>
+    </div>
+  </section>
+  {% addtoblock "js" %}
+    <script>
+
+      {% if zip %}
+        console.log({{ zip }});
+      {% else %}
+        console.log('no zip');
+      {% endif %}
+
+      var VAM = {
+        map: {
+          instance: {},
+          geocoder: {},
+          marker: {},
+          openedInfoWindow: undefined,
+          addMarker: function(options) {
+            var marker = new google.maps.Marker({
+              map: VAM.map.instance,
+              title: options.title,
+              position: { lat: options.lat, lng: options.lng }
+            });
+
+
+            var content = options.content;
+            var infoWindow = new google.maps.InfoWindow();
+
+            google.maps.event.addListener(marker, 'click', (function(marker, content, infowindow) {
+              return function() {
+                if (VAM.map.openedInfoWindow !== undefined) {
+                  VAM.map.openedInfoWindow.close();
+                }
+                VAM.map.openedInfoWindow = infowindow;
+                infowindow.setContent(content);
+                infowindow.open(VAM.map.instance, marker);
+              };
+            })(marker, content, infoWindow));
+          }
+        },
+        objects: {},
+        initMap: function() {
+            this.map.instance = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 46.798473, lng: 8.231726 },
+            zoom: 8
+          });
+          this.map.geocoder = new google.maps.Geocoder();
+          this.getMapData();
+          {% if zip %}
+            this.handleZip('{{ zip }}');
+          {% endif %}
+        },
+        getMapData: function() {
+          $.getJSON('{{ map_data_url }}', function(data) {
+            $.each(data, function(index, value) {
+              VAM.objects[value.id] = value;
+              options = {
+                title: value.name,
+                lat: Number(value.address.latitude),
+                lng: Number(value.address.longitude),
+                content: '',
+              };
+
+              var content = '<h3>' + value.name + '</h3>' +
+                        '<p>' + value.opening_time + '</p>';
+              options.content = content;
+              VAM.map.addMarker(options);
+            });
+          })
+        },
+        handleZip: function(zip) {
+          if(zip === undefined) {
+            if($('#map-search').val() != '') {
+              zip = $('#map-search').val();
+              // some dirty code to change the url without refresh (making the searchresults when clicking the searchbutton on mapshareable)
+              window.history.pushState({}, '', window.location.origin + window.location.pathname + '?zip=' + zip);
+            } else {
+              return;
+            }
+          }
+
+          VAM.map.geocoder.geocode({'address': zip}, function(results, status) {
+            if(status == google.maps.GeocoderStatus.OK) {
+              var location = results[0].geometry.location;
+              VAM.map.instance.setCenter(location);
+              VAM.map.instance.setZoom(15);
+            } else {
+              console.log('Something went wrong with Geocoder:', results, status);
+            }
+          })
+        }
+      };
+
+
+    </script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key={{ api_key }}&callback=VAM.initMap">
+    </script>
+  {% endaddtoblock %}
+
+{% endblock %}
+
