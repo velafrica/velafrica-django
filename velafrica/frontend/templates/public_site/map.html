@@ -7,18 +7,14 @@
     <div id="map"></div>
     <div class="searchfield">
       <input id="map-search" type="text">
-      <button id="map-search-submit" onclick="VAM.handleZip()">{% trans "Suchen" %}</button>
+      <button id="map-search-submit" onclick="VAM.handleSearch()">{% trans "Suchen" %}</button>
+    </div>
+    <div class="legend">
+
     </div>
   </section>
   {% addtoblock "js" %}
     <script>
-
-      {% if zip %}
-        console.log({{ zip }});
-      {% else %}
-        console.log('no zip');
-      {% endif %}
-
       var VAM = {
         map: {
           instance: {},
@@ -52,12 +48,17 @@
         initMap: function() {
             this.map.instance = new google.maps.Map(document.getElementById('map'), {
             center: {lat: 46.798473, lng: 8.231726 },
-            zoom: 8
+            zoom: 8,
+            mapTypeControl: true,
+            mapTypeControlOptions: {
+              style: google.maps.MapTypeControlStyle.VERTICAL_BAR,
+              position: google.maps.ControlPosition.TOP_RIGHT
+            }
           });
           this.map.geocoder = new google.maps.Geocoder();
           this.getMapData();
-          {% if zip %}
-            this.handleZip('{{ zip }}');
+          {% if search %}
+            this.handleSearch('{{ search }}');
           {% endif %}
         },
         getMapData: function() {
@@ -78,18 +79,18 @@
             });
           })
         },
-        handleZip: function(zip) {
-          if(zip === undefined) {
+        handleSearch: function(search) {
+          if(search === undefined) {
             if($('#map-search').val() != '') {
-              zip = $('#map-search').val();
+              search = $('#map-search').val();
               // some dirty code to change the url without refresh (making the searchresults when clicking the searchbutton on mapshareable)
-              window.history.pushState({}, '', window.location.origin + window.location.pathname + '?zip=' + zip);
+              window.history.pushState({}, '', window.location.origin + window.location.pathname + '?search=' + search);
             } else {
               return;
             }
           }
 
-          VAM.map.geocoder.geocode({'address': zip}, function(results, status) {
+          VAM.map.geocoder.geocode({'address': search}, function(results, status) {
             if(status == google.maps.GeocoderStatus.OK) {
               var location = results[0].geometry.location;
               VAM.map.instance.setCenter(location);
