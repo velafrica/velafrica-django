@@ -21,28 +21,54 @@ section.teaser {
     .bicycle-submit {
       display: flex;
       justify-content: center;
-      padding-top: 3rem;
+      padding: 3rem 0 2rem;
 
-      input.address {
-        height: 4.5rem;
-        border-radius: $vel-border-radius;
-        padding: 1rem;
+      input.postal-code {
         font-size: 18px;
-        border-color: transparent;
+        font-weight: lighter;
+        text-align: center;
+        height: 50px;
+        width: 133px;
+        border-radius: $vel-border-radius;
+        border: 1px solid $velafrica;
+        padding: 1rem;
+
+        &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+          color: $velafrica;
+        }
+        &::-moz-placeholder { /* Firefox 19+ */
+          color: $velafrica;
+        }
+        &:-ms-input-placeholder { /* IE 10+ */
+          color: $velafrica
+        }
+        &:-moz-placeholder { /* Firefox 18- */
+          color: $velafrica
+        }
       }
 
       a.bicycle-submit-button {
         margin-left: 1rem;
-        padding: 1rem 1.5rem;
+        padding: 5px 20px 8px;
         color: white;
         font-size: 22px;
         background-color: $velafrica;
         border-radius: $vel-border-radius;
         text-decoration: none;
+        font-weight: lighter;
 
         &:hover {
           background-color: $velafrica-hover;
         }
+      }
+    }
+    
+    a.collection-event-link {
+      color: $velafrica-brown-1;
+      font-size: 16px;
+      
+      &:hover {
+        color: $velafrica-brown-3-hover;
       }
     }
   }

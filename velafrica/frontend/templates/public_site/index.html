@@ -27,19 +27,19 @@
 
         <div class="container bicycle-search">
           <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-6 text-center">
 
               <h2>{% trans "Velo abgeben:" %}</h2>
 
               <div class="bicycle-submit">
                 <form>
-                  <input class="address" type="text" placeholder="{% trans "PLZ eingeben" %}">
+                  <input class="postal-code" type="text" placeholder="{% trans "PLZ eingeben" %}">
                   <a href="#sammelstelle?=xyz" type="submit"
                      class="bicycle-submit-button">{% trans "Sammelstelle suchen" %}</a>
                 </form>
               </div>
 
-              <a href="#">{% trans "Samellanlass organisieren" %}</a>
+              <a class="collection-event-link" href="#">{% trans "Sammelanlass organisieren" %}</a>
 
             </div>
           </div>
@@ -62,7 +62,7 @@
 
           <div class="bicycle-tracking">
             <form>
-              <input class="address" type="text" placeholder="{% trans "Tracking-Code eingeben" %}">
+              <input class="postal-code" type="text" placeholder="{% trans "Tracking-Code eingeben" %}">
               <a href="#sammelstelle?=xyz" type="submit"
                  class="bicycle-submit-button">{% trans "Aktuellen Standort abfragen" %}</a>
             </form>
