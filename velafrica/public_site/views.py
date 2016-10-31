@@ -25,6 +25,11 @@ def render_map_template(request):
         'map_data_url': reverse('api:public:dropoffs')
     }
 
+    if 'zip' in request.GET:
+        template_context.update({
+            'zip': request.GET['zip']
+        })
+
     return render_to_response(template_name, template_context, context_instance=RequestContext(request))
 
 
