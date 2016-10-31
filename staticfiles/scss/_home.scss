@@ -1,34 +1,21 @@
 section.teaser {
-  background: url("../../velafrica/frontend/static/img/home_teaser.jpg") center/cover;
-  height: 100%;
-  max-height: 700px;
+  background: url("../../velafrica/frontend/static/img/street_burkina_irim.jpg") center/cover;
+  padding: 30px 0;
 
-  .content {
-    text-align: center;
-    color: white;
-
-    .content-overlay {
-      h1 {
-        align-items: center;
-        font-size: 60px;
-        font-weight: bold;
-      }
-
-      p {
-        font-size: 24px;
-        font-weight: normal;
-      }
-
-      a {
-        color: orange;
-      }
-    }
+  .container {
+    padding-top: 30px;
+  }
+  .mission > div > div {
+    background-color: rgba(white, .8);
+    border-radius: $vel-border-radius;
+    padding: 30px;
   }
 
   .bicycle-search {
-    h1 {
-      text-align: center;
-      color: white;
+    & > div > div {
+      background-color: rgba(white, .8);
+      border-radius: $vel-border-radius;
+      padding: 30px;
     }
 
     .bicycle-submit {
