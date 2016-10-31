@@ -12,11 +12,15 @@ body {
   font-family: 'Ek Mukta', sans-serif;
   color: $velafrica-brown-1;
 
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
   h1 {
     font-size: 64px;
     font-weight: bold;
     line-height: 74px;
     letter-spacing: .7px;
+    margin-top: 0;
 
     &.big-number {
 
@@ -28,6 +32,7 @@ body {
     font-weight: bold;
     line-height: 44px;
     letter-spacing: .5px;
+    margin-top: 0;
   }
 
   h3 {
@@ -35,6 +40,7 @@ body {
     font-weight: bold;
     line-height: 29px;
     letter-spacing: .3px;
+    margin-top: 0;
   }
 
   p {
@@ -65,9 +71,9 @@ body {
     line-height: 26px;
     letter-spacing: .4px;
     text-decoration: underline;
-    
+
     &:hover {
-      color: $velafrica-hover;  
+      color: $velafrica-hover;
     }
   }
 }
