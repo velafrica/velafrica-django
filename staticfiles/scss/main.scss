@@ -6,6 +6,68 @@
 @import "footer";
 @import "collection_point";
 @import "collection_event";
+@import url('https://fonts.googleapis.com/css?family=Ek+Mukta:300,400,700');
 
 body {
+  font-family: 'Ek Mukta', sans-serif;
+  color: $velafrica-brown-1;
+
+  h1 {
+    font-size: 64px;
+    font-weight: bold;
+    line-height: 74px;
+    letter-spacing: .7px;
+
+    &.big-number {
+
+    }
+  }
+
+  h2 {
+    font-size: 36px;
+    font-weight: bold;
+    line-height: 44px;
+    letter-spacing: .5px;
+  }
+
+  h3 {
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 29px;
+    letter-spacing: .3px;
+  }
+
+  p {
+    font-size: 20px;
+    font-weight: normal;
+    line-height: 29px;
+    letter-spacing: .3px;
+
+    &.lead {
+      font-size: 26px;
+      font-weight: lighter;
+      line-height: 37px;
+      letter-spacing: .5px;
+    }
+
+    &.legend {
+      font-size: 14px;
+      font-weight: normal;
+      line-height: 20px;
+      letter-spacing: .5px;
+    }
+  }
+
+  a {
+    font-size: 20px;
+    font-weight: bold;
+    color: $velafrica;
+    line-height: 26px;
+    letter-spacing: .4px;
+    text-decoration: underline;
+    
+    &:hover {
+      color: $velafrica-hover;  
+    }
+  }
 }
