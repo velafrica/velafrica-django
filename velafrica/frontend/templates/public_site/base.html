@@ -13,12 +13,10 @@
 {% include "public_site/partials/header.html" %}
 
 {% block content %}{% endblock %}
-
 {% if not nofooter %}
   {% include "public_site/partials/footer.html" %}
 {% endif %}
 
 {% if not debug %}{% render_bundle 'main' %}{% endif %}
-
 </body>
 </html>
