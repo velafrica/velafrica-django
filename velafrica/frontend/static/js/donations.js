@@ -48,5 +48,28 @@ if ($('#donation').length) {
 
   // extract and set the redirect_url where the donor will be redirected to after donating money
   $('#id_invoice_redirect_url').val($('#invoice_redirect_url').val());
+
+  var sizeDonationPanels = function () {
+    // get all the panels
+    var $panels = $('#donation div.md-amount-panel .panel');
+
+    // reset the hard-set height, so we can get the actual height the element needs
+    $panels.css('height', '');
+
+    // figure out the height of the highest panel
+    var highestPanelHeight = 0;
+    $panels.each(function() {
+      var panelHeight = $(this).height();
+      if (panelHeight > highestPanelHeight) {
+        highestPanelHeight = panelHeight;
+      }
+    });
+
+    // set the height of all the panels to the same height as the highest panel
+    $panels.css('height', highestPanelHeight);
+  }
+
+  $(window).resize(sizeDonationPanels);
+  sizeDonationPanels();
 }
 
