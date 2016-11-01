@@ -8,5 +8,6 @@ window.jQuery = window.$ = $;
 $(document).ready(function () {
   require('donations');
   require('bootstrap.min');
+  require('map');
 });
 
