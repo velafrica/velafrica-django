@@ -10,7 +10,11 @@
       <button id="map-search-submit" onclick="VAM.handleSearch()">{% trans "Suchen" %}</button>
     </div>
     <div class="legend">
-
+      <ul>
+        <li>{% trans 'Permanent' %}</li>
+        <li>{% trans 'Temporär' %}</li>
+        <li>{% trans 'mit Abholservice' %}</li>
+      </ul>
     </div>
   </section>
   {% addtoblock "js" %}
@@ -25,7 +29,8 @@
             var marker = new google.maps.Marker({
               map: VAM.map.instance,
               title: options.title,
-              position: { lat: options.lat, lng: options.lng }
+              position: { lat: options.lat, lng: options.lng },
+              icon: options.icon
             });
 
 
@@ -64,17 +69,19 @@
         getMapData: function() {
           $.getJSON('{{ map_data_url }}', function(data) {
             $.each(data, function(index, value) {
+              if(!value.address.latitude && !value.address.longitude) {
+                return;
+              }
+
               VAM.objects[value.id] = value;
               options = {
                 title: value.name,
                 lat: Number(value.address.latitude),
                 lng: Number(value.address.longitude),
-                content: '',
+                content: VAM.getInfoWindowContent(value),
+                icon: VAM.getIcon(value)
               };
 
-              var content = '<h3>' + value.name + '</h3>' +
-                        '<p>' + value.opening_time + '</p>';
-              options.content = content;
               VAM.map.addMarker(options);
             });
           })
@@ -99,6 +106,49 @@
               console.log('Something went wrong with Geocoder:', results, status);
             }
           })
+        },
+        getInfoWindowContent: function(value) {
+          var content = '';
+
+          content += '<div class="infowindow">';
+
+          content += '<h2>' + value.name + '</h2>';
+
+          if(value.opening_time) {
+            content += '<h4>' + '{% trans 'Öffnungszeiten' %}' + '</h4>';
+            content += '<p>' + value.opening_time + '</p>';
+          }
+
+          if(value.pickup) {
+            content += '<h4>' + '{% trans 'Abholservice' %}' + '</h4>';
+            content += '<p>' + value.pickup_description + '</p>';
+          }
+
+
+          if(value.notes) {
+            content += '<h4>' + '{% trans 'Weitere Informationen' %}' + '</h4>';
+            content += '<p>' + value.notes + '</p>';
+          }
+
+          if(value.sbb) {
+            content += '<p><a href="#">{% trans 'SBB Transporteticket bestellen' %}</a></p>';
+          }
+
+          content += '</div>';
+
+          return content;
+        },
+        getIcon: function(value) {
+{#          var icon = '{% static  'img/map-icons/default.png' %}'; // default color#}
+{#          if(value.temp) {#}
+{#            icon = '{% static  'img/map-icons/temp.png' %}';#}
+{#          }#}
+{##}
+{#          if(value.pickup) {#}
+{#            icon = '{% static  'img/map-icons/pickup.png' %}';#}
+{#          }#}
+{#          return icon;#}
+          return '';
         }
       };
 
