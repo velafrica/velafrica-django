@@ -1,8 +1,142 @@
 section#donation {
-  .md-amount-panel.active {
-    & .panel-heading {
-      background-color: orange;
+  &>.md-header {
+    background-color: $velafrica-brown-4;
+    h1, h3 {
+      color: $velafrica-white-1;
+    }
+    h1 {
+      padding-top: 60px;
+    }
+    p {
+      color: $velafrica-white-1;
+      padding-bottom: 60px;
+      letter-spacing: 0.3px;
+    }
+  }
+  &>.md-donate {
+    padding-top: 90px;
+    h2 {
+      color: $velafrica-brown-1;
+      margin-bottom: 30px;
+    }
 
+    .md-amount-panel {
+      .panel {
+        box-shadow: none;
+        border: 2px solid $velafrica-brown-1;
+
+        .panel-heading {
+          background-color: $velafrica-white-1;
+          border-bottom: 2px solid $velafrica-brown-1;
+          border-top-left-radius: 0px;
+          border-top-right-radius: 0px;
+
+          h3 {
+            font-size: 26px;
+            letter-spacing: 0.5px;
+          }
+        }
+
+        .panel-body {
+          p {
+            letter-spacing: 0.5px;
+            color: $velafrica-brown-1;
+            margin: 0px;
+          }
+          input#custom-amount {
+            border: 1px solid $velafrica-brown-4;
+            border-radius: 3px;
+            padding: 15px 20px;
+            font-size: 16px;
+            font-family: $velafrica-font-family;
+            margin-left: 10px;
+          }
+        }
+
+        &:hover, &:focus {
+          cursor: pointer;
+        }
+      }
+
+      &.active {
+        .panel {
+          border: 2px solid $velafrica;
+
+          .panel-heading {
+            background-color: $velafrica;
+            border-bottom-color: $velafrica;
+            background-image: url("./../img/Check_medium_white@2x.png");
+            background-repeat: no-repeat;
+            background-position-x: 305px;
+            background-position-y: 14px;
+            background-size: 30px 24px;
+
+            h3 {
+              color: $velafrica-white-1;
+            }
+          }
+          .panel-body {
+            p {
+              color: $velafrica;
+            }
+          }
+        }
+        
+      }
+    }
+    .md-paymentoptions {
+      padding-top: 90px;
+
+      ul.nav-tabs {
+        border: none;
+
+        li {
+          border: 2px solid $velafrica;
+          width: 33%;
+
+          &:nth-child(1) {
+            border-top-left-radius: 3px;
+            border-bottom-left-radius: 3px;
+            border-right-width: 0px;
+          }
+          &:last-child {
+            border-top-right-radius: 3px;
+            border-bottom-right-radius: 3px;
+            border-left-width: 0px;
+          }
+
+          a {
+            border: none;
+            background-color: transparent;
+            text-align: center;
+            text-decoration: none;
+            font-size: 24px;
+          }
+
+          &.active {
+            background-color: $velafrica;
+            a {
+              color: $velafrica-white-1;
+            }
+          }
+        }
+      }
+      .md-payment-content {
+        clear: both;
+
+        .tab-pane {
+          padding-top: 40px;
+
+          p {
+            display: block;
+            text-align: center;
+          }
+
+          form {
+            text-align: center;
+          }
+        }
+      }
     }
   }
 }
