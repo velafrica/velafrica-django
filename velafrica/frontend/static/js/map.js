@@ -1,5 +1,6 @@
-if ($('#map').length) {
-  var VAM = {
+if ($('section.map').length) {
+  window.VAM = {
+    data_url: '',
     map: {
       instance: {},
       geocoder: {},
@@ -7,7 +8,7 @@ if ($('#map').length) {
       openedInfoWindow: undefined,
       addMarker: function (options) {
         var marker = new google.maps.Marker({
-          map: VAM.map.instance,
+          map: window.VAM.map.instance,
           title: options.title,
           position: {lat: options.lat, lng: options.lng},
           icon: options.icon
@@ -19,12 +20,12 @@ if ($('#map').length) {
 
         google.maps.event.addListener(marker, 'click', (function (marker, content, infowindow) {
           return function () {
-            if (VAM.map.openedInfoWindow !== undefined) {
-              VAM.map.openedInfoWindow.close();
+            if (window.VAM.map.openedInfoWindow !== undefined) {
+              window.VAM.map.openedInfoWindow.close();
             }
-            VAM.map.openedInfoWindow = infowindow;
+            window.VAM.map.openedInfoWindow = infowindow;
             infowindow.setContent(content);
-            infowindow.open(VAM.map.instance, marker);
+            infowindow.open(window.VAM.map.instance, marker);
           };
         })(marker, content, infoWindow));
       }
@@ -42,30 +43,29 @@ if ($('#map').length) {
       });
       this.map.geocoder = new google.maps.Geocoder();
       this.getMapData();
-      {%
-        if search %}
-      this.handleSearch('{{ search }}');
-      {%
-        endif %
-      }
+      // {% if search %}
+      // this.handleSearch('{{ search }}');
+      // {%
+      //   endif %
+      // }
     },
     getMapData: function () {
-      $.getJSON('{{ map_data_url }}', function (data) {
+      $.getJSON($('#map-data-url').val(), function (data) {
         $.each(data, function (index, value) {
           if (!value.address.latitude && !value.address.longitude) {
             return;
           }
 
-          VAM.objects[value.id] = value;
-          options = {
+          window.VAM.objects[value.id] = value;
+          var options = {
             title: value.name,
             lat: Number(value.address.latitude),
             lng: Number(value.address.longitude),
-            content: VAM.getInfoWindowContent(value),
-            icon: VAM.getIcon(value)
+            content: window.VAM.getInfoWindowContent(value),
+            icon: window.VAM.getIcon(value)
           };
 
-          VAM.map.addMarker(options);
+          window.VAM.map.addMarker(options);
         });
       })
     },
@@ -80,11 +80,11 @@ if ($('#map').length) {
         }
       }
 
-      VAM.map.geocoder.geocode({'address': search}, function (results, status) {
+      window.VAM.map.geocoder.geocode({'address': search}, function (results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
           var location = results[0].geometry.location;
-          VAM.map.instance.setCenter(location);
-          VAM.map.instance.setZoom(15);
+          window.VAM.map.instance.setCenter(location);
+          window.VAM.map.instance.setZoom(15);
         } else {
           console.log('Something went wrong with Geocoder:', results, status);
         }
