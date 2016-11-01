@@ -123,6 +123,19 @@ section#donation {
       }
       .md-payment-content {
         clear: both;
+
+        .tab-pane {
+          padding-top: 40px;
+
+          p {
+            display: block;
+            text-align: center;
+          }
+
+          form {
+            text-align: center;
+          }
+        }
       }
     }
   }

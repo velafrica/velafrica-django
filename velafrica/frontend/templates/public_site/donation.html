@@ -62,8 +62,10 @@
                data-toggle="tab">{% trans "Einzahlungsschein" %}</a>
           </li>
         </ul>
-        <div class="tab-content md-payment-content">
+        <div class="tab-content md-payment-content col-sm-6 col-sm-offset-3">
           <div class="tab-pane active" id="md-paypal">
+            <p>{% trans "Spenden Sie sicher, schnell und unkompliziert online via PayPal." %}</p>
+
             {{ paypalform.render }}
           </div>
           <div class="tab-pane" id="md-onba">
