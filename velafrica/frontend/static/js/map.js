@@ -135,5 +135,7 @@ if ($('section.map').length) {
   };
 
   // load the map
-  window.VAM.initMap();
+  setTimeout(function(){
+    window.VAM.initMap();
+  }, 2000);
 }
