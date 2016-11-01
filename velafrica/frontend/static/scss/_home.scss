@@ -1,5 +1,5 @@
 section.teaser {
-  background: url("../../velafrica/frontend/static/img/street_burkina_irim.jpg") center/cover;
+  background: url("./../img/street_burkina_irim.jpg") center/cover;
   padding: 30px 0;
 
   .container {
@@ -143,7 +143,7 @@ section.bicycle-statistic {
 }
 
 section.organize {
-  background: url("../../velafrica/frontend/static/img/bicycles.jpg") center/cover;
+  background: url("./../img/bicycles.jpg") center/cover;
   padding: 60px 0;
 
   & > div > div > div {
