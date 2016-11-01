@@ -11,7 +11,7 @@ var webpack = require('webpack');
 config.debug = false;
 config.devtool = 'source-map';
 config.entry = {
-  // main: './js/main',
+  main: './../velafrica/frontend/static/js/main.js',
   styles: './../velafrica/frontend/static/scss/main.scss',
 };
 config.module.loaders = [

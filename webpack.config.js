@@ -15,6 +15,7 @@ var config = {
       'webpack-dev-server/client?http://' + host + ':4000',
       'webpack/hot/dev-server',
       // './js/main',
+      './../velafrica/frontend/static/js/main.js',
       './../velafrica/frontend/static/scss/main.scss',
     ],
   },
