@@ -76,6 +76,7 @@ var config = {
       'assets/scss',
       'assets/img',
       'node_modules',
+      'static/js',
     ],
     alias: {},
   },
