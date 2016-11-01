@@ -1,5 +1,6 @@
 {% extends "public_site/base.html" %}
 {% load sekizai_tags %}
+{% load static %}
 {% load i18n %}
 
 {% block content %}
@@ -12,9 +13,9 @@
     </div>
     <div class="legend">
       <ul>
-        <li>{% trans 'Permanent' %}</li>
-        <li>{% trans 'Temporär' %}</li>
-        <li>{% trans 'mit Abholservice' %}</li>
+        <li><img src="{% static 'img/map-icons/default.png' %}">{% trans 'Permanent' %}</li>
+        <li><img src="{% static 'img/map-icons/temp.png' %}">{% trans 'Temporär' %}</li>
+        <li><img src="{% static 'img/map-icons/pickup.png' %}">{% trans 'mit Abholservice' %}</li>
       </ul>
     </div>
   </section>
