@@ -1,6 +1,6 @@
 'use strict';
 
-let $ = require('jquery');
+var $ = require('jquery');
 //hack jquery into window fixes double jquery import issue.
 window.jQuery = window.$ = $;
 
