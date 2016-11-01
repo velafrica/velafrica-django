@@ -23,6 +23,9 @@
       "url": "https://github.com/philippkueng/heroku-buildpack-sassc"
     },
     {
+      "url": "https://github.com/philippkueng/heroku-buildpack-gettext"
+    },
+    {
       "url": "heroku/nodejs"
     },
     {
