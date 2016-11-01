@@ -31,7 +31,7 @@ section.map {
       letter-spacing: 0.22px;
       line-height: 20px;
 
-      text-align: center;
+      padding-left: 20px;
     }
 
     button {
@@ -46,4 +46,62 @@ section.map {
     }
   }
 
+  .legend {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin: 30px;
+    padding: 15px;
+
+    height: 50px;
+    border-radius: 3px;
+    background: #FFFFFF;
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      li {
+        font-family: EkMukta-Regular;
+        font-size: 12px;
+        color: #30170F;
+        letter-spacing: 0.25px;
+        line-height: 16px;
+
+        display: inline;
+        margin-right: 5px;
+        &:before {
+          height: 20px;
+          width: 20px;
+          background: red;
+          content: 'x';
+
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+
+  .infowindow {
+    h2 {
+      font-family: EkMukta-Bold;
+      font-size: 24px;
+      color: #E34A11;
+      letter-spacing: 0.22px;
+      line-height: 30px;
+    }
+
+    h4 {
+
+    }
+
+    p {
+      font-family: EkMukta-Regular;
+      font-size: 16px;
+      color: rgba(47,22,14,0.70);
+      letter-spacing: 0.3px;
+      line-height: 16px;
+    }
+  }
 }
