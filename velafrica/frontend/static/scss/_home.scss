@@ -1,0 +1,194 @@
+section.teaser {
+  background: url("./../img/street_burkina_irim.jpg") center/cover;
+  padding: 30px 0;
+
+  .container {
+    padding-top: 30px;
+  }
+  .mission > div > div {
+    background-color: rgba(white, .8);
+    border-radius: $vel-border-radius;
+    padding: 30px;
+  }
+
+  .bicycle-search {
+    & > div > div {
+      background-color: rgba(white, .8);
+      border-radius: $vel-border-radius;
+      padding: 30px;
+    }
+
+    .bicycle-submit {
+      padding: 3rem 0 2rem;
+
+      input.postal-code {
+        font-size: 18px;
+        text-align: center;
+        height: 50px;
+        width: 133px;
+        border-radius: $vel-border-radius;
+        border: 1px solid $velafrica;
+        padding: 1rem;
+
+        &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+          color: $velafrica;
+        }
+        &::-moz-placeholder { /* Firefox 19+ */
+          color: $velafrica;
+        }
+        &:-ms-input-placeholder { /* IE 10+ */
+          color: $velafrica
+        }
+        &:-moz-placeholder { /* Firefox 18- */
+          color: $velafrica
+        }
+
+        &:focus {
+          -webkit-box-shadow: none;
+          -moz-box-shadow: none;
+          outline: auto 0px;
+          border-color: $velafrica-hover;
+        }
+      }
+
+      a.bicycle-submit-button {
+        width: 230px;
+        margin-left: 1rem;
+        padding: 5px 20px 8px;
+        color: white;
+        font-size: 22px;
+        background-color: $velafrica;
+        border-radius: $vel-border-radius;
+        text-decoration: none;
+
+        &:hover {
+          background-color: $velafrica-hover;
+        }
+      }
+    }
+
+    a.collection-event-link {
+      color: $velafrica-brown-1;
+      font-size: 16px;
+
+      &:hover {
+        color: $velafrica-brown-3-hover;
+      }
+    }
+  }
+}
+
+section.bicycle-statistic {
+  padding: 120px 0;
+
+  h1.big-number {
+    font-size: 144px;
+  }
+
+  a {
+    color: $velafrica-brown-2;
+  }
+
+  img {
+    margin: 60px 0;
+    height: 385px;
+    width: 376px;
+  }
+  .bicycle-tracking {
+    padding-top: 30px;
+
+    input.tracking-code {
+      height: 50px;
+      width: 206px;
+      border-radius: $vel-border-radius;
+      border: 1px solid $velafrica-brown-5;
+      font-size: 16px;
+      text-align: center;
+
+      &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+        color: $velafrica-brown-5;
+      }
+      &::-moz-placeholder { /* Firefox 19+ */
+        color: $velafrica-brown-5;
+      }
+      &:-ms-input-placeholder { /* IE 10+ */
+        color: $velafrica-brown-5;
+      }
+      &:-moz-placeholder { /* Firefox 18- */
+        color: $velafrica-brown-5;
+      }
+
+      &:focus {
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        outline: auto 0px;
+        border-color: $velafrica-brown-2;
+      }
+    }
+
+    a.tracking-submit-button {
+      color: white;
+      margin-left: 1rem;
+      width: 298px;
+      padding: 6px 20px 8px;
+      background-color: $velafrica-brown-5;
+      border-radius: $vel-border-radius;
+      text-decoration: none;
+
+      &:hover {
+        background-color: $velafrica-brown-2;
+      }
+    }
+  }
+}
+
+section.organize {
+  background: url("./../img/bicycles.jpg") center/cover;
+  padding: 60px 0;
+
+  & > div > div > div {
+    background-color: rgba(white, .8);
+    border-radius: $vel-border-radius;
+    padding: 30px;
+  }
+}
+
+section.join-us {
+  padding: 120px 0;
+
+  h1 {
+    color: $velafrica-brown-4;
+    margin-bottom: 60px;
+  }
+
+  a {
+    color: $velafrica-brown-1;
+
+    .panel-default {
+      border-radius: $vel-border-radius;
+      border: 2px solid $velafrica-brown-1;
+      min-height: 280px;
+
+      .panel-body {
+        padding: 0;
+
+        img {
+          background-position: center;
+          -webkit-background-size: cover;
+          background-size: cover;
+          margin-bottom: 30px;
+        }
+      }
+
+      &:hover {
+        border-color: $velafrica;
+      }
+    }
+  }
+}
+
+section.news {
+  //border-bottom: 1px solid $velafrica-brown-4;
+  border-top: 1px solid $velafrica-brown-4;
+  padding: 90px 0;
+}

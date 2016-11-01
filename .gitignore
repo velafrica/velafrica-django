@@ -36,3 +36,6 @@ staticfiles/
 # prevent backup files from being comittet
 *.pgsql
 *.sql
+
+# prevent .mo files from being added
+*.mo

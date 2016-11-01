@@ -9,13 +9,13 @@
 
       <section class="teaser">
 
-        <div class="container">
-          <div class="content">
-            <div class="content-overlay">
+        <div class="container mission">
+          <div class="row">
+            <div class="col-md-6">
 
               <h1>{% trans "Unsere Mission" %}</h1>
 
-              <p>
+              <p class="lead">
                 {% trans "Wir machen alte Velos flott und verschiffen sie nach Afrika. Hier geben wir erwerbslosen Frauen und Männer eine Perspektive, dort erleichtern wir den Alltag, schaffen Arbeitsplätze und bilden Mechanikerinnen und Mechaniker aus." %}
               </p>
 
@@ -26,42 +26,139 @@
         </div>
 
         <div class="container bicycle-search">
-          <div>
-            <h1>{% trans "Velo abgeben" %}</h1>
-          </div>
+          <div class="row">
+            <div class="col-md-6 text-center">
 
-          <div class="bicycle-submit">
-            <form>
-              <input class="address" type="text" placeholder="{% trans "Adresse / PLZ eingeben" %}">
-              <a href="#sammelstelle?=xyz" type="submit"
-                 class="bicycle-submit-button">{% trans "Sammelstelle suchen" %}</a>
-            </form>
+              <h2>{% trans "Velo abgeben:" %}</h2>
+
+              <div class="bicycle-submit">
+                <form>
+                  <input class="postal-code" type="text" placeholder="{% trans "PLZ eingeben" %}">
+                  <a href="#sammelstelle?=xyz" type="submit"
+                     class="bicycle-submit-button">{% trans "Sammelstelle suchen" %}</a>
+                </form>
+              </div>
+
+              <a class="collection-event-link" href="#">{% trans "Sammelanlass organisieren" %}</a>
+
+            </div>
           </div>
         </div>
 
       </section>
 
-      <section>
-        <div class="bycicle">
+      <section class="bicycle-statistic">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12 text-center">
 
-          <h1>{% trans "170'204" %}</h1>
+              <h1 class="big-number">{% trans "170'204" %}</h1>
 
-          <h3>{% trans "Velos sind schon in Afrika angekommen!" %}</h3>
+              <h2>{% trans "Velos sind schon in Afrika angekommen!" %}</h2>
 
-          <a href="#erfahren-sie-mehr">{% trans "Erfahren Sie mehr" %}</a>
+              <a href="#erfahren-sie-mehr">{% trans "Erfahren Sie mehr" %}</a>
 
-          <img src="{% static "img/frau_kind.png" %}" alt="">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 text-center">
+              <img src="{% static "img/frau_kind.png" %}" alt="">
 
-          <h3>{% trans "Wo befindet sich meines?" %}</h3>
+              <h2>{% trans "Wo befindet sich meines?" %}</h2>
 
-          <div class="bicycle-tracking">
-            <form>
-              <input class="address" type="text" placeholder="{% trans "Tracking-Code eingeben" %}">
-              <a href="#sammelstelle?=xyz" type="submit"
-                 class="bicycle-submit-button">{% trans "Aktuellen Standort abfragen" %}</a>
-            </form>
+              <div class="bicycle-tracking">
+                <form>
+                  <input class="tracking-code" type="text" placeholder="{% trans "Tracking-Code eingeben" %}">
+                  <a href="#sammelstelle?=xyz" type="submit"
+                     class="tracking-submit-button">{% trans "Aktuellen Standort abfragen" %}</a>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="organize">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 col-md-offset-6">
+              <h2>{% trans "So einfach organisieren Sie in Ihrer Liegenschaft eine Ausmistaktion" %}</h2>
+
+              <p class="lead">
+                {% trans "Zusammen mit ihrem Nachbar hat Lisa eine Ausmistaktion organisiert. Erfahren Sie, wie viele verstaubte Drahtesel Lisa gespendet hat und lesen Sie, wie auch Sie ganz eifach eine Aufräumaktion in Ihrer Nachbarschaft organisieren können!" %}
+              </p>
+
+              <a href="#">{% trans "Anleitung ansehen" %}</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="join-us">
+        <div class="container text-center">
+
+          <h1>{% trans "Machen Sie mit!" %}</h1>
+
+          <div class="col-md-3">
+            <a href="#">
+              <div class="panel panel-default">
+                <div class="panel-body">
+                  <img src="../../static/img/bicycles.jpg" alt="">
+                </div>
+                <span>{% trans "Sammelaktion organisieren" %}</span>
+              </div>
+            </a>
           </div>
 
+          <div class="col-md-3">
+            <a href="#">
+              <div class="panel panel-default">
+                <div class="panel-body">
+                  <img src="../../static/img/bicycles.jpg" alt="">
+                </div>
+                <span>{% trans "Bei Velafrica anpacken" %}</span>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-3">
+            <a href="#">
+              <div class="panel panel-default">
+                <div class="panel-body">
+                  <img src="../../static/img/bicycles.jpg" alt="">
+                </div>
+                <span>{% trans "Als Firma engagieren" %}</span>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-3">
+            <a href="#">
+              <div class="panel panel-default">
+                <div class="panel-body">
+                  <img src="../../static/img/bicycles.jpg" alt="">
+                </div>
+                <span>{% trans "Angebote für Schulen" %}</span>
+              </div>
+            </a>
+          </div>
+
+        </div>
+      </section>
+
+      <section class="news">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12 text-center">
+
+              <h1>{% trans "Titel für brennende News" %}</h1>
+
+              <p>{% trans "Weit hinten, hinter den Wortbergen, fern der Länder Vokalien und Konsonantien leben die Blindtexte. Abgeschieden wohnen sie in Buchstabhausen an der Küste des Semantik, eines grossen Sprachozeans." %}</p>
+
+              <a href="#">{% trans "Link zum Blogs oder so" %}</a>
+
+            </div>
+          </div>
         </div>
       </section>
 
