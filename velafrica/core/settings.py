@@ -174,7 +174,7 @@ CMS_TEMPLATES = (
     ('cms/base.html', 'Base'),
 )
 
-SITE_ID = 1
+SITE_ID = 2
 
 # Settings for Blog
 THUMBNAIL_PROCESSORS = (
