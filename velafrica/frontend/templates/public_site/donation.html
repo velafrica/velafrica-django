@@ -81,33 +81,6 @@
         </div>
       </div>
     </div>
-    <div class="md-footprint row text-center">
-      <h2 class="col-sm-12">{% trans "CO2-Footprint kompensieren" %}</h2>
-      <p class="col-sm-12">
-        {% trans "Sie möchten Ihren CO2-Footprint kompensieren und gleichzeitig Velafrica unterstützen? Dank der Zusammenarbeit mit South Pole Carbon geht das ganz einfach: Im Webshop mit dem CO2-Rechner den individuellen Ausstoss berechnen und als Kompensations-Projekt 'Bicycles for Africa' wählen." %}
-      </p>
-      <a href="" class="col-sm-12">Zu South Pole Carbon</a>
-    </div>
-    <div class="md-more row">
-      <h1 class="col-sm-12 text-center">{% trans "Weitere Spendenarten" %}</h1>
-      <div class="row">
-        <div class="col-sm-4">
-          <h3>{% trans "Velospende" %}</h3>
-          <p>{% trans "Spenden Sie sicher, schnell und unkompliziert online via PayPal" %}</p>
-          <a href="">{% trans "Mehr erfahren" %}</a>
-        </div>
-        <div class="col-sm-4">
-          <h3>{% trans "Patenschaft" %}</h3>
-          <p>{% trans "Spenden Sie sicher, schnell und unkompliziert online via PayPal" %}</p>
-          <a href="">{% trans "Mehr erfahren" %}</a>
-        </div>
-        <div class="col-sm-4">
-          <h3>{% trans "Geschenkideen" %}</h3>
-          <p>{% trans "Spenden Sie sicher, schnell und unkompliziert online via PayPal" %}</p>
-          <a href="">{% trans "Mehr erfahren" %}</a>
-        </div>
-      </div>
-    </div>
     <input type="hidden" id="invoice_redirect_url" value='{% url "home:donation:thank_you" %}'>
   </section>
 {% endblock %}
