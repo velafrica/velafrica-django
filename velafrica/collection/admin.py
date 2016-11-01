@@ -178,6 +178,9 @@ class DropoffAdmin(admin.ModelAdmin):
         ('Temporäre Abgabestelle', {
             'fields': ('temp', 'temp_start', 'temp_end',)
         }),
+        ('Abholservice', {
+            'fields': ('pickup', 'pickup_description',)
+        }),
         ('Benutzerdefinierter Pin auf Karte', {
             'fields': ('custom_lat', 'custom_lon'),
         }),
