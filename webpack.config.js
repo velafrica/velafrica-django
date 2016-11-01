@@ -77,6 +77,7 @@ var config = {
       'assets/img',
       'node_modules',
       'static/js',
+      'static/bootstrap-3.3.6-dist/js',
     ],
     alias: {},
   },
