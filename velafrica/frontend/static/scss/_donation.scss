@@ -84,5 +84,46 @@ section#donation {
         
       }
     }
+    .md-paymentoptions {
+      padding-top: 90px;
+
+      ul.nav-tabs {
+        border: none;
+
+        li {
+          border: 2px solid $velafrica;
+          width: 33%;
+
+          &:nth-child(1) {
+            border-top-left-radius: 3px;
+            border-bottom-left-radius: 3px;
+            border-right-width: 0px;
+          }
+          &:last-child {
+            border-top-right-radius: 3px;
+            border-bottom-right-radius: 3px;
+            border-left-width: 0px;
+          }
+
+          a {
+            border: none;
+            background-color: transparent;
+            text-align: center;
+            text-decoration: none;
+            font-size: 24px;
+          }
+
+          &.active {
+            background-color: $velafrica;
+            a {
+              color: $velafrica-white-1;
+            }
+          }
+        }
+      }
+      .md-payment-content {
+        clear: both;
+      }
+    }
   }
 }
