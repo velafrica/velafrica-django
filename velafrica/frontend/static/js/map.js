@@ -133,4 +133,7 @@ if ($('section.map').length) {
       return icon;
     }
   };
+
+  // load the map
+  window.VAM.initMap();
 }
