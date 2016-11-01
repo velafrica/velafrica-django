@@ -320,6 +320,6 @@ else:
 # Due to a mistake the SITE_ID on staging has to be 2 but will be 1 on production
 # so its configurable per env variable (shame on HaRii)
 if 'SITE_ID' in os.environ:
-    SITE_ID = os.environ['SITE_ID']
+    SITE_ID = int(os.environ['SITE_ID'])
 else:
     SITE_ID = 1
