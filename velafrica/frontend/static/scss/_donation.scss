@@ -43,6 +43,14 @@ section#donation {
             color: $velafrica-brown-1;
             margin: 0px;
           }
+          input#custom-amount {
+            border: 1px solid $velafrica-brown-4;
+            border-radius: 3px;
+            padding: 15px 20px;
+            font-size: 16px;
+            font-family: $velafrica-font-family;
+            margin-left: 10px;
+          }
         }
 
         &:hover, &:focus {
