@@ -71,13 +71,11 @@ section.map {
 
         display: inline;
         margin-right: 5px;
-        &:before {
-          height: 20px;
-          width: 20px;
-          background: red;
-          content: 'x';
 
+        img {
           margin-right: 5px;
+          width: 15px;
+          height: auto;
         }
       }
     }
