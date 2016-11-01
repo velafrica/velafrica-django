@@ -12,7 +12,7 @@ config.debug = false;
 config.devtool = 'source-map';
 config.entry = {
   // main: './js/main',
-  styles: './scss/main.scss',
+  styles: './../velafrica/frontend/static/scss/main.scss',
 };
 config.module.loaders = [
   {
