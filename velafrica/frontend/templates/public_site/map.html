@@ -17,16 +17,8 @@
       </ul>
     </div>
   </section>
-  {% addtoblock "js" %}
-    <script>
-
-
-
-    </script>
-    <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key={{ api_key }}&callback=VAM.initMap">
-    </script>
-  {% endaddtoblock %}
-
+  <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key={{ api_key }}&callback=VAM.initMap">
+  </script>
 {% endblock %}
 
