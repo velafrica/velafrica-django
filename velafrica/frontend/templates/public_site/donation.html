@@ -3,44 +3,6 @@
 {% load sekizai_tags %}
 
 {% block content %}
-  {% addtoblock "js" %}
-    <script>
-      function changeAmount(amount) {
-        $('#id_amount').val(amount);
-        $('#id_donation_amount').val(amount);
-      }
-
-      function emptyAndReadOnly() {
-        var checkbox = $(this);
-        var donation_amount = $('#id_donation_amount');
-        if(checkbox.is(':checked')) {
-          donation_amount.val(0);
-          donation_amount.attr('readonly', true);
-
-        } else {
-          donation_amount.attr('readonly', false);
-          donation_amount.val($('#md-amounts-tabs li.active a').data('amount'));
-        }
-      }
-
-      $(document).ready(function() {
-        $('#custom-amount').change(function(e) {
-          var customAmount = $(this);
-          customAmount.closest('.md-amount-panel').data('amount', customAmount.val());
-          changeAmount(customAmount.val());
-        });
-        $('.md-amount-panel').click(function(e) {
-          var amountPanel = $(this);
-          changeAmount(amountPanel.data('amount'));
-          $('.md-amount-panel.active').removeClass('active');
-          amountPanel.addClass('active');
-        });
-        changeAmount({{ amounts.first.amount }});
-        $('#id_empty_invoice').change(emptyAndReadOnly);
-        $('#id_invoice_redirect_url').val('{% url "home:donation:thank_you" %}');
-      })
-    </script>
-  {% endaddtoblock %}
   <section id="donation" class="container-fluid">
     <div class="md-header row">
       <h1 class="md-header-title col-sm-12 text-center">
@@ -167,5 +129,6 @@
         </div>
       </div>
     </div>
+    <input type="hidden" id="invoice_redirect_url" value='{% url "home:donation:thank_you" %}'>
   </section>
 {% endblock %}
