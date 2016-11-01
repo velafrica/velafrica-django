@@ -1,4 +1,18 @@
 section#donation {
+  &>.md-header {
+    background-color: $velafrica-brown-4;
+    h1, h3 {
+      color: $velafrica-white-1;
+    }
+    h1 {
+      padding-top: 60px;
+    }
+    p {
+      color: $velafrica-white-1;
+      padding-bottom: 60px;
+      letter-spacing: 0.3px;
+    }
+  }
   .md-amount-panel.active {
     & .panel-heading {
       background-color: orange;
