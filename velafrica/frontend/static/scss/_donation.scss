@@ -13,10 +13,61 @@ section#donation {
       letter-spacing: 0.3px;
     }
   }
-  .md-amount-panel.active {
-    & .panel-heading {
-      background-color: orange;
+  &>.md-donate {
+    padding-top: 90px;
+    h2 {
+      color: $velafrica-brown-1;
+      margin-bottom: 30px;
+    }
 
+    .md-amount-panel {
+      .panel {
+        box-shadow: none;
+        border: 2px solid $velafrica-brown-1;
+
+        .panel-heading {
+          background-color: $velafrica-white-1;
+          border-bottom: 2px solid $velafrica-brown-1;
+
+          h3 {
+            font-size: 26px;
+            letter-spacing: 0.5px;
+          }
+        }
+
+        .panel-body {
+          p {
+            letter-spacing: 0.5px;
+            color: $velafrica-brown-1;
+            margin: 0px;
+          }
+        }
+
+        &:hover, &:focus {
+          cursor: pointer;
+        }
+      }
+
+      &.active {
+        .panel {
+          border: 2px solid $velafrica;
+
+          .panel-heading {
+            background-color: $velafrica;
+            border-bottom-color: $velafrica;
+
+            h3 {
+              color: $velafrica-white-1;
+            }
+          }
+          .panel-body {
+            p {
+              color: $velafrica;
+            }
+          }
+        }
+        
+      }
     }
   }
 }
