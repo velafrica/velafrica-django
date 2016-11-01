@@ -5,4 +5,7 @@ let $ = require('jquery');
 window.jQuery = window.$ = $;
 
 
-require('donations');
+$(document).ready(function () {
+  require('donations');  
+});
+
