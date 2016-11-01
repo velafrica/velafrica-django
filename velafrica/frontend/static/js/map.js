@@ -122,13 +122,13 @@ if ($('section.map').length) {
       return content;
     },
     getIcon: function (value) {
-      var icon = 'img/map-icons/default.png';
+      var icon = '/static/img/map-icons/default.png';
       if (value.temp) {
-        icon = 'img/map-icons/temp.png';
+        icon = '/static/img/map-icons/temp.png';
       }
 
       if (value.pickup) {
-        icon = 'img/map-icons/pickup.png';
+        icon = '/static/img/map-icons/pickup.png';
       }
       return icon;
     }
