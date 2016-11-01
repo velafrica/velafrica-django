@@ -174,8 +174,6 @@ CMS_TEMPLATES = (
     ('cms/base.html', 'Base'),
 )
 
-SITE_ID = 2
-
 # Settings for Blog
 THUMBNAIL_PROCESSORS = (
     'easy_thumbnails.processors.colorspace',
@@ -318,3 +316,10 @@ if 'GMAP_API_KEY' in os.environ:
     GMAP_API_KEY = os.environ['GMAP_API_KEY']
 else:
     GMAP_API_KEY = ''
+
+# Due to a mistake the SITE_ID on staging has to be 2 but will be 1 on production
+# so its configurable per env variable (shame on HaRii)
+if 'SITE_ID' in os.environ:
+    SITE_ID = os.environ['SITE_ID']
+else:
+    SITE_ID = 1
