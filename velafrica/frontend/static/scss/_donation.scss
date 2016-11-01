@@ -28,6 +28,8 @@ section#donation {
         .panel-heading {
           background-color: $velafrica-white-1;
           border-bottom: 2px solid $velafrica-brown-1;
+          border-top-left-radius: 0px;
+          border-top-right-radius: 0px;
 
           h3 {
             font-size: 26px;
@@ -55,6 +57,11 @@ section#donation {
           .panel-heading {
             background-color: $velafrica;
             border-bottom-color: $velafrica;
+            background-image: url("./../img/Check_medium_white@2x.png");
+            background-repeat: no-repeat;
+            background-position-x: 305px;
+            background-position-y: 14px;
+            background-size: 30px 24px;
 
             h3 {
               color: $velafrica-white-1;
