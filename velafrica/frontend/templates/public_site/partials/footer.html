@@ -1,4 +1,3 @@
-{% load render_bundle from webpack_loader %}
 {% load static %}
 {% load i18n %}
 
@@ -49,5 +48,3 @@
     </div>
   </div>
 </footer>
-
-{% if not debug %}{% render_bundle 'main' %}{% endif %}
