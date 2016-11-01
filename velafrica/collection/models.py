@@ -248,6 +248,8 @@ class Dropoff(models.Model):
     address = models.ForeignKey(Address, verbose_name="Adresse")
     custom_lat = models.CharField(max_length=255, blank=True, verbose_name="Latitude")
     custom_lon = models.CharField(max_length=255, blank=True, verbose_name="Longitude")
+    pickup = models.BooleanField(verbose_name="Abholservice", default=False)
+    pickup_description = models.TextField(blank=True, verbose_name="Abholservice Beschreibung")
 
     def __unicode__(self):
         return u"{}".format(self.name)
