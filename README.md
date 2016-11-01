@@ -107,7 +107,7 @@ cp .env_dist .env
 And then fill in your database credentials (eg. username, password & database name) in `.env`
 
 ### 5. Create database (apply migrations)
-   
+
 ```bash
 heroku local:run python manage.py migrate
 ```
@@ -118,13 +118,20 @@ heroku local:run python manage.py migrate
 python manage.py compilemessages
 ```
 
-### 7. Start development server & livereload tools
+### 7. Load the fixture data
+
+```bash
+heroku local:run ./bin/load_fixtures.sh
+```
+
+
+### 8. Start development server & livereload tools
 
 ```bash
 heroku local:start -f Procfile_dev
 ```
 
-### 8. Enjoy
+### 9. Enjoy
 
 ```bash
 open http://localhost:5000/
