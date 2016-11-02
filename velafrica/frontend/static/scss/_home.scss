@@ -51,8 +51,9 @@ section.teaser {
         }
       }
 
-      a.bicycle-submit-button {
+      input.bicycle-submit-button {
         width: 230px;
+        height: 50px;
         margin-left: 1rem;
         padding: 5px 20px 8px;
         color: white;
@@ -60,6 +61,7 @@ section.teaser {
         background-color: $velafrica;
         border-radius: $vel-border-radius;
         text-decoration: none;
+        border-style: none;
 
         &:hover {
           background-color: $velafrica-hover;

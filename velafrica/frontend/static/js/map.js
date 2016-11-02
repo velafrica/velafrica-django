@@ -1,4 +1,9 @@
 if ($('section.map').length) {
+  $("#map-search").keyup(function(e){
+    if (e.keyCode == 13) {
+      window.VAM.handleSearch($("#map-search").val());
+    }
+  });
   window.VAM = {
     data_url: '',
     map: {
@@ -43,11 +48,11 @@ if ($('section.map').length) {
       });
       this.map.geocoder = new google.maps.Geocoder();
       this.getMapData();
-      // {% if search %}
-      // this.handleSearch('{{ search }}');
-      // {%
-      //   endif %
-      // }
+      var search = window.getUrlVars()["search"];
+      if (search) {
+        this.handleSearch(decodeURIComponent(search));
+      }
+
     },
     getMapData: function () {
       $.getJSON($('#map-data-url').val(), function (data) {
@@ -79,6 +84,8 @@ if ($('section.map').length) {
           return;
         }
       }
+
+      $("#map-search").val(search);
 
       window.VAM.map.geocoder.geocode({'address': search}, function (results, status) {
         if (status == google.maps.GeocoderStatus.OK) {

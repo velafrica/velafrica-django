@@ -32,10 +32,9 @@
               <h2>{% trans "Velo abgeben:" %}</h2>
 
               <div class="bicycle-submit">
-                <form>
-                  <input class="postal-code" type="text" placeholder="{% trans "PLZ eingeben" %}">
-                  <a href="#sammelstelle?=xyz" type="submit"
-                     class="bicycle-submit-button">{% trans "Sammelstelle suchen" %}</a>
+                <form action="{% url "home:map:home" %}" method="get">
+                  <input name="search" class="postal-code" type="text" placeholder="{% trans "PLZ eingeben" %}">
+                  <input type="submit" value="{% trans "Sammelstelle suchen" %}" class="bicycle-submit-button">
                 </form>
               </div>
 
