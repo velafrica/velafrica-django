@@ -123,9 +123,23 @@ section#donation {
       }
       .md-payment-content {
         clear: both;
+        padding-bottom: 150px;
 
         .tab-pane {
           padding-top: 40px;
+
+          &#md-onba ul {
+            list-style: none;
+            padding: 20px 0px 0px 0px;
+
+            li {
+              display: block;
+              text-align: center;
+              font-size: 20px;
+              line-height: 29px;
+              letter-spacing: 0.5;
+            }
+          }
 
           p {
             display: block;

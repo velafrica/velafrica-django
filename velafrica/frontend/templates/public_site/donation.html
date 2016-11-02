@@ -69,7 +69,13 @@
             {{ paypalform.render }}
           </div>
           <div class="tab-pane" id="md-onba">
-            meep1.
+            <p>{% trans "Für Ihre Spende per E-Banking benötigen Sie folgende Informationen:" %}</p>
+            <ul>
+              <li>{% trans "Spendenkonto: PC 30-7391-3" %}</li>
+              <li>{% trans "Empfänger: Stiftung Sinnovativ, Velafrica, 3007 Bern" %}</li>
+              <li>{% trans "IBAN: CH27 0900 0000 3000 7391 3" %}</li>
+              <li>{% trans "BIC: POFICHBEXXX" %}</li>
+            </ul>
           </div>
           <div class="tab-pane" id="md-invoice">
             <form action="{% url "home:donation:order_invoice" %}" method="POST">
