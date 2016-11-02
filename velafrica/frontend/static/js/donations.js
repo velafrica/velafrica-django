@@ -36,13 +36,20 @@ if ($('#donation').length) {
     .parent()
     .prepend($('<span />').text('CHF'));
 
-  // change the description text
+  // change the description text for the option to send a ESR without value in.
   var $checkbox = $('#id_empty_invoice');
   var $checkboxParent = $checkbox.parent();
   $checkboxParent.find('input').first().remove();
   $checkboxParent.prepend($checkbox);
   $checkboxParent.css('text-align', 'left');
-  $checkboxParent.find('label').text('Leeren Einzahlungsschein bestellen')
+  $checkboxParent.find('label').text('Leeren Einzahlungsschein bestellen');
+
+  // fill in the placeholder texts
+  $('#id_first_name').attr('placeholder', ($('#trans_id_first_name').val()));
+  $('#id_last_name').attr('placeholder', ($('#trans_id_last_name').val()));
+  $('#id_address').attr('placeholder', ($('#trans_id_address').val()));
+  $('#id_zip').attr('placeholder', ($('#trans_id_zip').val()));
+  $('form textarea').attr('placeholder', ($('#trans_id_comment').val()));
 
   // set the custom donation value after every change of the input form
   $('#custom-amount').change(function(e) {

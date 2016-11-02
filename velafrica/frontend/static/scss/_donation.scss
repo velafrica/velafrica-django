@@ -185,6 +185,25 @@ section#donation {
                   width: auto;
                   margin-right: 10px;
                 }
+
+                &#id_number_invoices,
+                &#id_first_name,
+                &#id_last_name,
+                &#id_address,
+                &#id_zip {
+                  border: 1px solid $velafrica-brown-3;
+                  border-radius: 3px;
+                  font-size: 16px;
+                  padding: 15px 20px;
+                }
+              }
+
+              textarea {
+                  border: 1px solid $velafrica-brown-3;
+                  border-radius: 3px;
+                  font-size: 16px;
+                  width: 100%;
+                  padding: 15px 20px;
               }
 
               &.donation_amount_label {
@@ -192,13 +211,16 @@ section#donation {
                 text-align: left;
               }
 
-              label[for='id_donation_amount'] {
+              label {
                 visibility: hidden;
                 width: 0px;
                 height: 0px;
               }
 
               label[for='id_empty_invoice'] {
+                visibility: visible;
+                width: auto;
+                height: auto;
                 font-size: 14px;
                 font-weight: normal;
                 letter-spacing: 0.5px;
@@ -214,6 +236,17 @@ section#donation {
               padding-top: 30px;
               margin-bottom: 20px;
               letter-spacing: 0.5px;
+            }
+
+            input[type='submit'] {
+              margin-top: 60px;
+              font-size: 20px;
+              font-weight: bold;
+              color: $velafrica-white-1;
+              background-color: $velafrica-brown-3;
+              border: none;
+              border-radius: 3px;
+              padding: 12px 20px;
             }
           }
         }

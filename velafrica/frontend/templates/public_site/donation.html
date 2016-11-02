@@ -84,12 +84,17 @@
               <p class="donation_amount_label">{% trans "Ihr Spendenbetrag" %}</p>
               {% csrf_token %}
               {{ invoiceform.as_p }}
-              <input type="submit">
+              <input type="submit" value='{% trans "Einzahlungsschein bestellen" %}'>
             </form>
           </div>
         </div>
       </div>
     </div>
     <input type="hidden" id="invoice_redirect_url" value='{% url "home:donation:thank_you" %}'>
+    <input type="hidden" id="trans_id_first_name" value='{% trans "Vorname" %}'>
+    <input type="hidden" id="trans_id_last_name" value='{% trans "Nachname" %}'>
+    <input type="hidden" id="trans_id_address" value='{% trans "Strasse und Haus-Nr." %}'>
+    <input type="hidden" id="trans_id_zip" value='{% trans "PLZ und Ort" %}'>
+    <input type="hidden" id="trans_id_comment" value='{% trans "Bermerkungen" %}'>
   </section>
 {% endblock %}
