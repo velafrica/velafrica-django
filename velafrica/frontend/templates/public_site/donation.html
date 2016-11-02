@@ -78,7 +78,7 @@
             </ul>
           </div>
           <div class="tab-pane row" id="md-invoice">
-            <p>{% trans "Erhalten Sie einen Einzahlungsschein per Post." %}</p>
+            <p id="md-invoice-description">{% trans "Erhalten Sie einen Einzahlungsschein per Post." %}</p>
             <h3>{% trans "Kontaktangaben" %}</h3>
             <form class="col-sm-6 col-sm-offset-3" action="{% url "home:donation:order_invoice" %}" method="POST">
               <p class="donation_amount_label">{% trans "Ihr Spendenbetrag" %}</p>

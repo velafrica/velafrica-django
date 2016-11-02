@@ -153,6 +153,8 @@ section#donation {
           &#md-invoice {
             p {
               margin-bottom: 0px;
+              clear: both;
+              padding: 10px 0px 0px 0px;
 
               span {
                 font-weight: bold;
@@ -178,6 +180,11 @@ section#donation {
                     color: black;
                   }
                 }
+
+                &#id_empty_invoice {
+                  width: auto;
+                  margin-right: 10px;
+                }
               }
 
               &.donation_amount_label {
@@ -190,12 +197,22 @@ section#donation {
                 width: 0px;
                 height: 0px;
               }
+
+              label[for='id_empty_invoice'] {
+                font-size: 14px;
+                font-weight: normal;
+                letter-spacing: 0.5px;
+              }
+
+              &#md-invoice-description {
+                padding: 0;
+              }
             }
             h3 {
               display: block;
               text-align: center;
               padding-top: 30px;
-              margin-bottom: 30px;
+              margin-bottom: 20px;
               letter-spacing: 0.5px;
             }
           }

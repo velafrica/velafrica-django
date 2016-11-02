@@ -36,6 +36,14 @@ if ($('#donation').length) {
     .parent()
     .prepend($('<span />').text('CHF'));
 
+  // change the description text
+  var $checkbox = $('#id_empty_invoice');
+  var $checkboxParent = $checkbox.parent();
+  $checkboxParent.find('input').first().remove();
+  $checkboxParent.prepend($checkbox);
+  $checkboxParent.css('text-align', 'left');
+  $checkboxParent.find('label').text('Leeren Einzahlungsschein bestellen')
+
   // set the custom donation value after every change of the input form
   $('#custom-amount').change(function(e) {
     var customAmount = $(this);
