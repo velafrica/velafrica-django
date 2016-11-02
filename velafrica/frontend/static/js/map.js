@@ -78,12 +78,14 @@ if ($('section.map').length) {
       if (search === undefined) {
         if ($('#map-search').val() != '') {
           search = $('#map-search').val();
-          // some dirty code to change the url without refresh (making the searchresults when clicking the searchbutton on mapshareable)
-          window.history.pushState({}, '', window.location.origin + window.location.pathname + '?search=' + search);
         } else {
           return;
         }
       }
+      
+      // some dirty code to change the url without refresh
+      // (making the searchresults when clicking the searchbutton on map shareable)
+      window.history.pushState({}, '', window.location.origin + window.location.pathname + '?search=' + search);
 
       $("#map-search").val(search);
 
