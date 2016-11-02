@@ -31,6 +31,11 @@ if ($('#donation').length) {
       .width('97');
   }
 
+  // add a CHF field in front of the donation amount (for ESR)
+  $('#id_donation_amount')
+    .parent()
+    .prepend($('<span />').text('CHF'));
+
   // set the custom donation value after every change of the input form
   $('#custom-amount').change(function(e) {
     var customAmount = $(this);

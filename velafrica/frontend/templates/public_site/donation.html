@@ -77,8 +77,11 @@
               <li>{% trans "BIC: POFICHBEXXX" %}</li>
             </ul>
           </div>
-          <div class="tab-pane" id="md-invoice">
-            <form action="{% url "home:donation:order_invoice" %}" method="POST">
+          <div class="tab-pane row" id="md-invoice">
+            <p>{% trans "Erhalten Sie einen Einzahlungsschein per Post." %}</p>
+            <h3>{% trans "Kontaktangaben" %}</h3>
+            <form class="col-sm-6 col-sm-offset-3" action="{% url "home:donation:order_invoice" %}" method="POST">
+              <p class="donation_amount_label">{% trans "Ihr Spendenbetrag" %}</p>
               {% csrf_token %}
               {{ invoiceform.as_p }}
               <input type="submit">

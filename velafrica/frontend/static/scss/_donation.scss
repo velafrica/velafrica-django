@@ -128,6 +128,15 @@ section#donation {
         .tab-pane {
           padding-top: 40px;
 
+          p {
+            display: block;
+            text-align: center;
+          }
+
+          form {
+            text-align: center;
+          }
+
           &#md-onba ul {
             list-style: none;
             padding: 20px 0px 0px 0px;
@@ -141,13 +150,54 @@ section#donation {
             }
           }
 
-          p {
-            display: block;
-            text-align: center;
-          }
+          &#md-invoice {
+            p {
+              margin-bottom: 0px;
 
-          form {
-            text-align: center;
+              span {
+                font-weight: bold;
+                font-size: 26px;
+                float: left;
+                margin-top: 1px;
+              }
+
+              input {
+                width: 100%;
+
+                &#id_donation_amount {
+                  border: none;
+                  position: relative;
+                  width: 50%;
+                  float: left;
+                  font-size: 26px;
+                  font-weight: bold;
+                  margin-left: 10px;
+
+                  &:after {
+                    content: "afa";
+                    color: black;
+                  }
+                }
+              }
+
+              &.donation_amount_label {
+                font-size: 14px;
+                text-align: left;
+              }
+
+              label[for='id_donation_amount'] {
+                visibility: hidden;
+                width: 0px;
+                height: 0px;
+              }
+            }
+            h3 {
+              display: block;
+              text-align: center;
+              padding-top: 30px;
+              margin-bottom: 30px;
+              letter-spacing: 0.5px;
+            }
           }
         }
       }
