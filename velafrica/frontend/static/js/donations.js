@@ -23,6 +23,14 @@ if ($('#donation').length) {
     }
   };
 
+  var replacePaypalButtonImage = function () {
+    $("#md-paypal form input[type='image']")
+      .first()
+      .attr('src', 'https://www.paypalobjects.com/webstatic/en_US/i/btn/png/gold-rect-paypal-60px.png')
+      .height('30')
+      .width('97');
+  }
+
   // set the custom donation value after every change of the input form
   $('#custom-amount').change(function(e) {
     var customAmount = $(this);
@@ -71,5 +79,6 @@ if ($('#donation').length) {
 
   $(window).resize(sizeDonationPanels);
   sizeDonationPanels();
+  replacePaypalButtonImage();
 }
 
