@@ -4,45 +4,65 @@
 <footer class="footer">
   <div class="container">
     <div class="row">
+      <div class="col-md-3 social">
+        <a href="#"><img src="{% static "img/facebook.png" %}" alt=""></a>
+        <a href="#"><img src="{% static "img/instagram.png" %}" alt=""></a>
+        <a href="#"><img src="{% static "img/twitter.png" %}" alt=""></a>
+      </div>
+
+      <div class="col-md-9">
+        <form>
+          <input class="newsletter" type="text" placeholder="{% trans "E-Mail Adresse eingeben" %}">
+          <input type="submit" value="{% trans "Newsletter abonnieren" %}"
+             class="newsletter-submit-button">
+        </form>
+      </div>
+
+    </div>
+    <div class="row">
       <div class="col-sm-3 first-background">
 
         <h4>{% trans "Über uns" %}</h4>
-        <ul>
-          <li><a href="#">{% trans "Geschichte" %}</a></li>
-          <li><a href="#">{% trans "Organisation" %}</a></li>
-          <li><a href="#">{% trans "Team" %}</a></li>
+        <ul class="list-group">
+          <li class="list-group-item"><a href="#">{% trans "Geschichte" %}</a></li>
+          <li class="list-group-item"><a href="#">{% trans "Organisation" %}</a></li>
+          <li class="list-group-item"><a href="#">{% trans "Team" %}</a></li>
+          <li class="list-group-item"><a href="">{% trans "Partner Schweiz" %}</a></li>
+          <li class="list-group-item"><a href="">{% trans "Partner Afrika" %}</a></li>
         </ul>
 
       </div>
       <div class="col-sm-3">
 
-        <h4>{% trans "Unsere Partner" %}</h4>
-        <ul>
-          <li><a href="">{% trans "Partner Schweiz" %}</a></li>
-          <li><a href="">{% trans "Partner Afrika" %}</a></li>
+        <h4>{% trans "Quicklinks" %}</h4>
+        <ul class="list-group">
+          <li class="list-group-item"><a href="">{% trans "Blog" %}</a></li>
+          <li class="list-group-item"><a href="">{% trans "Agenda" %}</a></li>
+          <li class="list-group-item"><a href="">{% trans "FAQ" %}</a></li>
+          <li class="list-group-item"><a href="">{% trans "Velafrica Zeitung" %}</a></li>
+          <li class="list-group-item"><a href="">{% trans "Sitemap" %}</a></li>
         </ul>
 
       </div>
-      <div class="col-sm-3">
 
-        <h4>{% trans "News und Termine" %}</h4>
-        <ul>
-          <li><a href="">{% trans "Blog" %}</a></li>
-          <li><a href="">{% trans "Agenda" %}</a></li>
-          <li><a href="">{% trans "FAQ" %}</a></li>
-          <li><a href="">{% trans "Velafrica Zeitung" %}</a></li>
-        </ul>
-
-      </div>
       <div class="col-sm-3">
 
         <h4>{% trans "Kontakt" %}</h4>
-        <p>Velafrica</p>
-        <p>Waldeggstrasse 27</p>
-        <p>3097 Liebfeld</p>
-        <p>T +41(0)31 979 70 50</p>
-        <p>info@velafrica.ch</p>
-        <p><img src="{% static "img/velafrica_logo_claim.svg" %}"></p>
+        <ul class="list-group">
+          <li class="list-group-item">Velafrica</li>
+          <li class="list-group-item">Waldeggstrasse 27</li>
+          <li class="list-group-item">3097 Liebfeld</li>
+          <li class="list-group-item">T +41(0)31 979 70 50</li>
+          <li class="list-group-item"><a href="#">info@velafrica.ch</a></li>
+          <li class="list-group-item"><a href="#">Auf Karte anzeigen</a></li>
+        </ul>
+
+      </div>
+
+      <div class="col-sm-3">
+
+        <p><img class="footer-img" src="{% static "img/velafrica_logo_claim.svg" %}"></p>
+        <p><img class="footer-img" src="{% static "img/self_label.png" %}"></p>
 
       </div>
     </div>

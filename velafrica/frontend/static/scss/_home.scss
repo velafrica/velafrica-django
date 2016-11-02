@@ -103,21 +103,21 @@ section.bicycle-statistic {
       height: 50px;
       width: 206px;
       border-radius: $vel-border-radius;
-      border: 1px solid $velafrica-brown-5;
+      border: 1px solid $velafrica-brown-3;
       font-size: 16px;
       text-align: center;
 
       &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-        color: $velafrica-brown-5;
+        color: $velafrica-brown-3;
       }
       &::-moz-placeholder { /* Firefox 19+ */
-        color: $velafrica-brown-5;
+        color: $velafrica-brown-3;
       }
       &:-ms-input-placeholder { /* IE 10+ */
-        color: $velafrica-brown-5;
+        color: $velafrica-brown-3;
       }
       &:-moz-placeholder { /* Firefox 18- */
-        color: $velafrica-brown-5;
+        color: $velafrica-brown-3;
       }
 
       &:focus {
@@ -133,12 +133,12 @@ section.bicycle-statistic {
       margin-left: 1rem;
       width: 298px;
       padding: 6px 20px 8px;
-      background-color: $velafrica-brown-5;
+      background-color: $velafrica-brown-3;
       border-radius: $vel-border-radius;
       text-decoration: none;
 
       &:hover {
-        background-color: $velafrica-brown-2;
+        background-color: $velafrica-brown-3-hover;
       }
     }
   }
@@ -190,7 +190,9 @@ section.join-us {
 }
 
 section.news {
-  //border-bottom: 1px solid $velafrica-brown-4;
-  border-top: 1px solid $velafrica-brown-4;
   padding: 90px 0;
+
+  h1 {
+    margin-bottom: 60px;
+  }
 }

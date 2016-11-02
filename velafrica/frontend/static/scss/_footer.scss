@@ -1,3 +1,93 @@
 footer {
-  background-color: $velafrica-brown-3;
+  background-color: $velafrica-brown-5;
+  & > div > div {
+    padding: 30px 0 30px;
+  }
+
+  .social {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    
+    a {
+      padding-right: 30px;
+
+      & > img {
+        height: 26px;
+      }
+    }
+
+  }
+
+  .newsletter {
+    height: 50px;
+    width: 206px;
+    border-radius: $vel-border-radius;
+    border: 1px solid white;
+    font-size: 16px;
+    text-align: center;
+
+    &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+      color: $velafrica-brown-3;
+    }
+    &::-moz-placeholder { /* Firefox 19+ */
+      color: $velafrica-brown-3;
+    }
+    &:-ms-input-placeholder { /* IE 10+ */
+      color: $velafrica-brown-3;
+    }
+    &:-moz-placeholder { /* Firefox 18- */
+      color: $velafrica-brown-3;
+    }
+
+    &:focus {
+      -webkit-box-shadow: none;
+      -moz-box-shadow: none;
+      outline: auto 0px;
+      border-color: $velafrica-brown-2;
+    }
+  }
+
+  .newsletter-submit-button {
+    color: white;
+    margin-left: 1rem;
+    width: 298px;
+    height: 50px;
+    border-style: none;
+    padding: 6px 20px 8px;
+    background-color: $velafrica-brown-3;
+    border-radius: $vel-border-radius;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+
+    &:hover {
+      background-color: $velafrica-brown-3-hover;
+    }
+  }
+
+  h4 {
+    font-weight: bolder;
+  }
+
+  ul li {
+    a {
+      font-size: 16px;
+      color: $velafrica-brown-1;
+      font-weight: lighter;
+      line-height: 24px;
+      letter-spacing: .2px;
+    }
+  }
+
+  .list-group-item {
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    font-size: 16px;
+  }
+
+  img.footer-img {
+    width: 50%;
+  }
 }
