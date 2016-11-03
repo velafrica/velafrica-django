@@ -9,10 +9,10 @@ from velafrica.collection.models import Dropoff
 from velafrica.collection.serializer import DropoffSerializer
 
 @api_view(['GET'])
-# @renderer_classes((JSONRenderer,))
 @permission_classes((AllowAny,))
 def get_dropoffs(request):
-    all = Dropoff.objects.filter(active=True).filter(Q(temp=False) | Q(temp_end__lte=datetime.now().date()))
+    q = Q(temp=True) & Q(temp_end__lt=datetime.now().date().strftime('%Y-%m-%d'))
+    all = Dropoff.objects.filter(active=True).exclude(q)
 
     serializer = DropoffSerializer(all, many=True)
     return Response(serializer.data)
