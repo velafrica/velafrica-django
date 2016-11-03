@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
 from django.utils.safestring import mark_safe
-from import_export import fields
-from import_export import resources
-from import_export.admin import ImportExportMixin, ExportMixin
+from import_export import fields, resources, widgets
+from import_export.admin import ImportExportMixin, ExportMixin, ImportMixin
 from simple_history.admin import SimpleHistoryAdmin
 
 from velafrica.collection.models import *
@@ -169,7 +168,19 @@ class CollectionEventAdmin(ImportExportMixin, SimpleHistoryAdmin):
     status_logistics.short_description = 'Abholung'
 
 
+class DropoffResource(resources.ModelResource):
+    """
+    Define the Dropoff resource for import / export
+    """
+
+    class Meta:
+        model = Dropoff
+
+
 class DropoffAdmin(admin.ModelAdmin):
+    resources_class = DropoffResource
+    search_fields = ['name']
+    list_filter = ['active', 'sbb', 'temp', 'pickup']
     fieldsets = (
         ('Allgemein', {
             'fields': ('name', 'active', 'sbb', 'address', 'contact_person',
