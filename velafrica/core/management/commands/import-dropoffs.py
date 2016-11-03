@@ -32,6 +32,7 @@ class Command(BaseCommand):
             country = Country.objects.get(name='Schweiz')
             firstline = True
             sbb_sentence = '<a target="_blank" href="http://velafrica.ch.darwin.sui-inter.net/de/Kontakt/Kontaktformular">velafrica.ch</a>'.decode('utf-8')
+            sbb_sentence2 = '<a target="_blank" href="http://www.velosfuerafrika.ch/vfa/kontakt/kontakt.html">velosfuerafrika.ch</a>'.decode('utf-8')
             for row in reader:
                 if firstline:
                     firstline = False
@@ -64,7 +65,6 @@ class Command(BaseCommand):
                     address_id = address.first().pk
 
                 new_dropoff = Dropoff(
-                    name=csv_item['Firma'],
                     active=True,
                     address_id=address_id,
                     contact_person=u'{} {} {}'.format(csv_item['Anrede'], csv_item['Vorname'], csv_item['Nachname']),
@@ -72,7 +72,12 @@ class Command(BaseCommand):
                     opening_time=csv_item['Öffnungszeiten']
                 )
 
-                if sbb_sentence in csv_item['Öffnungszeiten']:
+                if csv_item['Firma']:
+                    new_dropoff.name = csv_item['Firma']
+                else:
+                    new_dropoff.name = 'Unbenannt'
+
+                if sbb_sentence in csv_item['Öffnungszeiten'] or sbb_sentence2 in csv_item['Öffnungszeiten']:
                     new_dropoff.sbb = True
 
                 new_dropoff.save()
