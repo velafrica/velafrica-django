@@ -106,19 +106,23 @@ if ($('section.map').length) {
 
       content += '<h2>' + value.name + '</h2>';
 
+      if(value.temp_start && value.temp_end) {
+        content += '<p class="lead">Temporär von ' + value.temp_start + ' bis ' + value.temp_end + '</p>';
+      }
+
       if (value.opening_time) {
-        content += '<h4>' + 'Öffnungszeiten' + '</h4>';
+        content += '<h3>' + 'Öffnungszeiten' + '</h3>';
         content += '<p>' + value.opening_time + '</p>';
       }
 
       if (value.pickup) {
-        content += '<h4>' + 'Abholservice' + '</h4>';
+        content += '<h3>' + 'Abholservice' + '</h3>';
         content += '<p>' + value.pickup_description + '</p>';
       }
 
 
       if (value.notes) {
-        content += '<h4>' + 'Weitere Informationen' + '</h4>';
+        content += '<h3>' + 'Weitere Informationen' + '</h3>';
         content += '<p>' + value.notes + '</p>';
       }
 
