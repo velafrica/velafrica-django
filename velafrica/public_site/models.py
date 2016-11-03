@@ -7,6 +7,9 @@ class DonationAmount(models.Model):
     description = models.TextField(verbose_name='Beschreibung')
     amount = models.DecimalField(max_digits=10, decimal_places=2)
 
+    def __unicode__(self):
+        return u"{} - {}".format(self.amount, self.description[0:80])
+
     class Meta:
         verbose_name = 'Geldspendebetrag'
         verbose_name_plural = 'Geldspendebeträge'
