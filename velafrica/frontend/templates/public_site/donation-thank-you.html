@@ -1,6 +1,24 @@
 {% extends "public_site/base.html" %}
+{% load static %}
 {% load i18n %}
 
 {% block content %}
-  <h1 class="text-center">MERCI DIKKA!</h1>
+  <section id="donation-thank-you" class="container">
+    <div class="row heading">
+      {% if paypal %}
+        <h1 class="col-sm-8 col-sm-offset-2 text-center">{% trans "Vielen Dank für Ihre Spende!" %}</h1>
+      {% else %}
+        <h1 class="col-sm-8 col-sm-offset-2 text-center">{% trans "Formular versendet" %}</h1>
+        <p class="col-sm-8 col-sm-offset-2 text-center">{% trans "Der Einzahlungsschein wird Ihnen in ein paar Tagen per Post zugestellt" %}</p>
+      {% endif %}
+    </div>
+    <div class="row link">
+      <div class="col-sm-12  text-center">
+        <a href="#">{% trans "Unsere Partner in Afrika" %}</a>
+      </div>
+    </div>
+    <div class="row image">
+      <img class="img-responsive" src="{% static 'img/werkstatt.png' %}" alt="">
+    </div>
+  </section>
 {% endblock %}
