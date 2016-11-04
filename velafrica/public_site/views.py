@@ -43,7 +43,7 @@ def render_donation_template(request):
         "item_name": "Velafrica Donation",
         "invoice": "unique-invoice-id",
         "notify_url": request.build_absolute_uri(reverse('paypal-ipn')),
-        "return_url":  request.build_absolute_uri(reverse('home:donation:thank_you')),
+        "return_url":  request.build_absolute_uri(reverse('home:donation:thank_you_paypal')),
         "cancel_return": request.build_absolute_uri(),
         "rm": "1",
         "custom": "Upgrade all users!",  # Custom command to correlate to some function later (optional)
