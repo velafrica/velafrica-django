@@ -177,7 +177,7 @@ class DropoffResource(resources.ModelResource):
         model = Dropoff
 
 
-class DropoffAdmin(ExportMixin, admin.ModelAdmin):
+class DropoffAdmin(ImportExportMixin, admin.ModelAdmin):
     resources_class = DropoffResource
     search_fields = ['name', 'address__street', 'address__zipcode', 'address__city']
     list_filter = ['active', 'sbb', 'temp', 'pickup']
