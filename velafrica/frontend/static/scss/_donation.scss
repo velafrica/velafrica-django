@@ -257,3 +257,27 @@ section#donation {
     }
   }
 }
+
+section#donation-thank-you {
+  padding-top: 90px;
+  padding-bottom: 120px;
+
+  .link {
+    margin: 60px;
+  }
+
+  .image {
+    img {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  //img {
+  //  margin: 0 0 0 0;
+  //  margin-left: auto;
+  //  margin-right: auto;
+  //  margin-top: 60px;
+  //  margin-bottom: 90px;
+  //}
+}
