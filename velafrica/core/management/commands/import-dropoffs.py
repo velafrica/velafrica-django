@@ -31,8 +31,12 @@ class Command(BaseCommand):
             reader = csv.reader(csvfile, delimiter=';', quotechar='"')
             country = Country.objects.get(name='Schweiz')
             firstline = True
-            sbb_sentence = '<a target="_blank" href="http://velafrica.ch.darwin.sui-inter.net/de/Kontakt/Kontaktformular">velafrica.ch</a>'.decode('utf-8')
-            sbb_sentence2 = '<a target="_blank" href="http://www.velosfuerafrika.ch/vfa/kontakt/kontakt.html">velosfuerafrika.ch</a>'.decode('utf-8')
+            sbb_checks = [
+                '<a target="_blank" href="http://velafrica.ch.darwin.sui-inter.net/de/Kontakt/Kontaktformular">velafrica.ch</a>'.decode('utf-8'),
+                '<a target="_blank" href="http://www.velosfuerafrika.ch/vfa/kontakt/kontakt.html">velosfuerafrika.ch</a>'.decode('utf-8'),
+                '<a target="_blank" href="http://velafrica.ch.darwin.sui-inter.net/fr/Contact/Formulaire-de-contact">velafrica.ch</a>'.decode('utf-8')
+            ]
+
             for row in reader:
                 if firstline:
                     firstline = False
@@ -77,8 +81,10 @@ class Command(BaseCommand):
                 else:
                     new_dropoff.name = 'Unbenannt'
 
-                if sbb_sentence in csv_item['Öffnungszeiten'] or sbb_sentence2 in csv_item['Öffnungszeiten']:
-                    new_dropoff.sbb = True
+
+                for sbb_check in sbb_checks:
+                    if sbb_check in csv_item['Öffnungszeiten']:
+                        new_dropoff.sbb = True
 
                 new_dropoff.save()
                 print(u'successfully imported {}'.format(new_dropoff))
