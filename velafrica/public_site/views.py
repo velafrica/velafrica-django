@@ -70,3 +70,7 @@ def order_invoice(request):
 def thank_you(request):
     template_name = 'public_site/donation-thank-you.html'
     return render_to_response(template_name, {}, context_instance=RequestContext(request))
+
+def thank_you_paypal(request):
+    template_name = 'public_site/donation-thank-you.html'
+    return render_to_response(template_name, {'paypal': True}, context_instance=RequestContext(request))
