@@ -123,6 +123,7 @@ INSTALLED_APPS = (
     'storages',
 
     'webpack_loader',
+    'mailchimp',
 )
 
 # Django Storages Settings for SFTP
@@ -323,3 +324,8 @@ if 'SITE_ID' in os.environ:
     SITE_ID = int(os.environ['SITE_ID'])
 else:
     SITE_ID = 1
+
+if 'MAILCHIMP_API_KEY' in os.environ:
+    MAILCHIMP_API_KEY = os.environ['MAILCHIMP_API_KEY']
+else:
+    MAILCHIMP_API_KEY = ''
