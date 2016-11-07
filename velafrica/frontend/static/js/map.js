@@ -64,8 +64,8 @@ if ($('section.map').length) {
           window.VAM.objects[value.id] = value;
           var options = {
             title: value.name,
-            lat: Number(value.address.latitude),
-            lng: Number(value.address.longitude),
+            lat: Number((value.custom_lat) ? value.custom_lat : value.address.latitude),
+            lng: Number((value.custom_lon) ? value.custom_lon : value.address.longitude),
             content: window.VAM.getInfoWindowContent(value),
             icon: window.VAM.getIcon(value)
           };
@@ -105,6 +105,7 @@ if ($('section.map').length) {
       content += '<div class="infowindow">';
 
       content += '<h2>' + value.name + '</h2>';
+      content += '<p class="lead">' + value.address.street + ', ' + value.address.zipcode + ' ' + value.address.city + '</p>';
 
       if(value.temp_start && value.temp_end) {
         content += '<p class="lead">Temporär von ' + value.temp_start + ' bis ' + value.temp_end + '</p>';
