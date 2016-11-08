@@ -21,5 +21,6 @@ $(document).ready(function () {
     require('bootstrap.min');
     require('map');
     require('contact');
+    require('newsletter');
 });
 
