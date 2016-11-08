@@ -4,22 +4,19 @@
 
 {% block content %}
   <section id="donation-thank-you" class="container-fluid">
-  <section id="donation-thank-you" class="container-fluid">
     <div class="md-header row">
-      <h1 class="md-header-title col-sm-6 col-sm-offset-3 text-center">
-        {% if paypal %}
-          <h1 class="col-sm-8 col-sm-offset-2 text-center">
-            {% trans "Vielen Dank für<br/> Ihre Spende!" %}
-          </h1>
-        {% else %}
-          <h1 class="col-sm-8 col-sm-offset-2 text-center">
-            {% trans "Formular versendet" %}
-          </h1>
-          <p class="col-sm-8 col-sm-offset-2 text-center">
-            {% trans "Der Einzahlungsschein wird Ihnen in ein paar Tagen per Post zugestellt" %}
-          </p>
-        {% endif %}
-      </h1>
+      {% if paypal %}
+        <h1 class="col-sm-6 col-sm-offset-3 text-center">
+          {% trans "Vielen Dank für<br/> Ihre Spende!" %}
+        </h1>
+      {% else %}
+        <h1 class="col-sm-6 col-sm-offset-3 text-center">
+          {% trans "Formular versendet" %}
+        </h1>
+        <p class="col-sm-6 col-sm-offset-3 text-center">
+          {% trans "Der Einzahlungsschein wird Ihnen in ein paar Tagen per Post zugestellt" %}
+        </p>
+      {% endif %}
     </div>
     <div class="md-donation-thank-you row">
       <h3 class="col-sm-6 col-sm-offset-3 text-center">
