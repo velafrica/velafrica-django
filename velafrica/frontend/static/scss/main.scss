@@ -16,6 +16,11 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
+  .container-fluid {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
   h1 {
     font-size: 64px;
     font-weight: bold;

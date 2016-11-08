@@ -1,12 +1,15 @@
 from django.conf.urls import include, url
 from .views import order_invoice
 from django.conf.urls import url
-from .views import render_template, render_donation_template, render_map_template, order_invoice, thank_you
+from .views import render_template, render_donation_template, \
+                   render_map_template, order_invoice, \
+                   thank_you, thank_you_paypal
 
 donations = [
     url(r'^$', render_donation_template, name='home'),
     url(r'^orderinvoice/$', order_invoice, name='order_invoice'),
     url(r'^thank-you/$', thank_you, name='thank_you'),
+    url(r'^thank-you-paypal/$', thank_you_paypal, name='thank_you_paypal'),
 ]
 
 map = [

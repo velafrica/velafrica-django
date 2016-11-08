@@ -1,6 +1,33 @@
 {% extends "public_site/base.html" %}
+{% load static %}
 {% load i18n %}
 
 {% block content %}
-  <h1 class="text-center">MERCI DIKKA!</h1>
+  <section id="donation-thank-you" class="container-fluid">
+    <div class="md-header row">
+      {% if paypal %}
+        <h1 class="col-sm-6 col-sm-offset-3 text-center">
+          {% trans "Vielen Dank für<br/> Ihre Spende!" %}
+        </h1>
+      {% else %}
+        <div class="col-sm-6 col-sm-offset-3 text-center checkmark">
+          <h1>
+          {% trans "Formular versendet" %}
+          </h1>
+        </div>
+        <p class="col-sm-6 col-sm-offset-3 text-center">
+          {% trans "Der Einzahlungsschein wird Ihnen in ein paar Tagen per Post zugestellt" %}
+        </p>
+      {% endif %}
+    </div>
+    <div class="md-donation-thank-you row">
+      <h3 class="col-sm-6 col-sm-offset-3 text-center">
+        <!--https://hofratsuess.tpondemand.com/entity/419-->
+        <a href="#todo">{% trans "Unsere Partner in Afrika" %}</a>
+      </h3>
+      <div class="col-sm-6 col-sm-offset-3 text-center">
+        <img src="{% static 'img/werkstatt.png' %}" alt='{% trans "Velafrica Werkstatt" %}'>
+      </div>
+    </div>
+  </section>
 {% endblock %}
