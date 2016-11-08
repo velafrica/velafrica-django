@@ -16,9 +16,18 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
+  padding-top: 80px;
+
   .container-fluid {
     padding-right: 0;
     padding-left: 0;
+
+    .row {
+      @media (max-width: 768px) {
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+    }
   }
 
   h1 {
@@ -28,8 +37,8 @@ body {
     letter-spacing: .7px;
     margin-top: 0;
 
-    &.big-number {
-
+    @media (max-width: 320px) {
+      font-size: 54px;
     }
   }
 
@@ -80,6 +89,14 @@ body {
 
     &:hover {
       color: $velafrica-hover;
+    }
+  }
+
+  @media (max-width: 768px) {
+    input {
+      width: 100% !important;
+      margin: 5px 0 !important;
+      margin-left: 0 !important;
     }
   }
 }
