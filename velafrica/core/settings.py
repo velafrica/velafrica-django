@@ -329,3 +329,9 @@ if 'MAILCHIMP_API_KEY' in os.environ:
     MAILCHIMP_API_KEY = os.environ['MAILCHIMP_API_KEY']
 else:
     MAILCHIMP_API_KEY = ''
+
+if 'MAILCHIMP_LIST_ID' in os.environ:
+    MAILCHIMP_LIST_ID = os.environ['MAILCHIMP_LIST_ID']
+else:
+    MAILCHIMP_LIST_ID = ''
+
