@@ -16,3 +16,8 @@ def get_dropoffs(request):
 
     serializer = DropoffSerializer(all, many=True)
     return Response(serializer.data)
+
+@api_view(['GET'])
+@permission_classes((AllowAny,))
+def subscribe_newsletter(request):
+    pass
