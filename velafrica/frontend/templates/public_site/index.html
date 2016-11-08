@@ -68,8 +68,8 @@
               <div class="bicycle-tracking">
                 <form>
                   <input class="tracking-code" type="text" placeholder="{% trans "Tracking-Code eingeben" %}">
-                  <a href="#sammelstelle?=xyz" type="submit"
-                     class="tracking-submit-button">{% trans "Aktuellen Standort abfragen" %}</a>
+                  <input href="#sammelstelle?=xyz" type="submit"
+                     class="tracking-submit-button" value="{% trans "Aktuellen Standort abfragen" %}">
                 </form>
               </div>
             </div>
@@ -95,53 +95,57 @@
 
       <section class="join-us">
         <div class="container text-center">
+          <div class="row">
 
-          <h1>{% trans "Machen Sie mit!" %}</h1>
+            <h1>{% trans "Machen Sie mit!" %}</h1>
 
-          <div class="col-md-3">
-            <a href="#">
-              <div class="panel panel-default">
-                <div class="panel-body">
-                  <img src="../../static/img/bicycles.jpg" alt="">
+            <div class="col-sm-6 col-lg-3">
+              <a href="#">
+                <div class="panel panel-default">
+                  <div class="panel-body">
+                    <img src="../../static/img/bicycles.jpg" alt="">
+                  </div>
+                  <span>{% trans "Sammelaktion organisieren" %}</span>
                 </div>
-                <span>{% trans "Sammelaktion organisieren" %}</span>
-              </div>
-            </a>
-          </div>
+              </a>
+            </div>
 
-          <div class="col-md-3">
-            <a href="#">
-              <div class="panel panel-default">
-                <div class="panel-body">
-                  <img src="../../static/img/bicycles.jpg" alt="">
+            <div class="col-sm-6 col-lg-3">
+              <a href="#">
+                <div class="panel panel-default">
+                  <div class="panel-body">
+                    <img src="../../static/img/bicycles.jpg" alt="">
+                  </div>
+                  <span>{% trans "Bei Velafrica anpacken" %}</span>
                 </div>
-                <span>{% trans "Bei Velafrica anpacken" %}</span>
-              </div>
-            </a>
-          </div>
+              </a>
+            </div>
 
-          <div class="col-md-3">
-            <a href="#">
-              <div class="panel panel-default">
-                <div class="panel-body">
-                  <img src="../../static/img/bicycles.jpg" alt="">
+            <div class="clearfix visible-sm-block"></div>
+
+            <div class="col-sm-6 col-lg-3">
+              <a href="#">
+                <div class="panel panel-default">
+                  <div class="panel-body">
+                    <img src="../../static/img/bicycles.jpg" alt="">
+                  </div>
+                  <span>{% trans "Als Firma engagieren" %}</span>
                 </div>
-                <span>{% trans "Als Firma engagieren" %}</span>
-              </div>
-            </a>
-          </div>
+              </a>
+            </div>
 
-          <div class="col-md-3">
-            <a href="#">
-              <div class="panel panel-default">
-                <div class="panel-body">
-                  <img src="../../static/img/bicycles.jpg" alt="">
+            <div class="col-sm-6 col-lg-3">
+              <a href="#">
+                <div class="panel panel-default">
+                  <div class="panel-body">
+                    <img src="../../static/img/bicycles.jpg" alt="">
+                  </div>
+                  <span>{% trans "Angebote für Schulen" %}</span>
                 </div>
-                <span>{% trans "Angebote für Schulen" %}</span>
-              </div>
-            </a>
-          </div>
+              </a>
+            </div>
 
+          </div>
         </div>
       </section>
 
