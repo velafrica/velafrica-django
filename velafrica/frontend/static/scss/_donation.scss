@@ -260,3 +260,35 @@ section#donation {
     }
   }
 }
+
+section#donation-thank-you {
+  h1 {
+    letter-spacing: 0.69px;
+    color: $velafrica-brown-1;
+    font-size: 64px;
+    line-height: 74px;
+    margin-top: 90px;
+    margin-bottom: 60px;
+  }
+
+  h3 a {
+    text-decoration: none;
+    color: $velafrica-brown-3;
+    border-bottom: 2px solid $velafrica-brown-3;
+    padding-bottom: 0px;
+    line-height: 20px;
+    display: inline-block;
+
+    &:hover, &:focus {
+      color: $velafrica-brown-3-hover;
+      border-bottom: 2px solid $velafrica-brown-3-hover;
+    }
+  }
+
+  img {
+    margin-top: 60px;
+    margin-bottom: 120px;
+    width: 318px;
+    height: 207px;
+  }
+}
