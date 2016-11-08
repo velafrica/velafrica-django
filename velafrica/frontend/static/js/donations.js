@@ -13,13 +13,20 @@ if ($('#donation').length) {
   var emptyAndReadOnly = function() {
     var checkbox = $(this);
     var donation_amount = $('#id_donation_amount');
+
+    // person would like an empty ESR
     if(checkbox.is(':checked')) {
       donation_amount.val(0);
       donation_amount.attr('readonly', true);
+      donation_amount.hide();
+      donation_amount.parent().find('span').first().text('–');
 
+    // person would like an ESR with an amount prefilled
     } else {
       donation_amount.attr('readonly', false);
-      donation_amount.val($('#md-amounts-tabs li.active a').data('amount'));
+      donation_amount.val($('.md-amount-panel.active').data('amount'));
+      donation_amount.show();
+      donation_amount.parent().find('span').first().text('CHF');
     }
   };
 

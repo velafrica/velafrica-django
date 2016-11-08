@@ -161,6 +161,7 @@ section#donation {
                 font-size: 26px;
                 float: left;
                 margin-top: 1px;
+                margin-bottom: 4px;
               }
 
               input {
@@ -205,6 +206,7 @@ section#donation {
                   font-size: 16px;
                   width: 100%;
                   padding: 15px 20px;
+                  height: 100px;
               }
 
               &.donation_amount_label {
@@ -217,6 +219,7 @@ section#donation {
                 width: 0px;
                 height: 0px;
                 display: block;
+                margin: 0;
               }
 
               label[for='id_empty_invoice'] {
@@ -259,17 +262,33 @@ section#donation {
 }
 
 section#donation-thank-you {
-  padding-top: 90px;
-  padding-bottom: 120px;
-
-  .link {
-    margin: 60px;
+  h1 {
+    letter-spacing: 0.69px;
+    color: $velafrica-brown-1;
+    font-size: 64px;
+    line-height: 74px;
+    margin-top: 90px;
+    margin-bottom: 60px;
   }
 
-  .image {
-    img {
-      margin-left: auto;
-      margin-right: auto;
+  h3 a {
+    text-decoration: none;
+    color: $velafrica-brown-3;
+    border-bottom: 2px solid $velafrica-brown-3;
+    padding-bottom: 0px;
+    line-height: 20px;
+    display: inline-block;
+
+    &:hover, &:focus {
+      color: $velafrica-brown-3-hover;
+      border-bottom: 2px solid $velafrica-brown-3-hover;
     }
+  }
+
+  img {
+    margin-top: 60px;
+    margin-bottom: 120px;
+    width: 318px;
+    height: 207px;
   }
 }

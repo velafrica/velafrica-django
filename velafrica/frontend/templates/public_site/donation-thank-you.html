@@ -3,22 +3,32 @@
 {% load i18n %}
 
 {% block content %}
-  <section id="donation-thank-you" class="container">
-    <div class="row heading">
-      {% if paypal %}
-        <h1 class="col-sm-8 col-sm-offset-2 text-center">{% trans "Vielen Dank für Ihre Spende!" %}</h1>
-      {% else %}
-        <h1 class="col-sm-8 col-sm-offset-2 text-center">{% trans "Formular versendet" %}</h1>
-        <p class="col-sm-8 col-sm-offset-2 text-center">{% trans "Der Einzahlungsschein wird Ihnen in ein paar Tagen per Post zugestellt" %}</p>
-      {% endif %}
+  <section id="donation-thank-you" class="container-fluid">
+  <section id="donation-thank-you" class="container-fluid">
+    <div class="md-header row">
+      <h1 class="md-header-title col-sm-6 col-sm-offset-3 text-center">
+        {% if paypal %}
+          <h1 class="col-sm-8 col-sm-offset-2 text-center">
+            {% trans "Vielen Dank für<br/> Ihre Spende!" %}
+          </h1>
+        {% else %}
+          <h1 class="col-sm-8 col-sm-offset-2 text-center">
+            {% trans "Formular versendet" %}
+          </h1>
+          <p class="col-sm-8 col-sm-offset-2 text-center">
+            {% trans "Der Einzahlungsschein wird Ihnen in ein paar Tagen per Post zugestellt" %}
+          </p>
+        {% endif %}
+      </h1>
     </div>
-    <div class="row link">
-      <div class="col-sm-12  text-center">
-        <a href="#">{% trans "Unsere Partner in Afrika" %}</a>
+    <div class="md-donation-thank-you row">
+      <h3 class="col-sm-6 col-sm-offset-3 text-center">
+        <!--https://hofratsuess.tpondemand.com/entity/419-->
+        <a href="#todo">{% trans "Unsere Partner in Afrika" %}</a>
+      </h3>
+      <div class="col-sm-6 col-sm-offset-3 text-center">
+        <img src="{% static 'img/werkstatt.png' %}" alt='{% trans "Velafrica Werkstatt" %}'>
       </div>
-    </div>
-    <div class="row image">
-      <img class="img-responsive" src="{% static 'img/werkstatt.png' %}" alt="">
     </div>
   </section>
 {% endblock %}
