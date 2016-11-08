@@ -1,102 +1,140 @@
 .header-wrap {
+  background-color: white;
+  margin-bottom: 0;
 
-  .row {
-    display: flex;
+  header > div > div {
+    padding-left: 15px;
+    padding-right: 15px;
   }
 
   header {
-    .container-fluid {
-      padding-left: 30px;
-      padding-right: 30px;
+    & > div > div > div {
+      height: 80px;
     }
 
-    .big-nav {
-      background-color: $velafrica;
-      visibility: hidden;
-      height: 0;
-    }
+    .navigation-container {
+      display: flex;
+      padding-left: 0;
+      padding-right: 0;
 
-    .left {
-      .logo {
+      ul {
+        list-style-type: none;
+        padding-left: 0;
+      }
 
-        img {
-          flex: 0 0 100px;
-          padding-top: 5px;
-          height: 75px;
+      .navigation-left {
+        flex-grow: 0;
+        flex-shrink: 0;
+        flex-basis: 100px;
+        margin-left: 15px;
+
+        @media (max-width: 435px) {
+          flex-basis: 75px;
+        }
+
+        .logo {
+          img {
+            padding-top: 5px;
+            height: 70px;
+          }
         }
       }
-    }
 
-    .right {
-      .dropdown {
-        float: right;
+      .navigation-right {
+        flex-grow: 1;
+        flex-basis: auto;
+
+        height: 80px;
         display: flex;
         align-items: center;
-        height: 80px;
+        justify-content: flex-end;
 
-        .btn-donation {
-          font-size: 20px;
-          font-weight: bold;
-          color: white;
-          background-color: $velafrica-brown-3;
-          border-color: transparent;
-          height: 50px;
-          width: $vel-don-with;
-          border-radius: $vel-border-radius;
+        li {
+          padding: 1rem;
 
-          &:hover {
-            background-color: $velafrica-brown-3-hover;
+          @media (max-width: 435px) {
+            padding: 5px;
           }
-
-          &:focus,
-          &:active {
-            outline: 0;
-            outline-offset: 0;
-            border-color: transparent;
-            box-shadow: none;
-          }
-        }
-
-        .dropdown-menu {
-          padding: 0;
-          text-align: center;
-          background-color: $velafrica-brown-3;
-          border-radius: $vel-border-radius;
-          width: $vel-don-with;
-          border-color: transparent;
-          margin: -13px 0 0;
-
-          li {
-            border-bottom: 1px solid $velafrica-brown-3-hover;
-
-            &:last-child {
-              border-color: transparent;
+          a {
+            color: $velafrica-brown-3;
+            text-decoration: none;
+            font-weight: normal;
+            transition: .5s ease;
+            
+            &:hover {
+              color: $velafrica-brown-1;
             }
 
-            a {
-              font-size: 20px;
-              color: white;
-              text-decoration: none;
-              padding: 11px 20px;
+            @media (max-width: 375px) {
+              font-size: 14px;
+            }
+          }
 
-              &:first-child {
-                &:hover {
-                  background-color: $velafrica-brown-3-hover;
-                  border-top-left-radius: $vel-border-radius;
-                  border-top-right-radius: $vel-border-radius;
-                }
-              }
+          .btn-donation {
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            background-color: $velafrica-brown-3;
+            border-color: transparent;
+            height: 50px;
+            width: $vel-don-with;
+            border-radius: $vel-border-radius;
+
+            &:hover {
+              background-color: $velafrica-brown-3-hover;
+            }
+            &:focus,
+            &:active {
+              outline: 0;
+              outline-offset: 0;
+              border-color: transparent;
+              box-shadow: none;
+            }
+          }
+
+          .dropdown-menu {
+            right: 0;
+            padding: 0;
+            text-align: center;
+            background-color: $velafrica-brown-3;
+            border-radius: $vel-border-radius;
+            width: $vel-don-with;
+            border-color: transparent;
+            margin: -5px 10px 0;
+
+            li {
+              border-bottom: 1px solid $velafrica-brown-3-hover;
+              padding: 0;
 
               &:last-child {
-                &:hover {
-                  background-color: $velafrica-brown-3-hover;
-                  border-bottom-left-radius: $vel-border-radius;
-                  border-bottom-right-radius: $vel-border-radius;
-                }
+                border-color: transparent;
               }
 
-              &:hover {
-                background-color: $velafrica-brown-3-hover;
+              a {
+                font-size: 20px;
+                color: white;
+                text-decoration: none;
+                padding: 11px 20px;
+
+                &:first-child {
+                  &:hover {
+                    background-color: $velafrica-brown-3-hover;
+                    border-top-left-radius: $vel-border-radius;
+                    border-top-right-radius: $vel-border-radius;
+                  }
+                }
+
+                &:last-child {
+                  &:hover {
+                    background-color: $velafrica-brown-3-hover;
+                    border-bottom-left-radius: $vel-border-radius;
+                    border-bottom-right-radius: $vel-border-radius;
+                  }
+                }
+
+                &:hover {
+                  background-color: $velafrica-brown-3-hover;
+                }
               }
             }
           }

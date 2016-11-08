@@ -1,45 +1,44 @@
 {% load i18n %}
 {% load static %}
 
-<div class="header-wrap">
+<div class="header-wrap navbar navbar-default navbar-fixed-top">
 
   <header>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-6 left">
+        <div class="col-xs-12 navigation-container">
 
-          <a class="logo" href="/">
-            <img src="{% static "img/velafrica_logo_claim.svg" %}" alt="">
-          </a>
+          <ul class="navigation-left">
+            <li>
+              <a class="logo" href="/">
+                <img src="{% static "img/velafrica_logo_claim.svg" %}" alt="">
+              </a>
+            </li>
+          </ul>
 
-        </div>
-        <div class="col-sm-6 navbar-right right">
+          <ul class="navigation-right">
+            <li><a href="#">{% trans "Über uns" %}</a></li>
+            <li><a href="#">{% trans "Partner" %}</a></li>
+            <li><a href="#">{% trans "Mitmachen" %}</a></li>
+            <li class="dropdown hidden-xs">
 
-          <div class="dropdown">
-            <button class="btn btn-donation dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-              Spenden
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-              <li><a href="{% url "home:donation:home" %}">{% trans "Geldspende" %}</a></li>
-              <li><a href="#">{% trans "Velospende" %}</a></li>
-              <li><a href="#">{% trans "Geschenkidee" %}</a></li>
-            </ul>
-          </div>
+              <button class="btn btn-donation dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
+                      aria-haspopup="true" aria-expanded="false">
+                Spenden
+                <span class="caret"></span>
+              </button>
+
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li><a href="{% url "home:donation:home" %}">{% trans "Geldspende" %}</a></li>
+                <li><a href="#">{% trans "Velospende" %}</a></li>
+                <li><a href="#">{% trans "Geschenkidee" %}</a></li>
+              </ul>
+            </li>
+          </ul>
+
         </div>
       </div>
     </div>
-
-    <div class="big-nav">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-12">
-          </div>
-        </div>
-      </div>
-    </div>
-
   </header>
 
 </div>
