@@ -25,6 +25,7 @@ def subscribe_newsletter(request):
     email = request.POST.get('email', False)
     if email:
         list = mailchimp.utils.get_connection().get_list_by_id(MAILCHIMP_LIST_ID)
+        # TODO: proper exception handling
         return Response(list.subscribe(email, {'EMAIL': email}, double_optin=False))
     else:
         return Response(False)
