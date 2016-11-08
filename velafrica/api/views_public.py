@@ -7,6 +7,8 @@ from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 from velafrica.collection.models import Dropoff
 from velafrica.collection.serializer import DropoffSerializer
+from velafrica.core.settings import MAILCHIMP_LIST_ID
+import mailchimp
 
 @api_view(['GET'])
 @permission_classes((AllowAny,))
@@ -17,7 +19,12 @@ def get_dropoffs(request):
     serializer = DropoffSerializer(all, many=True)
     return Response(serializer.data)
 
-@api_view(['GET'])
+@api_view(['POST'])
 @permission_classes((AllowAny,))
 def subscribe_newsletter(request):
-    pass
+    email = request.POST.get('email', False)
+    if email:
+        list = mailchimp.utils.get_connection().get_list_by_id(MAILCHIMP_LIST_ID)
+        return Response(list.subscribe(email, {'EMAIL': email}, double_optin=False))
+    else:
+        return Response(False)
