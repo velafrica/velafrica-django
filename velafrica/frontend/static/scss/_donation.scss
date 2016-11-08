@@ -270,6 +270,17 @@ section#donation-thank-you {
     margin-top: 90px;
     margin-bottom: 60px;
   }
+  div.checkmark {
+    h1 {
+      background-image: url('./../img/check_large_green.png');
+      background-repeat: no-repeat;
+      background-size: 58px 47px;
+      background-position-x: 0px;
+      background-position-y: 9px;
+      padding-left: 90px;
+      display: inline-block;
+    }
+  }
 
   h3 a {
     text-decoration: none;
