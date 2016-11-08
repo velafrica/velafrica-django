@@ -252,7 +252,7 @@ class Dropoff(models.Model):
     pickup_description = models.TextField(blank=True, verbose_name="Abholservice Beschreibung")
 
     def __unicode__(self):
-        return u"{}".format(self.name)
+        return u"{} - {}".format(self.name, self.address)
 
     class Meta:
         verbose_name = "Abgabstelle"
