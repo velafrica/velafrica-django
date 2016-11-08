@@ -1,6 +1,6 @@
 if ($('section.map').length) {
   $("#map-search").keyup(function(e){
-    if (e.keyCode == 13) {
+    if (e.keyCode == 13 && $("#map-search").val() != '') {
       window.VAM.handleSearch($("#map-search").val());
     }
   });
@@ -89,7 +89,7 @@ if ($('section.map').length) {
 
       $("#map-search").val(search);
 
-      window.VAM.map.geocoder.geocode({'address': search}, function (results, status) {
+      window.VAM.map.geocoder.geocode({'address': search + ', Schweiz', 'region': 'CH'}, function (results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
           var location = results[0].geometry.location;
           window.VAM.map.instance.setCenter(location);
