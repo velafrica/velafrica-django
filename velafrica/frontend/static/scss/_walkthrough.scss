@@ -1,5 +1,7 @@
 main.walkthrough {
 
+  padding-bottom: 127px;
+
   section {
     padding-top: 73px;
     padding-bottom: 73px;
@@ -26,7 +28,7 @@ main.walkthrough {
     }
     &:last-child {
       background-color: white;
-      
+
       h1 {
         color: $velafrica-brown-3-hover;
       }
@@ -51,6 +53,89 @@ main.walkthrough {
         background-color: rgba(white, .8);
         border-radius: $vel-border-radius;
         padding: 30px;
+      }
+    }
+
+    form {
+      input,
+      select {
+        border-color: $velafrica-brown-3;
+        height: 50px;
+
+        &:focus {
+          border-color: $velafrica-brown-1;
+          box-shadow: none;
+        }
+
+        &.btn-detail {
+          font-weight: bold;
+          color: white;
+          background-color: $velafrica-brown-3;
+          padding: 0 20px;
+
+          &:hover {
+            background-color: $velafrica-brown-3-hover;
+          }
+          &:focus,
+          &:active {
+            outline: 0;
+            outline-offset: 0;
+            border-color: transparent;
+            box-shadow: none;
+          }
+        }
+
+        &.btn-send {
+          font-weight: bold;
+          color: white;
+          background-color: $velafrica;
+          border-color: transparent;
+          padding: 0 20px;
+
+          &:hover {
+            background-color: $velafrica-hover;
+          }
+          &:focus,
+          &:active {
+            outline: 0;
+            outline-offset: 0;
+            border-color: transparent;
+            box-shadow: none;
+          }
+        }
+      }
+
+      select {
+        color: $velafrica-brown-3;
+      }
+
+      textarea {
+        border-color: $velafrica-brown-3;
+
+        &:focus {
+          border-color: $velafrica-brown-1;
+          box-shadow: none;
+        }
+      }
+
+      .form-control {
+        &::-webkit-input-placeholder {
+          color: $velafrica-brown-3;
+        }
+        &:-moz-placeholder {
+          color: $velafrica-brown-3;
+        }
+        &::-moz-placeholder {
+          color: $velafrica-brown-3;
+        }
+        &:-ms-input-placeholder {
+          color: $velafrica-brown-3;
+        }
+      }
+
+      p.detail-info {
+        margin-top: 60px;
+        margin-bottom: 60px;
       }
     }
   }

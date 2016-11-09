@@ -116,31 +116,44 @@
         <div class="row">
           <div class="col-md-10 col-md-offset-1">
             <form action="">
-              <h4>{% trans "Kontaktangaben" %}</h4>
-              <input type="text" placeholder="{% trans "Name*" %}">
-              <input type="text" placeholder="{% trans "Vorname*" %}">
-              <input type="text" placeholder="{% trans "Telefon*" %}">
-              <input type="text" placeholder="{% trans "Email*" %}">
-              <p class="legende">{% trans "* Pflichtfelder" %}</p>
+              <div class="col-md-6 col-md-offset-3">
+                <h4>{% trans "Kontaktangaben" %}</h4>
+                <div class="form-group">
+                  <input type="text" class="form-control input-lg" placeholder="{% trans "Name*" %}" required>
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control input-lg" placeholder="{% trans "Vorname*" %}" required>
+                </div>
+                <div class="form-group">
+                  <input type="number" class="form-control input-lg" placeholder="{% trans "Telefon*" %}" required>
+                </div>
+                <div class="form-group">
+                  <input type="email" class="form-control input-lg" placeholder="{% trans "Email*" %}" required>
+                  <p class="legend">{% trans "* Pflichtfelder" %}</p>
+                </div>
 
-              <h4>{% trans "Wie sind Sie aufgestellt?" %}</h4>
-              <select name="">
-                <option value="privatPerson">{% trans "Privatperson" %}</option>
-                <option value="saab">Saab</option>
-                <option value="fiat">Fiat</option>
-                <option value="audi">Audi</option>
-              </select>
-              <br><br>
-              <textarea rows="4" placeholder="{% trans "Bemerkung" %}"></textarea>
-
-              <p class="text-center">
-                {% trans "Falls Sie bereits konkrete Angaben zum Sammelanlass machen können, empfehlen wir Ihnen, die Detail-Infos so weit wie möglich auszufüllen. Das erleichtert uns die Arbeit." %}
-              </p>
+                <h4>{% trans "Wie sind Sie aufgestellt?" %}</h4>
+                <div class="form-group">
+                  <select class="form-control input-lg">
+                    <option value="privatperson">{% trans "Privatperson" %}</option>
+                    <option value="saab">Saab</option>
+                    <option value="fiat">Fiat</option>
+                    <option value="audi">Audi</option>
+                  </select>
+                </div>
+                <textarea class="form-control input-lg" rows="4" placeholder="{% trans "Bemerkung" %}"></textarea>
+              </div>
 
               <div class="clearfix"></div>
 
-              <button>Detail-Infos hinzufügen</button>
-              <input type="submit" value="{% trans "Kurzanfrage absenden" %}">
+              <div class="col-md-12 text-center">
+                <p class="detail-info">
+                  {% trans "Falls Sie bereits konkrete Angaben zum Sammelanlass machen können, empfehlen wir Ihnen, die Detail-Infos so weit wie möglich auszufüllen. Das erleichtert uns die Arbeit." %}
+                </p>
+
+                <input class="btn btn-detail btn-lg" type="button" value="{% trans "Detail-Infos hinzufügen" %}">
+                <input class="btn btn-send btn-lg" type="submit" value="{% trans "Kurzanfrage absenden" %}">
+              </div>
             </form>
           </div>
         </div>
