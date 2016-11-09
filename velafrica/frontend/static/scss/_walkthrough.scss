@@ -1,0 +1,57 @@
+main.walkthrough {
+
+  section {
+    padding-top: 73px;
+    padding-bottom: 73px;
+
+    h3 {
+      color: $velafrica-brown-3-hover;
+    }
+
+    h4 {
+      color: $velafrica-brown-1;
+      margin-top: 60px;
+    }
+
+    h2 {
+      color: $velafrica;
+      margin-top: 30px;
+    }
+
+    &:nth-child(odd) {
+      background-color: $velafrica-brown-5;
+    }
+    &:nth-child(even) {
+      background-color: $velafrica-brown-4;
+    }
+    &:last-child {
+      background-color: white;
+      
+      h1 {
+        color: $velafrica-brown-3-hover;
+      }
+    }
+
+    &.walk-teaser {
+      background: url(../img/walkthrough_teaser.png) center/cover;
+
+      h2 {
+        color: $velafrica-brown-1;
+        margin-top: 0;
+      }
+
+      .container {
+        & > div {
+          padding-left: 15px;
+          padding-right: 15px;
+        }
+      }
+
+      & > div > div > div {
+        background-color: rgba(white, .8);
+        border-radius: $vel-border-radius;
+        padding: 30px;
+      }
+    }
+  }
+}
