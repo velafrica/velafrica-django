@@ -165,10 +165,29 @@
         </div>
       </section>
 
+      <section class="socialwall">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12">
+
+              {% include "public_site/partials/socialwall_with_limited_height.html" %}
+
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-12 text-center social-link">
+
+              <a href="#">{% trans "Weiter auf unsere Social Wall" %}</a>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
     </div>
   </main>
 
-  {% include "public_site/partials/socialwall_with_limited_height.html" %}
 
 {% endblock %}
 
