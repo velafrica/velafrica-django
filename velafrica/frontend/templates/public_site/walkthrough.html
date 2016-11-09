@@ -3,4 +3,150 @@
 
 {% block content %}
 
+  <main class="walkthrough">
+
+    <section class="walk-teaser">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+
+            <h2>{% trans "In 4 Schritten zur Ausmistaktion" %}</h2>
+            <p class="lead">
+              {% trans "Möchten Sie zusammen mit Ihren Vereinskollegen, Ihrem Quartier, Ihren Arbeitskollegen oder einer Schulklasse eine Velosammelung durchführen? Es ist ganz einfach!" %}
+            </p>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container text-center">
+        <div class="row">
+          <div class="col-xs-12 col-md-10 col-md-offset-1">
+
+            <h3>{% trans "SCHRITT 1 VON 4" %}</h3>
+
+            <h4>{% trans "Wo und wann?" %}</h4>
+
+            <h2>{% trans "Legen Sie einen Termin fest" %}</h2>
+
+            <p class="lead">
+              {% trans "Definieren Sie Datum und Ort, an dem die Sammlung statt finden soll.<br> (Für die Vorbereitung benötigen Sie mindestens 5 Wochen Vorlauf.) <br>Holen Sie die gegebenenfalls Bewilligung ein. <br>Organisieren Sie Ihre Helfer und informieren Sie sie über die Abläufe am Sammeltag. <br>Bei grossen Anlässen stellen wir Ihnen Personal zur Verfügung." %}
+            </p>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container text-center">
+        <div class="row">
+          <div class="col-xs-12 col-md-10 col-md-offset-1">
+
+            <h3>{% trans "SCHRITT 2 VON 4" %}</h3>
+
+            <h4>{% trans "Werbe-Material" %}</h4>
+
+            <h2>{% trans "Bewerben Sie mit uns Ihren Sammelanlass" %}</h2>
+
+            <p class="lead">
+              {% trans "Wir stellen Ihenen Material zur verfügung: <br>Diverse Flyer, Plakate, Zeitschirft, Etiketten, Werbe-Blachen, Roll-Ups, Flaggen, T-Shirts und mehr. Eine detaillierte Auflistung und Bestell-Formular finden Sie in unseren Downloads. Je nach Anlass verschicken wir zudem eine Medienmitteilung." %}
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container text-center">
+        <div class="row">
+          <div class="col-xs-12 col-md-10 col-md-offset-1">
+
+            <h3>{% trans "SCHRITT 3 VON 4" %}</h3>
+
+            <h4>{% trans "Am Tag des Anlasses" %}</h4>
+
+            <h2>{% trans "Der Tag der Sammlung ist gekommen" %}</h2>
+
+            <p class="lead">
+              {% trans "Stellen Sie Ihren Stand auf, und sperren Sie nötigenfalls das Gelände ab. <br> Kennzeichnen Sie de Velos mit den von uns gelieferten Etiketten. <br>Halten Sie den Anlass mit ein paar fotografischen Impressionen fest :) <br> Am Ende des Tages holen wir die gesammelten Velos ab." %}
+            </p>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container text-center">
+        <div class="row">
+          <div class="col-xs-12 col-md-10 col-md-offset-1">
+
+            <h3>{% trans "SCHRITT 4 VON 4" %}</h3>
+
+            <h4>{% trans "Abholen der Velos" %}</h4>
+
+            <h2>{% trans "Nach dem Sammelanlass" %}</h2>
+
+            <p class="lead">
+              {% trans "Wir sind immer froh um Feedback! <br> Helfen Sie uns, indem Sie die fotografischen Impressionen auf Social Media posten und uns taggen!" %}
+            </p>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="row text-center">
+          <div class="col-xs-12 col-md-10 col-md-offset-1">
+
+            <h1>{% trans "Interessiert?" %}</h1>
+
+            <p>
+              {% trans "Bitte tragen Sie Ihre Angaben ein, damit wir Sie kontaktieren können." %}
+            </p>
+
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-10 col-md-offset-1">
+            <form action="">
+              <h4>{% trans "Kontaktangaben" %}</h4>
+              <input type="text" placeholder="{% trans "Name*" %}">
+              <input type="text" placeholder="{% trans "Vorname*" %}">
+              <input type="text" placeholder="{% trans "Telefon*" %}">
+              <input type="text" placeholder="{% trans "Email*" %}">
+              <p class="legende">{% trans "* Pflichtfelder" %}</p>
+
+              <h4>{% trans "Wie sind Sie aufgestellt?" %}</h4>
+              <select name="">
+                <option value="privatPerson">{% trans "Privatperson" %}</option>
+                <option value="saab">Saab</option>
+                <option value="fiat">Fiat</option>
+                <option value="audi">Audi</option>
+              </select>
+              <br><br>
+              <textarea rows="4" placeholder="{% trans "Bemerkung" %}"></textarea>
+
+              <p class="text-center">
+                {% trans "Falls Sie bereits konkrete Angaben zum Sammelanlass machen können, empfehlen wir Ihnen, die Detail-Infos so weit wie möglich auszufüllen. Das erleichtert uns die Arbeit." %}
+              </p>
+
+              <div class="clearfix"></div>
+
+              <button>Detail-Infos hinzufügen</button>
+              <input type="submit" value="{% trans "Kurzanfrage absenden" %}">
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
 {% endblock %}
