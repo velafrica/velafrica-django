@@ -59,6 +59,12 @@ def render_donation_template(request):
     return render_to_response(template_name, template_context, context_instance=RequestContext(request))
 
 
+def render_walkthrough_template(request):
+    template_name = 'public_site/walkthrough.html'
+
+    return render_to_response(template_name, {}, context_instance=RequestContext(request))
+
+
 def order_invoice(request):
     if request.method == 'POST':
         form = InvoiceForm(request.POST)
