@@ -52,10 +52,19 @@ body {
   }
 
   h3 {
+    font-size: 26px;
+    font-weight: bold;
+    line-height: 36px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-top: 0;
+  }
+
+  h4 {
     font-size: 20px;
     font-weight: bold;
     line-height: 29px;
-    letter-spacing: .3px;
+    letter-spacing: .5px;
     margin-top: 0;
   }
 
@@ -63,13 +72,13 @@ body {
     font-size: 20px;
     font-weight: normal;
     line-height: 29px;
-    letter-spacing: .3px;
+    letter-spacing: .5px;
 
     &.lead {
       font-size: 26px;
       font-weight: lighter;
       line-height: 37px;
-      letter-spacing: .5px;
+      letter-spacing: .3px;
     }
 
     &.legend {
