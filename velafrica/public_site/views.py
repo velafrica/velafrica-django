@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
+from django.conf import settings
+from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext
+from django.template.loader import get_template
 from paypal.standard.forms import PayPalPaymentsForm
-from velafrica.core.settings import PAYPAL_RECEIVER_MAIL, GMAP_API_KEY
+from velafrica.core.settings import PAYPAL_RECEIVER_MAIL, GMAP_API_KEY, INVOICE_ORDER_RECEIVER
 from .forms import InvoiceForm
 from .models import DonationAmount
 
@@ -69,8 +72,30 @@ def order_invoice(request):
     if request.method == 'POST':
         form = InvoiceForm(request.POST)
         if form.is_valid():
-            form.save()
+            invoiceorder = form.save()
+
+            email_context = {
+                'firstname': form.cleaned_data['first_name'],
+                'lastname': form.cleaned_data['last_name'],
+                'address': u"{}, {}".format(form.cleaned_data['address'], form.cleaned_data['zip']),
+                'comment': form.cleaned_data['comment'],
+                'number_invoices': form.cleaned_data['number_invoices'],
+                'donation_amount': form.cleaned_data['donation_amount'],
+                'url': request.build_absolute_uri(reverse('admin:public_site_invoiceorder_change', args=[invoiceorder.pk])),
+            }
+
+            subject = 'Neue ESR Bestellung'
+            content = get_template('email/invoice_order.txt').render(email_context)
+            # copied from tracking handlers
+            from_name = getattr(settings, 'EMAIL_FROM_NAME', 'Velafrica Tracking')
+            from_email = getattr(settings, 'EMAIL_FROM_EMAIL', 'tracking@velafrica.ch')
+            sender = u"{} <{}>".format(from_name, from_email)
+
+            send_mail(subject, content, sender, [INVOICE_ORDER_RECEIVER], fail_silently=False)
             return redirect(form.cleaned_data['invoice_redirect_url'])
+        else:
+            # TODO: track error with rollbar
+            return redirect('/')
 
 
 def thank_you(request):

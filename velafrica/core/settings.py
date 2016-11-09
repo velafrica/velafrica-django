@@ -335,3 +335,7 @@ if 'MAILCHIMP_LIST_ID' in os.environ:
 else:
     MAILCHIMP_LIST_ID = ''
 
+if 'INVOICE_ORDER_RECEIVER' in os.environ:
+    INVOICE_ORDER_RECEIVER = os.environ['INVOICE_ORDER_RECEIVER']
+else:
+    INVOICE_ORDER_RECEIVER = 'info@velafrica.ch'
