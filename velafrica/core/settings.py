@@ -265,8 +265,6 @@ EMAIL_HOST_PASSWORD = '!0q486ZjXeJilxfmwa#2HOc3PD5n1'
 EMAIL_FROM_NAME = 'Velafrica Tracking'
 EMAIL_FROM_EMAIL = 'tracking@velafrica.ch'
 
-
-# TODO: get from env variables, no passwords in code!
 # Django Storage settings
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 AWS_S3_SECURE_URLS = False
