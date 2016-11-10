@@ -5,7 +5,7 @@ from __future__ import unicode_literals
 import django_resized.forms
 from django.db import migrations, models
 
-import velafrica.core.ftp
+import velafrica.core.storage
 
 
 class Migration(migrations.Migration):
@@ -23,6 +23,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='partnersud',
             name='image',
-            field=django_resized.forms.ResizedImageField(blank=True, help_text=b'Foto vom Partner vor Ort.', null=True, storage=velafrica.core.ftp.MyFTPStorage(), upload_to=b'velafrica_sud/partner/'),
+            field=django_resized.forms.ResizedImageField(blank=True, help_text=b'Foto vom Partner vor Ort.', null=True, storage=velafrica.core.storage.MyStorage(), upload_to=b'velafrica_sud/partner/'),
         ),
     ]

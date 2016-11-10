@@ -5,11 +5,11 @@ from django_resized import ResizedImageField
 from multiselectfield import MultiSelectField
 from simple_history.models import HistoricalRecords
 
-from velafrica.core.ftp import MyFTPStorage
+from velafrica.core.storage import MyStorage
 from velafrica.organisation.models import Organisation
 from velafrica.stock.models import StockList, Warehouse
 
-fs = MyFTPStorage()
+fs = MyStorage()
 
 
 class Forwarder(models.Model):
