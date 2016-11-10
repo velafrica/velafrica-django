@@ -1,4 +1,4 @@
-main.walkthrough {
+main#walkthrough {
 
   padding-bottom: 127px;
 
@@ -24,10 +24,10 @@ main.walkthrough {
     }
 
     &:nth-child(odd) {
-      background-color: $velafrica-brown-5;
+      background-color: $velafrica-brown-6;
     }
     &:nth-child(even) {
-      background-color: $velafrica-brown-4;
+      background-color: $velafrica-brown-5;
     }
     &:last-child {
       background-color: white;
@@ -38,7 +38,7 @@ main.walkthrough {
     }
 
     &.walk-teaser {
-      background: url(../img/walkthrough_teaser.png) center/cover;
+      background: url(../img/walkthrough_teaser.jpg) center/cover;
 
       h2 {
         color: $velafrica-brown-1;
@@ -121,6 +121,9 @@ main.walkthrough {
           border-color: $velafrica-brown-1;
           box-shadow: none;
         }
+      }
+      #wannUndWo {
+        display: none;
       }
 
       .form-control {
