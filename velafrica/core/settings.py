@@ -268,8 +268,12 @@ EMAIL_FROM_EMAIL = 'tracking@velafrica.ch'
 
 # TODO: get from env variables, no passwords in code!
 # Django Storage settings
-DEFAULT_FILE_STORAGE = 'storages.backends.ftp.FTPStorage'
-FTP_STORAGE_LOCATION = 'ftp://nto5q-partnertoo:B1XqSY78ri0Vb94_hxws-C5nm6co@partnertool.velafrica.ch:21'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+AWS_S3_SECURE_URLS = False
+AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY']
+AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_KEY']
+AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
+AWS_S3_CUSTOM_DOMAIN = os.environ['AWS_S3_CUSTOM_DOMAIN']
 
 
 REST_FRAMEWORK = {
