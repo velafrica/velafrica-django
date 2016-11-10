@@ -61,7 +61,8 @@ main.walkthrough {
 
     form {
       input,
-      select {
+      select,
+      button {
         border-color: $velafrica-brown-3;
         height: 50px;
         border-radius: $vel-border-radius;
