@@ -7,7 +7,7 @@ from django.template import RequestContext
 from django.template.loader import get_template
 from paypal.standard.forms import PayPalPaymentsForm
 from velafrica.core.settings import PAYPAL_RECEIVER_MAIL, GMAP_API_KEY, INVOICE_ORDER_RECEIVER
-from .forms import InvoiceForm
+from .forms import InvoiceForm, WalkthroughRequestForm
 from .models import DonationAmount
 
 def render_template(request):
@@ -63,9 +63,19 @@ def render_donation_template(request):
 
 
 def render_walkthrough_template(request):
-    template_name = 'public_site/walkthrough.html'
+    form = WalkthroughRequestForm()
+    if request.method == 'GET':
+        template_name = 'public_site/walkthrough.html'
 
-    return render_to_response(template_name, {}, context_instance=RequestContext(request))
+    if request.method == 'POST':
+        template_name = 'public_site/walkthrough.html'
+        form = WalkthroughRequestForm(request.POST)
+        if form.is_valid():
+            request = form.save()
+            # TODO: send mail
+
+
+    return render_to_response(template_name, {'form': form}, context_instance=RequestContext(request))
 
 
 def order_invoice(request):
