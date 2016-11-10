@@ -7,7 +7,7 @@ import django_resized.forms
 from django.conf import settings
 from django.db import migrations, models
 
-import velafrica.core.ftp
+import velafrica.core.storage
 
 
 class Migration(migrations.Migration):
@@ -118,7 +118,7 @@ class Migration(migrations.Migration):
             name='PartnerSud',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('image', django_resized.forms.ResizedImageField(blank=True, help_text=b'Foto vom Partner vor Ort.', null=True, storage=velafrica.core.ftp.MyFTPStorage(), upload_to=b'velafrica_sud/partner/')),
+                ('image', django_resized.forms.ResizedImageField(blank=True, help_text=b'Foto vom Partner vor Ort.', null=True, storage=velafrica.core.storage.MyStorage(), upload_to=b'velafrica_sud/partner/')),
                 ('org_form', models.CharField(blank=True, max_length=255, null=True)),
                 ('legalform', models.CharField(blank=True, max_length=255, null=True, verbose_name=b'Organisationsform')),
                 ('partner_since', models.IntegerField(blank=True, help_text=b'Jahr', null=True, verbose_name=b'Partner seit...')),

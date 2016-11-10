@@ -3,9 +3,9 @@ from django.db import models
 from django.utils import timezone
 from simple_history.models import HistoricalRecords
 
-from velafrica.core.ftp import MyFTPStorage
+from velafrica.core.storage import MyStorage
 
-fs = MyFTPStorage()
+fs = MyStorage()
 
 class File(models.Model):
     """

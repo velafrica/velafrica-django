@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 import django_resized.forms
 from django.db import models, migrations
 
-import velafrica.core.ftp
+import velafrica.core.storage
 
 
 class Migration(migrations.Migration):
@@ -22,6 +22,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='trackingeventtype',
             name='image',
-            field=django_resized.forms.ResizedImageField(storage=velafrica.core.ftp.MyFTPStorage(), upload_to=b'tracking/eventtypes/', null=True, verbose_name=b'Symbolbild', blank=True),
+            field=django_resized.forms.ResizedImageField(storage=velafrica.core.storage.MyStorage(), upload_to=b'tracking/eventtypes/', null=True, verbose_name=b'Symbolbild', blank=True),
         ),
     ]
