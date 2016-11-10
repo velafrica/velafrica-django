@@ -266,7 +266,7 @@ EMAIL_FROM_NAME = 'Velafrica Tracking'
 EMAIL_FROM_EMAIL = 'tracking@velafrica.ch'
 
 # Django Storage settings
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 AWS_S3_SECURE_URLS = False
 AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY']
 AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_KEY']
