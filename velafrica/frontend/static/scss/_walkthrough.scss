@@ -5,6 +5,8 @@ main.walkthrough {
   section {
     padding-top: 73px;
     padding-bottom: 73px;
+    padding-top: 60px;
+    padding-bottom: 60px;
 
     h3 {
       color: $velafrica-brown-3-hover;
@@ -18,6 +20,7 @@ main.walkthrough {
     h2 {
       color: $velafrica;
       margin-top: 30px;
+      margin-bottom: 15px;
     }
 
     &:nth-child(odd) {
@@ -61,7 +64,7 @@ main.walkthrough {
       select {
         border-color: $velafrica-brown-3;
         height: 50px;
-
+        border-radius: $vel-border-radius;
         &:focus {
           border-color: $velafrica-brown-1;
           box-shadow: none;
@@ -107,11 +110,12 @@ main.walkthrough {
 
       select {
         color: $velafrica-brown-3;
+        border-radius: $vel-border-radius;
       }
 
       textarea {
         border-color: $velafrica-brown-3;
-
+        border-radius: $vel-border-radius;
         &:focus {
           border-color: $velafrica-brown-1;
           box-shadow: none;
@@ -136,6 +140,10 @@ main.walkthrough {
       p.detail-info {
         margin-top: 60px;
         margin-bottom: 60px;
+      }
+
+      .walk-detail-info {
+        display: none;
       }
     }
   }

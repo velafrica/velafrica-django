@@ -151,8 +151,110 @@
                   {% trans "Falls Sie bereits konkrete Angaben zum Sammelanlass machen können, empfehlen wir Ihnen, die Detail-Infos so weit wie möglich auszufüllen. Das erleichtert uns die Arbeit." %}
                 </p>
 
-                <input class="btn btn-detail btn-lg" type="button" value="{% trans "Detail-Infos hinzufügen" %}">
                 <input class="btn btn-send btn-lg" type="submit" value="{% trans "Kurzanfrage absenden" %}">
+                <button class="btn btn-detail btn-lg" id="walkDetail" onclick="toggler('#walkDetailInfo');"
+                        type="button">{% trans "Detail-Infos hinzufügen" %}<span
+                        class="glyphicon glyphicon-arrow-down"></span></button>
+              </div>
+
+              <div class="col-xs-12 col-xs-offset-0 col-md-8 col-md-offset-3 walk-detail-info" id="walkDetailInfo">
+                <h2>{% trans "Eckdaten für den Sammelanlass" %}</h2>
+
+                <h4>{% trans "Datum" %}</h4>
+
+                <h4>{% trans "Annahmezeiten" %}</h4>
+
+                <h4>{% trans "Adresse Sammelstandort" %}</h4>
+                <div class="form-group">
+                  <input type="text" class="form-control input-lg" placeholder="{% trans "Strasse und Nummer" %}">
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control input-lg" placeholder="{% trans "PLZ und Ort" %}">
+                </div>
+                <textarea name="" id="" rows="4" placeholder="{% trans "Standortbeschreibung" %}"></textarea>
+
+                <h4>{% trans "Sind diese Angaben definitiv?" %}</h4>
+
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
+                    Ja
+                  </label>
+                </div>
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                    Nein
+                  </label>
+                </div>
+                <textarea name="" id="" rows="3" placeholder="{% trans "Bemerkung" %}"></textarea>
+
+                <h2>{% trans "Öffentlichkeitsarbeit" %}</h2>
+                <h4>{% trans "Wie und wo werden Sie die Sammelaktion bewerben?" %}</h4>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="">
+                    {% trans "Persönliches Netzwerk" %}
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="">
+                    {% trans "Social Media" %}
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="">
+                    {% trans "Inserat" %}
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="">
+                    {% trans "Medienmitteilung" %}
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="">
+                    {% trans "Website" %}
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="">
+                    {% trans "Veranstaltungskalender" %}
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="">
+                    {% trans "Plakate" %}
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="">
+                    {% trans "Flyer" %}
+                  </label>
+                </div>
+
+                <h4>{% trans "Wünschen Die bei der Öffentlichkeitsarbeit Unterstützung durch Velafrica" %}</h4>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="">
+                    {% trans "Nein" %}
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="">
+                    {% trans "Vorlage Medienmitteilung" %}
+                  </label>
+                </div>
+
+
               </div>
             </form>
           </div>
@@ -161,5 +263,12 @@
     </section>
 
   </main>
+
+  <script>
+    function toggler(divID) {
+      $(divID).toggle();
+      $('#walkDetail').find('span').toggleClass('glyphicon glyphicon-arrow-down').toggleClass('glyphicon glyphicon-arrow-up');
+    }
+  </script>
 
 {% endblock %}
