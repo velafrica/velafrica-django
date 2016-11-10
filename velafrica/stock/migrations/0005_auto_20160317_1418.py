@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 import django_resized.forms
 from django.db import migrations
 
-import velafrica.core.ftp
+import velafrica.core.storage
 
 
 class Migration(migrations.Migration):
@@ -17,16 +17,16 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='category',
             name='image',
-            field=django_resized.forms.ResizedImageField(help_text=b'Product picture.', storage=velafrica.core.ftp.MyFTPStorage(), null=True, upload_to=b'stock/categories/', blank=True),
+            field=django_resized.forms.ResizedImageField(help_text=b'Product picture.', storage=velafrica.core.storage.MyStorage(), null=True, upload_to=b'stock/categories/', blank=True),
         ),
         migrations.AlterField(
             model_name='product',
             name='image',
-            field=django_resized.forms.ResizedImageField(storage=velafrica.core.ftp.MyFTPStorage(), upload_to=b'stock/products/', null=True, verbose_name=b'Produktbild', blank=True),
+            field=django_resized.forms.ResizedImageField(storage=velafrica.core.storage.MyStorage(), upload_to=b'stock/products/', null=True, verbose_name=b'Produktbild', blank=True),
         ),
         migrations.AlterField(
             model_name='warehouse',
             name='image',
-            field=django_resized.forms.ResizedImageField(storage=velafrica.core.ftp.MyFTPStorage(), upload_to=b'stock/warehouses/', null=True, verbose_name=b'Bild des Lagers', blank=True),
+            field=django_resized.forms.ResizedImageField(storage=velafrica.core.storage.MyStorage(), upload_to=b'stock/warehouses/', null=True, verbose_name=b'Bild des Lagers', blank=True),
         ),
     ]
