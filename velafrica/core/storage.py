@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from django.utils.deconstruct import deconstructible
-from storages.backends.ftp import FTPStorage
+from storages.backends.s3boto3 import S3Boto3Storage
 
 @deconstructible
-class MyFTPStorage(FTPStorage):
+class MyStorage(S3Boto3Storage):
     """
     TODO: write doc
     """
