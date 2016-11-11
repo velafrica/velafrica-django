@@ -1,6 +1,6 @@
 import googlemaps
 from django.conf import settings
-from django.core.mail import send_mail
+from django.core.mail import send_mail as django_send_mail
 from django.template.loader import get_template
 
 # initialize client
@@ -47,4 +47,4 @@ def send_mail(template, subject, receiver, context):
 	from_email = getattr(settings, 'EMAIL_FROM_EMAIL', 'tracking@velafrica.ch')
 	sender = u"{} <{}>".format(from_name, from_email)
 
-	send_mail(subject, content, sender, receiver, fail_silently=False )
+	django_send_mail(subject, content, sender, receiver, fail_silently=False )
