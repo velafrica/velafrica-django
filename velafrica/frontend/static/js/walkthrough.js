@@ -16,10 +16,10 @@ if ($('#walkthrough').length) {
 
     $('input[name="optionsRadios"]').click(function () {
         if ($(this).attr("value") == "yes") {
-            $('#wannUndWo').show();
+            $('#id_collected_before_note').show();
         }
         if ($(this).attr("value") == "no") {
-            $('#wannUndWo').hide();
+            $('#id_collected_before_note').hide();
         }
     });
 }

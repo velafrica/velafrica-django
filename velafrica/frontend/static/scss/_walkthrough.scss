@@ -60,6 +60,10 @@ main#walkthrough {
     }
 
     form {
+      input[type="radio"] {
+        height: 15px;
+      }
+
       input,
       select,
       button {
@@ -122,7 +126,7 @@ main#walkthrough {
           box-shadow: none;
         }
       }
-      #wannUndWo {
+      #id_collected_before_note {
         display: none;
       }
 
