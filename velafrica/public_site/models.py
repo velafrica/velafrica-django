@@ -69,8 +69,8 @@ class WalkthroughRequest(models.Model):
     collected_before_note = models.TextField(blank=True, verbose_name="Wann und wo")
 
     # optional/detail information
-    date_start = models.DateField(blank=True, null=True, verbose_name="Datum von")
-    date_end = models.DateField(blank=True, null=True, verbose_name="Datum bis")
+    date_fixed = models.BooleanField(default=False, verbose_name='Datum fixiert')
+    date = models.DateField(blank=True, null=True, verbose_name="Datum")
     pickup_time_start = models.CharField(max_length=255, verbose_name="Annahmezeit von", blank=True)
     pickup_time_end = models.CharField(max_length=255, verbose_name="Annahmezeit bis", blank=True)
     address = models.CharField(max_length=255, verbose_name='Adresse', blank=True)
