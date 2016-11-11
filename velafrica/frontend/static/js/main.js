@@ -4,7 +4,7 @@ var $ = require('jquery');
 //hack jquery into window fixes double jquery import issue.
 window.jQuery = window.$ = $;
 
-window.getUrlVars = function() {
+window.getUrlVars = function () {
     var vars = [], hash;
     var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
     for (var i = 0; i < hashes.length; i++) {
@@ -22,5 +22,7 @@ $(document).ready(function () {
     require('map');
     require('contact');
     require('newsletter');
+    require('walkthrough');
 });
+
 

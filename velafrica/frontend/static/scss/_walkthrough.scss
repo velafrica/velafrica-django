@@ -1,10 +1,12 @@
-main.walkthrough {
+main#walkthrough {
 
   padding-bottom: 127px;
 
   section {
     padding-top: 73px;
     padding-bottom: 73px;
+    padding-top: 60px;
+    padding-bottom: 60px;
 
     h3 {
       color: $velafrica-brown-3-hover;
@@ -18,13 +20,14 @@ main.walkthrough {
     h2 {
       color: $velafrica;
       margin-top: 30px;
+      margin-bottom: 15px;
     }
 
     &:nth-child(odd) {
-      background-color: $velafrica-brown-5;
+      background-color: $velafrica-brown-6;
     }
     &:nth-child(even) {
-      background-color: $velafrica-brown-4;
+      background-color: $velafrica-brown-5;
     }
     &:last-child {
       background-color: white;
@@ -35,7 +38,7 @@ main.walkthrough {
     }
 
     &.walk-teaser {
-      background: url(../img/walkthrough_teaser.png) center/cover;
+      background: url(../img/walkthrough_teaser.jpg) center/cover;
 
       h2 {
         color: $velafrica-brown-1;
@@ -58,10 +61,11 @@ main.walkthrough {
 
     form {
       input,
-      select {
+      select,
+      button {
         border-color: $velafrica-brown-3;
         height: 50px;
-
+        border-radius: $vel-border-radius;
         &:focus {
           border-color: $velafrica-brown-1;
           box-shadow: none;
@@ -107,15 +111,19 @@ main.walkthrough {
 
       select {
         color: $velafrica-brown-3;
+        border-radius: $vel-border-radius;
       }
 
       textarea {
         border-color: $velafrica-brown-3;
-
+        border-radius: $vel-border-radius;
         &:focus {
           border-color: $velafrica-brown-1;
           box-shadow: none;
         }
+      }
+      #wannUndWo {
+        display: none;
       }
 
       .form-control {
@@ -136,6 +144,10 @@ main.walkthrough {
       p.detail-info {
         margin-top: 60px;
         margin-bottom: 60px;
+      }
+
+      .walk-detail-info {
+        display: none;
       }
     }
   }

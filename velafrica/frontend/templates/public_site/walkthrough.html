@@ -3,16 +3,16 @@
 
 {% block content %}
 
-  <main class="walkthrough">
+  <main id="walkthrough">
 
     <section class="walk-teaser">
       <div class="container">
         <div class="row">
           <div class="col-md-6">
 
-            <h2>{% trans "In 4 Schritten zur Ausmistaktion" %}</h2>
+            <h2>{% trans "Anleitung für eine erfolgreiche Sammelaktion" %}</h2>
             <p class="lead">
-              {% trans "Möchten Sie zusammen mit Ihren Vereinskollegen, Ihrem Quartier, Ihren Arbeitskollegen oder einer Schulklasse eine Velosammelung durchführen? Es ist ganz einfach!" %}
+              {% trans "Engagierte Menschen sammeln jedes Jahr in der ganzen Schweiz mehrere tausend Velos für Afrika. Sie tragen damit wesentlich zum Erfolg von Velafrica bei. Machen auch Sie mit und organisieren Sie eine Sammelaktion. Es ist ganz einfach!" %}
             </p>
 
           </div>
@@ -29,10 +29,10 @@
 
             <h4>{% trans "Wo und wann?" %}</h4>
 
-            <h2>{% trans "Legen Sie einen Termin fest" %}</h2>
+            <h2>{% trans "Treffen Sie Vorbereitungen" %}</h2>
 
             <p class="lead">
-              {% trans "Definieren Sie Datum und Ort, an dem die Sammlung statt finden soll.<br> (Für die Vorbereitung benötigen Sie mindestens 5 Wochen Vorlauf.) <br>Holen Sie die gegebenenfalls Bewilligung ein. <br>Organisieren Sie Ihre Helfer und informieren Sie sie über die Abläufe am Sammeltag. <br>Bei grossen Anlässen stellen wir Ihnen Personal zur Verfügung." %}
+              {% trans "Bevor sie loslegen, kontaktieren Sie uns bitte. Eine Vorlaufzeit von vier Wochen ist ideal. Wählen Sie einen Standort für die Sammlung, der auch mit dem Auto gut erreichbar ist. Denken Sie daran, allenfalls eine Bewilligung einzuholen. Zusammen sammeln macht mehr Spass: Motivieren Sie zwei bis drei Helferinnen und Helfer, die Sie unterstützen." %}
             </p>
 
           </div>
@@ -47,12 +47,12 @@
 
             <h3>{% trans "SCHRITT 2 VON 4" %}</h3>
 
-            <h4>{% trans "Werbe-Material" %}</h4>
+            <h4>{% trans "Informationsmaterial bestellen" %}</h4>
 
-            <h2>{% trans "Bewerben Sie mit uns Ihren Sammelanlass" %}</h2>
+            <h2>{% trans "Machen Sie Werbung für Ihren Anlass" %}</h2>
 
             <p class="lead">
-              {% trans "Wir stellen Ihenen Material zur verfügung: <br>Diverse Flyer, Plakate, Zeitschirft, Etiketten, Werbe-Blachen, Roll-Ups, Flaggen, T-Shirts und mehr. Eine detaillierte Auflistung und Bestell-Formular finden Sie in unseren Downloads. Je nach Anlass verschicken wir zudem eine Medienmitteilung." %}
+              {% trans "Rühren Sie die Werbetrommel für Ihre Aktion: Ob in Ihrem persönlichen Umfeld oder in den sozialen Medien. Wir unterstützen Sie gerne bei der Öffentlichkeitsarbeit. Ausserdem  erhalten Sie auf Wunsch Werbematerialien wie Flyer und Plakate von uns zugeschickt. Für den Anlass selbst stellen wir Ihnen Standmaterial wie Werbeblachen zur Verfügung." %}
             </p>
           </div>
         </div>
@@ -66,12 +66,12 @@
 
             <h3>{% trans "SCHRITT 3 VON 4" %}</h3>
 
-            <h4>{% trans "Am Tag des Anlasses" %}</h4>
+            <h4>{% trans "Am Tag der Aktion" %}</h4>
 
-            <h2>{% trans "Der Tag der Sammlung ist gekommen" %}</h2>
+            <h2>{% trans "Freuen Sie sich über jedes gespendete Velo" %}</h2>
 
             <p class="lead">
-              {% trans "Stellen Sie Ihren Stand auf, und sperren Sie nötigenfalls das Gelände ab. <br> Kennzeichnen Sie de Velos mit den von uns gelieferten Etiketten. <br>Halten Sie den Anlass mit ein paar fotografischen Impressionen fest :) <br> Am Ende des Tages holen wir die gesammelten Velos ab." %}
+              {% trans "Der Stand steht. Das Informationsmaterial liegt bereit. Die Sammelstelle ist gekennzeichnet. Es geht los. Überreichen Sie den Spenderinnen und Spendern als Dankeschön unseren Merci-Flyer. Markieren Sie die abgegebenen Velos mit den mitgelieferten Etiketten. Machen Sie ein paar Fotos von Ihrer Aktion und freuen Sie sich über nette Begegnungen. " %}
             </p>
 
           </div>
@@ -91,7 +91,7 @@
             <h2>{% trans "Nach dem Sammelanlass" %}</h2>
 
             <p class="lead">
-              {% trans "Wir sind immer froh um Feedback! <br> Helfen Sie uns, indem Sie die fotografischen Impressionen auf Social Media posten und uns taggen!" %}
+              {% trans "Sie können über jedes gesammelte Velo stolz sein! Um den Abtransport kümmern wir uns – wie vorgängig mit Ihnen abgesprochen. Das Werbematerial bitten wir Sie an uns zu retournieren. Wir sind natürlich neugierig, wie es gelaufen ist. Drum freuen wir uns über Ihre zeitnahe Rückmeldung samt Fotos. Verkünden Sie Ihren Erfolg über die sozialen Medien mit dem Hashtag #Velafrica an @Velafrica." %}
             </p>
 
           </div>
@@ -107,7 +107,7 @@
             <h1>{% trans "Interessiert?" %}</h1>
 
             <p>
-              {% trans "Bitte tragen Sie Ihre Angaben ein, damit wir Sie kontaktieren können." %}
+              {% trans "Wir freuen uns, wenn Sie Kontakt mit uns aufnehmen. Bitte tragen Sie hierzu Ihre Angaben ein." %}
             </p>
 
           </div>
@@ -132,27 +132,132 @@
                   <p class="legend">{% trans "* Pflichtfelder" %}</p>
                 </div>
 
-                <h4>{% trans "Wie sind Sie aufgestellt?" %}</h4>
+                <h4>{% trans "Wer ist der Veranstalter?" %}</h4>
                 <div class="form-group">
                   <select class="form-control input-lg">
                     <option value="privatperson">{% trans "Privatperson" %}</option>
-                    <option value="saab">Saab</option>
-                    <option value="fiat">Fiat</option>
-                    <option value="audi">Audi</option>
+                    <option value="verein">{% trans "Verein" %}</option>
+                    <option value="firma">{% trans "Firma" %}</option>
+                    <option value="liegenschaftsverwaltung">{% trans "Liegenschaftsverwaltung" %}</option>
                   </select>
                 </div>
-                <textarea class="form-control input-lg" rows="4" placeholder="{% trans "Bemerkung" %}"></textarea>
+                <p>{% trans "Haben Sie bereits in der Vergangenheit für Velafrica gesammelt?" %}</p>
+                <div class="form-group">
+                  <div class="radio">
+                    <label>
+                      <input type="radio" name="optionsRadios" id="optionsRadios1" value="yes">
+                      Ja
+                    </label>
+                  </div>
+                  <div class="radio">
+                    <label>
+                      <input type="radio" name="optionsRadios" id="optionsRadios2" value="no">
+                      Nein
+                    </label>
+                  </div>
+                </div>
+                <textarea id="wannUndWo" class="form-control input-lg" rows="4"
+                          placeholder="{% trans "Wann und Wo?" %}"></textarea>
               </div>
 
               <div class="clearfix"></div>
 
               <div class="col-md-12 text-center">
                 <p class="detail-info">
-                  {% trans "Falls Sie bereits konkrete Angaben zum Sammelanlass machen können, empfehlen wir Ihnen, die Detail-Infos so weit wie möglich auszufüllen. Das erleichtert uns die Arbeit." %}
+                  {% trans "Falls Sie bereits konkretere Angaben zum geplanten Sammelanlass machen können, bitten wir Sie, die Detailinformationen so weit als möglich auszufüllen. Sie erleichtern uns damit die Planung." %}
                 </p>
 
-                <input class="btn btn-detail btn-lg" type="button" value="{% trans "Detail-Infos hinzufügen" %}">
                 <input class="btn btn-send btn-lg" type="submit" value="{% trans "Kurzanfrage absenden" %}">
+                <button class="btn btn-detail btn-lg" id="walkDetail"
+                        type="button">{% trans "Detail-Infos hinzufügen" %}<span
+                        class="vel-icon arrow-up-white"></span></button>
+              </div>
+
+              <div class="col-xs-12 col-xs-offset-0 col-md-8 col-md-offset-2 walk-detail-info" id="walkDetailInfo">
+
+                <h2>{% trans "Eckdaten der Sammelaktion" %}</h2>
+
+                <h4>{% trans "Datum" %}</h4>
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="dateYes" id="dateYes" value="dateYes">
+                    Steht bereits fest
+                  </label>
+                </div>
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="dateNo" id="dateNo" value="dateNo">
+                    Ist noch offen
+                  </label>
+                </div>
+
+                <h4>{% trans "Dauer des Anlasses" %}</h4>
+                von bis
+
+                <h4>{% trans "Angaben zur Sammelstelle " %}</h4>
+                <div class="form-group">
+                  <input type="text" class="form-control input-lg" placeholder="{% trans "Strasse und Nummer" %}">
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control input-lg" placeholder="{% trans "PLZ und Ort" %}">
+                </div>
+                <textarea name="" id="" rows="4" class="form-control input-lg"
+                          placeholder="{% trans "Weitere Angaben zum Standort" %}"></textarea>
+
+                <p>{% trans "Lieferadresse für Infomaterial" %}</p>
+                <div class="form-group">
+                  <input type="text" class="form-control input-lg" placeholder="{% trans "Strasse und Nummer" %}">
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control input-lg" placeholder="{% trans "PLZ und Ort" %}">
+                </div>
+
+                <h4>{% trans "Logistik" %}</h4>
+                <p>{% trans "Erwartete Menge gesammelter Velos?" %}</p>
+                <div class="form-group">
+                  <select class="form-control">
+                    <option>1 - 20</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                  </select>
+                </div>
+
+                <p>{% trans "Gibt es eine Möglichkeit, die Velos vor Ort zwischenzulagern? *" %}</p>
+                <p class="legend">{% trans "* Bei Bedarf schicken wir Ihnen Sicherungskabel- und schlösser" %}</p>
+
+
+                <p></p>
+
+                <p>{% trans "Verantwortliche/r während des Sammelanlasses vor Ort" %}</p>
+                <div class="form-group">
+                  <input type="text" class="form-control input-lg" placeholder="{% trans "Name" %}">
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control input-lg" placeholder="{% trans "Vorname" %}">
+                </div>
+                <div class="form-group">
+                  <input type="number" class="form-control input-lg" placeholder="{% trans "Mobile" %}">
+                </div>
+                <div class="form-group">
+                  <input type="email" class="form-control input-lg" placeholder="{% trans "Email" %}">
+                </div>
+
+                <p>{% trans "Anzahl Helfer/innen" %}</p>
+                <div class="form-group">
+                  <select name="" id="" class="form-control">
+                    <option value="">1 - 10</option>
+                    <option value="">1 - 10</option>
+                    <option value="">1 - 10</option>
+                    <option value="">1 - 10</option>
+                    <option value="">1 - 10</option>
+                  </select>
+                </div>
+                <textarea name="" id="" rows="3" class="form-control input-lg"
+                          placeholder="{% trans "Bemerkung" %}"></textarea>
+                <input type="submit" class="btn btn-send btn-lg" value="{% trans "Kontaktaufnahme absenden" %}">
+
               </div>
             </form>
           </div>
@@ -161,5 +266,9 @@
     </section>
 
   </main>
+
+  <script>
+
+  </script>
 
 {% endblock %}
