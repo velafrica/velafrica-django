@@ -337,7 +337,7 @@ if 'MAILCHIMP_LIST_ID' in os.environ:
 else:
     MAILCHIMP_LIST_ID = ''
 
-if 'INVOICE_ORDER_RECEIVER' in os.environ:
-    INVOICE_ORDER_RECEIVER = os.environ['INVOICE_ORDER_RECEIVER']
+if 'ORDER_RECEIVER' in os.environ:
+    ORDER_RECEIVER = os.environ['ORDER_RECEIVER']
 else:
-    INVOICE_ORDER_RECEIVER = 'info@velafrica.ch'
+    ORDER_RECEIVER = 'info@velafrica.ch'
