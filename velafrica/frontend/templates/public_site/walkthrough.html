@@ -119,27 +119,27 @@
               <div class="col-md-6 col-md-offset-3">
                 <h4>{% trans "Kontaktangaben" %}</h4>
                 <div class="form-group">
-                  <input type="text" class="form-control input-lg" placeholder="{% trans "Name*" %}" required>
+                  {{ form.last_name.error }}
+                  {{ form.last_name}}
                 </div>
                 <div class="form-group">
-                  <input type="text" class="form-control input-lg" placeholder="{% trans "Vorname*" %}" required>
+                  {{ form.first_name.error }}
+                  {{ form.first_name }}
                 </div>
                 <div class="form-group">
-                  <input type="number" class="form-control input-lg" placeholder="{% trans "Telefon*" %}" required>
+                  {{ form.phone.error }}
+                  {{ form.phone }}
                 </div>
                 <div class="form-group">
-                  <input type="email" class="form-control input-lg" placeholder="{% trans "Email*" %}" required>
+                  {{ form.email.error }}
+                  {{ form.email }}
                   <p class="legend">{% trans "* Pflichtfelder" %}</p>
                 </div>
 
                 <h4>{% trans "Wer ist der Veranstalter?" %}</h4>
                 <div class="form-group">
-                  <select class="form-control input-lg">
-                    <option value="privatperson">{% trans "Privatperson" %}</option>
-                    <option value="verein">{% trans "Verein" %}</option>
-                    <option value="firma">{% trans "Firma" %}</option>
-                    <option value="liegenschaftsverwaltung">{% trans "Liegenschaftsverwaltung" %}</option>
-                  </select>
+                  {{ form.organizer_type.error }}
+                  {{ form.organizer_type }}
                 </div>
                 <p>{% trans "Haben Sie bereits in der Vergangenheit für Velafrica gesammelt?" %}</p>
                 <div class="form-group">
@@ -156,8 +156,7 @@
                     </label>
                   </div>
                 </div>
-                <textarea id="wannUndWo" class="form-control input-lg" rows="4"
-                          placeholder="{% trans "Wann und Wo?" %}"></textarea>
+                {{ form.collected_before_note }}
               </div>
 
               <div class="clearfix"></div>
