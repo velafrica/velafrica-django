@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext
 from paypal.standard.forms import PayPalPaymentsForm
-from velafrica.core.settings import PAYPAL_RECEIVER_MAIL, GMAP_API_KEY, INVOICE_ORDER_RECEIVER
+from velafrica.core.settings import PAYPAL_RECEIVER_MAIL, GMAP_API_KEY, ORDER_RECEIVER
 from velafrica.core.utils import send_mail
 from velafrica.collection.models import Dropoff
 from .forms import InvoiceForm, SbbTicketOrderForm
@@ -83,7 +83,20 @@ def render_sbb_ticker_order(request):
             order.dropoff = dropoff
             order.save()
 
+            email_context = {
+                'dropoff': dropoff,
+                'firstname': order.first_name,
+                'lastname': order.last_name,
+                'address': u"{}, {}".format(order.address, order.zip),
+                'email': order.email,
+                'phone': order.phone,
+                'note': order.note,
+                'url': request.build_absolute_uri(reverse('admin:public_site_sbbticketorder_change', args=[order.pk]))
+            }
 
+            subject = 'Neue SBB Ticket Bestellung'
+
+            send_mail('email/sbb_ticket_order.txt', subject, [ORDER_RECEIVER], email_context)
 
             template_context['success'] = True
         else:

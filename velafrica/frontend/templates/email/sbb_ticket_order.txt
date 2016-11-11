@@ -1,11 +1,10 @@
+Bestellung für: {{ dropoff }}
 Vorname: {{ firstname }}
 Nachname: {{ lastname }}
 Adresse: {{ address }}
 Anmerkung:
-{{ comment|safe|striptags }}
+{{ note|safe|striptags }}
 
-Betrag: {{ donation_amount }}
-Anzahl Einzahlungsscheine: {{ number_invoices }}
 
 
 Admin: {{ url }}
