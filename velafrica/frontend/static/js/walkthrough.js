@@ -17,9 +17,11 @@ if ($('#walkthrough').length) {
     $('input[name="optionsRadios"]').click(function () {
         if ($(this).attr("value") == "yes") {
             $('#id_collected_before_note').show();
+            $('#id_collected_before').val(true);
         }
         if ($(this).attr("value") == "no") {
             $('#id_collected_before_note').hide();
+            $('#id_collected_before').val(false);
         }
     });
 }
