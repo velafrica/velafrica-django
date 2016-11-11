@@ -63,8 +63,11 @@ class WalkthroughRequest(models.Model):
     last_name = models.CharField(max_length=255, verbose_name="Nachname")
     phone = models.CharField(max_length=255, verbose_name="Telefonnummer")
     email = models.CharField(max_length=255, verbose_name="E-Mail")
-    organizer_type = models.IntegerField(verbose_name="Aufstellung", choices=PERSON_TYPE_CHOICES, default=1)
+    organizer_type = models.IntegerField(verbose_name="Veranstalter", choices=PERSON_TYPE_CHOICES, default=1)
     organizer_type_note = models.TextField(blank=True, verbose_name="Bemerkung")
+
+    collected_before = models.BooleanField(default=False, verbose_name="Bereits für Velafrica gesammelt")
+    collected_before_note = models.TextField(blank=True, verbose_name="Wann und wo")
 
     # optional/detail information
     date_start = models.DateField(blank=True, null=True, verbose_name="Datum von")
