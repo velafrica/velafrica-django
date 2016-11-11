@@ -6,6 +6,7 @@ if ($('section.map').length) {
   });
   window.VAM = {
     data_url: '',
+    sbb_ticket_order_url: $('#sbb-ticket-order-url').val(),
     map: {
       instance: {},
       geocoder: {},
@@ -128,7 +129,7 @@ if ($('section.map').length) {
       }
 
       if (value.sbb) {
-        content += '<p><a href="#">' + 'SBB Transporteticket bestellen' + '</a></p>';
+        content += '<p><a href="' + window.VAM.sbb_ticket_order_url +'?id=' + value.id + '">' + 'SBB Transporteticket bestellen' + '</a></p>';
       }
 
       content += '</div>';
