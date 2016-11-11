@@ -129,7 +129,7 @@ if ($('section.map').length) {
       }
 
       if (value.sbb) {
-        content += '<p><a href="' + window.VAM.sbb_ticket_order_url +'?id=' + value.id + '">' + 'SBB Transporteticket bestellen' + '</a></p>';
+        content += '<p><a target="_blank" href="' + window.VAM.sbb_ticket_order_url +'?id=' + value.id + '">' + 'SBB Transporteticket bestellen' + '</a></p>';
       }
 
       content += '</div>';
