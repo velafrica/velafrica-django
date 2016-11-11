@@ -46,7 +46,6 @@ django-taggit-templatetags==0.2.5
 django-templatetag-sugar==1.0
 django-treebeard==4.0.1
 django-webpack-loader==0.3.3
-django-widget-tweaks==1.4.1
 djangocms-admin-style==1.2.5
 djangocms-apphook-setup==0.1.2
 djangocms-attributes-field==0.1.1
