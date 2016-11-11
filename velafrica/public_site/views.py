@@ -79,13 +79,8 @@ def order_invoice(request):
             }
 
             subject = 'Neue ESR Bestellung'
-            content = get_template('email/invoice_order.txt').render(email_context)
-            # copied from tracking handlers
-            from_name = getattr(settings, 'EMAIL_FROM_NAME', 'Velafrica Tracking')
-            from_email = getattr(settings, 'EMAIL_FROM_EMAIL', 'tracking@velafrica.ch')
-            sender = u"{} <{}>".format(from_name, from_email)
 
-            send_mail(subject, content, sender, [INVOICE_ORDER_RECEIVER], fail_silently=False)
+            send_mail('email/invoice_order.txt', subject, [ORDER_RECEIVER], email_context)
             return redirect(form.cleaned_data['invoice_redirect_url'])
         else:
             # TODO: track error with rollbar
