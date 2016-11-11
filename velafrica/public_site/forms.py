@@ -30,6 +30,7 @@ class WalkthroughRequestForm(forms.ModelForm):
     organizer_type = forms.ChoiceField(widget=forms.Select(attrs={
         'class': 'form-control input-lg'
     }), choices=WalkthroughRequest.PERSON_TYPE_CHOICES)
+    collected_before = forms.BooleanField(widget=forms.HiddenInput)
     collected_before_note = forms.CharField(widget=forms.Textarea(attrs={
         'class': 'form-control input-lg',
         'placeholder': 'Wann und wo?',
