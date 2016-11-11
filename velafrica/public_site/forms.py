@@ -30,10 +30,69 @@ class WalkthroughRequestForm(forms.ModelForm):
     organizer_type = forms.ChoiceField(widget=forms.Select(attrs={
         'class': 'form-control input-lg'
     }), choices=WalkthroughRequest.PERSON_TYPE_CHOICES)
-    collected_before = forms.BooleanField(widget=forms.HiddenInput)
+    collected_before = forms.BooleanField(required=False, widget=forms.HiddenInput)
     collected_before_note = forms.CharField(widget=forms.Textarea(attrs={
         'class': 'form-control input-lg',
         'placeholder': 'Wann und wo?',
+        'rows': '4'
+    }), required=False)
+    date_fixed = forms.BooleanField(required=False, widget=forms.HiddenInput)
+    date = forms.DateField(widget=forms.TextInput(attrs={
+        'class': 'datepicker form-control input-lg',
+        'placeholder': 'TT.MM.YYYY'
+    }), required=False)
+
+    pickup_time_start = forms.CharField(required=False, widget=forms.TextInput(attrs={
+        'class': 'form-control input-lg',
+        'placeholder': '00:00',
+    }))
+    pickup_time_end = forms.CharField(required=False, widget=forms.TextInput(attrs={
+        'class': 'form-control input-lg',
+        'placeholder': '00:00',
+    }))
+    address = forms.CharField(required=False, widget=forms.TextInput(attrs={
+        'class': 'form-control input-lg',
+        'placeholder': 'Strasse und Hausnummer',
+    }))
+    zip = forms.CharField(required=False, widget=forms.TextInput(attrs={
+        'class': 'form-control input-lg',
+        'placeholder': 'PLZ und Ort',
+    }))
+    address_note = forms.CharField(required=False, widget=forms.Textarea(attrs={
+        'class': 'form-control input-lg',
+        'placeholder': 'Weiter Angaben zum Standort',
+        'rows': '4',
+    }))
+    expected_velos = forms.ChoiceField(required=False, widget=forms.Select(attrs={
+        'class': 'form-control input-lg',
+        'placeholder': '',
+    }), choices=WalkthroughRequest.EXPECTED_VELOS)
+    can_store = forms.BooleanField(required=False, widget=forms.HiddenInput)
+    can_deliver = forms.BooleanField(required=False, widget=forms.HiddenInput)
+    velafrica_pickup = forms.BooleanField(required=False, widget=forms.HiddenInput)
+    responsible_first_name = forms.CharField(required=False, widget=forms.TextInput(attrs={
+        'class': 'form-control input-lg',
+        'placeholder': 'Name',
+    }))
+    responsible_last_name = forms.CharField(required=False, widget=forms.TextInput(attrs={
+        'class': 'form-control input-lg',
+        'placeholder': 'Vorname',
+    }))
+    responsible_phone = forms.CharField(required=False, widget=forms.TextInput(attrs={
+        'class': 'form-control input-lg',
+        'placeholder': 'Telefonnummer',
+    }))
+    responsible_email = forms.CharField(required=False, widget=forms.TextInput(attrs={
+        'class': 'form-control input-lg',
+        'placeholder': 'E-Mail',
+    }))
+    supporter_count = forms.ChoiceField(required=False, widget=forms.Select(attrs={
+        'class': 'form-control input-lg',
+        'placeholder': '',
+    }), choices=WalkthroughRequest.SUPPORTERS_COUNT)
+    supporter_note = forms.CharField(required=False, widget=forms.Textarea(attrs={
+        'class': 'form-control input-lg',
+        'placeholder': 'Bemerkung',
         'rows': '4'
     }))
 
@@ -41,8 +100,9 @@ class WalkthroughRequestForm(forms.ModelForm):
         model = WalkthroughRequest
         fields = (
             'first_name', 'last_name', 'phone', 'email', 'organizer_type', 'collected_before', 'collected_before_note',
-            'date_start', 'date_end', 'pickup_time_start', 'pickup_time_end', 'address', 'zip', 'address_note',
-            'expected_velos', 'can_store', 'can_deliver', 'velafrica_pickup',
-            'responsible_first_name', 'responsible_last_name', 'responsible_phone', 'responsible_email',
-            'supporter_count', 'supporter_note'
+            'date_fixed', 'date',
+            # 'pickup_time_start', 'pickup_time_end', 'address', 'zip', 'address_note',
+            # 'expected_velos', 'can_store', 'can_deliver', 'velafrica_pickup',
+            # 'responsible_first_name', 'responsible_last_name', 'responsible_phone', 'responsible_email',
+            # 'supporter_count', 'supporter_note'
         )

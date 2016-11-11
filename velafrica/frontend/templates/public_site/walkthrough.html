@@ -112,33 +112,35 @@
 
           </div>
         </div>
-
         <div class="row">
           <div class="col-md-10 col-md-offset-1">
-            <form action="">
+            {{ form.non_field_errors }}
+            {{ form.errors }}
+            <form action="" method="POST">
+              {{ form.collected_before }}
+              {{ form.date_fixed }}
+              {{ form.can_store }}
+              {{ form.can_deliver }}
+              {{ form.velafrica_pickup }}
+              {% csrf_token %}
               <div class="col-md-6 col-md-offset-3">
                 <h4>{% trans "Kontaktangaben" %}</h4>
                 <div class="form-group">
-                  {{ form.last_name.error }}
                   {{ form.last_name}}
                 </div>
                 <div class="form-group">
-                  {{ form.first_name.error }}
                   {{ form.first_name }}
                 </div>
                 <div class="form-group">
-                  {{ form.phone.error }}
                   {{ form.phone }}
                 </div>
                 <div class="form-group">
-                  {{ form.email.error }}
                   {{ form.email }}
                   <p class="legend">{% trans "* Pflichtfelder" %}</p>
                 </div>
 
                 <h4>{% trans "Wer ist der Veranstalter?" %}</h4>
                 <div class="form-group">
-                  {{ form.organizer_type.error }}
                   {{ form.organizer_type }}
                 </div>
                 <p>{% trans "Haben Sie bereits in der Vergangenheit für Velafrica gesammelt?" %}</p>
@@ -156,7 +158,6 @@
                     </label>
                   </div>
                 </div>
-                {{ form.collected_before }}
                 {{ form.collected_before_note }}
               </div>
 
@@ -180,82 +181,103 @@
                 <h4>{% trans "Datum" %}</h4>
                 <div class="radio">
                   <label>
-                    <input type="radio" name="dateYes" id="dateYes" value="dateYes">
+                    <input type="radio" name="dateRadios" id="dateYes" value="yes">
                     Steht bereits fest
                   </label>
                 </div>
+                {{ form.date }}
                 <div class="radio">
                   <label>
-                    <input type="radio" name="dateNo" id="dateNo" value="dateNo">
+                    <input type="radio" name="dateRadios" id="dateNo" value="no">
                     Ist noch offen
                   </label>
                 </div>
 
                 <h4>{% trans "Dauer des Anlasses" %}</h4>
-                von bis
+                von {{ form.pickup_time_start }} bis {{ form.pickup_time_end }}
 
                 <h4>{% trans "Angaben zur Sammelstelle " %}</h4>
                 <div class="form-group">
-                  <input type="text" class="form-control input-lg" placeholder="{% trans "Strasse und Nummer" %}">
+                  {{ form.address }}
                 </div>
                 <div class="form-group">
-                  <input type="text" class="form-control input-lg" placeholder="{% trans "PLZ und Ort" %}">
+                  {{ form.zip }}
                 </div>
-                <textarea name="" id="" rows="4" class="form-control input-lg"
-                          placeholder="{% trans "Weitere Angaben zum Standort" %}"></textarea>
-
-                <p>{% trans "Lieferadresse für Infomaterial" %}</p>
-                <div class="form-group">
-                  <input type="text" class="form-control input-lg" placeholder="{% trans "Strasse und Nummer" %}">
-                </div>
-                <div class="form-group">
-                  <input type="text" class="form-control input-lg" placeholder="{% trans "PLZ und Ort" %}">
-                </div>
+                {{ form.address_note }}
 
                 <h4>{% trans "Logistik" %}</h4>
                 <p>{% trans "Erwartete Menge gesammelter Velos?" %}</p>
                 <div class="form-group">
-                  <select class="form-control">
-                    <option>1 - 20</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                  </select>
+                  {{ form.expected_velos }}
                 </div>
 
                 <p>{% trans "Gibt es eine Möglichkeit, die Velos vor Ort zwischenzulagern? *" %}</p>
                 <p class="legend">{% trans "* Bei Bedarf schicken wir Ihnen Sicherungskabel- und schlösser" %}</p>
+                <div class="form-group">
+                  <div class="radio">
+                    <label>
+                      <input type="radio" name="storeRadios" value="yes">
+                      Ja
+                    </label>
+                  </div>
+                  <div class="radio">
+                    <label>
+                      <input type="radio" name="storeRadios" value="no">
+                      Nein
+                    </label>
+                  </div>
+                </div>
 
+                <p>{% trans "Verfügen Sie über Mittel, den Abtransport der Velos zu unserem nächsten Verarbeitungspartner zu übernehmen?" %}</p>
+                <div class="form-group">
+                  <div class="radio">
+                    <label>
+                      <input type="radio" name="deliverRadios" value="yes">
+                      Ja
+                    </label>
+                  </div>
+                  <div class="radio">
+                    <label>
+                      <input type="radio" name="deliverRadios" value="no">
+                      Nein
+                    </label>
+                  </div>
+                </div>
 
-                <p></p>
-
+                <p>{% trans "Wünschen Sie, dass Velafrica den Abtransport der Velos übernimmt?" %}</p>
+                <div class="form-group">
+                  <div class="radio">
+                    <label>
+                      <input type="radio" name="vaRadios" value="yes">
+                      Ja
+                    </label>
+                  </div>
+                  <div class="radio">
+                    <label>
+                      <input type="radio" name="vaRadios" value="no">
+                      Nein
+                    </label>
+                  </div>
+                </div>
                 <p>{% trans "Verantwortliche/r während des Sammelanlasses vor Ort" %}</p>
                 <div class="form-group">
-                  <input type="text" class="form-control input-lg" placeholder="{% trans "Name" %}">
+                  {{ form.responsible_last_name }}
                 </div>
                 <div class="form-group">
-                  <input type="text" class="form-control input-lg" placeholder="{% trans "Vorname" %}">
+                  {{ form.responsible_first_name }}
                 </div>
                 <div class="form-group">
-                  <input type="number" class="form-control input-lg" placeholder="{% trans "Mobile" %}">
+                  {{ form.responsible_phone }}
                 </div>
                 <div class="form-group">
-                  <input type="email" class="form-control input-lg" placeholder="{% trans "Email" %}">
+                  {{ form.responsible_email }}
                 </div>
 
                 <p>{% trans "Anzahl Helfer/innen" %}</p>
                 <div class="form-group">
-                  <select name="" id="" class="form-control">
-                    <option value="">1 - 10</option>
-                    <option value="">1 - 10</option>
-                    <option value="">1 - 10</option>
-                    <option value="">1 - 10</option>
-                    <option value="">1 - 10</option>
-                  </select>
+                  {{ form.supporter_count }}
                 </div>
-                <textarea name="" id="" rows="3" class="form-control input-lg"
-                          placeholder="{% trans "Bemerkung" %}"></textarea>
+                {{ form.supporter_note }}
                 <input type="submit" class="btn btn-send btn-lg" value="{% trans "Kontaktaufnahme absenden" %}">
 
               </div>

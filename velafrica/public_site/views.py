@@ -71,9 +71,8 @@ def render_walkthrough_template(request):
         template_name = 'public_site/walkthrough.html'
         form = WalkthroughRequestForm(request.POST)
         if form.is_valid():
-            request = form.save()
+            walkthrough = form.save()
             # TODO: send mail
-
 
     return render_to_response(template_name, {'form': form}, context_instance=RequestContext(request))
 
