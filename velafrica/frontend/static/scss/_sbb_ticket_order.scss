@@ -1,0 +1,76 @@
+section#sbb-ticket-order {
+  .well {
+    margin-top: 30px;
+
+    padding-top: 30px;
+    padding-bottom: 30px;
+    border-color: $velafrica-brown-3-hover;
+    background-color: $velafrica-brown-6;
+  }
+
+  .sbb-form {
+    padding-top: 30px;
+    padding-bottom: 90px;
+
+    input,
+    select,
+    button {
+      border-color: $velafrica-brown-3;
+      height: 50px;
+      border-radius: $vel-border-radius;
+      &:focus {
+        border-color: $velafrica-brown-1;
+        box-shadow: none;
+      }
+
+      &.btn-detail {
+        font-weight: bold;
+        color: white;
+        background-color: $velafrica-brown-3;
+        padding: 0 20px;
+
+        &:hover {
+          background-color: $velafrica-brown-3-hover;
+        }
+        &:focus,
+        &:active {
+          outline: 0;
+          outline-offset: 0;
+          border-color: transparent;
+          box-shadow: none;
+        }
+      }
+
+      &.btn-send {
+        font-weight: bold;
+        color: white;
+        background-color: $velafrica;
+        border-color: transparent;
+        padding: 0 20px;
+        width: 250px;
+        font-size: 22px;
+        font-weight: normal;
+
+        &:hover {
+          background-color: $velafrica-hover;
+        }
+        &:focus,
+        &:active {
+          outline: 0;
+          outline-offset: 0;
+          border-color: transparent;
+          box-shadow: none;
+        }
+      }
+    }
+
+    textarea {
+      border-color: $velafrica-brown-3;
+      border-radius: $vel-border-radius;
+      &:focus {
+        border-color: $velafrica-brown-1;
+        box-shadow: none;
+      }
+    }
+  }
+}

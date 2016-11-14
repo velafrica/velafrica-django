@@ -2,27 +2,49 @@
 {% load i18n %}
 
 {% block content %}
-  <section id="sbb-ticket-order" class="container-fluid">
-    {% if success %}
-      <div class="col-sm-6 col-sm-offset-3 text-center checkmark">
+  <section id="sbb-ticket-order">
+    <div class="container">
+
+      {% if success %}
+        <div class="col-sm-6 col-sm-offset-3 text-center checkmark">
           <h1>
-          {% trans "Formular versendet" %}
+            {% trans "Formular versendet" %}
           </h1>
-      </div>
-      <p class="col-sm-6 col-sm-offset-3 text-center">
+        </div>
+        <p class="col-sm-6 col-sm-offset-3 text-center">
           {% trans "Die Transportetikette wird Ihnen in ein paar Tagen per Post zugestellt" %}
-      </p>
-    {% else %}
-      <form action="" method="POST">
-        {% csrf_token %}
-        <input type="hidden" id="id_dropoff" value="{{ dropoff.id }}">
-        <p>
-          <label for="dropoff">{% trans "Gepäcksschalter:" %}</label>
-          <input name="dropoff" type="text" value="{{ dropoff }}" {% if dropoff %} readonly {% endif %}>
         </p>
-        {{ form.as_p }}
-        <input type="submit" value="Absenden">
-      </form>
-    {% endif %}
+      {% else %}
+
+        <div class="row text-center">
+          <h1>{% trans "SBB Ticketbestellung" %}</h1>
+
+          <div class="col-md-6 col-md-offset-3 well">
+            <h4>{% trans "Gepäcksschalter" %}</h4>
+            <p>{{ dropoff }}</p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4 col-md-offset-4">
+            <form action="" method="POST">
+              {% csrf_token %}
+              <input type="hidden" id="id_dropoff" value="{{ dropoff.id }}">
+
+              <div class="sbb-form">
+                {% for field in form %}
+                  <div class="form-group">
+                    {{ field }}{{ field.errors }}
+                  </div>
+                {% endfor %}
+                <input type="submit" class="btn btn-send center-block" value="Absenden">
+              </div>
+
+            </form>
+          </div>
+        </div>
+      {% endif %}
+
+    </div>
   </section>
 {% endblock %}
