@@ -126,7 +126,7 @@
               <div class="col-md-6 col-md-offset-3">
                 <h4>{% trans "Kontaktangaben" %}</h4>
                 <div class="form-group">
-                  {{ form.last_name}}
+                  {{ form.last_name }}
                 </div>
                 <div class="form-group">
                   {{ form.first_name }}
@@ -146,16 +146,12 @@
                 <p>{% trans "Haben Sie bereits in der Vergangenheit für Velafrica gesammelt?" %}</p>
                 <div class="form-group">
                   <div class="radio">
-                    <label>
-                      <input type="radio" name="optionsRadios" id="optionsRadios1" value="yes">
-                      Ja
-                    </label>
+                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="yes">
+                    <label for="optionsRadios1">{% trans "Ja" %}</label>
                   </div>
                   <div class="radio">
-                    <label>
-                      <input type="radio" name="optionsRadios" id="optionsRadios2" value="no">
-                      Nein
-                    </label>
+                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="no">
+                    <label for="optionsRadios2">{% trans "Nein" %}</label>
                   </div>
                 </div>
                 {{ form.collected_before_note }}
@@ -180,18 +176,14 @@
 
                 <h4>{% trans "Datum" %}</h4>
                 <div class="radio">
-                  <label>
-                    <input type="radio" name="dateRadios" id="dateYes" value="yes">
-                    Steht bereits fest
-                  </label>
+                  <input type="radio" name="dateRadios" id="dateNo" value="no">
+                  <label for="dateNo">{% trans "Ist noch offen" %}</label>
+                </div>
+                <div class="radio">
+                  <input type="radio" name="dateRadios" id="dateYes" value="yes">
+                  <label for="dateYes">{% trans "Steht bereits fest" %}</label>
                 </div>
                 {{ form.date }}
-                <div class="radio">
-                  <label>
-                    <input type="radio" name="dateRadios" id="dateNo" value="no">
-                    Ist noch offen
-                  </label>
-                </div>
 
                 <h4>{% trans "Dauer des Anlasses" %}</h4>
                 von {{ form.pickup_time_start }} bis {{ form.pickup_time_end }}
@@ -215,48 +207,36 @@
                 <p class="legend">{% trans "* Bei Bedarf schicken wir Ihnen Sicherungskabel- und schlösser" %}</p>
                 <div class="form-group">
                   <div class="radio">
-                    <label>
-                      <input type="radio" name="storeRadios" value="yes">
-                      Ja
-                    </label>
+                    <input type="radio" id="keyYes" name="keyRadios" value="yes">
+                    <label for="keyYes">{% trans "Ja" %}</label>
                   </div>
                   <div class="radio">
-                    <label>
-                      <input type="radio" name="storeRadios" value="no">
-                      Nein
-                    </label>
+                    <input type="radio" id="keyNo" name="keyRadios" value="no">
+                    <label for="keyNo">{% trans "Nein" %}</label>
                   </div>
                 </div>
 
                 <p>{% trans "Verfügen Sie über Mittel, den Abtransport der Velos zu unserem nächsten Verarbeitungspartner zu übernehmen?" %}</p>
                 <div class="form-group">
                   <div class="radio">
-                    <label>
-                      <input type="radio" name="deliverRadios" value="yes">
-                      Ja
-                    </label>
+                    <input type="radio" name="deliverRadios" id="deliverYes" value="yes">
+                    <label for="deliverYes">{% trans "Ja" %}</label>
                   </div>
                   <div class="radio">
-                    <label>
-                      <input type="radio" name="deliverRadios" value="no">
-                      Nein
-                    </label>
+                    <input type="radio" name="deliverRadios" id="deliverNo" value="no">
+                    <label for="deliverNo">{% trans "Nein" %}</label>
                   </div>
                 </div>
 
                 <p>{% trans "Wünschen Sie, dass Velafrica den Abtransport der Velos übernimmt?" %}</p>
                 <div class="form-group">
                   <div class="radio">
-                    <label>
-                      <input type="radio" name="vaRadios" value="yes">
-                      Ja
-                    </label>
+                    <input type="radio" id="vaYes" name="vaRadios" value="yes">
+                    <label for="vaYes">{% trans "Ja" %}</label>
                   </div>
                   <div class="radio">
-                    <label>
-                      <input type="radio" name="vaRadios" value="no">
-                      Nein
-                    </label>
+                    <input type="radio" id="vaNo" name="vaRadios" value="no">
+                    <label for="vaNo">{% trans "Nein" %}</label>
                   </div>
                 </div>
                 <p>{% trans "Verantwortliche/r während des Sammelanlasses vor Ort" %}</p>
@@ -278,8 +258,8 @@
                   {{ form.supporter_count }}
                 </div>
                 {{ form.supporter_note }}
-                <input type="submit" class="btn btn-send btn-lg" value="{% trans "Kontaktaufnahme absenden" %}">
 
+                <input type="submit" class="btn btn-send btn-lg" value="{% trans "Kontaktaufnahme absenden" %}">
               </div>
             </form>
           </div>
@@ -288,9 +268,5 @@
     </section>
 
   </main>
-
-  <script>
-
-  </script>
 
 {% endblock %}
