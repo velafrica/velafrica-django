@@ -12,8 +12,7 @@
       <p class="col-sm-6 col-sm-offset-3 text-center">
           {% trans "Die Transportetikette wird Ihnen in ein paar Tagen per Post zugestellt" %}
       </p>
-    {% endif %}
-    {% if form %}
+    {% else %}
       <form action="" method="POST">
         {% csrf_token %}
         <input type="hidden" id="id_dropoff" value="{{ dropoff.id }}">
