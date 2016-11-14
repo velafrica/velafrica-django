@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.db import models, migrations
 
-import velafrica.core.ftp
+import velafrica.core.storage
 
 
 class Migration(migrations.Migration):
@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='file',
             name='file',
-            field=models.FileField(help_text=b'Select file to upload.', storage=velafrica.core.ftp.MyFTPStorage(), null=True, upload_to=b'downloads/', blank=True),
+            field=models.FileField(help_text=b'Select file to upload.', storage=velafrica.core.storage.MyStorage(), null=True, upload_to=b'downloads/', blank=True),
         ),
         migrations.AlterField(
             model_name='historicalfile',

@@ -6,10 +6,10 @@ from django.utils import timezone
 from django_resized import ResizedImageField
 from simple_history.models import HistoricalRecords
 
-from velafrica.core.ftp import MyFTPStorage
+from velafrica.core.storage import MyStorage
 from velafrica.organisation.models import Organisation, Address
 
-fs = MyFTPStorage()
+fs = MyStorage()
 
 class Category(models.Model):
     """

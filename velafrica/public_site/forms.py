@@ -1,5 +1,5 @@
 from django import forms
-from .models import InvoiceOrder, WalkthroughRequest
+from .models import InvoiceOrder, SbbTicketOrder
 
 
 class InvoiceForm(forms.ModelForm):
@@ -97,13 +97,9 @@ class WalkthroughRequestForm(forms.ModelForm):
         'rows': '4'
     }))
 
+
+class SbbTicketOrderForm(forms.ModelForm):
+
     class Meta:
-        model = WalkthroughRequest
-        fields = (
-            'first_name', 'last_name', 'phone', 'email', 'organizer_type', 'collected_before', 'collected_before_note',
-            'date_fixed', 'date',
-            # 'pickup_time_start', 'pickup_time_end', 'address', 'zip', 'address_note',
-            # 'expected_velos', 'can_store', 'can_deliver', 'velafrica_pickup',
-            # 'responsible_first_name', 'responsible_last_name', 'responsible_phone', 'responsible_email',
-            # 'supporter_count', 'supporter_note'
-        )
+        model = SbbTicketOrder
+        fields = ('first_name', 'last_name', 'address', 'zip', 'email', 'phone', 'note')
