@@ -7,7 +7,7 @@ from paypal.standard.forms import PayPalPaymentsForm
 from velafrica.core.settings import PAYPAL_RECEIVER_MAIL, GMAP_API_KEY, ORDER_RECEIVER
 from velafrica.core.utils import send_mail
 from velafrica.collection.models import Dropoff
-from .forms import InvoiceForm, SbbTicketOrderForm
+from .forms import InvoiceForm, SbbTicketOrderForm, WalkthroughRequestForm
 from .models import DonationAmount
 
 def render_template(request):
@@ -103,6 +103,21 @@ def render_sbb_ticker_order(request):
             template_context['form'] = form
 
     return render_to_response(template_name, template_context, context_instance=RequestContext(request))
+
+
+def render_walkthrough_template(request):
+    form = WalkthroughRequestForm()
+    if request.method == 'GET':
+        template_name = 'public_site/walkthrough.html'
+
+    if request.method == 'POST':
+        template_name = 'public_site/walkthrough.html'
+        form = WalkthroughRequestForm(request.POST)
+        if form.is_valid():
+            walkthrough = form.save()
+            # TODO: send mail
+
+    return render_to_response(template_name, {'form': form}, context_instance=RequestContext(request))
 
 
 def order_invoice(request):

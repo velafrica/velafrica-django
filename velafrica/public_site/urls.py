@@ -3,7 +3,8 @@ from .views import order_invoice
 from django.conf.urls import url
 from .views import render_template, render_donation_template, \
                    render_map_template, order_invoice, \
-                   thank_you, thank_you_paypal, render_sbb_ticker_order
+                   thank_you, thank_you_paypal, render_sbb_ticker_order, \
+                   render_walkthrough_template
 
 donations = [
     url(r'^$', render_donation_template, name='home'),
@@ -20,5 +21,6 @@ urlpatterns = [
     url(r'^$', render_template, name='home'),
     url(r'^donation/', include(donations, namespace='donation')),
     url(r'^map/', include(map, namespace='map')),
-    url(r'^sbb-ticket-order/$', render_sbb_ticker_order, name='sbbticket')
+    url(r'^sbb-ticket-order/$', render_sbb_ticker_order, name='sbbticket'),
+    url(r'^walkthrough/$', render_walkthrough_template, name='walkthrough'),
 ]
