@@ -38,7 +38,8 @@ class WalkthroughRequestForm(forms.ModelForm):
     }), required=False)
     date_fixed = forms.BooleanField(required=False, widget=forms.HiddenInput)
     date = forms.DateField(widget=forms.TextInput(attrs={
-        'class': 'datepicker form-control input-lg',
+        'type': 'date',
+        'class': 'form-control input-lg',
         'placeholder': 'TT.MM.YYYY'
     }), required=False)
 
