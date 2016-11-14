@@ -1,0 +1,29 @@
+{% extends "public_site/base.html" %}
+{% load i18n %}
+
+{% block content %}
+  <section id="sbb-ticket-order" class="container-fluid">
+    {% if success %}
+      <div class="col-sm-6 col-sm-offset-3 text-center checkmark">
+          <h1>
+          {% trans "Formular versendet" %}
+          </h1>
+      </div>
+      <p class="col-sm-6 col-sm-offset-3 text-center">
+          {% trans "Die Transportetikette wird Ihnen in ein paar Tagen per Post zugestellt" %}
+      </p>
+    {% endif %}
+    {% if form %}
+      <form action="" method="POST">
+        {% csrf_token %}
+        <input type="hidden" id="id_dropoff" value="{{ dropoff.id }}">
+        <p>
+          <label for="dropoff">{% trans "Gepäcksschalter:" %}</label>
+          <input name="dropoff" type="text" value="{{ dropoff }}" {% if dropoff %} readonly {% endif %}>
+        </p>
+        {{ form.as_p }}
+        <input type="submit" value="Absenden">
+      </form>
+    {% endif %}
+  </section>
+{% endblock %}
