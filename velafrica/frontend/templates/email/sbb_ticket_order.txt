@@ -1,6 +1,8 @@
 Bestellung für: {{ dropoff }}
 Vorname: {{ firstname }}
 Nachname: {{ lastname }}
+E-Mail: {{ email }}
+Telefonnummer: {{ phone }}
 Adresse: {{ address }}
 Anmerkung:
 {{ note|safe|striptags }}
