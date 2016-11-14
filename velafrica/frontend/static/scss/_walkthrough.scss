@@ -3,8 +3,6 @@ main#walkthrough {
   padding-bottom: 127px;
 
   section {
-    padding-top: 73px;
-    padding-bottom: 73px;
     padding-top: 60px;
     padding-bottom: 60px;
 
@@ -60,100 +58,128 @@ main#walkthrough {
     }
 
     form {
-      input[type="radio"] {
-        height: 15px;
+      .radio {
+        input[type="radio"] {
+          position: absolute;
+          opacity: 0;
+        }
+        input[type="radio"] + label {
+          position: relative;
+          padding: 0 0 0 40px;
+          font-size: 16px;
+          line-height: 25px;
+          margin: 0 0 10px 0;
+        }
+        input[type="radio"] + label:before {
+          content: "";
+          display: block;
+          position: absolute;
+          left: 0;
+          top: -2px;
+          height: 28px;
+          width: 28px;
+          background: white;
+          border: 1px solid $velafrica-brown-3;
+          box-shadow: inset 0 0 0 5px white;
+          border-radius: 20px;
+          transition: all .2s ease;
+        }
+
+        input[type="radio"]:checked + label:before {
+          background: $velafrica-brown-1;
+        }
+      }
+    }
+
+    input,
+    select,
+    button {
+      border-color: $velafrica-brown-3;
+      height: 50px;
+      border-radius: $vel-border-radius;
+      &:focus {
+        border-color: $velafrica-brown-1;
+        box-shadow: none;
       }
 
-      input,
-      select,
-      button {
-        border-color: $velafrica-brown-3;
-        height: 50px;
-        border-radius: $vel-border-radius;
-        &:focus {
-          border-color: $velafrica-brown-1;
-          box-shadow: none;
+      &.btn-detail {
+        font-weight: bold;
+        color: white;
+        background-color: $velafrica-brown-3;
+        padding: 0 20px;
+
+        &:hover {
+          background-color: $velafrica-brown-3-hover;
         }
-
-        &.btn-detail {
-          font-weight: bold;
-          color: white;
-          background-color: $velafrica-brown-3;
-          padding: 0 20px;
-
-          &:hover {
-            background-color: $velafrica-brown-3-hover;
-          }
-          &:focus,
-          &:active {
-            outline: 0;
-            outline-offset: 0;
-            border-color: transparent;
-            box-shadow: none;
-          }
-        }
-
-        &.btn-send {
-          font-weight: bold;
-          color: white;
-          background-color: $velafrica;
+        &:focus,
+        &:active {
+          outline: 0;
+          outline-offset: 0;
           border-color: transparent;
-          padding: 0 20px;
-
-          &:hover {
-            background-color: $velafrica-hover;
-          }
-          &:focus,
-          &:active {
-            outline: 0;
-            outline-offset: 0;
-            border-color: transparent;
-            box-shadow: none;
-          }
-        }
-      }
-
-      select {
-        color: $velafrica-brown-3;
-        border-radius: $vel-border-radius;
-      }
-
-      textarea {
-        border-color: $velafrica-brown-3;
-        border-radius: $vel-border-radius;
-        &:focus {
-          border-color: $velafrica-brown-1;
           box-shadow: none;
         }
       }
-      #id_collected_before_note,
-      #id_date {
-        display: none;
-      }
 
-      .form-control {
-        &::-webkit-input-placeholder {
-          color: $velafrica-brown-3;
-        }
-        &:-moz-placeholder {
-          color: $velafrica-brown-3;
-        }
-        &::-moz-placeholder {
-          color: $velafrica-brown-3;
-        }
-        &:-ms-input-placeholder {
-          color: $velafrica-brown-3;
-        }
-      }
+      &.btn-send {
+        font-weight: bold;
+        color: white;
+        background-color: $velafrica;
+        border-color: transparent;
+        padding: 0 20px;
 
-      p.detail-info {
-        margin-top: 60px;
-        margin-bottom: 60px;
+        &:hover {
+          background-color: $velafrica-hover;
+        }
+        &:focus,
+        &:active {
+          outline: 0;
+          outline-offset: 0;
+          border-color: transparent;
+          box-shadow: none;
+        }
       }
+    }
 
-      .walk-detail-info {
-        display: none;
+    select {
+      color: $velafrica-brown-3;
+      border-radius: $vel-border-radius;
+    }
+
+    textarea {
+      border-color: $velafrica-brown-3;
+      border-radius: $vel-border-radius;
+      &:focus {
+        border-color: $velafrica-brown-1;
+        box-shadow: none;
       }
+    }
+    #id_collected_before_note,
+    #id_date {
+      display: none;
+    }
+
+    .form-control {
+      &::-webkit-input-placeholder {
+        color: $velafrica-brown-3;
+      }
+      &:-moz-placeholder {
+        color: $velafrica-brown-3;
+      }
+      &::-moz-placeholder {
+        color: $velafrica-brown-3;
+      }
+      &:-ms-input-placeholder {
+        color: $velafrica-brown-3;
+      }
+    }
+
+    p.detail-info {
+      margin-top: 60px;
+      margin-bottom: 60px;
+    }
+
+    .walk-detail-info {
+      display: none;
     }
   }
 }
