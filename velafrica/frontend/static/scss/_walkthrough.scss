@@ -1,10 +1,16 @@
 main#walkthrough {
 
-  padding-bottom: 127px;
+  padding-bottom: 60px;
 
   section {
     padding-top: 60px;
     padding-bottom: 60px;
+
+    .vertical-align {
+      height: 50px;
+      vertical-align: middle;
+      display: table-cell;
+    }
 
     h3 {
       color: $velafrica-brown-3-hover;
@@ -58,6 +64,10 @@ main#walkthrough {
     }
 
     form {
+      .vel-radio {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+      }
       .radio {
         input[type="radio"] {
           position: absolute;
@@ -65,8 +75,8 @@ main#walkthrough {
         }
         input[type="radio"] + label {
           position: relative;
-          padding: 0 0 0 40px;
-          font-size: 16px;
+          padding: 0 0 0 45px;
+          font-size: 20px;
           line-height: 25px;
           margin: 0 0 10px 0;
         }
@@ -180,6 +190,15 @@ main#walkthrough {
 
     .walk-detail-info {
       display: none;
+
+      h2 {
+        padding-top: 90px;
+        color: $velafrica-brown-1;
+      }
+
+      #id_supporter_note {
+        margin-bottom: 60px;
+      }
     }
   }
 }
