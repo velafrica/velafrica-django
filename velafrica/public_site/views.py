@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 from django.conf import settings
-from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext
-from django.template.loader import get_template
 from paypal.standard.forms import PayPalPaymentsForm
-from velafrica.core.settings import PAYPAL_RECEIVER_MAIL, GMAP_API_KEY, INVOICE_ORDER_RECEIVER
-from .forms import InvoiceForm
+from velafrica.core.settings import PAYPAL_RECEIVER_MAIL, GMAP_API_KEY, ORDER_RECEIVER
+from velafrica.core.utils import send_mail
+from velafrica.collection.models import Dropoff
+from .forms import InvoiceForm, SbbTicketOrderForm
 from .models import DonationAmount
 
 def render_template(request):
@@ -25,7 +25,8 @@ def render_map_template(request):
     template_context = {
         'nofooter': True,
         'api_key': GMAP_API_KEY,
-        'map_data_url': reverse('api:public:dropoffs')
+        'map_data_url': reverse('api:public:dropoffs'),
+        'sbb_ticket_order_url': reverse('home:sbbticket')
     }
 
     if 'search' in request.GET:
@@ -62,6 +63,48 @@ def render_donation_template(request):
     return render_to_response(template_name, template_context, context_instance=RequestContext(request))
 
 
+def render_sbb_ticker_order(request):
+    template_name = 'public_site/sbb_ticket_order.html'
+    template_context = {
+        'form': SbbTicketOrderForm()
+    }
+
+    if 'id' in request.GET:
+        dropoff = Dropoff.objects.get(id=int(request.GET['id']))
+        if dropoff:
+            template_context.update({'dropoff': dropoff})
+    else:
+        dropoff = None
+
+    if request.method == 'POST':
+        form = SbbTicketOrderForm(request.POST)
+        if form.is_valid():
+            order = form.save()
+            order.dropoff = dropoff
+            order.save()
+
+            email_context = {
+                'dropoff': dropoff,
+                'firstname': order.first_name,
+                'lastname': order.last_name,
+                'address': u"{}, {}".format(order.address, order.zip),
+                'email': order.email,
+                'phone': order.phone,
+                'note': order.note,
+                'url': request.build_absolute_uri(reverse('admin:public_site_sbbticketorder_change', args=[order.pk]))
+            }
+
+            subject = 'Neue SBB Ticket Bestellung'
+
+            send_mail('email/sbb_ticket_order.txt', subject, [ORDER_RECEIVER], email_context)
+
+            template_context['success'] = True
+        else:
+            template_context['form'] = form
+
+    return render_to_response(template_name, template_context, context_instance=RequestContext(request))
+
+
 def order_invoice(request):
     if request.method == 'POST':
         form = InvoiceForm(request.POST)
@@ -79,13 +122,8 @@ def order_invoice(request):
             }
 
             subject = 'Neue ESR Bestellung'
-            content = get_template('email/invoice_order.txt').render(email_context)
-            # copied from tracking handlers
-            from_name = getattr(settings, 'EMAIL_FROM_NAME', 'Velafrica Tracking')
-            from_email = getattr(settings, 'EMAIL_FROM_EMAIL', 'tracking@velafrica.ch')
-            sender = u"{} <{}>".format(from_name, from_email)
 
-            send_mail(subject, content, sender, [INVOICE_ORDER_RECEIVER], fail_silently=False)
+            send_mail('email/invoice_order.txt', subject, [ORDER_RECEIVER], email_context)
             return redirect(form.cleaned_data['invoice_redirect_url'])
         else:
             # TODO: track error with rollbar

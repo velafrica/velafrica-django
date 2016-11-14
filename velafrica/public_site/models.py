@@ -31,3 +31,21 @@ class InvoiceOrder(models.Model):
     class Meta:
         verbose_name = 'Einzahlungschein'
         verbose_name_plural = 'Einzahlungsscheine'
+
+
+class SbbTicketOrder(models.Model):
+    dropoff = models.ForeignKey('collection.Dropoff', on_delete=models.SET_NULL, null=True, blank=True)
+    first_name = models.CharField(max_length=255, verbose_name="Vorname")
+    last_name = models.CharField(max_length=255, verbose_name="Nachname")
+    address = models.CharField(max_length=255, verbose_name="Strasse und Hausnummer")
+    zip = models.CharField(max_length=255, verbose_name="PLZ und Ort")
+    email = models.CharField(max_length=255, verbose_name="E-Mail")
+    phone = models.CharField(max_length=255, verbose_name="Telefonnummer", blank=True)
+    note = models.TextField(verbose_name="Bemerkung", blank=True)
+
+    def __unicode__(self):
+        return u"{} {} - {}".format(self.first_name, self.last_name, self.dropoff)
+
+    class Meta:
+        verbose_name = 'SBB Ticketbestellung'
+        verbose_name_plural = 'SBB Ticketbestellungen'
