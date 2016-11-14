@@ -97,6 +97,17 @@ class WalkthroughRequestForm(forms.ModelForm):
         'rows': '4'
     }))
 
+    class Meta:
+        model = WalkthroughRequest
+        fields = (
+            'first_name', 'last_name', 'phone', 'email', 'organizer_type', 'collected_before', 'collected_before_note',
+            'date_fixed', 'date',
+            # 'pickup_time_start', 'pickup_time_end', 'address', 'zip', 'address_note',
+            # 'expected_velos', 'can_store', 'can_deliver', 'velafrica_pickup',
+            # 'responsible_first_name', 'responsible_last_name', 'responsible_phone', 'responsible_email',
+            # 'supporter_count', 'supporter_note'
+        )
+
 
 class SbbTicketOrderForm(forms.ModelForm):
 
