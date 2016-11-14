@@ -1,5 +1,5 @@
 from django import forms
-from .models import InvoiceOrder, SbbTicketOrder
+from .models import InvoiceOrder, SbbTicketOrder, WalkthroughRequest
 
 
 class InvoiceForm(forms.ModelForm):
