@@ -1,0 +1,13 @@
+{% extends "public_site/base.html" %}
+{% load i18n %}
+
+{% block content %}
+  <div class="col-sm-6 col-sm-offset-3 text-center checkmark">
+          <h1>
+          {% trans "Formular versendet" %}
+          </h1>
+      </div>
+      <p class="col-sm-6 col-sm-offset-3 text-center">
+          {% trans "Ihre Anfrage wurde gesendet." %}
+      </p>
+{% endblock %}

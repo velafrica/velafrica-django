@@ -30,7 +30,9 @@ class WalkthroughRequestForm(forms.ModelForm):
     organizer_type = forms.ChoiceField(widget=forms.Select(attrs={
         'class': 'form-control input-lg'
     }), choices=WalkthroughRequest.PERSON_TYPE_CHOICES)
-    collected_before = forms.BooleanField(required=False, widget=forms.HiddenInput)
+    collected_before = forms.BooleanField(required=False, widget=forms.HiddenInput(attrs={
+        'value': 'False'
+    }))
     collected_before_note = forms.CharField(widget=forms.Textarea(attrs={
         'class': 'form-control input-lg',
         'placeholder': 'Wann und wo?',
@@ -68,9 +70,15 @@ class WalkthroughRequestForm(forms.ModelForm):
         'class': 'form-control input-lg',
         'placeholder': '',
     }), choices=WalkthroughRequest.EXPECTED_VELOS)
-    can_store = forms.BooleanField(required=False, widget=forms.HiddenInput)
-    can_deliver = forms.BooleanField(required=False, widget=forms.HiddenInput)
-    velafrica_pickup = forms.BooleanField(required=False, widget=forms.HiddenInput)
+    can_store = forms.BooleanField(required=False, widget=forms.HiddenInput(attrs={
+        'value': 'False'
+    }))
+    can_deliver = forms.BooleanField(required=False, widget=forms.HiddenInput(attrs={
+        'value': 'False'
+    }))
+    velafrica_pickup = forms.BooleanField(required=False, widget=forms.HiddenInput(attrs={
+        'value': 'False'
+    }))
     responsible_first_name = forms.CharField(required=False, widget=forms.TextInput(attrs={
         'class': 'form-control input-lg',
         'placeholder': 'Name',
@@ -102,10 +110,10 @@ class WalkthroughRequestForm(forms.ModelForm):
         fields = (
             'first_name', 'last_name', 'phone', 'email', 'organizer_type', 'collected_before', 'collected_before_note',
             'date_fixed', 'date',
-            # 'pickup_time_start', 'pickup_time_end', 'address', 'zip', 'address_note',
-            # 'expected_velos', 'can_store', 'can_deliver', 'velafrica_pickup',
-            # 'responsible_first_name', 'responsible_last_name', 'responsible_phone', 'responsible_email',
-            # 'supporter_count', 'supporter_note'
+            'pickup_time_start', 'pickup_time_end', 'address', 'zip', 'address_note',
+            'expected_velos', 'can_store', 'can_deliver', 'velafrica_pickup',
+            'responsible_first_name', 'responsible_last_name', 'responsible_phone', 'responsible_email',
+            'supporter_count', 'supporter_note'
         )
 
 
