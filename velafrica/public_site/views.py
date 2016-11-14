@@ -7,8 +7,8 @@ from paypal.standard.forms import PayPalPaymentsForm
 from velafrica.core.settings import PAYPAL_RECEIVER_MAIL, GMAP_API_KEY, ORDER_RECEIVER
 from velafrica.core.utils import send_mail
 from velafrica.collection.models import Dropoff
-from .forms import InvoiceForm, SbbTicketOrderForm
-from .models import DonationAmount
+from .forms import InvoiceForm, SbbTicketOrderForm, WalkthroughRequestForm
+from .models import DonationAmount, WalkthroughRequest
 
 def render_template(request):
     template_name = '/index'
@@ -99,6 +99,31 @@ def render_sbb_ticker_order(request):
             send_mail('email/sbb_ticket_order.txt', subject, [ORDER_RECEIVER], email_context)
 
             template_context['success'] = True
+        else:
+            template_context['form'] = form
+
+    return render_to_response(template_name, template_context, context_instance=RequestContext(request))
+
+
+def render_walkthrough_template(request):
+    template_name = 'public_site/walkthrough.html'
+    template_context = {
+        'form': WalkthroughRequestForm()
+    }
+
+    if request.method == 'POST':
+        form = WalkthroughRequestForm(request.POST)
+        if form.is_valid():
+            walkthrough = form.save()
+
+            email_context = {
+                'data': walkthrough,
+                'url': request.build_absolute_uri(reverse('admin:public_site_walkthroughrequest_change', args=[walkthrough.pk])),
+            }
+
+            subject = 'Neue Sammelanlassanfrage'
+            send_mail('email/walkthrough_request.txt', subject, [ORDER_RECEIVER], email_context)
+            template_name = 'public_site/walkthrough-send.html'
         else:
             template_context['form'] = form
 

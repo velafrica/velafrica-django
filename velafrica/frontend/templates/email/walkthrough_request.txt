@@ -1,0 +1,37 @@
+Kontaktangaben:
+Vorname: {{ data.first_name }}
+Nachname: {{ data.last_name }}
+Telefon: {{ data.phone }}
+Email: {{ data.email }}
+
+Veranstalter: {{ data.get_organizer_type_display }}
+
+Bereits für Velafrica gesammelt: {% if data.collected_before %} Ja {% else %} Nein {% endif %}
+Anmerkung dazu: {{ data.collected_before_note }}
+
+
+Details:
+Datum: {% if data.date_fixed %} {{ data.date }} {% else %} Noch offen {% endif %}
+Annahmezeit: {{ data.pickup_time_start }} - {{ data.pickup_time_end }}
+
+Sammelstelle:
+Adresse: {{ data.address }}
+PLZ: {{ data.zip }}
+Anmerkung: {{ data.address_note }}
+
+Logistik:
+Erwartete Velos: {{ data.get_expected_velos_display }}
+Möglichkeit Velos zwischenzulagern: {% if data.can_store %} Ja {% else %} Nein {% endif %}
+Verfügt über Mittel den Abtransport zu übernehmen: {% if data.can_deliver %} Ja {% else %} Nein {% endif %}
+Abtransport durch Velafrica: {% if data.velafrica_pickup %} Ja {% else %} Nein {% endif %}
+
+Verantwortlicher:
+Vorname: {{ data.responsible_first_name }}
+Nachname: {{ data.responsible_last_name }}
+Telefon: {{ data.responsible_phone }}
+Email: {{ data.responsible_email }}
+
+Anzahl Helfer: {{ data.get_supporter_counter_display }}
+Anmerkung: {{ data.supporter_note }}
+
+Admin: {{ url }}
