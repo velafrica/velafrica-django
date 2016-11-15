@@ -109,3 +109,13 @@ class WalkthroughRequest(models.Model):
     class Meta:
         verbose_name = 'Sammelanlassanfrage'
         verbose_name_plural = 'Sammelanlassanfragen'
+
+
+class Content(models.Model):
+    key = models.CharField(max_length=255, verbose_name='Key', unique=True)
+    value = models.TextField(verbose_name='Value')
+    language = models.CharField(max_length=2, verbose_name='Sprache')
+
+    class Meta:
+        verbose_name = 'Inhalt'
+        verbose_name_plural = 'Inhalte'
