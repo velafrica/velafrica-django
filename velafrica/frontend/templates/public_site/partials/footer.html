@@ -14,9 +14,9 @@
         <form id="newsletter-form">
           {% csrf_token %}
           <input id="newsletter-subscribe-url" type="hidden" value="{% url 'api:public:subscribe-newsletter' %}">
-          <input name="email" class="newsletter" type="text" placeholder="{% trans "E-Mail Adresse eingeben" %}">
+          <input name="email" id="newsletter-email-field" class="newsletter" type="text" placeholder="{% trans "E-Mail Adresse eingeben" %}">
           <input type="submit" value="{% trans "Newsletter abonnieren" %}"
-             class="newsletter-submit-button">
+             class="newsletter-submit-button" id="newsletter-submit">
         </form>
       </div>
 

@@ -3,14 +3,23 @@ if ($('#newsletter-form').length) {
     event.preventDefault();
     if ($(this).find('input[name="email"]').val() != '') {
       var data = $(this).serialize();
+      var buttonVal = $("#newsletter-submit").val();
       $.ajax(
-          {
-            type: 'POST',
-            url: $('#newsletter-subscribe-url').val(),
-            data: data
-          }
+        {
+          type: 'POST',
+          url: $('#newsletter-subscribe-url').val(),
+          data: data
+        }
       ).done(function (response) {
-        console.log(response);
+        if (response === true) {
+          $("#newsletter-submit").css("background-color", "green").val("success");
+        } else {
+          $("#newsletter-submit").css("background-color", "red").val("error");
+        }
+        setTimeout(function () {
+          $("#newsletter-submit").css("background-color", "").val(buttonVal);
+          $("#newsletter-email-field").val("");
+        }, 4000);
       })
     } else {
       //TODO: email validation (client)
