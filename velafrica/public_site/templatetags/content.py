@@ -6,8 +6,11 @@ register = template.Library()
 
 @register.simple_tag
 def get_content(key):
-    value = Content.objects.get(key=key)
-    if value:
-        return value.value
+    if Content.objects.count() > 0:
+        value = Content.objects.get(key=key)
+        if value:
+            return value.value
+        else:
+            return ''
     else:
         return ''
