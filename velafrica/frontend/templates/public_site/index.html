@@ -1,13 +1,14 @@
 {% extends "public_site/base.html" %}
 {% load i18n %}
 {% load static %}
+{% load content %}
 
 {% block content %}
 
   <main>
     <div class="container-fluid">
 
-      <section class="teaser">
+      <section class="teaser" style="background: url('{% get_content "home:main_image" %}') center/cover">
 
         <div class="container mission">
           <div class="row">
