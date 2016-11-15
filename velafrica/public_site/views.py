@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.conf import settings
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, resolve
 from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext
 from paypal.standard.forms import PayPalPaymentsForm
@@ -110,6 +110,17 @@ def render_walkthrough_template(request):
     template_context = {
         'form': WalkthroughRequestForm()
     }
+
+    partials = {
+        'collection': 'public_site/partials/walkthroughs/collectionpoint.html',
+        'company': 'public_site/partials/walkthroughs/company.html',
+        'school': 'public_site/partials/walkthroughs/school.html',
+        'voluntary': 'public_site/partials/walkthroughs/voluntary.html'
+    }
+
+    template_context.update({
+         'partial': partials.get(resolve(request.path).url_name, 'nothing')
+    })
 
     if request.method == 'POST':
         form = WalkthroughRequestForm(request.POST)
