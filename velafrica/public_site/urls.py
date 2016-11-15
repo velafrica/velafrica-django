@@ -17,10 +17,19 @@ map = [
     url(r'^$', render_map_template, name='home'),
 ]
 
+walkthroughs = [
+    url(r'^sammelanlass/$', render_walkthrough_template, name='collection'),
+    url(r'^frewillig/$', render_walkthrough_template, name='voluntary'),
+    url(r'^firmen/$', render_walkthrough_template, name='company'),
+    url(r'^schulen/$', render_walkthrough_template, name='school'),
+
+]
+
 urlpatterns = [
     url(r'^$', render_template, name='home'),
     url(r'^donation/', include(donations, namespace='donation')),
     url(r'^map/', include(map, namespace='map')),
     url(r'^sbb-ticket-order/$', render_sbb_ticker_order, name='sbbticket'),
-    url(r'^walkthrough/$', render_walkthrough_template, name='walkthrough'),
+    url(r'^mitmachen/', include(walkthroughs, namespace='walkthroughs')),
+
 ]
