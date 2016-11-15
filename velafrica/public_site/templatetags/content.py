@@ -11,6 +11,6 @@ def get_content(key):
         if value:
             return value.value
         else:
-            return ''
+            return key
     else:
-        return ''
+        return key
