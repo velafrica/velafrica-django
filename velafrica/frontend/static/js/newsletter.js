@@ -12,9 +12,9 @@ if ($('#newsletter-form').length) {
         }
       ).done(function (response) {
         if (response === true) {
-          $("#newsletter-submit").css("background-color", "green").val("success");
+          $("#newsletter-submit").css("background-color", "green").val("Abonniert!");
         } else {
-          $("#newsletter-submit").css("background-color", "red").val("error");
+          $("#newsletter-submit").css("background-color", "red").val("Fehlgeschlagen!");
         }
         setTimeout(function () {
           $("#newsletter-submit").css("background-color", "").val(buttonVal);
