@@ -59,7 +59,7 @@ var config = {
   },
   postcss: [
     autoprefixer({
-      browsers: ['last 3 versions', 'ie >= 9'],
+      browsers: ['last 3 versions', 'ie >= 9', 'safari >= 6', 'chrome >= 49', 'firefox >= 44'],
     }),
   ],
   sassLoader: {
