@@ -7,6 +7,9 @@
   <section class="map">
     <input type="hidden" id="map-data-url" value="{{ map_data_url }}">
     <input type="hidden" id="sbb-ticket-order-url" value="{{ sbb_ticket_order_url }}">
+    {% if auth %}
+      <input type="hidden" id="auth" value="{{ auth }}">
+    {% endif %}
     <div id="map"></div>
     <div class="searchfield">
       <input id="map-search" type="text">

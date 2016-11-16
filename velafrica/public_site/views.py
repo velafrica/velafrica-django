@@ -29,6 +29,9 @@ def render_map_template(request):
         'sbb_ticket_order_url': reverse('home:sbbticket')
     }
 
+    if request.user.is_authenticated():
+        template_context['auth'] = True;
+
     if 'search' in request.GET:
         template_context.update({
             'search': request.GET['search']

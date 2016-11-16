@@ -105,6 +105,10 @@ if ($('section.map').length) {
 
       content += '<div class="infowindow">';
 
+      if ($('#auth').val() === 'True') {
+        content += '<a target="_blank" href="/admin/collection/dropoff/' + value.id + '/change/">Bearbeiten</a>';
+      }
+
       content += '<h2>' + value.name + '</h2>';
       content += '<p class="lead">' + value.address.street + ', ' + value.address.zipcode + ' ' + value.address.city + '</p>';
 
