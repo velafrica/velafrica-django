@@ -112,9 +112,14 @@ class WalkthroughRequest(models.Model):
 
 
 class Content(models.Model):
-    key = models.CharField(max_length=255, verbose_name='Key', unique=True)
-    value = models.TextField(verbose_name='Value')
     language = models.CharField(max_length=2, verbose_name='Sprache')
+    path = models.CharField(max_length=255, verbose_name='Pfad')
+    key = models.CharField(max_length=255, verbose_name='Key')
+    value = models.TextField(verbose_name='Value', blank=True)
+    description = models.TextField(verbose_name='Beschreibung', blank=True)
+
+    def __unicode__(self):
+        return u"{}_{}_{}".format(self.language, self.path, self.key)
 
     class Meta:
         verbose_name = 'Inhalt'
