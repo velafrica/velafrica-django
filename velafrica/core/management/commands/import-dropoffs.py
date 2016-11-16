@@ -86,6 +86,9 @@ class Command(BaseCommand):
                     if sbb_check in csv_item['Öffnungszeiten']:
                         new_dropoff.sbb = True
 
+                if not new_dropoff.sbb:
+                    new_dropoff.pickup = True
+
                 new_dropoff.save()
                 print(u'successfully imported {}'.format(new_dropoff))
 
