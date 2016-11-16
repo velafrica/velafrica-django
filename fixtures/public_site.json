@@ -1,1 +1,59 @@
-[{"model": "public_site.donationamount", "pk": 1, "fields": {"is_active": true, "description": "Finanzieren Sie den Export eines Spendenvelos.", "amount": "50.00"}}, {"model": "public_site.donationamount", "pk": 2, "fields": {"is_active": true, "description": "Unterst\u00fctzen Sie die Einrichtung eines Ausbildungsplatzes in Afrika.", "amount": "500.00"}}, {"model": "public_site.donationamount", "pk": 3, "fields": {"is_active": true, "description": "Erm\u00f6glichen Sie den Transport eines vollen Containers mit 500 Velos.", "amount": "5000.00"}}]
+[
+{
+  "model": "public_site.donationamount",
+  "pk": 1,
+  "fields": {
+    "is_active": true,
+    "description": "Finanzieren Sie den Export eines Spendenvelos.",
+    "amount": "50.00"
+  }
+},
+{
+  "model": "public_site.donationamount",
+  "pk": 2,
+  "fields": {
+    "is_active": true,
+    "description": "Unterstützen Sie die Einrichtung eines Ausbildungsplatzes in Afrika.",
+    "amount": "500.00"
+  }
+},
+{
+  "model": "public_site.donationamount",
+  "pk": 3,
+  "fields": {
+    "is_active": true,
+    "description": "Ermöglichen Sie den Transport eines vollen Containers mit 500 Velos.",
+    "amount": "5000.00"
+  }
+},
+{
+  "model": "public_site.donationamount",
+  "pk": 4,
+  "fields": {
+    "is_active": false,
+    "amount": "100000.00"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 2,
+  "fields": {
+    "language": "de",
+    "path": "index",
+    "key": "first_background_image",
+    "value": "/static/img/street_burkina_irim.jpg",
+    "description": "Hintergrundbild des ersten Teasers"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 3,
+  "fields": {
+    "language": "en",
+    "path": "index",
+    "key": "first_background_image",
+    "value": "",
+    "description": "Hintergrundbild des ersten Teasers"
+  }
+}
+]
