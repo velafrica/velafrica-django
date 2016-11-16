@@ -8,6 +8,19 @@ section#sbb-ticket-order {
     background-color: $velafrica-brown-6;
   }
 
+  .checkmark {
+    margin-top: 8vw;
+    margin-bottom: 8vw;
+
+    & > p {
+     margin: 30px 0;
+
+      & > a {
+        line-height: 70px;
+      }
+    }
+  }
+
   .sbb-form {
     padding-top: 30px;
     padding-bottom: 90px;
