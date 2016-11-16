@@ -66,7 +66,8 @@ def render_donation_template(request):
 def render_sbb_ticker_order(request):
     template_name = 'public_site/sbb_ticket_order.html'
     template_context = {
-        'form': SbbTicketOrderForm()
+        'form': SbbTicketOrderForm(),
+        'donation_url': reverse('home:donation:home')
     }
 
     if 'id' in request.GET:

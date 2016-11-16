@@ -6,14 +6,18 @@
     <div class="container">
 
       {% if success %}
-        <div class="col-sm-6 col-sm-offset-3 text-center checkmark">
+        <div class="col-xs-12 text-center checkmark">
           <h1>
-            {% trans "Formular versendet" %}
+            {% trans "Ticket bestellt" %}
           </h1>
+
+          <p>
+            {% blocktrans %}
+              Die Bestellung wird Ihnen in ein paar Tagen per Post zugestellt. Wir freuen uns über Ihre Velo-Spende.
+              Vielen Dank! <br><a href="{{ donation_url }}">Unterstützen Sie uns weiter</a>
+            {% endblocktrans %}
+          </p>
         </div>
-        <p class="col-sm-6 col-sm-offset-3 text-center">
-          {% trans "Die Transportetikette wird Ihnen in ein paar Tagen per Post zugestellt" %}
-        </p>
       {% else %}
 
         <div class="row text-center">
