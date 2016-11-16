@@ -189,6 +189,6 @@ open https://dashboard.heroku.com/apps/<your-app-name>/deploy/github
 # Fixtures
 To update / save new fixtures run
 ```
-heroku local:run python manage.py dumpdata --format=json --indent=2 -v 2 [appname] | grep -v "[OKAY]" > fixtures/[app_name].json
+heroku local:run python manage.py dumpdata --format=json --indent=2 -v 2 [app_name] | grep -v "[OKAY]" > fixtures/[app_name].json
 ```
 Before you commit the new fixtures file, make sure you remove dev/test data from the json and only commit those changes which are relevant for staging or production
