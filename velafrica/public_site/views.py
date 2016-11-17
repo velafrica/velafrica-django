@@ -8,7 +8,7 @@ from velafrica.core.settings import PAYPAL_RECEIVER_MAIL, GMAP_API_KEY, ORDER_RE
 from velafrica.core.utils import send_mail
 from velafrica.collection.models import Dropoff
 from .forms import InvoiceForm, SbbTicketOrderForm, WalkthroughRequestForm
-from .models import DonationAmount, WalkthroughRequest
+from .models import DonationAmount, WalkthroughRequest, TeamMember, Award
 
 def render_template(request):
     template_name = '/index'
@@ -181,4 +181,16 @@ def thank_you_paypal(request):
 
 def render_about_us_template(request):
     template_name = 'public_site/ueber-uns.html'
-    return render_to_response(template_name, {}, context_instance=RequestContext(request))
+    template_context = {}
+
+    if Award.objects.count() > 0:
+        template_context.update({
+            'awards': Award.objects.filter(active=True)
+        })
+
+    if TeamMember.objects.count() > 0:
+        template_context.update({
+            'team': TeamMember.objects.filter(active=True)
+        })
+
+    return render_to_response(template_name, template_context, context_instance=RequestContext(request))
