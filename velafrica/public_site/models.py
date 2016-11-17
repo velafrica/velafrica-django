@@ -125,3 +125,25 @@ class Content(models.Model):
     class Meta:
         verbose_name = 'Inhalt'
         verbose_name_plural = 'Inhalte'
+
+
+class TeamMember(models.Model):
+    active = models.BooleanField(default=True)
+    name = models.CharField(max_length=255, verbose_name="Name")
+    position = models.CharField(max_length=255, verbose_name="Position", blank=True)
+    email = models.CharField(max_length=255, verbose_name="E-Mail", blank=True)
+    image = models.CharField(max_length=255, verbose_name="Bild-URL", blank=True)
+
+    class Meta:
+        verbose_name = 'Teammitglied'
+        verbose_name_plural = 'Teammitglieder'
+
+
+class Award(models.Model):
+    active = models.BooleanField(default=True)
+    name = models.CharField(max_length=255, verbose_name="Name")
+    image = models.CharField(max_length=255, verbose_name="Bild-URL")
+
+    class Meta:
+        verbose_name = 'Award'
+        verbose_name_plural = 'Awards'
