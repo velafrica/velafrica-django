@@ -1,5 +1,5 @@
 from django import forms
-from .models import InvoiceOrder, SbbTicketOrder, WalkthroughRequest
+from .models import InvoiceOrder, SbbTicketOrder, WalkthroughRequest, ContactRequest
 
 
 class InvoiceForm(forms.ModelForm):
@@ -156,3 +156,26 @@ class SbbTicketOrderForm(forms.ModelForm):
     class Meta:
         model = SbbTicketOrder
         fields = ('first_name', 'last_name', 'amount', 'address', 'zip', 'email', 'phone', 'note')
+
+
+class ContactRequestForm(forms.ModelForm):
+    first_name = forms.CharField(widget=forms.TextInput(attrs={
+        'class': 'form-control input-lg',
+        'placeholder': 'Vorname*'
+    }))
+    last_name = forms.CharField(widget=forms.TextInput(attrs={
+        'class': 'form-control input-lg',
+        'placeholder': 'Nachname*'
+    }))
+    email = forms.EmailField(widget=forms.EmailInput(attrs={
+        'class': 'form-control input-lg',
+        'placeholder': 'E-Mail*'
+    }))
+    note = forms.CharField(widget=forms.Textarea(attrs={
+        'class': 'form-control input-lg',
+        'placeholder': 'Nachricht*'
+    }))
+
+    class Meta:
+        model = ContactRequest
+        fields = ('first_name', 'last_name', 'email', 'note')

@@ -112,6 +112,17 @@ class WalkthroughRequest(models.Model):
         verbose_name_plural = 'Sammelanlassanfragen'
 
 
+class ContactRequest(models.Model):
+    first_name = models.CharField(max_length=255, verbose_name='Vorname')
+    last_name = models.CharField(max_length=255, verbose_name='Nachname')
+    email = models.CharField(max_length=255, verbose_name='E-Mail')
+    note = models.TextField(verbose_name='Nachricht')
+
+    class Meta:
+        verbose_name = 'Kontaktanfrage'
+        verbose_name_plural = 'Kontaktanfragen'
+
+
 class Content(models.Model):
     language = models.CharField(max_length=2, verbose_name='Sprache')
     path = models.CharField(max_length=255, verbose_name='Pfad')
