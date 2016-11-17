@@ -154,6 +154,7 @@ class Award(models.Model):
     active = models.BooleanField(default=True)
     name = models.CharField(max_length=255, verbose_name="Name")
     image = models.CharField(max_length=255, verbose_name="Bild-URL")
+    text = models.TextField(verbose_name="Text")
 
     class Meta:
         verbose_name = 'Award'
