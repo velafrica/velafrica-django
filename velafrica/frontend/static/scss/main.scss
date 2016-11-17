@@ -11,7 +11,6 @@
 @import "socialwall";
 @import "sbb_ticket_order";
 @import "about_us";
-
 @import url('https://fonts.googleapis.com/css?family=Ek+Mukta:300,400,700');
 
 body {
@@ -23,16 +22,29 @@ body {
 
   padding-top: 80px;
 
+  .container,
+  .container-fluid {
+    .teaser-vel {
+      @media (max-width: 768px) {
+        margin-left: 0;
+        margin-right: 0;
+      }
+
+      .teaser-white-bg {
+        background-color: rgba(white, .8);
+        border-radius: $vel-border-radius;
+        padding: 30px;
+
+        @media (max-width: 768px) {
+          padding: 15px;
+        }
+      }
+    }
+  }
+
   .container-fluid {
     padding-right: 0;
     padding-left: 0;
-
-    .row {
-      @media (max-width: 768px) {
-        padding-left: 15px;
-        padding-right: 15px;
-      }
-    }
   }
 
   h1 {
@@ -83,6 +95,7 @@ body {
       font-weight: lighter;
       line-height: 37px;
       letter-spacing: .3px;
+      margin-bottom: 0;
     }
 
     &.legend {

@@ -48,19 +48,6 @@ main#walkthrough {
         color: $velafrica-brown-1;
         margin-top: 0;
       }
-
-      .container {
-        & > div {
-          padding-left: 15px;
-          padding-right: 15px;
-        }
-      }
-
-      & > div > div > div {
-        background-color: rgba(white, .8);
-        border-radius: $vel-border-radius;
-        padding: 30px;
-      }
     }
 
     form {

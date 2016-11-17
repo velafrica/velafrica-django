@@ -1,24 +1,14 @@
-section.teaser {
+section#teaser-welcome {
   padding: 30px 0;
 
   .container {
     padding-top: 30px;
   }
-  .mission > div > div {
-    background-color: rgba(white, .8);
-    border-radius: $vel-border-radius;
-    padding: 30px;
-  }
 
   .bicycle-search {
-    & > div > div {
-      background-color: rgba(white, .8);
-      border-radius: $vel-border-radius;
-      padding: 30px;
-    }
 
     .bicycle-submit {
-      padding: 3rem 0 2rem;
+      //padding: 3rem 0 2rem;
 
       input.postal-code {
         font-size: 18px;
@@ -86,7 +76,7 @@ section.teaser {
   }
 }
 
-section.bicycle-statistic {
+section#bicycle-statistic {
   padding: 120px 0;
 
   h1.big-number {
@@ -168,18 +158,12 @@ section.bicycle-statistic {
   }
 }
 
-section.organize {
+section#organize {
   background: url("../img/2015_GeroldsGarten_ViviKola.jpg") center/cover;
   padding: 60px 0;
-
-  & > div > div > div {
-    background-color: rgba(white, .8);
-    border-radius: $vel-border-radius;
-    padding: 30px;
-  }
 }
 
-section.join-us {
+section#join-us {
   .container {
     padding-left: 0;
     padding-right: 0;
@@ -225,7 +209,7 @@ section.join-us {
 
 }
 
-section.news {
+section#news {
   padding: 90px 0;
 
   h1 {

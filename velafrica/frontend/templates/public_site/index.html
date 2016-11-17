@@ -8,11 +8,11 @@
   <main>
     <div class="container-fluid">
 
-      <section class="teaser" style="background: url('{% get_content "first_background_image" "Hintergrundbild des ersten Teasers" %}') center/cover">
+      <section id="teaser-welcome" style="background: url('{% get_content "first_background_image" "Hintergrundbild des ersten Teasers" %}') center/cover">
 
-        <div class="container mission">
-          <div class="row">
-            <div class="col-md-6">
+        <div class="container">
+          <div class="row teaser-vel">
+            <div class="col-md-6 teaser-white-bg">
 
               <h1>{% trans "Velos verändern Leben" %}</h1>
 
@@ -27,8 +27,8 @@
         </div>
 
         <div class="container bicycle-search">
-          <div class="row">
-            <div class="col-md-6 text-center">
+          <div class="row teaser-vel">
+            <div class="col-md-6 text-center teaser-white-bg">
 
               <h2>{% trans "Velo spenden" %}</h2>
               <p class="lead">
@@ -50,7 +50,7 @@
 
       </section>
 
-      <section class="bicycle-statistic">
+      <section id="bicycle-statistic">
         <div class="container">
           <div class="row">
             <div class="col-sm-12 text-center">
@@ -81,10 +81,10 @@
         </div>
       </section>
 
-      <section class="organize">
+      <section id="organize">
         <div class="container">
-          <div class="row">
-            <div class="col-md-6 col-md-offset-6">
+          <div class="row teaser-vel">
+            <div class="col-md-6 col-md-offset-6 teaser-white-bg">
               <h2>{% trans "Organisieren Sie eine Velosammlung. Wir unterstützen Sie dabei." %}</h2>
 
               <p class="lead">
@@ -97,7 +97,7 @@
         </div>
       </section>
 
-      <section class="join-us">
+      <section id="join-us">
         <div class="container text-center">
           <div class="row">
 
@@ -153,7 +153,7 @@
         </div>
       </section>
 
-      <section class="news">
+      <section id="news">
         <div class="container">
           <div class="row">
             <div class="col-md-12 text-center">

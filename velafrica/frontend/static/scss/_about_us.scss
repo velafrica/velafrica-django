@@ -11,13 +11,7 @@ main#about-us {
     &#messenger,
     &#messenger-content {
       padding: 90px 0;
-      min-height: 600px;
-    }
-
-    div > div > div {
-      background-color: rgba(white, .8);
-      border-radius: $vel-border-radius;
-      padding: 30px;
+      min-height: 500px;
     }
 
     &#history {
@@ -33,6 +27,12 @@ main#about-us {
       background: url("../img/Klingel01.jpg") center/cover;
     }
 
+    .well {
+      border-color: $velafrica-brown-3-hover;
+      h3 {
+        color: $velafrica;
+      }
+    }
   }
 }
 
