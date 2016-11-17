@@ -183,7 +183,8 @@
   "fields": {
     "active": true,
     "name": "Simone Niggli-Luder",
-    "image": "http://velafrica.ch/media/archive2/Botschafter/Niggli_Luder.jpg"
+    "image": "http://velafrica.ch/media/archive2/Botschafter/Niggli_Luder.jpg",
+    "text": ""
   }
 },
 {
@@ -192,7 +193,8 @@
   "fields": {
     "active": true,
     "name": "Franz Hohler",
-    "image": "http://velafrica.ch/media/archive2/Botschafter/Franz_Hohler.jpg"
+    "image": "http://velafrica.ch/media/archive2/Botschafter/Franz_Hohler.jpg",
+    "text": ""
   }
 },
 {
@@ -201,7 +203,8 @@
   "fields": {
     "active": true,
     "name": "Franco Marvulli",
-    "image": "http://velafrica.ch/media/archive2/Botschafter/Franco_Marvulli.jpg"
+    "image": "http://velafrica.ch/media/archive2/Botschafter/Franco_Marvulli.jpg",
+    "text": ""
   }
 },
 {
@@ -210,7 +213,8 @@
   "fields": {
     "active": true,
     "name": "Emil Steinberger",
-    "image": "http://velafrica.ch/media/archive2/Botschafter/Emil.jpg"
+    "image": "http://velafrica.ch/media/archive2/Botschafter/Emil.jpg",
+    "text": ""
   }
 },
 {
