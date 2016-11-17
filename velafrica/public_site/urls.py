@@ -30,5 +30,5 @@ urlpatterns = [
     url(r'^map/', include(map, namespace='map')),
     url(r'^sbb-ticket-order/$', render_sbb_ticker_order, name='sbbticket'),
     url(r'^mitmachen/', include(walkthroughs, namespace='walkthroughs')),
-    url(r'^ueber-uns/$', render_about_us_template, name='ueberuns'),
+    url(r'^ueber-uns/$', render_about_us_template, name='aboutus'),
 ]
