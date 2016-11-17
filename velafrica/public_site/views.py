@@ -175,9 +175,11 @@ def thank_you(request):
     template_name = 'public_site/donation-thank-you.html'
     return render_to_response(template_name, {}, context_instance=RequestContext(request))
 
+
 def thank_you_paypal(request):
     template_name = 'public_site/donation-thank-you.html'
     return render_to_response(template_name, {'paypal': True}, context_instance=RequestContext(request))
+
 
 def render_about_us_template(request):
     template_name = 'public_site/ueber-uns.html'
