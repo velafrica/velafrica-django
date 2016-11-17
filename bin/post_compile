@@ -5,3 +5,7 @@ export PATH=$PATH:/app/.heroku/gettext/bin/usr/local/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/app/.heroku/gettext/bin/usr/local/lib
 cd velafrica/
 django-admin compilemessages
+
+# remove unused assets for a smaller slug size
+cd /app/
+rm -rf node_modules/
