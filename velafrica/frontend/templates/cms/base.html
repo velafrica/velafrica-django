@@ -19,52 +19,6 @@
 
 {% cms_toolbar %}
 
-{% block topbar %}
-  <div class="header-wrap">
-
-    <header>
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-sm-6 left">
-
-            <a class="logo" href="/de/pages/">
-              <img src="{% static "img/velafrica_logo_claim.svg" %}" alt="">
-            </a>
-
-          </div>
-          <div class="col-sm-6 navbar-right right">
-
-            <div class="dropdown">
-              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
-                      aria-haspopup="true" aria-expanded="false">
-                Spenden
-                <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                <li><a href="#">Geldspende</a></li>
-                <li><a href="#">Velospende</a></li>
-                <li><a href="#">Patenschaft</a></li>
-                <li><a href="#">Geschenkidee</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="big-nav">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-12">
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </header>
-
-  </div>
-{% endblock %}
-
 <main>
   <div class="container-fluid">
     {% placeholder content %}
