@@ -145,6 +145,9 @@ class TeamMember(models.Model):
     email = models.CharField(max_length=255, verbose_name="E-Mail", blank=True)
     image = models.CharField(max_length=255, verbose_name="Bild-URL", blank=True)
 
+    def __unicode__(self):
+        return u"{}".format(self.name)
+
     class Meta:
         verbose_name = 'Teammitglied'
         verbose_name_plural = 'Teammitglieder'
@@ -155,6 +158,9 @@ class Award(models.Model):
     name = models.CharField(max_length=255, verbose_name="Name")
     image = models.CharField(max_length=255, verbose_name="Bild-URL")
     text = models.TextField(verbose_name="Text")
+
+    def __unicode__(self):
+        return u"{}".format(self.name)
 
     class Meta:
         verbose_name = 'Award'
