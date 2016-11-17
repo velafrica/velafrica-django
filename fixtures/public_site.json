@@ -73,6 +73,7 @@
   "fields": {
     "active": true,
     "name": "Michel Ducommun",
+    "position": "Programmleiter Afrika",
     "email": "michel.ducommun@velafrica.ch",
     "image": "http://velafrica.ch/media/archive2/Team/Michel.jpg"
   }
@@ -105,6 +106,7 @@
   "fields": {
     "active": true,
     "name": "Claudia Meyr",
+    "position": "Kommunikation & Fundraising",
     "email": "claudia.meyr@velafrica.ch",
     "image": "http://velafrica.ch/media/archive2/Team/Claudia.jpg"
   }
@@ -147,6 +149,7 @@
   "pk": 9,
   "fields": {
     "active": true,
+    "name": "Christopher Klein",
     "position": "Werkstattleiter",
     "email": "christopher.klein@velafrica.ch",
     "image": "http://velafrica.ch/media/archive2/Team/Christopher.jpg"
@@ -181,6 +184,7 @@
     "active": true,
     "name": "Simone Niggli-Luder",
     "image": "http://velafrica.ch/media/archive2/Botschafter/Niggli_Luder.jpg",
+    "text": ""
   }
 },
 {
@@ -190,6 +194,7 @@
     "active": true,
     "name": "Franz Hohler",
     "image": "http://velafrica.ch/media/archive2/Botschafter/Franz_Hohler.jpg",
+    "text": ""
   }
 },
 {
@@ -199,6 +204,7 @@
     "active": true,
     "name": "Franco Marvulli",
     "image": "http://velafrica.ch/media/archive2/Botschafter/Franco_Marvulli.jpg",
+    "text": ""
   }
 },
 {
@@ -208,6 +214,7 @@
     "active": true,
     "name": "Emil Steinberger",
     "image": "http://velafrica.ch/media/archive2/Botschafter/Emil.jpg",
+    "text": ""
   }
 },
 {
