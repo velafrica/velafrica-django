@@ -3,6 +3,10 @@
 {% load static %}
 {% load i18n %}
 
+{% block page_title %}
+  {% trans "Finden Sie Abgabestellen" %}
+{% endblock %}
+
 {% block content %}
   <section class="map">
     <input type="hidden" id="map-data-url" value="{{ map_data_url }}">

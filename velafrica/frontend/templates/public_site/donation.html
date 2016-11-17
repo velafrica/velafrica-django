@@ -1,6 +1,10 @@
 {% extends "public_site/base.html" %}
 {% load i18n %}
 {% load sekizai_tags %}
+{% block page_title %}
+  {% trans "Ihre Spende hilft!" %}
+{% endblock %}
+
 
 {% block content %}
   <section id="donation" class="container-fluid">

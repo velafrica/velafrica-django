@@ -1,6 +1,10 @@
 {% extends "public_site/base.html" %}
 {% load i18n %}
 
+{% block page_title %}
+  {% trans "Ihre Anfrage an Velafrica wurde versendet." %}
+{% endblock %}
+
 {% block content %}
   <div class="col-sm-6 col-sm-offset-3 text-center checkmark">
           <h1>
