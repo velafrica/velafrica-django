@@ -91,6 +91,7 @@ def render_sbb_ticker_order(request):
                 'dropoff': dropoff,
                 'firstname': order.first_name,
                 'lastname': order.last_name,
+                'amount': order.amount,
                 'address': u"{}, {}".format(order.address, order.zip),
                 'email': order.email,
                 'phone': order.phone,

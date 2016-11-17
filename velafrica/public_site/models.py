@@ -42,6 +42,7 @@ class SbbTicketOrder(models.Model):
     email = models.CharField(max_length=255, verbose_name="E-Mail")
     phone = models.CharField(max_length=255, verbose_name="Telefonnummer", blank=True)
     note = models.TextField(verbose_name="Bemerkung", blank=True)
+    amount = models.IntegerField(verbose_name="Anzahl", default=1)
 
     def __unicode__(self):
         return u"{} {} - {}".format(self.first_name, self.last_name, self.dropoff)

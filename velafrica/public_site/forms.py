@@ -148,7 +148,11 @@ class SbbTicketOrderForm(forms.ModelForm):
         'placeholder': 'Bemerkung',
         'rows': '4'
     }))
+    amount = forms.IntegerField(required=False, widget=forms.NumberInput(attrs={
+        'class': 'form-control input-lg',
+        'placeholder': 'Menge an Velos'
+    }))
 
     class Meta:
         model = SbbTicketOrder
-        fields = ('first_name', 'last_name', 'address', 'zip', 'email', 'phone', 'note')
+        fields = ('first_name', 'last_name', 'amount', 'address', 'zip', 'email', 'phone', 'note')
