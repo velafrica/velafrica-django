@@ -8,7 +8,7 @@ from velafrica.core.settings import PAYPAL_RECEIVER_MAIL, GMAP_API_KEY, ORDER_RE
 from velafrica.core.utils import send_mail
 from velafrica.collection.models import Dropoff
 from .forms import InvoiceForm, SbbTicketOrderForm, WalkthroughRequestForm
-from .models import DonationAmount, WalkthroughRequest, TeamMember, Award
+from .models import DonationAmount, WalkthroughRequest, TeamMember, References
 
 def render_template(request):
     template_name = '/index'
@@ -185,9 +185,9 @@ def render_about_us_template(request):
     template_name = 'public_site/ueber-uns.html'
     template_context = {}
 
-    if Award.objects.count() > 0:
+    if References.objects.count() > 0:
         template_context.update({
-            'awards': Award.objects.filter(active=True)
+            'references': References.objects.filter(active=True)
         })
 
     if TeamMember.objects.count() > 0:

@@ -153,7 +153,7 @@ class TeamMember(models.Model):
         verbose_name_plural = 'Teammitglieder'
 
 
-class Award(models.Model):
+class References(models.Model):
     active = models.BooleanField(default=True)
     name = models.CharField(max_length=255, verbose_name="Name")
     image = models.CharField(max_length=255, verbose_name="Bild-URL")
@@ -163,5 +163,5 @@ class Award(models.Model):
         return u"{}".format(self.name)
 
     class Meta:
-        verbose_name = 'Award'
-        verbose_name_plural = 'Awards'
+        verbose_name = 'Botschafter'
+        verbose_name_plural = 'Botschafter'
