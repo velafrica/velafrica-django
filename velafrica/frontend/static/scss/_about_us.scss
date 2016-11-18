@@ -92,6 +92,7 @@ main#about-us {
     &#messenger-content {
 
       .references {
+        margin-top: 60px;
 
         .reference-img,
         .reference-content {
@@ -110,6 +111,15 @@ main#about-us {
           border-left: 0;
 
           em {
+            font-size: 18px;
+            line-height: 24px;
+            font-weight: normal;
+
+            @media (max-width: 500px) {
+              font-size: 14px;
+              line-height: 18px;
+            }
+
             &:before {
               position: relative;
               content: "\201C";
