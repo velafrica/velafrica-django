@@ -1,230 +1,230 @@
 [
-{
-  "model": "public_site.donationamount",
-  "pk": 1,
-  "fields": {
-    "is_active": true,
-    "description": "Finanzieren Sie den Export eines Spendenvelos.",
-    "amount": "50.00"
+  {
+    "model": "public_site.donationamount",
+    "pk": 1,
+    "fields": {
+      "is_active": true,
+      "description": "Finanzieren Sie den Export eines Spendenvelos.",
+      "amount": "50.00"
+    }
+  },
+  {
+    "model": "public_site.donationamount",
+    "pk": 2,
+    "fields": {
+      "is_active": true,
+      "description": "Unterstützen Sie die Einrichtung eines Ausbildungsplatzes in Afrika.",
+      "amount": "500.00"
+    }
+  },
+  {
+    "model": "public_site.donationamount",
+    "pk": 3,
+    "fields": {
+      "is_active": true,
+      "description": "Ermöglichen Sie den Transport eines vollen Containers mit 500 Velos.",
+      "amount": "5000.00"
+    }
+  },
+  {
+    "model": "public_site.donationamount",
+    "pk": 4,
+    "fields": {
+      "is_active": false,
+      "amount": "100000.00"
+    }
+  },
+  {
+    "model": "public_site.content",
+    "pk": 2,
+    "fields": {
+      "language": "de",
+      "path": "index",
+      "key": "first_background_image",
+      "value": "/static/img/street_burkina_irim.jpg",
+      "description": "Hintergrundbild des ersten Teasers"
+    }
+  },
+  {
+    "model": "public_site.content",
+    "pk": 3,
+    "fields": {
+      "language": "en",
+      "path": "index",
+      "key": "first_background_image",
+      "value": "",
+      "description": "Hintergrundbild des ersten Teasers"
+    }
+  },
+  {
+    "model": "public_site.teammember",
+    "pk": 1,
+    "fields": {
+      "active": true,
+      "name": "Paolo Richter",
+      "position": "Gesch\u00e4ftsleiter",
+      "email": "paolo.richter@drahtesel.ch",
+      "image": "http://velafrica.ch/media/archive2/Team/Paolo.jpg"
+    }
+  },
+  {
+    "model": "public_site.teammember",
+    "pk": 2,
+    "fields": {
+      "active": true,
+      "name": "Michel Ducommun",
+      "position": "Programmleiter Afrika",
+      "email": "michel.ducommun@velafrica.ch",
+      "image": "http://velafrica.ch/media/archive2/Team/Michel.jpg"
+    }
+  },
+  {
+    "model": "public_site.teammember",
+    "pk": 3,
+    "fields": {
+      "active": true,
+      "name": "Matthias Maurer",
+      "position": "Programmleiter Schweiz",
+      "email": "matthias.maurer@velafrica.ch",
+      "image": "http://velafrica.ch/media/archive2/Team/Matthias.jpg"
+    }
+  },
+  {
+    "model": "public_site.teammember",
+    "pk": 4,
+    "fields": {
+      "active": true,
+      "name": "Mats Gurtner",
+      "position": "Programmassistent",
+      "email": "mats.gurtner@velafrica.ch",
+      "image": "http://velafrica.ch/media/archive2/Team/Mats.jpg"
+    }
+  },
+  {
+    "model": "public_site.teammember",
+    "pk": 5,
+    "fields": {
+      "active": true,
+      "name": "Claudia Meyr",
+      "position": "Kommunikation & Fundraising",
+      "email": "claudia.meyr@velafrica.ch",
+      "image": "http://velafrica.ch/media/archive2/Team/Claudia.jpg"
+    }
+  },
+  {
+    "model": "public_site.teammember",
+    "pk": 6,
+    "fields": {
+      "active": true,
+      "name": "Nikolai R\u00e4ber",
+      "position": "Projektkoordinator",
+      "email": "nikolai.raeber@velafrica.ch",
+      "image": "http://velafrica.ch/media/archive2/Team/Nikolai_neu.jpg"
+    }
+  },
+  {
+    "model": "public_site.teammember",
+    "pk": 7,
+    "fields": {
+      "active": true,
+      "name": "Viveca Haffner",
+      "position": "Programmassistentin",
+      "email": "viveca.haffner@velafrica.ch",
+      "image": "http://velafrica.ch/media/archive2/Team/Viveca_neu_1466421808.jpg"
+    }
+  },
+  {
+    "model": "public_site.teammember",
+    "pk": 8,
+    "fields": {
+      "active": true,
+      "name": "Thomas Marti",
+      "position": "Programmassistent",
+      "email": "thomas.marti@velafrica.ch",
+      "image": "http://velafrica.ch/media/archive2/Team/Thomas.jpg"
+    }
+  },
+  {
+    "model": "public_site.teammember",
+    "pk": 9,
+    "fields": {
+      "active": true,
+      "name": "Christopher Klein",
+      "position": "Werkstattleiter",
+      "email": "christopher.klein@velafrica.ch",
+      "image": "http://velafrica.ch/media/archive2/Team/Christopher.jpg"
+    }
+  },
+  {
+    "model": "public_site.teammember",
+    "pk": 10,
+    "fields": {
+      "active": true,
+      "name": "Lorenz R\u00fcfenacht",
+      "position": "Mitarbeiter Export-Werkstatt",
+      "email": "lorenz.ruefenacht@velafrica.ch",
+      "image": "http://velafrica.ch/media/archive2/Team/Lorenz.jpg"
+    }
+  },
+  {
+    "model": "public_site.teammember",
+    "pk": 11,
+    "fields": {
+      "active": true,
+      "name": "Julian Meier & Sylvain Gilgen",
+      "position": "Zivildienstleistende",
+      "email": "zivi@velafrica.ch",
+      "image": ""
+    }
+  },
+  {
+    "model": "public_site.references",
+    "pk": 1,
+    "fields": {
+      "active": true,
+      "name": "Simone Niggli-Luder",
+      "image": "http://velafrica.ch/media/archive2/Botschafter/Niggli_Luder.jpg",
+      "text": "Ein Velo in Afrika öffnet Türen: Der Weg zur Schule oder an den Arbeitsplatz wird kürzer oder gar erst machbar, die Fahrt auf den Markt zum Verkauf der eigenen Früchte bringt Einkommen für die ganze Familie. Diese Art von Mobilität unterstütze ich gerne."
+    }
+  },
+  {
+    "model": "public_site.references",
+    "pk": 2,
+    "fields": {
+      "active": true,
+      "name": "Franz Hohler",
+      "image": "http://velafrica.ch/media/archive2/Botschafter/Franz_Hohler.jpg",
+      "text": "Das Velo ist nach den Füssen dasjenige Verkehrsmittel, das am wenigsten Schadstoffe ausstösst. Deshalb sollte es dringend gefördert werden – in Afrika und bei uns."
+    }
+  },
+  {
+    "model": "public_site.references",
+    "pk": 3,
+    "fields": {
+      "active": true,
+      "name": "Franco Marvulli",
+      "image": "http://velafrica.ch/media/archive2/Botschafter/Franco_Marvulli.jpg",
+      "text": "Ich finde die Idee von Velafrica genial. Funktionierende Velos müssen nicht mehr weggeworfen werden, es entstehen Arbeitsplätze in der Schweiz und den Menschen in Afrika erleichtern die Velos das Leben."
+    }
+  },
+  {
+    "model": "public_site.references",
+    "pk": 4,
+    "fields": {
+      "active": true,
+      "name": "Emil Steinberger",
+      "image": "http://velafrica.ch/media/archive2/Botschafter/Emil.jpg",
+      "text": "Es ist von A bis Z eine ehrliche Sache. Einfach und effizient. Vom Sammeln über das Reparieren bis zum Verschiffen und Verwenden in Afrika. Jeder Mensch kann sich die Hilfe rasch vorstellen. Hut ab!"
+    }
+  },
+  {
+    "model": "public_site.references",
+    "pk": 5,
+    "fields": {
+      "active": true,
+      "name": "Patrick Bengondo",
+      "image": "http://velafrica.ch/media/archive2/Botschafter/Patrick_Bengondo.jpg",
+      "text": "Ich unterst\u00fctze Velafrica, weil ich weiss, dass durch die Velos aus der Schweiz ganz viele Menschen ein besseres Leben haben."
+    }
   }
-},
-{
-  "model": "public_site.donationamount",
-  "pk": 2,
-  "fields": {
-    "is_active": true,
-    "description": "Unterstützen Sie die Einrichtung eines Ausbildungsplatzes in Afrika.",
-    "amount": "500.00"
-  }
-},
-{
-  "model": "public_site.donationamount",
-  "pk": 3,
-  "fields": {
-    "is_active": true,
-    "description": "Ermöglichen Sie den Transport eines vollen Containers mit 500 Velos.",
-    "amount": "5000.00"
-  }
-},
-{
-  "model": "public_site.donationamount",
-  "pk": 4,
-  "fields": {
-    "is_active": false,
-    "amount": "100000.00"
-  }
-},
-{
-  "model": "public_site.content",
-  "pk": 2,
-  "fields": {
-    "language": "de",
-    "path": "index",
-    "key": "first_background_image",
-    "value": "/static/img/street_burkina_irim.jpg",
-    "description": "Hintergrundbild des ersten Teasers"
-  }
-},
-{
-  "model": "public_site.content",
-  "pk": 3,
-  "fields": {
-    "language": "en",
-    "path": "index",
-    "key": "first_background_image",
-    "value": "",
-    "description": "Hintergrundbild des ersten Teasers"
-  }
-},
-{
-  "model": "public_site.teammember",
-  "pk": 1,
-  "fields": {
-    "active": true,
-    "name": "Paolo Richter",
-    "position": "Gesch\u00e4ftsleiter",
-    "email": "paolo.richter@drahtesel.ch",
-    "image": "http://velafrica.ch/media/archive2/Team/Paolo.jpg"
-  }
-},
-{
-  "model": "public_site.teammember",
-  "pk": 2,
-  "fields": {
-    "active": true,
-    "name": "Michel Ducommun",
-    "position": "Programmleiter Afrika",
-    "email": "michel.ducommun@velafrica.ch",
-    "image": "http://velafrica.ch/media/archive2/Team/Michel.jpg"
-  }
-},
-{
-  "model": "public_site.teammember",
-  "pk": 3,
-  "fields": {
-    "active": true,
-    "name": "Matthias Maurer",
-    "position": "Programmleiter Schweiz",
-    "email": "matthias.maurer@velafrica.ch",
-    "image": "http://velafrica.ch/media/archive2/Team/Matthias.jpg"
-  }
-},
-{
-  "model": "public_site.teammember",
-  "pk": 4,
-  "fields": {
-    "active": true,
-    "name": "Mats Gurtner",
-    "position": "Programmassistent",
-    "email": "mats.gurtner@velafrica.ch",
-    "image": "http://velafrica.ch/media/archive2/Team/Mats.jpg"
-  }
-},
-{
-  "model": "public_site.teammember",
-  "pk": 5,
-  "fields": {
-    "active": true,
-    "name": "Claudia Meyr",
-    "position": "Kommunikation & Fundraising",
-    "email": "claudia.meyr@velafrica.ch",
-    "image": "http://velafrica.ch/media/archive2/Team/Claudia.jpg"
-  }
-},
-{
-  "model": "public_site.teammember",
-  "pk": 6,
-  "fields": {
-    "active": true,
-    "name": "Nikolai R\u00e4ber",
-    "position": "Projektkoordinator",
-    "email": "nikolai.raeber@velafrica.ch",
-    "image": "http://velafrica.ch/media/archive2/Team/Nikolai_neu.jpg"
-  }
-},
-{
-  "model": "public_site.teammember",
-  "pk": 7,
-  "fields": {
-    "active": true,
-    "name": "Viveca Haffner",
-    "position": "Programmassistentin",
-    "email": "viveca.haffner@velafrica.ch",
-    "image": "http://velafrica.ch/media/archive2/Team/Viveca_neu_1466421808.jpg"
-  }
-},
-{
-  "model": "public_site.teammember",
-  "pk": 8,
-  "fields": {
-    "active": true,
-    "name": "Thomas Marti",
-    "position": "Programmassistent",
-    "email": "thomas.marti@velafrica.ch",
-    "image": "http://velafrica.ch/media/archive2/Team/Thomas.jpg"
-  }
-},
-{
-  "model": "public_site.teammember",
-  "pk": 9,
-  "fields": {
-    "active": true,
-    "name": "Christopher Klein",
-    "position": "Werkstattleiter",
-    "email": "christopher.klein@velafrica.ch",
-    "image": "http://velafrica.ch/media/archive2/Team/Christopher.jpg"
-  }
-},
-{
-  "model": "public_site.teammember",
-  "pk": 10,
-  "fields": {
-    "active": true,
-    "name": "Lorenz R\u00fcfenacht",
-    "position": "Mitarbeiter Export-Werkstatt",
-    "email": "lorenz.ruefenacht@velafrica.ch",
-    "image": "http://velafrica.ch/media/archive2/Team/Lorenz.jpg"
-  }
-},
-{
-  "model": "public_site.teammember",
-  "pk": 11,
-  "fields": {
-    "active": true,
-    "name": "Julian Meier & Sylvain Gilgen",
-    "position": "Zivildienstleistende",
-    "email": "zivi@velafrica.ch",
-    "image": ""
-  }
-},
-{
-  "model": "public_site.references",
-  "pk": 1,
-  "fields": {
-    "active": true,
-    "name": "Simone Niggli-Luder",
-    "image": "http://velafrica.ch/media/archive2/Botschafter/Niggli_Luder.jpg",
-    "text": ""
-  }
-},
-{
-  "model": "public_site.references",
-  "pk": 2,
-  "fields": {
-    "active": true,
-    "name": "Franz Hohler",
-    "image": "http://velafrica.ch/media/archive2/Botschafter/Franz_Hohler.jpg",
-    "text": ""
-  }
-},
-{
-  "model": "public_site.references",
-  "pk": 3,
-  "fields": {
-    "active": true,
-    "name": "Franco Marvulli",
-    "image": "http://velafrica.ch/media/archive2/Botschafter/Franco_Marvulli.jpg",
-    "text": ""
-  }
-},
-{
-  "model": "public_site.references",
-  "pk": 4,
-  "fields": {
-    "active": true,
-    "name": "Emil Steinberger",
-    "image": "http://velafrica.ch/media/archive2/Botschafter/Emil.jpg",
-    "text": ""
-  }
-},
-{
-  "model": "public_site.references",
-  "pk": 5,
-  "fields": {
-    "active": true,
-    "name": "Patrick Bengondo",
-    "image": "http://velafrica.ch/media/archive2/Botschafter/Patrick_Bengondo.jpg",
-    "text": "Ich unterst\u00fctze Velafrica, weil ich weiss, dass durch die Velos aus der Schweiz ganz viele Menschen ein besseres Leben haben."
-  }
-}
 ]
