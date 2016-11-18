@@ -196,3 +196,17 @@ def render_about_us_template(request):
         })
 
     return render_to_response(template_name, template_context, context_instance=RequestContext(request))
+
+
+def render_personal_tracking(request, tracking_no):
+    template_name = 'public_site/my-tracking.html'
+    template_context = {
+        'tracking_no': tracking_no
+    }
+    return render_to_response(template_name, template_context, context_instance=RequestContext(request))
+
+
+def render_tracking(request):
+    template_name = 'public_site/my-tracking.html'
+    template_context = {}
+    return render_to_response(template_name, template_context, context_instance=RequestContext(request))
