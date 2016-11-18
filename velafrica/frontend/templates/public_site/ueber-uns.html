@@ -175,16 +175,25 @@
             {% endif %}
 
             <div class="col-md-3 col-xs-6 text-center">
-              {% if member.image %}
-                <img src="{{ member.image }}" style="width: 100%" alt="">
-              {% else %}
-                <img src="http://placehold.it/300?text=Image.." alt="">
-              {% endif %}
+              <div class="team-member">
+                {% if member.image %}
+                  <img src="{{ member.image }}" style="width: 100%" alt="">
+                {% else %}
+                  <img src="http://placehold.it/300?text=Image.." alt="">
+                {% endif %}
 
-              <h4 style="padding-top: 20px">{{ member.name }}</h4>
-              <p class="legend">{{ member.position }}</p>
-              <a style="font-size: 14px" href="mailto:{{ member.email }}">{{ member.email }}</a>
+                <div class="team-content">
+                  <h4>{{ member.name }}</h4>
+                  <p class="legend">{{ member.position }}</p>
+                  <a class="hidden-xs visible-sm visible-md visible-lg" href="mailto:{{ member.email }}">{{ member.email }}</a>
+                  <a class="visible-xs" href="mailto:{{ member.email }}"><i class="glyphicon glyphicon-inbox"></i></a>
+                </div>
+              </div>
             </div>
+
+            {% if forloop.counter|divisibleby:2 %}
+              <div class="clearfix visible-xs-block"></div>
+            {% endif %}
 
           {% endfor %}
           </div>
