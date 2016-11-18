@@ -6,6 +6,7 @@
     "name": "Tracking erstellt",
     "show_partner_info": false,
     "description": "Herzlichen Dank, dass Sie uns Ihr altes Velo spenden und sich an unserem Tracking-Testlauf beteiligen. Mit Ihrem pers\u00f6nlichen Tracking-Code k\u00f6nnen Sie in den kommenden Wochen und Monaten die Reise Ihres alten Drahtesels mitverfolgen.",
+    "email_text": null,
     "image": "tracking/eventtypes/IMG_3425.JPG",
     "label": "Dein Velo wurde im Trackingsystem erfasst",
     "required_previous_event": null,
@@ -40,7 +41,10 @@
   "fields": {
     "name": "Containerverlad",
     "show_partner_info": false,
+    "description": "2015 verschiffte Velafrica 17'445 Recyling-Velos zu seinen Partnern in Afrika. Das sind 38 Schiffscontainer bis oben hin beladen mit rund 500 Drahteseln. Heute ist auch Ihr Velo darunter und wird verladen. Vom Berner Liebefeld geht es zun\u00e4chst mit einem Lastwagen nach Basel und dann per Bahn oder Schiff nach Antwerpen. Dort kommt der Container auf ein Handelsschiff, das Kurs Richtung S\u00fcden aufnimmt. Im Zielhafen angekommen, ist die Reise meist noch nicht zu Ende. Mit dem Lastwagen geht es oft noch hunderte Kilometer in entlegene Regionen zu unseren Partnern in Ghana, Gambia, Eritrea, Burkina Faso, Tansania, Elfenbeink\u00fcste und Madagaskar. Die Reise dauert in der Regel etwa drei Monate. Sobald die Velos angekommen sind, informieren wir Sie wieder.",
     "email_text": "",
+    "image": "",
+    "label": "",
     "required_previous_event": 8,
     "arrival_africa": false,
     "complete_tracking": false,
@@ -53,8 +57,12 @@
   "model": "sbbtracking.trackingeventtype",
   "pk": 5,
   "fields": {
+    "name": "Ankunft Partner Afrika",
     "show_partner_info": true,
+    "description": "Das Velo ist nun in Afrika. Merci!",
     "email_text": "",
+    "image": "",
+    "label": "",
     "required_previous_event": 4,
     "arrival_africa": true,
     "complete_tracking": true,
@@ -69,6 +77,7 @@
   "fields": {
     "name": "Verkauf im Drahtesel/Partnerwerkstatt",
     "show_partner_info": false,
+    "description": "Unsere Werkstattmitarbeitenden haben entschieden, dass es Sinn macht, Ihr Velo im Laden des sozialen Unternehmens \u00abDrahtesel\u00bb im Berner Liebefeld (www.drahtesel.ch) oder einem unserer Partner zu verkaufen. Velafrica verkauft bis zu 10 Prozent der gespendeten Velos in der Schweiz. Der Erl\u00f6s kommt vollumf\u00e4nglich Velafrica zugute. So finanziert Ihr Velo die Transportkosten von mehreren Dutzend anderen Spendervelos nach Afrika. Das Tracking Ihres Drahtesels endet hiermit. Herzlichen Dank f\u00fcr Ihre wertvolle Unterst\u00fctzung.",
     "email_text": "",
     "image": "tracking/eventtypes/VerkaufVeloladen.jpg",
     "label": "Velo wurde im Drahtesel verkauft",
@@ -86,6 +95,7 @@
   "fields": {
     "name": "Zerlegung in Einzelteile",
     "show_partner_info": false,
+    "description": "Velafrica exportiert nur fahrt\u00fcchtige Velos in gutem Zustand nach Afrika. Sie sollen vor Ort noch einige Jahre weiterrollen. Ihr alter Drahtesel hat unsere Qualit\u00e4tspr\u00fcfung leider nicht bestanden. Aber keine Sorge: Er landet nicht auf dem M\u00fcll, sondern wird in seine Einzelteile zerlegt. Neben Recycling-Velos beliefern wir unsere afrikanischen Partner auch mit Ersatzteilen. Vielleicht kurvt Ihr Lenker schon bald in Madagaskar herum oder eine Sch\u00fclerin aus Tansania tritt in Ihre Pedale. Die Weiterverfolgung der Ersatzteile ist leider nicht m\u00f6glich. Das Tracking Ihres Velos endet deshalb hier. Wir danken Ihnen nochmals herzlich f\u00fcr Ihre Unterst\u00fctzung.",
     "email_text": "",
     "image": "tracking/eventtypes/Velafrica_1.shooting_26_von_161-14.jpg",
     "label": "Velo wird zu Ersatzteilen verarbeitet",
@@ -103,6 +113,7 @@
   "fields": {
     "name": "Bereit f\u00fcr Export",
     "show_partner_info": false,
+    "description": "Ihr Velo hat die Velowerkstatt verlassen und ist bereit f\u00fcr die Reise nach Afrika. F\u00fcr einen platzsparenden Transport sind Pedale, Vorderrad und Sattel demontiert. Instand gestellt haben es zum Beispiel Fl\u00fcchtlinge, die in der Export-Werkstatt von Velafrica arbeiten. Im Rahmen eines Integrationsprojekts lernen rund 20 Teilnehmende fachm\u00e4nnisch Reparaturarbeiten an den gespendeten Fahrr\u00e4dern durchzuf\u00fchren. W\u00e4hrend ihres Einsatzes erhalten sie einen Einblick in die hiesige Arbeitswelt und ihre M\u00f6glichkeiten. Dazu geh\u00f6rt auch Deutschtraining on the Job. So wird sinnvolle Integrationsarbeit mit nachhaltigem Velorecycling verbunden.",
     "email_text": "",
     "image": "tracking/eventtypes/2876_Va_Drahtesel_JL.jpg",
     "label": "Dein Velo ist bereit f\u00fcr Export - bald geht's nac \u00dcbersee.",
@@ -153,6 +164,7 @@
   "model": "sbbtracking.velotype",
   "pk": 6,
   "fields": {
+    "name": ""
   }
 },
 {
