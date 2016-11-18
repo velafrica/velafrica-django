@@ -33,8 +33,6 @@ main#about-us {
         background-color: $velafrica-brown-6;
         border-radius: $vel-border-radius;
         margin: 1.5rem 0;
-        overflow-wrap: break-word;
-        word-wrap: break-word;
 
         img {
           border-top-left-radius: $vel-border-radius;
@@ -75,10 +73,22 @@ main#about-us {
       }
     }
 
-    .well {
-      border-color: $velafrica-brown-3-hover;
-      h3 {
-        color: $velafrica;
+    &#messenger-content {
+
+      .references {
+
+        .reference-img,
+        .reference-content {
+          min-height: 200px;
+          padding-top: 2rem;
+          padding-bottom: 2rem;
+        }
+
+        .reference-img {
+          img {
+            width: 100%;
+          }
+        }
       }
     }
   }
