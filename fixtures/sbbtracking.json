@@ -1,147 +1,17 @@
 [
 {
-  "model": "sbbtracking.historicaltrackingeventtype",
-  "pk": 1,
-  "fields": {
-    "id": 1,
-    "name": "Testeventtype",
-    "show_partner_info": false,
-    "description": "meep.",
-    "email_text": "",
-    "image": "",
-    "label": "",
-    "arrival_africa": false,
-    "complete_tracking": false,
-    "send_email": false,
-    "latitude_default": null,
-    "longitude_default": null,
-    "required_previous_event": null,
-    "history_date": "2016-10-12T15:54:36.149Z",
-    "history_user": 1,
-    "history_type": "+"
-  }
-},
-{
-  "model": "sbbtracking.historicaltrackingeventtype",
-  "pk": 2,
-  "fields": {
-    "id": 2,
-    "name": "Testeventtype 2",
-    "show_partner_info": false,
-    "email_text": "",
-    "image": "",
-    "label": "",
-    "arrival_africa": false,
-    "complete_tracking": false,
-    "send_email": false,
-    "latitude_default": null,
-    "longitude_default": null,
-    "required_previous_event": 1,
-    "history_date": "2016-10-13T13:15:40.478Z",
-    "history_user": 1,
-    "history_type": "+"
-  }
-},
-{
-  "model": "sbbtracking.historicaltrackingeventtype",
-  "pk": 3,
-  "fields": {
-    "id": 3,
-    "name": "Testeventtype",
-    "show_partner_info": false,
-    "description": "meep.",
-    "email_text": "",
-    "image": "",
-    "label": "",
-    "arrival_africa": false,
-    "complete_tracking": false,
-    "send_email": false,
-    "latitude_default": null,
-    "longitude_default": null,
-    "required_previous_event": null,
-    "history_date": "2016-10-25T11:50:15.405Z",
-    "history_user": 1,
-    "history_type": "+"
-  }
-},
-{
-  "model": "sbbtracking.historicaltrackingeventtype",
-  "pk": 4,
-  "fields": {
-    "id": 4,
-    "name": "Testeventtype 2",
-    "show_partner_info": false,
-    "email_text": "",
-    "image": "",
-    "label": "",
-    "arrival_africa": false,
-    "complete_tracking": false,
-    "send_email": false,
-    "latitude_default": null,
-    "longitude_default": null,
-    "required_previous_event": 1,
-    "history_date": "2016-10-25T11:50:15.410Z",
-    "history_user": 1,
-    "history_type": "+"
-  }
-},
-{
-  "model": "sbbtracking.historicaltrackingeventtype",
-  "pk": 5,
-  "fields": {
-    "id": 5,
-    "name": "Testeventtype",
-    "show_partner_info": false,
-    "description": "meep.",
-    "email_text": "",
-    "image": "",
-    "label": "",
-    "arrival_africa": false,
-    "complete_tracking": false,
-    "send_email": false,
-    "latitude_default": null,
-    "longitude_default": null,
-    "required_previous_event": null,
-    "history_date": "2016-10-25T11:50:15.413Z",
-    "history_user": 1,
-    "history_type": "+"
-  }
-},
-{
-  "model": "sbbtracking.historicaltrackingeventtype",
-  "pk": 6,
-  "fields": {
-    "id": 6,
-    "name": "Testeventtype 2",
-    "show_partner_info": false,
-    "email_text": "",
-    "image": "",
-    "label": "",
-    "arrival_africa": false,
-    "complete_tracking": false,
-    "send_email": false,
-    "latitude_default": null,
-    "longitude_default": null,
-    "required_previous_event": 1,
-    "history_date": "2016-10-25T11:50:15.416Z",
-    "history_user": 1,
-    "history_type": "+"
-  }
-},
-{
   "model": "sbbtracking.trackingeventtype",
   "pk": 1,
   "fields": {
-    "name": "Testeventtype",
+    "name": "Tracking erstellt",
     "show_partner_info": false,
-    "description": "meep.",
-    "email_text": "",
-    "image": "",
-    "label": "",
+    "description": "Herzlichen Dank, dass Sie uns Ihr altes Velo spenden und sich an unserem Tracking-Testlauf beteiligen. Mit Ihrem pers\u00f6nlichen Tracking-Code k\u00f6nnen Sie in den kommenden Wochen und Monaten die Reise Ihres alten Drahtesels mitverfolgen.",
+    "image": "tracking/eventtypes/IMG_3425.JPG",
+    "label": "Dein Velo wurde im Trackingsystem erfasst",
     "required_previous_event": null,
     "arrival_africa": false,
     "complete_tracking": false,
-    "send_email": false,
+    "send_email": true,
     "latitude_default": null,
     "longitude_default": null
   }
@@ -150,33 +20,16 @@
   "model": "sbbtracking.trackingeventtype",
   "pk": 2,
   "fields": {
-    "name": "Testeventtype 2",
+    "name": "Eingang Velafrica/Partnerwerkstatt",
     "show_partner_info": false,
+    "description": "Ihr altes Velo ist bei Velafrica in Bern oder einem unserer Verarbeitungspartner eingetroffen. Wir haben es registriert, so dass Sie die verschiedenen Stationen Ihres Drahtesels jetzt online abrufen k\u00f6nnen. Bis es demn\u00e4chst in die Velowerkstatt kommt, wo es fachkundig unter die Lupe genommen wird, bleibt es im Zwischenlager.",
     "email_text": "",
-    "image": "",
-    "label": "",
+    "image": "tracking/eventtypes/2982_Va_Drahtesel_JL.jpg",
+    "label": "Velo bei Velafrica angekommen",
     "required_previous_event": 1,
     "arrival_africa": false,
     "complete_tracking": false,
-    "send_email": false,
-    "latitude_default": null,
-    "longitude_default": null
-  }
-},
-{
-  "model": "sbbtracking.trackingeventtype",
-  "pk": 3,
-  "fields": {
-    "name": "Testeventtype",
-    "show_partner_info": false,
-    "description": "meep.",
-    "email_text": "",
-    "image": "",
-    "label": "",
-    "required_previous_event": null,
-    "arrival_africa": false,
-    "complete_tracking": false,
-    "send_email": false,
+    "send_email": true,
     "latitude_default": null,
     "longitude_default": null
   }
@@ -185,15 +38,13 @@
   "model": "sbbtracking.trackingeventtype",
   "pk": 4,
   "fields": {
-    "name": "Testeventtype 2",
+    "name": "Containerverlad",
     "show_partner_info": false,
     "email_text": "",
-    "image": "",
-    "label": "",
-    "required_previous_event": 1,
+    "required_previous_event": 8,
     "arrival_africa": false,
     "complete_tracking": false,
-    "send_email": false,
+    "send_email": true,
     "latitude_default": null,
     "longitude_default": null
   }
@@ -202,16 +53,12 @@
   "model": "sbbtracking.trackingeventtype",
   "pk": 5,
   "fields": {
-    "name": "Testeventtype",
-    "show_partner_info": false,
-    "description": "meep.",
+    "show_partner_info": true,
     "email_text": "",
-    "image": "",
-    "label": "",
-    "required_previous_event": null,
-    "arrival_africa": false,
-    "complete_tracking": false,
-    "send_email": false,
+    "required_previous_event": 4,
+    "arrival_africa": true,
+    "complete_tracking": true,
+    "send_email": true,
     "latitude_default": null,
     "longitude_default": null
   }
@@ -220,487 +67,120 @@
   "model": "sbbtracking.trackingeventtype",
   "pk": 6,
   "fields": {
-    "name": "Testeventtype 2",
+    "name": "Verkauf im Drahtesel/Partnerwerkstatt",
     "show_partner_info": false,
     "email_text": "",
-    "image": "",
-    "label": "",
-    "required_previous_event": 1,
+    "image": "tracking/eventtypes/VerkaufVeloladen.jpg",
+    "label": "Velo wurde im Drahtesel verkauft",
+    "required_previous_event": 2,
     "arrival_africa": false,
-    "complete_tracking": false,
-    "send_email": false,
+    "complete_tracking": true,
+    "send_email": true,
     "latitude_default": null,
     "longitude_default": null
   }
 },
 {
-  "model": "sbbtracking.historicaltrackingevent",
-  "pk": 1,
-  "fields": {
-    "id": 1,
-    "datetime": "2016-10-13T14:38:36Z",
-    "latitude": null,
-    "longitude": null,
-    "note": "",
-    "event_type": 1,
-    "tracking": 1,
-    "organisation": null,
-    "history_date": "2016-10-13T14:38:56.913Z",
-    "history_user": 1,
-    "history_type": "+"
-  }
-},
-{
-  "model": "sbbtracking.historicaltrackingevent",
-  "pk": 2,
-  "fields": {
-    "id": 2,
-    "datetime": "2016-10-13T14:39:11Z",
-    "latitude": null,
-    "longitude": null,
-    "note": "",
-    "event_type": 2,
-    "tracking": 1,
-    "organisation": null,
-    "history_date": "2016-10-13T14:39:21.576Z",
-    "history_user": 1,
-    "history_type": "+"
-  }
-},
-{
-  "model": "sbbtracking.historicaltrackingevent",
-  "pk": 3,
-  "fields": {
-    "id": 2,
-    "datetime": "2016-10-13T14:39:11Z",
-    "latitude": null,
-    "longitude": null,
-    "note": "",
-    "event_type": 2,
-    "tracking": 1,
-    "organisation": null,
-    "history_date": "2016-10-13T14:53:00.992Z",
-    "history_user": 1,
-    "history_type": "-"
-  }
-},
-{
-  "model": "sbbtracking.historicaltrackingevent",
-  "pk": 4,
-  "fields": {
-    "id": 1,
-    "datetime": "2016-10-13T14:38:36Z",
-    "latitude": null,
-    "longitude": null,
-    "note": "",
-    "event_type": 1,
-    "tracking": 1,
-    "organisation": null,
-    "history_date": "2016-10-13T14:53:00.996Z",
-    "history_user": 1,
-    "history_type": "-"
-  }
-},
-{
-  "model": "sbbtracking.historicaltrackingevent",
-  "pk": 5,
-  "fields": {
-    "id": 3,
-    "datetime": "2016-10-13T14:53:26Z",
-    "latitude": null,
-    "longitude": null,
-    "note": "",
-    "event_type": 1,
-    "tracking": 1,
-    "organisation": null,
-    "history_date": "2016-10-13T14:53:40.751Z",
-    "history_user": 1,
-    "history_type": "+"
-  }
-},
-{
-  "model": "sbbtracking.historicaltrackingevent",
-  "pk": 6,
-  "fields": {
-    "id": 4,
-    "datetime": "2016-10-13T14:54:10Z",
-    "latitude": null,
-    "longitude": null,
-    "note": "",
-    "event_type": 2,
-    "tracking": 1,
-    "organisation": null,
-    "history_date": "2016-10-13T14:54:26.696Z",
-    "history_user": 1,
-    "history_type": "+"
-  }
-},
-{
-  "model": "sbbtracking.historicaltrackingevent",
+  "model": "sbbtracking.trackingeventtype",
   "pk": 7,
   "fields": {
-    "id": 5,
-    "datetime": "2016-10-13T14:55:29Z",
-    "latitude": null,
-    "longitude": null,
-    "note": "",
-    "event_type": 1,
-    "tracking": 2,
-    "organisation": null,
-    "history_date": "2016-10-13T14:55:36.824Z",
-    "history_user": 1,
-    "history_type": "+"
+    "name": "Zerlegung in Einzelteile",
+    "show_partner_info": false,
+    "email_text": "",
+    "image": "tracking/eventtypes/Velafrica_1.shooting_26_von_161-14.jpg",
+    "label": "Velo wird zu Ersatzteilen verarbeitet",
+    "required_previous_event": 2,
+    "arrival_africa": false,
+    "complete_tracking": true,
+    "send_email": true,
+    "latitude_default": null,
+    "longitude_default": null
   }
 },
 {
-  "model": "sbbtracking.trackingevent",
-  "pk": 3,
-  "fields": {
-    "datetime": "2016-10-13T14:53:26Z",
-    "event_type": 1,
-    "tracking": 1,
-    "organisation": null,
-    "latitude": null,
-    "longitude": null,
-    "note": ""
-  }
-},
-{
-  "model": "sbbtracking.trackingevent",
-  "pk": 4,
-  "fields": {
-    "datetime": "2016-10-13T14:54:10Z",
-    "event_type": 2,
-    "tracking": 1,
-    "organisation": null,
-    "latitude": null,
-    "longitude": null,
-    "note": ""
-  }
-},
-{
-  "model": "sbbtracking.trackingevent",
-  "pk": 5,
-  "fields": {
-    "datetime": "2016-10-13T14:55:29Z",
-    "event_type": 1,
-    "tracking": 2,
-    "organisation": null,
-    "latitude": null,
-    "longitude": null,
-    "note": ""
-  }
-},
-{
-  "model": "sbbtracking.historicaltracking",
-  "pk": 1,
-  "fields": {
-    "id": 1,
-    "tracking_no": "TEST20161",
-    "first_name": "Harald",
-    "last_name": "Ullmann",
-    "email": "harald.ullmann@outlook.de",
-    "note": "",
-    "complete": false,
-    "vpn": null,
-    "container": null,
-    "velo_type": null,
-    "last_event": null,
-    "history_date": "2016-10-13T14:38:32.830Z",
-    "history_user": 1,
-    "history_type": "+"
-  }
-},
-{
-  "model": "sbbtracking.historicaltracking",
-  "pk": 2,
-  "fields": {
-    "id": 1,
-    "tracking_no": "TEST20161",
-    "first_name": "Harald",
-    "last_name": "Ullmann",
-    "email": "harald.ullmann@outlook.de",
-    "note": "",
-    "complete": false,
-    "vpn": null,
-    "container": null,
-    "velo_type": null,
-    "last_event": null,
-    "history_date": "2016-10-13T14:38:56.905Z",
-    "history_user": 1,
-    "history_type": "~"
-  }
-},
-{
-  "model": "sbbtracking.historicaltracking",
-  "pk": 3,
-  "fields": {
-    "id": 1,
-    "tracking_no": "TEST20161",
-    "first_name": "Harald",
-    "last_name": "Ullmann",
-    "email": "harald.ullmann@outlook.de",
-    "note": "",
-    "complete": false,
-    "vpn": null,
-    "container": null,
-    "velo_type": null,
-    "last_event": 1,
-    "history_date": "2016-10-13T14:38:56.922Z",
-    "history_user": 1,
-    "history_type": "~"
-  }
-},
-{
-  "model": "sbbtracking.historicaltracking",
-  "pk": 4,
-  "fields": {
-    "id": 1,
-    "tracking_no": "TEST20161",
-    "first_name": "Harald",
-    "last_name": "Ullmann",
-    "email": "harald.ullmann@outlook.de",
-    "note": "",
-    "complete": false,
-    "vpn": null,
-    "container": null,
-    "velo_type": null,
-    "last_event": 1,
-    "history_date": "2016-10-13T14:39:21.571Z",
-    "history_user": 1,
-    "history_type": "~"
-  }
-},
-{
-  "model": "sbbtracking.historicaltracking",
-  "pk": 5,
-  "fields": {
-    "id": 1,
-    "tracking_no": "TEST20161",
-    "first_name": "Harald",
-    "last_name": "Ullmann",
-    "email": "harald.ullmann@outlook.de",
-    "note": "",
-    "complete": false,
-    "vpn": null,
-    "container": null,
-    "velo_type": null,
-    "last_event": 2,
-    "history_date": "2016-10-13T14:39:21.578Z",
-    "history_user": 1,
-    "history_type": "~"
-  }
-},
-{
-  "model": "sbbtracking.historicaltracking",
-  "pk": 6,
-  "fields": {
-    "id": 1,
-    "tracking_no": "TEST20161",
-    "first_name": "Harald",
-    "last_name": "Ullmann",
-    "email": "harald.ullmann@outlook.de",
-    "note": "",
-    "complete": false,
-    "vpn": null,
-    "container": null,
-    "velo_type": null,
-    "last_event": 2,
-    "history_date": "2016-10-13T14:53:00.986Z",
-    "history_user": 1,
-    "history_type": "~"
-  }
-},
-{
-  "model": "sbbtracking.historicaltracking",
-  "pk": 7,
-  "fields": {
-    "id": 1,
-    "tracking_no": "TEST20161",
-    "first_name": "Harald",
-    "last_name": "Ullmann",
-    "email": "harald.ullmann@outlook.de",
-    "note": "",
-    "complete": false,
-    "vpn": null,
-    "container": null,
-    "velo_type": null,
-    "last_event": null,
-    "history_date": "2016-10-13T14:53:40.747Z",
-    "history_user": 1,
-    "history_type": "~"
-  }
-},
-{
-  "model": "sbbtracking.historicaltracking",
+  "model": "sbbtracking.trackingeventtype",
   "pk": 8,
   "fields": {
-    "id": 1,
-    "tracking_no": "TEST20161",
-    "first_name": "Harald",
-    "last_name": "Ullmann",
-    "email": "harald.ullmann@outlook.de",
-    "note": "",
-    "complete": false,
-    "vpn": null,
-    "container": null,
-    "velo_type": null,
-    "last_event": 3,
-    "history_date": "2016-10-13T14:53:40.753Z",
-    "history_user": 1,
-    "history_type": "~"
+    "name": "Bereit f\u00fcr Export",
+    "show_partner_info": false,
+    "email_text": "",
+    "image": "tracking/eventtypes/2876_Va_Drahtesel_JL.jpg",
+    "label": "Dein Velo ist bereit f\u00fcr Export - bald geht's nac \u00dcbersee.",
+    "required_previous_event": 2,
+    "arrival_africa": false,
+    "complete_tracking": false,
+    "send_email": true,
+    "latitude_default": null,
+    "longitude_default": null
   }
 },
 {
-  "model": "sbbtracking.historicaltracking",
-  "pk": 9,
-  "fields": {
-    "id": 1,
-    "tracking_no": "TEST20161",
-    "first_name": "Harald",
-    "last_name": "Ullmann",
-    "email": "harald.ullmann@outlook.de",
-    "note": "",
-    "complete": false,
-    "vpn": null,
-    "container": null,
-    "velo_type": null,
-    "last_event": 3,
-    "history_date": "2016-10-13T14:54:03.363Z",
-    "history_user": 1,
-    "history_type": "~"
-  }
-},
-{
-  "model": "sbbtracking.historicaltracking",
-  "pk": 10,
-  "fields": {
-    "id": 1,
-    "tracking_no": "TEST20161",
-    "first_name": "Harald",
-    "last_name": "Ullmann",
-    "email": "harald.ullmann@outlook.de",
-    "note": "",
-    "complete": false,
-    "vpn": null,
-    "container": null,
-    "velo_type": null,
-    "last_event": 3,
-    "history_date": "2016-10-13T14:54:26.691Z",
-    "history_user": 1,
-    "history_type": "~"
-  }
-},
-{
-  "model": "sbbtracking.historicaltracking",
-  "pk": 11,
-  "fields": {
-    "id": 1,
-    "tracking_no": "TEST20161",
-    "first_name": "Harald",
-    "last_name": "Ullmann",
-    "email": "harald.ullmann@outlook.de",
-    "note": "",
-    "complete": false,
-    "vpn": null,
-    "container": null,
-    "velo_type": null,
-    "last_event": 4,
-    "history_date": "2016-10-13T14:54:26.698Z",
-    "history_user": 1,
-    "history_type": "~"
-  }
-},
-{
-  "model": "sbbtracking.historicaltracking",
-  "pk": 12,
-  "fields": {
-    "id": 2,
-    "tracking_no": "TEST20162",
-    "first_name": "Rafi",
-    "last_name": "Cano",
-    "email": "",
-    "note": "",
-    "complete": false,
-    "vpn": null,
-    "container": null,
-    "velo_type": null,
-    "last_event": null,
-    "history_date": "2016-10-13T14:55:27.781Z",
-    "history_user": 1,
-    "history_type": "+"
-  }
-},
-{
-  "model": "sbbtracking.historicaltracking",
-  "pk": 13,
-  "fields": {
-    "id": 2,
-    "tracking_no": "TEST20162",
-    "first_name": "Rafi",
-    "last_name": "Cano",
-    "email": "",
-    "note": "",
-    "complete": false,
-    "vpn": null,
-    "container": null,
-    "velo_type": null,
-    "last_event": null,
-    "history_date": "2016-10-13T14:55:36.820Z",
-    "history_user": 1,
-    "history_type": "~"
-  }
-},
-{
-  "model": "sbbtracking.historicaltracking",
-  "pk": 14,
-  "fields": {
-    "id": 2,
-    "tracking_no": "TEST20162",
-    "first_name": "Rafi",
-    "last_name": "Cano",
-    "email": "",
-    "note": "",
-    "complete": false,
-    "vpn": null,
-    "container": null,
-    "velo_type": null,
-    "last_event": 5,
-    "history_date": "2016-10-13T14:55:36.826Z",
-    "history_user": 1,
-    "history_type": "~"
-  }
-},
-{
-  "model": "sbbtracking.tracking",
+  "model": "sbbtracking.velotype",
   "pk": 1,
   "fields": {
-    "tracking_no": "TEST20161",
-    "vpn": null,
-    "first_name": "Harald",
-    "last_name": "Ullmann",
-    "email": "harald.ullmann@outlook.de",
-    "container": null,
-    "note": "",
-    "velo_type": null,
-    "last_event": 4,
-    "complete": false
+    "name": "MTB"
   }
 },
 {
-  "model": "sbbtracking.tracking",
+  "model": "sbbtracking.velotype",
   "pk": 2,
   "fields": {
-    "tracking_no": "TEST20162",
-    "vpn": null,
-    "first_name": "Rafi",
-    "last_name": "Cano",
-    "email": "",
-    "container": null,
-    "note": "",
-    "velo_type": null,
-    "last_event": 5,
-    "complete": false
+    "name": "Classic Man"
+  }
+},
+{
+  "model": "sbbtracking.velotype",
+  "pk": 3,
+  "fields": {
+    "name": "Classic Woman"
+  }
+},
+{
+  "model": "sbbtracking.velotype",
+  "pk": 4,
+  "fields": {
+    "name": "Touring Man"
+  }
+},
+{
+  "model": "sbbtracking.velotype",
+  "pk": 5,
+  "fields": {
+    "name": "Touring Woman"
+  }
+},
+{
+  "model": "sbbtracking.velotype",
+  "pk": 6,
+  "fields": {
+  }
+},
+{
+  "model": "sbbtracking.velotype",
+  "pk": 7,
+  "fields": {
+    "name": "BMX"
+  }
+},
+{
+  "model": "sbbtracking.velotype",
+  "pk": 8,
+  "fields": {
+    "name": "3 Gang"
+  }
+},
+{
+  "model": "sbbtracking.velotype",
+  "pk": 9,
+  "fields": {
+    "name": "Double Bar"
+  }
+},
+{
+  "model": "sbbtracking.velotype",
+  "pk": 10,
+  "fields": {
+    "name": "Racing"
   }
 }
 ]
