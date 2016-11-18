@@ -69,32 +69,32 @@
             </p>
 
           </div>
+        </div>
 
-          <div class="row">
-            <div class="col-xs-12 text-center">
-              <div class="well well-lg">
+        <div class="row">
+          <div class="col-xs-12 text-center">
+            <div class="">
 
-                <h3>Swiss Social Entrepreneur 2009</h3>
-                <p>
-                  Paolo Richter erhielt für sein Engagement von der Schwab Foundation 2009 die Auszeichnung «Swiss
-                  Social
-                  Entrepreneur of the Year». Die Jury honoriert damit das nachhaltige und soziale Engagement in der
-                  Schweiz und in Afrika.
-                </p>
+              <h3>Swiss Social Entrepreneur 2009</h3>
+              <p>
+                Paolo Richter erhielt für sein Engagement von der Schwab Foundation 2009 die Auszeichnung «Swiss
+                Social
+                Entrepreneur of the Year». Die Jury honoriert damit das nachhaltige und soziale Engagement in der
+                Schweiz und in Afrika.
+              </p>
 
-              </div>
-              <div class="well well-lg">
+            </div>
+            <div class="">
 
-                <h3>Finalist beim UBS Social Innovators 2016</h3>
-                <img src="http://placehold.it/200x100" alt="">
+              <h3>Finalist beim UBS Social Innovators 2016</h3>
+              <img src="http://placehold.it/200x100" alt="">
 
-              </div>
-              <div class="well well-lg">
+            </div>
+            <div class="">
 
-                <h3>Seif Label zertifiziert</h3>
-                <img src="http://placehold.it/200x100" alt="">
+              <h3>Seif Label zertifiziert</h3>
+              <img src="http://placehold.it/200x100" alt="">
 
-              </div>
             </div>
           </div>
         </div>
@@ -185,7 +185,8 @@
                 <div class="team-content">
                   <h4>{{ member.name }}</h4>
                   <p class="legend">{{ member.position }}</p>
-                  <a class="hidden-xs visible-sm visible-md visible-lg" href="mailto:{{ member.email }}">{{ member.email }}</a>
+                  <a class="hidden-xs visible-sm visible-md visible-lg"
+                     href="mailto:{{ member.email }}">{{ member.email }}</a>
                   <a class="visible-xs" href="mailto:{{ member.email }}"><i class="glyphicon glyphicon-inbox"></i></a>
                 </div>
               </div>
@@ -232,17 +233,21 @@
           </div>
         </div>
 
-        <div class="row">
-          <div class="col-xs-12">
+        <div class="row references">
 
-            {% for reference in references %}
-              {{ reference.name }}
-              {{ reference.image }}
-              {{ reference.text }}
+          {% for reference in references %}
+            <div class="col-xs-4 col-md-3 col-md-offset-2 reference-img">
+              <img src="{{ reference.image }}" alt="">
+            </div>
+            <div class="col-xs-8 col-md-5 reference-content">
+              <blockquote>
+                <p class="legend"><em>{{ reference.text }}</em></p>
+                <footer>{{ reference.name }}</footer>
+              </blockquote>
+            </div>
+            <div class="clearfix visible"></div>
+          {% endfor %}
 
-            {% endfor %}
-
-          </div>
         </div>
       </div>
     </section>
