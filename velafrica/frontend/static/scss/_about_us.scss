@@ -14,6 +14,22 @@ main#about-us {
       min-height: 500px;
     }
 
+    .side-content {
+      margin-top: 60px;
+
+      .side-item {
+        margin-top: 60px;
+
+        h3 {
+          color: $velafrica;
+        }
+
+        img {
+          border-radius: $vel-border-radius;
+        }
+      }
+    }
+
     &#history {
       background: url("../img/Velafrica_PaoloRichter_150611_049.jpg") center/cover;
     }
@@ -27,10 +43,112 @@ main#about-us {
       background: url("../img/Klingel01.jpg") center/cover;
     }
 
-    .well {
-      border-color: $velafrica-brown-3-hover;
-      h3 {
-        color: $velafrica;
+    &#team-content {
+
+      .team-member {
+        background-color: $velafrica-brown-6;
+        border-radius: $vel-border-radius;
+        margin: 1.5rem 0;
+
+        img {
+          border-top-left-radius: $vel-border-radius;
+          border-top-right-radius: $vel-border-radius;
+        }
+
+        h4 {
+          margin-bottom: 0;
+        }
+        p {
+          padding-top: 0;
+          margin-bottom: 0;
+        }
+        a {
+          font-size: 13px;
+        }
+        .team-content {
+          padding: 2rem .5rem;
+          min-height: 160px;
+
+          @media (max-width: 320px) {
+            min-height: 180px;
+          }
+
+          a.visible-xs {
+            position: absolute;
+            bottom: 10%;
+            left: calc(50% - 12px);
+          }
+
+          i {
+            //margin-top: 2rem;
+            //position: absolute;
+            color: $velafrica;
+            font-size: 24px;
+          }
+        }
+      }
+    }
+
+    &#messenger-content {
+
+      .references {
+        margin-top: 60px;
+
+        .reference-img,
+        .reference-content {
+          min-height: 200px;
+          padding-top: 2rem;
+          padding-bottom: 2rem;
+        }
+
+        .reference-img {
+          img {
+            width: 100%;
+            border-radius: $vel-border-radius;
+          }
+        }
+
+        blockquote {
+          border-left: 0;
+
+          em {
+            font-size: 18px;
+            line-height: 24px;
+            font-weight: normal;
+
+            @media (max-width: 500px) {
+              font-size: 14px;
+              line-height: 18px;
+            }
+
+            &:before {
+              position: relative;
+              content: "\201C";
+              top: 20px;
+              left: -15px;
+              font-size: 50px;
+              color: $velafrica;
+              line-height: 0;
+            }
+            &:after {
+              position: relative;
+              font-size: 50px;
+              bottom: -30px;
+              content: "\201D";
+              color: $velafrica;
+              line-height: 0;
+            }
+          }
+
+          footer {
+            background-color: transparent;
+            color: $velafrica-brown-3;
+
+            &:before {
+              content: "";
+            }
+          }
+        }
       }
     }
   }
