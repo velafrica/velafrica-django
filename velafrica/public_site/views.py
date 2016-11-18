@@ -7,6 +7,7 @@ from paypal.standard.forms import PayPalPaymentsForm
 from velafrica.core.settings import PAYPAL_RECEIVER_MAIL, GMAP_API_KEY, ORDER_RECEIVER
 from velafrica.core.utils import send_mail
 from velafrica.collection.models import Dropoff
+from velafrica.sbbtracking.models import Tracking, TrackingEvent
 from .forms import InvoiceForm, SbbTicketOrderForm, WalkthroughRequestForm
 from .models import DonationAmount, WalkthroughRequest, TeamMember, References
 
@@ -200,9 +201,22 @@ def render_about_us_template(request):
 
 def render_personal_tracking(request, tracking_no):
     template_name = 'public_site/my-tracking.html'
-    template_context = {
-        'tracking_no': tracking_no
-    }
+    template_context = {}
+
+    tracking_no = tracking_no.upper()
+
+    try:
+        tracking = Tracking.objects.get(tracking_no=tracking_no)
+        tracking_events = TrackingEvent.objects.filter(tracking=tracking.id)
+        template_context.update({
+            'tracking': tracking,
+            'tracking_events': tracking_events
+        })
+    except Tracking.DoesNotExist:
+        template_context.update({
+            'tracking': False
+        })
+
     return render_to_response(template_name, template_context, context_instance=RequestContext(request))
 
 
