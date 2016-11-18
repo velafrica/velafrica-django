@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 from django.conf import settings
 from django.core.urlresolvers import reverse, resolve
+from django.db.models import Count
 from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext
 from paypal.standard.forms import PayPalPaymentsForm
 from velafrica.core.settings import PAYPAL_RECEIVER_MAIL, GMAP_API_KEY, ORDER_RECEIVER
 from velafrica.core.utils import send_mail
 from velafrica.collection.models import Dropoff
-from velafrica.sbbtracking.models import Tracking, TrackingEvent
+from velafrica.sbbtracking.models import Tracking, TrackingEvent, TrackingEventType
 from .forms import InvoiceForm, SbbTicketOrderForm, WalkthroughRequestForm
 from .models import DonationAmount, WalkthroughRequest, TeamMember, References
 
@@ -222,5 +223,8 @@ def render_personal_tracking(request, tracking_no):
 
 def render_tracking(request):
     template_name = 'public_site/tracking.html'
-    template_context = {}
+    template_context = {
+        'get_event_counts_url': reverse('api:public:events_count')
+    }
+
     return render_to_response(template_name, template_context, context_instance=RequestContext(request))
