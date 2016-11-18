@@ -207,6 +207,6 @@ def render_personal_tracking(request, tracking_no):
 
 
 def render_tracking(request):
-    template_name = 'public_site/my-tracking.html'
+    template_name = 'public_site/tracking.html'
     template_context = {}
     return render_to_response(template_name, template_context, context_instance=RequestContext(request))
