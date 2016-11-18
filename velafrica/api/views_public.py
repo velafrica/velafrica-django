@@ -8,6 +8,7 @@ from rest_framework.permissions import AllowAny
 from velafrica.collection.models import Dropoff
 from velafrica.collection.serializer import DropoffSerializer
 from velafrica.core.settings import MAILCHIMP_LIST_ID
+from velafrica.sbbtracking.models import Tracking, TrackingEventType, TrackingEvent
 import mailchimp
 
 @api_view(['GET'])
@@ -32,3 +33,18 @@ def subscribe_newsletter(request):
             return Response(False)
     else:
         return Response(False)
+
+
+@api_view(['GET'])
+@permission_classes((AllowAny,))
+def get_event_counts(request):
+    last_events = Tracking.objects.all().values('last_event')
+    resp = {}
+    for id in last_events:
+        keyname = TrackingEvent.objects.get(id=id.get('last_event')).event_type.name
+        if keyname in resp:
+            resp[keyname] += 1
+        else:
+            resp[keyname] = 1
+
+    return Response(resp)

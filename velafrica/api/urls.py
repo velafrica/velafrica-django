@@ -93,7 +93,8 @@ velafrica_sud = [
 
 public = [
     url(r'^dropoffs/$', views_public.get_dropoffs, name="dropoffs"),
-    url(r'^subscribe-newsletter/$', views_public.subscribe_newsletter, name="subscribe-newsletter")
+    url(r'^subscribe-newsletter/$', views_public.subscribe_newsletter, name="subscribe-newsletter"),
+    url(r'^get_events_count$', views_public.get_event_counts, name="events_count"),
 ]
 
 # where it all comes together
