@@ -1,0 +1,23 @@
+section#tracking-code {
+  padding-top: 60px;
+  padding-bottom: 60px;
+
+  background-color: $velafrica-brown-1;
+  
+  h2 {
+    color: $velafrica-brown-3-hover;
+  }
+  
+  h1 {
+    color: white;
+  }
+  
+}
+
+section#tracking-events {
+  h3.tracking-date {
+    background-color: $velafrica;
+    padding: 5px 15px;
+    color: white;
+  }
+}
