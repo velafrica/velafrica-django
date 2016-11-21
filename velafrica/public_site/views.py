@@ -208,9 +208,13 @@ def render_personal_tracking(request, tracking_no):
 
     try:
         tracking = Tracking.objects.get(tracking_no=tracking_no)
-        tracking_events = TrackingEvent.objects.filter(tracking=tracking.id)
+        tracking_events = TrackingEvent.objects.filter(tracking=tracking.id).order_by('-datetime')
+
+        first_event = tracking_events.first()
+
         template_context.update({
             'tracking': tracking,
+            'first_event': first_event,
             'tracking_events': tracking_events
         })
     except Tracking.DoesNotExist:
