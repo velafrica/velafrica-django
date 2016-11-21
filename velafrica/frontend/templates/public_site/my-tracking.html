@@ -6,8 +6,52 @@
 {% endblock %}
 
 {% block content %}
-  <h1>my-tracking</h1>
 
-  {{ tracking }}
-  {{ tracking_events }}
+  <section id="tracking-code">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-xs-10">
+          <h2>{% trans "Tracking-Nr." %} {{ tracking.tracking_no }}</h2>
+
+          <h1>{% trans "Was gerade mit Ihren Velo geschiet" %}</h1>
+        </div>
+        <div class="col-xs 2">
+          <img src="http://placehold.it/50" alt="">
+          <img src="http://placehold.it/50" alt="">
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="tracking-events">
+    <div class="container">
+
+      {% for event in tracking_events %}
+
+        <div class="row">
+          <div class="col-xs-12">
+
+            <h3 class="tracking-date" data-date="{{ event.datetime }}">{{ event.datetime }}</h3>
+
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h2 class="panel-title">{{ event.event_type.name }}</h2>
+              </div>
+              <div class="panel-body">
+                <p>{{ event.event_type.description }}</p>
+                <img src="{{ event.event_type.image }}" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+
 {% endblock %}
