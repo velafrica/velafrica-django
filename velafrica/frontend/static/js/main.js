@@ -17,6 +17,7 @@ window.getUrlVars = function () {
 
 
 $(document).ready(function () {
+    require('index');
     require('donations');
     require('bootstrap.min');
     require('map');
