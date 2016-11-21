@@ -5,4 +5,4 @@ register = template.Library()
 
 @register.simple_tag()
 def s3(path):
-    return u"{}/{}".format(settings.AWS_S3_CUSTOM_DOMAIN, path)
+    return u"http://{}/{}".format(settings.AWS_S3_CUSTOM_DOMAIN, path)
