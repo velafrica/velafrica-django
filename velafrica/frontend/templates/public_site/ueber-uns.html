@@ -187,7 +187,7 @@
                   <p class="legend">{{ member.position }}</p>
                   <a class="hidden-xs visible-sm visible-md visible-lg"
                      href="mailto:{{ member.email }}">{{ member.email }}</a>
-                  <a class="visible-xs" href="mailto:{{ member.email }}"><i class="glyphicon glyphicon-inbox"></i></a>
+                  <a class="visible-xs" href="mailto:{{ member.email }}"><i class="glyphicon glyphicon-envelope"></i></a>
                 </div>
               </div>
             </div>
@@ -236,10 +236,10 @@
         <div class="row references">
 
           {% for reference in references %}
-            <div class="col-xs-4 col-md-3 col-md-offset-2 reference-img">
+            <div class="col-xs-4 col-md-2 col-md-offset-2 reference-img">
               <img src="{{ reference.image }}" alt="">
             </div>
-            <div class="col-xs-8 col-md-5 reference-content">
+            <div class="col-xs-8 col-md-6 reference-content">
               <blockquote>
                 <p class="legend"><em>{{ reference.text }}</em></p>
                 <footer>{{ reference.name }}</footer>
