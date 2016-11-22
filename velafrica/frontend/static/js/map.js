@@ -22,7 +22,7 @@ if ($('section.map').length) {
 
 
         var content = options.content;
-        var infoWindow = new google.maps.InfoWindow();
+        var infoWindow = new google.maps.InfoWindow({'maxWidth': 400});
 
         google.maps.event.addListener(marker, 'click', (function (marker, content, infowindow) {
           return function () {
@@ -32,6 +32,7 @@ if ($('section.map').length) {
             window.VAM.map.openedInfoWindow = infowindow;
             infowindow.setContent(content);
             infowindow.open(window.VAM.map.instance, marker);
+            //TODO: center map to marker
           };
         })(marker, content, infoWindow));
       }
@@ -104,39 +105,53 @@ if ($('section.map').length) {
       var content = '';
 
       content += '<div class="infowindow">';
+      content += '<div class="container" style="max-width: 100%;">';
 
-      if ($('#auth').val() === 'True') {
-        content += '<a target="_blank" href="/admin/collection/dropoff/' + value.id + '/change/">Bearbeiten</a>';
-      }
+        content += '<div class="row">';
+          content += '<h4 class="col-md-9" style="color: #E9571B; margin-bottom:0;">' + value.name + '</h4>';
+          if ($('#auth').val() === 'True') {
+            content += '<a target="_blank" class="col-md-3 btn btn-primary" href="/admin/collection/dropoff/' + value.id + '/change/">Bearbeiten</a>';
+          }
+        content += '</div>';
 
-      content += '<h2>' + value.name + '</h2>';
-      content += '<p class="lead">' + value.address.street + ', ' + value.address.zipcode + ' ' + value.address.city + '</p>';
+        content += '<div class="row">';
+          content += '<p class="col-md-12 legend" style="padding-top:0;">' + value.address.street + '<br>' + value.address.zipcode + ' ' + value.address.city + '</p>';
+        content += '</div>';
+
+        if (value.opening_time) {
+          content += '<div class="row">';
+            content += '<div class="col-md-12">';
+              content += '<h5 style="margin-bottom: 0;">Öffnungszeiten</h5>';
+              content += '<p class="legend" style="padding-top:0;">' + value.opening_time + '</p>';
+          content += '</div></div>';
+        }
+
+        if (value.pickup && value.pickup_description) {
+          content += '<div class="row">';
+            content += '<h5 class="col-md-12" style="margin-bottom: 0;">' + 'Abholservice' + '</h5>';
+            content += '<p class="col-md-12 legend" style="padding-top: 0;">' + value.pickup_description + '</p>';
+          content += '</div>';
+        }
+
+        if (value.notes) {
+          content += '<div class="row">';
+            content += '<h5 class="col-md-12" style="margin-bottom: 0;">' + 'Weitere Informationen' + '</h5>';
+            content += '<p class="col-md-12 legend" style="padding-top: 0;">' + value.notes + '</p>';
+          content += '</div>';
+        }
+
+        if (value.sbb) {
+          content += '<div class="row">';
+            content += '<a target="_blank" class="col-md-12 legend" href="' + window.VAM.sbb_ticket_order_url +'?id=' + value.id + '">' + 'SBB-Transportetikette bestellen' + '</a>';
+          content += '</div>';
+        }
 
       if(value.temp_start && value.temp_end) {
         content += '<p class="lead">Temporär von ' + value.temp_start + ' bis ' + value.temp_end + '</p>';
       }
 
-      if (value.opening_time) {
-        content += '<h3>' + 'Öffnungszeiten' + '</h3>';
-        content += '<p>' + value.opening_time + '</p>';
-      }
 
-      if (value.pickup) {
-        content += '<h3>' + 'Abholservice' + '</h3>';
-        content += '<p>' + value.pickup_description + '</p>';
-      }
-
-
-      if (value.notes) {
-        content += '<h3>' + 'Weitere Informationen' + '</h3>';
-        content += '<p>' + value.notes + '</p>';
-      }
-
-      if (value.sbb) {
-        content += '<p><a target="_blank" href="' + window.VAM.sbb_ticket_order_url +'?id=' + value.id + '">' + 'SBB Transporteticket bestellen' + '</a></p>';
-      }
-
-      content += '</div>';
+      content += '</div></div>';
 
       return content;
     },

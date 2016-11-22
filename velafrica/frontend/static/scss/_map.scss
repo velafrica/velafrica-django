@@ -47,10 +47,10 @@ section.map {
     }
   }
 
-  .legend {
+  .map-legend {
     position: absolute;
     top: 0;
-    left: 50%;
+    left: calc(50% - 150px);
     margin: 30px;
     padding: 15px;
 
@@ -83,24 +83,21 @@ section.map {
   }
 
   .infowindow {
-    h2 {
-      font-family: EkMukta-Bold;
-      font-size: 24px;
-      color: #E34A11;
-      letter-spacing: 0.22px;
-      line-height: 30px;
+    .container {
+      padding: 15px;
     }
 
-    h4 {
-
+    a.legend {
+      font-size: 14px;
+      font-weight: bold;
+      line-height: 20px;
+      letter-spacing: .5px;
+      color: $velafrica-brown-1;
     }
 
-    p {
-      font-family: EkMukta-Regular;
-      font-size: 16px;
-      color: rgba(47,22,14,0.70);
-      letter-spacing: 0.3px;
-      line-height: 16px;
+    h5 {
+      font-weight: bold;
+      letter-spacing: .5px;
     }
   }
 }
