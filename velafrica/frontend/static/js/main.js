@@ -24,6 +24,7 @@ $(document).ready(function () {
     require('contact');
     require('newsletter');
     require('walkthrough');
+    require('tracking');
 });
 
 

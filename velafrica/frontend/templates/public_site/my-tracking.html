@@ -35,8 +35,7 @@
         <div class="row">
           <div class="col-xs-12 text-center">
 
-            <span class="label label-default tracking-date">{% if forloop.counter == 1 %} {% trans "Heute" %}{% else %}
-              {{ event.datetime|date:"d.m.Y"}}{% endif %}</span>
+            <span class="label label-default tracking-date" data-date="{{ event.datetime|date:"m/d/Y" }}">{{ event.datetime|date:"d.m.Y"}}</span>
 
           </div>
         </div>
