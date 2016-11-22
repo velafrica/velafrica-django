@@ -1,0 +1,39 @@
+html.cms-ready.cms-toolbar-expanded {
+  body>div.navbar {
+    top: 51px;
+  }
+
+  &.cms-structure-mode-structure>body {
+    &>main div.app-blog {
+      height: 0px;
+    }
+  }
+}
+
+div.blog {
+  div.app-blog {
+    font-family: $velafrica-font-family;
+
+    article header {
+      padding-top: 20px;
+
+      h2 {
+        font-size: 36px;
+        line-height: 44px;
+      }
+    }
+
+    div.blog-content {
+      padding-top: 20px;
+      padding-bottom: 90px;
+      span, p, a {
+        font-size: 20px;
+        line-height: 29px;
+        letter-spacing: 0.5px;
+      }
+      section, iframe {
+        display: block;
+      }
+    }
+  }
+}
