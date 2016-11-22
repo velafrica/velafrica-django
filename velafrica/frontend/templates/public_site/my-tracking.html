@@ -11,16 +11,18 @@
   <section id="tracking-code">
     <div class="container">
       <div class="row text-center">
-        <div class="col-xs-10">
+        <div class="col-md-8 col-md-offset-2">
+
           <h2>{% trans "Tracking-Nr." %} {{ tracking.tracking_no }}</h2>
+          <h1>{% trans "Was gerade mit Ihrem Velo geschieht" %}</h1>
 
-          <h1>{% trans "Was gerade mit Ihren Velo geschieht" %}</h1>
         </div>
-        <div class="col-xs 2">
-          <img src="http://placehold.it/50" alt="">
-          <img src="http://placehold.it/50" alt="">
-        </div>
+        <div class="col-md-2">
 
+          <img src="http://placehold.it/35" alt="">
+          <img src="http://placehold.it/35" alt="">
+
+        </div>
       </div>
     </div>
   </section>
@@ -30,31 +32,34 @@
 
       {% for event in tracking_events %}
 
-          <div class="row">
-            <div class="col-xs-12 text-center">
+        <div class="row">
+          <div class="col-xs-12 text-center">
 
-              <span class="label label-default tracking-date">{% if forloop.counter == 1 %} {% trans "Heute"  %}{% else %}{{ event.datetime|date:"d.m.Y"}}{% endif %}</span>
+            <span class="label label-default tracking-date">{% if forloop.counter == 1 %} {% trans "Heute" %}{% else %}
+              {{ event.datetime|date:"d.m.Y"}}{% endif %}</span>
 
-            </div>
           </div>
+        </div>
 
-          <div class="row">
-            <div class="{% if forloop.counter == 1 %} col-xs-12 {% else %}col-md-8 col-md-offset-2 {% endif %}">
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h2 class="panel-title text-center">{{ event.event_type.name }}</h2>
-                </div>
-                <div class="panel-body row">
-                  <p class="{% if forloop.counter == 1 %} col-md-8 col-md-offset-2 {% else %}col-md-12{% endif %}">{{ event.event_type.description }}</p>
-                  <img src="{% s3 event.event_type.image %}" alt="">
-                </div>
+        <div class="row">
+          <div class="{% if forloop.counter == 1 %} col-xs-12 {% else %}col-md-8 col-md-offset-2 {% endif %}">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h2 class="panel-title text-center">{{ event.event_type.name }}</h2>
+              </div>
+              <div class="panel-body row">
+                <p class="{% if forloop.counter == 1 %} col-md-8 col-md-offset-2 {% else %}col-md-12{% endif %}">{{ event.event_type.description }}</p>
+                <img src="{% s3 event.event_type.image %}" alt="">
               </div>
             </div>
           </div>
+        </div>
 
       {% endfor %}
 
     </div>
   </section>
+
+  
 
 {% endblock %}
