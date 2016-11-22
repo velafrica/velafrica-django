@@ -158,6 +158,43 @@ section#information {
 section#information {
   margin-top: 130px;
 
+  .equal, .equal > div {
+    display: flex;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: auto;
+    flex-wrap: wrap;
+
+    .panel {
+      display: flex;
+      flex-grow: 1;
+
+      a {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+
+        div {
+          flex-grow: 1;
+        }
+      }
+    }
+
+    .panel-footer {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+    }
+
+    @media (max-width: 992px) {
+      flex-basis: 49%;
+      justify-content: space-between;
+    }
+    @media (max-width: 500px) {
+      flex-basis: 100%;
+    }
+  }
+
   h2 {
     margin-bottom: 60px;
   }
