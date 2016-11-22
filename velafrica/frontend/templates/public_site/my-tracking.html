@@ -1,5 +1,6 @@
 {% extends "public_site/base.html" %}
 {% load i18n %}
+{% load s3 %}
 
 {% block page_title %}
   {% trans "Wo ist mein Velo?" %}
@@ -13,7 +14,7 @@
         <div class="col-xs-10">
           <h2>{% trans "Tracking-Nr." %} {{ tracking.tracking_no }}</h2>
 
-          <h1>{% trans "Was gerade mit Ihren Velo geschiet" %}</h1>
+          <h1>{% trans "Was gerade mit Ihren Velo geschieht" %}</h1>
         </div>
         <div class="col-xs 2">
           <img src="http://placehold.it/50" alt="">
@@ -29,28 +30,30 @@
 
       {% for event in tracking_events %}
 
-        <div class="row">
-          <div class="col-xs-12">
+          <div class="row">
+            <div class="col-xs-12 text-center">
 
-            <h3 class="tracking-date" data-date="{{ event.datetime }}">{{ event.datetime }}</h3>
+              <span class="label label-default tracking-date">{% if forloop.counter == 1 %} {% trans "Heute"  %}{% else %}{{ event.datetime|date:"d.m.Y"}}{% endif %}</span>
 
+            </div>
           </div>
-        </div>
 
-        <div class="row">
-          <div class="col-xs-12">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h2 class="panel-title">{{ event.event_type.name }}</h2>
-              </div>
-              <div class="panel-body">
-                <p>{{ event.event_type.description }}</p>
-                <img src="{{ event.event_type.image }}" alt="">
+          <div class="row">
+            <div class="{% if forloop.counter == 1 %} col-xs-12 {% else %}col-md-8 col-md-offset-2 {% endif %}">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h2 class="panel-title text-center">{{ event.event_type.name }}</h2>
+                </div>
+                <div class="panel-body row">
+                  <p class="{% if forloop.counter == 1 %} col-md-8 col-md-offset-2 {% else %}col-md-12{% endif %}">{{ event.event_type.description }}</p>
+                  <img src="{% s3 event.event_type.image %}" alt="">
+                </div>
               </div>
             </div>
           </div>
-        </div>
+
       {% endfor %}
+
     </div>
   </section>
 

@@ -3,21 +3,111 @@ section#tracking-code {
   padding-bottom: 60px;
 
   background-color: $velafrica-brown-1;
-  
+
   h2 {
     color: $velafrica-brown-3-hover;
   }
-  
+
   h1 {
     color: white;
   }
-  
+
 }
 
 section#tracking-events {
-  h3.tracking-date {
-    background-color: $velafrica;
-    padding: 5px 15px;
-    color: white;
+  span {
+    @extend h3;
+    margin: 4rem 0 !important;
+    height: 50px;
+    line-height: 40px !important;
+
+    &:after {
+      content: "";
+      display: block;
+      position: absolute;
+      left: 50%;
+      top: 76px;
+      bottom: 0;
+      border: dotted;
+      border-width: 0 0 0 6px;
+      border-color: $velafrica;
+      z-index: -1;
+    }
+    &:nth-child(-n+1) {
+      content: "";
+      //visibility: hidden;
+    }
+    &:before {
+      content: "";
+      display: block;
+      position: absolute;
+      left: 50%;
+      top: -20px;
+      bottom: 0;
+      border: dotted;
+      border-width: 0 0 0 6px;
+      border-color: $velafrica;
+      z-index: -1;
+    }
+
+    .tracking-date {
+      background-color: $velafrica;
+      padding: 5px 15px;
+      color: white;
+    }
+
+    &.label {
+      border-radius: $vel-border-radius;
+      display: inline-block;
+    }
+    &.label-default {
+      background-color: $velafrica;
+    }
+  }
+
+  .panel {
+    border: none;
+  }
+
+  .panel-default {
+    background-color: $velafrica-brown-6;
+    color: $velafrica-brown-1;
+    border-color: transparent;
+
+    .panel-heading {
+      color: $velafrica-brown-1;
+      background-color: $velafrica-brown-4;
+      border-bottom: none;
+
+      .panel-title {
+        font-size: 36px;
+        font-weight: bold;
+        line-height: 44px;
+        letter-spacing: .5px;
+        margin-top: 0;
+
+        @media (max-width: 320px) {
+          font-size: 32px;
+        }
+      }
+    }
+
+    .panel-body {
+      padding-bottom: 0;
+
+      p.col-md-8 {
+        padding: 30px 0;
+      }
+
+      p.col-md-12 {
+        padding: 15px 45px;
+      }
+
+      img {
+        width: 100%;
+        border-bottom-left-radius: $vel-border-radius;
+        border-bottom-right-radius: $vel-border-radius;
+      }
+    }
   }
 }
