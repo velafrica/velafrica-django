@@ -19,7 +19,7 @@
           <ul class="navigation-right">
             <li><a href="{% url "home:aboutus" %}">{% trans "Über uns" %}</a></li>
             <li><a href="#">{% trans "Partner" %}</a></li>
-            <li><a href="#">{% trans "Mitmachen" %}</a></li>
+            <li><a href="{% url "home:walkthroughs:collection" %}">{% trans "Mitmachen" %}</a></li>
             <li class="dropdown hidden-xs">
 
               <button class="btn btn-donation dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
@@ -30,7 +30,7 @@
 
               <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                 <li><a href="{% url "home:donation:home" %}">{% trans "Geldspende" %}</a></li>
-                <li><a href="#">{% trans "Velospende" %}</a></li>
+                <li><a href="{% url "home:map:home" %}">{% trans "Velospende" %}</a></li>
                 <li><a href="#">{% trans "Geschenkidee" %}</a></li>
               </ul>
             </li>
