@@ -16,14 +16,20 @@
 </head>
 <body>
 
-{% include "public_site/partials/header.html" %}
+{% if 'edit' not in request.GET %}
+  {% include "public_site/partials/header.html" %}
+{% endif %}
 
 {% cms_toolbar %}
+
+{% if 'edit' not in request.GET %}
+  <h2>{{ request.GET.edit }}</h2>
+{% endif %}
 
 <main>
   <div class="blog container">
     <div class="row">
-      <div class="col-sm-6 col-sm-offset-3">
+      <div class="col-sm-8 col-sm-offset-2">
         {% placeholder content %}
         {% block content %}
         {% endblock %}
@@ -32,8 +38,10 @@
   </div>
 </main>
 
-{% if not nofooter %}
-  {% include "public_site/partials/footer.html" %}
+{% if 'edit' not in request.GET %}
+  {% if not nofooter %}
+    {% include "public_site/partials/footer.html" %}
+  {% endif %}
 {% endif %}
 
 {% if not debug %}{% render_bundle 'main' %}{% endif %}
