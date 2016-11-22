@@ -1,0 +1,12 @@
+{% load i18n thumbnail cms_tags %}
+
+<ul class="post-detail">
+    {% if post.author %}
+    <li>
+        <a href="{% url 'djangocms_blog:posts-author' post.author.get_username %}">{% if post.author.get_full_name %}{{ post.author.get_full_name }}{% else %}{{ post.author }}{% endif %}</a>
+    </li>
+    {% endif %}
+    <li>
+        {{ post.date_published|date:"DATE_FORMAT" }}
+    </li>
+</ul>
