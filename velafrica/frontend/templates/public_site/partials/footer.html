@@ -26,9 +26,9 @@
 
         <h4>{% trans "Über uns" %}</h4>
         <ul class="list-group">
-          <li class="list-group-item"><a href="#">{% trans "Geschichte" %}</a></li>
-          <li class="list-group-item"><a href="#">{% trans "Organisation" %}</a></li>
-          <li class="list-group-item"><a href="#">{% trans "Team" %}</a></li>
+          <li class="list-group-item"><a href="{% url "home:aboutus" %}#history">{% trans "Geschichte" %}</a></li>
+          <li class="list-group-item"><a href="{% url "home:aboutus" %}#organisation">{% trans "Organisation" %}</a></li>
+          <li class="list-group-item"><a href="{% url "home:aboutus" %}#team">{% trans "Team" %}</a></li>
           <li class="list-group-item"><a href="#">{% trans "Partner Schweiz" %}</a></li>
           <li class="list-group-item"><a href="#">{% trans "Partner Afrika" %}</a></li>
         </ul>
