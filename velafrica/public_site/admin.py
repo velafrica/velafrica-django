@@ -1,6 +1,12 @@
 from django.contrib import admin
 from .models import DonationAmount, InvoiceOrder, SbbTicketOrder, WalkthroughRequest, \
-    Content, TeamMember, References, ContactRequest
+    Content, TeamMember, References, ContactRequest, Partner
+
+
+class PartnerAdmin(admin.ModelAdmin):
+    search_fields = ['name']
+    list_filter = ['country']
+
 
 class ContentAdmin(admin.ModelAdmin):
     search_fields = ['path', 'key', 'description']
@@ -16,3 +22,4 @@ admin.site.register(InvoiceOrder)
 admin.site.register(SbbTicketOrder)
 admin.site.register(WalkthroughRequest)
 admin.site.register(ContactRequest)
+admin.site.register(Partner, PartnerAdmin)

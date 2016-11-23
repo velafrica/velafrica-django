@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.db import models
+from velafrica.organisation.models import Address
 
 
 class DonationAmount(models.Model):
@@ -165,3 +166,20 @@ class References(models.Model):
     class Meta:
         verbose_name = 'Botschafter'
         verbose_name_plural = 'Botschafter'
+
+
+class Partner(models.Model):
+    COUNTRY_CHOICES = (
+        (1, 'Afrika'),
+        (2, 'Schweiz'),
+    )
+
+    name = models.CharField(max_length=255, verbose_name="Name")
+    description = models.TextField(verbose_name="Beschreibung")
+    link = models.CharField(max_length=255, verbose_name="URL", blank=True)
+    address = models.ForeignKey(Address, verbose_name="Adresse", on_delete=models.SET_NULL, blank=True, null=True)
+    country = models.IntegerField(verbose_name="Land", choices=COUNTRY_CHOICES)
+
+    class Meta:
+        verbose_name = 'Partner'
+        verbose_name_plural = 'Partner'

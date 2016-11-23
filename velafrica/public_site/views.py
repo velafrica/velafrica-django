@@ -10,7 +10,7 @@ from velafrica.core.utils import send_mail
 from velafrica.collection.models import Dropoff
 from velafrica.sbbtracking.models import Tracking, TrackingEvent, TrackingEventType
 from .forms import InvoiceForm, SbbTicketOrderForm, WalkthroughRequestForm
-from .models import DonationAmount, WalkthroughRequest, TeamMember, References
+from .models import DonationAmount, WalkthroughRequest, TeamMember, References, Partner
 
 def render_template(request):
     template_name = '/index'
@@ -226,6 +226,21 @@ def render_tracking(request):
     template_name = 'public_site/tracking.html'
     template_context = {
         'get_event_counts_url': reverse('api:public:events_count')
+    }
+
+    return render_to_response(template_name, template_context, context_instance=RequestContext(request))
+
+
+def render_partners(request):
+    template_name = 'public_site/partner.html'
+
+    if 'afrika' in request.path:
+        choice = 1
+    elif 'schweiz' in request.path:
+        choice = 2
+
+    template_context = {
+        'partners': Partner.objects.filter(country=choice)
     }
 
     return render_to_response(template_name, template_context, context_instance=RequestContext(request))

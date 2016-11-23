@@ -5,7 +5,7 @@ from .views import render_template, render_donation_template, \
                    render_map_template, order_invoice, \
                    thank_you, thank_you_paypal, render_sbb_ticker_order, \
                    render_walkthrough_template, render_about_us_template, \
-                   render_personal_tracking, render_tracking
+                   render_personal_tracking, render_tracking, render_partners
 
 donations = [
     url(r'^$', render_donation_template, name='home'),
@@ -30,6 +30,11 @@ tracking = [
     url(r'^tracking/$', render_tracking, name='general')
 ]
 
+partner = [
+    url(r'afrika/$', render_partners, name="africa"),
+    url(r'schweiz/$', render_partners, name="swiss")
+]
+
 urlpatterns = [
     url(r'^$', render_template, name='home'),
     url(r'^donation/', include(donations, namespace='donation')),
@@ -37,5 +42,6 @@ urlpatterns = [
     url(r'^sbb-ticket-order/$', render_sbb_ticker_order, name='sbbticket'),
     url(r'^mitmachen/', include(walkthroughs, namespace='walkthroughs')),
     url(r'^ueber-uns/$', render_about_us_template, name='aboutus'),
+    url(r'^partner/', include(partner, namespace='partner')),
     url(r'^', include(tracking, namespace='tracking')),
 ]
