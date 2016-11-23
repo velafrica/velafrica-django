@@ -18,7 +18,7 @@ section#tracking-code {
     flex-wrap: wrap;
     align-items: flex-end;
 
-    @media (max-width: 990px) {
+    @media (max-width: 992px) {
       align-items: center;
       justify-content: center;
     }
@@ -43,6 +43,15 @@ section#tracking-code {
 }
 
 section#tracking-events {
+
+  .no-before {
+    &:before {
+      content: 'none';
+      height: 0;
+      visibility: hidden;
+    }
+  }
+
   span {
     @extend h3;
     margin: 4rem 0 !important;
@@ -56,14 +65,10 @@ section#tracking-events {
       left: 50%;
       top: 76px;
       bottom: 0;
-      border: dotted;
-      border-width: 0 0 0 6px;
+      border: dashed;
+      border-width: 0 0 0 4px;
       border-color: $velafrica;
       z-index: -1;
-    }
-    &:nth-child(-n+1) {
-      content: "";
-      //visibility: hidden;
     }
     &:before {
       content: "";
@@ -71,9 +76,10 @@ section#tracking-events {
       position: absolute;
       left: 50%;
       top: -20px;
+      height: 70px;
       bottom: 0;
-      border: dotted;
-      border-width: 0 0 0 6px;
+      border: dashed;
+      border-width: 0 0 0 4px;
       border-color: $velafrica;
       z-index: -1;
     }
@@ -147,6 +153,7 @@ section#tracking-events {
       }
     }
   }
+
 }
 
 section#information {

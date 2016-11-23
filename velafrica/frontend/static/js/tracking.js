@@ -1,5 +1,6 @@
-if($('span.tracking-date').length) {
-  $.each($('span.tracking-date'), function(index, value) {
+if ($('span.tracking-date').length) {
+  $(".tracking-date:first").addClass("no-before");
+  $.each($('span.tracking-date'), function (index, value) {
     var timestamp = $(value).data('date');
     var today = new Date();
     var today_timestamp = today.getMonth() + 1 + '/' + today.getDate() + '/' + today.getFullYear();
@@ -7,9 +8,9 @@ if($('span.tracking-date').length) {
     console.log(yesterday);
     var next_day_timestamp = yesterday.getMonth() + 1 + '/' + yesterday.getDate() + '/' + yesterday.getFullYear();
     console.log(today, yesterday);
-    if(timestamp == today_timestamp) {
+    if (timestamp == today_timestamp) {
       $(value).html('Heute');
-    } else if (timestamp == next_day_timestamp){
+    } else if (timestamp == next_day_timestamp) {
       $(value).html('Gestern');
     }
   })
