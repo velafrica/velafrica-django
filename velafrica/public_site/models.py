@@ -180,6 +180,9 @@ class Partner(models.Model):
     address = models.ForeignKey(Address, verbose_name="Adresse", on_delete=models.SET_NULL, blank=True, null=True)
     country = models.IntegerField(verbose_name="Land", choices=COUNTRY_CHOICES)
 
+    def __unicode__(self):
+        return u"{}".format(self.name)
+
     class Meta:
         verbose_name = 'Partner'
         verbose_name_plural = 'Partner'
