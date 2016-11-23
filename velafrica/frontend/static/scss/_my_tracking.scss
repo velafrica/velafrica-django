@@ -1,6 +1,6 @@
 section#tracking-code {
-  padding-top: 60px;
-  padding-bottom: 60px;
+  padding-top: 50px;
+  padding-bottom: 20px;
 
   background-color: $velafrica-brown-1;
 
@@ -12,6 +12,34 @@ section#tracking-code {
     color: white;
   }
 
+  .row, .row > div > div {
+    display: flex;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    align-items: flex-end;
+
+    @media (max-width: 990px) {
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .tracking-social {
+    padding-bottom: 20px;
+    padding-top: 20px;
+
+    a {
+      text-decoration: none;
+
+      &:last-child {
+        margin-left: 20px;
+      }
+
+      img {
+        width: 35px;
+      }
+    }
+  }
 }
 
 section#tracking-events {

@@ -1,6 +1,7 @@
 {% extends "public_site/base.html" %}
 {% load i18n %}
 {% load s3 %}
+{% load static %}
 
 {% block page_title %}
   {% trans "Wo ist mein Velo?" %}
@@ -17,10 +18,20 @@
           <h1>{% trans "Was gerade mit Ihrem Velo geschieht" %}</h1>
 
         </div>
-        <div class="col-md-2">
+        <div class="col-md-2 text-center">
 
-          <img src="http://placehold.it/35" alt="">
-          <img src="http://placehold.it/35" alt="">
+          <div class="tracking-social">
+            <a href="http://www.facebook.com/sharer/sharer.php?s=100&p[url]=http://www.example.com&p[images][0]=&p[title]=Title%20Goes%20Here&p[summary]=Description%20goes%20here!"
+               target="_blank"
+               onclick="window.open(this.href,'targetWindow','toolbar=no,location=0,status=no,menubar=no,scrollbars=yes,resizable=yes,width=600,height=250'); return false">
+              <img src="{% static "img/facebook_orange.png" %}" alt="">
+            </a>
+
+            <a href="https://twitter.com/intent/tweet?text=hello+world&via=velafrica" target="_blank"
+               onclick="window.open(this.href,'targetWindow','toolbar=no,location=0,status=no,menubar=no,scrollbars=yes,resizable=yes,width=600,height=250'); return false"><img
+                    src="{% static "img/twitter_orange.png" %}" alt="">
+            </a>
+          </div>
 
         </div>
       </div>
@@ -35,7 +46,8 @@
         <div class="row">
           <div class="col-xs-12 text-center">
 
-            <span class="label label-default tracking-date" data-date="{{ event.datetime|date:"m/d/Y" }}">{{ event.datetime|date:"d.m.Y"}}</span>
+            <span class="label label-default tracking-date"
+                  data-date="{{ event.datetime|date:"m/d/Y" }}">{{ event.datetime|date:"d.m.Y"}}</span>
 
           </div>
         </div>
