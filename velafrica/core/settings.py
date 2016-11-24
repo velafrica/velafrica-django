@@ -125,8 +125,6 @@ INSTALLED_APPS = (
     'mailchimp',
 )
 
-# Django Storages Settings for SFTP
-
 
 MIDDLEWARE_CLASSES = (
     'cms.middleware.utils.ApphookReloadMiddleware',
@@ -253,13 +251,12 @@ DJANGORESIZED_DEFAULT_SIZE = [1920, 1080]
 DJANGORESIZED_DEFAULT_QUALITY = 75
 DJANGORESIZED_DEFAULT_KEEP_META = True
 
-# TODO: get from env variables, no passwords in code!
 # Email settings
-EMAIL_HOST = 'smtpauth.creta.ch'
-EMAIL_HOST_USER = 'tracking@velafrica.ch'
-EMAIL_HOST_PASSWORD = '!0q486ZjXeJilxfmwa#2HOc3PD5n1'
-#EMAIL_PORT = 465
-#EMAIL_USE_SSL = True
+EMAIL_HOST = os.environ['EMAIL_HOST']
+EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
+EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
+EMAIL_PORT = os.environ['EMAIL_PORT']
+EMAIL_USE_SSL = True
 
 EMAIL_FROM_NAME = 'Velafrica Tracking'
 EMAIL_FROM_EMAIL = 'tracking@velafrica.ch'

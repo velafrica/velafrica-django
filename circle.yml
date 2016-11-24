@@ -6,3 +6,7 @@ machine:
     AWS_STORAGE_BUCKET_NAME: ''
     AWS_S3_CUSTOM_DOMAIN: ''
     SECRET_KEY: 'some-secrets-are-no-secrets'
+    EMAIL_HOST: ''
+    EMAIL_HOST_USER: ''
+    EMAIL_HOST_PASSWORD: ''
+    EMAIL_PORT: ''
