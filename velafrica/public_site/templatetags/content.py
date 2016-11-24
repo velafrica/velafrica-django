@@ -14,7 +14,6 @@ def get_content(context, key, description=''):
 
     language = context.request.LANGUAGE_CODE
 
-
     full_key = u"{}_{}_{}".format(
         language,
         path,
