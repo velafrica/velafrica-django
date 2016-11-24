@@ -5,6 +5,7 @@ from velafrica.public_site.models import Content
 
 register = template.Library()
 
+
 @register.simple_tag(takes_context=True)
 def get_content(context, key, description=''):
     # return context.request.LANGUAGE_CODE

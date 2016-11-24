@@ -3,6 +3,7 @@ from django.conf import settings
 
 register = template.Library()
 
+
 @register.simple_tag()
 def s3(path):
     return u"http://{}/{}".format(settings.AWS_S3_CUSTOM_DOMAIN, path)
