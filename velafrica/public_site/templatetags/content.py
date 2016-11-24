@@ -21,13 +21,8 @@ def get_content(context, key, description=''):
         key
     )
     value = None
-    try:
-        value = Content.objects.get(
-            language=language,
-            path=path,
-            key=key
-        )
-    except Content.DoesNotExist:
+    value_set = False
+    if not Content.objects.filter(Q(language=language) & Q(path=path) & Q(key=key)).count() > 0:
         for lang_code, lang in settings.LANGUAGES:
             key_value = Content(
                 language=lang_code,
@@ -38,8 +33,16 @@ def get_content(context, key, description=''):
             key_value.save()
             if lang == language:
                 value = key_value
+                value_set = True
 
-    if value:
+    if not value_set:
+        value = Content.objects.get(
+            language=language,
+            path=path,
+            key=key
+        )
+
+    if value.value:
         return value.value
     else:
         return full_key
