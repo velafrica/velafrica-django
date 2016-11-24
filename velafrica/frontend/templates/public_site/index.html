@@ -18,13 +18,13 @@
           <div class="row teaser-vel">
             <div class="col-md-6 teaser-white-bg">
 
-              <h1>{% trans "Velos verändern Leben" %}</h1>
+              <h1>{% get_content "teaser_heading" "Überschrift auf ersten Teaser" %}</h1>
 
               <p class="lead">
-                {% trans "Velafrica sammelt ausgediente Velos, lässt sie in sozialen Einrichtungen in der Schweiz instand stellen und exportiert sie zu seinen Partnern nach Afrika. So verbindet die Organisation Integrationsarbeit in der Schweiz mit Entwicklungszusammenarbeit in Afrika." %}
+                {% get_content "teaser_lead" "Text auf ersten Teaser" %}
               </p>
 
-              <a href="{{ link }}">{% trans "Erfahren Sie mehr" %}</a>
+              <a href="{{ link }}">{% get_content "teaser_readmore" '"Erfahren Sie Mehr" Link auf ersten Teaser' %}</a>
 
             </div>
           </div>
@@ -34,19 +34,19 @@
           <div class="row teaser-vel">
             <div class="col-md-6 text-center teaser-white-bg">
 
-              <h2>{% trans "Velo spenden" %}</h2>
+              <h2>{% get_content "velo_search_heading" "Überschrift Sammelstellensuche" %}</h2>
               <p class="lead">
-                {% trans "Finden Sie unter den über 400 Abgabestellen eine in Ihrer Nähe." %}
+                {% get_content "velo_search_lead" "Text Sammelstellenfsuche" %}
               </p>
 
               <div class="bicycle-submit">
                 <form action="{% url "home:map:home" %}" method="get">
-                  <input name="search" class="postal-code" type="text" placeholder="{% trans "PLZ" %}">
-                  <input type="submit" value="{% trans "Sammelstelle suchen" %}" class="bicycle-submit-button">
+                  <input name="search" class="postal-code" type="text" placeholder="{% get_content "velo_search_placeholder" "Input Platzhalter Sammelstellensuche" %}">
+                  <input type="submit" value="{% get_content "velo_search_button" "Button Sammelstellensuche" %}" class="bicycle-submit-button">
                 </form>
               </div>
 
-              <a class="collection-event-link" href="{% url 'home:walkthroughs:collection' %}">{% trans "Sammelanlass organisieren" %}</a>
+              <a class="collection-event-link" href="{% url 'home:walkthroughs:collection' %}">{% get_content "velo_search_link" '"Sammelanlass organisieren" Link' %}</a>
 
             </div>
           </div>
@@ -61,9 +61,9 @@
 
               <h1 class="big-number">{% trans "170'204" %}</h1>
 
-              <h2>{% trans "Finden Sie unter den über 400 Abgabestellen eine in Ihrer Nähe." %}</h2>
+              <h2>{% get_content "tracking_heading" "Überschrift zum Tracking Teaser" %}</h2>
 
-              <a href="{% url "home:tracking:general" %}">{% trans "Erfahren Sie mehr" %}</a>
+              <a href="{% url "home:tracking:general" %}">{% get_content "tracking_read_more" "Readmore Link bei Tracking Teaser" %}</a>
 
             </div>
           </div>
@@ -71,13 +71,13 @@
             <div class="col-sm-12 text-center">
               <img src="{% static "img/frau_kind_663x664.gif" %}" alt="">
 
-              <h2>{% trans "Verfolgen Sie den Weg Ihres Velos." %}</h2>
+              <h2>{% get_content "tracking_search_heading" "Überschrift Tracking Suche" %}</h2>
 
               <div class="bicycle-tracking">
                 <form id="tracking-code-form">
-                  <input class="tracking-code" type="text" placeholder="{% trans "Tracking-Code eingeben" %}">
+                  <input class="tracking-code" type="text" placeholder="{% get_content "tracking_search_placeholder" "Input Platzhalter Tracking Suche" %}">
                   <input href="#sammelstelle?=xyz" type="submit"
-                     class="tracking-submit-button" value="{% trans "Aktuellen Standort abfragen" %}">
+                     class="tracking-submit-button" value="{% get_content "tracking_search_button" "Button Tracking Suche" %}">
                 </form>
               </div>
             </div>
@@ -89,13 +89,13 @@
         <div class="container">
           <div class="row teaser-vel">
             <div class="col-md-6 col-md-offset-6 teaser-white-bg">
-              <h2>{% trans "Organisieren Sie eine Velosammlung. Wir unterstützen Sie dabei." %}</h2>
+              <h2>{% get_content "organize_heading" "Überschrift zweiter Teaster" %}</h2>
 
               <p class="lead">
-                {% trans "Möchten Sie zusammen mit Ihren Vereinskollegen, in Ihrem Quartier, mit Ihren Arbeitskollegen oder Freunden eine Sammelaktion durchführen? Wir zeigen Ihnen in wenigen Schritten, wie Sie dabei am besten Vorgehen." %}
+                {% get_content "organize_lead" "Text zweiter Teaser" %}
               </p>
 
-              <a href="{% url 'home:walkthroughs:collection' %}">{% trans "Anleitung ansehen" %}</a>
+              <a href="{% url 'home:walkthroughs:collection' %}">{% get_content "organize_link" '"Anleitung ansehen" Link' %}</a>
             </div>
           </div>
         </div>
@@ -105,7 +105,7 @@
         <div class="container text-center">
           <div class="row">
 
-            <h1>{% trans "Machen Sie mit!" %}</h1>
+            <h1>{% get_content "join_us_heading" "Überschrift Mitmachen" %}</h1>
 
             <div class="col-sm-6 col-lg-3">
               <a href="{% url 'home:walkthroughs:collection' %}">
@@ -113,31 +113,7 @@
                   <div class="panel-body">
                     <img src="../../static/img/velos_entsorgen.jpg" alt="">
                   </div>
-                  <span>{% trans "Grösser Menge an Velos entsorgen" %}</span>
-                </div>
-              </a>
-            </div>
-
-            <div class="col-sm-6 col-lg-3">
-              <a href="{% url 'home:walkthroughs:voluntary' %}">
-                <div class="panel panel-default">
-                  <div class="panel-body">
-                    <img src="../../static/img/schueler.jpg" alt="">
-                  </div>
-                  <span>{% trans "Engagiert als Schule" %}</span>
-                </div>
-              </a>
-            </div>
-
-            <div class="clearfix visible-sm-block"></div>
-
-            <div class="col-sm-6 col-lg-3">
-              <a href="{% url 'home:walkthroughs:company' %}">
-                <div class="panel panel-default">
-                  <div class="panel-body">
-                    <img src="../../static/img/freiwillige_haende.jpg" alt="">
-                  </div>
-                  <span>{% trans "Freiwilligeneinsätze" %}</span>
+                  <span>{% get_content "join_us_panel_collection" "Mitmachen Panel - Velos entsorgen" %}</span>
                 </div>
               </a>
             </div>
@@ -146,9 +122,33 @@
               <a href="{% url 'home:walkthroughs:school' %}">
                 <div class="panel panel-default">
                   <div class="panel-body">
+                    <img src="../../static/img/schueler.jpg" alt="">
+                  </div>
+                  <span>{% get_content "join_us_panel_school" "Mitmachen Panel - Schule" %}</span>
+                </div>
+              </a>
+            </div>
+
+            <div class="clearfix visible-sm-block"></div>
+
+            <div class="col-sm-6 col-lg-3">
+              <a href="{% url 'home:walkthroughs:voluntary' %}">
+                <div class="panel panel-default">
+                  <div class="panel-body">
+                    <img src="../../static/img/freiwillige_haende.jpg" alt="">
+                  </div>
+                  <span>{% get_content "join_us_panel_voluntary" "Mitmachen Panel - Freiwillige" %}</span>
+                </div>
+              </a>
+            </div>
+
+            <div class="col-sm-6 col-lg-3">
+              <a href="{% url 'home:walkthroughs:company' %}">
+                <div class="panel panel-default">
+                  <div class="panel-body">
                     <img src="../../static/img/angebote_firmen.jpg" alt="">
                   </div>
-                  <span>{% trans "Angebote für Firmen" %}</span>
+                  <span>{% get_content "join_us_panel_company" "Mitmachen Panel - Firmen" %}</span>
                 </div>
               </a>
             </div>
@@ -162,11 +162,11 @@
           <div class="row">
             <div class="col-md-12 text-center">
 
-              <h1>{% trans "Titel für brennende News" %}</h1>
+              <h1>{% get_content "news_heading" "Überschrift News" %}</h1>
 
-              <p>{% trans "Weit hinten, hinter den Wortbergen, fern der Länder Vokalien und Konsonantien leben die Blindtexte. Abgeschieden wohnen sie in Buchstabhausen an der Küste des Semantik, eines grossen Sprachozeans." %}</p>
+              <p>{% get_content "news_lead" "Text News" %}</p>
 
-              <a href="#">{% trans "Link zum Blogs oder so" %}</a>
+              <a href="#">{% get_content "news_link" "Link News" %}</a>
 
             </div>
           </div>
@@ -178,10 +178,10 @@
           <div class="row">
             <div class="col-xs-12 text-center">
 
-              <h1>{% trans "Social Wall" %}</h1>
+              <h1>{% get_content "socialwall_heading" "Überschrift Socialwall" %}</h1>
 
               <p class="lead">
-                {% trans "Wir nutzen Facebook, Instagram und Youtube. Auf unserer Social Wall bündeln wir alle Beiträge aus den sozialen Netzwerken, sowohl eigene wie auch fremde. Hier landet alles, was mit dem Hashtag #Velafrica markiert oder mit @Velafrica getaggt ist. Wir freuen uns über Ihre Unterstützung! " %}
+                {% get_content "socialwall_lead" "Text Socialwall" %}
               </p>
 
               {% include "public_site/partials/socialwall_with_limited_height.html" %}
@@ -192,7 +192,7 @@
           <div class="row">
             <div class="col-xs-12 text-center social-link">
 
-              <a href="/socialwall">{% trans "Weiter auf unsere Social Wall" %}</a>
+              <a href="{% url 'home:socialwall' %}">{% get_content "socialwall_link" "Link Socialwall" %}</a>
 
             </div>
           </div>
