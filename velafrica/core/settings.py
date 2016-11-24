@@ -21,9 +21,8 @@ PROJECT_BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspa
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
-# TODO: get from env variable
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'b2j_&e=rzafa+zo874%tc^h!nbp#%0#442*19@(i&h-&s=v*hh'
+SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if 'DEBUG' in os.environ:
