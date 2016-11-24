@@ -13,7 +13,8 @@
   },
   "addons": [
     "heroku-postgresql",
-    "rollbar"
+    "rollbar",
+    "sendgrid"
   ],
   "buildpacks": [
     {
