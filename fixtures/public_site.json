@@ -35,28 +35,6 @@
     }
   },
   {
-    "model": "public_site.content",
-    "pk": 2,
-    "fields": {
-      "language": "de",
-      "path": "index",
-      "key": "first_background_image",
-      "value": "/static/img/street_burkina_irim.jpg",
-      "description": "Hintergrundbild des ersten Teasers"
-    }
-  },
-  {
-    "model": "public_site.content",
-    "pk": 3,
-    "fields": {
-      "language": "en",
-      "path": "index",
-      "key": "first_background_image",
-      "value": "",
-      "description": "Hintergrundbild des ersten Teasers"
-    }
-  },
-  {
     "model": "public_site.teammember",
     "pk": 1,
     "fields": {
