@@ -194,7 +194,7 @@ def render_about_us_template(request):
 
     if TeamMember.objects.count() > 0:
         template_context.update({
-            'team': TeamMember.objects.filter(active=True)
+            'team': TeamMember.objects.filter(active=True).order_by('-sorting')
         })
 
     return render_to_response(template_name, template_context, context_instance=RequestContext(request))

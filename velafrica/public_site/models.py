@@ -145,6 +145,7 @@ class TeamMember(models.Model):
     position = models.CharField(max_length=255, verbose_name="Position", blank=True)
     email = models.CharField(max_length=255, verbose_name="E-Mail", blank=True)
     image = models.CharField(max_length=255, verbose_name="Bild-URL", blank=True)
+    sorting = models.IntegerField(verbose_name="Sortierung", default=0)
 
     def __unicode__(self):
         return u"{}".format(self.name)
