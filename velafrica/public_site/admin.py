@@ -14,9 +14,14 @@ class ContentAdmin(admin.ModelAdmin):
     list_display = ['__unicode__', 'description']
 
 
+class TeamMemberAdmin(admin.ModelAdmin):
+    ordering = ('-sorting',)
+    search_fields = ['name']
+
+
 admin.site.register(Content, ContentAdmin)
 admin.site.register(DonationAmount)
-admin.site.register(TeamMember)
+admin.site.register(TeamMember, TeamMemberAdmin)
 admin.site.register(References)
 admin.site.register(InvoiceOrder)
 admin.site.register(SbbTicketOrder)
