@@ -10,13 +10,17 @@
 
           <ul class="navigation-left">
             <li>
-              <a class="logo" href="/">
+              <a class="logo" href="http://velafrica.ch">
                 <img src="{% static "img/velafrica_logo_claim.svg" %}" alt="">
               </a>
             </li>
-          </ul>
 
+          </ul>
+          <p class="text-center" style="padding:25px 0px 0px 70px;">
+              Die neue Velafrika-Seite ist noch in der Werkstatt. <a href="http://velafrica.ch">Hier</a> geht es zur aktuellen Seite
+          </p>
           <ul class="navigation-right">
+
             <li><a href="{% url "home:aboutus" %}">{% trans "Über uns" %}</a></li>
             <li><a href="#">{% trans "Partner" %}</a></li>
             <li><a href="{% url "home:walkthroughs:collection" %}">{% trans "Mitmachen" %}</a></li>
