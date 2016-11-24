@@ -1,10 +1,19 @@
 {% load i18n %}
 {% load static %}
-
+<div class="container-fluid betaBanner">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="text-center">
+        Die neue Velafrika-Seite ist noch in der Werkstatt. <a href="http://velafrica.ch">Hier</a> geht es zur aktuellen Seite
+      </div>
+    </div>
+  </div>
+</div>
 <div class="header-wrap navbar navbar-default navbar-fixed-top">
 
   <header>
     <div class="container-fluid">
+
       <div class="row">
         <div class="col-xs-12 navigation-container">
 
@@ -16,9 +25,7 @@
             </li>
 
           </ul>
-          <p class="text-center" style="padding:25px 0px 0px 70px;">
-              Die neue Velafrika-Seite ist noch in der Werkstatt. <a href="http://velafrica.ch">Hier</a> geht es zur aktuellen Seite
-          </p>
+
           <ul class="navigation-right">
 
             <li><a href="{% url "home:aboutus" %}">{% trans "Über uns" %}</a></li>
