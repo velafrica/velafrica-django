@@ -37,6 +37,7 @@ partner = [
 
 urlpatterns = [
     url(r'^$', render_template, name='home'),
+    url(r'^socialwall$', render_template, name='socialwall'),
     url(r'^donation/', include(donations, namespace='donation')),
     url(r'^map/', include(map, namespace='map')),
     url(r'^sbb-ticket-order/$', render_sbb_ticker_order, name='sbbticket'),
