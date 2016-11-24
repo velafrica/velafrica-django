@@ -306,15 +306,8 @@ if 'PAYPAL_TEST' in os.environ:
 else:
     PAYPAL_TEST = False
 
-if 'PAYPAL_RECEIVER_MAIL' in os.environ:
-    PAYPAL_RECEIVER_MAIL = os.environ['PAYPAL_RECEIVER_MAIL']
-else:
-    PAYPAL_RECEIVER_MAIL = ""
-
-if 'GMAP_API_KEY' in os.environ:
-    GMAP_API_KEY = os.environ['GMAP_API_KEY']
-else:
-    GMAP_API_KEY = ''
+PAYPAL_RECEIVER_MAIL = os.environ['PAYPAL_RECEIVER_MAIL']
+GMAP_API_KEY = os.environ['GMAP_API_KEY']
 
 # Due to a mistake the SITE_ID on staging has to be 2 but will be 1 on production
 # so its configurable per env variable (shame on HaRii)
@@ -323,17 +316,6 @@ if 'SITE_ID' in os.environ:
 else:
     SITE_ID = 1
 
-if 'MAILCHIMP_API_KEY' in os.environ:
-    MAILCHIMP_API_KEY = os.environ['MAILCHIMP_API_KEY']
-else:
-    MAILCHIMP_API_KEY = ''
-
-if 'MAILCHIMP_LIST_ID' in os.environ:
-    MAILCHIMP_LIST_ID = os.environ['MAILCHIMP_LIST_ID']
-else:
-    MAILCHIMP_LIST_ID = ''
-
-if 'ORDER_RECEIVER' in os.environ:
-    ORDER_RECEIVER = os.environ['ORDER_RECEIVER']
-else:
-    ORDER_RECEIVER = 'info@velafrica.ch'
+MAILCHIMP_API_KEY = os.environ['MAILCHIMP_API_KEY']
+MAILCHIMP_LIST_ID = os.environ['MAILCHIMP_LIST_ID']
+ORDER_RECEIVER = os.environ['ORDER_RECEIVER']
