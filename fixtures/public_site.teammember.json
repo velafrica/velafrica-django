@@ -1,0 +1,134 @@
+[
+{
+  "model": "public_site.teammember",
+  "pk": 1,
+  "fields": {
+    "active": true,
+    "name": "Paolo Richter",
+    "position": "Gesch\u00e4ftsleiter",
+    "email": "paolo.richter@drahtesel.ch",
+    "image": "http://velafrica.ch/media/archive2/Team/Paolo.jpg",
+    "sorting": 10
+  }
+},
+{
+  "model": "public_site.teammember",
+  "pk": 2,
+  "fields": {
+    "active": true,
+    "name": "Michel Ducommun",
+    "position": "Programmleiter Afrika",
+    "email": "michel.ducommun@velafrica.ch",
+    "image": "http://velafrica.ch/media/archive2/Team/Michel.jpg",
+    "sorting": 0
+  }
+},
+{
+  "model": "public_site.teammember",
+  "pk": 3,
+  "fields": {
+    "active": true,
+    "name": "Matthias Maurer",
+    "position": "Programmleiter Schweiz",
+    "email": "matthias.maurer@velafrica.ch",
+    "image": "http://velafrica.ch/media/archive2/Team/Matthias.jpg",
+    "sorting": 0
+  }
+},
+{
+  "model": "public_site.teammember",
+  "pk": 4,
+  "fields": {
+    "active": true,
+    "name": "Mats Gurtner",
+    "position": "Programmassistent",
+    "email": "mats.gurtner@velafrica.ch",
+    "image": "http://velafrica.ch/media/archive2/Team/Mats.jpg",
+    "sorting": 0
+  }
+},
+{
+  "model": "public_site.teammember",
+  "pk": 5,
+  "fields": {
+    "active": true,
+    "name": "Claudia Meyr",
+    "position": "Kommunikation & Fundraising",
+    "email": "claudia.meyr@velafrica.ch",
+    "image": "http://velafrica.ch/media/archive2/Team/Claudia.jpg",
+    "sorting": 0
+  }
+},
+{
+  "model": "public_site.teammember",
+  "pk": 6,
+  "fields": {
+    "active": true,
+    "name": "Nikolai R\u00e4ber",
+    "position": "Projektkoordinator",
+    "email": "nikolai.raeber@velafrica.ch",
+    "image": "http://velafrica.ch/media/archive2/Team/Nikolai_neu.jpg",
+    "sorting": 0
+  }
+},
+{
+  "model": "public_site.teammember",
+  "pk": 7,
+  "fields": {
+    "active": true,
+    "name": "Viveca Haffner",
+    "position": "Programmassistentin",
+    "email": "viveca.haffner@velafrica.ch",
+    "image": "http://velafrica.ch/media/archive2/Team/Viveca_neu_1466421808.jpg",
+    "sorting": 0
+  }
+},
+{
+  "model": "public_site.teammember",
+  "pk": 8,
+  "fields": {
+    "active": true,
+    "name": "Thomas Marti",
+    "position": "Programmassistent",
+    "email": "thomas.marti@velafrica.ch",
+    "image": "http://velafrica.ch/media/archive2/Team/Thomas.jpg",
+    "sorting": 0
+  }
+},
+{
+  "model": "public_site.teammember",
+  "pk": 9,
+  "fields": {
+    "active": true,
+    "name": "Christopher Klein",
+    "position": "Werkstattleiter",
+    "email": "christopher.klein@velafrica.ch",
+    "image": "http://velafrica.ch/media/archive2/Team/Christopher.jpg",
+    "sorting": 0
+  }
+},
+{
+  "model": "public_site.teammember",
+  "pk": 10,
+  "fields": {
+    "active": true,
+    "name": "Lorenz R\u00fcfenacht",
+    "position": "Mitarbeiter Export-Werkstatt",
+    "email": "lorenz.ruefenacht@velafrica.ch",
+    "image": "http://velafrica.ch/media/archive2/Team/Lorenz.jpg",
+    "sorting": 0
+  }
+},
+{
+  "model": "public_site.teammember",
+  "pk": 11,
+  "fields": {
+    "active": true,
+    "name": "Julian Meier & Sylvain Gilgen",
+    "position": "Zivildienstleistende",
+    "email": "zivi@velafrica.ch",
+    "image": "",
+    "sorting": 0
+  }
+}
+]
