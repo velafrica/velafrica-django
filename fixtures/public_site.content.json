@@ -490,7 +490,7 @@
     "language": "de",
     "path": "index",
     "key": "news_heading",
-    "value": "Titel f\u00fcr brennende News",
+    "value": "Neuigkeiten von Velafrica",
     "description": "\u00dcberschrift News"
   }
 },
@@ -501,7 +501,7 @@
     "language": "en",
     "path": "index",
     "key": "news_heading",
-    "value": "Titel f\u00fcr brennende News",
+    "value": "Neuigkeiten von Velafrica",
     "description": "\u00dcberschrift News"
   }
 },
@@ -512,7 +512,7 @@
     "language": "de",
     "path": "index",
     "key": "news_lead",
-    "value": "Weit hinten, hinter den Wortbergen, fern der L\u00e4nder Vokalien und Konsonantien leben die Blindtexte. Abgeschieden wohnen sie in Buchstabhausen an der K\u00fcste des Semantik, eines grossen Sprachozeans.",
+    "value": "In unserem Blog berichten wir regelm\u00e4ssig von Aktionen, Projekten und von unseren Partnern in Afrika und der Schweiz. Aktuell und authentisch, damit Sie sich ein ehrliches Bild unserer Arbeit machen k\u00f6nnen.",
     "description": "Text News"
   }
 },
@@ -523,7 +523,7 @@
     "language": "en",
     "path": "index",
     "key": "news_lead",
-    "value": "Weit hinten, hinter den Wortbergen, fern der L\u00e4nder Vokalien und Konsonantien leben die Blindtexte. Abgeschieden wohnen sie in Buchstabhausen an der K\u00fcste des Semantik, eines grossen Sprachozeans.",
+    "value": "In unserem Blog berichten wir regelm\u00e4ssig von Aktionen, Projekten und von unseren Partnern in Afrika und der Schweiz. Aktuell und authentisch, damit Sie sich ein ehrliches Bild unserer Arbeit machen k\u00f6nnen.",
     "description": "Text News"
   }
 },
@@ -534,7 +534,7 @@
     "language": "de",
     "path": "index",
     "key": "news_link",
-    "value": "Link zum Blogs oder so",
+    "value": "Zum Blog",
     "description": "Link News"
   }
 },
@@ -545,7 +545,7 @@
     "language": "en",
     "path": "index",
     "key": "news_link",
-    "value": "Link zum Blogs oder so",
+    "value": "Zum Blog",
     "description": "Link News"
   }
 },
