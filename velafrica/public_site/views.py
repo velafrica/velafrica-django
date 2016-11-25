@@ -232,7 +232,7 @@ def render_tracking(request):
     }
 
     data = Tracking.get_event_counts()
-    data['total'] = Tracking.get_tracked_velo_count()
+    data['total'] = Tracking.get_tracked_velo_count(True)
     template_context['data'] = data
 
     return render_to_response(template_name, template_context, context_instance=RequestContext(request))
