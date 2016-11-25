@@ -278,8 +278,18 @@ class Tracking(models.Model):
     def get_event_counts():
         last_events = Tracking.objects.all().values('last_event')
         resp = {}
+        keynames = {
+            1: 'tracking_erstellt',
+            2: 'eingang_velafrica_partner',
+            4: 'containerverlad',
+            5: 'ankunft_afrika',
+            6: 'verkauf',
+            7: 'zerlegung',
+            8: 'export'
+        }
         for id in last_events:
-            keyname = TrackingEvent.objects.get(id=id.get('last_event')).event_type.name.replace(' ', '_').lower()
+            last_event_event_type = TrackingEvent.objects.get(id=id.get('last_event')).event_type
+            keyname = keynames.get(last_event_event_type.id, last_event_event_type.name)
             if keyname in resp:
                 resp[keyname] += 1
             else:
