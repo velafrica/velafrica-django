@@ -50,6 +50,14 @@ body {
     transition: .5s ease;
   }
 
+  .bg-white {
+    background-color: white;
+  }
+
+  .bg-brown-3 {
+    background-color: $velafrica-brown-3;
+  }
+
   .container,
   .container-fluid {
     .teaser-vel {
@@ -84,6 +92,11 @@ body {
 
     @media (max-width: 425px) {
       font-size: 50px;
+    }
+
+    &.tracking-number {
+     font-size: 124px;
+      line-height: 136px;
     }
   }
 
