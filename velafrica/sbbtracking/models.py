@@ -270,6 +270,19 @@ class Tracking(models.Model):
         days = (date.today() - date(2017, 1, 1)).days
         return inital_velo + days * average_per_day + Tracking.objects.count()
 
+    @staticmethod
+    def get_event_counts():
+        last_events = Tracking.objects.all().values('last_event')
+        resp = {}
+        for id in last_events:
+            keyname = TrackingEvent.objects.get(id=id.get('last_event')).event_type.name
+            if keyname in resp:
+                resp[keyname] += 1
+            else:
+                resp[keyname] = 1
+
+        return resp
+
     class Meta:
         ordering = ['-tracking_no']
 

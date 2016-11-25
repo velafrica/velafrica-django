@@ -37,14 +37,9 @@ def subscribe_newsletter(request):
 
 @api_view(['GET'])
 @permission_classes((AllowAny,))
-def get_event_counts(request):
-    last_events = Tracking.objects.all().values('last_event')
-    resp = {}
-    for id in last_events:
-        keyname = TrackingEvent.objects.get(id=id.get('last_event')).event_type.name
-        if keyname in resp:
-            resp[keyname] += 1
-        else:
-            resp[keyname] = 1
-
+def get_live_tracking_data(request):
+    resp = {
+        'total': Tracking.get_tracked_velo_count()
+    }
+    resp.update(Tracking.get_event_counts())
     return Response(resp)
