@@ -227,7 +227,7 @@ def render_personal_tracking(request, tracking_no):
 def render_tracking(request):
     template_name = 'public_site/tracking.html'
     template_context = {
-        'get_event_counts_url': reverse('api:public:events_count')
+        'get_event_counts_url': reverse('api:public:tracking_live_data')
     }
 
     return render_to_response(template_name, template_context, context_instance=RequestContext(request))
