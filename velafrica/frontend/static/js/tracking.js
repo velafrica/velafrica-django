@@ -13,3 +13,32 @@ if ($('span.tracking-date').length) {
     }
   })
 }
+
+if($('#tracking-navi').length) {
+  $(window).scroll(onScroll);
+
+    //jQuery for page scrolling feature - requires jQuery Easing plugin
+    $(function () {
+      $('a.page-scroll').bind('click', function (event) {
+        var $anchor = $(this);
+        $('html, body').stop().animate({
+          scrollTop: $($anchor.attr('href')).offset().top
+        }, 700, 'easeInOutExpo');
+        event.preventDefault();
+      });
+    });
+
+    function onScroll() {
+      var scrollPos = $(document).scrollTop();
+      $('#menu-center a').each(function () {
+        var currLink = $(this);
+        var refElement = $(currLink.attr("href"));
+        if (refElement.position().top <= scrollPos && refElement.position().top + refElement.height() > scrollPos) {
+          currLink.addClass("active");
+        }
+        else {
+          currLink.removeClass("active");
+        }
+      });
+    }
+}
