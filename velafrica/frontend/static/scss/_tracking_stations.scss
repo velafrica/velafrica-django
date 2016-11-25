@@ -1,55 +1,128 @@
-section[id*="tracking-stations-"] {
-  & .tracking-stations-header {
-    h4 {
-      font-size: 30px;
-      font-weight: bold;
+section#tracking-navi {
+  .navbar-fixed-top {
+    top: 80px;
+    z-index: 1;
+    background-color: $velafrica-brown-5;
+  }
+
+  .tracking-navi-menu {
+    list-style: none;
+    overflow: hidden;
+    height: 50px;
+    padding-top: 15px;
+    margin-left: 0;
+    padding-left: 0;
+
+    .active {
+      background-color: $velafrica-brown-1;
+      color: white;
+
+      &:after {
+        background: linear-gradient(45deg, transparent 0%, transparent 50%, $velafrica-brown-1 51%, $velafrica-brown-1 100%);
+      }
     }
 
-    ul {
-      list-style: none;
-      padding: 0;
+    & li {
+      float: left;
+      margin-left: 26px;
 
-      li {
-        div {
-          text-align: center;
+      &:nth-child(-n+1) {
+        margin-left: 0px;
+      }
 
-          a {
-            margin: 0 auto;
-            display: block;
-            width: 100px;
-            height: 100px;
-            border-radius: 50px;
-            font-size: 30px;
-            font-weight: bold;
-            color: purple;
-            line-height: 100px;
-            text-align: center;
-            background: lightgrey;
-            border: 3px solid dimgrey;
-          }
+      & a {
+        width: 198px;
+        color: $velafrica-brown-1;
+        text-decoration: none;
+        text-align: center;
+        padding: 3px 0;
+        background: $velafrica-brown-4;
+        border-radius: $vel-border-radius;
+        position: relative;
+        display: block;
+        float: left;
+        height: 30px;
+        transition: none;
+        font-weight: normal;
+        font-size: 20px;
+
+        &:hover {
+          background-color: $velafrica-brown-1;
+          color: white;
 
           &:after {
-            content: attr(data-title);
-            text-align: center;
+            background: linear-gradient(45deg, transparent 0%, transparent 50%, $velafrica-brown-1 51%, $velafrica-brown-1 100%);
           }
         }
-      }
 
-      li:not(:last-child) {
-        div {
-          a {
-            &:before{
-              content: '';
-              position: absolute;
-              top: 48%;
-              z-index: -1;
-              height: 10px;
-              width: 100%;
-              background-color: dimgrey;
-            }
-          }
+        &:after {
+          content: "";
+          display: block;
+          position: absolute;
+          margin-top: -25px;
+          height: 22px;
+          width: 22px;
+          background: linear-gradient(45deg, transparent 0%, transparent 50%, $velafrica-brown-4 51%, $velafrica-brown-4 100%);
+          border-radius: $vel-border-radius;
+          transform: rotate(45deg);
+          left: 94%;
+          z-index: 2;
         }
       }
     }
+  }
+}
+
+section#tracking-stations {
+  padding-top: 140px;
+  height: 1000px;
+}
+
+section#tracking-record {
+  background-color: $velafrica-brown-3;
+
+  .col-md-6:first-child {
+
+    h2 {
+      color: white;
+    }
+  }
+}
+
+section#tracking-entry {
+  background-color: $velafrica-brown-3;
+
+  h2 {
+    color: white;
+  }
+
+  .panel {
+    background-color: $velafrica-brown-3;
+    border-radius: 0;
+
+    p.lead {
+      color: white;
+    }
+  }
+}
+
+section#tracking-processing {
+  background-color: $velafrica-brown-3;
+  h2 {
+    color: white;
+  }
+}
+
+section#tracking-africa {
+  background-color: $velafrica-brown-3;
+  h2 {
+    color: white;
+  }
+}
+
+section#tracking-arrived {
+  background-color: $velafrica-brown-3;
+  h2 {
+    color: white;
   }
 }
