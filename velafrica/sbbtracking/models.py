@@ -3,6 +3,7 @@ from datetime import date
 from django.conf import settings
 from django.core.validators import EmailValidator
 from django.db import models
+from django.db.models import Q
 from django.utils import timezone
 from django_resized import ResizedImageField
 from simple_history.models import HistoricalRecords
@@ -268,7 +269,10 @@ class Tracking(models.Model):
         inital_velo = getattr(settings, 'INITIAL_VELO_COUNT', 0)
         average_per_day = getattr(settings, 'AVERAGE_VELOS_PER_DAY', 0)
         days = (date.today() - date(2017, 1, 1)).days
-        return inital_velo + days * average_per_day + Tracking.objects.count()
+        #TODO: make this more dynamic, as the event ids could be different
+        # (4 = Containerverlad, 5 = Ankunft Partner Afrika)
+        trackings = Tracking.objects.filter(Q(Q(last_event__event_type_id=4) | Q(last_event__event_type_id=5))).count()
+        return inital_velo + days * average_per_day + trackings
 
     @staticmethod
     def get_event_counts():
