@@ -1,10 +1,324 @@
 {% extends "public_site/base.html" %}
 {% load i18n %}
+{% load static %}
 
 {% block page_title %}
   {% trans "Velafrica - Tracking" %}
 {% endblock %}
 
 {% block content %}
-  <h1>tracking</h1>
+
+  <section id="tracking-navi">
+    <div id="menu-center" class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="col-md-12">
+
+          <ul class="tracking-navi-menu">
+            <li>
+              <a href="#tracking-record" class="page-scroll">
+                {% trans "Erfassen" %}
+              </a>
+            </li>
+            <li>
+              <a href="#tracking-entry" class="page-scroll">
+                {% trans "Eingang Velafrica" %}
+              </a>
+            </li>
+            <li>
+              <a href="#tracking-processing" class="page-scroll">
+                {% trans "Verarbeitung" %}
+              </a>
+            </li>
+            <li>
+              <a href="#tracking-africa" class="page-scroll">
+                {% trans "Verlad nach Afrika" %}
+              </a>
+            </li>
+            <li>
+              <a href="#tracking-arrived" class="page-scroll">
+                {% trans "Ankunft bei Afrika" %}
+              </a>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tracking-stations">
+    <div class="container text-center">
+      <div class="col-md-10 col-md-offset-1">
+
+        <h1>{% trans "Der Weg nach Afrika" %}</h1>
+        <p class="lead">
+          {% trans "Erfahren Sie, was genau mit den Velos geschiet und welche Stationen sie auf ihrer Reise durchlaufen" %}
+        </p>
+
+        <img src="{% static "img/werkstatt_gross.png" %}" alt="">
+
+      </div>
+    </div>
+  </section>
+
+  <section id="tracking-record">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-8 col-md-offset-4">
+
+              <h1 class="tracking-number">94</h1>
+              <h2>{% trans "Velos sind in unserem Tracking System erfasst worden" %}</h2>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+
+          <img src="{% static "img/Klingel01.jpg" %}" alt="">
+
+        </div>
+      </div>
+      <div class="row bg-white">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-8 col-xs-offset-2">
+
+              <p>
+                {% trans "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores dignissimos distinctio dolorem doloremque dolorum magnam minus officia perspiciatis quam repellat! Beatae delectus iusto minima, molestias mollitia nam porro unde. Saepe." %}
+              </p>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tracking-entry">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6">
+
+          <img src="{% static "img/velafrica_eingang.png" %}" alt="">
+
+        </div>
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+
+              <h1 class="tracking-number">14</h1>
+              <h2>
+                {% trans "Velos sind bei Velafrica in Bern eingetroffen und warten auf die Weiterverarbeitung" %}
+              </h2>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="row bg-white">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-8 col-xs-offset-2">
+
+              <p>
+                {% trans "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores dignissimos distinctio dolorem doloremque dolorum magnam minus officia perspiciatis quam repellat! Beatae delectus iusto minima, molestias mollitia nam porro unde. Saepe." %}
+              </p>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row bg-white">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4">
+
+              <div class="panel">
+                <h1 class="tracking-number">3</h1>
+                <p class="lead">
+                  {% trans "Velos wurden in den letzten fünf Tagen für den Verkauf asugewählt" %}
+                </p>
+              </div>
+              <p>
+                {% trans "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam amet aspernatur doloremque eaque ex, exercitationem expedita inventore maxime minus odio praesentium provident quis quod reiciendis rem, repellat vel velit voluptate?" %}
+              </p>
+
+            </div>
+            <div class="col-md-4">
+
+              <div class="panel">
+                <h1 class="tracking-number">78</h1>
+                <p class="lead">
+                  {% trans "Velos werden für den Export aufbereitet" %}
+                </p>
+              </div>
+              <p>
+                {% trans "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam amet aspernatur doloremque eaque ex, exercitationem expedita inventore maxime minus odio praesentium provident quis quod reiciendis rem, repellat vel velit voluptate?" %}
+              </p>
+
+            </div>
+            <div class="col-md-4">
+
+              <div class="panel">
+                <h1 class="tracking-number">12</h1>
+                <p class="lead">
+                  {% trans "Velos wurden in den letzten fünf Tagen zerlegt und liefern damit wichtige Ersatzteile" %}
+                </p>
+              </div>
+              <p>
+                {% trans "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam amet aspernatur doloremque eaque ex, exercitationem expedita inventore maxime minus odio praesentium provident quis quod reiciendis rem, repellat vel velit voluptate?" %}
+              </p>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tracking-processing">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-8 col-md-offset-4">
+
+              <h1 class="tracking-number">639</h1>
+              <h2>{% trans "Velos haben die Velowerkstatt verlassen und sind bereit für die Reise nach Afrika" %}</h2>
+
+            </div>
+          </div>
+
+        </div>
+        <div class="col-md-6">
+
+          <img src="{% static "img/velafrica_verarbeitung.png" %}" alt="">
+
+        </div>
+      </div>
+
+      <div class="row bg-white">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-8 col-xs-offset-2">
+
+              <p>
+                {% trans "Für einen platzsparenden Transport sind Pedale, Vorderrad und Sattel demontiert. Instand gestellt haben sie Flüchtlinge, die in der Export-Werkstatt von Velafrica arbeiten. Im Rahmen eines Integrationsprojekts lernen rund 20 Teilnehmende fachmännisch Reparaturarbeiten an den gespendeten Fahrrädern durchzuführen." %}
+              </p>
+              <p>
+                {% trans "Während ihres Einsatzes erhalten sie einen Einblick in die hiesige Arbeitswelt und ihre Möglichkeiten. Dazu gehört auch Deutschtraining on the Job. So wird sinnvolle Integrationsarbeit mit nachhaltigem Velorecycling verbunden." %}
+              </p>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tracking-africa">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6">
+
+          <img src="{% static "img/velafrica_afrika.png" %}" alt="">
+
+        </div>
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-xs-8 col-xs-offset-2">
+
+              <h1 class="tracking-number">984</h1>
+              <h2>{% trans "Velos sind auf dem Weg nach Afrika" %}</h2>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row bg-white">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-8 col-xs-offset-2">
+
+              <p>
+                {% trans "Vom Berner Liebefeld geht es zunächst mit einem Lastwagen nach Basel und dann per Bahn oder Schiff nach Antwerpen. Dort kommt der Container auf ein Handelsschiff, das Kurs Richtung Süden aufnimmt. Im Zielhafen angekommen, ist die Reise meist noch nicht zu Ende. Mit dem Lastwagen geht es oft noch hunderte Kilometer in entlegene Regionen zu unseren Partnern in Ghana, Gambia, Eritrea, Burkina Faso, Tansania, Elfenbeinküste und Madagaskar. Die Reise dauert in der Regel etwa drei Monate." %}
+              </p>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tracking-arrived">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-8 col-md-offset-4">
+
+              <h1 class="tracking-number">55'204</h1>
+              <h2>{% trans "Velos sind dieses Jahr schon in Afrika angekommen" %}</h2>
+
+            </div>
+          </div>
+
+        </div>
+        <div class="col-md-6">
+
+          <img src="{% static "img/velafrica_angekommen.png" %}" alt="">
+
+        </div>
+      </div>
+      <div class="row bg-white">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+
+              <p>
+                {% trans "Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus.Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus." %}
+              </p>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+
+  <script>
+    $(window).scroll(onScroll);
+
+    //jQuery for page scrolling feature - requires jQuery Easing plugin
+    $(function () {
+      $('a.page-scroll').bind('click', function (event) {
+        var $anchor = $(this);
+        $('html, body').stop().animate({
+          scrollTop: $($anchor.attr('href')).offset().top
+        }, 700, 'easeInOutExpo');
+        event.preventDefault();
+      });
+    });
+
+    function onScroll() {
+      var scrollPos = $(document).scrollTop();
+      $('#menu-center a').each(function () {
+        var currLink = $(this);
+        var refElement = $(currLink.attr("href"));
+        if (refElement.position().top <= scrollPos && refElement.position().top + refElement.height() > scrollPos) {
+          currLink.addClass("active");
+        }
+        else {
+          currLink.removeClass("active");
+        }
+      });
+    }
+  </script>
+
 {% endblock %}
