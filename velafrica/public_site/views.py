@@ -234,7 +234,6 @@ def render_tracking(request):
     data = Tracking.get_event_counts()
     data['total'] = Tracking.get_tracked_velo_count()
     template_context['data'] = data
-    template_context['data']['weg_afrika'] = template_context['data'].get('export', 0) + template_context['data'].get('containerverlad', 0)
 
     return render_to_response(template_name, template_context, context_instance=RequestContext(request))
 

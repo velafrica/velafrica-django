@@ -295,6 +295,7 @@ class Tracking(models.Model):
             else:
                 resp[keyname] = 1
 
+        resp['weg_afrika'] = resp.get('export', 0) + resp.get('containerverlad', 0)
         return resp
 
     class Meta:
