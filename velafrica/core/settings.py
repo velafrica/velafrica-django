@@ -270,6 +270,7 @@ AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
 AWS_S3_CUSTOM_DOMAIN = os.environ['AWS_S3_CUSTOM_DOMAIN']
 
 
+
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
@@ -319,3 +320,5 @@ else:
 MAILCHIMP_API_KEY = os.environ['MAILCHIMP_API_KEY']
 MAILCHIMP_LIST_ID = os.environ['MAILCHIMP_LIST_ID']
 ORDER_RECEIVER = os.environ['ORDER_RECEIVER']
+INITIAL_VELO_COUNT = int(os.environ['INITIAL_VELO_COUNT'])
+AVERAGE_VELOS_PER_DAY = int(os.environ['AVERAGE_VELOS_PER_DAY'])

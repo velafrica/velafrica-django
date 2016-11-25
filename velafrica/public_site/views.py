@@ -14,12 +14,14 @@ from .models import DonationAmount, WalkthroughRequest, TeamMember, References, 
 
 def render_template(request):
     template_name = '/index'
+    template_context = {}
     if request.path != '/':
         template_name = request.path
 
-    return render_to_response('public_site' + template_name + '.html', {
+    if request.path == '/':
+        template_context['velo_count'] = Tracking.get_tracked_velo_count()
 
-    }, context_instance=RequestContext(request))
+    return render_to_response('public_site' + template_name + '.html', template_context, context_instance=RequestContext(request))
 
 
 def render_map_template(request):

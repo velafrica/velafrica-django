@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from datetime import date
+from django.conf import settings
 from django.core.validators import EmailValidator
 from django.db import models
 from django.utils import timezone
@@ -260,6 +262,13 @@ class Tracking(models.Model):
             return TrackingEventType.objects.filter(required_previous_event=last_event.event_type)
         else:
             return TrackingEventType.objects.filter(required_previous_event=None)
+
+    @staticmethod
+    def get_tracked_velo_count():
+        inital_velo = getattr(settings, 'INITIAL_VELO_COUNT', 0)
+        average_per_day = getattr(settings, 'AVERAGE_VELOS_PER_DAY', 0)
+        days = (date.today() - date(2017, 1, 1)).days
+        return inital_velo + days * average_per_day + Tracking.objects.count()
 
     class Meta:
         ordering = ['-tracking_no']
