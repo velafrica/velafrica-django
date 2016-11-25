@@ -2,6 +2,8 @@
 {% load i18n %}
 {% load static %}
 {% load content %}
+{% load humanize %}
+{% load swissint %}
 
 {% block page_title %}
   {% trans "Velafrica" %}
@@ -59,7 +61,7 @@
           <div class="row">
             <div class="col-sm-12 text-center">
 
-              <h1 class="big-number">{{ velo_count }}</h1>
+              <h1 class="big-number">{{ velo_count|intcomma|swissint|safe }}</h1>
 
               <h2>{% get_content "tracking_heading" "Überschrift zum Tracking Teaser" %}</h2>
 
