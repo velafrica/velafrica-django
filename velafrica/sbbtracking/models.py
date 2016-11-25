@@ -269,7 +269,7 @@ class Tracking(models.Model):
         inital_velo = getattr(settings, 'INITIAL_VELO_COUNT', 0)
         average_per_day = getattr(settings, 'AVERAGE_VELOS_PER_DAY', 0)
         days = (date.today() - date(2017, 1, 1)).days
-        #TODO: make this more dynamic, as the event ids could be different
+        # TODO: make this more dynamic, as the event ids could be different
         # (4 = Containerverlad, 5 = Ankunft Partner Afrika)
         trackings = Tracking.objects.filter(Q(Q(last_event__event_type_id=4) | Q(last_event__event_type_id=5))).count()
         return inital_velo + days * average_per_day + trackings
@@ -279,7 +279,7 @@ class Tracking(models.Model):
         last_events = Tracking.objects.all().values('last_event')
         resp = {}
         for id in last_events:
-            keyname = TrackingEvent.objects.get(id=id.get('last_event')).event_type.name
+            keyname = TrackingEvent.objects.get(id=id.get('last_event')).event_type.name.replace(' ', '_').lower()
             if keyname in resp:
                 resp[keyname] += 1
             else:
