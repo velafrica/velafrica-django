@@ -1,6 +1,9 @@
 {% extends "public_site/base.html" %}
 {% load i18n %}
 {% load static %}
+{% load humanize %}
+{% load swissint %}
+
 
 {% block page_title %}
   {% trans "Velafrica - Tracking" %}
@@ -68,7 +71,7 @@
           <div class="row">
             <div class="col-md-8 col-md-offset-4">
 
-              <h1 class="tracking-number">94</h1>
+              <h1 class="tracking-number">{{ data.tracking_erstellt|intcomma|swissint|safe }}</h1>
               <h2>{% trans "Velos sind in unserem Tracking System erfasst worden" %}</h2>
 
             </div>
@@ -108,7 +111,7 @@
           <div class="row">
             <div class="col-md-8 col-md-offset-2">
 
-              <h1 class="tracking-number">14</h1>
+              <h1 class="tracking-number">{{ data.eingang_velafrica_partner|intcomma|swissint|safe }}</h1>
               <h2>
                 {% trans "Velos sind bei Velafrica in Bern eingetroffen und warten auf die Weiterverarbeitung" %}
               </h2>
@@ -137,7 +140,7 @@
             <div class="col-md-4">
 
               <div class="panel">
-                <h1 class="tracking-number">3</h1>
+                <h1 class="tracking-number">{{ data.verkauf|intcomma|swissint|safe }}</h1>
                 <p class="lead">
                   {% trans "Velos wurden in den letzten fünf Tagen für den Verkauf asugewählt" %}
                 </p>
@@ -150,7 +153,7 @@
             <div class="col-md-4">
 
               <div class="panel">
-                <h1 class="tracking-number">78</h1>
+                <h1 class="tracking-number">{{ data.export|intcomma|swissint|safe }}</h1>
                 <p class="lead">
                   {% trans "Velos werden für den Export aufbereitet" %}
                 </p>
@@ -163,7 +166,7 @@
             <div class="col-md-4">
 
               <div class="panel">
-                <h1 class="tracking-number">12</h1>
+                <h1 class="tracking-number">{{ data.zerlegung|intcomma|swissint|safe }}</h1>
                 <p class="lead">
                   {% trans "Velos wurden in den letzten fünf Tagen zerlegt und liefern damit wichtige Ersatzteile" %}
                 </p>
@@ -187,7 +190,7 @@
           <div class="row">
             <div class="col-md-8 col-md-offset-4">
 
-              <h1 class="tracking-number">639</h1>
+              <h1 class="tracking-number">{{ data.containerverlad|intcomma|swissint|safe }}</h1>
               <h2>{% trans "Velos haben die Velowerkstatt verlassen und sind bereit für die Reise nach Afrika" %}</h2>
 
             </div>
@@ -232,7 +235,7 @@
           <div class="row">
             <div class="col-xs-8 col-xs-offset-2">
 
-              <h1 class="tracking-number">984</h1>
+              <h1 class="tracking-number">{{ data.weg_afrika|intcomma|swissint|safe }}</h1>
               <h2>{% trans "Velos sind auf dem Weg nach Afrika" %}</h2>
 
             </div>
@@ -262,7 +265,7 @@
           <div class="row">
             <div class="col-md-8 col-md-offset-4">
 
-              <h1 class="tracking-number">55'204</h1>
+              <h1 class="tracking-number">{{ data.total|intcomma|swissint|safe }}</h1>
               <h2>{% trans "Velos sind dieses Jahr schon in Afrika angekommen" %}</h2>
 
             </div>
@@ -290,6 +293,7 @@
       </div>
     </div>
   </section>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
 
 {% endblock %}
