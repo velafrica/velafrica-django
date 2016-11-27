@@ -1252,5 +1252,49 @@
     "value": "",
     "description": "Text In Afrika angekommen"
   }
+},
+{
+  "model": "public_site.content",
+  "pk": 115,
+  "fields": {
+    "language": "de",
+    "path": "_my_tracking_",
+    "key": "heading",
+    "value": "Was gerade mit Ihrem Velo geschieht",
+    "description": "\u00dcberschrift der pers\u00f6nlichen Tracking Seite"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 116,
+  "fields": {
+    "language": "en",
+    "path": "_my_tracking_",
+    "key": "heading",
+    "value": "Was gerade mit Ihrem Velo geschieht",
+    "description": "\u00dcberschrift der pers\u00f6nlichen Tracking Seite"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 117,
+  "fields": {
+    "language": "de",
+    "path": "_my_tracking_",
+    "key": "information_heading",
+    "value": "Weitere Informationen rund um Velafrica",
+    "description": "\u00dcberschrift Weitere Informationen"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 118,
+  "fields": {
+    "language": "en",
+    "path": "_my_tracking_",
+    "key": "information_heading",
+    "value": "Weitere Informationen rund um Velafrica",
+    "description": "\u00dcberschrift Weitere Informationen"
+  }
 }
 ]

@@ -2,6 +2,7 @@
 {% load i18n %}
 {% load s3 %}
 {% load static %}
+{% load content %}
 
 {% block page_title %}
   {% trans "Wo ist mein Velo?" %}
@@ -15,7 +16,7 @@
         <div class="col-md-8 col-md-offset-2">
 
           <h2>{% trans "Tracking-Nr." %} {{ tracking.tracking_no }}</h2>
-          <h1>{% trans "Was gerade mit Ihrem Velo geschieht" %}</h1>
+          <h1>{% get_content "heading" "Überschrift der persönlichen Tracking Seite" %}</h1>
 
         </div>
         <div class="col-md-2 text-center">
@@ -74,7 +75,7 @@
 
   <section id="information">
     <div class="container">
-      <h2 class="text-center">{% trans "Weitere Informationen rund um Velafrica" %}</h2>
+      <h2 class="text-center">{% get_content "information_heading" "Überschrift Weitere Informationen" %}</h2>
       <div class="row equal">
 
 
