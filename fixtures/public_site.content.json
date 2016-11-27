@@ -614,5 +614,643 @@
     "value": "Weiter auf unsere Social Wall",
     "description": "Link Socialwall"
   }
+},
+{
+  "model": "public_site.content",
+  "pk": 57,
+  "fields": {
+    "language": "de",
+    "path": "_tracking_",
+    "key": "stations_title_erfassen",
+    "value": "Velo wird registriert",
+    "description": "Tracking Stationen Titel Erfassen"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 58,
+  "fields": {
+    "language": "en",
+    "path": "_tracking_",
+    "key": "stations_title_erfassen",
+    "value": "Velo wird registriert",
+    "description": "Tracking Stationen Titel Erfassen"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 59,
+  "fields": {
+    "language": "de",
+    "path": "_tracking_",
+    "key": "stations_title_eingang",
+    "value": "Sortierung",
+    "description": "Tracking Stationen Titel Eingang"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 60,
+  "fields": {
+    "language": "en",
+    "path": "_tracking_",
+    "key": "stations_title_eingang",
+    "value": "Sortierung",
+    "description": "Tracking Stationen Titel Eingang"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 61,
+  "fields": {
+    "language": "de",
+    "path": "_tracking_",
+    "key": "stations_title_verarbeitung",
+    "value": "Verarbeitung",
+    "description": "Tracking Stationen Titel Verarbeitung"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 62,
+  "fields": {
+    "language": "en",
+    "path": "_tracking_",
+    "key": "stations_title_verarbeitung",
+    "value": "Verarbeitung",
+    "description": "Tracking Stationen Titel Verarbeitung"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 63,
+  "fields": {
+    "language": "de",
+    "path": "_tracking_",
+    "key": "stations_title_verlad",
+    "value": "Transport nach Afrika",
+    "description": "Tracking Stationen Titel Verlad"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 64,
+  "fields": {
+    "language": "en",
+    "path": "_tracking_",
+    "key": "stations_title_verlad",
+    "value": "Transport nach Afrika",
+    "description": "Tracking Stationen Titel Verlad"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 65,
+  "fields": {
+    "language": "de",
+    "path": "_tracking_",
+    "key": "stations_title_ankunft",
+    "value": "Velo ist angekommen",
+    "description": "Tracking Stationen Titel Ankuft"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 66,
+  "fields": {
+    "language": "en",
+    "path": "_tracking_",
+    "key": "stations_title_ankunft",
+    "value": "Velo ist angekommen",
+    "description": "Tracking Stationen Titel Ankuft"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 67,
+  "fields": {
+    "language": "de",
+    "path": "_tracking_",
+    "key": "stations_heading",
+    "value": "Von der Schweiz nach Afrika",
+    "description": "\u00dcberschrift Allgemeine Tracking Seite"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 68,
+  "fields": {
+    "language": "en",
+    "path": "_tracking_",
+    "key": "stations_heading",
+    "value": "Von der Schweiz nach Afrika",
+    "description": "\u00dcberschrift Allgemeine Tracking Seite"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 69,
+  "fields": {
+    "language": "de",
+    "path": "_tracking_",
+    "key": "stations_lead",
+    "value": "Jedes Jahr verschifft Velafrica \u00fcber 15'000 gespendete Velos zu seinen Partnern nach Ghana, Gambia, Eritrea, Burkina Faso, Tansania, Madagaskar und die Elfenbeink\u00fcste. Welche Stationen dabei jedes einzelne durchl\u00e4uft, k\u00f6nnen Sie dank unseres Tracking-Systems mitverfolgen. Kommen Sie mit auf Reisen.",
+    "description": "Lead Text Allgemeine Tracking Seite"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 70,
+  "fields": {
+    "language": "en",
+    "path": "_tracking_",
+    "key": "stations_lead",
+    "value": "Jedes Jahr verschifft Velafrica \u00fcber 15'000 gespendete Velos zu seinen Partnern nach Ghana, Gambia, Eritrea, Burkina Faso, Tansania, Madagaskar und die Elfenbeink\u00fcste. Welche Stationen dabei jedes einzelne durchl\u00e4uft, k\u00f6nnen Sie dank unseres Tracking-Systems mitverfolgen. Kommen Sie mit auf Reisen.",
+    "description": "Lead Text Allgemeine Tracking Seite"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 71,
+  "fields": {
+    "language": "de",
+    "path": "_tracking_",
+    "key": "stations_image",
+    "value": "/static/img/werkstatt_gross.png",
+    "description": "Erstes Bild Allgemeine Tracking Seite"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 72,
+  "fields": {
+    "language": "en",
+    "path": "_tracking_",
+    "key": "stations_image",
+    "value": "/static/img/werkstatt_gross.png",
+    "description": "Erstes Bild Allgemeine Tracking Seite"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 73,
+  "fields": {
+    "language": "de",
+    "path": "_tracking_",
+    "key": "station_record_subtitle",
+    "value": "Velos sind aktuell in unserem Tracking-System erfasst",
+    "description": "Untertitel Erfassung"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 74,
+  "fields": {
+    "language": "en",
+    "path": "_tracking_",
+    "key": "station_record_subtitle",
+    "value": "Velos sind aktuell in unserem Tracking-System erfasst",
+    "description": "Untertitel Erfassung"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 75,
+  "fields": {
+    "language": "de",
+    "path": "_tracking_",
+    "key": "station_record_image",
+    "value": "/static/img/Klingel01.jpg",
+    "description": "Bild Erfassung"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 76,
+  "fields": {
+    "language": "en",
+    "path": "_tracking_",
+    "key": "station_record_image",
+    "value": "/static/img/Klingel01.jpg",
+    "description": "Bild Erfassung"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 77,
+  "fields": {
+    "language": "de",
+    "path": "_tracking_",
+    "key": "station_record_text",
+    "value": "Die Spenderinnen und Spender haben einen pers\u00f6nlichen Tracking-Code erhalten und k\u00f6nnen nun die verschiedenen Stationen ihres Velos online abrufen.",
+    "description": "Text Erfassung"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 78,
+  "fields": {
+    "language": "en",
+    "path": "_tracking_",
+    "key": "station_record_text",
+    "value": "Die Spenderinnen und Spender haben einen pers\u00f6nlichen Tracking-Code erhalten und k\u00f6nnen nun die verschiedenen Stationen ihres Velos online abrufen.",
+    "description": "Text Erfassung"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 79,
+  "fields": {
+    "language": "de",
+    "path": "_tracking_",
+    "key": "station_entry_image",
+    "value": "/static/img/velafrica_eingang.png",
+    "description": "Bild Eingang"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 80,
+  "fields": {
+    "language": "en",
+    "path": "_tracking_",
+    "key": "station_entry_image",
+    "value": "/static/img/velafrica_eingang.png",
+    "description": "Bild Eingang"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 81,
+  "fields": {
+    "language": "de",
+    "path": "_tracking_",
+    "key": "station_entry_subtitle",
+    "value": "Velos sind bei uns oder einem unserer Partner eingetroffen",
+    "description": "Untertitel Eingang"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 82,
+  "fields": {
+    "language": "en",
+    "path": "_tracking_",
+    "key": "station_entry_subtitle",
+    "value": "Velos sind bei uns oder einem unserer Partner eingetroffen",
+    "description": "Untertitel Eingang"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 83,
+  "fields": {
+    "language": "de",
+    "path": "_tracking_",
+    "key": "station_entry_text",
+    "value": "Vom Zwischenlager geht es schon bald in die Velowerkstatt. Dort werden sie fachkundig unter die Lupe genommen. Dann entscheidet sich, ob und wie die Reise weitergeht. Eines ist klar: Wir verschicken keinen Schrott nach Afrika. Diejenigen Velos, die unseren Qualit\u00e4tsstandards nicht gen\u00fcgen, werden zu wertvollen Ersatzteillieferanten. Und zehn Prozent sind so gut in Schuss, dass es Sinn macht, sie in der Schweiz zu verkaufen.",
+    "description": "Text Eingang"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 84,
+  "fields": {
+    "language": "en",
+    "path": "_tracking_",
+    "key": "station_entry_text",
+    "value": "Vom Zwischenlager geht es schon bald in die Velowerkstatt. Dort werden sie fachkundig unter die Lupe genommen. Dann entscheidet sich, ob und wie die Reise weitergeht. Eines ist klar: Wir verschicken keinen Schrott nach Afrika. Diejenigen Velos, die unseren Qualit\u00e4tsstandards nicht gen\u00fcgen, werden zu wertvollen Ersatzteillieferanten. Und zehn Prozent sind so gut in Schuss, dass es Sinn macht, sie in der Schweiz zu verkaufen.",
+    "description": "Text Eingang"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 85,
+  "fields": {
+    "language": "de",
+    "path": "_tracking_",
+    "key": "station_verkauf_subtitle",
+    "value": "Velos wurden in den letzten f\u00fcnf Tagen f\u00fcr den Verkauf asugew\u00e4hlt",
+    "description": "Verarbeitung Panel Verkauf Untertitel"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 86,
+  "fields": {
+    "language": "en",
+    "path": "_tracking_",
+    "key": "station_verkauf_subtitle",
+    "value": "Velos wurden in den letzten f\u00fcnf Tagen f\u00fcr den Verkauf asugew\u00e4hlt",
+    "description": "Verarbeitung Panel Verkauf Untertitel"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 87,
+  "fields": {
+    "language": "de",
+    "path": "_tracking_",
+    "key": "station_verkauf_text",
+    "value": "",
+    "description": "Verarbeitung Panel Verkauf Text"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 88,
+  "fields": {
+    "language": "en",
+    "path": "_tracking_",
+    "key": "station_verkauf_text",
+    "value": "",
+    "description": "Verarbeitung Panel Verkauf Text"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 89,
+  "fields": {
+    "language": "de",
+    "path": "_tracking_",
+    "key": "station_export_subtitle",
+    "value": "Velos werden f\u00fcr den Export aufbereitet",
+    "description": "Verarbeitung Panel Export Untertitel"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 90,
+  "fields": {
+    "language": "en",
+    "path": "_tracking_",
+    "key": "station_export_subtitle",
+    "value": "Velos werden f\u00fcr den Export aufbereitet",
+    "description": "Verarbeitung Panel Export Untertitel"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 91,
+  "fields": {
+    "language": "de",
+    "path": "_tracking_",
+    "key": "station_export_text",
+    "value": "",
+    "description": "Verarbeitung Panel Export Text"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 92,
+  "fields": {
+    "language": "en",
+    "path": "_tracking_",
+    "key": "station_export_text",
+    "value": "",
+    "description": "Verarbeitung Panel Export Text"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 93,
+  "fields": {
+    "language": "de",
+    "path": "_tracking_",
+    "key": "station_zerlegung_subtitle",
+    "value": "Velos wurden in den letzten f\u00fcnf Tagen zerlegt und liefern damit wichtige Ersatzteile",
+    "description": "Verarbeitung Panel Zerlegung Untertitel"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 94,
+  "fields": {
+    "language": "en",
+    "path": "_tracking_",
+    "key": "station_zerlegung_subtitle",
+    "value": "Velos wurden in den letzten f\u00fcnf Tagen zerlegt und liefern damit wichtige Ersatzteile",
+    "description": "Verarbeitung Panel Zerlegung Untertitel"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 95,
+  "fields": {
+    "language": "de",
+    "path": "_tracking_",
+    "key": "station_zerlegung_text",
+    "value": "",
+    "description": "Verarbeitung Panel Zerlegung Text"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 96,
+  "fields": {
+    "language": "en",
+    "path": "_tracking_",
+    "key": "station_zerlegung_text",
+    "value": "",
+    "description": "Verarbeitung Panel Zerlegung Text"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 97,
+  "fields": {
+    "language": "de",
+    "path": "_tracking_",
+    "key": "station_processing_subtitle",
+    "value": "Velos haben Fl\u00fcchtlinge in der Werkstatt instand gestellt und f\u00fcr den Export vorbereitet",
+    "description": "Untertitel Containerverlad"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 98,
+  "fields": {
+    "language": "en",
+    "path": "_tracking_",
+    "key": "station_processing_subtitle",
+    "value": "Velos haben Fl\u00fcchtlinge in der Werkstatt instand gestellt und f\u00fcr den Export vorbereitet",
+    "description": "Untertitel Containerverlad"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 99,
+  "fields": {
+    "language": "de",
+    "path": "_tracking_",
+    "key": "station_processing_image",
+    "value": "/static/img/velafrica_verarbeitung.png",
+    "description": "Bild Containerverlad"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 100,
+  "fields": {
+    "language": "en",
+    "path": "_tracking_",
+    "key": "station_processing_image",
+    "value": "/static/img/velafrica_verarbeitung.png",
+    "description": "Bild Containerverlad"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 101,
+  "fields": {
+    "language": "de",
+    "path": "_tracking_",
+    "key": "station_processing_text",
+    "value": "In der Werkstatt im Berner Liebefeld f\u00fchren rund 20 Fl\u00fcchtlinge unter fachkundiger Anleitung Reparaturarbeiten an den gespendeten Velos durch. W\u00e4hrend ihres Einsatzes bei Velafrica, der in der Regel sechs Monate dauert, bekommen sie einen Einblick in die Schweizer Arbeitswelt und k\u00f6nnen ihre Deutschkenntnisse verbessern. So wird sinnvolle Integrationsarbeit mit nachhaltigem Velorecycling verbunden.",
+    "description": "Text Containerverlad"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 102,
+  "fields": {
+    "language": "en",
+    "path": "_tracking_",
+    "key": "station_processing_text",
+    "value": "In der Werkstatt im Berner Liebefeld f\u00fchren rund 20 Fl\u00fcchtlinge unter fachkundiger Anleitung Reparaturarbeiten an den gespendeten Velos durch. W\u00e4hrend ihres Einsatzes bei Velafrica, der in der Regel sechs Monate dauert, bekommen sie einen Einblick in die Schweizer Arbeitswelt und k\u00f6nnen ihre Deutschkenntnisse verbessern. So wird sinnvolle Integrationsarbeit mit nachhaltigem Velorecycling verbunden.",
+    "description": "Text Containerverlad"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 103,
+  "fields": {
+    "language": "de",
+    "path": "_tracking_",
+    "key": "station_africa_image",
+    "value": "/static/img/velafrica_afrika.png",
+    "description": "Bild Weg nach Afrika"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 104,
+  "fields": {
+    "language": "en",
+    "path": "_tracking_",
+    "key": "station_africa_image",
+    "value": "/static/img/velafrica_afrika.png",
+    "description": "Bild Weg nach Afrika"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 105,
+  "fields": {
+    "language": "de",
+    "path": "_tracking_",
+    "key": "station_africa_subtitle",
+    "value": "Velos sind auf dem Weg nach Afrika",
+    "description": "Untertitel Weg nach Afrika"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 106,
+  "fields": {
+    "language": "en",
+    "path": "_tracking_",
+    "key": "station_africa_subtitle",
+    "value": "Velos sind auf dem Weg nach Afrika",
+    "description": "Untertitel Weg nach Afrika"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 107,
+  "fields": {
+    "language": "de",
+    "path": "_tracking_",
+    "key": "station_africa_text",
+    "value": "F\u00fcr den platzsparenden Transport ist bei allen Velos der Lenker quer gestellt, der Sattel, die Pedale und das Vorderrad sind mit Dr\u00e4hten am Rahmen befestigt. So passen rund 500 Recycling-Velos in den 12 Meter langen und 2,6 Meter breiten Laderaum des Containers. <br>\r\nDie Reise kann losgehen. Der Lastwagen transportiert den Container zun\u00e4chst nach Basel, per Zug oder Schiff geht es weiter nach Antwerpen, dem zweitgr\u00f6ssten Hafen Europas. Dort kommen die Velos auf einen Containerfrachter, der Kurs Richtung S\u00fcden nimmt. Bis zu sechs Wochen dauert die \u00dcberfahrt zu dem jeweiligen Zielhafen. Dort ist die Reise allerdings noch nicht zu Ende. Auf dem Landweg geht es oft noch hunderte Kilometer in entlegene Regionen zu unseren Partnern in Ghana, Gambia, Eritrea, Burkina Faso, Tansania, Madagaskar und die Elfenbeink\u00fcste.",
+    "description": "Text Weg nach Afrika"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 108,
+  "fields": {
+    "language": "en",
+    "path": "_tracking_",
+    "key": "station_africa_text",
+    "value": "F\u00fcr den platzsparenden Transport ist bei allen Velos der Lenker quer gestellt, der Sattel, die Pedale und das Vorderrad sind mit Dr\u00e4hten am Rahmen befestigt. So passen rund 500 Recycling-Velos in den 12 Meter langen und 2,6 Meter breiten Laderaum des Containers. <br>\r\nDie Reise kann losgehen. Der Lastwagen transportiert den Container zun\u00e4chst nach Basel, per Zug oder Schiff geht es weiter nach Antwerpen, dem zweitgr\u00f6ssten Hafen Europas. Dort kommen die Velos auf einen Containerfrachter, der Kurs Richtung S\u00fcden nimmt. Bis zu sechs Wochen dauert die \u00dcberfahrt zu dem jeweiligen Zielhafen. Dort ist die Reise allerdings noch nicht zu Ende. Auf dem Landweg geht es oft noch hunderte Kilometer in entlegene Regionen zu unseren Partnern in Ghana, Gambia, Eritrea, Burkina Faso, Tansania, Madagaskar und die Elfenbeink\u00fcste.",
+    "description": "Text Weg nach Afrika"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 109,
+  "fields": {
+    "language": "de",
+    "path": "_tracking_",
+    "key": "station_arrived_subtitle",
+    "value": "Velos sind dieses Jahr schon in Afrika angekommen",
+    "description": "Untertitel In Anfrika angekommen"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 110,
+  "fields": {
+    "language": "en",
+    "path": "_tracking_",
+    "key": "station_arrived_subtitle",
+    "value": "Velos sind dieses Jahr schon in Afrika angekommen",
+    "description": "Untertitel In Anfrika angekommen"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 111,
+  "fields": {
+    "language": "de",
+    "path": "_tracking_",
+    "key": "station_arrived_image",
+    "value": "/static/img/velafrica_angekommen.png",
+    "description": "Bild In Anfrika angekommen"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 112,
+  "fields": {
+    "language": "en",
+    "path": "_tracking_",
+    "key": "station_arrived_image",
+    "value": "/static/img/velafrica_angekommen.png",
+    "description": "Bild In Anfrika angekommen"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 113,
+  "fields": {
+    "language": "de",
+    "path": "_tracking_",
+    "key": "station_arrived_text",
+    "value": "",
+    "description": "Text In Afrika angekommen"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 114,
+  "fields": {
+    "language": "en",
+    "path": "_tracking_",
+    "key": "station_arrived_text",
+    "value": "",
+    "description": "Text In Afrika angekommen"
+  }
 }
 ]

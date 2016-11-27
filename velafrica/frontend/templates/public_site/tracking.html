@@ -3,6 +3,7 @@
 {% load static %}
 {% load humanize %}
 {% load swissint %}
+{% load content %}
 
 
 {% block page_title %}
@@ -19,27 +20,27 @@
           <ul class="tracking-navi-menu">
             <li>
               <a href="#tracking-record" class="page-scroll">
-                {% trans "Erfassen" %}
+                {% get_content "stations_title_erfassen" "Tracking Stationen Titel Erfassen" %}
               </a>
             </li>
             <li>
               <a href="#tracking-entry" class="page-scroll">
-                {% trans "Eingang Velafrica" %}
+                {% get_content "stations_title_eingang" "Tracking Stationen Titel Eingang" %}
               </a>
             </li>
             <li>
               <a href="#tracking-processing" class="page-scroll">
-                {% trans "Verarbeitung" %}
+                {% get_content "stations_title_verarbeitung" "Tracking Stationen Titel Verarbeitung" %}
               </a>
             </li>
             <li>
               <a href="#tracking-africa" class="page-scroll">
-                {% trans "Verlad nach Afrika" %}
+                {% get_content "stations_title_verlad" "Tracking Stationen Titel Verlad" %}
               </a>
             </li>
             <li>
               <a href="#tracking-arrived" class="page-scroll">
-                {% trans "Ankunft bei Afrika" %}
+                {% get_content "stations_title_ankunft" "Tracking Stationen Titel Ankuft" %}
               </a>
             </li>
           </ul>
@@ -53,12 +54,12 @@
     <div class="container text-center">
       <div class="col-md-10 col-md-offset-1">
 
-        <h1>{% trans "Der Weg nach Afrika" %}</h1>
+        <h1>{% get_content "stations_heading" "Überschrift Allgemeine Tracking Seite" %}</h1>
         <p class="lead">
-          {% trans "Erfahren Sie, was genau mit den Velos geschiet und welche Stationen sie auf ihrer Reise durchlaufen" %}
+          {% get_content "stations_lead" "Lead Text Allgemeine Tracking Seite" %}
         </p>
 
-        <img src="{% static "img/werkstatt_gross.png" %}" alt="">
+        <img src="{% get_content "stations_image" "Erstes Bild Allgemeine Tracking Seite" %}" alt="">
 
       </div>
     </div>
@@ -72,14 +73,14 @@
             <div class="col-md-8 col-md-offset-4">
 
               <h1 class="tracking-number">{{ data.tracking_erstellt|intcomma|swissint|safe }}</h1>
-              <h2>{% trans "Velos sind in unserem Tracking System erfasst worden" %}</h2>
+              <h2>{% get_content "station_record_subtitle" "Untertitel Erfassung" %}</h2>
 
             </div>
           </div>
         </div>
         <div class="col-md-6">
 
-          <img src="{% static "img/Klingel01.jpg" %}" alt="">
+          <img src="{% get_content "station_record_image" "Bild Erfassung" %}" alt="">
 
         </div>
       </div>
@@ -89,7 +90,7 @@
             <div class="col-xs-8 col-xs-offset-2">
 
               <p>
-                {% trans "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores dignissimos distinctio dolorem doloremque dolorum magnam minus officia perspiciatis quam repellat! Beatae delectus iusto minima, molestias mollitia nam porro unde. Saepe." %}
+                {% get_content "station_record_text" "Text Erfassung" %}
               </p>
 
             </div>
@@ -104,7 +105,7 @@
       <div class="row">
         <div class="col-md-6">
 
-          <img src="{% static "img/velafrica_eingang.png" %}" alt="">
+          <img src="{% get_content "station_entry_image" "Bild Eingang" %}" alt="">
 
         </div>
         <div class="col-md-6">
@@ -113,7 +114,7 @@
 
               <h1 class="tracking-number">{{ data.eingang_velafrica_partner|intcomma|swissint|safe }}</h1>
               <h2>
-                {% trans "Velos sind bei Velafrica in Bern eingetroffen und warten auf die Weiterverarbeitung" %}
+                {% get_content "station_entry_subtitle" "Untertitel Eingang" %}
               </h2>
 
             </div>
@@ -127,7 +128,7 @@
             <div class="col-xs-8 col-xs-offset-2">
 
               <p>
-                {% trans "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores dignissimos distinctio dolorem doloremque dolorum magnam minus officia perspiciatis quam repellat! Beatae delectus iusto minima, molestias mollitia nam porro unde. Saepe." %}
+                {% get_content "station_entry_text" "Text Eingang" %}
               </p>
 
             </div>
@@ -142,11 +143,11 @@
               <div class="panel">
                 <h1 class="tracking-number">{{ data.verkauf|intcomma|swissint|safe }}</h1>
                 <p class="lead">
-                  {% trans "Velos wurden in den letzten fünf Tagen für den Verkauf asugewählt" %}
+                  {% get_content "station_verkauf_subtitle" "Verarbeitung Panel Verkauf Untertitel" %}
                 </p>
               </div>
               <p>
-                {% trans "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam amet aspernatur doloremque eaque ex, exercitationem expedita inventore maxime minus odio praesentium provident quis quod reiciendis rem, repellat vel velit voluptate?" %}
+                {% get_content "station_verkauf_text" "Verarbeitung Panel Verkauf Text" %}
               </p>
 
             </div>
@@ -155,11 +156,11 @@
               <div class="panel">
                 <h1 class="tracking-number">{{ data.export|intcomma|swissint|safe }}</h1>
                 <p class="lead">
-                  {% trans "Velos werden für den Export aufbereitet" %}
+                  {% get_content "station_export_subtitle" "Verarbeitung Panel Export Untertitel" %}
                 </p>
               </div>
               <p>
-                {% trans "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam amet aspernatur doloremque eaque ex, exercitationem expedita inventore maxime minus odio praesentium provident quis quod reiciendis rem, repellat vel velit voluptate?" %}
+                {% get_content "station_export_text" "Verarbeitung Panel Export Text" %}
               </p>
 
             </div>
@@ -168,11 +169,11 @@
               <div class="panel">
                 <h1 class="tracking-number">{{ data.zerlegung|intcomma|swissint|safe }}</h1>
                 <p class="lead">
-                  {% trans "Velos wurden in den letzten fünf Tagen zerlegt und liefern damit wichtige Ersatzteile" %}
+                  {% get_content "station_zerlegung_subtitle" "Verarbeitung Panel Zerlegung Untertitel" %}
                 </p>
               </div>
               <p>
-                {% trans "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam amet aspernatur doloremque eaque ex, exercitationem expedita inventore maxime minus odio praesentium provident quis quod reiciendis rem, repellat vel velit voluptate?" %}
+                {% get_content "station_zerlegung_text" "Verarbeitung Panel Zerlegung Text" %}
               </p>
 
             </div>
@@ -191,7 +192,7 @@
             <div class="col-md-8 col-md-offset-4">
 
               <h1 class="tracking-number">{{ data.containerverlad|intcomma|swissint|safe }}</h1>
-              <h2>{% trans "Velos haben die Velowerkstatt verlassen und sind bereit für die Reise nach Afrika" %}</h2>
+              <h2>{% get_content "station_processing_subtitle" "Untertitel Containerverlad" %}</h2>
 
             </div>
           </div>
@@ -199,7 +200,7 @@
         </div>
         <div class="col-md-6">
 
-          <img src="{% static "img/velafrica_verarbeitung.png" %}" alt="">
+          <img src="{% get_content "station_processing_image" "Bild Containerverlad" %}" alt="">
 
         </div>
       </div>
@@ -210,10 +211,7 @@
             <div class="col-xs-8 col-xs-offset-2">
 
               <p>
-                {% trans "Für einen platzsparenden Transport sind Pedale, Vorderrad und Sattel demontiert. Instand gestellt haben sie Flüchtlinge, die in der Export-Werkstatt von Velafrica arbeiten. Im Rahmen eines Integrationsprojekts lernen rund 20 Teilnehmende fachmännisch Reparaturarbeiten an den gespendeten Fahrrädern durchzuführen." %}
-              </p>
-              <p>
-                {% trans "Während ihres Einsatzes erhalten sie einen Einblick in die hiesige Arbeitswelt und ihre Möglichkeiten. Dazu gehört auch Deutschtraining on the Job. So wird sinnvolle Integrationsarbeit mit nachhaltigem Velorecycling verbunden." %}
+                {% get_content "station_processing_text" "Text Containerverlad" %}
               </p>
 
             </div>
@@ -228,7 +226,7 @@
       <div class="row">
         <div class="col-md-6">
 
-          <img src="{% static "img/velafrica_afrika.png" %}" alt="">
+          <img src="{% get_content "station_africa_image" "Bild Weg nach Afrika" %}" alt="">
 
         </div>
         <div class="col-md-6">
@@ -236,7 +234,7 @@
             <div class="col-xs-8 col-xs-offset-2">
 
               <h1 class="tracking-number">{{ data.weg_afrika|intcomma|swissint|safe }}</h1>
-              <h2>{% trans "Velos sind auf dem Weg nach Afrika" %}</h2>
+              <h2>{% get_content "station_africa_subtitle" "Untertitel Weg nach Afrika" %}</h2>
 
             </div>
           </div>
@@ -248,7 +246,7 @@
             <div class="col-xs-8 col-xs-offset-2">
 
               <p>
-                {% trans "Vom Berner Liebefeld geht es zunächst mit einem Lastwagen nach Basel und dann per Bahn oder Schiff nach Antwerpen. Dort kommt der Container auf ein Handelsschiff, das Kurs Richtung Süden aufnimmt. Im Zielhafen angekommen, ist die Reise meist noch nicht zu Ende. Mit dem Lastwagen geht es oft noch hunderte Kilometer in entlegene Regionen zu unseren Partnern in Ghana, Gambia, Eritrea, Burkina Faso, Tansania, Elfenbeinküste und Madagaskar. Die Reise dauert in der Regel etwa drei Monate." %}
+                {% get_content "station_africa_text" "Text Weg nach Afrika" %}
               </p>
 
             </div>
@@ -266,7 +264,7 @@
             <div class="col-md-8 col-md-offset-4">
 
               <h1 class="tracking-number">{{ data.total|intcomma|swissint|safe }}</h1>
-              <h2>{% trans "Velos sind dieses Jahr schon in Afrika angekommen" %}</h2>
+              <h2>{% get_content "station_arrived_subtitle" "Untertitel In Anfrika angekommen" %}</h2>
 
             </div>
           </div>
@@ -274,7 +272,7 @@
         </div>
         <div class="col-md-6">
 
-          <img src="{% static "img/velafrica_angekommen.png" %}" alt="">
+          <img src="{% get_content "station_arrived_image" "Bild In Anfrika angekommen" %}" alt="">
 
         </div>
       </div>
@@ -284,7 +282,7 @@
             <div class="col-md-8 col-md-offset-2">
 
               <p>
-                {% trans "Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus.Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus." %}
+                {% get_content "station_arrived_text" "Text In Afrika angekommen" %}
               </p>
 
             </div>
