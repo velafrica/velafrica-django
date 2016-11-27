@@ -45,4 +45,7 @@ def get_content(context, key, description=''):
     if value.value:
         return value.value
     else:
-        return full_key
+        if context.request.user.is_authenticated():
+            return full_key
+        else:
+            return ''
