@@ -132,7 +132,10 @@ class Content(models.Model):
     description = models.TextField(verbose_name='Beschreibung', blank=True)
 
     def __unicode__(self):
-        return u"{}_{}_{}".format(self.language, self.path, self.key)
+        if self.path == 'index':
+            return u"{}_{}_{}".format(self.language, self.path, self.key)
+        else:
+            return u"{}{}{}".format(self.language, self.path, self.key)
 
     class Meta:
         verbose_name = 'Inhalt'
