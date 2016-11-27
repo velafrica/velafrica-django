@@ -38,6 +38,7 @@ class ContentAdmin(admin.ModelAdmin):
     def is_filled_column(self, object):
         source = 'yes' if object.value else 'no'
         return format_html(u'<img src="/static/admin/img/icon-{}.svg" alt="{}"'.format(source, source))
+    is_filled_column.short_description = 'Befüllt'
 
 
 class TeamMemberAdmin(admin.ModelAdmin):
