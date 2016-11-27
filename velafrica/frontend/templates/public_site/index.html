@@ -26,7 +26,7 @@
                 {% get_content "teaser_lead" "Text auf ersten Teaser" %}
               </p>
 
-              <a href="{{ link }}">{% get_content "teaser_readmore" '"Erfahren Sie Mehr" Link auf ersten Teaser' %}</a>
+              <a href="{% url "home:aboutus" %}">{% get_content "teaser_readmore" '"Erfahren Sie Mehr" Link auf ersten Teaser' %}</a>
 
             </div>
           </div>
