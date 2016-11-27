@@ -9,10 +9,9 @@ register = template.Library()
 
 @register.simple_tag(takes_context=True)
 def get_content(context, key, description=''):
-    # return context.request.LANGUAGE_CODE
     path = '_index_'
     if context.request.path != '/':
-        path = context.request.path.replace('/', '_')
+        path = context.request.path.replace('/', '_').replace('-', '_')
 
     language = context.request.LANGUAGE_CODE
 
