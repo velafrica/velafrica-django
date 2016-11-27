@@ -29,8 +29,8 @@
           <li class="list-group-item"><a href="{% url "home:aboutus" %}#history">{% trans "Geschichte" %}</a></li>
           <li class="list-group-item"><a href="{% url "home:aboutus" %}#organisation">{% trans "Organisation" %}</a></li>
           <li class="list-group-item"><a href="{% url "home:aboutus" %}#team">{% trans "Team" %}</a></li>
-          <li class="list-group-item"><a href="#">{% trans "Partner Schweiz" %}</a></li>
-          <li class="list-group-item"><a href="#">{% trans "Partner Afrika" %}</a></li>
+          <li class="list-group-item"><a href="{% url "home:partner:swiss" %}">{% trans "Partner Schweiz" %}</a></li>
+          <li class="list-group-item"><a href="{% url "home:partner:africa" %}">{% trans "Partner Afrika" %}</a></li>
         </ul>
 
       </div>
@@ -40,8 +40,6 @@
         <ul class="list-group">
           <li class="list-group-item"><a href="/pages/">{% trans "Blog" %}</a></li>
           <li class="list-group-item"><a href="#">{% trans "Agenda" %}</a></li>
-          <li class="list-group-item"><a href="#">{% trans "FAQ" %}</a></li>
-          <li class="list-group-item"><a href="#">{% trans "Velafrica Zeitung" %}</a></li>
           <li class="list-group-item"><a href="#">{% trans "Sitemap" %}</a></li>
         </ul>
 
