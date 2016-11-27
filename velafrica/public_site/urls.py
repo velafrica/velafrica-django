@@ -26,7 +26,7 @@ walkthroughs = [
 ]
 
 tracking = [
-    url(r'^my-tracking/(?P<tracking_no>\w+)/$', render_personal_tracking, name='personal'),
+    url(r'^my-tracking/$', render_personal_tracking, name='personal'),
     url(r'^tracking/$', render_tracking, name='general')
 ]
 

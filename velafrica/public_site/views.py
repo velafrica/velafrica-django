@@ -202,11 +202,11 @@ def render_about_us_template(request):
     return render_to_response(template_name, template_context, context_instance=RequestContext(request))
 
 
-def render_personal_tracking(request, tracking_no):
+def render_personal_tracking(request):
     template_name = 'public_site/my-tracking.html'
     template_context = {}
 
-    tracking_no = tracking_no.upper()
+    tracking_no = getattr(request.GET, 'tracking_no', '')
 
     try:
         tracking = Tracking.objects.get(tracking_no=tracking_no)
