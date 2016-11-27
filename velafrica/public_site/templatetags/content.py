@@ -1,6 +1,7 @@
 from django import template
 from django.conf import settings
 from django.db.models import Q
+from django.utils.safestring import mark_safe
 from velafrica.public_site.models import Content
 
 register = template.Library()
@@ -43,7 +44,7 @@ def get_content(context, key, description=''):
         )
 
     if value.value:
-        return value.value
+        return mark_safe(value.value)
     else:
         if context.request.user.is_authenticated():
             return full_key
