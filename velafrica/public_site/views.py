@@ -208,6 +208,8 @@ def render_personal_tracking(request):
 
     if 'tracking_no' in request.GET:
         tracking_no = request.GET['tracking_no']
+    else:
+        tracking_no = ''
 
     try:
         tracking = Tracking.objects.get(tracking_no=tracking_no.upper())
