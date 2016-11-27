@@ -206,10 +206,11 @@ def render_personal_tracking(request):
     template_name = 'public_site/my-tracking.html'
     template_context = {}
 
-    tracking_no = getattr(request.GET, 'tracking_no', '')
+    if 'tracking_no' in request.GET:
+        tracking_no = request.GET['tracking_no']
 
     try:
-        tracking = Tracking.objects.get(tracking_no=tracking_no)
+        tracking = Tracking.objects.get(tracking_no=tracking_no.upper())
         tracking_events = TrackingEvent.objects.filter(tracking=tracking.id).order_by('-datetime')
 
         template_context.update({
