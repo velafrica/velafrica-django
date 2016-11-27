@@ -4,7 +4,7 @@
   "pk": 1,
   "fields": {
     "language": "de",
-    "path": "index",
+    "path": "_index_",
     "key": "first_background_image",
     "value": "http://staging-files.velafrica.ch.s3.amazonaws.com/filer_public/1d/01/1d012dc4-4f00-424f-b2cf-c9946e224ea2/street_burkina_irim.jpg",
     "description": "Hintergrundbild des ersten Teasers"
@@ -15,7 +15,7 @@
   "pk": 2,
   "fields": {
     "language": "en",
-    "path": "index",
+    "path": "_index_",
     "key": "first_background_image",
     "value": "http://staging-files.velafrica.ch.s3.amazonaws.com/filer_public/1d/01/1d012dc4-4f00-424f-b2cf-c9946e224ea2/street_burkina_irim.jpg",
     "description": "Hintergrundbild des ersten Teasers"
@@ -26,7 +26,7 @@
   "pk": 3,
   "fields": {
     "language": "de",
-    "path": "index",
+    "path": "_index_",
     "key": "teaser_heading",
     "value": "Velos ver\u00e4ndern Leben",
     "description": "\u00dcberschrift auf ersten Teaser"
@@ -37,7 +37,7 @@
   "pk": 4,
   "fields": {
     "language": "en",
-    "path": "index",
+    "path": "_index_",
     "key": "teaser_heading",
     "value": "Velos ver\u00e4ndern Leben",
     "description": "\u00dcberschrift auf ersten Teaser"
@@ -48,7 +48,7 @@
   "pk": 5,
   "fields": {
     "language": "de",
-    "path": "index",
+    "path": "_index_",
     "key": "teaser_lead",
     "value": "Velafrica sammelt ausgediente Velos, l\u00e4sst sie in sozialen Einrichtungen in der Schweiz instand stellen und exportiert sie zu seinen Partnern nach Afrika. So verbindet die Organisation Integrationsarbeit in der Schweiz mit Entwicklungszusammenarbeit in Afrika.",
     "description": "Text auf ersten Teaser"
@@ -59,7 +59,7 @@
   "pk": 6,
   "fields": {
     "language": "en",
-    "path": "index",
+    "path": "_index_",
     "key": "teaser_lead",
     "value": "Velafrica sammelt ausgediente Velos, l\u00e4sst sie in sozialen Einrichtungen in der Schweiz instand stellen und exportiert sie zu seinen Partnern nach Afrika. So verbindet die Organisation Integrationsarbeit in der Schweiz mit Entwicklungszusammenarbeit in Afrika.",
     "description": "Text auf ersten Teaser"
@@ -70,7 +70,7 @@
   "pk": 7,
   "fields": {
     "language": "de",
-    "path": "index",
+    "path": "_index_",
     "key": "teaser_readmore",
     "value": "Erfahren Sie mehr",
     "description": "\"Erfahren Sie Mehr\" Link auf ersten Teaser"
@@ -81,7 +81,7 @@
   "pk": 8,
   "fields": {
     "language": "en",
-    "path": "index",
+    "path": "_index_",
     "key": "teaser_readmore",
     "value": "Erfahren Sie mehr",
     "description": "\"Erfahren Sie Mehr\" Link auf ersten Teaser"
@@ -92,7 +92,7 @@
   "pk": 9,
   "fields": {
     "language": "de",
-    "path": "index",
+    "path": "_index_",
     "key": "velo_search_heading",
     "value": "Velo spenden",
     "description": "\u00dcberschrift Sammelstellensuche"
@@ -103,7 +103,7 @@
   "pk": 10,
   "fields": {
     "language": "en",
-    "path": "index",
+    "path": "_index_",
     "key": "velo_search_heading",
     "value": "Velo spenden",
     "description": "\u00dcberschrift Sammelstellensuche"
@@ -114,7 +114,7 @@
   "pk": 11,
   "fields": {
     "language": "de",
-    "path": "index",
+    "path": "_index_",
     "key": "velo_search_lead",
     "value": "Finden Sie unter den \u00fcber 400 Abgabestellen eine in Ihrer N\u00e4he.",
     "description": "Text Sammelstellenfsuche"
@@ -125,7 +125,7 @@
   "pk": 12,
   "fields": {
     "language": "en",
-    "path": "index",
+    "path": "_index_",
     "key": "velo_search_lead",
     "value": "Finden Sie unter den \u00fcber 400 Abgabestellen eine in Ihrer N\u00e4he.",
     "description": "Text Sammelstellenfsuche"
@@ -136,7 +136,7 @@
   "pk": 13,
   "fields": {
     "language": "de",
-    "path": "index",
+    "path": "_index_",
     "key": "velo_search_button",
     "value": "Sammelstelle suchen",
     "description": "Button Sammelstellensuche"
@@ -147,7 +147,7 @@
   "pk": 14,
   "fields": {
     "language": "en",
-    "path": "index",
+    "path": "_index_",
     "key": "velo_search_button",
     "value": "Sammelstelle suchen",
     "description": "Button Sammelstellensuche"
@@ -158,7 +158,7 @@
   "pk": 15,
   "fields": {
     "language": "de",
-    "path": "index",
+    "path": "_index_",
     "key": "velo_search_link",
     "value": "Sammelanlass organisieren",
     "description": "\"Sammelanlass organisieren\" Link"
@@ -169,7 +169,7 @@
   "pk": 16,
   "fields": {
     "language": "en",
-    "path": "index",
+    "path": "_index_",
     "key": "velo_search_link",
     "value": "Sammelanlass organisieren",
     "description": "\"Sammelanlass organisieren\" Link"
@@ -180,7 +180,7 @@
   "pk": 17,
   "fields": {
     "language": "de",
-    "path": "index",
+    "path": "_index_",
     "key": "velo_search_placeholder",
     "value": "PLZ",
     "description": "Input Platzhalter Sammelstellensuche"
@@ -191,7 +191,7 @@
   "pk": 18,
   "fields": {
     "language": "en",
-    "path": "index",
+    "path": "_index_",
     "key": "velo_search_placeholder",
     "value": "PLZ",
     "description": "Input Platzhalter Sammelstellensuche"
@@ -202,7 +202,7 @@
   "pk": 19,
   "fields": {
     "language": "de",
-    "path": "index",
+    "path": "_index_",
     "key": "tracking_heading",
     "value": "Finden Sie unter den \u00fcber 400 Abgabestellen eine in Ihrer N\u00e4he.",
     "description": "\u00dcberschrift zum Tracking Teaser"
@@ -213,7 +213,7 @@
   "pk": 20,
   "fields": {
     "language": "en",
-    "path": "index",
+    "path": "_index_",
     "key": "tracking_heading",
     "value": "Finden Sie unter den \u00fcber 400 Abgabestellen eine in Ihrer N\u00e4he.",
     "description": "\u00dcberschrift zum Tracking Teaser"
@@ -224,7 +224,7 @@
   "pk": 21,
   "fields": {
     "language": "de",
-    "path": "index",
+    "path": "_index_",
     "key": "tracking_read_more",
     "value": "Erfahren Sie mehr",
     "description": "Readmore Link bei Tracking Teaser"
@@ -235,7 +235,7 @@
   "pk": 22,
   "fields": {
     "language": "en",
-    "path": "index",
+    "path": "_index_",
     "key": "tracking_read_more",
     "value": "Erfahren Sie mehr",
     "description": "Readmore Link bei Tracking Teaser"
@@ -246,7 +246,7 @@
   "pk": 23,
   "fields": {
     "language": "de",
-    "path": "index",
+    "path": "_index_",
     "key": "tracking_search_heading",
     "value": "Verfolgen Sie den Weg Ihres Velos.",
     "description": "\u00dcberschrift Tracking Suche"
@@ -257,7 +257,7 @@
   "pk": 24,
   "fields": {
     "language": "en",
-    "path": "index",
+    "path": "_index_",
     "key": "tracking_search_heading",
     "value": "Verfolgen Sie den Weg Ihres Velos.",
     "description": "\u00dcberschrift Tracking Suche"
@@ -268,7 +268,7 @@
   "pk": 25,
   "fields": {
     "language": "de",
-    "path": "index",
+    "path": "_index_",
     "key": "tracking_search_placeholder",
     "value": "Tracking-Code eingeben",
     "description": "Input Platzhalter Tracking Suche"
@@ -279,7 +279,7 @@
   "pk": 26,
   "fields": {
     "language": "en",
-    "path": "index",
+    "path": "_index_",
     "key": "tracking_search_placeholder",
     "value": "Tracking-Code eingeben",
     "description": "Input Platzhalter Tracking Suche"
@@ -290,7 +290,7 @@
   "pk": 27,
   "fields": {
     "language": "de",
-    "path": "index",
+    "path": "_index_",
     "key": "tracking_search_button",
     "value": "Aktuellen Standort abfragen",
     "description": "Button Tracking Suche"
@@ -301,7 +301,7 @@
   "pk": 28,
   "fields": {
     "language": "en",
-    "path": "index",
+    "path": "_index_",
     "key": "tracking_search_button",
     "value": "Aktuellen Standort abfragen",
     "description": "Button Tracking Suche"
@@ -312,7 +312,7 @@
   "pk": 29,
   "fields": {
     "language": "de",
-    "path": "index",
+    "path": "_index_",
     "key": "organize_heading",
     "value": "Organisieren Sie eine Velosammlung. Wir unterst\u00fctzen Sie dabei.",
     "description": "\u00dcberschrift zweiter Teaster"
@@ -323,7 +323,7 @@
   "pk": 30,
   "fields": {
     "language": "en",
-    "path": "index",
+    "path": "_index_",
     "key": "organize_heading",
     "value": "Organisieren Sie eine Velosammlung. Wir unterst\u00fctzen Sie dabei.",
     "description": "\u00dcberschrift zweiter Teaster"
@@ -334,7 +334,7 @@
   "pk": 31,
   "fields": {
     "language": "de",
-    "path": "index",
+    "path": "_index_",
     "key": "organize_lead",
     "value": "M\u00f6chten Sie zusammen mit Ihren Vereinskollegen, in Ihrem Quartier, mit Ihren Arbeitskollegen oder Freunden eine Sammelaktion durchf\u00fchren? Wir zeigen Ihnen in wenigen Schritten, wie Sie dabei am besten Vorgehen.",
     "description": "Text zweiter Teaser"
@@ -345,7 +345,7 @@
   "pk": 32,
   "fields": {
     "language": "en",
-    "path": "index",
+    "path": "_index_",
     "key": "organize_lead",
     "value": "M\u00f6chten Sie zusammen mit Ihren Vereinskollegen, in Ihrem Quartier, mit Ihren Arbeitskollegen oder Freunden eine Sammelaktion durchf\u00fchren? Wir zeigen Ihnen in wenigen Schritten, wie Sie dabei am besten Vorgehen.",
     "description": "Text zweiter Teaser"
@@ -356,7 +356,7 @@
   "pk": 33,
   "fields": {
     "language": "de",
-    "path": "index",
+    "path": "_index_",
     "key": "organize_link",
     "value": "Anleitung ansehen",
     "description": "\"Anleitung ansehen\" Link"
@@ -367,7 +367,7 @@
   "pk": 34,
   "fields": {
     "language": "en",
-    "path": "index",
+    "path": "_index_",
     "key": "organize_link",
     "value": "Anleitung ansehen",
     "description": "\"Anleitung ansehen\" Link"
@@ -378,7 +378,7 @@
   "pk": 35,
   "fields": {
     "language": "de",
-    "path": "index",
+    "path": "_index_",
     "key": "join_us_heading",
     "value": "Machen Sie mit!",
     "description": "\u00dcberschrift Mitmachen"
@@ -389,7 +389,7 @@
   "pk": 36,
   "fields": {
     "language": "en",
-    "path": "index",
+    "path": "_index_",
     "key": "join_us_heading",
     "value": "Machen Sie mit!",
     "description": "\u00dcberschrift Mitmachen"
@@ -400,7 +400,7 @@
   "pk": 37,
   "fields": {
     "language": "de",
-    "path": "index",
+    "path": "_index_",
     "key": "join_us_panel_collection",
     "value": "Gr\u00f6sser Menge an Velos entsorgen",
     "description": "Mitmachen Panel - Velos entsorgen"
@@ -411,7 +411,7 @@
   "pk": 38,
   "fields": {
     "language": "en",
-    "path": "index",
+    "path": "_index_",
     "key": "join_us_panel_collection",
     "value": "Gr\u00f6sser Menge an Velos entsorgen",
     "description": "Mitmachen Panel - Velos entsorgen"
@@ -422,7 +422,7 @@
   "pk": 39,
   "fields": {
     "language": "de",
-    "path": "index",
+    "path": "_index_",
     "key": "join_us_panel_school",
     "value": "Engagiert als Schule",
     "description": "Mitmachen Panel - Schule"
@@ -433,7 +433,7 @@
   "pk": 40,
   "fields": {
     "language": "en",
-    "path": "index",
+    "path": "_index_",
     "key": "join_us_panel_school",
     "value": "Engagiert als Schule",
     "description": "Mitmachen Panel - Schule"
@@ -444,7 +444,7 @@
   "pk": 41,
   "fields": {
     "language": "de",
-    "path": "index",
+    "path": "_index_",
     "key": "join_us_panel_voluntary",
     "value": "Freiwilligeneins\u00e4tze",
     "description": "Mitmachen Panel - Freiwillige"
@@ -455,7 +455,7 @@
   "pk": 42,
   "fields": {
     "language": "en",
-    "path": "index",
+    "path": "_index_",
     "key": "join_us_panel_voluntary",
     "value": "Freiwilligeneins\u00e4tze",
     "description": "Mitmachen Panel - Freiwillige"
@@ -466,7 +466,7 @@
   "pk": 43,
   "fields": {
     "language": "de",
-    "path": "index",
+    "path": "_index_",
     "key": "join_us_panel_company",
     "value": "Angebote f\u00fcr Firmen",
     "description": "Mitmachen Panel - Firmen"
@@ -477,7 +477,7 @@
   "pk": 44,
   "fields": {
     "language": "en",
-    "path": "index",
+    "path": "_index_",
     "key": "join_us_panel_company",
     "value": "Angebote f\u00fcr Firmen",
     "description": "Mitmachen Panel - Firmen"
@@ -488,7 +488,7 @@
   "pk": 45,
   "fields": {
     "language": "de",
-    "path": "index",
+    "path": "_index_",
     "key": "news_heading",
     "value": "Neuigkeiten von Velafrica",
     "description": "\u00dcberschrift News"
@@ -499,7 +499,7 @@
   "pk": 46,
   "fields": {
     "language": "en",
-    "path": "index",
+    "path": "_index_",
     "key": "news_heading",
     "value": "Neuigkeiten von Velafrica",
     "description": "\u00dcberschrift News"
@@ -510,7 +510,7 @@
   "pk": 47,
   "fields": {
     "language": "de",
-    "path": "index",
+    "path": "_index_",
     "key": "news_lead",
     "value": "In unserem Blog berichten wir regelm\u00e4ssig von Aktionen, Projekten und von unseren Partnern in Afrika und der Schweiz. Aktuell und authentisch, damit Sie sich ein ehrliches Bild unserer Arbeit machen k\u00f6nnen.",
     "description": "Text News"
@@ -521,7 +521,7 @@
   "pk": 48,
   "fields": {
     "language": "en",
-    "path": "index",
+    "path": "_index_",
     "key": "news_lead",
     "value": "In unserem Blog berichten wir regelm\u00e4ssig von Aktionen, Projekten und von unseren Partnern in Afrika und der Schweiz. Aktuell und authentisch, damit Sie sich ein ehrliches Bild unserer Arbeit machen k\u00f6nnen.",
     "description": "Text News"
@@ -532,7 +532,7 @@
   "pk": 49,
   "fields": {
     "language": "de",
-    "path": "index",
+    "path": "_index_",
     "key": "news_link",
     "value": "Zum Blog",
     "description": "Link News"
@@ -543,7 +543,7 @@
   "pk": 50,
   "fields": {
     "language": "en",
-    "path": "index",
+    "path": "_index_",
     "key": "news_link",
     "value": "Zum Blog",
     "description": "Link News"
@@ -554,7 +554,7 @@
   "pk": 51,
   "fields": {
     "language": "de",
-    "path": "index",
+    "path": "_index_",
     "key": "socialwall_heading",
     "value": "Social Wall",
     "description": "\u00dcberschrift Socialwall"
@@ -565,7 +565,7 @@
   "pk": 52,
   "fields": {
     "language": "en",
-    "path": "index",
+    "path": "_index_",
     "key": "socialwall_heading",
     "value": "Social Wall",
     "description": "\u00dcberschrift Socialwall"
@@ -576,7 +576,7 @@
   "pk": 53,
   "fields": {
     "language": "de",
-    "path": "index",
+    "path": "_index_",
     "key": "socialwall_lead",
     "value": "Wir nutzen Facebook, Instagram und Youtube. Auf unserer Social Wall b\u00fcndeln wir alle Beitr\u00e4ge aus den sozialen Netzwerken, sowohl eigene wie auch fremde. Hier landet alles, was mit dem Hashtag #Velafrica markiert oder mit @Velafrica getaggt ist. Wir freuen uns \u00fcber Ihre Unterst\u00fctzung!",
     "description": "Text Socialwall"
@@ -587,7 +587,7 @@
   "pk": 54,
   "fields": {
     "language": "en",
-    "path": "index",
+    "path": "_index_",
     "key": "socialwall_lead",
     "value": "Wir nutzen Facebook, Instagram und Youtube. Auf unserer Social Wall b\u00fcndeln wir alle Beitr\u00e4ge aus den sozialen Netzwerken, sowohl eigene wie auch fremde. Hier landet alles, was mit dem Hashtag #Velafrica markiert oder mit @Velafrica getaggt ist. Wir freuen uns \u00fcber Ihre Unterst\u00fctzung!",
     "description": "Text Socialwall"
@@ -598,7 +598,7 @@
   "pk": 55,
   "fields": {
     "language": "de",
-    "path": "index",
+    "path": "_index_",
     "key": "socialwall_link",
     "value": "Weiter auf unsere Social Wall",
     "description": "Link Socialwall"
@@ -609,7 +609,7 @@
   "pk": 56,
   "fields": {
     "language": "en",
-    "path": "index",
+    "path": "_index_",
     "key": "socialwall_link",
     "value": "Weiter auf unsere Social Wall",
     "description": "Link Socialwall"
