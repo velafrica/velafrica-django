@@ -35,7 +35,7 @@ section#tracking-navi {
         color: $velafrica-brown-1;
         text-decoration: none;
         text-align: center;
-        padding: 3px 0;
+        padding: 3px 0 0 5px;
         background: $velafrica-brown-4;
         border-radius: $vel-border-radius;
         position: relative;
@@ -44,7 +44,7 @@ section#tracking-navi {
         height: 30px;
         transition: none;
         font-weight: normal;
-        font-size: 20px;
+        font-size: 19px;
 
         &:hover {
           background-color: $velafrica-brown-1;
