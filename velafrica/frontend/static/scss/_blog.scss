@@ -95,5 +95,18 @@ div.blog {
         padding-bottom: 30px;
       }
     }
+
+    section.blog-list {
+      article {
+        padding-top: 20px;
+
+        header h3 a {
+          color: $velafrica-brown-2;
+          text-decoration: none;
+          font-size: 24px;
+          line-height: 28px;
+        }
+      }
+    }
   }
 }
