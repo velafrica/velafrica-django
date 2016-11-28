@@ -1,0 +1,44 @@
+section[id*='partner-'] {
+  h2 {
+    color: $velafrica
+  }
+
+  .partner-heading {
+    padding-top: 60px;
+    padding-bottom: 30px;
+  }
+
+  .partner {
+    background-color: $velafrica-brown-6;
+    border-radius: $vel-border-radius;
+    padding: 30px;
+    margin: 30px 0;
+    min-height: 200px;
+
+    .partner-name {
+      font-size: 20px;
+      color: #A5814F;
+      letter-spacing: 0.5px;
+      line-height: 29px;
+
+      margin-bottom:0;
+    }
+
+    .partner-location {
+      font-size: 20px;
+      color: #A5814F;
+      letter-spacing: 0.5px;
+      line-height: 29px;
+      text-transform: none;
+
+      margin-bottom: 30px;
+    }
+
+    .partner-description {
+      font-size: 20px;
+      color: #30170F;
+      letter-spacing: 0.5px;
+      line-height: 29px;
+    }
+  }
+}

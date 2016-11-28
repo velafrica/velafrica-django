@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import collections
 from django.conf import settings
 from django.core.urlresolvers import reverse, resolve
 from django.db.models import Count
@@ -246,11 +247,22 @@ def render_partners(request):
 
     if 'afrika' in request.path:
         choice = 1
+        section_id = 'africa'
     elif 'schweiz' in request.path:
         choice = 2
+        section_id = 'swiss'
+
+    partners_locations = Partner.objects.filter(country=choice).order_by('location').values('location').distinct()
+    dict = {}
+    for location in partners_locations:
+        keyname = location['location']
+        dict[keyname] = Partner.objects.filter(country=choice).filter(location=location['location'])
+
+    dict = collections.OrderedDict(sorted(dict.items()))
 
     template_context = {
-        'partners': Partner.objects.filter(country=choice)
+        'section_id': section_id,
+        'locations': dict
     }
 
     return render_to_response(template_name, template_context, context_instance=RequestContext(request))
