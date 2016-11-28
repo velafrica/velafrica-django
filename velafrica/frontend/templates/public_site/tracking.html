@@ -12,285 +12,294 @@
 
 {% block content %}
 
-  <section id="tracking-navi">
-    <div id="menu-center" class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
-        <div class="col-md-12">
-
-          <ul class="tracking-navi-menu">
-            <li>
-              <a href="#tracking-record" class="page-scroll">
-                {% get_content "stations_title_erfassen" "Tracking Stationen Titel Erfassen" %}
-              </a>
-            </li>
-            <li>
-              <a href="#tracking-entry" class="page-scroll">
-                {% get_content "stations_title_eingang" "Tracking Stationen Titel Eingang" %}
-              </a>
-            </li>
-            <li>
-              <a href="#tracking-processing" class="page-scroll">
-                {% get_content "stations_title_verarbeitung" "Tracking Stationen Titel Verarbeitung" %}
-              </a>
-            </li>
-            <li>
-              <a href="#tracking-africa" class="page-scroll">
-                {% get_content "stations_title_verlad" "Tracking Stationen Titel Verlad" %}
-              </a>
-            </li>
-            <li>
-              <a href="#tracking-arrived" class="page-scroll">
-                {% get_content "stations_title_ankunft" "Tracking Stationen Titel Ankuft" %}
-              </a>
-            </li>
-          </ul>
-
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="tracking-stations">
-    <div class="container text-center">
-      <div class="col-md-10 col-md-offset-1">
-
-        <h1>{% get_content "stations_heading" "Überschrift Allgemeine Tracking Seite" %}</h1>
-        <p class="lead">
-          {% get_content "stations_lead" "Lead Text Allgemeine Tracking Seite" %}
-        </p>
-
-        <img src="{% get_content "stations_image" "Erstes Bild Allgemeine Tracking Seite" %}" alt="">
-
-      </div>
-    </div>
-  </section>
-
-  <section id="tracking-record">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-6">
-          <div class="row">
-            <div class="col-md-8 col-md-offset-4">
-
-              <h1 class="tracking-number">{{ data.tracking_erstellt|intcomma|swissint|safe }}</h1>
-              <h2>{% get_content "station_record_subtitle" "Untertitel Erfassung" %}</h2>
-
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6">
-
-          <img src="{% get_content "station_record_image" "Bild Erfassung" %}" alt="">
-
-        </div>
-      </div>
-      <div class="row bg-white">
+  <main id="tracking">
+    <section id="tracking-navi">
+      <div id="menu-center" class="navbar navbar-default navbar-fixed-top hidden-xs hidden-sm hidden-md">
         <div class="container">
-          <div class="row">
-            <div class="col-xs-8 col-xs-offset-2 vel-margin">
+          <div class="col-md-12">
 
-              <p>
-                {% get_content "station_record_text" "Text Erfassung" %}
-              </p>
+            <ul class="tracking-navi-menu">
+              <li>
+                <a href="#tracking-record" class="page-scroll">
+                  {% get_content "stations_title_erfassen" "Tracking Stationen Titel Erfassen" %}
+                </a>
+              </li>
+              <li>
+                <a href="#tracking-entry" class="page-scroll">
+                  {% get_content "stations_title_eingang" "Tracking Stationen Titel Eingang" %}
+                </a>
+              </li>
+              <li>
+                <a href="#tracking-processing" class="page-scroll">
+                  {% get_content "stations_title_verarbeitung" "Tracking Stationen Titel Verarbeitung" %}
+                </a>
+              </li>
+              <li>
+                <a href="#tracking-africa" class="page-scroll">
+                  {% get_content "stations_title_verlad" "Tracking Stationen Titel Verlad" %}
+                </a>
+              </li>
+              <li>
+                <a href="#tracking-arrived" class="page-scroll">
+                  {% get_content "stations_title_ankunft" "Tracking Stationen Titel Ankuft" %}
+                </a>
+              </li>
+            </ul>
 
-            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="tracking-entry">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-6">
+    <section id="tracking-stations">
+      <div class="container text-center">
+        <div class="col-md-10 col-md-offset-1">
 
-          <img src="{% get_content "station_entry_image" "Bild Eingang" %}" alt="">
+          <h1>{% get_content "stations_heading" "Überschrift Allgemeine Tracking Seite" %}</h1>
+          <p class="lead">
+            {% get_content "stations_lead" "Lead Text Allgemeine Tracking Seite" %}
+          </p>
 
-        </div>
-        <div class="col-md-6">
-          <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-
-              <h1 class="tracking-number">{{ data.eingang_velafrica_partner|intcomma|swissint|safe }}</h1>
-              <h2>
-                {% get_content "station_entry_subtitle" "Untertitel Eingang" %}
-              </h2>
-
-            </div>
-          </div>
+          <img src="{% get_content "stations_image" "Erstes Bild Allgemeine Tracking Seite" %}" alt="">
 
         </div>
       </div>
-      <div class="row bg-white">
-        <div class="container">
-          <div class="row">
-            <div class="col-xs-8 col-xs-offset-2 vel-margin">
+    </section>
 
-              <p>
-                {% get_content "station_entry_text" "Text Eingang" %}
-              </p>
+    <section id="tracking-record">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-8 col-md-offset-4 col-xs-11 col-xs-offset-1">
 
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row bg-white">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-4">
+                <h1 class="tracking-number">{{ data.tracking_erstellt|intcomma|swissint|safe }}</h1>
+                <h2>{% get_content "station_record_subtitle" "Untertitel Erfassung" %}</h2>
 
-              <div class="panel">
-                <h1 class="tracking-number">{{ data.verkauf|intcomma|swissint|safe }}</h1>
-                <h2>
-                  {% get_content "station_verkauf_subtitle" "Verarbeitung Panel Verkauf Untertitel" %}
-                </h2>
               </div>
-              <p class="vel-entry-pad">
-                {% get_content "station_verkauf_text" "Verarbeitung Panel Verkauf Text" %}
-              </p>
-
             </div>
-            <div class="col-md-4">
+          </div>
+          <div class="col-md-6 col-img0">
 
-              <div class="panel">
-                <h1 class="tracking-number">{{ data.export|intcomma|swissint|safe }}</h1>
-                <h2>
-                  {% get_content "station_export_subtitle" "Verarbeitung Panel Export Untertitel" %}
-                </h2>
+            <div class="vel-content-img"
+                 style="background: url('{% get_content "station_record_image" "Bild Erfassung" %}') center/cover"></div>
+
+          </div>
+        </div>
+        <div class="row bg-white">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-8 col-md-offset-2 col-xs-11 col-xs-offset-1 vel-margin">
+
+                <p>
+                  {% get_content "station_record_text" "Text Erfassung" %}
+                </p>
+
               </div>
-              <p class="vel-entry-pad">
-                {% get_content "station_export_text" "Verarbeitung Panel Export Text" %}
-              </p>
-
             </div>
-            <div class="col-md-4">
+          </div>
+        </div>
+      </div>
+    </section>
 
-              <div class="panel">
-                <h1 class="tracking-number">{{ data.zerlegung|intcomma|swissint|safe }}</h1>
+    <section id="tracking-entry">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-6 col-img0">
+
+            <div class="vel-content-img"
+                 style="background: url('{% get_content "station_entry_image" "Bild Eingang" %}') center/cover"></div>
+
+          </div>
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-8 col-md-offset-1 col-xs-11 col-xs-offset-1">
+
+                <h1 class="tracking-number">{{ data.eingang_velafrica_partner|intcomma|swissint|safe }}</h1>
                 <h2>
-                  {% get_content "station_zerlegung_subtitle" "Verarbeitung Panel Zerlegung Untertitel" %}
+                  {% get_content "station_entry_subtitle" "Untertitel Eingang" %}
                 </h2>
+
               </div>
-              <p class="vel-entry-pad">
-                {% get_content "station_zerlegung_text" "Verarbeitung Panel Zerlegung Text" %}
-              </p>
-
             </div>
+
           </div>
-
         </div>
-      </div>
-    </div>
-  </section>
+        <div class="row bg-white">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-8 col-md-offset-2 col-xs-11 col-xs-offset-1 vel-margin">
 
-  <section id="tracking-processing">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-6">
-          <div class="row">
-            <div class="col-md-8 col-md-offset-4">
+                <p>
+                  {% get_content "station_entry_text" "Text Eingang" %}
+                </p>
 
-              <h1 class="tracking-number">{{ data.containerverlad|intcomma|swissint|safe }}</h1>
-              <h2>{% get_content "station_processing_subtitle" "Untertitel Containerverlad" %}</h2>
-
-            </div>
-          </div>
-
-        </div>
-        <div class="col-md-6">
-
-          <img src="{% get_content "station_processing_image" "Bild Containerverlad" %}" alt="">
-
-        </div>
-      </div>
-
-      <div class="row bg-white">
-        <div class="container">
-          <div class="row">
-            <div class="col-xs-8 col-xs-offset-2">
-
-              <p class="vel-margin">
-                {% get_content "station_processing_text" "Text Containerverlad" %}
-              </p>
-
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
+        <div class="row bg-white">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-4">
 
-  <section id="tracking-africa">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-6">
+                <div class="panel">
+                  <h1 class="tracking-number">{{ data.verkauf|intcomma|swissint|safe }}</h1>
+                  <h2>
+                    {% get_content "station_verkauf_subtitle" "Verarbeitung Panel Verkauf Untertitel" %}
+                  </h2>
+                </div>
+                <p class="vel-entry-pad">
+                  {% get_content "station_verkauf_text" "Verarbeitung Panel Verkauf Text" %}
+                </p>
 
-          <img src="{% get_content "station_africa_image" "Bild Weg nach Afrika" %}" alt="">
+              </div>
+              <div class="col-md-4">
 
-        </div>
-        <div class="col-md-6">
-          <div class="row">
-            <div class="col-xs-8 col-xs-offset-2">
+                <div class="panel">
+                  <h1 class="tracking-number">{{ data.export|intcomma|swissint|safe }}</h1>
+                  <h2>
+                    {% get_content "station_export_subtitle" "Verarbeitung Panel Export Untertitel" %}
+                  </h2>
+                </div>
+                <p class="vel-entry-pad">
+                  {% get_content "station_export_text" "Verarbeitung Panel Export Text" %}
+                </p>
 
-              <h1 class="tracking-number">{{ data.weg_afrika|intcomma|swissint|safe }}</h1>
-              <h2>{% get_content "station_africa_subtitle" "Untertitel Weg nach Afrika" %}</h2>
+              </div>
+              <div class="col-md-4">
 
+                <div class="panel">
+                  <h1 class="tracking-number">{{ data.zerlegung|intcomma|swissint|safe }}</h1>
+                  <h2>
+                    {% get_content "station_zerlegung_subtitle" "Verarbeitung Panel Zerlegung Untertitel" %}
+                  </h2>
+                </div>
+                <p class="vel-entry-pad">
+                  {% get_content "station_zerlegung_text" "Verarbeitung Panel Zerlegung Text" %}
+                </p>
+
+              </div>
             </div>
+
           </div>
         </div>
       </div>
-      <div class="row bg-white">
-        <div class="container">
-          <div class="row">
-            <div class="col-xs-8 col-xs-offset-2">
+    </section>
 
-              <p class="vel-margin">
-                {% get_content "station_africa_text" "Text Weg nach Afrika" %}
-              </p>
+    <section id="tracking-processing">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-8 col-md-offset-4 col-xs-11 col-xs-offset-1">
 
+                <h1 class="tracking-number">{{ data.containerverlad|intcomma|swissint|safe }}</h1>
+                <h2>{% get_content "station_processing_subtitle" "Untertitel Containerverlad" %}</h2>
+
+              </div>
             </div>
+
+          </div>
+          <div class="col-md-6 col-img0">
+
+            <div class="vel-content-img"
+                 style="background: url({% get_content "station_processing_image" "Bild Containerverlad" %}) center/cover"></div>
+
           </div>
         </div>
-      </div>
-    </div>
-  </section>
 
-  <section id="tracking-arrived">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-6">
-          <div class="row">
-            <div class="col-md-8 col-md-offset-4">
+        <div class="row bg-white">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-8 col-md-offset-2 col-xs-11 col-xs-offset-1">
 
-              <h1 class="tracking-number">{{ data.total|intcomma|swissint|safe }}</h1>
-              <h2>{% get_content "station_arrived_subtitle" "Untertitel In Anfrika angekommen" %}</h2>
+                <p class="vel-margin">
+                  {% get_content "station_processing_text" "Text Containerverlad" %}
+                </p>
 
-            </div>
-          </div>
-
-        </div>
-        <div class="col-md-6">
-
-          <img src="{% get_content "station_arrived_image" "Bild In Anfrika angekommen" %}" alt="">
-
-        </div>
-      </div>
-      <div class="row bg-white">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-
-              <p class="vel-margin">
-                {% get_content "station_arrived_text" "Text In Afrika angekommen" %}
-              </p>
-
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <section id="tracking-africa">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-6 col-img0">
+
+            <div class="vel-content-img"
+                 style="background: url('{% get_content "station_africa_image" "Bild Weg nach Afrika" %}') center/cover"></div>
+
+          </div>
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-8 col-md-offset-1 col-xs-11 col-xs-offset-1">
+
+                <h1 class="tracking-number">{{ data.weg_afrika|intcomma|swissint|safe }}</h1>
+                <h2>{% get_content "station_africa_subtitle" "Untertitel Weg nach Afrika" %}</h2>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row bg-white">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-8 col-md-offset-2 col-xs-11 col-xs-offset-1">
+
+                <p class="vel-margin">
+                  {% get_content "station_africa_text" "Text Weg nach Afrika" %}
+                </p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tracking-arrived">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-8 col-md-offset-4 col-xs-11 col-xs-offset-1">
+
+                <h1 class="tracking-number">{{ data.total|intcomma|swissint|safe }}</h1>
+                <h2>{% get_content "station_arrived_subtitle" "Untertitel In Anfrika angekommen" %}</h2>
+
+              </div>
+            </div>
+
+          </div>
+
+          <div class="col-md-6 col-img0">
+
+            <div class="vel-content-img"
+                 style="background: url('{% get_content "station_arrived_image" "Bild In Anfrika angekommen" %}') center/cover"></div>
+
+          </div>
+        </div>
+        <div class="row bg-white">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-8 col-md-offset-2 col-xs-11 col-xs-offset-1">
+
+                <p class="vel-margin">
+                  {% get_content "station_arrived_text" "Text In Afrika angekommen" %}
+                </p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
 
