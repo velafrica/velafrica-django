@@ -952,7 +952,7 @@
     "language": "de",
     "path": "_tracking_",
     "key": "station_verkauf_text",
-    "value": "",
+    "value": "Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus.",
     "description": "Verarbeitung Panel Verkauf Text"
   }
 },
@@ -996,7 +996,7 @@
     "language": "de",
     "path": "_tracking_",
     "key": "station_export_text",
-    "value": "",
+    "value": "Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus.",
     "description": "Verarbeitung Panel Export Text"
   }
 },
@@ -1040,7 +1040,7 @@
     "language": "de",
     "path": "_tracking_",
     "key": "station_zerlegung_text",
-    "value": "",
+    "value": "Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus.",
     "description": "Verarbeitung Panel Zerlegung Text"
   }
 },
