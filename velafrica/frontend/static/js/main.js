@@ -3,6 +3,7 @@
 var $ = require('jquery');
 //hack jquery into window fixes double jquery import issue.
 window.jQuery = window.$ = $;
+require('jquery-easing');
 
 window.getUrlVars = function () {
     var vars = [], hash;

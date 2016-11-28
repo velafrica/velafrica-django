@@ -21,6 +21,7 @@
     "global": "^4.3.0",
     "imports-loader": "^0.6.5",
     "jquery": "^2.2.3",
+    "jquery-easing": "0.0.1",
     "lodash": "^4.5.1",
     "node-libs-browser": "^1.0.0",
     "node-sass": "^3.7.0",
@@ -37,5 +38,7 @@
     "clean": "rm -rf staticfiles/dist/",
     "postinstall": "./node_modules/.bin/webpack --config webpack.prod.config.js"
   },
-  "engines": {"node" : "5.5.0"}
+  "engines": {
+    "node": "5.5.0"
+  }
 }
