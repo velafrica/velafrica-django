@@ -33,7 +33,9 @@ if($('#tracking-navi').length) {
       $('#menu-center a').each(function () {
         var currLink = $(this);
         var refElement = $(currLink.attr("href"));
-        if (refElement.position().top <= scrollPos && refElement.position().top + refElement.height() > scrollPos) {
+        var heightAnchor = 140;
+        console.log(refElement.position().top, scrollPos, refElement.height());
+        if (refElement.position().top - heightAnchor <= scrollPos && refElement.position().top + refElement.height() > scrollPos + heightAnchor) {
           currLink.addClass("active");
         }
         else {
