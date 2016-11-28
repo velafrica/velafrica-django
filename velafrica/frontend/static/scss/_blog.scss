@@ -74,6 +74,15 @@ div.blog {
           color: $velafrica-brown-2;
         }
       }
+      figcaption {
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding-bottom: 30px;
+        font-size: 14px;
+        color: $velafrica-brown-2;
+        padding-top: 6px;
+      }
       &>a {
         display: block;
         padding-bottom: 30px;
