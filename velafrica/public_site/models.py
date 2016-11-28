@@ -181,8 +181,9 @@ class Partner(models.Model):
     name = models.CharField(max_length=255, verbose_name="Name")
     description = models.TextField(verbose_name="Beschreibung", blank=True)
     link = models.CharField(max_length=255, verbose_name="URL", blank=True)
-    address = models.ForeignKey(Address, verbose_name="Adresse", on_delete=models.SET_NULL, blank=True, null=True)
     country = models.IntegerField(verbose_name="Land", choices=COUNTRY_CHOICES)
+    location = models.CharField(max_length=255, verbose_name="Kanton/Staat")
+    city = models.CharField(max_length=255, verbose_name="Stadt")
 
     def __unicode__(self):
         return u"{}".format(self.name)
