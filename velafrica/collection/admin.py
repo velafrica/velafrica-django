@@ -103,7 +103,7 @@ class CollectionEventAdmin(ImportExportMixin, SimpleHistoryAdmin):
     """
     """
     resource_class = CollectionEventAdminResource
-    list_display = ['date_start', 'date_end', 'event', 'notes', 'status_logistics', 'status_marketing', 'status_results', 'velo_amount', 'complete' ]
+    list_display = ['date_start', 'date_end', 'event', 'status_logistics', 'status_marketing', 'status_results', 'velo_amount', 'complete', 'notes' ]
     search_fields = ['event__name', 'event__address__city']
 
     inlines = [TaskProgressInline]
