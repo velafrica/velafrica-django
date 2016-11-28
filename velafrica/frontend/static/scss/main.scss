@@ -13,12 +13,11 @@
 @import "about_us";
 @import "blog";
 @import "my_tracking";
-
 @import url('https://fonts.googleapis.com/css?family=Ek+Mukta:300,400,700');
 
 .betaBanner {
   position: fixed;
-  top:0;
+  top: 0;
   z-index: 1400;
   background-color: white;
   font-weight: bold;
@@ -58,7 +57,7 @@ body {
     background-color: $velafrica-brown-3;
   }
 
-  .vel-margin{
+  .vel-margin {
     margin-top: 30px;
     margin-bottom: 90px;
   }
@@ -100,7 +99,7 @@ body {
     }
 
     &.tracking-number {
-     font-size: 124px;
+      font-size: 124px;
       line-height: 136px;
     }
   }

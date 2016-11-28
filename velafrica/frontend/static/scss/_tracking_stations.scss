@@ -74,8 +74,14 @@ section#tracking-navi {
 }
 
 section#tracking-stations {
-  padding-top: 140px;
-  height: 1000px;
+  padding-top: 110px;
+  margin-bottom: 90px;
+
+  img {
+    width: 50%;
+    background-size: cover;
+    margin-top: 60px;
+  }
 }
 
 section#tracking-record {
@@ -99,10 +105,19 @@ section#tracking-entry {
   .panel {
     background-color: $velafrica-brown-3;
     border-radius: 0;
+    padding: 30px 60px 30px 30px;
+
+    h1 {
+      margin-bottom: 0;
+    }
 
     p.lead {
       color: white;
     }
+  }
+
+  .vel-entry-pad {
+    padding: 30px 60px 30px 30px;
   }
 }
 
