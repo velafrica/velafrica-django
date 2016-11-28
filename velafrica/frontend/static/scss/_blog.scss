@@ -48,7 +48,7 @@ div.blog {
     div.blog-content {
       padding-top: 20px;
       padding-bottom: 90px;
-      span, p, a {
+      div, span, p, a {
         font-size: 20px;
         line-height: 29px;
         letter-spacing: 0.5px;
@@ -58,7 +58,7 @@ div.blog {
       }
       &>section {
         padding-bottom: 30px;
-        &>p {
+        &>p, &>div {
           padding-bottom: 10px;
         }
       }
