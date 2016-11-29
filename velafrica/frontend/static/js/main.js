@@ -26,6 +26,7 @@ $(document).ready(function () {
     require('newsletter');
     require('walkthrough');
     require('tracking');
+    require('blog');
 });
 
 
