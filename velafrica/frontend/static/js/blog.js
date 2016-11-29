@@ -13,7 +13,7 @@ if ($('.blog-list').length) {
       }
     });
 
-    $posts.css('height', highestPostHeight + 30);
+    $posts.css('height', highestPostHeight + 74);
   }
   sizePosts();
 }
