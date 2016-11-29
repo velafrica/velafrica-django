@@ -97,14 +97,42 @@ div.blog {
     }
 
     section.blog-list {
-      article {
-        padding-top: 20px;
+      padding-bottom: 60px;
 
-        header h3 a {
-          color: $velafrica-brown-2;
-          text-decoration: none;
-          font-size: 24px;
-          line-height: 28px;
+      header h2 {
+        display: block;
+        text-align: center;
+        font-size: 44px;
+        padding-bottom: 20px;
+        color: $velafrica-brown-3;
+      }
+
+      article {
+        div.post_container {
+          background: $velafrica-brown-5;
+          padding-top: 20px;
+          padding-bottom: 20px;
+          padding-left: 12px;
+          padding-right: 12px;
+
+          span.post_date {
+            font-size: 14px;
+            font-weight: bold;
+            color: $velafrica-brown-3;
+            display: block;
+            padding-bottom: 20px;
+          }
+
+          h3 a {
+            color: $velafrica-brown-1;
+            text-decoration: none;
+            font-size: 24px;
+            line-height: 28px;
+          }
+
+          footer.read-more a {
+            font-size: 14px;
+          }
         }
       }
     }

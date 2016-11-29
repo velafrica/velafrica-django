@@ -2,17 +2,11 @@
 {% load md5 %}
 
 <article id="post-{{ post.slug }}" class="post-item col-md-6">
-    <header>
-        <h3><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
-        <div class="meta">
-          <img src="https://www.gravatar.com/avatar/{{ post.author.email|md5 }}?s=60" alt="">
-          <div class="user_and_date">
-            {% block blog_meta %}
-                {% include "djangocms_blog/includes/blog_meta.html" %}
-            {% endblock %}
-          </div>
-        </div>
-    </header>
+  <div class="post_container">
+    <span class="post_date">
+      {{ post.date_published|date:"DATE_FORMAT" }}
+    </span>
+    <h3><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
     {% if image and post.main_image %}
     <div class="blog-visual">
         {% thumbnail post.main_image post.thumbnail_options.size crop=post.thumbnail_options.crop upscale=post.thumbnail_options.upscale subject_location=post.main_image.subject_location as thumb %}
@@ -22,4 +16,5 @@
     <footer class="read-more">
         <a href="{{ post.get_absolute_url }}">{% trans "read more" %} &raquo;</a>
     </footer>
+  </div>
 </article>
