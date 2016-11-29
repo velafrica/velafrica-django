@@ -12,7 +12,7 @@
     <header>
         <h2>{% render_model post "title" %}</h2>
         <div class="meta">
-          <img src="https://www.gravatar.com/avatar/{{ post.author.email|md5 }}?s=60" alt="">
+          <img src="https://www.gravatar.com/avatar/{{ post.author.email|md5 }}?s=75" alt="">
           <div class="user_and_date">
             {% block blog_meta %}
                 {% include "djangocms_blog/includes/blog_meta.html" %}

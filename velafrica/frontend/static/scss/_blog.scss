@@ -30,7 +30,7 @@ div.blog {
         }
         div.user_and_date {
           padding-left: 20px;
-          ul {
+          &>ul {
             list-style: none;
             padding-left: 0px;
 
@@ -38,6 +38,15 @@ div.blog {
               li, a {
                 font-size: 14px;
                 color: $velafrica-brown-2;
+              }
+            }
+
+            &>ul.categories {
+              list-style-type: none;
+              padding: 0px;
+              li {
+                float: left;
+                margin-right: 5px;
               }
             }
           }
