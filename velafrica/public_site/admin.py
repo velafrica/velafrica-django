@@ -46,10 +46,15 @@ class TeamMemberAdmin(admin.ModelAdmin):
     search_fields = ['name']
 
 
+class ReferenceAdmin(admin.ModelAdmin):
+    ordering = ('-sorting',)
+    search_fields = ['name']
+
+
 admin.site.register(Content, ContentAdmin)
 admin.site.register(DonationAmount)
 admin.site.register(TeamMember, TeamMemberAdmin)
-admin.site.register(References)
+admin.site.register(References, ReferenceAdmin)
 admin.site.register(InvoiceOrder)
 admin.site.register(SbbTicketOrder)
 admin.site.register(WalkthroughRequest)

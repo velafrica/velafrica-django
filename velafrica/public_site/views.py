@@ -192,7 +192,7 @@ def render_about_us_template(request):
 
     if References.objects.count() > 0:
         template_context.update({
-            'references': References.objects.filter(active=True)
+            'references': References.objects.filter(active=True).order_by('-sorting')
         })
 
     if TeamMember.objects.count() > 0:

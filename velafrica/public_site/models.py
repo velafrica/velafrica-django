@@ -163,6 +163,7 @@ class References(models.Model):
     name = models.CharField(max_length=255, verbose_name="Name")
     image = models.CharField(max_length=255, verbose_name="Bild-URL")
     text = models.TextField(verbose_name="Text")
+    sorting = models.IntegerField(verbose_name="Sortierung", default=0)
 
     def __unicode__(self):
         return u"{}".format(self.name)
