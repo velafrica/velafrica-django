@@ -33,13 +33,3 @@ def subscribe_newsletter(request):
             return Response(False)
     else:
         return Response(False)
-
-
-@api_view(['GET'])
-@permission_classes((AllowAny,))
-def get_live_tracking_data(request):
-    resp = {
-        'total': Tracking.get_tracked_velo_count()
-    }
-    resp.update(Tracking.get_event_counts())
-    return Response(resp)
