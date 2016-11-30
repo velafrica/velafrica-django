@@ -2,7 +2,7 @@
 import collections
 from django.conf import settings
 from django.core.urlresolvers import reverse, resolve
-from django.db.models import Count
+from django.db.models import Q
 from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext
 from paypal.standard.forms import PayPalPaymentsForm
@@ -231,8 +231,32 @@ def render_personal_tracking(request):
 def render_tracking(request):
     template_name = 'public_site/tracking.html'
 
-    data = Tracking.get_event_counts()
-    data['total'] = Tracking.get_tracked_velo_count(True, True)
+    last_events = Tracking.objects.all().values('last_event')
+    data = {}
+    keynames = {
+        1: 'tracking_erstellt',
+        2: 'eingang_velafrica_partner',
+        4: 'containerverlad',
+        5: 'ankunft_afrika',
+        6: 'verkauf',
+        7: 'zerlegung',
+        8: 'export'
+    }
+    for id in last_events:
+        last_event_event_type = TrackingEvent.objects.get(id=id.get('last_event')).event_type
+        keyname = keynames.get(last_event_event_type.id, last_event_event_type.name)
+        if keyname in data:
+            data[keyname] += 1
+        else:
+            data[keyname] = 1
+
+    data['weg_afrika'] = data.get('export', 0) + data.get('containerverlad', 0)
+
+    tracking_created_id = 1
+
+    data['tracking_erstellt'] = TrackingEvent.objects.filter(event_type_id=tracking_created_id).count()
+    data['total'] = Tracking.get_tracked_velo_count(this_year=True, without_initial=True)
+
     template_context = {
         'data': data
     }

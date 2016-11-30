@@ -282,30 +282,6 @@ class Tracking(models.Model):
             trackings = Tracking.objects.filter(Q(Q(last_event__event_type_id=4) | Q(last_event__event_type_id=5))).count()
         return inital_velo + days * average_per_day + trackings if not without_initial else days * average_per_day + trackings
 
-    @staticmethod
-    def get_event_counts():
-        last_events = Tracking.objects.all().values('last_event')
-        resp = {}
-        keynames = {
-            1: 'tracking_erstellt',
-            2: 'eingang_velafrica_partner',
-            4: 'containerverlad',
-            5: 'ankunft_afrika',
-            6: 'verkauf',
-            7: 'zerlegung',
-            8: 'export'
-        }
-        for id in last_events:
-            last_event_event_type = TrackingEvent.objects.get(id=id.get('last_event')).event_type
-            keyname = keynames.get(last_event_event_type.id, last_event_event_type.name)
-            if keyname in resp:
-                resp[keyname] += 1
-            else:
-                resp[keyname] = 1
-
-        resp['weg_afrika'] = resp.get('export', 0) + resp.get('containerverlad', 0)
-        return resp
-
     class Meta:
         ordering = ['-tracking_no']
 
