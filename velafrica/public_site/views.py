@@ -230,14 +230,12 @@ def render_personal_tracking(request):
 
 def render_tracking(request):
     template_name = 'public_site/tracking.html'
-    template_context = {
-        'get_event_counts_url': reverse('api:public:tracking_live_data'),
-
-    }
 
     data = Tracking.get_event_counts()
-    data['total'] = Tracking.get_tracked_velo_count(True)
-    template_context['data'] = data
+    data['total'] = Tracking.get_tracked_velo_count(True, True)
+    template_context = {
+        'data': data
+    }
 
     return render_to_response(template_name, template_context, context_instance=RequestContext(request))
 

@@ -265,17 +265,22 @@ class Tracking(models.Model):
             return TrackingEventType.objects.filter(required_previous_event=None)
 
     @staticmethod
-    def get_tracked_velo_count(this_year = False):
+    def get_tracked_velo_count(this_year = False, without_initial = False):
         inital_velo = getattr(settings, 'INITIAL_VELO_COUNT', 0)
         average_per_day = getattr(settings, 'AVERAGE_VELOS_PER_DAY', 0)
         days = (date.today() - date(2017, 1, 1)).days
+
+        # this only applies when the function is called before 1.1.2017 (to prevent calculation with negative numbers
+        if days < 0:
+            days *= -1
+
         # TODO: make this more dynamic, as the event ids could be different
         # (4 = Containerverlad, 5 = Ankunft Partner Afrika)
         if this_year:
             trackings = Tracking.objects.filter(Q(Q(Q(last_event__event_type_id=4) | Q(last_event__event_type_id=5))) & Q(last_event__datetime__year=date.today().year)).count()
         else:
             trackings = Tracking.objects.filter(Q(Q(last_event__event_type_id=4) | Q(last_event__event_type_id=5))).count()
-        return inital_velo + days * average_per_day + trackings
+        return inital_velo + days * average_per_day + trackings if not without_initial else days * average_per_day + trackings
 
     @staticmethod
     def get_event_counts():
