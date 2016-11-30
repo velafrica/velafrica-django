@@ -1,5 +1,6 @@
 {% load i18n %}
 {% load static %}
+{% if not user.is_authenticated %}
 <div class="container-fluid betaBanner">
   <div class="row">
     <div class="col-xs-12">
@@ -9,6 +10,7 @@
     </div>
   </div>
 </div>
+{% endif %}
 <div class="header-wrap navbar navbar-default navbar-fixed-top">
 
   <header>
