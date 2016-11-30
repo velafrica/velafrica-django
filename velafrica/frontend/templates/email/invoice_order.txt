@@ -1,11 +1,8 @@
-Vorname: {{ firstname }}
-Nachname: {{ lastname }}
-Adresse: {{ address }}
-Anmerkung:
-{{ comment|safe|striptags }}
-
-Betrag: {{ donation_amount }}
-Anzahl Einzahlungsscheine: {{ number_invoices }}
-
-
-Admin: {{ url }}
+Vorname: {{ firstname }}<br>
+Nachname: {{ lastname }}<br>
+Adresse: {{ address }}<br>
+Anmerkung:<br>
+{{ comment|safe|striptags }}<br>
+<br>
+Betrag: {{ donation_amount }}<br>
+Anzahl Einzahlungsscheine: {{ number_invoices }}<br>

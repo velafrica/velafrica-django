@@ -1,13 +1,9 @@
-Bestellung für: {{ dropoff }}
-Vorname: {{ firstname }}
-Nachname: {{ lastname }}
-Menge: {{ amount }}
-E-Mail: {{ email }}
-Telefonnummer: {{ phone }}
-Adresse: {{ address }}
-Anmerkung:
-{{ note|safe|striptags }}
-
-
-
-Admin: {{ url }}
+Bestellung für: {{ dropoff }}<br>
+Vorname: {{ firstname }}<br>
+Nachname: {{ lastname }}<br>
+Menge: {{ amount }}<br>
+E-Mail: {{ email }}<br>
+Telefonnummer: {{ phone }}<br>
+Adresse: {{ address }}<br>
+Anmerkung:<br>
+{{ note|safe|striptags }}<br>

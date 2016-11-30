@@ -1,6 +1,6 @@
 import googlemaps
 from django.conf import settings
-from django.core.mail import send_mail as django_send_mail
+from django.core.mail import EmailMultiAlternatives, send_mail as django_send_mail
 from django.template.loader import get_template
 
 # initialize client
@@ -43,10 +43,11 @@ def get_googlemaps_url_distance(origin, destination):
 
 
 def send_mail(template, subject, receiver, context):
-	content = get_template(template).render(context)
-	# copied from tracking handlers
-	from_name = getattr(settings, 'EMAIL_FROM_NAME', 'Velafrica Tracking')
-	from_email = getattr(settings, 'EMAIL_FROM_EMAIL', 'tracking@velafrica.ch')
-	sender = u"{} <{}>".format(from_name, from_email)
-
-	django_send_mail(subject, content, sender, receiver, fail_silently=False )
+    content = get_template(template).render(context)
+    # copied from tracking handlers
+    from_name = getattr(settings, 'EMAIL_FROM_NAME', 'Velafrica Tracking')
+    from_email = getattr(settings, 'EMAIL_FROM_EMAIL', 'tracking@velafrica.ch')
+    sender = u"{} <{}>".format(from_name, from_email)
+    msg = EmailMultiAlternatives(subject, content, sender, receiver)
+    msg.attach_alternative(content, 'text/html')
+    msg.send()
