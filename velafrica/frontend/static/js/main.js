@@ -16,6 +16,11 @@ window.getUrlVars = function () {
     return vars;
 }
 
+window.formatDate = function (date) {
+    var slices = date.split("-");
+    return slices[2] + '.' + slices[1] + '.' + slices[0]
+}
+
 
 $(document).ready(function () {
     require('index');

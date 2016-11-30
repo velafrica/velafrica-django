@@ -89,6 +89,21 @@ section.map {
     font-family: $velafrica-font-family;
     .container {
       padding: 15px;
+
+      h4 {
+        color: $velafrica;
+        margin-bottom: 0;
+
+        &.name {
+          margin-top: 10px;
+        }
+      }
+
+      p.temp {
+        padding: 0;
+        color: $velafrica-brown-3;
+        font-weight: bold;
+      }
     }
 
     a.legend {

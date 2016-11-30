@@ -108,7 +108,12 @@ if ($('section.map').length) {
       content += '<div class="container" style="max-width: 100%;">';
 
         content += '<div class="row">';
-          content += '<h4 class="col-md-9" style="color: #E9571B; margin-bottom:0;">' + value.name + '</h4>';
+          content += '<div class="col-md-9">';
+            if(value.temp_start && value.temp_end) {
+              content += '<h4 >' + window.formatDate(value.temp_start) + ' &#8211; ' + window.formatDate(value.temp_end) + '</h4>';
+            }
+            content += '<h4 class="name">' + value.name + '</h4>';
+          content += '</div>'
           if ($('#auth').val() === 'True') {
             content += '<a target="_blank" class="col-md-3 btn btn-primary" href="/admin/collection/dropoff/' + value.id + '/change/">Bearbeiten</a>';
           }
@@ -145,11 +150,6 @@ if ($('section.map').length) {
             content += '<a target="_blank" class="col-md-12 legend" href="' + window.VAM.sbb_ticket_order_url +'?id=' + value.id + '">' + 'SBB-Transportetikette bestellen' + '</a>';
           content += '</div>';
         }
-
-      if(value.temp_start && value.temp_end) {
-        content += '<p class="lead">Temporär von ' + value.temp_start + ' bis ' + value.temp_end + '</p>';
-      }
-
 
       content += '</div></div>';
 
