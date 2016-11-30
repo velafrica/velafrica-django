@@ -12,196 +12,201 @@
 {% block content %}
 
   <main>
-    <div class="container-fluid">
+    <section id="teaser-welcome"
+             style="background: url('{% get_content "first_background_image" "Hintergrundbild des ersten Teasers" %}') center/cover">
 
-      <section id="teaser-welcome" style="background: url('{% get_content "first_background_image" "Hintergrundbild des ersten Teasers" %}') center/cover">
+      <div class="container">
+        <div class="row teaser-vel">
+          <div class="col-md-6 teaser-white-bg">
 
-        <div class="container">
-          <div class="row teaser-vel">
-            <div class="col-md-6 teaser-white-bg">
+            <h1>{% get_content "teaser_heading" "Überschrift auf ersten Teaser" %}</h1>
 
-              <h1>{% get_content "teaser_heading" "Überschrift auf ersten Teaser" %}</h1>
+            <p class="lead">
+              {% get_content "teaser_lead" "Text auf ersten Teaser" %}
+            </p>
 
-              <p class="lead">
-                {% get_content "teaser_lead" "Text auf ersten Teaser" %}
-              </p>
+            <a href="{% url "home:aboutus" %}">{% get_content "teaser_readmore" '"Erfahren Sie Mehr" Link auf ersten Teaser' %}</a>
 
-              <a href="{% url "home:aboutus" %}">{% get_content "teaser_readmore" '"Erfahren Sie Mehr" Link auf ersten Teaser' %}</a>
+          </div>
+        </div>
+      </div>
 
+      <div class="container bicycle-search">
+        <div class="row teaser-vel">
+          <div class="col-md-6 text-center teaser-white-bg">
+
+            <h2>{% get_content "velo_search_heading" "Überschrift Sammelstellensuche" %}</h2>
+            <p class="lead">
+              {% get_content "velo_search_lead" "Text Sammelstellenfsuche" %}
+            </p>
+
+            <div class="bicycle-submit">
+              <form action="{% url "home:map:home" %}" method="get">
+                <input name="search" class="postal-code" type="text"
+                       placeholder="{% get_content "velo_search_placeholder" "Input Platzhalter Sammelstellensuche" %}">
+                <input type="submit" value="{% get_content "velo_search_button" "Button Sammelstellensuche" %}"
+                       class="bicycle-submit-button">
+              </form>
+            </div>
+
+            <a class="collection-event-link"
+               href="{% url 'home:walkthroughs:collection' %}">{% get_content "velo_search_link" '"Sammelanlass organisieren" Link' %}</a>
+
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <section id="bicycle-statistic">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 text-center">
+
+            <h1 class="big-number">{{ velo_count|intcomma|swissint|safe }}</h1>
+
+            <h2>{% get_content "tracking_heading" "Überschrift zum Tracking Teaser" %}</h2>
+
+            <a href="{% url "home:tracking:general" %}">{% get_content "tracking_read_more" "Readmore Link bei Tracking Teaser" %}</a>
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 text-center">
+            <img src="{% static "img/frau_kind_663x664.gif" %}" alt="">
+
+            <h2>{% get_content "tracking_search_heading" "Überschrift Tracking Suche" %}</h2>
+
+            <div class="bicycle-tracking">
+              <form id="tracking-code-form">
+                <input class="tracking-code" type="text"
+                       placeholder="{% get_content "tracking_search_placeholder" "Input Platzhalter Tracking Suche" %}">
+                <input type="submit"
+                       class="tracking-submit-button"
+                       value="{% get_content "tracking_search_button" "Button Tracking Suche" %}">
+              </form>
             </div>
           </div>
         </div>
+      </div>
+    </section>
 
-        <div class="container bicycle-search">
-          <div class="row teaser-vel">
-            <div class="col-md-6 text-center teaser-white-bg">
+    <section id="organize">
+      <div class="container">
+        <div class="row teaser-vel">
+          <div class="col-md-6 col-md-offset-6 teaser-white-bg">
+            <h2>{% get_content "organize_heading" "Überschrift zweiter Teaster" %}</h2>
 
-              <h2>{% get_content "velo_search_heading" "Überschrift Sammelstellensuche" %}</h2>
-              <p class="lead">
-                {% get_content "velo_search_lead" "Text Sammelstellenfsuche" %}
-              </p>
+            <p class="lead">
+              {% get_content "organize_lead" "Text zweiter Teaser" %}
+            </p>
 
-              <div class="bicycle-submit">
-                <form action="{% url "home:map:home" %}" method="get">
-                  <input name="search" class="postal-code" type="text" placeholder="{% get_content "velo_search_placeholder" "Input Platzhalter Sammelstellensuche" %}">
-                  <input type="submit" value="{% get_content "velo_search_button" "Button Sammelstellensuche" %}" class="bicycle-submit-button">
-                </form>
-              </div>
-
-              <a class="collection-event-link" href="{% url 'home:walkthroughs:collection' %}">{% get_content "velo_search_link" '"Sammelanlass organisieren" Link' %}</a>
-
-            </div>
+            <a href="{% url 'home:walkthroughs:collection' %}">{% get_content "organize_link" '"Anleitung ansehen" Link' %}</a>
           </div>
         </div>
+      </div>
+    </section>
 
-      </section>
+    <section id="join-us">
+      <div class="container text-center">
 
-      <section id="bicycle-statistic">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-12 text-center">
+        <h1>{% get_content "join_us_heading" "Überschrift Mitmachen" %}</h1>
+        <div class="row equal">
 
-              <h1 class="big-number">{{ velo_count|intcomma|swissint|safe }}</h1>
-
-              <h2>{% get_content "tracking_heading" "Überschrift zum Tracking Teaser" %}</h2>
-
-              <a href="{% url "home:tracking:general" %}">{% get_content "tracking_read_more" "Readmore Link bei Tracking Teaser" %}</a>
-
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-12 text-center">
-              <img src="{% static "img/frau_kind_663x664.gif" %}" alt="">
-
-              <h2>{% get_content "tracking_search_heading" "Überschrift Tracking Suche" %}</h2>
-
-              <div class="bicycle-tracking">
-                <form id="tracking-code-form">
-                  <input class="tracking-code" type="text" placeholder="{% get_content "tracking_search_placeholder" "Input Platzhalter Tracking Suche" %}">
-                  <input type="submit"
-                     class="tracking-submit-button" value="{% get_content "tracking_search_button" "Button Tracking Suche" %}">
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="organize">
-        <div class="container">
-          <div class="row teaser-vel">
-            <div class="col-md-6 col-md-offset-6 teaser-white-bg">
-              <h2>{% get_content "organize_heading" "Überschrift zweiter Teaster" %}</h2>
-
-              <p class="lead">
-                {% get_content "organize_lead" "Text zweiter Teaser" %}
-              </p>
-
-              <a href="{% url 'home:walkthroughs:collection' %}">{% get_content "organize_link" '"Anleitung ansehen" Link' %}</a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="join-us">
-        <div class="container text-center">
-          <div class="row">
-
-            <h1>{% get_content "join_us_heading" "Überschrift Mitmachen" %}</h1>
-
-            <div class="col-sm-6 col-lg-3">
+          <div class="col-sm-6 col-lg-3">
+            <div class="panel panel-default">
               <a href="{% url 'home:walkthroughs:collection' %}">
-                <div class="panel panel-default">
-                  <div class="panel-body">
-                    <img src="../../static/img/velos_entsorgen.jpg" alt="">
-                  </div>
-                  <span>{% get_content "join_us_panel_collection" "Mitmachen Panel - Velos entsorgen" %}</span>
+                <div class="panel-body">
+                  <div style="background:url({% static "img/velos_entsorgen.jpg" %}) center/cover;"></div>
+                </div>
+                <div class="panel-footer text-center">
+                  {% get_content "join_us_panel_collection" "Mitmachen Panel - Velos entsorgen" %}
                 </div>
               </a>
             </div>
+          </div>
 
-            <div class="col-sm-6 col-lg-3">
+          <div class="col-sm-6 col-lg-3">
+            <div class="panel panel-default">
               <a href="{% url 'home:walkthroughs:school' %}">
-                <div class="panel panel-default">
-                  <div class="panel-body">
-                    <img src="../../static/img/schueler.jpg" alt="">
-                  </div>
-                  <span>{% get_content "join_us_panel_school" "Mitmachen Panel - Schule" %}</span>
+                <div class="panel-body">
+                  <div style="background:url('{% static "img/schueler.jpg"  %}') center/cover;"></div>
+                </div>
+                <div class="panel-footer text-center">
+                  {% get_content "join_us_panel_school" "Mitmachen Panel - Schule" %}
                 </div>
               </a>
             </div>
+          </div>
 
-            <div class="clearfix visible-sm-block"></div>
-
-            <div class="col-sm-6 col-lg-3">
+          <div class="col-sm-6 col-lg-3">
+            <div class="panel panel-default">
               <a href="{% url 'home:walkthroughs:voluntary' %}">
-                <div class="panel panel-default">
-                  <div class="panel-body">
-                    <img src="../../static/img/freiwillige_haende.jpg" alt="">
-                  </div>
-                  <span>{% get_content "join_us_panel_voluntary" "Mitmachen Panel - Freiwillige" %}</span>
+                <div class="panel-body">
+                  <div style="background:url({% static "img/freiwillige_haende.jpg" %}) center/cover;"></div>
+                </div>
+                <div class="panel-footer text-center">
+                  {% get_content "join_us_panel_voluntary" "Mitmachen Panel - Freiwillige" %}
                 </div>
               </a>
             </div>
+          </div>
 
-            <div class="col-sm-6 col-lg-3">
+          <div class="col-sm-6 col-lg-3">
+            <div class="panel panel-default">
               <a href="{% url 'home:walkthroughs:company' %}">
-                <div class="panel panel-default">
-                  <div class="panel-body">
-                    <img src="../../static/img/angebote_firmen.jpg" alt="">
-                  </div>
-                  <span>{% get_content "join_us_panel_company" "Mitmachen Panel - Firmen" %}</span>
+                <div class="panel-body">
+                  <div style="background:url({% static "img/angebote_firmen.jpg" %}) center/cover;"></div>
+                </div>
+                <div class="panel-footer text-center">
+                  {% get_content "join_us_panel_company" "Mitmachen Panel - Firmen" %}
                 </div>
               </a>
             </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="news">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+
+            <h1>{% get_content "news_heading" "Überschrift News" %}</h1>
+            <p>{% get_content "news_lead" "Text News" %}</p>
+            <a href="#">{% get_content "news_link" "Link News" %}</a>
 
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section id="news">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12 text-center">
+    <section class="socialwall">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 text-center">
 
-              <h1>{% get_content "news_heading" "Überschrift News" %}</h1>
+            <h1>{% get_content "socialwall_heading" "Überschrift Socialwall" %}</h1>
+            <p class="lead">
+              {% get_content "socialwall_lead" "Text Socialwall" %}
+            </p>
+            {% include "public_site/partials/socialwall_with_limited_height.html" %}
 
-              <p>{% get_content "news_lead" "Text News" %}</p>
-
-              <a href="#">{% get_content "news_link" "Link News" %}</a>
-
-            </div>
           </div>
         </div>
-      </section>
 
-      <section class="socialwall">
-        <div class="container">
-          <div class="row">
-            <div class="col-xs-12 text-center">
+        <div class="row">
+          <div class="col-xs-12 text-center social-link">
 
-              <h1>{% get_content "socialwall_heading" "Überschrift Socialwall" %}</h1>
+            <a href="{% url 'home:socialwall' %}">{% get_content "socialwall_link" "Link Socialwall" %}</a>
 
-              <p class="lead">
-                {% get_content "socialwall_lead" "Text Socialwall" %}
-              </p>
-
-              {% include "public_site/partials/socialwall_with_limited_height.html" %}
-
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-xs-12 text-center social-link">
-
-              <a href="{% url 'home:socialwall' %}">{% get_content "socialwall_link" "Link Socialwall" %}</a>
-
-            </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-    </div>
   </main>
 
 

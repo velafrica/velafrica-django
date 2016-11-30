@@ -2,11 +2,6 @@
   background-color: white;
   margin-bottom: 0;
 
-  header > div > div {
-    padding-left: 15px;
-    padding-right: 15px;
-  }
-
   header {
     & > div > div > div {
       height: 80px;
@@ -48,7 +43,6 @@
         display: flex;
         align-items: center;
         justify-content: flex-end;
-        margin-right: 15px;
 
         li {
           padding: 1rem;
@@ -61,7 +55,7 @@
             text-decoration: none;
             font-weight: normal;
             transition: .5s ease;
-            
+
             &:hover {
               color: $velafrica-brown-1;
             }

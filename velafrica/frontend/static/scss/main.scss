@@ -36,11 +36,9 @@ body {
   color: $velafrica-brown-1;
   overflow-wrap: break-word;
   word-wrap: break-word;
-
+  padding-top: 80px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  padding-top: 80px;
 
   :focus {
     outline: 5px auto $velafrica;
@@ -56,6 +54,10 @@ body {
 
   .bg-brown-3 {
     background-color: $velafrica-brown-3;
+  }
+
+  .bg-brown-4 {
+    background-color: $velafrica-brown-4;
   }
 
   .vel-margin {
@@ -86,11 +88,6 @@ body {
         }
       }
     }
-  }
-
-  .container-fluid {
-    padding-right: 0;
-    padding-left: 0;
   }
 
   h1 {

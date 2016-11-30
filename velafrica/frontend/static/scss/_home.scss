@@ -1,14 +1,13 @@
 section#teaser-welcome {
-  padding: 30px 0;
+  padding-top: 60px;
 
   .container {
-    padding-top: 30px;
+    padding-bottom: 30px;
   }
 
   .bicycle-search {
 
     .bicycle-submit {
-      //padding: 3rem 0 2rem;
 
       input.postal-code {
         font-size: 18px;
@@ -165,14 +164,78 @@ section#organize {
 
 section#join-us {
   .container {
-    padding-left: 0;
-    padding-right: 0;
+    .equal,
+    .equal > div {
+      display: flex;
+      flex-grow: 1;
+      flex-shrink: 1;
+      flex-basis: auto;
+      flex-wrap: wrap;
+
+      .panel {
+        display: flex;
+        flex-grow: 1;
+
+        a {
+          display: flex;
+          flex-direction: column;
+          flex-grow: 1;
+
+          div {
+            flex-grow: 1;
+          }
+        }
+      }
+    }
+
+    .panel-footer {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+    }
+
+    @media (max-width: 992px) {
+      flex-basis: 49%;
+      justify-content: space-between;
+    }
+    @media (max-width: 500px) {
+      flex-basis: 100%;
+    }
   }
 
-  & > div > div {
-    margin: 0;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
+  .panel-default {
+    border-color: $velafrica-brown-1;
+    border-width: 2px;
+
+    &:hover {
+      border-color: $velafrica;
+    }
+
+    a {
+      color: black;
+      text-decoration: none;
+
+      &:hover {
+        color: $velafrica;
+      }
+      & > .panel-body {
+        text-decoration: none;
+        padding: 0;
+        margin: 0;
+        & > div {
+          min-height: 250px;
+          width: 100%;
+        }
+      }
+      & > .panel-footer {
+        text-decoration: underline;
+        background-color: transparent;
+        border-top: none;
+        padding: 15px 0 24px;
+        align-items: center;
+        min-height: 70px;
+      }
+    }
   }
 
   padding: 120px 0;
