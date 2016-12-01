@@ -1,11 +1,11 @@
 section#sbb-ticket-order {
-  .well {
-    margin-top: 30px;
+  padding-left: 15px;
+  padding-right: 15px;
+  //color: white;
 
-    padding-top: 30px;
-    padding-bottom: 30px;
-    border-color: $velafrica-brown-3-hover;
-    background-color: $velafrica-brown-6;
+  & > div {
+    padding-top: 60px;
+    padding-bottom: 60px;
   }
 
   .checkmark {
