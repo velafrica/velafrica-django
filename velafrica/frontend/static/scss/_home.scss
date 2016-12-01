@@ -172,6 +172,14 @@ section#join-us {
       flex-basis: auto;
       flex-wrap: wrap;
 
+      @media (max-width: 992px) {
+        flex-basis: 48%;
+        justify-content: space-between;
+      }
+      @media (max-width: 560px) {
+        flex-basis: 100%;
+      }
+
       .panel {
         display: flex;
         flex-grow: 1;
@@ -192,14 +200,6 @@ section#join-us {
       display: flex;
       justify-content: center;
       align-items: flex-end;
-    }
-
-    @media (max-width: 992px) {
-      flex-basis: 49%;
-      justify-content: space-between;
-    }
-    @media (max-width: 500px) {
-      flex-basis: 100%;
     }
   }
 
@@ -222,8 +222,9 @@ section#join-us {
         text-decoration: none;
         padding: 0;
         margin: 0;
-        & > div {
-          min-height: 250px;
+
+        div {
+          height: 250px;
           width: 100%;
         }
       }
