@@ -1,19 +1,19 @@
 section#donation {
-  &>.md-header {
+  & > .md-header {
     background-color: $velafrica-brown-4;
     h1, h3 {
-      color: $velafrica-white-1;
+      color: $velafrica-brown-1;
     }
     h1 {
       padding-top: 60px;
     }
     p {
-      color: $velafrica-white-1;
+      color: $velafrica-brown-1;
       padding-bottom: 60px;
       letter-spacing: 0.3px;
     }
   }
-  &>.md-donate {
+  & > .md-donate {
     padding-top: 90px;
     h2 {
       color: $velafrica-brown-1;
@@ -81,7 +81,7 @@ section#donation {
             }
           }
         }
-        
+
       }
     }
     .md-paymentoptions {
@@ -201,12 +201,12 @@ section#donation {
               }
 
               textarea {
-                  border: 1px solid $velafrica-brown-3;
-                  border-radius: 3px;
-                  font-size: 16px;
-                  width: 100%;
-                  padding: 15px 20px;
-                  height: 100px;
+                border: 1px solid $velafrica-brown-3;
+                border-radius: 3px;
+                font-size: 16px;
+                width: 100%;
+                padding: 15px 20px;
+                height: 100px;
               }
 
               &.donation_amount_label {
