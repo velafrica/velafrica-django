@@ -18,7 +18,8 @@ def get_dropoffs(request):
     q = Q(temp=True) & Q(temp_end__lte=datetime.now().date().strftime('%Y-%m-%d'))
     all = Dropoff.objects.filter(active=True).exclude(q)
     coll_drop = list()
-    for collectionevent in CollectionEvent.objects.exclude(date_end__lt=datetime.now().date().strftime('%Y-%m-%d')):
+    for collectionevent in CollectionEvent.objects.exclude(date_end__lt=datetime.now().date().strftime('%Y-%m-%d'))\
+            .exclude(event__address=None):
         new_drop = Dropoff(
             name=collectionevent.event.name,
             sbb=False,
