@@ -34,7 +34,6 @@ if($('#tracking-navi').length) {
         var currLink = $(this);
         var refElement = $(currLink.attr("href"));
         var heightAnchor = 140;
-        console.log(refElement.position().top, scrollPos, refElement.height());
         if (refElement.position().top - heightAnchor <= scrollPos && refElement.position().top + refElement.height() > scrollPos + heightAnchor) {
           currLink.addClass("active");
         }
