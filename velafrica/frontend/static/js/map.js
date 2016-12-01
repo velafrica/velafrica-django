@@ -115,7 +115,13 @@ if ($('section.map').length) {
             content += '<h4 class="name">' + value.name + '</h4>';
           content += '</div>'
           if ($('#auth').val() === 'True') {
-            content += '<a target="_blank" class="col-md-3 btn btn-primary" href="/admin/collection/dropoff/' + value.id + '/change/">Bearbeiten</a>';
+            var admin_url = '/admin/collection/';
+            if (value.id < 0) {
+              admin_url += 'collectionevent/' + (-1 * value.id) + '/change/';
+            } else {
+              admin_url += 'dropoff/' + value.id + '/change/';
+            }
+            content += '<a target="_blank" class="col-md-3 btn btn-primary" href="' + admin_url + '">Bearbeiten</a>';
           }
         content += '</div>';
 
