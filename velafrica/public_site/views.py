@@ -207,6 +207,8 @@ def render_personal_tracking(request, tracking_no=''):
     template_name = 'public_site/my-tracking.html'
     template_context = {}
 
+    fb_app_id = getattr(settings, 'FACEBOOK_APP_ID', '')
+
     try:
         tracking = Tracking.objects.get(tracking_no=tracking_no.upper())
         tracking_events = TrackingEvent.objects.filter(tracking=tracking.id).order_by('-datetime')
@@ -214,7 +216,8 @@ def render_personal_tracking(request, tracking_no=''):
         template_context.update({
             'tracking': tracking,
             'tracking_events': tracking_events,
-            'full_path': request.build_absolute_uri()
+            'full_path': request.build_absolute_uri(),
+            'fb_app_id': fb_app_id
         })
     except Tracking.DoesNotExist:
         # Ticket Order
