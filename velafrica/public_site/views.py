@@ -203,14 +203,9 @@ def render_about_us_template(request):
     return render_to_response(template_name, template_context, context_instance=RequestContext(request))
 
 
-def render_personal_tracking(request):
+def render_personal_tracking(request, tracking_no=''):
     template_name = 'public_site/my-tracking.html'
     template_context = {}
-
-    if 'tracking_no' in request.GET:
-        tracking_no = request.GET['tracking_no']
-    else:
-        tracking_no = ''
 
     try:
         tracking = Tracking.objects.get(tracking_no=tracking_no.upper())
@@ -218,9 +213,11 @@ def render_personal_tracking(request):
 
         template_context.update({
             'tracking': tracking,
-            'tracking_events': tracking_events
+            'tracking_events': tracking_events,
+            'full_path': request.build_absolute_uri()
         })
     except Tracking.DoesNotExist:
+        # Ticket Order
         template_context.update({
             'tracking': False
         })
