@@ -8,6 +8,15 @@
   {% trans "Wo ist mein Velo?" %}
 {% endblock %}
 
+{% block head_meta %}
+  <meta property="fb:app_id" content="{{ fb_app_id }}" />
+  <meta property="og:url" content="{{ full_path }}" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Velafrica Velo Tracking" />
+  <meta property="og:description" content="Ich habe mein altes Velo gespendet. Jetzt ist es auf dem Weg nach Afrika." />
+  <meta property="og:image" content="http://files.velafrica.ch.s3.amazonaws.com/tracking/eventtypes/IMG_3425.JPG" />
+{% endblock %}
+
 {% block content %}
 
   <section id="tracking-code">
