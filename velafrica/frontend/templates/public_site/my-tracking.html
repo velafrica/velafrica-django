@@ -31,13 +31,13 @@
         <div class="col-md-2 text-center">
 
           <div class="tracking-social">
-            <a href="http://www.facebook.com/sharer/sharer.php?s=100&p[url]=http://www.example.com&p[images][0]=&p[title]=Title%20Goes%20Here&p[summary]=Description%20goes%20here!"
-               target="_blank"
+              <a href="https://www.facebook.com/dialog/share?app_id={{ fb_app_id }}&display=popup&href={{ full_path|urlencode }}"
+              target="_blank"
                onclick="window.open(this.href,'targetWindow','toolbar=no,location=0,status=no,menubar=no,scrollbars=yes,resizable=yes,width=600,height=250'); return false">
               <img src="{% static "img/facebook_orange.png" %}" alt="">
             </a>
 
-            <a href="https://twitter.com/intent/tweet?text=hello+world&via=velafrica" target="_blank"
+            <a href="https://twitter.com/intent/tweet?text=Ich+habe+mein+altes+Velo+gespendet.+Jetzt+ist+es+auf+dem+Weg+nach+Afrika.&via=velafrica&url={{ full_path|urlencode }}" target="_blank"
                onclick="window.open(this.href,'targetWindow','toolbar=no,location=0,status=no,menubar=no,scrollbars=yes,resizable=yes,width=600,height=250'); return false"><img
                     src="{% static "img/twitter_orange.png" %}" alt="">
             </a>
