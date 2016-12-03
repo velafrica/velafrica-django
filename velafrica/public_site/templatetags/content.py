@@ -12,6 +12,8 @@ def get_content(context, key, description=''):
     path = '_index_'
     if context.request.path != '/':
         path = context.request.path.replace('/', '_').replace('-', '_')
+        if not path.endswith('_'):
+            path = path[0:len(path)-len(path.split('_')[-1])]
 
     language = context.request.LANGUAGE_CODE
 
