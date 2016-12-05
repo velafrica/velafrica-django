@@ -8,7 +8,6 @@ section.map {
   }
 
   .searchfield {
-    font-family: $velafrica-font-family;
     background: rgba(227,199,159,0.70);
     border-radius: 3px;
     position: absolute;
@@ -28,7 +27,6 @@ section.map {
       margin-right: 15px;
       background: #FFFFFF;
 
-      font-family: EkMukta-Regular;
       font-size: 16px;
       color: #E34A11;
       letter-spacing: 0.22px;
@@ -41,7 +39,6 @@ section.map {
       width: 100px;
       background: #B0936E;
 
-      font-family: EkMukta-Bold;
       font-size: 20px;
       color: #FFFFFF;
       letter-spacing: 0.22px;
@@ -50,12 +47,11 @@ section.map {
   }
 
   .map-legend {
-    font-family: $velafrica-font-family;
     position: absolute;
     top: 0;
     left: calc(50% - 150px);
     margin: 30px;
-    padding: 10px 12px;
+    padding: 12px 12px 10px 12px;
 
     height: 50px;
     border-radius: 3px;
@@ -67,7 +63,6 @@ section.map {
       padding: 0;
 
       li {
-        font-family: EkMukta-Regular;
         font-size: 12px;
         color: #30170F;
         letter-spacing: 0.25px;
