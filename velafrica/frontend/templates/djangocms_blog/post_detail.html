@@ -1,11 +1,28 @@
 {% extends "djangocms_blog/base.html" %}
 {% load i18n thumbnail cms_tags %}
 {% load md5 %}
+{% load static %}
+{% load social_media %}
+{% load s3 %}
 
 {% block meta_description %}{{ post.meta_description }}{% endblock meta_description %}
 {% block meta_keywords %}{{ post.meta_keywords }}{% endblock meta_keywords %}
 {% block canonical_url %}<link rel="canonical" href="{{ meta.url }}"/>{% endblock canonical_url %}
 {% block title %}{{ post.get_title }}{% endblock %}
+{% block head_meta %}
+  <meta property="fb:app_id" content="{% facebook_app_id %}" />
+  <meta property="og:url" content="{{ request.build_absolute_uri }}" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="{{ post.get_title }}" />
+  <meta property="og:description" content="{{ post.abstract|striptags|safe }}" />
+  {% if post.main_image %}
+    {% thumbnail post.main_image 200x200 crop=post.full_image_options.crop upscale=post.full_image_options.upscale subject_location=post.main_image.subject_location  as fb_thumb %}
+    <meta property="og:image" content="{{ fb_thumb.url }}" />
+  {% else %}
+    <meta property="og:image" content="http://files.velafrica.ch.s3.amazonaws.com/tracking/eventtypes/IMG_3425.JPG" />
+  {% endif %}
+
+{% endblock %}
 
 {% block content_blog %}{% spaceless %}
 <article id="post-{{ post.slug }}" class="post-item post-detail">
@@ -17,6 +34,9 @@
             {% block blog_meta %}
                 {% include "djangocms_blog/includes/blog_meta.html" %}
             {% endblock %}
+          </div>
+          <div class="sharing-buttons">
+            {% sharing_buttons %}
           </div>
         </div>
     </header>

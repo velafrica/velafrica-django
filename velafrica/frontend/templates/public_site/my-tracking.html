@@ -3,14 +3,15 @@
 {% load s3 %}
 {% load static %}
 {% load content %}
+{% load social_media %}
 
 {% block page_title %}
   {% trans "Wo ist mein Velo?" %}
 {% endblock %}
 
 {% block head_meta %}
-  <meta property="fb:app_id" content="{{ fb_app_id }}" />
-  <meta property="og:url" content="{{ full_path }}" />
+  <meta property="fb:app_id" content="{% facebook_app_id %}" />
+  <meta property="og:url" content="{{ request.build_absolute_uri }}" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Velafrica Velo Tracking" />
   <meta property="og:description" content="Ich habe mein altes Velo gespendet. Jetzt ist es auf dem Weg nach Afrika." />
@@ -31,16 +32,7 @@
         <div class="col-md-2 text-center">
 
           <div class="tracking-social">
-              <a href="https://www.facebook.com/dialog/share?app_id={{ fb_app_id }}&display=popup&href={{ full_path|urlencode }}"
-              target="_blank"
-               onclick="window.open(this.href,'targetWindow','toolbar=no,location=0,status=no,menubar=no,scrollbars=yes,resizable=yes,width=600,height=250'); return false">
-              <img src="{% static "img/facebook_orange.png" %}" alt="">
-            </a>
-
-            <a href="https://twitter.com/intent/tweet?text=Ich+habe+mein+altes+Velo+gespendet.+Jetzt+ist+es+auf+dem+Weg+nach+Afrika.&via=velafrica&url={{ full_path|urlencode }}" target="_blank"
-               onclick="window.open(this.href,'targetWindow','toolbar=no,location=0,status=no,menubar=no,scrollbars=yes,resizable=yes,width=600,height=250'); return false"><img
-                    src="{% static "img/twitter_orange.png" %}" alt="">
-            </a>
+            {% sharing_buttons "Ich habe mein altes Velo gespendet. Jetzt ist es auf dem Weg nach Afrika." %}
           </div>
 
         </div>

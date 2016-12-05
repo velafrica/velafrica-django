@@ -216,8 +216,6 @@ def render_personal_tracking(request, tracking_no=''):
         template_context.update({
             'tracking': tracking,
             'tracking_events': tracking_events,
-            'full_path': request.build_absolute_uri(),
-            'fb_app_id': fb_app_id
         })
     except Tracking.DoesNotExist:
         # Ticket Order
