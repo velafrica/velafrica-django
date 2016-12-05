@@ -115,7 +115,7 @@ heroku local:run python manage.py migrate
 ### 6. Compile the translation files
 
 ```bash
-python manage.py compilemessages
+heroku local:run python manage.py compilemessages
 ```
 
 ### 7. Load the fixture data

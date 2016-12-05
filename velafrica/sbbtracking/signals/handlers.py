@@ -4,6 +4,7 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.core.urlresolvers import reverse
 
 from velafrica.sbbtracking.models import TrackingEvent, EmailLog
 
@@ -38,7 +39,7 @@ def send_email(sender, instance, created, **kwargs):
 
             # prepare email fields
             subject = u"Velafrica Velo Tracking {} - {}".format(
-                instance.tracking.tracking_no, 
+                instance.tracking.tracking_no,
                 instance.event_type.name
             )
             if instance.event_type.email_text:
@@ -62,8 +63,9 @@ def send_email(sender, instance, created, **kwargs):
                 if partner.get_website():
                     msg_body += partner.get_website()
 
-            msg_footer = u"Verfolgen Sie Ihr Velo online, auf http://tracking.velafrica.ch/tracking/{}\n\nDiese Email wurde automatisch generiert. Bitte antworten Sie nicht darauf.".format(
-                instance.tracking.tracking_no
+            msg_footer = u"Verfolgen Sie Ihr Velo online, auf {}{}\n\nDiese Email wurde automatisch generiert. Bitte antworten Sie nicht darauf.".format(
+                getattr(settings, 'APP_URL', 'http://tracking.velafrica.ch'),
+                reverse('home:tracking:personal', kwargs={'tracking_no' : instance.tracking.tracking_no})
             )
             msg = u"{}\n\n{}".format(
                 msg_body,
