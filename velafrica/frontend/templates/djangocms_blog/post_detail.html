@@ -18,8 +18,6 @@
   {% if post.main_image %}
     {% thumbnail post.main_image 200x200 crop=post.full_image_options.crop upscale=post.full_image_options.upscale subject_location=post.main_image.subject_location  as fb_thumb %}
     <meta property="og:image" content="{{ fb_thumb.url }}" />
-  {% else %}
-    <meta property="og:image" content="http://files.velafrica.ch.s3.amazonaws.com/tracking/eventtypes/IMG_3425.JPG" />
   {% endif %}
 
 {% endblock %}
