@@ -110,7 +110,11 @@ if ($('section.map').length) {
         content += '<div class="row">';
           content += '<div class="col-md-9">';
             if(value.temp_start && value.temp_end) {
-              content += '<h4 >' + window.formatDate(value.temp_start) + ' &#8211; ' + window.formatDate(value.temp_end) + '</h4>';
+              if (value.temp_start == value.temp_end) {
+                content += '<h4 >' + window.formatDate(value.temp_start) + '</h4>';
+              } else {
+                content += '<h4 >' + window.formatDate(value.temp_start) + ' &#8211; ' + window.formatDate(value.temp_end) + '</h4>';
+              }
             }
             content += '<h4 class="name">' + value.name + '</h4>';
           content += '</div>'
