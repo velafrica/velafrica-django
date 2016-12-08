@@ -292,6 +292,6 @@ def render_partners(request):
     return render_to_response(template_name, template_context, context_instance=RequestContext(request))
 
 
-def render_impressum(request):
+def render_impressum_template(request):
     template_name = 'public_site/impressum.html'
     return render_to_response(template_name, {}, context_instance=RequestContext(request))

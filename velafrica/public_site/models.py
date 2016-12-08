@@ -192,12 +192,3 @@ class Partner(models.Model):
     class Meta:
         verbose_name = 'Partner'
         verbose_name_plural = 'Partner'
-
-
-class Impressum(models.Model):
-    def __unicode__(self):
-        return u"{}".format(self.name)
-
-    class Meta:
-        verbose_name = 'Impressum'
-        verbose_name_plural = 'Impressum'
