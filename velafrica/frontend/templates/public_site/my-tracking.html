@@ -10,12 +10,12 @@
 {% endblock %}
 
 {% block head_meta %}
-  <meta property="fb:app_id" content="{% facebook_app_id %}" />
-  <meta property="og:url" content="{{ request.build_absolute_uri }}" />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Velafrica Velo Tracking" />
-  <meta property="og:description" content="Ich habe mein altes Velo gespendet. Jetzt ist es auf dem Weg nach Afrika." />
-  <meta property="og:image" content="http://files.velafrica.ch.s3.amazonaws.com/tracking/eventtypes/IMG_3425.JPG" />
+  <meta property="fb:app_id" content="{% facebook_app_id %}"/>
+  <meta property="og:url" content="{{ request.build_absolute_uri }}"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="Velafrica Velo Tracking"/>
+  <meta property="og:description" content="Ich habe mein altes Velo gespendet. Jetzt ist es auf dem Weg nach Afrika."/>
+  <meta property="og:image" content="http://files.velafrica.ch.s3.amazonaws.com/tracking/eventtypes/IMG_3425.JPG"/>
 {% endblock %}
 
 {% block content %}
@@ -27,13 +27,6 @@
 
           <h2>{% trans "Tracking-Nr." %} {{ tracking.tracking_no }}</h2>
           <h1>{% get_content "heading" "Überschrift der persönlichen Tracking Seite" %}</h1>
-
-        </div>
-        <div class="col-md-2 text-center">
-
-          <div class="tracking-social">
-            {% sharing_buttons "Ich habe mein altes Velo gespendet. Jetzt ist es auf dem Weg nach Afrika." %}
-          </div>
 
         </div>
       </div>
@@ -59,11 +52,22 @@
           <div class="{% if forloop.counter == 1 %} col-xs-12 {% else %}col-md-8 col-md-offset-2 {% endif %}">
             <div class="panel panel-default">
               <div class="panel-heading">
-                <h2 class="panel-title text-center">{{ event.event_type.name }}</h2>
+
+                <h2 class="panel-title text-center">
+                  {{ event.event_type.name }}
+                  {% if forloop.counter == 1 %}
+                    <social class="align-center text-center">
+                      {% sharing_buttons "Ich habe mein altes Velo gespendet. Jetzt ist es auf dem Weg nach Afrika." %}
+                    </social>
+                  {% endif %}
+                </h2>
+
               </div>
               <div class="panel-body row">
+
                 <p class="{% if forloop.counter == 1 %} col-md-8 col-md-offset-2 {% else %}col-md-12{% endif %}">{{ event.event_type.description }}</p>
                 <img src="{% s3 event.event_type.image %}" alt="">
+
               </div>
             </div>
           </div>
