@@ -96,7 +96,8 @@ class WalkthroughRequest(models.Model):
     address = models.CharField(max_length=255, verbose_name='Adresse', blank=True)
     zip = models.CharField(max_length=255, verbose_name="Postleitzahl", blank=True)
     address_note = models.TextField(verbose_name="Standortbeschreibung", blank=True)
-    expected_velos = models.IntegerField(verbose_name="Erwartete Menge gesammelter Velos", choices=EXPECTED_VELOS, default=1)
+    expected_velos = models.IntegerField(verbose_name="Erwartete Menge gesammelter Velos", choices=EXPECTED_VELOS,
+                                         default=1)
     can_store = models.BooleanField(default=False, verbose_name="Kann Velos vor Ort zwischenlagern")
     can_deliver = models.BooleanField(default=False, verbose_name="Kann Abtransport zu Partner übernehmen")
     velafrica_pickup = models.BooleanField(default=False, verbose_name="Abtransport durch Velafrica")
@@ -106,7 +107,6 @@ class WalkthroughRequest(models.Model):
     responsible_email = models.CharField(verbose_name="E-Mail", max_length=255, blank=True)
     supporter_count = models.IntegerField(verbose_name="Anzahl Helfer", choices=SUPPORTERS_COUNT, default=1)
     supporter_note = models.TextField(verbose_name="Bemerkung", blank=True)
-
 
     class Meta:
         verbose_name = 'Sammelanlassanfrage'
@@ -192,3 +192,12 @@ class Partner(models.Model):
     class Meta:
         verbose_name = 'Partner'
         verbose_name_plural = 'Partner'
+
+
+class Impressum(models.Model):
+    def __unicode__(self):
+        return u"{}".format(self.name)
+
+    class Meta:
+        verbose_name = 'Impressum'
+        verbose_name_plural = 'Impressum'

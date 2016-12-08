@@ -13,6 +13,7 @@ from velafrica.sbbtracking.models import Tracking, TrackingEvent, TrackingEventT
 from .forms import InvoiceForm, SbbTicketOrderForm, WalkthroughRequestForm
 from .models import DonationAmount, WalkthroughRequest, TeamMember, References, Partner
 
+
 def render_template(request):
     template_name = '/index'
     template_context = {}
@@ -22,7 +23,8 @@ def render_template(request):
     if request.path == '/':
         template_context['velo_count'] = Tracking.get_tracked_velo_count()
 
-    return render_to_response('public_site' + template_name + '.html', template_context, context_instance=RequestContext(request))
+    return render_to_response('public_site' + template_name + '.html', template_context,
+                              context_instance=RequestContext(request))
 
 
 def render_map_template(request):
@@ -55,7 +57,7 @@ def render_donation_template(request):
         "item_name": "Velafrica Donation",
         "invoice": "unique-invoice-id",
         "notify_url": request.build_absolute_uri(reverse('paypal-ipn')),
-        "return_url":  request.build_absolute_uri(reverse('home:donation:thank_you_paypal')),
+        "return_url": request.build_absolute_uri(reverse('home:donation:thank_you_paypal')),
         "cancel_return": request.build_absolute_uri(),
         "rm": "1",
         "custom": "Upgrade all users!",  # Custom command to correlate to some function later (optional)
@@ -129,7 +131,7 @@ def render_walkthrough_template(request):
     }
 
     template_context.update({
-         'partial': partials.get(resolve(request.path).url_name, 'nothing')
+        'partial': partials.get(resolve(request.path).url_name, 'nothing')
     })
 
     if request.method == 'POST':
@@ -139,7 +141,8 @@ def render_walkthrough_template(request):
 
             email_context = {
                 'data': walkthrough,
-                'url': request.build_absolute_uri(reverse('admin:public_site_walkthroughrequest_change', args=[walkthrough.pk])),
+                'url': request.build_absolute_uri(
+                    reverse('admin:public_site_walkthroughrequest_change', args=[walkthrough.pk])),
             }
 
             subject = 'Neue Sammelanlassanfrage'
@@ -164,7 +167,8 @@ def order_invoice(request):
                 'comment': form.cleaned_data['comment'],
                 'number_invoices': form.cleaned_data['number_invoices'],
                 'donation_amount': form.cleaned_data['donation_amount'],
-                'url': request.build_absolute_uri(reverse('admin:public_site_invoiceorder_change', args=[invoiceorder.pk])),
+                'url': request.build_absolute_uri(
+                    reverse('admin:public_site_invoiceorder_change', args=[invoiceorder.pk])),
             }
 
             subject = 'Neue ESR Bestellung'
@@ -286,3 +290,8 @@ def render_partners(request):
     }
 
     return render_to_response(template_name, template_context, context_instance=RequestContext(request))
+
+
+def render_impressum(request):
+    template_name = 'public_site/impressum.html'
+    return render_to_response(template_name, {}, context_instance=RequestContext(request))
