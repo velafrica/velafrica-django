@@ -15,5 +15,5 @@ if ($('.blog-list').length) {
 
     $posts.css('height', highestPostHeight + 74);
   }
-  sizePosts();
+  // sizePosts();
 }
