@@ -37,22 +37,29 @@ def send_email(sender, instance, created, **kwargs):
         # check if there is an email on the tracking
         if instance.tracking.email:
 
+            # default salutation for trackings without any name
+            salutation = u"Liebe Velospenderin, lieber Velospender"
+
+            # personal salutation only if first name is set
+            if instance.tracking.first_name:
+                salutation = u"Hallo {}".format(instance.tracking.first_name)
+                if instance.tracking.last_name:
+                    salutation += u" {}".format(instance.tracking.last_name)
+
             # prepare email fields
             subject = u"Velafrica Velo Tracking {} - {}".format(
                 instance.tracking.tracking_no,
                 instance.event_type.name
             )
             if instance.event_type.email_text:
-                msg_body = u"Hallo {} {},\n\n{}".format(
-                    instance.tracking.first_name,
-                    instance.tracking.last_name,
+                msg_body = u"{},\n\n{}".format(
+                    salutation,
                     instance.event_type.email_text
                 )
 
             else:
-                msg_body = u"Hallo {} {},\n\nNeuer Velo Tracking Event: {}".format(
-                    instance.tracking.first_name,
-                    instance.tracking.last_name,
+                msg_body = u"{},\n\nNeuer Velo Tracking Event: {}".format(
+                    salutation,
                     instance.event_type.name
                 )
 
