@@ -133,7 +133,9 @@ div.blog {
       }
 
       article {
+        margin-bottom: 30px;
         div.post_container {
+          border-radius: $vel-border-radius;
           background: $velafrica-brown-5;
           padding-top: 30px;
           padding-bottom: 40px;
@@ -147,6 +149,12 @@ div.blog {
             color: $velafrica-brown-3;
             display: block;
             padding-bottom: 20px;
+          }
+
+          .blog-visual {
+            img {
+              //width: 50%;
+            }
           }
 
           h3 a {

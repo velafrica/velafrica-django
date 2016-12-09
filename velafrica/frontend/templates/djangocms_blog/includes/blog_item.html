@@ -1,20 +1,26 @@
 {% load i18n thumbnail cms_tags %}
 {% load md5 %}
 
-<article id="post-{{ post.slug }}" class="post-item col-md-6">
+<article id="post-{{ post.slug }}" class="post-item col-xs-12">
   <div class="post_container">
     <span class="post_date">
       {{ post.date_published|date:"DATE_FORMAT" }}
     </span>
     <h3><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
     {% if image and post.main_image %}
-    <div class="blog-visual">
-        {% thumbnail post.main_image post.thumbnail_options.size crop=post.thumbnail_options.crop upscale=post.thumbnail_options.upscale subject_location=post.main_image.subject_location as thumb %}
-        <img src="{{ thumb.url }}" alt="{{ post.main_image.default_alt_text }}" width="{{ thumb.width }}" height="{{ thumb.height }}" />
-    </div>
+      <div class="blog-visual">
+        {% thumbnail post.main_image 680x350 crop=post.thumbnail_options.crop upscale=post.thumbnail_options.upscale subject_location=post.main_image.subject_location as thumb %}
+        <img src="{{ thumb.url }}" alt="{{ post.main_image.default_alt_text }}" width="{{ thumb.width }}"
+             height="{{ thumb.height }}"/>
+      </div>
+      <div class="blog-abstract">
+        <p>
+          {{ post.abstract }}
+        </p>
+      </div>
     {% endif %}
     <footer class="read-more">
-        <a href="{{ post.get_absolute_url }}">{% trans "read more" %} &raquo;</a>
+      <a href="{{ post.get_absolute_url }}">{% trans "read more" %} &raquo;</a>
     </footer>
   </div>
 </article>
