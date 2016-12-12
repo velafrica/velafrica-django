@@ -197,8 +197,8 @@ class Event(models.Model):
     name = models.CharField(max_length=255, verbose_name="Name")
     category = models.ForeignKey('collection.EventCategory', related_name='pub_event_category', on_delete=models.SET_NULL, verbose_name="Kategorie", null=True)
     address = models.ForeignKey('organisation.Address', related_name='pub_event_address', on_delete=models.SET_NULL, verbose_name="Adresse", null=True)
-    description = models.TextField(verbose_name="Beschreibung")
-    organizer = models.CharField(max_length=255, verbose_name="Veranstalter")
+    description = models.TextField(verbose_name="Beschreibung", blank=True)
+    organizer = models.CharField(max_length=255, verbose_name="Veranstalter", blank=True)
     active = models.BooleanField(default=True, verbose_name="Aktiv")
 
     def __unicode__(self):
