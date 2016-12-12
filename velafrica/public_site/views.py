@@ -12,7 +12,7 @@ from velafrica.core.utils import send_mail
 from velafrica.collection.models import Dropoff
 from velafrica.sbbtracking.models import Tracking, TrackingEvent, TrackingEventType
 from .forms import InvoiceForm, SbbTicketOrderForm, WalkthroughRequestForm
-from .models import DonationAmount, WalkthroughRequest, TeamMember, References, Partner
+from .models import DonationAmount, WalkthroughRequest, TeamMember, References, Partner, Event, EventDateTime
 
 
 def render_template(request):
@@ -298,3 +298,27 @@ def render_partners(request):
 def render_impressum_template(request):
     template_name = 'public_site/impressum.html'
     return render_to_response(template_name, {}, context_instance=RequestContext(request))
+
+
+def render_agenda(request):
+    template_name = 'public_site/agenda.html'
+    template_context = {}
+
+    events = Event.objects.filter(active=True).all()
+
+    template_context['events'] = events
+    return render_to_response(template_name, template_context, context_instance=RequestContext(request))
+
+
+def render_specific_agenda(request, event_id):
+    template_name = 'public_site/agenda_detail.html'
+    template_context = {}
+
+    event = Event.objects.filter(pk=event_id).first()
+
+    if not event:
+        return redirect(reverse('home:agenda:index'))
+
+    template_context['event'] = event
+
+    return render_to_response(template_name, template_context, context_instance=RequestContext(request))
