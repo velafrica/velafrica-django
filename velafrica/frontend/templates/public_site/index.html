@@ -4,6 +4,10 @@
 {% load content %}
 {% load humanize %}
 {% load swissint %}
+{% load thumbnail cms_tags %}
+{% load md5 %}
+{% load social_media %}
+{% load s3 %}
 
 {% block page_title %}
   {% trans "Velafrica" %}
@@ -130,7 +134,7 @@
             <div class="panel panel-default">
               <a href="{% url 'home:walkthroughs:school' %}">
                 <div class="panel-body">
-                  <div style="background:url('{% static "img/schueler.jpg"  %}') center/cover;"></div>
+                  <div style="background:url('{% static "img/schueler.jpg" %}') center/cover;"></div>
                 </div>
                 <div class="panel-footer text-center">
                   {% get_content "join_us_panel_school" "Mitmachen Panel - Schule" %}
@@ -172,12 +176,42 @@
     <section id="news">
       <div class="container">
         <div class="row">
-          <div class="col-md-12 text-center">
+          <div class="col-md-8 col-md-offset-2">
 
-            <h1>{% get_content "news_heading" "Überschrift News" %}</h1>
-            <p>{% get_content "news_lead" "Text News" %}</p>
-            <a href="#">{% get_content "news_link" "Link News" %}</a>
+            <h1 class="text-center">{% get_content "news_heading" "Überschrift News" %}</h1>
+            <p class="text-center">{% get_content "news_lead" "Text News" %}</p>
 
+          </div>
+          <div class="col-md-8 col-md-offset-2">
+            <article id="post-{{ blog_post.slug }}">
+              <div class="post_container">
+                <span class="post_date">
+                  {{ blog_post.date_published|date:"DATE_FORMAT" }}
+                </span>
+                <h2>{{ blog_post.title }}</h2>
+
+                {% if blog_post.main_image %}
+                  <div class="blog-visual">
+                    {% thumbnail blog_post.main_image 1360x500 crop=blog_post.thumbnail_options.crop upscale=blog_post.thumbnail_options.upscale subject_location=blog_post.main_image.subject_location as thumb %}
+                    <img src="{{ thumb.url }}" alt="{{ blog_post.main_image.default_alt_text }}"
+                         width="100%"/>
+                  </div>
+                  <div class="blog-abstract">
+                    <p>
+                      {{ blog_post.abstract }}
+                    </p>
+                  </div>
+                {% endif %}
+                <footer class="read-more">
+                  <a href="{{ blog_post.get_absolute_url }}">{% trans "read more" %} &raquo;</a>
+                </footer>
+              </div>
+            </article>
+            <div class="blog_url">
+
+              <a class="text-center" href="/pages/blog/">{% get_content "news_link" "Link News" %}</a>
+
+            </div>
           </div>
         </div>
       </div>

@@ -279,4 +279,16 @@ section#news {
   h1 {
     margin-bottom: 60px;
   }
+
+  .post_container {
+    margin-top: 60px;
+    background-color: $velafrica-brown-5;
+    padding: 30px;
+    border-radius: $vel-border-radius;
+  }
+
+  .blog_url {
+    text-align: center;
+    margin-top: 60px;
+  }
 }
