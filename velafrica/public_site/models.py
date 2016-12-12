@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from django.db import models
-from velafrica.organisation.models import Address
 
 
 class DonationAmount(models.Model):
@@ -192,3 +191,30 @@ class Partner(models.Model):
     class Meta:
         verbose_name = 'Partner'
         verbose_name_plural = 'Partner'
+
+
+class Event(models.Model):
+    name = models.CharField(max_length=255, verbose_name="Name")
+    category = models.ForeignKey('collection.EventCategory', related_name='pub_event_category', on_delete=models.SET_NULL, verbose_name="Kategorie", null=True)
+    address = models.ForeignKey('organisation.Address', related_name='pub_event_address', on_delete=models.SET_NULL, verbose_name="Adresse", null=True)
+    description = models.TextField(verbose_name="Beschreibung")
+    organizer = models.CharField(max_length=255, verbose_name="Veranstalter")
+    active = models.BooleanField(default=True, verbose_name="Aktiv")
+
+    def __unicode__(self):
+        return u"{}".format(self.name)
+
+    class Meta:
+        verbose_name = 'Event'
+        verbose_name_plural = 'Events'
+
+
+class EventDateTime(models.Model):
+    event = models.ForeignKey(Event, related_name="datetimes")
+    date = models.DateField(verbose_name="Datum")
+    time_start = models.CharField(max_length=255, verbose_name="Von")
+    time_end = models.CharField(max_length=255, verbose_name="Bis")
+
+    class Meta:
+        ordering = ['date']
+        verbose_name = 'Datum/Uhrzeit'
