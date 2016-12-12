@@ -2,7 +2,7 @@
 from django.contrib import admin
 from django.utils.html import format_html
 from .models import DonationAmount, InvoiceOrder, SbbTicketOrder, WalkthroughRequest, \
-    Content, TeamMember, References, ContactRequest, Partner
+    Content, TeamMember, References, ContactRequest, Partner, Event, EventDateTime
 
 
 class PartnerAdmin(admin.ModelAdmin):
@@ -51,8 +51,18 @@ class ReferenceAdmin(admin.ModelAdmin):
     search_fields = ['name']
 
 
+class EventDateTimeInline(admin.TabularInline):
+    model = EventDateTime
+    extra = 1
+
+
+class EventAdmin(admin.ModelAdmin):
+    inlines = [EventDateTimeInline]
+
+
 admin.site.register(Content, ContentAdmin)
 admin.site.register(DonationAmount)
+admin.site.register(Event, EventAdmin)
 admin.site.register(TeamMember, TeamMemberAdmin)
 admin.site.register(References, ReferenceAdmin)
 admin.site.register(InvoiceOrder)
