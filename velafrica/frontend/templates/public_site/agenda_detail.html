@@ -6,5 +6,8 @@
 {% endblock %}
 
 {% block content %}
-{{ event }}
+{{ event }}<br>
+{% for datetime in event.datetimes.all %}
+  {{ datetime.date }}
+{% endfor %}
 {% endblock %}
