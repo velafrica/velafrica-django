@@ -37,8 +37,8 @@ partner = [
 ]
 
 agenda = [
-    url(r'agenda/$', render_agenda, name='index'),
-    url(r'(?P<event_id>\w+)$', render_specific_agenda, name='specific')
+    url(r'^agenda/$', render_agenda, name='index'),
+    url(r'^agenda/(?P<event_id>[-\w]+)/?$', render_specific_agenda, name='specific')
 ]
 
 urlpatterns = [
