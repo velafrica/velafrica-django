@@ -1,15 +1,17 @@
 # -*- coding: utf-8 -*-
 import collections
+from datetime import datetime
 from djangocms_blog.models import Post
 from django.conf import settings
 from django.core.urlresolvers import reverse, resolve
 from django.db.models import Q
 from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext
+from itertools import chain
 from paypal.standard.forms import PayPalPaymentsForm
 from velafrica.core.settings import PAYPAL_RECEIVER_MAIL, GMAP_API_KEY, ORDER_RECEIVER
 from velafrica.core.utils import send_mail
-from velafrica.collection.models import Dropoff
+from velafrica.collection.models import Dropoff, CollectionEvent
 from velafrica.sbbtracking.models import Tracking, TrackingEvent, TrackingEventType
 from .forms import InvoiceForm, SbbTicketOrderForm, WalkthroughRequestForm
 from .models import DonationAmount, WalkthroughRequest, TeamMember, References, Partner, Event, EventDateTime
@@ -306,7 +308,23 @@ def render_agenda(request):
 
     events = Event.objects.filter(active=True).all()
 
-    template_context['events'] = events
+    coll_events = list()
+    for collectionevent in CollectionEvent.objects.filter(date_end__gte=datetime.now().date().strftime('%Y-%m-%d')) \
+            .exclude(event__address=None):
+        new_event = Event(
+            name=collectionevent.event.name,
+            active=True,
+            category=collectionevent.event.category,
+            address=collectionevent.event.address,
+            description=collectionevent.event.description,
+            organizer=collectionevent.event.host
+        )
+        new_event.ce = True
+        new_event.id = -1 * collectionevent.id
+        coll_events.append(new_event)
+
+    all_events = list(chain(events, coll_events))
+    template_context['events'] = all_events
     return render_to_response(template_name, template_context, context_instance=RequestContext(request))
 
 
@@ -314,7 +332,11 @@ def render_specific_agenda(request, event_id):
     template_name = 'public_site/agenda_detail.html'
     template_context = {}
 
-    event = Event.objects.filter(pk=event_id).first()
+    if "-" in event_id:
+        event_id = int(event_id.replace('-', ''))
+        event = CollectionEvent.objects.filter(pk=event_id).first()
+    else:
+        event = Event.objects.filter(pk=event_id).first()
 
     if not event:
         return redirect(reverse('home:agenda:index'))
