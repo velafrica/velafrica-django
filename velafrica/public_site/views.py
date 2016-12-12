@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import collections
+from djangocms_blog.models import Post
 from django.conf import settings
 from django.core.urlresolvers import reverse, resolve
 from django.db.models import Q
@@ -22,6 +23,8 @@ def render_template(request):
 
     if request.path == '/':
         template_context['velo_count'] = Tracking.get_tracked_velo_count()
+        if Post.objects.count() > 0:
+            template_context['blog_post'] = Post.objects.filter(publish=True).order_by('-date_published').first()
 
     return render_to_response('public_site' + template_name + '.html', template_context,
                               context_instance=RequestContext(request))
