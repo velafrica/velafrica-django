@@ -218,3 +218,19 @@ class EventDateTime(models.Model):
     class Meta:
         ordering = ['date']
         verbose_name = 'Datum/Uhrzeit'
+
+
+class Supporter(models.Model):
+    name = models.CharField(max_length=255, verbose_name="Name")
+    description = models.CharField(max_length=140, verbose_name="Kurzbeschreibung", help_text="Max. 140 Zeichen", blank=True)
+    link = models.URLField(verbose_name="URL")
+    image = models.CharField(max_length=255, verbose_name="Bild/Logo URL", blank=True)
+    sorting = models.IntegerField(verbose_name="Sortierung", default=0)
+    active = models.BooleanField(verbose_name="Aktiv", default=True)
+
+    def __unicode__(self):
+        return u"{}".format(self.name)
+
+    class Meta:
+        verbose_name = "Unterstützer"
+        verbose_name_plural = "Unterstützer"

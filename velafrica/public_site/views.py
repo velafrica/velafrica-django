@@ -14,7 +14,7 @@ from velafrica.core.utils import send_mail
 from velafrica.collection.models import Dropoff, CollectionEvent
 from velafrica.sbbtracking.models import Tracking, TrackingEvent, TrackingEventType
 from .forms import InvoiceForm, SbbTicketOrderForm, WalkthroughRequestForm
-from .models import DonationAmount, WalkthroughRequest, TeamMember, References, Partner, Event, EventDateTime
+from .models import DonationAmount, WalkthroughRequest, TeamMember, References, Partner, Event, EventDateTime, Supporter
 
 
 def render_template(request):
@@ -342,5 +342,13 @@ def render_specific_agenda(request, event_id):
         return redirect(reverse('home:agenda:index'))
 
     template_context['event'] = event
+
+    return render_to_response(template_name, template_context, context_instance=RequestContext(request))
+
+def render_supporter(request):
+    template_name = 'public_site/supporter.html'
+    template_context = {
+        'supporter': Supporter.objects.filter(active=True).order_by('-sorting')
+    }
 
     return render_to_response(template_name, template_context, context_instance=RequestContext(request))

@@ -1,0 +1,13 @@
+{% extends "public_site/base.html" %}
+{% load i18n %}
+{% load sekizai_tags %}
+{% block page_title %}
+  {% trans "Unterstützer" %}
+{% endblock %}
+
+{% block content %}
+{% for supp in supporter %}
+  <img src="{{ supp.image }}" alt="">
+  <a href="{{ supp.link }}">{{ supp.name }}</a>
+{% endfor %}
+{% endblock %}

@@ -6,7 +6,8 @@ from .views import render_template, render_donation_template, \
                    thank_you, thank_you_paypal, render_sbb_ticker_order, \
                    render_walkthrough_template, render_about_us_template, \
                    render_personal_tracking, render_tracking, render_partners, \
-                   render_impressum_template, render_agenda, render_specific_agenda
+                   render_impressum_template, render_agenda, render_specific_agenda, \
+                   render_supporter
 
 donations = [
     url(r'^$', render_donation_template, name='home'),
@@ -53,4 +54,5 @@ urlpatterns = [
     url(r'^', include(tracking, namespace='tracking')),
     url(r'^', include(agenda, namespace='agenda')),
     url(r'^impressum/$', render_impressum_template, name='impressum'),
+    url(r'^supporter/$', render_supporter, name='supporter'),
 ]

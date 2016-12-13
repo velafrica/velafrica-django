@@ -2,7 +2,7 @@
 from django.contrib import admin
 from django.utils.html import format_html
 from .models import DonationAmount, InvoiceOrder, SbbTicketOrder, WalkthroughRequest, \
-    Content, TeamMember, References, ContactRequest, Partner, Event, EventDateTime
+    Content, TeamMember, References, ContactRequest, Partner, Event, EventDateTime, Supporter
 
 
 class PartnerAdmin(admin.ModelAdmin):
@@ -44,11 +44,19 @@ class ContentAdmin(admin.ModelAdmin):
 class TeamMemberAdmin(admin.ModelAdmin):
     ordering = ('-sorting',)
     search_fields = ['name']
+    list_filter = ('sorting',)
 
 
 class ReferenceAdmin(admin.ModelAdmin):
     ordering = ('-sorting',)
     search_fields = ['name']
+    list_filter = ('sorting',)
+
+
+class SupporterAdmin(admin.ModelAdmin):
+    ordering = ('-sorting',)
+    search_fields = ['name']
+    list_filter = ('sorting',)
 
 
 class EventDateTimeInline(admin.TabularInline):
@@ -70,3 +78,4 @@ admin.site.register(SbbTicketOrder)
 admin.site.register(WalkthroughRequest)
 admin.site.register(ContactRequest)
 admin.site.register(Partner, PartnerAdmin)
+admin.site.register(Supporter, SupporterAdmin)
