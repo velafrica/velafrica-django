@@ -1,0 +1,10 @@
+section.supporter {
+  & div.media {
+    height: 150px;
+
+    img {
+      max-width: none;
+      max-height: 100px;
+    }
+  }
+}
