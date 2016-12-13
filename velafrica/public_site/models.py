@@ -205,8 +205,8 @@ class Event(models.Model):
         return u"{}".format(self.name)
 
     class Meta:
-        verbose_name = 'Event'
-        verbose_name_plural = 'Events'
+        verbose_name = 'Veranstaltung'
+        verbose_name_plural = 'Veranstaltungen'
 
 
 class EventDateTime(models.Model):
