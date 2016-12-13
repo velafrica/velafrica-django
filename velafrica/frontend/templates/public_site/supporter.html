@@ -6,8 +6,30 @@
 {% endblock %}
 
 {% block content %}
-{% for supp in supporter %}
-  <img src="{{ supp.image }}" alt="">
-  <a href="{{ supp.link }}">{{ supp.name }}</a>
-{% endfor %}
+  <section class="supporter">
+    <div class="container">
+      <div class="row">
+          {% for supp in supporter %}
+            {% if not forloop.counter0 == 0 and forloop.counter0|divisibleby:3 %}
+              </div>
+              <div class="row">
+            {% endif %}
+
+            <div class="col-xs-12 col-sm-4">
+              <div class="media">
+                <div class="media-left">
+                  <a href="{{ supp.link }}" target="_blank">
+                    <img class="media-object" src="{{ supp.image }}" alt="">
+                  </a>
+                </div>
+                <div class="media-body">
+                  <h4 class="media-heading">{{ supp.name }}</h4>
+                  <p>{{ supp.description }}</p>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+      </div>
+    </div>
+  </section>
 {% endblock %}
