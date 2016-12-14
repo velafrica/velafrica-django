@@ -201,6 +201,20 @@ class Event(models.Model):
     organizer = models.CharField(max_length=255, verbose_name="Veranstalter", blank=True)
     active = models.BooleanField(default=True, verbose_name="Aktiv")
 
+    def get_date(self):
+        all = self.datetimes.filter(event_id=self.id)
+        count = all.count()
+        if count == 1:
+            date = u"{}".format(all.date.strftime('%d.%m.%Y'))
+        elif count > 1:
+            date = u"{} - {}".format(all.first().date.strftime('%d.%m'), all.last().date.strftime('%d.%m.%Y'))
+        else:
+            date = "wrong"
+        return date
+
+    def get_date_as_list(self):
+        return ""
+
     def __unicode__(self):
         return u"{}".format(self.name)
 
@@ -212,8 +226,8 @@ class Event(models.Model):
 class EventDateTime(models.Model):
     event = models.ForeignKey(Event, related_name="datetimes")
     date = models.DateField(verbose_name="Datum")
-    time_start = models.CharField(max_length=255, verbose_name="Von")
-    time_end = models.CharField(max_length=255, verbose_name="Bis")
+    time_start = models.CharField(max_length=255, verbose_name="Von", blank=True)
+    time_end = models.CharField(max_length=255, verbose_name="Bis", blank=True)
 
     class Meta:
         ordering = ['date']
