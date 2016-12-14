@@ -202,18 +202,15 @@ class Event(models.Model):
     active = models.BooleanField(default=True, verbose_name="Aktiv")
 
     def get_date(self):
-        all = self.datetimes.filter(event_id=self.id)
+        all = self.datetimes.filter(event_id=self.id).order_by('-date')
         count = all.count()
         if count == 1:
             date = u"{}".format(all.date.strftime('%d.%m.%Y'))
         elif count > 1:
             date = u"{} - {}".format(all.first().date.strftime('%d.%m'), all.last().date.strftime('%d.%m.%Y'))
         else:
-            date = "wrong"
+            date = ""
         return date
-
-    def get_date_as_list(self):
-        return ""
 
     def __unicode__(self):
         return u"{}".format(self.name)

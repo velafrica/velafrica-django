@@ -37,7 +37,7 @@
                   {% for datetime in event.datetimes.all %}
                     {{ datetime.date }} -
                     {{ datetime.time_start }} bis
-                    {{ datetime.time_end }} Uhr
+                    {{ datetime.time_end }} Uhr<br>
                   {% endfor %}
                 {% endif %}
               </td>
