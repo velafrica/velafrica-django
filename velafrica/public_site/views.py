@@ -319,7 +319,6 @@ def render_agenda(request):
             description=collectionevent.event.description,
             organizer=collectionevent.event.host
         )
-        new_event.ce = True
         new_event.id = -1 * collectionevent.id
         coll_events.append(new_event)
 
@@ -334,7 +333,20 @@ def render_specific_agenda(request, event_id):
 
     if "-" in event_id:
         event_id = int(event_id.replace('-', ''))
-        event = CollectionEvent.objects.filter(pk=event_id).first()
+        coll_event = CollectionEvent.objects.filter(pk=event_id).first()
+        event = Event(
+            name=coll_event.event.name,
+            active=True,
+            category=coll_event.event.category,
+            address=coll_event.event.address,
+            description=coll_event.event.description,
+            organizer=coll_event.event.host
+        )
+        if coll_event.date_start == coll_event.date_end:
+            datetime = u"{} {}".format(coll_event.date_start, coll_event.time)
+        else:
+            datetime = u"{} - {} {}".format(coll_event.date_start, coll_event.date_end, coll_event.time)
+        template_context['datetime'] = datetime
     else:
         event = Event.objects.filter(pk=event_id).first()
 

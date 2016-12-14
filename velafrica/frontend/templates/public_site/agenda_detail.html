@@ -39,11 +39,15 @@
             <tr>
               <td>{% trans "Datum" %}</td>
               <td>
-                {% for datetime in event.datetimes.all %}
-                  {{ datetime.date }} -
-                  {{ datetime.time_start }} bis
-                  {{ datetime.time_end }} Uhr
-                {% endfor %}
+                {% if datetime %}
+                  {{ datetime }}
+                {% else %}
+                  {% for datetime in event.datetimes.all %}
+                    {{ datetime.date }} -
+                    {{ datetime.time_start }} bis
+                    {{ datetime.time_end }} Uhr
+                  {% endfor %}
+                {% endif %}
               </td>
             </tr>
             <tr>
