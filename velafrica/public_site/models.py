@@ -205,7 +205,7 @@ class Event(models.Model):
         all = self.datetimes.filter(event_id=self.id).order_by('-date')
         count = all.count()
         if count == 1:
-            date = u"{}".format(all.date.strftime('%d.%m.%Y'))
+            date = u"{}".format(all.first().date.strftime('%d.%m.%Y'))
         elif count > 1:
             date = u"{} - {}".format(all.first().date.strftime('%d.%m'), all.last().date.strftime('%d.%m.%Y'))
         else:
