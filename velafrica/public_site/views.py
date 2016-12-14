@@ -343,9 +343,10 @@ def render_specific_agenda(request, event_id):
             organizer=coll_event.event.host
         )
         if coll_event.date_start == coll_event.date_end:
-            datetime = u"{} {}".format(coll_event.date_start, coll_event.time)
+            date= u"{}".format(coll_event.date_start.strftime('%d.%m'))
         else:
-            datetime = u"{} - {} {}".format(coll_event.date_start, coll_event.date_end, coll_event.time)
+            date = u"{} - {}".format(coll_event.date_start.strftime('%d.%m'), coll_event.date_end.strftime('%d.%m'))
+        datetime = u"{}, {}".format(date, coll_event.time)
         template_context['datetime'] = datetime
     else:
         event = Event.objects.filter(pk=event_id).first()
