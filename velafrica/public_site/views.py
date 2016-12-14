@@ -319,6 +319,11 @@ def render_agenda(request):
             description=collectionevent.event.description,
             organizer=collectionevent.event.host
         )
+        if collectionevent.date_start == collectionevent.date_end:
+            date = u"{}".format(collectionevent.date_start.strftime('%d.%m.%Y'))
+        else:
+            date = u"{} - {}".format(collectionevent.date_start.strftime('%d.%m'), collectionevent.date_end.strftime('%d.%m.%Y'))
+        new_event.date = date
         new_event.id = -1 * collectionevent.id
         coll_events.append(new_event)
 
@@ -343,11 +348,10 @@ def render_specific_agenda(request, event_id):
             organizer=coll_event.event.host
         )
         if coll_event.date_start == coll_event.date_end:
-            date= u"{}".format(coll_event.date_start.strftime('%d.%m'))
+            date = u"{}".format(coll_event.date_start.strftime('%d.%m'))
         else:
             date = u"{} - {}".format(coll_event.date_start.strftime('%d.%m'), coll_event.date_end.strftime('%d.%m'))
-        datetime = u"{}, {}".format(date, coll_event.time)
-        template_context['datetime'] = datetime
+        template_context['datetime'] = u"{}, {}".format(date, coll_event.time)
     else:
         event = Event.objects.filter(pk=event_id).first()
 

@@ -26,9 +26,11 @@
             {% for event in events %}
               <tr>
                 <td>
-                  {% for datetime in event.datetimes.all %}
-                    {{ datetime.date }}
-                  {% endfor %}
+                  {% if not event.date %}
+                    {{ event.get_date }}
+                  {% else %}
+                    {{ event.date }}
+                  {% endif %}
                 </td>
                 <td><a href="{{ event.pk }}">{{ event.name }}</a></td>
                 <td>{{ event.address.city }}</td>
