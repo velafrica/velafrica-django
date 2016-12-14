@@ -1,0 +1,34 @@
+section#agenda-teaser,
+section#agenda-teaser-detail {
+  background-color: $velafrica-brown-5;
+  padding-top: 90px;
+  padding-bottom: 90px;
+}
+
+section#agenda {
+  padding-top: 60px;
+  padding-bottom: 60px;
+
+  table {
+    font-size: 20px;
+    a {
+      font-size: inherit;
+    }
+  }
+}
+
+section#agenda-detail {
+  padding-top: 60px;
+  padding-bottom: 60px;
+
+  table {
+    margin-top: 30px;
+    font-size: 20px;
+  }
+}
+
+section#agenda-footer {
+  background-color: $velafrica-brown-4;
+  padding-top: 90px;
+  padding-bottom: 90px;
+}

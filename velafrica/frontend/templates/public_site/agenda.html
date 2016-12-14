@@ -6,7 +6,41 @@
 {% endblock %}
 
 {% block content %}
-{% for event in events %}
-  <a href="/agenda/{{ event.pk }}">{{ event.name }}</a>
-{% endfor %}
+
+  {% include "public_site/partials/agenda_teaser.html" %}
+
+  <section id="agenda" class="container">
+    <div class="row">
+
+      <div class="col-md-8 col-md-offset-2">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+            <tr>
+              <th>{% trans "Datum" %}</th>
+              <th>{% trans "Anlass" %}</th>
+              <th>{% trans "Ort" %}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for event in events %}
+              <tr>
+                <td>
+                  {% for datetime in event.datetimes.all %}
+                    {{ datetime.date }}
+                  {% endfor %}
+                </td>
+                <td><a href="{{ event.pk }}">{{ event.name }}</a></td>
+                <td>{{ event.address }}</td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% include "public_site/partials/agenda_footer.html" %}
+
 {% endblock %}

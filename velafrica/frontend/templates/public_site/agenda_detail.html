@@ -1,13 +1,89 @@
 {% extends "public_site/base.html" %}
-{% load i18n %}
+{% load i18n static %}
 {% load sekizai_tags %}
 {% block page_title %}
   {% trans "Agenda" %}
 {% endblock %}
 
 {% block content %}
-{{ event }}<br>
-{% for datetime in event.datetimes.all %}
-  {{ datetime.date }}
-{% endfor %}
+
+  {% include "public_site/partials/agenda_teaser.html" %}
+
+  <section id="agenda-detail" class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h1>{{ event.name }}</h1>
+        <h4>{% trans "So funktioniert's:" %}</h4>
+        <img src="{% static "img/piktogramm2.png" %}" alt="">
+        <p>
+          {% trans "Haben Sie ein altes Velo im Keller? Möchten Sie es in der Gemeinde Bern angeben? Wir holen es direkt vor der Haustüre ab." %}
+        </p>
+        <p>
+          {% trans "Weitere Informationen und das Anmeldeformular finden Sie hier: <a href='http://velafrica.ch/de/Velosammlung'>http://velafrica.ch/de/Velosammlung</a>" %}
+        </p>
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+            <tr>
+              <th>{% trans "Veranstaltungs Informationen" %}</th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>{% trans "Datum" %}</td>
+              <td>
+                {% for datetime in event.datetimes.all %}
+                  {{ datetime.date }} -
+                  {{ datetime.time_start }} bis
+                  {{ datetime.time_end }} Uhr
+                {% endfor %}
+              </td>
+            </tr>
+            <tr>
+              <td>{% trans "Kategorie" %}</td>
+              <td>{{ event.category }}</td>
+            </tr>
+            <tr>
+              <td>{% trans "Exportieren" %}</td>
+              <td>link</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+            <tr>
+              <th>{% trans "Ort" %}</th>
+              <th>{% trans "Veranstalter" %}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>{{ event.address }}</td>
+              <td>
+                {{ event.organizer }}<br>
+                {{ event.description }}
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% include "public_site/partials/agenda_footer.html" %}
+
 {% endblock %}
