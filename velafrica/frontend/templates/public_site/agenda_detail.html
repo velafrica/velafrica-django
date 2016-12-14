@@ -16,7 +16,7 @@
         <h4>{% trans "So funktioniert's:" %}</h4>
         <img src="{% static "img/piktogramm2.png" %}" alt="">
         <p>
-          {% trans "Haben Sie ein altes Velo im Keller? Möchten Sie es in der Gemeinde Bern angeben? Wir holen es direkt vor der Haustüre ab." %}
+          {% trans "Haben Sie ein altes Velo im Keller? Möchten Sie es in der {{ event.address.state }} {{ event.address.city }} angeben? Wir holen es direkt vor der Haustüre ab." %}
         </p>
         <p>
           {% trans "Weitere Informationen und das Anmeldeformular finden Sie hier: <a href='http://velafrica.ch/de/Velosammlung'>http://velafrica.ch/de/Velosammlung</a>" %}
@@ -71,10 +71,14 @@
             </thead>
             <tbody>
             <tr>
-              <td>{{ event.address }}</td>
               <td>
-                {{ event.organizer }}<br>
-                {{ event.description }}
+                {{ event.address.state }}<br>
+                {{ event.address.city }}
+              </td>
+              <td>
+                {{ event.address.organizer }}<br>
+                {{ event.address.street }}<br>
+                {{ event.address.city }} {{ event.zipcode }}
               </td>
             </tr>
             </tbody>
