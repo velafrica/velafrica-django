@@ -1,5 +1,6 @@
 {% load i18n static %}
 {% load content %}
+{% load teammember %}
 
 {% block content %}
 
@@ -39,11 +40,13 @@
 
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
+        {% get_content "ansprechperson" "Ansprechperperson: Mitmachen/Firmen" as member_name %}
+        {% get_teammember member_name as member %}
 
         <h4>Ansprechperson</h4>
-        <p>Mats Gurtner</p>
-        <a href="mailto:mats.gurtner@velafrica.ch">mats.gurtner@velafrica.ch</a>
-        <p>T ?????</p>
+        <p>{{ member.name }}</p>
+        <a href="mailto:{{ member.email }}">{{ member.email }}</a>
+        <p>{{ member.phone }}</p>
 
       </div>
     </div>
@@ -61,23 +64,26 @@
     <div class="row">
       <div class="col-md-10 col-md-offset-1">
 
-        <form action="">
+        <form action="" method="POST">
           <div class="col-md-6 col-md-offset-3">
+            {% csrf_token %}
             <h4>{% trans "Kontaktangaben" %}</h4>
-
+            {{ contact_form.non_field_errors }}
+            {{ contact_form.errors }}
+            <input type="hidden" name="send_to_mail" value="{{ member.email }}">
             <div class="form-group">
-              <input type="text" class="form-control input-lg" placeholder="{% trans "Name*" %}" required>
+              {{ contact_form.last_name }}
             </div>
             <div class="form-group">
-              <input type="text" class="form-control input-lg" placeholder="{% trans "Vorname*" %}" required>
+              {{ contact_form.first_name }}
             </div>
             <div class="form-group">
-              <input type="email" class="form-control input-lg" placeholder="{% trans "E-Mail*" %}" required>
+              {{ contact_form.email }}
             </div>
             <div class="form-group">
-              <input type="tel" class="form-control input-lg" placeholder="{% trans "Telefonnummer" %}">
+              {{ contact_form.phone }}
             </div>
-            <textarea class="form-control input-lg" cols="40" id="id_company_note" name="company_note" placeholder="Bemerkungen" rows="4"></textarea>
+              {{ contact_form.note }}
             <p class="legend">{% trans "* Pflichtfelder" %}</p>
             <input type="submit" class="btn btn-send btn-lg center-block"
                    value="{% trans "Kontaktaufnahme absenden" %}">

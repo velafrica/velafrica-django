@@ -1406,5 +1406,27 @@
     "value": "Claudia Meyr",
     "description": "Ansprechperperson: Mitmachen/Firmen"
   }
+},
+{
+  "model": "public_site.content",
+  "pk": 129,
+  "fields": {
+    "language": "de",
+    "path": "_mitmachen_schulen_",
+    "key": "ansprechperson",
+    "value": "Mats Gurtner",
+    "description": "Ansprechperperson: Mitmachen/Firmen"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 130,
+  "fields": {
+    "language": "en",
+    "path": "_mitmachen_schulen_",
+    "key": "ansprechperson",
+    "value": "Mats Gurtner",
+    "description": "Ansprechperperson: Mitmachen/Firmen"
+  }
 }
 ]
