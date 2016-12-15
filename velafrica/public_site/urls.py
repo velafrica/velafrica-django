@@ -2,12 +2,12 @@ from django.conf.urls import include, url
 from .views import order_invoice
 from django.conf.urls import url
 from .views import render_template, render_donation_template, \
-                   render_map_template, order_invoice, \
-                   thank_you, thank_you_paypal, render_sbb_ticker_order, \
-                   render_walkthrough_template, render_about_us_template, \
-                   render_personal_tracking, render_tracking, render_partners, \
-                   render_impressum_template, render_agenda, render_specific_agenda, \
-                   render_supporter
+    render_map_template, order_invoice, \
+    thank_you, thank_you_paypal, render_sbb_ticker_order, \
+    render_walkthrough_template, render_about_us_template, \
+    render_personal_tracking, render_tracking, render_partners, \
+    render_impressum_template, render_agenda, render_specific_agenda, \
+    render_supporter
 
 donations = [
     url(r'^$', render_donation_template, name='home'),
@@ -25,6 +25,7 @@ walkthroughs = [
     url(r'^frewillig/$', render_walkthrough_template, name='voluntary'),
     url(r'^firmen/$', render_walkthrough_template, name='company'),
     url(r'^schulen/$', render_walkthrough_template, name='school'),
+    url(r'velos/$', render_walkthrough_template, name='bicycle'),
 ]
 
 tracking = [

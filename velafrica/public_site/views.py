@@ -132,7 +132,8 @@ def render_walkthrough_template(request):
         'collection': 'public_site/partials/walkthroughs/collectionpoint.html',
         'company': 'public_site/partials/walkthroughs/company.html',
         'school': 'public_site/partials/walkthroughs/school.html',
-        'voluntary': 'public_site/partials/walkthroughs/voluntary.html'
+        'voluntary': 'public_site/partials/walkthroughs/voluntary.html',
+        'bicycle': 'public_site/partials/walkthroughs/bicycle.html'
     }
 
     template_context.update({
@@ -322,7 +323,8 @@ def render_agenda(request):
         if collectionevent.date_start == collectionevent.date_end:
             date = u"{}".format(collectionevent.date_start.strftime('%d.%m.%Y'))
         else:
-            date = u"{} - {}".format(collectionevent.date_start.strftime('%d.%m'), collectionevent.date_end.strftime('%d.%m.%Y'))
+            date = u"{} - {}".format(collectionevent.date_start.strftime('%d.%m'),
+                                     collectionevent.date_end.strftime('%d.%m.%Y'))
         new_event.date = date
         new_event.id = -1 * collectionevent.id
         coll_events.append(new_event)
@@ -361,6 +363,7 @@ def render_specific_agenda(request, event_id):
     template_context['event'] = event
 
     return render_to_response(template_name, template_context, context_instance=RequestContext(request))
+
 
 def render_supporter(request):
     template_name = 'public_site/supporter.html'

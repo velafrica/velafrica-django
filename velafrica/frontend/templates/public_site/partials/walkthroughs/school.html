@@ -1,0 +1,92 @@
+{% load i18n static %}
+{% load content %}
+
+{% block content %}
+
+  <section id="company" class="walk-teaser"
+           style="background: url({% static "img/schueler.jpg" %}) center/cover;">
+    <div class="container">
+      <div class="row teaser-vel">
+        <div class="col-md-6 teaser-white-bg">
+
+          <h2>{% trans "Engagiert als Schule" %}</h2>
+          <p class="lead">
+            {% trans "Engagierte Menschen sammeln jedes Jahr in der ganzen Schweiz mehrere tausend Velos für Afrika. Sie tragen damit wesentlich zum Erfolg von Velafrica bei. Machen auch Sie mit und organisieren Sie eine Sammelaktion. Es ist ganz einfach!" %}
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="company-content" class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h2>Titel</h2>
+        <p>
+          Weit hinten, hinter den Wortbergen, fern der Länder Vokalien und Konsonantien leben die Blindtexte.
+          Abgeschieden wohnen sie in Buchstabhausen an der Küste des Semantik, eines großen Sprachozeans. Ein kleines
+          Bächlein namens Duden fließt durch ihren Ort und versorgt sie mit den nötigen Regelialien. Es ist ein
+          paradiesmatisches Land, in dem einem gebratene Satzteile in den Mund fliegen. Nicht einmal von der
+          allmächtigen Interpunktion werden die Blindtexte beherrscht – ein geradezu unorthographisches Leben. Eines
+          Tages aber beschloß eine kleine Zeile Blindtext, ihr Name war Lorem Ipsum, hinaus zu gehen in die weite
+          Grammatik. Der große Oxmox riet ihr davon ab, da es dort wimmele von bösen
+        </p>
+        <img src="http://placehold.it/1000x350" alt="">
+      </div>
+    </div>
+  </section>
+  <section id="company-form" class="container">
+
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+
+        <h4>Ansprechperson</h4>
+        <p>Mats Gurtner</p>
+        <a href="mailto:mats.gurtner@velafrica.ch">mats.gurtner@velafrica.ch</a>
+        <p>T ?????</p>
+
+      </div>
+    </div>
+
+    <div class="row text-center">
+      <div class="col-xs-12 col-md-6 col-md-offset-3">
+
+        <h2 class="vel-pad">{% trans "Interessiert?" %}</h2>
+        <p>
+          {% trans "Wir freuen uns, wenn Sie Kontakt mit uns aufnehmen. Bitte tragen Sie hierzu Ihre Angaben ein." %}
+        </p>
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+
+        <form action="">
+          <div class="col-md-6 col-md-offset-3">
+            <h4>{% trans "Kontaktangaben" %}</h4>
+
+            <div class="form-group">
+              <input type="text" class="form-control input-lg" placeholder="{% trans "Name*" %}" required>
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control input-lg" placeholder="{% trans "Vorname*" %}" required>
+            </div>
+            <div class="form-group">
+              <input type="email" class="form-control input-lg" placeholder="{% trans "E-Mail*" %}" required>
+            </div>
+            <div class="form-group">
+              <input type="tel" class="form-control input-lg" placeholder="{% trans "Telefonnummer" %}">
+            </div>
+            <textarea class="form-control input-lg" cols="40" id="id_company_note" name="company_note" placeholder="Bemerkungen" rows="4"></textarea>
+            <p class="legend">{% trans "* Pflichtfelder" %}</p>
+            <input type="submit" class="btn btn-send btn-lg center-block"
+                   value="{% trans "Kontaktaufnahme absenden" %}">
+
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </section>
+
+{% endblock %}
