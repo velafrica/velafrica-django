@@ -8,13 +8,15 @@ register = template.Library()
 
 
 @register.simple_tag(takes_context=True)
-def get_content(context, key, description=''):
-    path = '_index_'
-    if context.request.path != '/':
-        path = context.request.path.replace('/', '_').replace('-', '_')
-        if not path.endswith('_'):
-            path = path[0:len(path)-len(path.split('_')[-1])]
-
+def get_content(context, key, description='', fixed=False):
+    if not fixed:
+        path = '_index_'
+        if context.request.path != '/':
+            path = context.request.path.replace('/', '_').replace('-', '_')
+            if not path.endswith('_'):
+                path = path[0:len(path)-len(path.split('_')[-1])]
+    else:
+        path = '_global_'
     language = context.request.LANGUAGE_CODE
 
     full_key = u"{}{}{}".format(
