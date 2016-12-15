@@ -171,6 +171,10 @@ class ContactRequestForm(forms.ModelForm):
         'class': 'form-control input-lg',
         'placeholder': 'E-Mail*'
     }))
+    phone = forms.CharField(widget=forms.TextInput(attrs={
+        'class': 'form-control input-lg',
+        'placeholder': 'Telefonnummer:'
+    }))
     note = forms.CharField(widget=forms.Textarea(attrs={
         'class': 'form-control input-lg',
         'placeholder': 'Nachricht*'
