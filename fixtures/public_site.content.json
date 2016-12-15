@@ -1384,5 +1384,27 @@
     "value": "Hilf uns noch mehr Velos nach Afrika zu schicken!",
     "description": "Text f\u00fcr den Link zur Spendenseite"
   }
+},
+{
+  "model": "public_site.content",
+  "pk": 127,
+  "fields": {
+    "language": "de",
+    "path": "_mitmachen_velos_",
+    "key": "ansprechperson",
+    "value": "Claudia Meyr",
+    "description": "Ansprechperperson: Mitmachen/Firmen"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 128,
+  "fields": {
+    "language": "en",
+    "path": "_mitmachen_velos_",
+    "key": "ansprechperson",
+    "value": "Claudia Meyr",
+    "description": "Ansprechperperson: Mitmachen/Firmen"
+  }
 }
 ]
