@@ -91,10 +91,6 @@ INSTALLED_APPS = (
     'djangocms_teaser',
     'djangocms_video',
     'djangocms_link',
-    # custom cms plugins
-    'velafrica.cms_plugins.tracking_stations',
-    # TODO: 'djangocms_snippet', - security hazard?
-    'velafrica.cms_plugins.moneydonate',
     # custom apps
     'massadmin',
     'daterange_filter',
