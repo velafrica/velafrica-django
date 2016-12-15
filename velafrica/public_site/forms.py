@@ -182,4 +182,4 @@ class ContactRequestForm(forms.ModelForm):
 
     class Meta:
         model = ContactRequest
-        fields = ('first_name', 'last_name', 'email', 'note')
+        fields = ('first_name', 'last_name', 'email', 'phone', 'note')
