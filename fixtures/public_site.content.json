@@ -1343,7 +1343,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 131,
+  "pk": 123,
   "fields": {
     "language": "de",
     "path": "_mitmachen_firmen_",
@@ -1354,13 +1354,35 @@
 },
 {
   "model": "public_site.content",
-  "pk": 132,
+  "pk": 124,
   "fields": {
     "language": "en",
     "path": "_mitmachen_firmen_",
     "key": "ansprechperson",
     "value": "Claudia Meyr",
     "description": "Ansprechperperson: Mitmachen/Firmen"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 125,
+  "fields": {
+    "language": "de",
+    "path": "_my_tracking_",
+    "key": "text_donation_link",
+    "value": "Hilf uns noch mehr Velos nach Afrika zu schicken!",
+    "description": "Text f\u00fcr den Link zur Spendenseite"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 126,
+  "fields": {
+    "language": "en",
+    "path": "_my_tracking_",
+    "key": "text_donation_link",
+    "value": "Hilf uns noch mehr Velos nach Afrika zu schicken!",
+    "description": "Text f\u00fcr den Link zur Spendenseite"
   }
 }
 ]

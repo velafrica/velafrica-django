@@ -35,7 +35,11 @@
 
   <section id="tracking-events">
     <div class="container">
-
+      <div class="row">
+        <div class="col-xs-12 text-center">
+          <a class="donation-link" href="{% url 'home:donation:home' %}">{% get_content "text_donation_link" "Text für den Link zur Spendenseite" %}</a>
+        </div>
+      </div>
       {% for event in tracking_events %}
 
         <div class="row">
