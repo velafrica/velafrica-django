@@ -1393,7 +1393,7 @@
     "path": "_mitmachen_velos_",
     "key": "ansprechperson",
     "value": "Claudia Meyr",
-    "description": "Ansprechperperson: Mitmachen/Firmen"
+    "description": "Ansprechperperson: Mitmachen/Ausmistaktion"
   }
 },
 {
@@ -1404,7 +1404,7 @@
     "path": "_mitmachen_velos_",
     "key": "ansprechperson",
     "value": "Claudia Meyr",
-    "description": "Ansprechperperson: Mitmachen/Firmen"
+    "description": "Ansprechperperson: Mitmachen/Ausmistaktion"
   }
 },
 {
@@ -1415,7 +1415,7 @@
     "path": "_mitmachen_schulen_",
     "key": "ansprechperson",
     "value": "Mats Gurtner",
-    "description": "Ansprechperperson: Mitmachen/Firmen"
+    "description": "Ansprechperperson: Mitmachen/Schulen"
   }
 },
 {
@@ -1426,7 +1426,7 @@
     "path": "_mitmachen_schulen_",
     "key": "ansprechperson",
     "value": "Mats Gurtner",
-    "description": "Ansprechperperson: Mitmachen/Firmen"
+    "description": "Ansprechperperson: Mitmachen/Schulen"
   }
 },
 {
