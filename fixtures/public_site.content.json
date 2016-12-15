@@ -1428,5 +1428,27 @@
     "value": "Mats Gurtner",
     "description": "Ansprechperperson: Mitmachen/Firmen"
   }
+},
+{
+  "model": "public_site.content",
+  "pk": 131,
+  "fields": {
+    "language": "de",
+    "path": "_mitmachen_frewillig_",
+    "key": "ansprechperson",
+    "value": "Matthias Maurer",
+    "description": "Ansprechperperson: Mitmachen/Freiwilligeneinsatz"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 132,
+  "fields": {
+    "language": "en",
+    "path": "_mitmachen_frewillig_",
+    "key": "ansprechperson",
+    "value": "Matthias Maurer",
+    "description": "Ansprechperperson: Mitmachen/Freiwilligeneinsatz"
+  }
 }
 ]
