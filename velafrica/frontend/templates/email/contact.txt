@@ -1,0 +1,8 @@
+Seite: {{ url }}<br>
+Vorname: {{ data.first_name }}<br>
+Nachname: {{ data.last_name }}<br>
+Email: {{ data.email}}<br>
+Telefonnummer: {{ data.phone }}<br>
+Anmerkung:<br>
+{{ data.note|safe|striptags }}<br>
+<br>
