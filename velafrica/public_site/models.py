@@ -115,8 +115,9 @@ class WalkthroughRequest(models.Model):
 class ContactRequest(models.Model):
     first_name = models.CharField(max_length=255, verbose_name='Vorname')
     last_name = models.CharField(max_length=255, verbose_name='Nachname')
-    email = models.CharField(max_length=255, verbose_name='E-Mail')
-    note = models.TextField(verbose_name='Nachricht')
+    email = models.CharField(max_length=255, verbose_name='E-Mail', blank=True)
+    phone = models.CharField(max_length=255, verbose_name='Telefonnummer', blank=True)
+    note = models.TextField(verbose_name='Nachricht', blank=True)
 
     class Meta:
         verbose_name = 'Kontaktanfrage'
