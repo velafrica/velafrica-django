@@ -1,5 +1,6 @@
 {% load i18n static %}
 {% load content %}
+{% load teammember %}
 
 {% block content %}
 
@@ -41,13 +42,13 @@
 
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
-
+        {% get_teammember "Claudia Meyr" as member %}
         <h4>
           Ansprechpersonen<br>
           Engagiert als Firma
         </h4>
-        <p>Claudia Meyr</p>
-        <a href="mailto:claudia.meyr@velafrica.ch">claudia.meyr@velafrica.ch</a>
+        <p>{{ member.name }}</p>
+        <a href="mailto:{{ member.email }}">{{ member.email }}</a>
         <p>T 031 979 70 50</p>
 
       </div>
