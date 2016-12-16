@@ -7,7 +7,7 @@ from .views import render_template, render_donation_template, \
     render_walkthrough_template, render_about_us_template, \
     render_personal_tracking, render_tracking, render_partners, \
     render_impressum_template, render_agenda, render_specific_agenda, \
-    render_supporter
+    render_supporter, render_impact
 
 donations = [
     url(r'^$', render_donation_template, name='home'),
@@ -56,4 +56,5 @@ urlpatterns = [
     url(r'^', include(agenda, namespace='agenda')),
     url(r'^impressum/$', render_impressum_template, name='impressum'),
     url(r'^supporter/$', render_supporter, name='supporter'),
+    url(r'^impact/$', render_impact, name='impact'),
 ]

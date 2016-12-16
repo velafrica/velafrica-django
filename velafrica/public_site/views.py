@@ -391,3 +391,8 @@ def render_supporter(request):
     }
 
     return render_to_response(template_name, template_context, context_instance=RequestContext(request))
+
+
+def render_impact(request):
+    template_name = 'public_site/impact.html'
+    return render_to_response(template_name,{}, context_instance=RequestContext(request))
