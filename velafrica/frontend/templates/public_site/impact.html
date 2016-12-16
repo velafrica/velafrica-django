@@ -1,19 +1,329 @@
 {% extends "public_site/base.html" %}
 {% load i18n %}
-{% load content %}
+{% load content static %}
 
 {% block page_title %}
   {% trans "Wirkung" %}
 {% endblock %}
 
 {% block content %}
-  <section id="impact" class="container">
+  <main id="impact">
+    <section id="impact-teaser" class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
 
-    <div class="row">
-      <div class="col-md-12">
-        <h1>impact</h1>
+          <h1 class="text-center">{% trans "Velos verändern Leben" %}</h1>
+          <p>
+            {% trans "Der grosse Oxmox riet ihr davon ab, da es dort wimmele von bösen Kommata, wilden Fragezeichen und hinterhältigen Semikoli, doch das Blindtextchen ließ sich nicht beirren. Es packte seine sieben Versalien, schob sich sein Initial in den Gürtel und machte sich auf den Weg. Als es die ersten Hügel des Kursivgebirges erklommen hatte, warf es einen letzten Blick zurück auf die Skyline seiner Heimatstadt Buchstabhausen. " %}
+          </p>
+
+        </div>
       </div>
-    </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <iframe width="100%" height="100%" src="https://www.youtube.com/embed/XUwVqpnJ7jY" frameborder="0"
+                  allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
+    <section id="impact-swiss"
+             style="background: url({% static "img/Frauen_Schulung_Irim_Feb_2014.png" %}) center/cover;">
+      <div class="container">
+        <div class="row teaser-vel">
+          <div class="col-md-6 col-md-offset-6 teaser-white-bg">
+            <h2>{% trans "Wirkung in der Schweiz" %}</h2>
+            <p class="lead">
+              {% trans "Der grosse Oxmox riet ihr davon ab, da es dort wimmele von bösen Kommata, wilden Fragezeichen und hinterhältigen Semikoli, doch das Blindtextchen ließ sich nicht beirren." %}
+            </p>
+          </div>
+        </div>
+      </div>
 
-  </section>
+    </section>
+    <section id="impact-swiss-network" class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2  text-center">
+
+          <h2>{% trans "Unser Netzwerk" %}</h2>
+          <p>
+            {% trans "In der Schweiz arbeitet Velafrica mit sozialen Einrichtungen zusammen, die Erwerbslose und Menschen mit Beeinträchtigungen beschäftigen. Dank diesem Partnernetzwerk können schweizweit Velos gesammelt und verarbeitet werden. Und nur dank dieser Zusammenarbeit ist es möglich, jährlich 17 000 fahrtüchtige Recycling-Velos zu verschiffen." %}
+          </p>
+          <a href="#">{% trans "Zum Netzwerk in der Schweiz" %}</a>
+          <img src="http://placehold.it/1000x500?text=SwissMap" alt="">
+
+        </div>
+      </div>
+    </section>
+    <section id="impact-integration">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2 text-center">
+
+            <h2>{% trans "Hier steht ein passender Titel" %}</h2>
+            <p>
+              {% trans "In der Schweiz arbeitet Velafrica mit sozialen Einrichtungen zusammen, die Erwerbslose und Menschen mit Beeinträchtigungen beschäftigen. Dank diesem Partnernetzwerk können schweizweit Velos gesammelt und verarbeitet werden. Und nur dank dieser Zusammenarbeit ist es möglich, jährlich 17 000 fahrtüchtige Recycling-Velos zu verschiffen." %}
+            </p>
+
+          </div>
+        </div>
+        <div class="row impact-tool">
+          <div class="col-sm-2 col-sm-offset-3">
+
+            <img src="{% static "img/gabelschluessel.png" %}" alt="">
+
+          </div>
+          <div class="col-sm-2">
+
+            <img src="{% static "img/kettenblatt.png" %}" alt="">
+
+          </div>
+          <div class="col-sm-2">
+
+            <img src="{% static "img/kettenpeitsche.png" %}" alt="">
+
+          </div>
+        </div>
+        <div class="row items">
+          <div class="col-md-6 item-content">
+
+            <h2>{% trans "Integration" %}</h2>
+            <p>
+              {% trans "Die meisten unserer Partner bieten – wie die Velowerkstatt des Drahtesels – Integrationsarbeitsplätze für Erwerbslose oder benachteiligte Menschen an. " %}
+            </p>
+
+          </div>
+          <div class="col-md-6 item-img" style="background:url({% static "img/integration.png" %}) center/cover;">
+
+          </div>
+        </div>
+        <div class="row items">
+          <div class="col-md-6 item-img" style="background:url({% static "img/workplace.png" %}) center/cover"></div>
+          <div class="col-md-6 item-content">
+
+            <h2>{% trans "Arbeitsplätze" %}</h2>
+            <p>
+              {% trans "Die meisten unserer Partner bieten – wie die Velowerkstatt des Drahtesels – Integrationsarbeitsplätze für Erwerbslose oder benachteiligte Menschen an. " %}
+            </p>
+
+          </div>
+        </div>
+        <div class="row items">
+          <div class="col-md-6 item-content">
+            <h2>{% trans "Recycling" %}</h2>
+            <p>
+              {% trans "Die meisten unserer Partner bieten – wie die Velowerkstatt des Drahtesels – Integrationsarbeitsplätze für Erwerbslose oder benachteiligte Menschen an. " %}
+            </p>
+          </div>
+          <div class="col-md-6 item-img" style="background:url({% static "img/recycling.png" %}) center/cover"></div>
+        </div>
+      </div>
+    </section>
+    <section id="impact-history-haben" class="container">
+      <h2 class="text-center">{% trans "Hier steht ein passender Titel" %}</h2>
+      <div class="row">
+        <div class="col-md-3" style="background:url({% static "img/haben.jpg" %}) center/cover"></div>
+        <div class="col-md-9">
+
+          <p class="lead">
+            {% trans "Haben Debessay, 28 Jahre <br>Bern, Schweiz" %}
+          </p>
+          <h2>{% trans "Wie Velos Haben Debessays Leben verändert" %}</h2>
+          <p class="lead">
+            {% trans "Haben Debessay aus Eritrea lernt dank des Integrationsprojekts Velos zu reparieren. Der grosse Oxmox riet ihr davon ab, da es dort wimmele von bösen Kommata, wilden Fragezeichen und hinterhältigen Semikoli." %}
+          </p>
+          <a href="#">{% trans "Zu Habens Geschichte" %}</a>
+
+        </div>
+      </div>
+    </section>
+    <section id="impact-africa"
+             style="background: url({% static "img/Frauen_Schulung_Irim_Feb_2014_2.jpg" %}) center/cover;">
+      <div class="container">
+        <div class="row teaser-vel">
+          <div class="col-md-6 teaser-white-bg">
+            <h2>{% trans "Wirkung in Afrika" %}</h2>
+            <p class="lead">
+              {% trans "Der grosse Oxmox riet ihr davon ab, da es dort wimmele von bösen Kommata, wilden Fragezeichen und hinterhältigen Semikoli, doch das Blindtextchen ließ sich nicht beirren." %}
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+    <section id="impact-africa-network" class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2  text-center">
+
+          <h2>{% trans "Unser Netzwerk" %}</h2>
+          <p>
+            {% trans "In der Schweiz arbeitet Velafrica mit sozialen Einrichtungen zusammen, die Erwerbslose und Menschen mit Beeinträchtigungen beschäftigen. Dank diesem Partnernetzwerk können schweizweit Velos gesammelt und verarbeitet werden. Und nur dank dieser Zusammenarbeit ist es möglich, jährlich 17 000 fahrtüchtige Recycling-Velos zu verschiffen." %}
+          </p>
+          <a href="#">{% trans "Zum Netzwerk in Afrika" %}</a>
+          <img src="http://placehold.it/1000x500?text=AfricaMap" alt="">
+
+        </div>
+      </div>
+    </section>
+    <section id="impact-mobility">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2 text-center">
+
+            <h2>{% trans "Hier steht ein passender Titel" %}</h2>
+            <p>
+              {% trans "In der Schweiz arbeitet Velafrica mit sozialen Einrichtungen zusammen, die Erwerbslose und Menschen mit Beeinträchtigungen beschäftigen. Dank diesem Partnernetzwerk können schweizweit Velos gesammelt und verarbeitet werden. Und nur dank dieser Zusammenarbeit ist es möglich, jährlich 17 000 fahrtüchtige Recycling-Velos zu verschiffen." %}
+            </p>
+
+          </div>
+        </div>
+        <div class="row impact-bicycle">
+          <div class="col-sm-2 col-sm-offset-3">
+
+            <img src="{% static "img/wassertraeger.png" %}" alt="">
+
+          </div>
+          <div class="col-sm-2">
+
+            <img src="{% static "img/schulkind.png" %}" alt="">
+
+          </div>
+          <div class="col-sm-2">
+
+            <img src="{% static "img/medizin.png" %}" alt="">
+
+          </div>
+        </div>
+        <div class="row items">
+          <div class="col-md-6 item-content">
+
+            <h2>{% trans "Mobilität für alle" %}</h2>
+            <p>
+              {% trans "Die meisten unserer Partner bieten – wie die Velowerkstatt des Drahtesels – Integrationsarbeitsplätze für Erwerbslose oder benachteiligte Menschen an. " %}
+            </p>
+
+          </div>
+          <div class="col-md-6 item-img" style="background:url({% static "img/mobility.jpg" %}) center/cover;"></div>
+        </div>
+        <div class="row items">
+          <div class="col-md-6 item-img" style="background:url({% static "img/education.jpg" %}) center/cover"></div>
+          <div class="col-md-6 item-content">
+
+            <h2>{% trans "Bildung" %}</h2>
+            <p>
+              {% trans "Die meisten unserer Partner bieten – wie die Velowerkstatt des Drahtesels – Integrationsarbeitsplätze für Erwerbslose oder benachteiligte Menschen an. " %}
+            </p>
+
+          </div>
+        </div>
+        <div class="row items">
+          <div class="col-md-6 item-content">
+            <h2>{% trans "Sociales Unternehmertum" %}</h2>
+            <p>
+              {% trans "Die meisten unserer Partner bieten – wie die Velowerkstatt des Drahtesels – Integrationsarbeitsplätze für Erwerbslose oder benachteiligte Menschen an. " %}
+            </p>
+          </div>
+          <div class="col-md-6 item-img"
+               style="background:url({% static "img/social_company.jpg" %}) center/cover"></div>
+        </div>
+      </div>
+    </section>
+    <section id="impact-history-graidess" class="container">
+      <h2 class="text-center">{% trans "Hier steht ein passender Titel" %}</h2>
+      <div class="row">
+        <div class="col-md-3" style="background:url({% static "img/graidess.jpg" %}) center/cover"></div>
+        <div class="col-md-9">
+
+          <p class="lead">
+            {% trans "Graidess Alphonce, 36 Jahre <br>Nshamba, Tansania" %}
+          </p>
+          <h2>{% trans "Wie Velos Haben Debessays Leben verändert" %}</h2>
+          <p class="lead">
+            {% trans "Haben Debessay aus Eritrea lernt dank des Integrationsprojekts Velos zu reparieren. Der grosse Oxmox riet ihr davon ab, da es dort wimmele von bösen Kommata, wilden Fragezeichen und hinterhältigen Semikoli." %}
+          </p>
+          <a href="#">{% trans "Zu Graidess' Geschichte" %}</a>
+
+        </div>
+      </div>
+    </section>
+    <section id="information" class="impact-information">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2">
+
+            <h1 class="text-center">{% trans "Sie möchten mitmachen?" %}</h1>
+            <p class="text-center">
+              {% trans "Es gibt vielseitige Möglichkeiten, sich mit Velafrica zu engagieren. Es packte seine sieben Versalien, schob sich sein Initial in den Gürtel und machte sich auf den Weg." %}
+            </p>
+
+          </div>
+        </div>
+        <div class="row equal">
+          <div class="col-sm-6 col-lg-3">
+            <div class="panel panel-default">
+              <a href="#">
+                <div class="panel-body">
+
+                  <p>{% trans "Welche Partner in Afrika mit uns arbeiten" %}</p>
+
+                </div>
+                <div class="panel-footer text-center">
+
+                  {% trans "Mehr erfahren" %}
+
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <div class="panel panel-default">
+              <a href="#">
+                <div class="panel-body">
+
+                  <p>{% trans "Welche Stationen Ihr gespendetes Velo noch durchlaufen wird" %}</p>
+
+                </div>
+                <div class="panel-footer text-center">
+
+                  {% trans "Mehr erfahren" %}
+
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <div class="panel panel-default">
+              <a href="#">
+                <div class="panel-body">
+
+                  <p>{% trans "Wer steht hinter Velafrica?" %}</p>
+
+                </div>
+                <div class="panel-footer text-center">
+
+                  {% trans "Mehr erfahren" %}
+
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <div class="panel panel-default">
+              <a href="#">
+                <div class="panel-body">
+
+                  <p>{% trans "Aktuelle News rund um Velafrica und Velo" %}</p>
+
+                </div>
+                <div class="panel-footer text-center">
+
+                  {% trans "Mehr erfahren" %}
+
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 {% endblock %}
