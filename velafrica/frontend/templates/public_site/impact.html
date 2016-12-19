@@ -31,14 +31,15 @@
       <div class="container">
         <div class="row teaser-vel">
           <div class="col-md-6 col-md-offset-6 teaser-white-bg">
+
             <h2>{% trans "Wirkung in der Schweiz" %}</h2>
             <p class="lead">
               {% trans "Der grosse Oxmox riet ihr davon ab, da es dort wimmele von bösen Kommata, wilden Fragezeichen und hinterhältigen Semikoli, doch das Blindtextchen ließ sich nicht beirren." %}
             </p>
+
           </div>
         </div>
       </div>
-
     </section>
     <section id="impact-swiss-network" class="container">
       <div class="row">
@@ -59,10 +60,7 @@
         <div class="row">
           <div class="col-md-8 col-md-offset-2 text-center">
 
-            <h2>{% trans "Hier steht ein passender Titel" %}</h2>
-            <p>
-              {% trans "In der Schweiz arbeitet Velafrica mit sozialen Einrichtungen zusammen, die Erwerbslose und Menschen mit Beeinträchtigungen beschäftigen. Dank diesem Partnernetzwerk können schweizweit Velos gesammelt und verarbeitet werden. Und nur dank dieser Zusammenarbeit ist es möglich, jährlich 17 000 fahrtüchtige Recycling-Velos zu verschiffen." %}
-            </p>
+            <h2>{% trans "Velafrica wirkt" %}</h2>
 
           </div>
         </div>
@@ -119,7 +117,8 @@
       </div>
     </section>
     <section id="impact-history-haben" class="container">
-      <h2 class="text-center">{% trans "Hier steht ein passender Titel" %}</h2>
+
+      <h2 class="text-center">{% trans "Aus unseren Projekten" %}</h2>
       <div class="row">
         <div class="col-md-3" style="background:url({% static "img/haben.jpg" %}) center/cover"></div>
         <div class="col-md-9">
@@ -169,10 +168,7 @@
         <div class="row">
           <div class="col-md-8 col-md-offset-2 text-center">
 
-            <h2>{% trans "Hier steht ein passender Titel" %}</h2>
-            <p>
-              {% trans "In der Schweiz arbeitet Velafrica mit sozialen Einrichtungen zusammen, die Erwerbslose und Menschen mit Beeinträchtigungen beschäftigen. Dank diesem Partnernetzwerk können schweizweit Velos gesammelt und verarbeitet werden. Und nur dank dieser Zusammenarbeit ist es möglich, jährlich 17 000 fahrtüchtige Recycling-Velos zu verschiffen." %}
-            </p>
+            <h2>{% trans "Afrika wird mobil" %}</h2>
 
           </div>
         </div>
@@ -260,10 +256,10 @@
         <div class="row equal">
           <div class="col-sm-6 col-lg-3">
             <div class="panel panel-default">
-              <a href="#">
+              <a href="{% url "home:donation:home" %}">
                 <div class="panel-body">
 
-                  <p>{% trans "Welche Partner in Afrika mit uns arbeiten" %}</p>
+                  <p>{% trans "Für Velafrica spenden" %}</p>
 
                 </div>
                 <div class="panel-footer text-center">
@@ -276,10 +272,10 @@
           </div>
           <div class="col-sm-6 col-lg-3">
             <div class="panel panel-default">
-              <a href="#">
+              <a href="{% url "home:map:home" %}">
                 <div class="panel-body">
 
-                  <p>{% trans "Welche Stationen Ihr gespendetes Velo noch durchlaufen wird" %}</p>
+                  <p>{% trans "Velo spenden" %}</p>
 
                 </div>
                 <div class="panel-footer text-center">
@@ -292,10 +288,10 @@
           </div>
           <div class="col-sm-6 col-lg-3">
             <div class="panel panel-default">
-              <a href="#">
+              <a href="{% url 'home:walkthroughs:collection' %}">
                 <div class="panel-body">
 
-                  <p>{% trans "Wer steht hinter Velafrica?" %}</p>
+                  <p>{% trans "Sammelanlass organisieren" %}</p>
 
                 </div>
                 <div class="panel-footer text-center">
@@ -308,10 +304,10 @@
           </div>
           <div class="col-sm-6 col-lg-3">
             <div class="panel panel-default">
-              <a href="#">
+              <a href="{% url 'home:walkthroughs:company' %}">
                 <div class="panel-body">
 
-                  <p>{% trans "Aktuelle News rund um Velafrica und Velo" %}</p>
+                  <p>{% trans "Als Firma engagieren" %}</p>
 
                 </div>
                 <div class="panel-footer text-center">
