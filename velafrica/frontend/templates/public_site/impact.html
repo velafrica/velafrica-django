@@ -12,29 +12,30 @@
       <div class="row">
         <div class="col-md-8 col-md-offset-2">
 
-          <h1 class="text-center">{% trans "Velos verändern Leben" %}</h1>
+          <h1 class="text-center">{% get_content "teaser_title" "Teaser Überschrift - Velos verändern Leben" %}</h1>
           <p>
-            {% trans "Der grosse Oxmox riet ihr davon ab, da es dort wimmele von bösen Kommata, wilden Fragezeichen und hinterhältigen Semikoli, doch das Blindtextchen ließ sich nicht beirren. Es packte seine sieben Versalien, schob sich sein Initial in den Gürtel und machte sich auf den Weg. Als es die ersten Hügel des Kursivgebirges erklommen hatte, warf es einen letzten Blick zurück auf die Skyline seiner Heimatstadt Buchstabhausen. " %}
+            {% get_content "teaser_content" "Teaser Content - Velos verändern Leben" %}
           </p>
 
         </div>
       </div>
       <div class="row">
         <div class="col-xs-12">
-          <iframe src="https://www.youtube.com/embed/XUwVqpnJ7jY" frameborder="0"
-                  allowfullscreen></iframe>
+
+          <iframe src="{% get_content "teaser_video" "Video - Velos verändern Leben" %}" frameborder="0"></iframe>
+
         </div>
       </div>
     </section>
     <section id="impact-swiss"
-             style="background: url({% static "img/Frauen_Schulung_Irim_Feb_2014.png" %}) center/cover;">
+             style="background: url({% get_content "impact_swiss_teaser_image" "Teaser Bild - Wirkung in der Schweiz" %}) center/cover;">
       <div class="container">
         <div class="row teaser-vel">
           <div class="col-md-6 col-md-offset-6 teaser-white-bg">
 
-            <h2>{% trans "Wirkung in der Schweiz" %}</h2>
+            <h2>{% get_content "impact_swiss_title" "Titel - Wirkung in der Schweiz" %}</h2>
             <p class="lead">
-              {% trans "Der grosse Oxmox riet ihr davon ab, da es dort wimmele von bösen Kommata, wilden Fragezeichen und hinterhältigen Semikoli, doch das Blindtextchen ließ sich nicht beirren." %}
+              {% get_content "impact_swiss_content" "Content - Wirkung in der Schweiz" %}
             </p>
 
           </div>
@@ -45,12 +46,12 @@
       <div class="row">
         <div class="col-md-8 col-md-offset-2  text-center">
 
-          <h2>{% trans "Unser Netzwerk" %}</h2>
+          <h2>{% get_content "network_swiss_title" "Titel - Unser Netzwerk" %}</h2>
           <p>
-            {% trans "In der Schweiz arbeitet Velafrica mit sozialen Einrichtungen zusammen, die Erwerbslose und Menschen mit Beeinträchtigungen beschäftigen. Dank diesem Partnernetzwerk können schweizweit Velos gesammelt und verarbeitet werden. Und nur dank dieser Zusammenarbeit ist es möglich, jährlich 17 000 fahrtüchtige Recycling-Velos zu verschiffen." %}
+            {% get_content "network_swiss_content" "Content - Unser Netzwerk" %}
           </p>
-          <a href="{% url "home:partner:swiss" %}">{% trans "Zum Netzwerk in der Schweiz" %}</a>
-          <img src="http://placehold.it/1000x500?text=SwissMap" alt="">
+          <a href="{% url "home:partner:swiss" %}">{% get_content "url_network_swiss" "Link - Zum Netzwerk in der Schweiz" %}</a>
+          <img src="{% get_content "swiss_map" "Bild - Schweizer Karte" %}" alt="">
 
         </div>
       </div>
@@ -60,59 +61,59 @@
         <div class="row">
           <div class="col-md-8 col-md-offset-2 text-center">
 
-            <h2>{% trans "Velafrica wirkt" %}</h2>
+            <h2>{% get_content "velafrica_impact_title" "Titel - Velafrica wirkt" %}</h2>
 
           </div>
         </div>
         <div class="row impact-tool">
           <div class="col-sm-2 col-sm-offset-3">
 
-            <img src="{% static "img/gabelschluessel.png" %}" alt="">
+            <img src="{% get_content "impact_tool_1" "Bild - Gabelschluessel" %}" alt="">
 
           </div>
           <div class="col-sm-2">
 
-            <img src="{% static "img/kettenblatt.png" %}" alt="">
+            <img src="{% get_content "impact_tool_2" "Bild - Kettenblatt" %}" alt="">
 
           </div>
           <div class="col-sm-2">
 
-            <img src="{% static "img/kettenpeitsche.png" %}" alt="">
+            <img src="{% get_content "impact_tool_3" "Bild - Kettenpeitsche" %}" alt="">
 
           </div>
         </div>
         <div class="row items">
           <div class="col-md-6 item-content">
 
-            <h2>{% trans "Integration" %}</h2>
+            <h2>{% get_content "integration_title" "Titel - Integration" %}</h2>
             <p>
-              {% trans "Die meisten unserer Partner bieten – wie die Velowerkstatt des Drahtesels – Integrationsarbeitsplätze für Erwerbslose oder benachteiligte Menschen an. " %}
+              {% get_content "integration_content" "Content - Integration" %}
             </p>
 
           </div>
-          <div class="col-md-6 item-img" style="background:url({% static "img/integration.png" %}) center/cover;">
+          <div class="col-md-6 item-img" style="background:url({% get_content "integration_image" "Bild - Integration" %}) center/cover;"></div>
+        </div>
+        <div class="row items">
+          <div class="col-md-6 item-img" style="background:url({% get_content "workplace_image" "Bild - Arbeitsplätze" %}) center/cover"></div>
+          <div class="col-md-6 item-content">
+
+            <h2>{% get_content "workplace_title" "Titel - Arbeitsplätze" %}</h2>
+            <p>
+              {% get_content "workplace_content" "Content - Arbeitsplätze" %}
+            </p>
 
           </div>
         </div>
         <div class="row items">
-          <div class="col-md-6 item-img" style="background:url({% static "img/workplace.png" %}) center/cover"></div>
           <div class="col-md-6 item-content">
 
-            <h2>{% trans "Arbeitsplätze" %}</h2>
+            <h2>{% get_content "recycling_title" "Titel - Recycling" %}</h2>
             <p>
-              {% trans "Die meisten unserer Partner bieten – wie die Velowerkstatt des Drahtesels – Integrationsarbeitsplätze für Erwerbslose oder benachteiligte Menschen an. " %}
+              {% get_content "recycling_content" "Content - Recycling" %}
             </p>
 
           </div>
-        </div>
-        <div class="row items">
-          <div class="col-md-6 item-content">
-            <h2>{% trans "Recycling" %}</h2>
-            <p>
-              {% trans "Die meisten unserer Partner bieten – wie die Velowerkstatt des Drahtesels – Integrationsarbeitsplätze für Erwerbslose oder benachteiligte Menschen an. " %}
-            </p>
-          </div>
-          <div class="col-md-6 item-img" style="background:url({% static "img/recycling.png" %}) center/cover"></div>
+          <div class="col-md-6 item-img" style="background:url({% get_content "recycling_image" "Bild - Recycling" %}) center/cover"></div>
         </div>
       </div>
     </section>
@@ -120,7 +121,7 @@
 
       <h2 class="text-center">{% trans "Aus unseren Projekten" %}</h2>
       <div class="row">
-        <div class="col-md-3" style="background:url({% static "img/haben.jpg" %}) center/cover"></div>
+        <div class="col-md-3" style="background:url({% get_content "haben_image" "Bild - Haben" %}) center/cover"></div>
         <div class="col-md-9">
 
           <p class="lead">
@@ -136,7 +137,7 @@
       </div>
     </section>
     <section id="impact-africa"
-             style="background: url({% static "img/Frauen_Schulung_Irim_Feb_2014_2.jpg" %}) center/cover;">
+             style="background: url({% get_content "impact_africa_teaser_image" "Teaser Bild - Wirkung in Afrika" %}) center/cover;">
       <div class="container">
         <div class="row teaser-vel">
           <div class="col-md-6 teaser-white-bg">
@@ -158,7 +159,7 @@
             {% trans "In der Schweiz arbeitet Velafrica mit sozialen Einrichtungen zusammen, die Erwerbslose und Menschen mit Beeinträchtigungen beschäftigen. Dank diesem Partnernetzwerk können schweizweit Velos gesammelt und verarbeitet werden. Und nur dank dieser Zusammenarbeit ist es möglich, jährlich 17 000 fahrtüchtige Recycling-Velos zu verschiffen." %}
           </p>
           <a href="{% url "home:partner:africa" %}">{% trans "Zum Netzwerk in Afrika" %}</a>
-          <img src="http://placehold.it/1000x500?text=AfricaMap" alt="">
+          <img src="{% get_content "africa_map" "Bild - Afrika Karte" %}" alt="">
 
         </div>
       </div>
@@ -198,10 +199,10 @@
             </p>
 
           </div>
-          <div class="col-md-6 item-img" style="background:url({% static "img/mobility.jpg" %}) center/cover;"></div>
+          <div class="col-md-6 item-img" style="background:url({% get_content "mobility_image" "Bild - Mobilität für alle" %}) center/cover;"></div>
         </div>
         <div class="row items">
-          <div class="col-md-6 item-img" style="background:url({% static "img/education.jpg" %}) center/cover"></div>
+          <div class="col-md-6 item-img" style="background:url({% get_content "education_image" "Bild - Bildung" %}) center/cover"></div>
           <div class="col-md-6 item-content">
 
             <h2>{% trans "Bildung" %}</h2>
@@ -219,14 +220,14 @@
             </p>
           </div>
           <div class="col-md-6 item-img"
-               style="background:url({% static "img/social_company.jpg" %}) center/cover"></div>
+               style="background:url({% get_content "social_image" "Bild - Sociales Unternehmertum" %}) center/cover"></div>
         </div>
       </div>
     </section>
     <section id="impact-history-graidess" class="container">
       <h2 class="text-center">{% trans "Hier steht ein passender Titel" %}</h2>
       <div class="row">
-        <div class="col-md-3" style="background:url({% static "img/graidess.jpg" %}) center/cover"></div>
+        <div class="col-md-3" style="background:url({% get_content "graidess_image" "Bild - Graidess" %}) center/cover"></div>
         <div class="col-md-9">
 
           <p class="lead">

@@ -1348,7 +1348,7 @@
     "language": "de",
     "path": "_mitmachen_firmen_",
     "key": "ansprechperson",
-    "value": "Claudia Meyr",
+    "value": "",
     "description": "Ansprechperperson: Mitmachen/Firmen"
   }
 },
@@ -1359,7 +1359,7 @@
     "language": "en",
     "path": "_mitmachen_firmen_",
     "key": "ansprechperson",
-    "value": "Claudia Meyr",
+    "value": "",
     "description": "Ansprechperperson: Mitmachen/Firmen"
   }
 },
@@ -1370,7 +1370,7 @@
     "language": "de",
     "path": "_my_tracking_",
     "key": "text_donation_link",
-    "value": "Hilf uns noch mehr Velos nach Afrika zu schicken!",
+    "value": "",
     "description": "Text f\u00fcr den Link zur Spendenseite"
   }
 },
@@ -1381,74 +1381,668 @@
     "language": "en",
     "path": "_my_tracking_",
     "key": "text_donation_link",
-    "value": "Hilf uns noch mehr Velos nach Afrika zu schicken!",
+    "value": "",
     "description": "Text f\u00fcr den Link zur Spendenseite"
   }
 },
 {
   "model": "public_site.content",
-  "pk": 127,
+  "pk": 137,
   "fields": {
     "language": "de",
-    "path": "_mitmachen_velos_",
-    "key": "ansprechperson",
-    "value": "Claudia Meyr",
-    "description": "Ansprechperperson: Mitmachen/Ausmistaktion"
+    "path": "_wirkung_",
+    "key": "teaser_title",
+    "value": "Velos ver\u00e4ndern Leben",
+    "description": "Teaser \u00dcberschrift - Velos ver\u00e4ndern Leben"
   }
 },
 {
   "model": "public_site.content",
-  "pk": 128,
+  "pk": 138,
   "fields": {
     "language": "en",
-    "path": "_mitmachen_velos_",
-    "key": "ansprechperson",
-    "value": "Claudia Meyr",
-    "description": "Ansprechperperson: Mitmachen/Ausmistaktion"
+    "path": "_wirkung_",
+    "key": "teaser_title",
+    "value": "",
+    "description": "Teaser \u00dcberschrift - Velos ver\u00e4ndern Leben"
   }
 },
 {
   "model": "public_site.content",
-  "pk": 129,
+  "pk": 139,
   "fields": {
     "language": "de",
-    "path": "_mitmachen_schulen_",
-    "key": "ansprechperson",
-    "value": "Mats Gurtner",
-    "description": "Ansprechperperson: Mitmachen/Schulen"
+    "path": "_wirkung_",
+    "key": "teaser_content",
+    "value": "Der grosse Oxmox riet ihr davon ab, da es dort wimmele von b\u00f6sen Kommata, wilden Fragezeichen und hinterh\u00e4ltigen Semikoli, doch das Blindtextchen lie\u00df sich nicht beirren. Es packte seine sieben Versalien, schob sich sein Initial in den G\u00fcrtel und machte sich auf den Weg. Als es die ersten H\u00fcgel des Kursivgebirges erklommen hatte, warf es einen letzten Blick zur\u00fcck auf die Skyline seiner Heimatstadt Buchstabhausen.",
+    "description": "Teaser Content - Velos ver\u00e4ndern Leben"
   }
 },
 {
   "model": "public_site.content",
-  "pk": 130,
+  "pk": 140,
   "fields": {
     "language": "en",
-    "path": "_mitmachen_schulen_",
-    "key": "ansprechperson",
-    "value": "Mats Gurtner",
-    "description": "Ansprechperperson: Mitmachen/Schulen"
+    "path": "_wirkung_",
+    "key": "teaser_content",
+    "value": "",
+    "description": "Teaser Content - Velos ver\u00e4ndern Leben"
   }
 },
 {
   "model": "public_site.content",
-  "pk": 131,
+  "pk": 141,
   "fields": {
     "language": "de",
-    "path": "_mitmachen_frewillig_",
-    "key": "ansprechperson",
-    "value": "Matthias Maurer",
-    "description": "Ansprechperperson: Mitmachen/Freiwilligeneinsatz"
+    "path": "_wirkung_",
+    "key": "teaser_video",
+    "value": "https://www.youtube.com/embed/XUwVqpnJ7jY",
+    "description": "Video - Velos ver\u00e4ndern Leben"
   }
 },
 {
   "model": "public_site.content",
-  "pk": 132,
+  "pk": 142,
   "fields": {
     "language": "en",
-    "path": "_mitmachen_frewillig_",
-    "key": "ansprechperson",
-    "value": "Matthias Maurer",
-    "description": "Ansprechperperson: Mitmachen/Freiwilligeneinsatz"
+    "path": "_wirkung_",
+    "key": "teaser_video",
+    "value": "https://www.youtube.com/embed/XUwVqpnJ7jY",
+    "description": "Video - Velos ver\u00e4ndern Leben"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 143,
+  "fields": {
+    "language": "de",
+    "path": "_wirkung_",
+    "key": "impact_swiss_teaser_image",
+    "value": "http://development-files.velafrica.ch.s3.amazonaws.com/filer_public/df/a7/dfa79951-4beb-4e0a-b5ac-bac28fd9f7ea/frauen_schulung_irim_feb_2014.png",
+    "description": "Teaser Bild - Wirkung in der Schweiz"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 144,
+  "fields": {
+    "language": "en",
+    "path": "_wirkung_",
+    "key": "impact_swiss_teaser_image",
+    "value": "http://development-files.velafrica.ch.s3.amazonaws.com/filer_public/df/a7/dfa79951-4beb-4e0a-b5ac-bac28fd9f7ea/frauen_schulung_irim_feb_2014.png",
+    "description": "Teaser Bild - Wirkung in der Schweiz"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 145,
+  "fields": {
+    "language": "de",
+    "path": "_wirkung_",
+    "key": "impact_swiss_title",
+    "value": "Wirkung in der Schweiz",
+    "description": "Titel - Wirkung in der Schweiz"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 146,
+  "fields": {
+    "language": "en",
+    "path": "_wirkung_",
+    "key": "impact_swiss_title",
+    "value": "",
+    "description": "Titel - Wirkung in der Schweiz"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 147,
+  "fields": {
+    "language": "de",
+    "path": "_wirkung_",
+    "key": "impact_swiss_content",
+    "value": "Der grosse Oxmox riet ihr davon ab, da es dort wimmele von b\u00f6sen Kommata, wilden Fragezeichen und hinterh\u00e4ltigen Semikoli, doch das Blindtextchen lie\u00df sich nicht beirren.",
+    "description": "Content - Wirkung in der Schweiz"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 148,
+  "fields": {
+    "language": "en",
+    "path": "_wirkung_",
+    "key": "impact_swiss_content",
+    "value": "",
+    "description": "Content - Wirkung in der Schweiz"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 149,
+  "fields": {
+    "language": "de",
+    "path": "_wirkung_",
+    "key": "network_swiss_title",
+    "value": "Unser Netzwerk",
+    "description": "Titel - Unser Netzwerk"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 150,
+  "fields": {
+    "language": "en",
+    "path": "_wirkung_",
+    "key": "network_swiss_title",
+    "value": "",
+    "description": "Titel - Unser Netzwerk"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 151,
+  "fields": {
+    "language": "de",
+    "path": "_wirkung_",
+    "key": "network_swiss_content",
+    "value": "In der Schweiz arbeitet Velafrica mit sozialen Einrichtungen zusammen, die Erwerbslose und Menschen mit Beeintr\u00e4chtigungen besch\u00e4ftigen. Dank diesem Partnernetzwerk k\u00f6nnen schweizweit Velos gesammelt und verarbeitet werden. Und nur dank dieser Zusammenarbeit ist es m\u00f6glich, j\u00e4hrlich 17 000 fahrt\u00fcchtige Recycling-Velos zu verschiffen.",
+    "description": "Content - Unser Netzwerk"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 152,
+  "fields": {
+    "language": "en",
+    "path": "_wirkung_",
+    "key": "network_swiss_content",
+    "value": "",
+    "description": "Content - Unser Netzwerk"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 153,
+  "fields": {
+    "language": "de",
+    "path": "_wirkung_",
+    "key": "url_network_swiss",
+    "value": "Zum Netzwerk in der Schweiz",
+    "description": "Link - Zum Netzwerk in der Schweiz"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 154,
+  "fields": {
+    "language": "en",
+    "path": "_wirkung_",
+    "key": "url_network_swiss",
+    "value": "",
+    "description": "Link - Zum Netzwerk in der Schweiz"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 155,
+  "fields": {
+    "language": "de",
+    "path": "_wirkung_",
+    "key": "swiss_map",
+    "value": "http://development-files.velafrica.ch.s3.amazonaws.com/filer_public/e9/48/e9485b0b-4768-461b-8c8c-081ecd930fd1/karte_schweiz2.png",
+    "description": "Bild - Schweizer Karte"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 156,
+  "fields": {
+    "language": "en",
+    "path": "_wirkung_",
+    "key": "swiss_map",
+    "value": "",
+    "description": "Bild - Schweizer Karte"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 157,
+  "fields": {
+    "language": "de",
+    "path": "_wirkung_",
+    "key": "velafrica_impact_title",
+    "value": "Velafrica wirkt",
+    "description": "Titel - Velafrica wirkt"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 158,
+  "fields": {
+    "language": "en",
+    "path": "_wirkung_",
+    "key": "velafrica_impact_title",
+    "value": "",
+    "description": "Titel - Velafrica wirkt"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 159,
+  "fields": {
+    "language": "de",
+    "path": "_wirkung_",
+    "key": "integration_title",
+    "value": "Integration",
+    "description": "Titel - Integration"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 160,
+  "fields": {
+    "language": "en",
+    "path": "_wirkung_",
+    "key": "integration_title",
+    "value": "",
+    "description": "Titel - Integration"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 161,
+  "fields": {
+    "language": "de",
+    "path": "_wirkung_",
+    "key": "integration_content",
+    "value": "Die meisten unserer Partner bieten \u2013 wie die Velowerkstatt des Drahtesels \u2013 Integrationsarbeitspl\u00e4tze f\u00fcr Erwerbslose oder benachteiligte Menschen an.",
+    "description": "Content - Integration"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 162,
+  "fields": {
+    "language": "en",
+    "path": "_wirkung_",
+    "key": "integration_content",
+    "value": "",
+    "description": "Content - Integration"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 163,
+  "fields": {
+    "language": "de",
+    "path": "_wirkung_",
+    "key": "integration_image",
+    "value": "http://development-files.velafrica.ch.s3.amazonaws.com/filer_public/25/f9/25f90664-efa2-4b0d-ade8-a9ef6e5f9e2a/integration.png",
+    "description": "Bild - Integration"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 164,
+  "fields": {
+    "language": "en",
+    "path": "_wirkung_",
+    "key": "integration_image",
+    "value": "",
+    "description": "Bild - Integration"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 165,
+  "fields": {
+    "language": "de",
+    "path": "_wirkung_",
+    "key": "workplace_image",
+    "value": "http://development-files.velafrica.ch.s3.amazonaws.com/filer_public/c1/b4/c1b4b0bb-8857-444c-b842-c332fa4174ce/workplace.png",
+    "description": "Bild - Arbeitspl\u00e4tze"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 166,
+  "fields": {
+    "language": "en",
+    "path": "_wirkung_",
+    "key": "workplace_image",
+    "value": "",
+    "description": "Bild - Arbeitspl\u00e4tze"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 167,
+  "fields": {
+    "language": "de",
+    "path": "_wirkung_",
+    "key": "workplace_title",
+    "value": "Arbeitspl\u00e4tze",
+    "description": "Titel - Arbeitspl\u00e4tze"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 168,
+  "fields": {
+    "language": "en",
+    "path": "_wirkung_",
+    "key": "workplace_title",
+    "value": "",
+    "description": "Titel - Arbeitspl\u00e4tze"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 169,
+  "fields": {
+    "language": "de",
+    "path": "_wirkung_",
+    "key": "workplace_content",
+    "value": "Die meisten unserer Partner bieten \u2013 wie die Velowerkstatt des Drahtesels \u2013 Integrationsarbeitspl\u00e4tze f\u00fcr Erwerbslose oder benachteiligte Menschen an.",
+    "description": "Content - Arbeitspl\u00e4tze"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 170,
+  "fields": {
+    "language": "en",
+    "path": "_wirkung_",
+    "key": "workplace_content",
+    "value": "",
+    "description": "Content - Arbeitspl\u00e4tze"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 171,
+  "fields": {
+    "language": "de",
+    "path": "_wirkung_",
+    "key": "impact_tool_1",
+    "value": "http://development-files.velafrica.ch.s3.amazonaws.com/filer_public/e4/08/e408e00b-2f35-4405-92a0-8b2d2f5f6115/amerikaner2.png",
+    "description": "Bild - Gabelschluessel"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 172,
+  "fields": {
+    "language": "en",
+    "path": "_wirkung_",
+    "key": "impact_tool_1",
+    "value": "",
+    "description": "Bild - Gabelschluessel"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 173,
+  "fields": {
+    "language": "de",
+    "path": "_wirkung_",
+    "key": "impact_tool_2",
+    "value": "http://development-files.velafrica.ch.s3.amazonaws.com/filer_public/cb/1c/cb1ce5af-fa0c-4fa4-aa95-2122f65690c3/kettenblatt2.png",
+    "description": "Bild - Kettenblatt"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 174,
+  "fields": {
+    "language": "en",
+    "path": "_wirkung_",
+    "key": "impact_tool_2",
+    "value": "",
+    "description": "Bild - Kettenblatt"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 175,
+  "fields": {
+    "language": "de",
+    "path": "_wirkung_",
+    "key": "impact_tool_3",
+    "value": "http://development-files.velafrica.ch.s3.amazonaws.com/filer_public/7d/f2/7df2f493-4d7e-4e8e-86d8-b6bcc4a2de7b/kettenpeitsche2.png",
+    "description": "Bild - Kettenpeitsche"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 176,
+  "fields": {
+    "language": "en",
+    "path": "_wirkung_",
+    "key": "impact_tool_3",
+    "value": "",
+    "description": "Bild - Kettenpeitsche"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 177,
+  "fields": {
+    "language": "de",
+    "path": "_wirkung_",
+    "key": "recycling_title",
+    "value": "Recycling",
+    "description": "Titel - Recycling"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 178,
+  "fields": {
+    "language": "en",
+    "path": "_wirkung_",
+    "key": "recycling_title",
+    "value": "",
+    "description": "Titel - Recycling"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 179,
+  "fields": {
+    "language": "de",
+    "path": "_wirkung_",
+    "key": "recycling_content",
+    "value": "Die meisten unserer Partner bieten \u2013 wie die Velowerkstatt des Drahtesels \u2013 Integrationsarbeitspl\u00e4tze f\u00fcr Erwerbslose oder benachteiligte Menschen an.",
+    "description": "Content - Recycling"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 180,
+  "fields": {
+    "language": "en",
+    "path": "_wirkung_",
+    "key": "recycling_content",
+    "value": "",
+    "description": "Content - Recycling"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 181,
+  "fields": {
+    "language": "de",
+    "path": "_wirkung_",
+    "key": "recycling_image",
+    "value": "http://development-files.velafrica.ch.s3.amazonaws.com/filer_public/15/0b/150ba3c1-332f-42c4-a0bf-a1dc95ae565f/recycling.png",
+    "description": "Bild - Recycling"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 182,
+  "fields": {
+    "language": "en",
+    "path": "_wirkung_",
+    "key": "recycling_image",
+    "value": "",
+    "description": "Bild - Recycling"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 183,
+  "fields": {
+    "language": "de",
+    "path": "_wirkung_",
+    "key": "haben_image",
+    "value": "http://development-files.velafrica.ch.s3.amazonaws.com/filer_public/df/f1/dff13558-ea58-4893-a34d-c0ccefd50c55/haben.jpg",
+    "description": "Bild - Haben"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 184,
+  "fields": {
+    "language": "en",
+    "path": "_wirkung_",
+    "key": "haben_image",
+    "value": "",
+    "description": "Bild - Haben"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 185,
+  "fields": {
+    "language": "de",
+    "path": "_wirkung_",
+    "key": "impact_africa_teaser_image",
+    "value": "http://development-files.velafrica.ch.s3.amazonaws.com/filer_public/26/fc/26fc8130-6f6a-48e7-9c20-05e193436984/frauen_schulung_irim_feb_2014_2.jpg",
+    "description": "Teaser Bild - Wirkung in Afrika"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 186,
+  "fields": {
+    "language": "en",
+    "path": "_wirkung_",
+    "key": "impact_africa_teaser_image",
+    "value": "",
+    "description": "Teaser Bild - Wirkung in Afrika"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 187,
+  "fields": {
+    "language": "de",
+    "path": "_wirkung_",
+    "key": "africa_map",
+    "value": "http://development-files.velafrica.ch.s3.amazonaws.com/filer_public/e9/68/e96838b6-faf6-41ee-89b7-e9eb81d10a80/karte_afrika2.png",
+    "description": "Bild - Afrika Karte"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 188,
+  "fields": {
+    "language": "en",
+    "path": "_wirkung_",
+    "key": "africa_map",
+    "value": "",
+    "description": "Bild - Afrika Karte"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 189,
+  "fields": {
+    "language": "de",
+    "path": "_wirkung_",
+    "key": "mobility_image",
+    "value": "http://development-files.velafrica.ch.s3.amazonaws.com/filer_public/17/dc/17dc9a3e-8d07-4cbd-a065-ff88a4b0441f/mobility.jpg",
+    "description": "Bild - Mobilit\u00e4t f\u00fcr alle"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 190,
+  "fields": {
+    "language": "en",
+    "path": "_wirkung_",
+    "key": "mobility_image",
+    "value": "",
+    "description": "Bild - Mobilit\u00e4t f\u00fcr alle"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 191,
+  "fields": {
+    "language": "de",
+    "path": "_wirkung_",
+    "key": "education_image",
+    "value": "http://development-files.velafrica.ch.s3.amazonaws.com/filer_public/1e/e2/1ee24a1b-354e-4654-a8ae-c98995714222/education.jpg",
+    "description": "Bild - Bildung"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 192,
+  "fields": {
+    "language": "en",
+    "path": "_wirkung_",
+    "key": "education_image",
+    "value": "",
+    "description": "Bild - Bildung"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 193,
+  "fields": {
+    "language": "de",
+    "path": "_wirkung_",
+    "key": "social_image",
+    "value": "http://development-files.velafrica.ch.s3.amazonaws.com/filer_public/35/18/35188802-b95f-4eb9-ac91-df1697461db9/social_company.jpg",
+    "description": "Bild - Sociales Unternehmertum"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 194,
+  "fields": {
+    "language": "en",
+    "path": "_wirkung_",
+    "key": "social_image",
+    "value": "",
+    "description": "Bild - Sociales Unternehmertum"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 195,
+  "fields": {
+    "language": "de",
+    "path": "_wirkung_",
+    "key": "graidess_image",
+    "value": "http://development-files.velafrica.ch.s3.amazonaws.com/filer_public/1d/32/1d32637a-bd9b-434d-9687-a6fc0dce5d10/graidess.jpg",
+    "description": "Bild - Graidess"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 196,
+  "fields": {
+    "language": "en",
+    "path": "_wirkung_",
+    "key": "graidess_image",
+    "value": "",
+    "description": "Bild - Graidess"
   }
 }
 ]
