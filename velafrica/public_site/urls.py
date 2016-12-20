@@ -56,5 +56,5 @@ urlpatterns = [
     url(r'^', include(agenda, namespace='agenda')),
     url(r'^impressum/$', render_impressum_template, name='impressum'),
     url(r'^supporter/$', render_supporter, name='supporter'),
-    url(r'^impact/$', render_impact, name='impact'),
+    url(r'^wirkung/$', render_impact, name='impact'),
 ]
