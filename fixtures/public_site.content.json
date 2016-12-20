@@ -1450,7 +1450,7 @@
     "value": "Matthias Maurer",
     "description": "Ansprechperperson: Mitmachen/Freiwilligeneinsatz"
   }
-}
+},
   {
   "model": "public_site.content",
   "pk": 133,
@@ -2109,6 +2109,72 @@
     "key": "graidess_image",
     "value": "",
     "description": "Bild - Graidess"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 193,
+  "fields": {
+    "language": "de",
+    "path": "_wirkung_",
+    "key": "water_bearer_image",
+    "value": "http://development-files.velafrica.ch.s3.amazonaws.com/filer_public/64/70/64705914-b285-4637-9e60-64c41af675f1/wassertraeger2.png",
+    "description": "Bild - Wassertraeger"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 194,
+  "fields": {
+    "language": "en",
+    "path": "_wirkung_",
+    "key": "water_bearer_image",
+    "value": "",
+    "description": "Bild - Wassertraeger"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 195,
+  "fields": {
+    "language": "de",
+    "path": "_wirkung_",
+    "key": "schoolchild_image",
+    "value": "http://development-files.velafrica.ch.s3.amazonaws.com/filer_public/52/1c/521cbe57-a3b0-432c-a85c-b7306a291151/schulkind2.png",
+    "description": "Bild - Schulkind"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 196,
+  "fields": {
+    "language": "en",
+    "path": "_wirkung_",
+    "key": "schoolchild_image",
+    "value": "",
+    "description": "Bild - Schulkind"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 197,
+  "fields": {
+    "language": "de",
+    "path": "_wirkung_",
+    "key": "medicine_image",
+    "value": "http://development-files.velafrica.ch.s3.amazonaws.com/filer_public/85/5c/855c9845-de01-4871-a8aa-4ee0557e8502/medizin2.png",
+    "description": "Bild - Medizin"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 198,
+  "fields": {
+    "language": "en",
+    "path": "_wirkung_",
+    "key": "medicine_image",
+    "value": "",
+    "description": "Bild - Medizin"
   }
 }
 ]
