@@ -1348,7 +1348,7 @@
     "language": "de",
     "path": "_mitmachen_firmen_",
     "key": "ansprechperson",
-    "value": "",
+    "value": "Claudia Meyr",
     "description": "Ansprechperperson: Mitmachen/Firmen"
   }
 },
@@ -1359,7 +1359,7 @@
     "language": "en",
     "path": "_mitmachen_firmen_",
     "key": "ansprechperson",
-    "value": "",
+    "value": "Claudia Meyr",
     "description": "Ansprechperperson: Mitmachen/Firmen"
   }
 },
@@ -1370,7 +1370,7 @@
     "language": "de",
     "path": "_my_tracking_",
     "key": "text_donation_link",
-    "value": "",
+    "value": "Hilf uns noch mehr Velos nach Afrika zu schicken!",
     "description": "Text f\u00fcr den Link zur Spendenseite"
   }
 },
@@ -1381,13 +1381,79 @@
     "language": "en",
     "path": "_my_tracking_",
     "key": "text_donation_link",
-    "value": "",
+    "value": "Hilf uns noch mehr Velos nach Afrika zu schicken!",
     "description": "Text f\u00fcr den Link zur Spendenseite"
   }
 },
 {
   "model": "public_site.content",
-  "pk": 137,
+  "pk": 127,
+  "fields": {
+    "language": "de",
+    "path": "_mitmachen_velos_",
+    "key": "ansprechperson",
+    "value": "Claudia Meyr",
+    "description": "Ansprechperperson: Mitmachen/Ausmistaktion"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 128,
+  "fields": {
+    "language": "en",
+    "path": "_mitmachen_velos_",
+    "key": "ansprechperson",
+    "value": "Claudia Meyr",
+    "description": "Ansprechperperson: Mitmachen/Ausmistaktion"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 129,
+  "fields": {
+    "language": "de",
+    "path": "_mitmachen_schulen_",
+    "key": "ansprechperson",
+    "value": "Mats Gurtner",
+    "description": "Ansprechperperson: Mitmachen/Schulen"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 130,
+  "fields": {
+    "language": "en",
+    "path": "_mitmachen_schulen_",
+    "key": "ansprechperson",
+    "value": "Mats Gurtner",
+    "description": "Ansprechperperson: Mitmachen/Schulen"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 131,
+  "fields": {
+    "language": "de",
+    "path": "_mitmachen_frewillig_",
+    "key": "ansprechperson",
+    "value": "Matthias Maurer",
+    "description": "Ansprechperperson: Mitmachen/Freiwilligeneinsatz"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 132,
+  "fields": {
+    "language": "en",
+    "path": "_mitmachen_frewillig_",
+    "key": "ansprechperson",
+    "value": "Matthias Maurer",
+    "description": "Ansprechperperson: Mitmachen/Freiwilligeneinsatz"
+  }
+}
+  {
+  "model": "public_site.content",
+  "pk": 133,
   "fields": {
     "language": "de",
     "path": "_wirkung_",
@@ -1398,7 +1464,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 138,
+  "pk": 134,
   "fields": {
     "language": "en",
     "path": "_wirkung_",
@@ -1409,7 +1475,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 139,
+  "pk": 135,
   "fields": {
     "language": "de",
     "path": "_wirkung_",
@@ -1420,7 +1486,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 140,
+  "pk": 136,
   "fields": {
     "language": "en",
     "path": "_wirkung_",
@@ -1431,51 +1497,51 @@
 },
 {
   "model": "public_site.content",
+  "pk": 137,
+  "fields": {
+    "language": "de",
+    "path": "_wirkung_",
+    "key": "teaser_video",
+    "value": "https://www.youtube.com/embed/XUwVqpnJ7jY",
+    "description": "Video - Velos ver\u00e4ndern Leben"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 138,
+  "fields": {
+    "language": "en",
+    "path": "_wirkung_",
+    "key": "teaser_video",
+    "value": "https://www.youtube.com/embed/XUwVqpnJ7jY",
+    "description": "Video - Velos ver\u00e4ndern Leben"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 139,
+  "fields": {
+    "language": "de",
+    "path": "_wirkung_",
+    "key": "impact_swiss_teaser_image",
+    "value": "http://development-files.velafrica.ch.s3.amazonaws.com/filer_public/df/a7/dfa79951-4beb-4e0a-b5ac-bac28fd9f7ea/frauen_schulung_irim_feb_2014.png",
+    "description": "Teaser Bild - Wirkung in der Schweiz"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 140,
+  "fields": {
+    "language": "en",
+    "path": "_wirkung_",
+    "key": "impact_swiss_teaser_image",
+    "value": "http://development-files.velafrica.ch.s3.amazonaws.com/filer_public/df/a7/dfa79951-4beb-4e0a-b5ac-bac28fd9f7ea/frauen_schulung_irim_feb_2014.png",
+    "description": "Teaser Bild - Wirkung in der Schweiz"
+  }
+},
+{
+  "model": "public_site.content",
   "pk": 141,
-  "fields": {
-    "language": "de",
-    "path": "_wirkung_",
-    "key": "teaser_video",
-    "value": "https://www.youtube.com/embed/XUwVqpnJ7jY",
-    "description": "Video - Velos ver\u00e4ndern Leben"
-  }
-},
-{
-  "model": "public_site.content",
-  "pk": 142,
-  "fields": {
-    "language": "en",
-    "path": "_wirkung_",
-    "key": "teaser_video",
-    "value": "https://www.youtube.com/embed/XUwVqpnJ7jY",
-    "description": "Video - Velos ver\u00e4ndern Leben"
-  }
-},
-{
-  "model": "public_site.content",
-  "pk": 143,
-  "fields": {
-    "language": "de",
-    "path": "_wirkung_",
-    "key": "impact_swiss_teaser_image",
-    "value": "http://development-files.velafrica.ch.s3.amazonaws.com/filer_public/df/a7/dfa79951-4beb-4e0a-b5ac-bac28fd9f7ea/frauen_schulung_irim_feb_2014.png",
-    "description": "Teaser Bild - Wirkung in der Schweiz"
-  }
-},
-{
-  "model": "public_site.content",
-  "pk": 144,
-  "fields": {
-    "language": "en",
-    "path": "_wirkung_",
-    "key": "impact_swiss_teaser_image",
-    "value": "http://development-files.velafrica.ch.s3.amazonaws.com/filer_public/df/a7/dfa79951-4beb-4e0a-b5ac-bac28fd9f7ea/frauen_schulung_irim_feb_2014.png",
-    "description": "Teaser Bild - Wirkung in der Schweiz"
-  }
-},
-{
-  "model": "public_site.content",
-  "pk": 145,
   "fields": {
     "language": "de",
     "path": "_wirkung_",
@@ -1486,7 +1552,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 146,
+  "pk": 142,
   "fields": {
     "language": "en",
     "path": "_wirkung_",
@@ -1497,7 +1563,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 147,
+  "pk": 143,
   "fields": {
     "language": "de",
     "path": "_wirkung_",
@@ -1508,7 +1574,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 148,
+  "pk": 144,
   "fields": {
     "language": "en",
     "path": "_wirkung_",
@@ -1519,7 +1585,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 149,
+  "pk": 145,
   "fields": {
     "language": "de",
     "path": "_wirkung_",
@@ -1530,7 +1596,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 150,
+  "pk": 146,
   "fields": {
     "language": "en",
     "path": "_wirkung_",
@@ -1541,7 +1607,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 151,
+  "pk": 147,
   "fields": {
     "language": "de",
     "path": "_wirkung_",
@@ -1552,7 +1618,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 152,
+  "pk": 148,
   "fields": {
     "language": "en",
     "path": "_wirkung_",
@@ -1563,7 +1629,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 153,
+  "pk": 149,
   "fields": {
     "language": "de",
     "path": "_wirkung_",
@@ -1574,7 +1640,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 154,
+  "pk": 150,
   "fields": {
     "language": "en",
     "path": "_wirkung_",
@@ -1585,7 +1651,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 155,
+  "pk": 151,
   "fields": {
     "language": "de",
     "path": "_wirkung_",
@@ -1596,7 +1662,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 156,
+  "pk": 152,
   "fields": {
     "language": "en",
     "path": "_wirkung_",
@@ -1607,7 +1673,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 157,
+  "pk": 153,
   "fields": {
     "language": "de",
     "path": "_wirkung_",
@@ -1618,7 +1684,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 158,
+  "pk": 154,
   "fields": {
     "language": "en",
     "path": "_wirkung_",
@@ -1629,7 +1695,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 159,
+  "pk": 155,
   "fields": {
     "language": "de",
     "path": "_wirkung_",
@@ -1640,7 +1706,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 160,
+  "pk": 156,
   "fields": {
     "language": "en",
     "path": "_wirkung_",
@@ -1651,7 +1717,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 161,
+  "pk": 157,
   "fields": {
     "language": "de",
     "path": "_wirkung_",
@@ -1662,7 +1728,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 162,
+  "pk": 158,
   "fields": {
     "language": "en",
     "path": "_wirkung_",
@@ -1673,7 +1739,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 163,
+  "pk": 159,
   "fields": {
     "language": "de",
     "path": "_wirkung_",
@@ -1684,7 +1750,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 164,
+  "pk": 160,
   "fields": {
     "language": "en",
     "path": "_wirkung_",
@@ -1695,7 +1761,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 165,
+  "pk": 161,
   "fields": {
     "language": "de",
     "path": "_wirkung_",
@@ -1706,7 +1772,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 166,
+  "pk": 162,
   "fields": {
     "language": "en",
     "path": "_wirkung_",
@@ -1717,7 +1783,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 167,
+  "pk": 163,
   "fields": {
     "language": "de",
     "path": "_wirkung_",
@@ -1728,7 +1794,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 168,
+  "pk": 164,
   "fields": {
     "language": "en",
     "path": "_wirkung_",
@@ -1739,7 +1805,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 169,
+  "pk": 165,
   "fields": {
     "language": "de",
     "path": "_wirkung_",
@@ -1750,7 +1816,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 170,
+  "pk": 166,
   "fields": {
     "language": "en",
     "path": "_wirkung_",
@@ -1761,7 +1827,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 171,
+  "pk": 167,
   "fields": {
     "language": "de",
     "path": "_wirkung_",
@@ -1772,7 +1838,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 172,
+  "pk": 168,
   "fields": {
     "language": "en",
     "path": "_wirkung_",
@@ -1783,7 +1849,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 173,
+  "pk": 169,
   "fields": {
     "language": "de",
     "path": "_wirkung_",
@@ -1794,7 +1860,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 174,
+  "pk": 170,
   "fields": {
     "language": "en",
     "path": "_wirkung_",
@@ -1805,7 +1871,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 175,
+  "pk": 171,
   "fields": {
     "language": "de",
     "path": "_wirkung_",
@@ -1816,7 +1882,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 176,
+  "pk": 172,
   "fields": {
     "language": "en",
     "path": "_wirkung_",
@@ -1827,7 +1893,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 177,
+  "pk": 173,
   "fields": {
     "language": "de",
     "path": "_wirkung_",
@@ -1838,7 +1904,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 178,
+  "pk": 174,
   "fields": {
     "language": "en",
     "path": "_wirkung_",
@@ -1849,7 +1915,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 179,
+  "pk": 175,
   "fields": {
     "language": "de",
     "path": "_wirkung_",
@@ -1860,7 +1926,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 180,
+  "pk": 176,
   "fields": {
     "language": "en",
     "path": "_wirkung_",
@@ -1871,7 +1937,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 181,
+  "pk": 177,
   "fields": {
     "language": "de",
     "path": "_wirkung_",
@@ -1882,7 +1948,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 182,
+  "pk": 178,
   "fields": {
     "language": "en",
     "path": "_wirkung_",
@@ -1893,7 +1959,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 183,
+  "pk": 179,
   "fields": {
     "language": "de",
     "path": "_wirkung_",
@@ -1904,7 +1970,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 184,
+  "pk": 180,
   "fields": {
     "language": "en",
     "path": "_wirkung_",
@@ -1915,7 +1981,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 185,
+  "pk": 181,
   "fields": {
     "language": "de",
     "path": "_wirkung_",
@@ -1926,7 +1992,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 186,
+  "pk": 182,
   "fields": {
     "language": "en",
     "path": "_wirkung_",
@@ -1937,7 +2003,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 187,
+  "pk": 183,
   "fields": {
     "language": "de",
     "path": "_wirkung_",
@@ -1948,7 +2014,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 188,
+  "pk": 184,
   "fields": {
     "language": "en",
     "path": "_wirkung_",
@@ -1959,7 +2025,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 189,
+  "pk": 185,
   "fields": {
     "language": "de",
     "path": "_wirkung_",
@@ -1970,7 +2036,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 190,
+  "pk": 186,
   "fields": {
     "language": "en",
     "path": "_wirkung_",
@@ -1981,7 +2047,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 191,
+  "pk": 187,
   "fields": {
     "language": "de",
     "path": "_wirkung_",
@@ -1992,7 +2058,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 192,
+  "pk": 188,
   "fields": {
     "language": "en",
     "path": "_wirkung_",
@@ -2003,7 +2069,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 193,
+  "pk": 189,
   "fields": {
     "language": "de",
     "path": "_wirkung_",
@@ -2014,7 +2080,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 194,
+  "pk": 190,
   "fields": {
     "language": "en",
     "path": "_wirkung_",
@@ -2025,7 +2091,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 195,
+  "pk": 191,
   "fields": {
     "language": "de",
     "path": "_wirkung_",
@@ -2036,7 +2102,7 @@
 },
 {
   "model": "public_site.content",
-  "pk": 196,
+  "pk": 192,
   "fields": {
     "language": "en",
     "path": "_wirkung_",
