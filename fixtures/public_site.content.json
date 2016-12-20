@@ -1128,7 +1128,7 @@
     "language": "de",
     "path": "_tracking_",
     "key": "station_africa_image",
-    "value": "/static/img/velafrica_afrika.png",
+    "value": "/static/img/velafrica_afrika.jpg",
     "description": "Bild Weg nach Afrika"
   }
 },
@@ -1139,7 +1139,7 @@
     "language": "en",
     "path": "_tracking_",
     "key": "station_africa_image",
-    "value": "/static/img/velafrica_afrika.png",
+    "value": "/static/img/velafrica_afrika.jpg",
     "description": "Bild Weg nach Afrika"
   }
 },
