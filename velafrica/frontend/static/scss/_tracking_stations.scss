@@ -123,7 +123,15 @@ main#tracking {
 
   section#tracking-entry {
     .panel {
-      background-color: $velafrica-brown-3;
+      &.first {
+        background-color: $velafrica-brown-3;
+
+        h2 {
+          color: white;
+        }
+      }
+
+      background-color: $velafrica-brown-5;
       border-radius: 0;
       padding: 30px 60px 30px 30px;
 
@@ -132,8 +140,8 @@ main#tracking {
         margin-top: 0;
       }
 
-      p.lead {
-        color: white;
+      h2 {
+        color: $velafrica-brown-2;
       }
     }
 
@@ -152,6 +160,7 @@ main#tracking {
       color: white;
     }
   }
+
 }
 
 section#tracking-record,

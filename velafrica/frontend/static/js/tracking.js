@@ -14,32 +14,53 @@ if ($('span.tracking-date').length) {
   })
 }
 
-if($('#tracking-navi').length) {
+if ($('#tracking-navi').length) {
   $(window).scroll(onScroll);
 
-    //jQuery for page scrolling feature - requires jQuery Easing plugin
-    $(function () {
-      $('a.page-scroll').bind('click', function (event) {
-        var $anchor = $(this);
-        $('html, body').stop().animate({
-          scrollTop: $($anchor.attr('href')).offset().top
-        }, 700, 'easeInOutExpo');
-        event.preventDefault();
-      });
+  //jQuery for page scrolling feature - requires jQuery Easing plugin
+  $(function () {
+    $('a.page-scroll').bind('click', function (event) {
+      var $anchor = $(this);
+      $('html, body').stop().animate({
+        scrollTop: $($anchor.attr('href')).offset().top
+      }, 700, 'easeInOutExpo');
+      event.preventDefault();
     });
+  });
 
-    function onScroll() {
-      var scrollPos = $(document).scrollTop();
-      $('#menu-center a').each(function () {
-        var currLink = $(this);
-        var refElement = $(currLink.attr("href"));
-        var heightAnchor = 140;
-        if (refElement.position().top - heightAnchor <= scrollPos && refElement.position().top + refElement.height() > scrollPos + heightAnchor) {
-          currLink.addClass("active");
-        }
-        else {
-          currLink.removeClass("active");
-        }
-      });
-    }
+  function onScroll() {
+    var scrollPos = $(document).scrollTop();
+    $('#menu-center a').each(function () {
+      var currLink = $(this);
+      var refElement = $(currLink.attr("href"));
+      var heightAnchor = 140;
+      if (refElement.position().top - heightAnchor <= scrollPos && refElement.position().top + refElement.height() > scrollPos + heightAnchor) {
+        currLink.addClass("active");
+      }
+      else {
+        currLink.removeClass("active");
+      }
+    });
+  }
+}
+if ($('.panel').length) {
+  function setHeightOfPanels() {
+    var maxHeight = 0;
+    var padding = 20;
+    var $h2Panels = $('.panel h2');
+
+    $h2Panels.css('height', '');
+
+    $h2Panels.each(function () {
+      var thisHeight = $(this).height();
+
+      if (thisHeight > maxHeight) {
+        maxHeight = thisHeight;
+      }
+      $h2Panels.css('height', maxHeight + padding);
+    });
+  }
+
+  $(window).resize(setHeightOfPanels);
+  setHeightOfPanels();
 }

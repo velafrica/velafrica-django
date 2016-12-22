@@ -139,11 +139,11 @@
           </div>
         </div>
         <div class="row bg-white">
-          <div class="container">
+          <div class="container panels">
             <div class="row">
               <div class="col-md-4">
 
-                <div class="panel">
+                <div class="panel first">
                   <h1 class="tracking-number">{{ data.verkauf|intcomma|swissint|safe }}</h1>
                   <h2>
                     {% get_content "station_verkauf_subtitle" "Verarbeitung Panel Verkauf Untertitel" %}
@@ -298,8 +298,6 @@
         </div>
       </div>
     </section>
-
   </main>
-
 
 {% endblock %}
