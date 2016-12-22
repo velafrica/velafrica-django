@@ -46,8 +46,7 @@ if ($('#tracking-navi').length) {
 if ($('.panel').length) {
   function setHeightOfPanels() {
     var maxHeight = 0;
-    var padding = 20;
-    var $h2Panels = $('.panel h2');
+    var $h2Panels = $('#tracking-entry .panels .panel h2');
 
     $h2Panels.css('height', '');
 
@@ -57,8 +56,9 @@ if ($('.panel').length) {
       if (thisHeight > maxHeight) {
         maxHeight = thisHeight;
       }
-      $h2Panels.css('height', maxHeight + padding);
     });
+
+    $h2Panels.css('height', maxHeight);
   }
 
   $(window).resize(setHeightOfPanels);

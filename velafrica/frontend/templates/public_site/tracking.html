@@ -146,7 +146,7 @@
                 <div class="panel first">
                   <h1 class="tracking-number">{{ data.verkauf|intcomma|swissint|safe }}</h1>
                   <h2>
-                    {% get_content "station_verkauf_subtitle" "Verarbeitung Panel Verkauf Untertitel" %}
+                    {% get_content "station_export_subtitle" "Verarbeitung Panel Export Untertitel" %}
                   </h2>
                 </div>
                 <p class="vel-entry-pad">
@@ -159,7 +159,8 @@
                 <div class="panel">
                   <h1 class="tracking-number">{{ data.export|intcomma|swissint|safe }}</h1>
                   <h2>
-                    {% get_content "station_export_subtitle" "Verarbeitung Panel Export Untertitel" %}
+                    {% get_content "station_zerlegung_subtitle" "Verarbeitung Panel Zerlegung Untertitel" %}
+
                   </h2>
                 </div>
                 <p class="vel-entry-pad">
@@ -172,7 +173,7 @@
                 <div class="panel">
                   <h1 class="tracking-number">{{ data.zerlegung|intcomma|swissint|safe }}</h1>
                   <h2>
-                    {% get_content "station_zerlegung_subtitle" "Verarbeitung Panel Zerlegung Untertitel" %}
+                    {% get_content "station_verkauf_subtitle" "Verarbeitung Panel Verkauf Untertitel" %}
                   </h2>
                 </div>
                 <p class="vel-entry-pad">
