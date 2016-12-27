@@ -186,6 +186,10 @@ class Partner(models.Model):
     country = models.IntegerField(verbose_name="Land", choices=COUNTRY_CHOICES)
     location = models.CharField(max_length=255, verbose_name="Kanton/Staat")
     city = models.CharField(max_length=255, verbose_name="Stadt")
+    category = "Kategorie/Bereich"
+
+    def get_category(self):
+        return self.category
 
     def __unicode__(self):
         return u"{}".format(self.name)
@@ -197,8 +201,10 @@ class Partner(models.Model):
 
 class Event(models.Model):
     name = models.CharField(max_length=255, verbose_name="Name")
-    category = models.ForeignKey('collection.EventCategory', related_name='pub_event_category', on_delete=models.SET_NULL, verbose_name="Kategorie", null=True)
-    address = models.ForeignKey('organisation.Address', related_name='pub_event_address', on_delete=models.SET_NULL, verbose_name="Adresse", null=True)
+    category = models.ForeignKey('collection.EventCategory', related_name='pub_event_category',
+                                 on_delete=models.SET_NULL, verbose_name="Kategorie", null=True)
+    address = models.ForeignKey('organisation.Address', related_name='pub_event_address', on_delete=models.SET_NULL,
+                                verbose_name="Adresse", null=True)
     description = models.TextField(verbose_name="Beschreibung", blank=True)
     organizer = models.CharField(max_length=255, verbose_name="Veranstalter", blank=True)
     active = models.BooleanField(default=True, verbose_name="Aktiv")
@@ -235,7 +241,8 @@ class EventDateTime(models.Model):
 
 class Supporter(models.Model):
     name = models.CharField(max_length=255, verbose_name="Name")
-    description = models.CharField(max_length=140, verbose_name="Kurzbeschreibung", help_text="Max. 140 Zeichen", blank=True)
+    description = models.CharField(max_length=140, verbose_name="Kurzbeschreibung", help_text="Max. 140 Zeichen",
+                                   blank=True)
     link = models.URLField(verbose_name="URL")
     image = models.CharField(max_length=255, verbose_name="Bild/Logo URL", blank=True)
     sorting = models.IntegerField(verbose_name="Sortierung", default=0)

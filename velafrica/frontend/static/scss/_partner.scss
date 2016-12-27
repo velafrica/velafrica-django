@@ -1,3 +1,90 @@
+section#partner-swiss-teaser {
+  background-color: $velafrica-brown-5;
+  padding-top: 60px;
+
+  .bg-white {
+    background-color: white;
+    padding: 30px;
+    border-radius: $vel-border-radius;
+  }
+
+  .container-fluid:nth-child(2) {
+    margin-top: 60px;
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+}
+
+section#partner-swiss-big {
+  padding-top: 60px;
+
+  .partner-for {
+    height: 270px;
+    padding: 15px;
+    margin-bottom: 15px;
+    margin-right: 15px;
+
+    &:nth-child(2n) {
+      margin-right: -15px;
+    }
+
+    .partner-top {
+      color: white;
+      bottom: 20%;
+      position: absolute;
+
+      h2 {
+        color: white;
+      }
+    }
+    .partner-bottom {
+      color: white;
+      bottom: 0;
+      position: absolute;
+    }
+  }
+}
+
+section#partner-swiss-info-small {
+  padding-top: 60px;
+
+  .partner-for-small {
+    padding: 15px;
+    margin-bottom: 15px;
+    margin-right: 15px;
+
+    &:nth-child(2n) {
+      margin-right: -15px;
+    }
+  }
+
+  .item {
+    border: 2px solid $velafrica-brown-3;
+    border-radius: $vel-border-radius;
+
+    .item-img {
+      margin-bottom: auto;
+      margin-top: auto;
+
+      img {
+        background-size: cover;
+        background-position: center;
+      }
+    }
+
+    .item-content {
+      h4 {
+        color: $velafrica-brown-3;
+        text-decoration: underline;
+      }
+
+      background-color: $velafrica-brown-5;
+      padding: 15px;
+      border-left: 2px solid $velafrica-brown-3;
+    }
+  }
+}
+
 section[id*='partner-'] {
   h2 {
     color: $velafrica
@@ -21,7 +108,7 @@ section[id*='partner-'] {
       letter-spacing: 0.5px;
       line-height: 29px;
 
-      margin-bottom:0;
+      margin-bottom: 0;
     }
 
     .partner-location {

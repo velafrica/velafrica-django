@@ -1,5 +1,5 @@
 {% extends "public_site/base.html" %}
-{% load i18n %}
+{% load i18n static %}
 {% load content %}
 
 {% block page_title %}
@@ -7,6 +7,100 @@
 {% endblock %}
 
 {% block content %}
+
+  <section id="partner-swiss-teaser">
+    <div class="container-fluid">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+
+            <img src="{% get_content "swiss_map" "Bild - Schweizer Karte" %}" alt="">
+
+          </div>
+          <div class="col-md-5 col-md-offset-1 bg-white">
+
+            <h2>{% trans "Dichtes Partnernetzwerk in der Schweiz" %}</h2>
+            <p class="lead">
+              {% trans "Dank der engen Zusammen aribet mit Unternehmen aus dem sozialen Bereich können pro Jahr über 20'000 Velos gesammelt und instand gestzt werden." %}
+            </p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid bg-brown-6">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2">
+
+            <p>
+              {% trans "In der Schweiz arbeitet Velafrica mit sozialen Einrichtungen zusammen, die Erwerbslose und Menschen mit Beeinträchtigungen beschäftigen. Dank diesem Partnernetzwerk können schweizweit Velos gesammelt und verarbeitet werden. Und nur dank dieser Zusammenarbeit ist es möglich, jährlich 17 000 fahrtüchtige Recycling-Velos zu verschiffen." %}
+            </p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid"
+         style="background:url({% get_content "swiss_teaser_image" "Bild - Teaser Partner Schweiz Bild" %}) center/cover;min-height:500px;"></div>
+  </section>
+  <section id="partner-swiss-big" class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h2 class="text-center">{% trans "Unsere Partner in der Schweiz" %}</h2>
+        <p class="lead">
+          {% trans "Der grosse Oxmox riet ihr davon ab, da es dort wimmele von bösen Kommata, wilden Fragezeichen und hinterhältigen Semikoli, doch das Blindtextchen ließ sich nicht beirren. " %}
+        </p>
+      </div>
+    </div>
+
+    {% for name, partners in locations.items %}
+
+      {% if forloop.counter < 2 %}
+        <div class="row">
+
+          {% for partner in partners %}
+            <div class="col-md-6 partner-for"
+                 style="background:linear-gradient(to top, rgba(0,0,0,1) 20%,rgba(0,0,0,.8) 41%,rgba(0,0,0,0) 100%), url('http://lorempixel.com/600/300/people/') center/cover;border-radius:3px;">
+              <div class="partner-top">
+                <h2>{{ partner.name|truncatechars:40 }}</h2>
+                <p>{{ partner.location }}</p>
+              </div>
+              <div class="partner-bottom">
+                <p>{{ partner.get_category }}</p>
+              </div>
+
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endfor %}
+  </section>
+
+  <section id="partner-swiss-info-small" class="container">
+    {% for name, partners in locations.items %}
+
+      <div class="row">
+
+        {% for partner in partners %}
+          <div class="col-md-6 partner-for-small">
+            <div class="row item">
+              <div class="col-xs-5 item-img">
+                <img src="http://lorempixel.com/900/600/people/">
+              </div>
+              <div class="col-xs-7 item-content">
+                <h4>{{ partner.name|truncatechars:30 }}</h4>
+                <p>{{ partner.location }}</p>
+                <p>{{ partner.get_category }}</p>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endfor %}
+  </section>
+
+
   <section id="partner-{{ section_id }}">
 
     <div class="container">
@@ -23,7 +117,7 @@
             <div class="col-xs-12 col-md-6">
               <div class="partner">
                 {% if partner.link %}
-                <a href="{{ partner.link }}" class="partner-name">{{ partner.name }}</a>
+                  <a href="{{ partner.link }}" class="partner-name">{{ partner.name }}</a>
                 {% else %}
                   <h3 class="partner-name">{{ partner.name }}</h3>
                 {% endif %}
