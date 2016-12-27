@@ -1321,28 +1321,6 @@
 },
 {
   "model": "public_site.content",
-  "pk": 121,
-  "fields": {
-    "language": "de",
-    "path": "_partner_schweiz_",
-    "key": "heading",
-    "value": "Wer hilft uns mit den Velos",
-    "description": "\u00dcberschrift der Partner Seite"
-  }
-},
-{
-  "model": "public_site.content",
-  "pk": 122,
-  "fields": {
-    "language": "en",
-    "path": "_partner_schweiz_",
-    "key": "heading",
-    "value": "Wer hilft uns mit den Velos",
-    "description": "\u00dcberschrift der Partner Seite"
-  }
-},
-{
-  "model": "public_site.content",
   "pk": 123,
   "fields": {
     "language": "de",
@@ -2227,9 +2205,9 @@
   "fields": {
     "language": "de",
     "path": "_partner_schweiz_",
-    "key": "impact_swiss_teaser_image",
-    "value": "",
-    "description": "Teaser Bild - Wirkung in der Schweiz"
+    "key": "p_swiss_map",
+    "value": "http://development-files.velafrica.ch.s3.amazonaws.com/filer_public/e9/48/e9485b0b-4768-461b-8c8c-081ecd930fd1/karte_schweiz2.png",
+    "description": "Bild - Schweizer Karte"
   }
 },
 {
@@ -2238,9 +2216,9 @@
   "fields": {
     "language": "en",
     "path": "_partner_schweiz_",
-    "key": "impact_swiss_teaser_image",
+    "key": "p_swiss_map",
     "value": "",
-    "description": "Teaser Bild - Wirkung in der Schweiz"
+    "description": "Bild - Schweizer Karte"
   }
 },
 {
@@ -2249,9 +2227,9 @@
   "fields": {
     "language": "de",
     "path": "_partner_schweiz_",
-    "key": "swiss_map",
-    "value": "http://development-files.velafrica.ch.s3.amazonaws.com/filer_public/e9/48/e9485b0b-4768-461b-8c8c-081ecd930fd1/karte_schweiz2.png",
-    "description": "Bild - Schweizer Karte"
+    "key": "p_swiss_teaser_image",
+    "value": "http://development-files.velafrica.ch.s3.amazonaws.com/filer_public/e0/c6/e0c681bc-ae0a-49bd-ab96-9478a78d5c40/vfa_feb14_1419_copy.jpg",
+    "description": "Bild - Teaser Partner Schweiz Bild"
   }
 },
 {
@@ -2260,9 +2238,9 @@
   "fields": {
     "language": "en",
     "path": "_partner_schweiz_",
-    "key": "swiss_map",
+    "key": "p_swiss_teaser_image",
     "value": "",
-    "description": "Bild - Schweizer Karte"
+    "description": "Bild - Teaser Partner Schweiz Bild"
   }
 },
 {
@@ -2271,9 +2249,9 @@
   "fields": {
     "language": "de",
     "path": "_partner_schweiz_",
-    "key": "swiss_teaser_image",
-    "value": "http://development-files.velafrica.ch.s3.amazonaws.com/filer_public/e0/c6/e0c681bc-ae0a-49bd-ab96-9478a78d5c40/vfa_feb14_1419_copy.jpg",
-    "description": "Bild - Teaser Partner Schweiz Bild"
+    "key": "heading",
+    "value": "",
+    "description": "\u00dcberschrift der Partner Seite"
   }
 },
 {
@@ -2282,9 +2260,9 @@
   "fields": {
     "language": "en",
     "path": "_partner_schweiz_",
-    "key": "swiss_teaser_image",
+    "key": "heading",
     "value": "",
-    "description": "Bild - Teaser Partner Schweiz Bild"
+    "description": "\u00dcberschrift der Partner Seite"
   }
 }
 ]
