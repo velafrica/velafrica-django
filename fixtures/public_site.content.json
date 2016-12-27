@@ -1451,7 +1451,7 @@
     "description": "Ansprechperperson: Mitmachen/Freiwilligeneinsatz"
   }
 },
-  {
+{
   "model": "public_site.content",
   "pk": 133,
   "fields": {
@@ -2175,6 +2175,116 @@
     "key": "medicine_image",
     "value": "",
     "description": "Bild - Medizin"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 199,
+  "fields": {
+    "language": "de",
+    "path": "_wirkung_",
+    "key": "schoolchild_image",
+    "value": "http://development-files.velafrica.ch.s3.amazonaws.com/filer_public/52/1c/521cbe57-a3b0-432c-a85c-b7306a291151/schulkind2.png",
+    "description": "Bild - Schulkind"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 200,
+  "fields": {
+    "language": "en",
+    "path": "_wirkung_",
+    "key": "schoolchild_image",
+    "value": "",
+    "description": "Bild - Schulkind"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 201,
+  "fields": {
+    "language": "de",
+    "path": "_wirkung_",
+    "key": "medicine_image",
+    "value": "http://development-files.velafrica.ch.s3.amazonaws.com/filer_public/85/5c/855c9845-de01-4871-a8aa-4ee0557e8502/medizin2.png",
+    "description": "Bild - Medizin"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 202,
+  "fields": {
+    "language": "en",
+    "path": "_wirkung_",
+    "key": "medicine_image",
+    "value": "",
+    "description": "Bild - Medizin"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 203,
+  "fields": {
+    "language": "de",
+    "path": "_partner_schweiz_",
+    "key": "impact_swiss_teaser_image",
+    "value": "",
+    "description": "Teaser Bild - Wirkung in der Schweiz"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 204,
+  "fields": {
+    "language": "en",
+    "path": "_partner_schweiz_",
+    "key": "impact_swiss_teaser_image",
+    "value": "",
+    "description": "Teaser Bild - Wirkung in der Schweiz"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 205,
+  "fields": {
+    "language": "de",
+    "path": "_partner_schweiz_",
+    "key": "swiss_map",
+    "value": "http://development-files.velafrica.ch.s3.amazonaws.com/filer_public/e9/48/e9485b0b-4768-461b-8c8c-081ecd930fd1/karte_schweiz2.png",
+    "description": "Bild - Schweizer Karte"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 206,
+  "fields": {
+    "language": "en",
+    "path": "_partner_schweiz_",
+    "key": "swiss_map",
+    "value": "",
+    "description": "Bild - Schweizer Karte"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 207,
+  "fields": {
+    "language": "de",
+    "path": "_partner_schweiz_",
+    "key": "swiss_teaser_image",
+    "value": "http://development-files.velafrica.ch.s3.amazonaws.com/filer_public/e0/c6/e0c681bc-ae0a-49bd-ab96-9478a78d5c40/vfa_feb14_1419_copy.jpg",
+    "description": "Bild - Teaser Partner Schweiz Bild"
+  }
+},
+{
+  "model": "public_site.content",
+  "pk": 208,
+  "fields": {
+    "language": "en",
+    "path": "_partner_schweiz_",
+    "key": "swiss_teaser_image",
+    "value": "",
+    "description": "Bild - Teaser Partner Schweiz Bild"
   }
 }
 ]
