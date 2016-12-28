@@ -4,8 +4,11 @@
   "pk": 1,
   "fields": {
     "name": "Vijana Bicycle Center (VBC)",
+    "category": "",
     "description": "In der Velowerkstatt VBC des Jugendzentrums lernen und arbeiten Aids-Waisen. Seit 2011 haben 37 Jugendliche (ein Drittel Frauen) ihre Lehre in Velomechanik abgeschlossen. Revidiert und kontrolliert gelangen die Schweizer Velos in den Verkauf. Der Gewinn fliesst in den Betrieb zur\u00fcck oder in einen Solidarit\u00e4tsfonds.",
     "link": "http://vbc.strikingly.com/",
+    "image": "https://placeholdit.imgix.net/~text?txtsize=38&txt=400%C3%97400&w=400&h=400",
+    "teaserd": false,
     "country": 1,
     "location": "Tansania",
     "city": "Nshamba"
@@ -16,8 +19,11 @@
   "pk": 2,
   "fields": {
     "name": "Arusha Bicycle Center (ABC)",
+    "category": "",
     "description": "Das Velozentrum mit Ausbildungsprogramm nimmt im Sommer 2015 Fahrt auf. Bei der Er\u00f6ffnung mit am Start ist Ex-Rad-Weltmeister Franco Marvulli, Botschafter von Velafrica. Junge Radsporttalente erhalten im ABC berufliche Perspektiven und k\u00f6nnen trainieren. Der Aufbaupartner von Velafrica ist als soziales Unternehmen angelegt, das sich durch den Veloverkauf und weitere Serviceangebote rund ums Rad mittelfristig selbst tr\u00e4gt.",
     "link": "http://arushabicyclecenter.strikingly.com/",
+    "image": "https://placeholdit.imgix.net/~text?txtsize=38&txt=400%C3%97400&w=400&h=400",
+    "teaserd": false,
     "country": 1,
     "location": "Tansania",
     "city": "Aruhsa"
@@ -28,8 +34,11 @@
   "pk": 3,
   "fields": {
     "name": "gebana Afrique",
+    "category": "",
     "description": "Seit 2007 liefert Velafrica Reycling-Velos an gebana Afrique. Die Tochterfirma von Gebana arbeitet mit Bauernkooperativen zusammen, die u.a. Mangos und Cashew-N\u00fcsse fair & bio produzieren. Die Velos werden als Fairtrade-Pr\u00e4mie an B\u00e4uerinnen und Bauern abgegeben.",
     "link": "https://www.gebana.com/de/produzenten/gebana-afrique/",
+    "image": "https://placeholdit.imgix.net/~text?txtsize=38&txt=400%C3%97400&w=400&h=400",
+    "teaserd": false,
     "country": 1,
     "location": "Burkina Faso",
     "city": "Bobo Dioulasso"
@@ -40,8 +49,11 @@
   "pk": 4,
   "fields": {
     "name": "Etablissement Ilboudo Moumouni et Fr\u00e8res (EIMF), Gesch\u00e4ftspartner von Gebana Afrique",
+    "category": "",
     "description": "Velos, die nicht an Bauerngenossenschaften abgegeben werden, kommen auf den Velomarkt von Ougadaougou. Das Familienunternehmen EIMF k\u00fcmmert sich um den Vertrieb und liefert teilweise direkt an Kleinh\u00e4ndler im l\u00e4ndlichen Burkina.",
     "link": "",
+    "image": "https://placeholdit.imgix.net/~text?txtsize=38&txt=400%C3%97400&w=400&h=400",
+    "teaserd": false,
     "country": 1,
     "location": "Burkina Faso",
     "city": "Ouagadougou"
@@ -52,8 +64,11 @@
   "pk": 5,
   "fields": {
     "name": "Mam Weefo",
+    "category": "",
     "description": "Gemeinsam mit der Schweizer Organisation Kaicedra startete 2014 das Projekt Mam Weefo, was \u00abMein Velo\u00bb bedeutet. Frauen und Schulkinder erhalten Velos zu stark verg\u00fcnstigten Preisen. Die Bev\u00f6lkerung in der l\u00e4ndlichen Region hat Zugang zu qualitativ hochwertigen Velos.",
     "link": "http://www.kaicedra.org/mam-weefo-new",
+    "image": "https://placeholdit.imgix.net/~text?txtsize=38&txt=400%C3%97400&w=400&h=400",
+    "teaserd": false,
     "country": 1,
     "location": "Burkina Faso",
     "city": "Region Rambo"
@@ -64,8 +79,11 @@
   "pk": 6,
   "fields": {
     "name": "Tomojema",
+    "category": "",
     "description": "Mit Helvetas bietet Velafrica seit 2012 Berufsbildung f\u00fcr schulferne Jugendliche im Bereich Velomechanik an. Tomojema, das lokale Partnerunternehmen, \u00fcbernimmt den Vertrieb der Recycling-Velos und hilft, die Velomobilit\u00e4t in der Region zu f\u00f6rdern.",
     "link": "https://www.helvetas.ch/de/was_wir_tun/projekte_helvetas/projekte_in_afrika/bildung_fur_schulferne_jugendliche_in_burkina_faso/",
+    "image": "https://placeholdit.imgix.net/~text?txtsize=38&txt=400%C3%97400&w=400&h=400",
+    "teaserd": false,
     "country": 1,
     "location": "Burkina Faso",
     "city": "Fada N\u2019Gourma"
@@ -76,8 +94,11 @@
   "pk": 7,
   "fields": {
     "name": "Suke",
+    "category": "",
     "description": "Via Suke, dem Unterst\u00fctzungskomitee f\u00fcr Eritrea, beliefert Velafrica die Kriegsversehrten-Vereinigung (ENWDVA) sowie die national Arbeitervereinigung (NCEW) mit Velos und Ersatzteilen. Die Velos dienen der Einkommensf\u00f6rderung von Frauen, die aufgrund der mehrj\u00e4hrigen Milit\u00e4rpflicht ihre Kinder oft alleine durchbringen m\u00fcssen.",
     "link": "http://www.suke.ch/projects/velos-fur-eritrea",
+    "image": "https://placeholdit.imgix.net/~text?txtsize=38&txt=400%C3%97400&w=400&h=400",
+    "teaserd": false,
     "country": 1,
     "location": "Eritrea",
     "city": "Eritrea"
@@ -88,8 +109,11 @@
   "pk": 8,
   "fields": {
     "name": "Neneh von Sheik T. Bittaye",
+    "category": "",
     "description": "Seit 2009 beliefert Velafrica das Kleinunternehmen mit Velos aus zweiter Hand. \u00dcber ein weit verzweigtes Netz an Zwischenh\u00e4ndlern gelangen die Drahtesel auch in entlegene Regionen. In der kleinen Werkstatt erhalten Jugendliche der technischen Schule Banjul praktisches Know-how in Velomechanik.",
     "link": "",
+    "image": "https://placeholdit.imgix.net/~text?txtsize=38&txt=400%C3%97400&w=400&h=400",
+    "teaserd": false,
     "country": 1,
     "location": "Gambia",
     "city": "Banjul"
@@ -100,8 +124,11 @@
   "pk": 9,
   "fields": {
     "name": "Future Survival Enterprise & Jokes Bay Enterprise",
+    "category": "",
     "description": "Mobilit\u00e4t mit stabilen und bezahlbaren Velos zu f\u00f6rdern, ist bis heute erkl\u00e4rtes Ziel von Velafrica. Daher werden auch ausgew\u00e4hlte H\u00e4ndler mit Velos aus der Schweiz beliefert, zum Beispiel in Ghana. John Edusei und Danda Ahmed, die beiden Gesch\u00e4ftsinhaber in Kumasi, sind Partner der ersten Stunden. Seit \u00fcber f\u00fcnfzehn Jahren gelangen die Recycling-Velos \u00fcber den riesigen Markt in Kumasi bis in die Nachbarl\u00e4nder Burkina Faso oder die Elfenbeink\u00fcste.",
     "link": "",
+    "image": "https://placeholdit.imgix.net/~text?txtsize=38&txt=400%C3%97400&w=400&h=400",
+    "teaserd": false,
     "country": 1,
     "location": "Ghana",
     "city": "Kumasi"
@@ -112,8 +139,11 @@
   "pk": 10,
   "fields": {
     "name": "Saint Paul Technical School (SPATS)",
+    "category": "",
     "description": "Velafrica baute 2009 auf dem SPATS-Campus eine Veloproduktions- und Lehrwerkstatt auf. In Schulungen f\u00fcr Ausbildner und Studenten wurden die Grundlagen der Velomechanik in Praxis und Theorie vermittelt. Die Ausbildungsinhalte wurden zusammen mit der Berner Fachhochschule f\u00fcr Architektur, Holz und Bau in Biel erarbeitet. Aktuell wird gepr\u00fcft, in welcher Form diese Inhalte zuk\u00fcnftig in die Gesamtausbildung der angehenden Techniker und Technikerinnen einfliessen.",
     "link": "http://spatsedu.com/",
+    "image": "https://placeholdit.imgix.net/~text?txtsize=38&txt=400%C3%97400&w=400&h=400",
+    "teaserd": false,
     "country": 1,
     "location": "Ghana",
     "city": "Kukurantumi"
@@ -124,8 +154,11 @@
   "pk": 11,
   "fields": {
     "name": "Centre Risika",
+    "category": "",
     "description": "Das Centre Risika ist ein Schul- und Ausbildungszentrum der lokalen Caritas f\u00fcr Jugendliche aus armen Verh\u00e4ltnissen. Seit 2012 hat das Zentrum sein Ausbildungsangebot erweitert. Junge Menschen zwischen 14 und 20 Jahren k\u00f6nnen eine Lehre in Velomechanik absolvieren. Auch die Bev\u00f6lkerung profitiert von Velos aus der Schweiz, die dort verkauft und repariert werden.",
     "link": "",
+    "image": "https://placeholdit.imgix.net/~text?txtsize=38&txt=400%C3%97400&w=400&h=400",
+    "teaserd": false,
     "country": 1,
     "location": "Madagaskar",
     "city": "Antsirabe"
@@ -136,8 +169,11 @@
   "pk": 12,
   "fields": {
     "name": "Sport3",
+    "category": "",
     "description": "2015 ging der erste Container mit Velos und Ersatzteilen an das kleine Velogesch\u00e4ft Sport3. Zuvor haben die H\u00e4ndler Nicolas und Jonas die Velos auf Markt von Kumasi gekauft, der Drehscheibe f\u00fcr gebrauchte R\u00e4der in Westafrika. Durch die Direktbelieferung k\u00f6nnen sie Kosten wie Z\u00f6lle und Transport sparen. Der Velorennclub von Abidjan ist nur einer der gl\u00fccklichen Abnehmer.",
     "link": "https://www.facebook.com/Sport3-364136227089833/",
+    "image": "https://placeholdit.imgix.net/~text?txtsize=38&txt=400%C3%97400&w=400&h=400",
+    "teaserd": false,
     "country": 1,
     "location": "Elfenbeink\u00fcste",
     "city": "Abidjan"
@@ -147,9 +183,12 @@
   "model": "public_site.partner",
   "pk": 13,
   "fields": {
-    "name": "Velostation Liestal: F\u00f6rderprogramm zur sozialen und beruflichen Integration",
+    "name": "Velostation Liestal",
+    "category": "F\u00f6rderprogramm zur sozialen und beruflichen Integration",
     "description": "",
     "link": "http://www.velostationliestal.ch/index.html",
+    "image": "https://placeholdit.imgix.net/~text?txtsize=38&txt=400%C3%97400&w=400&h=400",
+    "teaserd": false,
     "country": 2,
     "location": "Basel-Land",
     "city": "Liestal"
@@ -159,9 +198,12 @@
   "model": "public_site.partner",
   "pk": 14,
   "fields": {
-    "name": "Stiftung Jugendsozialwerk Blaues Kreuz BL: Arbeitsintegration",
+    "name": "Stiftung Jugendsozialwerk Blaues Kreuz BL",
+    "category": "Arbeitsintegration",
     "description": "",
     "link": "http://www.jugendsozialwerk.ch/home",
+    "image": "https://placeholdit.imgix.net/~text?txtsize=38&txt=400%C3%97400&w=400&h=400",
+    "teaserd": false,
     "country": 2,
     "location": "Basel-Land",
     "city": "Liestal/Pratteln"
@@ -171,9 +213,12 @@
   "model": "public_site.partner",
   "pk": 15,
   "fields": {
-    "name": "Heimst\u00e4tte B\u00e4rau: Betreuung und Besch\u00e4ftigung",
+    "name": "Heimst\u00e4tte B\u00e4rau",
+    "category": "Betreuung und Besch\u00e4ftigung",
     "description": "",
     "link": "http://www.heimstaette-baerau.ch/",
+    "image": "https://placeholdit.imgix.net/~text?txtsize=38&txt=400%C3%97400&w=400&h=400",
+    "teaserd": false,
     "country": 2,
     "location": "Bern",
     "city": "B\u00e4rau"
@@ -183,9 +228,12 @@
   "model": "public_site.partner",
   "pk": 16,
   "fields": {
-    "name": "Recycling-Werkst\u00e4tte Drahtesel, Liebefeld: Berufliche Integration",
+    "name": "Recycling-Werkst\u00e4tte Drahtesel, Liebefeld",
+    "category": "Berufliche Integration",
     "description": "",
     "link": "http://www.drahtesel.ch/",
+    "image": "https://placeholdit.imgix.net/~text?txtsize=38&txt=400%C3%97400&w=400&h=400",
+    "teaserd": false,
     "country": 2,
     "location": "Bern",
     "city": "Liebefeld"
@@ -195,9 +243,12 @@
   "model": "public_site.partner",
   "pk": 17,
   "fields": {
-    "name": "SAH Velostation Interlaken: Berufliches Integrationsangebot",
+    "name": "SAH Velostation Interlaken",
+    "category": "Berufliches Integrationsangebot",
     "description": "",
     "link": "http://www.sah-be.ch/bereiche-und-angebote/berufliche-und-soziale-integration/praxiseinsatz/velostation-interlaken",
+    "image": "https://placeholdit.imgix.net/~text?txtsize=38&txt=400%C3%97400&w=400&h=400",
+    "teaserd": false,
     "country": 2,
     "location": "Bern",
     "city": "Interlaken"
@@ -207,9 +258,12 @@
   "model": "public_site.partner",
   "pk": 18,
   "fields": {
-    "name": "Stiftung intact, Velostation Burgdorf: Innovation, Arbeit und Integration",
+    "name": "Stiftung intact, Velostation Burgdorf",
+    "category": "Innovation, Arbeit und Integration",
     "description": "",
     "link": "http://www.wir-bringens.ch/burgdorf.html",
+    "image": "https://placeholdit.imgix.net/~text?txtsize=38&txt=400%C3%97400&w=400&h=400",
+    "teaserd": false,
     "country": 2,
     "location": "Bern",
     "city": "Burgdorf"
@@ -219,9 +273,12 @@
   "model": "public_site.partner",
   "pk": 19,
   "fields": {
-    "name": "Stiftung intact, Velostation Langnau: Innovation, Arbeit und Integration",
+    "name": "Stiftung intact, Velostation Langnau",
+    "category": "Innovation, Arbeit und Integration",
     "description": "",
     "link": "http://www.wir-bringens.ch/langnau-2.html",
+    "image": "https://placeholdit.imgix.net/~text?txtsize=38&txt=400%C3%97400&w=400&h=400",
+    "teaserd": false,
     "country": 2,
     "location": "Bern",
     "city": "Langnau"
@@ -231,9 +288,12 @@
   "model": "public_site.partner",
   "pk": 20,
   "fields": {
-    "name": "Velostation Stadt Thun: Arbeitsintegration",
+    "name": "Velostation Stadt Thun",
+    "category": "Arbeitsintegration",
     "description": "",
     "link": "http://www.thun.ch/stadtverwaltung/abteilungenaemter/abteilung-sicherheit/fachstelle-arbeitsintegration.html",
+    "image": "https://placeholdit.imgix.net/~text?txtsize=38&txt=400%C3%97400&w=400&h=400",
+    "teaserd": false,
     "country": 2,
     "location": "Bern",
     "city": "Thun"
@@ -243,9 +303,12 @@
   "model": "public_site.partner",
   "pk": 21,
   "fields": {
-    "name": "VHDL Langenthal: Coaching und Bildung",
+    "name": "VHDL Langenthal",
+    "category": "Coaching und Bildung",
     "description": "",
     "link": "http://www.maximumm.ch/index.php?id=16",
+    "image": "https://placeholdit.imgix.net/~text?txtsize=38&txt=400%C3%97400&w=400&h=400",
+    "teaserd": false,
     "country": 2,
     "location": "Bern",
     "city": "Langenthal"
@@ -255,9 +318,12 @@
   "model": "public_site.partner",
   "pk": 22,
   "fields": {
-    "name": "Wohnheim Riggisberg: Gesch\u00fctzte Arbeitspl\u00e4tze",
+    "name": "Wohnheim Riggisberg",
+    "category": "Gesch\u00fctzte Arbeitspl\u00e4tze",
     "description": "",
     "link": "http://www.wohnheimriggisberg.ch/",
+    "image": "https://placeholdit.imgix.net/~text?txtsize=38&txt=400%C3%97400&w=400&h=400",
+    "teaserd": false,
     "country": 2,
     "location": "Bern",
     "city": "Riggisberg"
@@ -267,9 +333,12 @@
   "model": "public_site.partner",
   "pk": 23,
   "fields": {
-    "name": "Verein f\u00fcr aktive Arbeitsmassnahmen VAM, D\u00fcdingen und Bulle: Berufliche und soziale Integration",
+    "name": "Verein f\u00fcr aktive Arbeitsmassnahmen VAM, D\u00fcdingen und Bulle",
+    "category": "Berufliche und soziale Integration",
     "description": "",
     "link": "http://www.vam.ch/d/start.php",
+    "image": "https://placeholdit.imgix.net/~text?txtsize=38&txt=400%C3%97400&w=400&h=400",
+    "teaserd": false,
     "country": 2,
     "location": "Freiburg",
     "city": "D\u00fcdingen und Bulle"
@@ -279,9 +348,12 @@
   "model": "public_site.partner",
   "pk": 24,
   "fields": {
-    "name": "ECO Grischun, Chur: Arbeitsintegration",
+    "name": "ECO Grischun, Chur",
+    "category": "Arbeitsintegration",
     "description": "",
     "link": "http://www.eco-grischun.ch/",
+    "image": "https://placeholdit.imgix.net/~text?txtsize=38&txt=400%C3%97400&w=400&h=400",
+    "teaserd": false,
     "country": 2,
     "location": "Graub\u00fcnden",
     "city": "Chur"
@@ -291,9 +363,12 @@
   "model": "public_site.partner",
   "pk": 25,
   "fields": {
-    "name": "Caritas Luzern, Littau und Sursee: Bildungs- und Besch\u00e4ftigungsprogramme",
+    "name": "Caritas Luzern, Littau und Sursee",
+    "category": "Bildungs- und Besch\u00e4ftigungsprogramme",
     "description": "",
     "link": "http://www.caritas-luzern.ch/p81001136.html",
+    "image": "https://placeholdit.imgix.net/~text?txtsize=38&txt=400%C3%97400&w=400&h=400",
+    "teaserd": true,
     "country": 2,
     "location": "Luzern",
     "city": "Luzern"
@@ -303,9 +378,12 @@
   "model": "public_site.partner",
   "pk": 26,
   "fields": {
-    "name": "Ateliers Ph\u00e9nix, Neuenburg: Besch\u00e4ftigungsprogramm",
+    "name": "Ateliers Ph\u00e9nix, Neuenburg",
+    "category": "Besch\u00e4ftigungsprogramm",
     "description": "",
     "link": "http://www.ateliersphenix.ch/activites-atelier-velo",
+    "image": "https://placeholdit.imgix.net/~text?txtsize=38&txt=400%C3%97400&w=400&h=400",
+    "teaserd": false,
     "country": 2,
     "location": "Neuenburg",
     "city": "Neuch\u00e2tel"
@@ -315,9 +393,12 @@
   "model": "public_site.partner",
   "pk": 27,
   "fields": {
-    "name": "Buecherw\u00e4ldli Uzwil: Berufliche Integration",
+    "name": "Buecherw\u00e4ldli Uzwil",
+    "category": "Berufliche Integration",
     "description": "",
     "link": "http://www.buecherwaldli.ch/velowerkstatt.html",
+    "image": "https://placeholdit.imgix.net/~text?txtsize=38&txt=400%C3%97400&w=400&h=400",
+    "teaserd": false,
     "country": 2,
     "location": "St. Gallen",
     "city": "Uzwil"
@@ -327,9 +408,12 @@
   "model": "public_site.partner",
   "pk": 28,
   "fields": {
-    "name": "Projekt-Werkstatt St. Gallen: Einsatzprogramme f\u00fcr Stellensuchende",
+    "name": "Projekt-Werkstatt St. Gallen",
+    "category": "Einsatzprogramme f\u00fcr Stellensuchende",
     "description": "",
     "link": "http://www.projekt-werkstatt.ch/",
+    "image": "https://placeholdit.imgix.net/~text?txtsize=38&txt=400%C3%97400&w=400&h=400",
+    "teaserd": false,
     "country": 2,
     "location": "St. Gallen",
     "city": "St. Gallen"
@@ -339,9 +423,12 @@
   "model": "public_site.partner",
   "pk": 29,
   "fields": {
-    "name": "Stiftung arwole, Sargans: Integration von erwachsenen Menschen mit Lernbehinderung, geistiger oder psychischer Behinderung",
+    "name": "Stiftung arwole, Sargans",
+    "category": "Integration von erwachsenen Menschen mit Lernbehinderung, geistiger oder psychischer Behinderung",
     "description": "",
     "link": "http://arwole.ch/",
+    "image": "https://placeholdit.imgix.net/~text?txtsize=38&txt=400%C3%97400&w=400&h=400",
+    "teaserd": false,
     "country": 2,
     "location": "St. Gallen",
     "city": "Sargans"
@@ -351,9 +438,12 @@
   "model": "public_site.partner",
   "pk": 30,
   "fields": {
-    "name": "Werk- und Technologiezentrum Linthgebiet (WTL), Rapperswil-Jona: Sozialwirtschaftliches Unternehmen",
+    "name": "Werk- und Technologiezentrum Linthgebiet (WTL), Rapperswil-Jona",
+    "category": "Sozialwirtschaftliches Unternehmen",
     "description": "",
     "link": "http://www.wtl.ch/",
+    "image": "https://placeholdit.imgix.net/~text?txtsize=38&txt=400%C3%97400&w=400&h=400",
+    "teaserd": false,
     "country": 2,
     "location": "St. Gallen",
     "city": "Jona"
@@ -364,8 +454,11 @@
   "pk": 31,
   "fields": {
     "name": "SOS Ticino Rivera, Programmi Occupazionali RA",
+    "category": "",
     "description": "",
     "link": "http://www.sos-ti.ch/",
+    "image": "https://placeholdit.imgix.net/~text?txtsize=38&txt=400%C3%97400&w=400&h=400",
+    "teaserd": false,
     "country": 2,
     "location": "Tessin",
     "city": "Lugano"
@@ -375,9 +468,12 @@
   "model": "public_site.partner",
   "pk": 32,
   "fields": {
-    "name": "HEKS TG job Amriswil: Arbeit, Bildung, Begleitung",
+    "name": "HEKS TG job Amriswil",
+    "category": "Arbeit, Bildung, Begleitung",
     "description": "",
     "link": "https://www.heks.ch/schweiz/ostschweiz/heks-tg-job/",
+    "image": "https://placeholdit.imgix.net/~text?txtsize=38&txt=400%C3%97400&w=400&h=400",
+    "teaserd": false,
     "country": 2,
     "location": "Thurgau",
     "city": "Amriswil"
@@ -387,9 +483,12 @@
   "model": "public_site.partner",
   "pk": 33,
   "fields": {
-    "name": "Pro Travail, Lausanne: Solutions simples et utiles pour le retour au travail",
+    "name": "Pro Travail, Lausanne",
+    "category": "Solutions simples et utiles pour le retour au travail",
     "description": "",
     "link": "http://www.protravail.ch/",
+    "image": "https://placeholdit.imgix.net/~text?txtsize=38&txt=400%C3%97400&w=400&h=400",
+    "teaserd": true,
     "country": 2,
     "location": "Waadt",
     "city": "Lausanne"
@@ -399,9 +498,12 @@
   "model": "public_site.partner",
   "pk": 34,
   "fields": {
-    "name": "OPRA Turtmann, Brig: Qualifizierendes Arbeitsmarktprogramm",
+    "name": "OPRA Turtmann, Brig",
+    "category": "Qualifizierendes Arbeitsmarktprogramm",
     "description": "",
     "link": "http://www.opra.ch/index.php",
+    "image": "https://placeholdit.imgix.net/~text?txtsize=38&txt=400%C3%97400&w=400&h=400",
+    "teaserd": false,
     "country": 2,
     "location": "Wallis",
     "city": "Brig"
@@ -411,9 +513,12 @@
   "model": "public_site.partner",
   "pk": 35,
   "fields": {
-    "name": "VAM, Halle 44, Baar: F\u00f6rderung und Perspektiven",
+    "name": "VAM, Halle 44, Baar",
+    "category": "F\u00f6rderung und Perspektiven",
     "description": "",
     "link": "http://www.halle44-zg.ch/",
+    "image": "https://placeholdit.imgix.net/~text?txtsize=38&txt=400%C3%97400&w=400&h=400",
+    "teaserd": false,
     "country": 2,
     "location": "Zug",
     "city": "Zug"
@@ -423,9 +528,12 @@
   "model": "public_site.partner",
   "pk": 36,
   "fields": {
-    "name": "Basisbesch\u00e4ftigung Sozialdienst Z\u00fcrich: Arbeitsintegration",
+    "name": "Basisbesch\u00e4ftigung Sozialdienst Z\u00fcrich",
+    "category": "Arbeitsintegration",
     "description": "",
     "link": "https://www.stadt-zuerich.ch/content/sd/de/index/arbeitwohnendrogen/arbeitsintegrationsozialhilfe/basisbeschaeftigung/anforderungen_arbeitsorte.html",
+    "image": "https://placeholdit.imgix.net/~text?txtsize=38&txt=400%C3%97400&w=400&h=400",
+    "teaserd": false,
     "country": 2,
     "location": "Z\u00fcrich",
     "city": "Z\u00fcrich"
@@ -435,9 +543,12 @@
   "model": "public_site.partner",
   "pk": 37,
   "fields": {
-    "name": "Br\u00fchlgut Stiftung Winterthur: Besch\u00e4ftigungs- und Arbeitspl\u00e4tze",
+    "name": "Br\u00fchlgut Stiftung Winterthur",
+    "category": "Besch\u00e4ftigungs- und Arbeitspl\u00e4tze",
     "description": "",
     "link": "http://www.bruehlgut.ch/",
+    "image": "https://placeholdit.imgix.net/~text?txtsize=38&txt=400%C3%97400&w=400&h=400",
+    "teaserd": false,
     "country": 2,
     "location": "Z\u00fcrich",
     "city": "Winterthur"
@@ -447,9 +558,12 @@
   "model": "public_site.partner",
   "pk": 38,
   "fields": {
-    "name": "Quellenhof-Stiftung Winterthur: Therapie, Lebenstraining, Arbeitsintegration",
+    "name": "Quellenhof-Stiftung Winterthur",
+    "category": "Therapie, Lebenstraining, Arbeitsintegration",
     "description": "",
     "link": "http://www.qhs.ch/",
+    "image": "https://placeholdit.imgix.net/~text?txtsize=38&txt=400%C3%97400&w=400&h=400",
+    "teaserd": true,
     "country": 2,
     "location": "Z\u00fcrich",
     "city": "Winterthur"
@@ -459,9 +573,12 @@
   "model": "public_site.partner",
   "pk": 39,
   "fields": {
-    "name": "Werkst\u00e4tte auxilia des hpz FL: Gesch\u00fctzte Arbeitspl\u00e4tze",
+    "name": "Werkst\u00e4tte auxilia des hpz FL",
+    "category": "Gesch\u00fctzte Arbeitspl\u00e4tze",
     "description": "",
     "link": "http://www.hpz.li/",
+    "image": "https://placeholdit.imgix.net/~text?txtsize=38&txt=400%C3%97400&w=400&h=400",
+    "teaserd": false,
     "country": 2,
     "location": "F\u00fcrstentum Liechtenstein",
     "city": "Schaan"
