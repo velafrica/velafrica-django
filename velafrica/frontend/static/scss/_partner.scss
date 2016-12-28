@@ -11,20 +11,34 @@ section#partner-swiss-teaser {
   .container-fluid:nth-child(2) {
     margin-top: 60px;
     padding-top: 60px;
-    padding-bottom: 60px;
   }
 }
 
 section#partner-swiss-big {
+  & > div {
+    padding-bottom: 0;
+  }
+}
+
+section[id*='partner-'] {
   padding-top: 60px;
+
+  .teasered {
+    padding-bottom: 60px;
+  }
+
+  .row:last-child {
+    padding-bottom: 60px;
+  }
+
+  .col-md-6 {
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
 
   .partner-for {
     height: 270px;
     padding-left: 15px;
-
-    &:hover {
-      border: 2px solid $velafrica;
-    }
 
     .partner-top {
       color: white;
@@ -37,22 +51,18 @@ section#partner-swiss-big {
       }
     }
     .partner-bottom {
+      padding-bottom: 15px;
       color: white;
       bottom: 0;
       position: absolute;
     }
   }
-}
-
-section#partner-swiss-info-small {
-  padding-top: 60px;
-
   .partner-for-small {
     display: flex;
     flex-grow: 0;
     flex-shrink: 1;
     flex-basis: 10%;
-    height: 180px;
+    height: 200px;
 
     border: 2px solid $velafrica-brown-3;
     border-radius: $vel-border-radius;
@@ -60,11 +70,13 @@ section#partner-swiss-info-small {
     .partner-img {
       display: flex;
       flex-grow: 0;
+      flex-shrink: 0;
       flex-basis: 40%;
       height: 20%;
       padding: 15px;
       align-items: center;
       align-self: center;
+
     }
 
     .partner-content {
@@ -72,8 +84,9 @@ section#partner-swiss-info-small {
       display: flex;
       flex-grow: 1;
       flex-shrink: 0;
+      flex-basis: 0;
       flex-direction: column;
-      padding: 15px;
+      padding: 25px;
       border-left: 2px solid $velafrica-brown-3;
 
       .partner-content-bottom,
@@ -81,51 +94,26 @@ section#partner-swiss-info-small {
         display: flex;
         flex-direction: column;
       }
-    }
-  }
-}
 
-section[id*='partner-'] {
-  h2 {
-    color: $velafrica
-  }
+      .partner-content-top {
+        a {
+          color: $velafrica-brown-3;
+        }
+        p {
+          color: $velafrica-brown-3;
+        }
+      }
 
-  .partner-heading {
-    padding-top: 60px;
-    padding-bottom: 30px;
-  }
+      .partner-content-bottom {
+        padding-bottom: 20px;
+        bottom: 0;
+        position: absolute;
 
-  .partner {
-    background-color: $velafrica-brown-6;
-    border-radius: $vel-border-radius;
-    padding: 30px;
-    margin: 30px 0;
-    min-height: 200px;
-
-    .partner-name {
-      font-size: 20px;
-      color: #A5814F;
-      letter-spacing: 0.5px;
-      line-height: 29px;
-
-      margin-bottom: 0;
-    }
-
-    .partner-location {
-      font-size: 20px;
-      color: #A5814F;
-      letter-spacing: 0.5px;
-      line-height: 29px;
-      text-transform: none;
-
-      margin-bottom: 30px;
-    }
-
-    .partner-description {
-      font-size: 20px;
-      color: #30170F;
-      letter-spacing: 0.5px;
-      line-height: 29px;
+        p {
+          font-weight: bold;
+          color: black;
+        }
+      }
     }
   }
 }

@@ -44,6 +44,7 @@
     <div class="container-fluid"
          style="background:url({% get_content "p_swiss_teaser_image" "Bild - Teaser Partner Schweiz Bild" %}) center/cover;min-height:500px;"></div>
   </section>
+
   <section id="partner-swiss-big" class="container">
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
@@ -53,39 +54,42 @@
         </p>
       </div>
     </div>
-
-    {% for name, partners in locations.items %}
-
-      {% if forloop.counter < 2 %}
-        <div class="row">
-
-          {% for partner in partners %}
-            <a href="{{ partner.link }}" target="_blank">
-              <div class="col-md-6">
-
-                <div class="partner-for"
-                     style="background:linear-gradient(to top, rgba(0,0,0,1) 20%,rgba(0,0,0,.8) 41%,rgba(0,0,0,0) 100%), url('http://lorempixel.com/600/300/people/') center/cover;border-radius:3px;">
-                  <div class="partner-top">
-                    <h2>{{ partner.name|truncatechars:40 }}</h2>
-                    <p>{{ partner.location }}</p>
-                  </div>
-                  <div class="partner-bottom">
-                    <p>{{ partner.get_category }}</p>
-                  </div>
-
-                </div>
-              </div>
-            </a>
-          {% endfor %}
-        </div>
-      {% endif %}
-    {% endfor %}
   </section>
 
-  <section id="partner-swiss-info-small" class="container">
-    {% for name, partners in locations.items %}
+  <section id="partner-{{ section_id }}">
+
+    <div class="container">
+      <div class="row teasered">
+        {% for partner in teaserd %}
+          {# teaserd partners going here #}
+          <a href="{{ partner.link }}" target="_blank">
+            <div class="col-md-6">
+
+              <div class="partner-for"
+                   style="background:linear-gradient(to top, rgba(0,0,0,1) 20%,rgba(0,0,0,.8) 41%,rgba(0,0,0,0) 100%), url('http://lorempixel.com/600/300/people/') center/cover;border-radius:3px;">
+                <div class="partner-top">
+                  <h2>{{ partner.name|truncatechars:40 }}</h2>
+                  <p>{{ partner.location }}</p>
+                </div>
+                <div class="partner-bottom">
+                  <p>{{ partner.get_category }}</p>
+                </div>
+
+              </div>
+            </div>
+          </a>
+        {% endfor %}
+      </div>
+
       <div class="row">
         {% for partner in partners %}
+          {# "normal" partners #}
+
+          {% if not forloop.counter0 == 0 and forloop.counter0|divisibleby:2 %}
+            </div>
+            <div class="row">
+          {% endif %}
+
           <div class="col-md-6">
             <div class="partner-for-small">
               <div class="partner-img">
@@ -106,35 +110,8 @@
             </div>
           </div>
         {% endfor %}
-      </div>
-    {% endfor %}
-  </section>
-
-
-  <section id="partner-{{ section_id }}">
-
-    <div class="container">
-      <div class="text-center">
-        <h1 class="partner-heading">{% get_content "heading" "Überschrift der Partner Seite" %}</h1>
-      </div>
-          {% for partner in teaserd %}
-            {# teaserd partners going here #}
-          {% endfor %}
-          {% for partner in partners %}
-            {# "normal" partners #}
-            <div class="col-xs-12 col-md-6">
-              <div class="partner">
-                {% if partner.link %}
-                  <a href="{{ partner.link }}" class="partner-name">{{ partner.name }}</a>
-                {% else %}
-                  <h3 class="partner-name">{{ partner.name }}</h3>
-                {% endif %}
-
-                <h3 class="partner-location">{{ partner.city }}, {{ partner.location }}</h3>
-                <p class="partner-description">{{ partner.description }}</p>
-              </div>
-            </div>
-          {% endfor %}
+        </div>
     </div>
+
   </section>
 {% endblock %}
