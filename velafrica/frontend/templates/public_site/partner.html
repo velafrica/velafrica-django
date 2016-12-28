@@ -117,13 +117,11 @@
       <div class="text-center">
         <h1 class="partner-heading">{% get_content "heading" "Überschrift der Partner Seite" %}</h1>
       </div>
-      {% for name, partners in locations.items %}
-
-        <div class="row">
-          <div class="col-xs-12">
-            <h2>{{ name }}</h2>
-          </div>
+          {% for partner in teaserd %}
+            {# teaserd partners going here #}
+          {% endfor %}
           {% for partner in partners %}
+            {# "normal" partners #}
             <div class="col-xs-12 col-md-6">
               <div class="partner">
                 {% if partner.link %}
@@ -136,13 +134,7 @@
                 <p class="partner-description">{{ partner.description }}</p>
               </div>
             </div>
-
           {% endfor %}
-
-        </div>
-
-      {% endfor %}
-
     </div>
   </section>
 {% endblock %}

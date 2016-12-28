@@ -301,17 +301,14 @@ def render_partners(request):
         choice = 2
         section_id = 'swiss'
 
-    partners_locations = Partner.objects.filter(country=choice).order_by('location').values('location').distinct()
-    dict = {}
-    for location in partners_locations:
-        keyname = location['location']
-        dict[keyname] = Partner.objects.filter(country=choice).filter(location=location['location'])
-
-    dict = collections.OrderedDict(sorted(dict.items()))
+    all = Partner.objects.filter(country=choice).order_by('-teaserd')
+    teaserd = all[:4]
+    rest = all[4:]
 
     template_context = {
         'section_id': section_id,
-        'locations': dict
+        'teaserd': teaserd,
+        'partners': rest
     }
 
     return render_to_response(template_name, template_context, context_instance=RequestContext(request))
