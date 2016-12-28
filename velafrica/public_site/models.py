@@ -181,6 +181,7 @@ class Partner(models.Model):
     )
 
     name = models.CharField(max_length=255, verbose_name="Name")
+    category = models.CharField(max_length=255, verbose_name="Kategorie/Bereich", blank=True)
     description = models.TextField(verbose_name="Beschreibung", blank=True)
     link = models.CharField(max_length=255, verbose_name="URL", blank=True)
     image = models.URLField(verbose_name="Bild URL")
@@ -188,10 +189,6 @@ class Partner(models.Model):
     country = models.IntegerField(verbose_name="Land", choices=COUNTRY_CHOICES)
     location = models.CharField(max_length=255, verbose_name="Kanton/Staat")
     city = models.CharField(max_length=255, verbose_name="Stadt")
-    category = "Kategorie/Bereich"
-
-    def get_category(self):
-        return self.category
 
     def __unicode__(self):
         return u"{}".format(self.name)
