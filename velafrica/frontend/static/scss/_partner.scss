@@ -55,6 +55,10 @@ section[id*='partner-'] {
       color: white;
       bottom: 0;
       position: absolute;
+
+      p {
+        margin-right: 20px;
+      }
     }
   }
   .partner-for-small {
@@ -108,6 +112,7 @@ section[id*='partner-'] {
         padding-bottom: 20px;
         bottom: 0;
         position: absolute;
+        margin-right: 30px;
 
         p {
           font-weight: bold;
