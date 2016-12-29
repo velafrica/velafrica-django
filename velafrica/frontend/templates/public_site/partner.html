@@ -12,16 +12,16 @@
     <div class="container-fluid">
       <div class="container">
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-6 vel-pad-partner">
 
             <img id="{{ section_id }}-img-teaser" src="{% get_content "p_swiss_map" "Bild - Schweizer Karte" %}" alt="">
 
           </div>
           <div class="col-md-5 col-md-offset-1 bg-white">
 
-            <h2>{% trans "Dichtes Partnernetzwerk in der Schweiz" %}</h2>
+            <h2>{% get_content "partner_teaser_title" "Title - Partner Teaser" %}</h2>
             <p class="lead">
-              {% trans "Dank der engen Zusammen aribet mit Unternehmen aus dem sozialen Bereich können pro Jahr über 20'000 Velos gesammelt und instand gestzt werden." %}
+              {% get_content "partner_teaser_content" "Content - Partner Teaser" %}
             </p>
 
           </div>
