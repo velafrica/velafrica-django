@@ -6,17 +6,82 @@ section#partner-swiss-teaser {
     background-color: white;
     padding: 30px;
     border-radius: $vel-border-radius;
+
+    h2 {
+      color: $velafrica;
+    }
   }
 
   .container-fluid:nth-child(2) {
     margin-top: 60px;
     padding-top: 60px;
+
+    @media (max-width: 992px) {
+      margin-top: 0;
+    }
+  }
+
+  #swiss-section-img {
+    min-height: 500px;
+    background-size: cover !important;
+    background-position: center !important;
+  }
+
+  #swiss-img-teaser {
+    @media (max-width: 992px) {
+      padding-bottom: 30px;
+    }
   }
 }
 
 section#partner-swiss-big {
   & > div {
     padding-bottom: 0;
+  }
+}
+
+section#partner-africa-teaser {
+  background-color: $velafrica-brown-5;
+  padding-top: 60px;
+
+  .bg-white {
+    background-color: white;
+    padding: 30px;
+    border-radius: $vel-border-radius;
+
+    h2 {
+      color: $velafrica;
+    }
+  }
+
+  .container-fluid:nth-child(2) {
+    margin-top: 90px;
+    padding-top: 190px;
+
+    @media (max-width: 992px) {
+      margin-top: 0px;
+      padding-top: 60px;
+    }
+
+    @media (min-width: 993px) and (max-width: 1200px) {
+      margin-top: 0;
+      padding-top: 80px;
+    }
+  }
+
+  #africa-img-teaser {
+    position: absolute;
+
+    @media (max-width: 992px) {
+      position: relative;
+      padding-bottom: 30px;
+    }
+  }
+
+  #africa-section-img {
+    min-height: 600px;
+    background-position: center top !important;
+    background-size: cover !important;
   }
 }
 

@@ -8,13 +8,13 @@
 
 {% block content %}
 
-  <section id="partner-swiss-teaser">
+  <section id="partner-{{ section_id }}-teaser">
     <div class="container-fluid">
       <div class="container">
         <div class="row">
           <div class="col-md-6">
 
-            <img src="{% get_content "p_swiss_map" "Bild - Schweizer Karte" %}" alt="">
+            <img id="{{ section_id }}-img-teaser" src="{% get_content "p_swiss_map" "Bild - Schweizer Karte" %}" alt="">
 
           </div>
           <div class="col-md-5 col-md-offset-1 bg-white">
@@ -41,8 +41,8 @@
         </div>
       </div>
     </div>
-    <div class="container-fluid"
-         style="background:url({% get_content "p_swiss_teaser_image" "Bild - Teaser Partner Schweiz Bild" %}) center/cover;min-height:500px;"></div>
+    <div class="container-fluid" id="{{ section_id }}-section-img"
+         style="background:url({% get_content "p_swiss_teaser_image" "Bild - Teaser Partner Schweiz Bild" %});"></div>
   </section>
 
   <section id="partner-swiss-big" class="container">
