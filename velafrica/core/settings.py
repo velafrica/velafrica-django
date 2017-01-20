@@ -93,6 +93,7 @@ INSTALLED_APPS = (
     'djangocms_link',
     # custom django cms plugins
     'velafrica.cms_plugins.big_picture',
+    'velafrica.cms_plugins.row',
     # custom apps
     'massadmin',
     'daterange_filter',
