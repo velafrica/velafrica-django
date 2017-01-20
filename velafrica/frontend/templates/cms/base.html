@@ -28,6 +28,11 @@
 {% endif %}
 
 <main>
+
+  {% placeholder pre_content %}
+    {% block pre_content %}
+    {% endblock %}
+
   <div class="blog container">
     <div class="row">
       <div class="col-sm-8 col-sm-offset-2">

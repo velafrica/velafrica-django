@@ -91,6 +91,8 @@ INSTALLED_APPS = (
     'djangocms_teaser',
     'djangocms_video',
     'djangocms_link',
+    # custom django cms plugins
+    'velafrica.cms_plugins.big_picture',
     # custom apps
     'massadmin',
     'daterange_filter',
@@ -103,7 +105,7 @@ INSTALLED_APPS = (
     # custom velafrica apps
     'velafrica.api',
     'velafrica.core',
-    'velafrica.commission',
+    # 'velafrica.commission', just a PoC, not used in production
     'velafrica.counter',
     'velafrica.collection',
     'velafrica.download',
@@ -166,6 +168,7 @@ TEMPLATES = [
 ]
 
 CMS_TEMPLATES = (
+    ('cms/base.html', 'Base'),
     ('cms/base.html', 'Base'),
 )
 

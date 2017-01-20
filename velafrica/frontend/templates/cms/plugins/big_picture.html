@@ -1,0 +1,15 @@
+{% load static %}
+<section class="big_picture" style="{% if instance.background_img %}background: url('{{ instance.background_img.url }}') 50%/cover;{%  endif %} min-height: {{ instance.min_height }};">
+{% if instance.header and instance.text %}
+    <div class="container">
+        <div class="row teaser-vel">
+            <div class="col-md-6 teaser-white-bg">
+                <h2>{{ instance.header }}</h2>
+                <p class="lead">
+                    {{ instance.text }}
+                </p>
+            </div>
+        </div>
+    </div>
+{% endif %}
+</section>

@@ -215,3 +215,14 @@ body {
     }
   }
 }
+
+section.big_picture {
+  display: flex;
+}
+
+section.big_picture .container {
+  flex-shrink: 0;
+  flex-grow: 0;
+  margin: auto;
+  transform: translateY(-20%);
+}
