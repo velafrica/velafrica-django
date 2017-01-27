@@ -68,7 +68,13 @@ class Ride(models.Model):
     """
     date = models.DateField(blank=False, null=False, default=timezone.now, verbose_name="Datum")
     from_warehouse = models.ForeignKey(Warehouse, verbose_name='Start', related_name='from_warehouse', help_text='Start der Fahrt')
+    from_warehouse_detail_address = models.TextField(blank=True, null=True,
+                                                   verbose_name='FROM_WAREHOUSE alternative Adress (optional)',
+                                                   help_text='Bei Auswahl von "Diverse Spender" als Startpunkt, kann hier optional die genaue Adresse eingetragen werden.')
     to_warehouse = models.ForeignKey(Warehouse, verbose_name='Ziel', related_name='to_warehouse', help_text='Ziel der Fahrt')
+    to_warehouse_detail_address = models.TextField(blank=True, null=True,
+                                                   verbose_name='TO_WAREHOUSE alternative Adress (optional)',
+                                                   help_text='Bei Auswahl von "Diverse Spender" als Ziel, kann hier optional die genaue Adresse eingetragen werden.')
     driver = models.ForeignKey(Driver, verbose_name='Fahrer', help_text='Person die den Transport durchgeführt hat.')
     car = models.ForeignKey(Car, verbose_name='Fahrzeug')
     velos = models.IntegerField(blank=False, null=False, default=0, verbose_name='Anzahl Velos')
