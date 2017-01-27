@@ -74,6 +74,7 @@ class CollectionEventAdminResource(resources.ModelResource):
             'collection_partner_vrn__name',
             'collection_partner_other',
             'collection_partner_confirmed',
+            'intermediate_store',
             'processing',
             'processing__name',
             'processing_notes',

@@ -119,7 +119,8 @@ class CollectionEvent(models.Model):
         blank=True, 
         verbose_name="Abtransport durch andere Organisation",
         help_text="Wenn die Velos nicht von einem Velafrica Partner abgeholt werden, bitte hier eintragen von wem")
-    collection_partner_confirmed = models.BooleanField(default=False, verbose_name="Transport Partner bestätigt?")
+    collection_partner_confirmed = models.BooleanField(default=False, verbose_name="Transport bestätigt?")
+    intermediate_store = models.BooleanField(default=False, verbose_name="Zwischenlagerung möglich?")
 
     # marketing
     website = models.URLField(blank=True, help_text="Website des Events")
