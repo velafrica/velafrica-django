@@ -63,6 +63,9 @@
             {% if perms.velafrica_sud %}
             <li><a href="{% url 'frontend:container' %}" id="container">Container</a></li>
             {% endif %}
+            {% if perms.collection %}
+            <li><a href="{% url 'frontend:collection' %}" id="container">Sammelanlässe</a></li>
+            {% endif %}
             {% if user.is_authenticated %}
             <li><a href="{% url 'frontend:download' %}" id="download">Downloads</a></li>
             {% endif %}

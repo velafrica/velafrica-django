@@ -37,7 +37,7 @@ class TaskProgressAdmin(ExportMixin, SimpleHistoryAdmin):
 
 
 class EventAdmin(SimpleHistoryAdmin):
-    list_filter = ['yearly']
+    list_filter = ['yearly', 'region']
     list_display = ['name', 'yearly']
 
 class CollectionEventAdminResource(resources.ModelResource):

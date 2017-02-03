@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block breadcrumb %}
+<li><a href="{% url 'frontend:collection' %}">Collection Events</a></li>
+{% endblock %}
+
+{% block document-head %}
+
+{% endblock %}
+
+{% block jumbotron-img %}{% endblock %}
+{% block jumbotron-title %}
+Collection Events
+{% endblock %}
+
+{% block jumbotron %}
+
+{% endblock %}
+
+{% block content %}
+
+<!-- seach box -->
+<div class="input-group"><span class="input-group-addon">Search:</span> <input id="filter" type="text" class="form-control" /></div>
+
+<table class="table footable" data-page-size=100 data-filter="#filter">
+	<thead>
+		<tr>
+			<th data-sort-initial="descending">Datum</th>
+			<th>Event</th>
+			<th data-type="numeric">Anzahl Velos</th>
+		</tr>
+	</thead>
+	<tbody>
+	{% for c in collection_events %}
+		<tr>
+			<td data-value="{{ c.date_start |date:"c" }}">{{ c.date_start | date:"d.m.Y"}}</td>
+			<td>{{ c.event.name }} </td>
+			<td>{{ c.velo_amount }}</td>
+		</tr>
+	{% endfor %}
+	</tbody>
+</table>
+{% endblock %}
+
+{% block document-foot %}
+<!-- include footable -->
+<link rel="stylesheet" type="text/css" href="{% static "css/footable.core.min.css" %}" />
+<script type="text/javascript" src="{% static "js/footable.all.min.js" %}"></script>
+
+<!-- init footable -->
+<script type="text/javascript">
+	$(function () {
+		$('.footable').footable();
+	});
+</script>
+
+{% endblock %}
