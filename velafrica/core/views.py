@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect
-from django.shortcuts import render
-from django.template import RequestContext
+from django.shortcuts import redirect, reverse, render
 
 
 def home(request):
@@ -32,4 +30,5 @@ def accounts_logout(request):
   :view:`django.contrib.auth.views.login`
   """
   logout(request)
-  return redirect('auth:django.contrib.auth.views.login')
+  #return HttpResponseRedirect(reverse('auth:django.contrib.auth.views.login'))
+  return redirect(reverse('auth:login'))

@@ -16,7 +16,7 @@ Login
 {% endif %}
 
 <div>
-	<form method="post" action="{% url 'auth:django.contrib.auth.views.login' %}" role="form">
+	<form method="post" action="{% url 'auth:login' %}" role="form">
 	{% csrf_token %}
 	<table class="table">
 		<tr>
