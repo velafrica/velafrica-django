@@ -174,6 +174,10 @@ class CollectionEvent(models.Model):
         return self.event.host_type
     get_event_host_type.short_description = "Veranstalter Kategorie"
 
+    def get_event_contact(self):
+        return self.event.contact
+    get_event_contact.short_description = "Kontaktperson"
+
     def get_event_address(self):
         return self.event.address
     get_event_address.short_description = "Adresse"
