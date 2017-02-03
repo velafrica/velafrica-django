@@ -40,12 +40,23 @@ class HostType(models.Model):
         verbose_name_plural = "Veranstalter Kategorien"
 
 
+class Region(models.Model):
+    """
+    Region
+    """
+    name = models.CharField(max_length=255)
+
+    def __unicode__(self):
+        return u"{}".format(self.name)
+
+
 class Event(models.Model):
     """
     Recurring CollectionEvent
     """
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True, verbose_name="Beschreibung")
+    region = models.ForeignKey(Region, verbose_name="Region", null=True, blank=True)
     category = models.ForeignKey(EventCategory, verbose_name="Kategorie")
     yearly = models.BooleanField(default=False, verbose_name="Jährlich wiederkehrend?")
     host = models.CharField(max_length=255, verbose_name="Veranstalter")
@@ -142,6 +153,10 @@ class CollectionEvent(models.Model):
     def get_event_description(self):
         return self.event.description
     get_event_description.short_description = "Beschreibung"
+
+    def get_event_region(self):
+        return self.event.region
+    get_event_region.short_description = "Region"
 
     def get_event_category(self):
         return self.event.category

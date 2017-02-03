@@ -65,6 +65,7 @@ class CollectionEventAdminResource(resources.ModelResource):
             'date_end',
             'event',
             'event__name',
+            'event__region__name',
             'time',
             'notes',
             'presence_velafrica',
@@ -108,13 +109,13 @@ class CollectionEventAdmin(ImportExportMixin, SimpleHistoryAdmin):
     search_fields = ['event__name', 'event__address__city']
 
     inlines = [TaskProgressInline]
-    readonly_fields = ['get_googlemaps_link', 'get_event_name', 'get_event_description', 'get_event_category', 'get_event_yearly', 'get_event_host', 'get_event_host_type', 'get_event_address', 'get_event_address_notes']
+    readonly_fields = ['get_googlemaps_link', 'get_event_name', 'get_event_description', 'get_event_region', 'get_event_category', 'get_event_yearly', 'get_event_host', 'get_event_host_type', 'get_event_address', 'get_event_address_notes']
     fieldsets = (
         ('Sammelanlass', {
             'fields': ('date_start', 'date_end', 'event', 'time', 'notes', 'complete' )
             }),
         ('Event', {
-            'fields': ('get_event_description', 'get_event_category', 'get_event_yearly', 'get_event_host', 'get_event_host_type', 'get_googlemaps_link', 'get_event_address_notes')
+            'fields': ('get_event_description', 'get_event_category', 'get_event_region', 'get_event_yearly', 'get_event_host', 'get_event_host_type', 'get_googlemaps_link', 'get_event_address_notes')
             }),
         ('Logistik', {
             'fields': ('presence_velafrica', 'presence_velafrica_info', 'collection_partner_vrn', 'collection_partner_other', 'collection_partner_confirmed', 'collection', 'processing', 'processing_notes',)
@@ -200,6 +201,7 @@ class DropoffAdmin(ImportExportMixin, admin.ModelAdmin):
 
 
 admin.site.register(Dropoff, DropoffAdmin)
+admin.site.register(Region)
 admin.site.register(Event, EventAdmin)
 admin.site.register(EventCategory)
 admin.site.register(HostType)
