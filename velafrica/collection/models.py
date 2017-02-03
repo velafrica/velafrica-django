@@ -142,7 +142,10 @@ class CollectionEvent(models.Model):
     people_amount = models.IntegerField(default=0, verbose_name='Anzahl Helfer vor Ort')
     hours_amount = models.IntegerField(default=0, verbose_name='Geleistete Stunden', help_text="Anzahl geleistete Stunden von allen Helfern zusammen")
     money_amount = models.IntegerField(default=0, verbose_name='Gesammeltes Geld', help_text="Betrag in CHF der am Event gesammelt wurde")
-    additional_results = models.TextField(blank=True, verbose_name="weitere Resultate", help_text="Zusätzliche Resultate / Erkenntnisse")
+    additional_results = models.TextField(blank=True, verbose_name="weitere Resultate", help_text="Zusätzliche Resultate / Erkenntnisse, mündlichesFeedback, etc")
+
+    material_returned = models.BooleanField(default=False, verbose_name="Material retour?")
+    material_returned_notes = models.TextField(blank=True, null=True, verbose_name="Bemerkungen zu Material Retournierung")
 
     complete = models.BooleanField(default=False, verbose_name="Abgeschlossen")
 

@@ -124,7 +124,7 @@ class CollectionEventAdmin(ImportExportMixin, SimpleHistoryAdmin):
             'fields': ('website',)
             }),
         ('Resultate', {
-            'fields': ('feedback', 'velo_amount', 'people_amount', 'hours_amount', 'additional_results')
+            'fields': ('feedback', 'velo_amount', 'people_amount', 'hours_amount', 'additional_results', 'material_returned', 'material_returned_notes')
             }),
     )
     list_filter = ['complete', 'date_start', 'event']
