@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from django.shortcuts import render_to_response
+from django.shortcuts import render
 from django.template import RequestContext
 
 from velafrica.counter.models import Entry
@@ -22,7 +22,8 @@ def counter(request):
 
   print "STATS: {}".format(statistics)
 
-  return render_to_response('counter/index.html', {
+  return render(request,
+    'counter/index.html', {
     'org_id': statistics["org_id"],
     'organisations' : statistics["organisations"],
     'velos_total': statistics["velos_total"],
@@ -33,5 +34,5 @@ def counter(request):
     'velos_today': statistics["velos_today"],
     'velos_max': statistics["velos_max"],
     'velos_max_date': statistics["velos_max_date"],
-    }, context_instance=RequestContext(request)
+    }
   )

@@ -4,7 +4,7 @@ from itertools import chain
 from dal import autocomplete
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
-from django.shortcuts import render_to_response
+from django.shortcuts import render
 from django.template import RequestContext
 
 from velafrica.stock.models import Product, Warehouse, Stock, StockChange, StockListPosition
@@ -40,10 +40,10 @@ def stock(request):
     else:	
       	stock = stock.none()
             
-    return render_to_response('stock/index.html', { 
+    return render(request, 'stock/index.html', {
         'stock': stock, 
         'warehouses': warehouses,
-        }, context_instance=RequestContext(request)
+        }
     )
 
 
@@ -61,9 +61,9 @@ def warehouses(request):
 
     :template:`stock/warehouses.html`
     """
-    return render_to_response('stock/warehouses.html', {
+    return render(request, 'stock/warehouses.html', {
         'warehouses': Warehouse.objects.all(),
-        }, context_instance=RequestContext(request)
+        }
     )
 
 @login_required
@@ -171,7 +171,7 @@ def warehouse(request, pk):
         # save in tuple (in, out, diff)
         stock_movements[s] = (s_in, s_out, (s_in - s_out))
 
-    return render_to_response('stock/warehouse_detail.html', {
+    return render(request, 'stock/warehouse_detail.html', {
         'warehouse': warehouse,
         'rides': rides,
         'rides_in': rides_in,
@@ -182,7 +182,7 @@ def warehouse(request, pk):
         'velo_stock': velo_stock,
         'container_out': container_out,
         'container_velos_out': container_velos_out,
-        }, context_instance=RequestContext(request)
+        }
     )
 
 

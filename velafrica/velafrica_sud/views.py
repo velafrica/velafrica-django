@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render_to_response
+from django.shortcuts import render
 from django.template import RequestContext
 
 from velafrica.velafrica_sud.models import Container
@@ -24,8 +24,9 @@ def container(request):
   for c in containers:
     bicycles_total += c.velos_loaded
 
-  return render_to_response('velafrica_sud/container.html', {
-    'containers': containers,
-    'bicycles_total': bicycles_total,
-    }, context_instance=RequestContext(request)
-  )
+  context = {
+      'containers': containers,
+      'bicycles_total': bicycles_total,
+  }
+
+  return render(request, 'velafrica_sud/container.html', context)

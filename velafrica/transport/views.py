@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render_to_response
+from django.shortcuts import render
 from django.template import RequestContext
 
 from velafrica.transport.models import Ride, Car, Driver
@@ -59,11 +59,11 @@ def transport(request):
         'Velos': rides.filter(spare_parts=False).count()
     }
   
-    return render_to_response('transport/index.html', {
+    return render(request, 'transport/index.html', {
         'rides': rides,
         'velos': velos,
         'cars': cars,
         'charts': charts,
-        }, context_instance=RequestContext(request)
+        }
     )
   

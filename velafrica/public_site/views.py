@@ -5,7 +5,7 @@ from djangocms_blog.models import Post
 from django.conf import settings
 from django.core.urlresolvers import reverse, resolve
 from django.db.models import Q
-from django.shortcuts import render_to_response, redirect
+from django.shortcuts import render, redirect
 from django.template import RequestContext
 from itertools import chain
 from paypal.standard.forms import PayPalPaymentsForm
@@ -28,8 +28,7 @@ def render_template(request):
         if Post.objects.count() > 0:
             template_context['blog_post'] = Post.objects.filter(publish=True).order_by('-date_published').first()
 
-    return render_to_response('public_site' + template_name + '.html', template_context,
-                              context_instance=RequestContext(request))
+    return render(request, 'public_site' + template_name + '.html', template_context)
 
 
 def render_map_template(request):
@@ -49,7 +48,7 @@ def render_map_template(request):
             'search': request.GET['search']
         })
 
-    return render_to_response(template_name, template_context, context_instance=RequestContext(request))
+    return render(request, template_name, template_context)
 
 
 def render_donation_template(request):
@@ -75,7 +74,7 @@ def render_donation_template(request):
         'invoiceform': invoiceform
     }
 
-    return render_to_response(template_name, template_context, context_instance=RequestContext(request))
+    return render(request, template_name, template_context)
 
 
 def render_sbb_ticker_order(request):
@@ -119,7 +118,7 @@ def render_sbb_ticker_order(request):
         else:
             template_context['form'] = form
 
-    return render_to_response(template_name, template_context, context_instance=RequestContext(request))
+    return render(request, template_name, template_context)
 
 
 def render_walkthrough_template(request):
@@ -176,7 +175,7 @@ def render_walkthrough_template(request):
             else:
                 template_context['contact_form'] = form
 
-    return render_to_response(template_name, template_context, context_instance=RequestContext(request))
+    return render(request, template_name, template_context)
 
 
 def order_invoice(request):
@@ -207,12 +206,12 @@ def order_invoice(request):
 
 def thank_you(request):
     template_name = 'public_site/donation-thank-you.html'
-    return render_to_response(template_name, {}, context_instance=RequestContext(request))
+    return render(request, template_name, {})
 
 
 def thank_you_paypal(request):
     template_name = 'public_site/donation-thank-you.html'
-    return render_to_response(template_name, {'paypal': True}, context_instance=RequestContext(request))
+    return render(request, template_name, {'paypal': True})
 
 
 def render_about_us_template(request):
@@ -229,7 +228,7 @@ def render_about_us_template(request):
             'team': TeamMember.objects.filter(active=True).order_by('-sorting')
         })
 
-    return render_to_response(template_name, template_context, context_instance=RequestContext(request))
+    return render(request, template_name, template_context)
 
 
 def render_personal_tracking(request, tracking_no=''):
@@ -252,7 +251,7 @@ def render_personal_tracking(request, tracking_no=''):
             'tracking': False
         })
 
-    return render_to_response(template_name, template_context, context_instance=RequestContext(request))
+    return render(request, template_name, template_context)
 
 
 def render_tracking(request):
@@ -288,7 +287,7 @@ def render_tracking(request):
         'data': data
     }
 
-    return render_to_response(template_name, template_context, context_instance=RequestContext(request))
+    return render(request, template_name, template_context)
 
 
 def render_partners(request):
@@ -311,12 +310,12 @@ def render_partners(request):
         'partners': rest
     }
 
-    return render_to_response(template_name, template_context, context_instance=RequestContext(request))
+    return render(request, template_name, template_context)
 
 
 def render_impressum_template(request):
     template_name = 'public_site/impressum.html'
-    return render_to_response(template_name, {}, context_instance=RequestContext(request))
+    return render(request, template_name, {})
 
 
 def render_agenda(request):
@@ -347,7 +346,7 @@ def render_agenda(request):
 
     all_events = list(chain(events, coll_events))
     template_context['events'] = all_events
-    return render_to_response(template_name, template_context, context_instance=RequestContext(request))
+    return render(request, template_name, template_context)
 
 
 def render_specific_agenda(request, event_id):
@@ -378,7 +377,7 @@ def render_specific_agenda(request, event_id):
 
     template_context['event'] = event
 
-    return render_to_response(template_name, template_context, context_instance=RequestContext(request))
+    return render(request, template_name, template_context)
 
 
 def render_supporter(request):
@@ -387,9 +386,9 @@ def render_supporter(request):
         'supporter': Supporter.objects.filter(active=True).order_by('-sorting')
     }
 
-    return render_to_response(template_name, template_context, context_instance=RequestContext(request))
+    return render(request, template_name, template_context)
 
 
 def render_impact(request):
     template_name = 'public_site/impact.html'
-    return render_to_response(template_name,{}, context_instance=RequestContext(request))
+    return render(request, template_name,{})

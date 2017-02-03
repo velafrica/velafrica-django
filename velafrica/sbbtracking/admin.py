@@ -3,7 +3,7 @@ from django import forms
 from django import template
 from django.contrib import admin
 from django.http import HttpResponseRedirect
-from django.shortcuts import render_to_response
+from django.shortcuts import render
 from import_export import resources
 from import_export.admin import ImportExportMixin
 from simple_history.admin import SimpleHistoryAdmin
@@ -174,10 +174,9 @@ class TrackingAdmin(ImportExportMixin, SimpleHistoryAdmin):
         if not form:
             form = self.AddEventForm(initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
 
-        return render_to_response(
+        return render(request,
             'admin/add_event.html', 
-            {'trackings': queryset, 'tag_form': form },
-            context_instance=template.RequestContext(request)
+            {'trackings': queryset, 'tag_form': form }
         )
     add_event.short_description = "Add event to trackings"    
 

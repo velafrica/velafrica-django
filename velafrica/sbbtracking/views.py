@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.contrib import messages
-from django.shortcuts import render_to_response
+from django.shortcuts import render
 from django.template import RequestContext
 
 from velafrica.sbbtracking.models import Tracking, TrackingEvent
@@ -40,10 +40,10 @@ def tracking(request, tracking_no=0):
     else:
       messages.add_message(request, messages.ERROR, "Kein Tracking mit der Nummer {} gefunden.".format(tno))
 
-  return render_to_response('sbbtracking/index.html', {
+  return render(request, 'sbbtracking/index.html', {
     'tno': tno,
     'tracking': tracking,
     'tracking_events': tracking_events,
     'direct_access': direct_access,
-    }, context_instance=RequestContext(request)
+    }
   )
