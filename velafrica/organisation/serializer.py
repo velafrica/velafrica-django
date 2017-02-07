@@ -11,6 +11,7 @@ class PersonSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Person
+        fields = '__all__'
 
 
 class CountrySerializer(serializers.ModelSerializer):
@@ -19,6 +20,7 @@ class CountrySerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = Country
+        fields = '__all__'
 
 class AdressSerializer(serializers.ModelSerializer):
     """
@@ -29,6 +31,7 @@ class AdressSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Address
+        fields = '__all__'
 
 
 class OrganisationSerializer(serializers.ModelSerializer):
@@ -40,3 +43,4 @@ class OrganisationSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = Organisation
+        fields = '__all__'

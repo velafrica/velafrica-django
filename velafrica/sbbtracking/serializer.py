@@ -5,12 +5,13 @@ from velafrica.sbbtracking.models import Tracking, TrackingEvent, TrackingEventT
 
 
 class VeloTypeSerializer(serializers.ModelSerializer):
-	"""
-	Todo: write doc.
-	"""
+    """
+    Todo: write doc.
+    """
 
-	class Meta:
-		model = VeloType
+    class Meta:
+        model = VeloType
+        fields = '__all__'
 
 
 class TrackingEventSerializer(serializers.ModelSerializer):
@@ -20,6 +21,7 @@ class TrackingEventSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = TrackingEvent
+        fields = '__all__'
 
 
 class TrackingEventTypeSerializer(serializers.ModelSerializer):
@@ -29,6 +31,7 @@ class TrackingEventTypeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = TrackingEventType
+        fields = '__all__'
 
 
 class TrackingSerializer(serializers.ModelSerializer):
@@ -36,10 +39,11 @@ class TrackingSerializer(serializers.ModelSerializer):
     Todo: write doc.
     """
     next_tracking_eventtype_options = TrackingEventTypeSerializer(many=True, read_only=True)
-    
+
     class Meta:
         model = Tracking
         read_only = ["next_tracking_eventtype_options", "last_event", "complete"]
+        fields = '__all__'
 
 
 class TrackingDetailSerializer(serializers.ModelSerializer):
@@ -53,3 +57,4 @@ class TrackingDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tracking
         read_only = ["next_tracking_eventtype_options", "last_event", "complete"]
+        fields = '__all__'

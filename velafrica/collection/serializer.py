@@ -9,6 +9,7 @@ class EventCategorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = EventCategory
+        fields = '__all__'
 
 
 class EventSerializer(serializers.ModelSerializer):
@@ -17,12 +18,14 @@ class EventSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Event
+        fields = '__all__'
 
 
 class CollectionEventSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CollectionEvent
+        fields = '__all__'
 
 
 class DropoffSerializer(serializers.ModelSerializer):
@@ -31,3 +34,4 @@ class DropoffSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Dropoff
+        fields = '__all__'

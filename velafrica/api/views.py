@@ -45,7 +45,7 @@ class VeloTypeList(DjangoModelPermissionsMixin, generics.ListCreateAPIView):
 
 class VeloTypeDetail(DjangoModelPermissionsMixin, generics.RetrieveUpdateAPIView):
     """
-    Get details of a trackings.
+    Get details of a velo type.
     """
 
     queryset = VeloType.objects.all()
@@ -64,7 +64,7 @@ class TrackingList(DjangoModelPermissionsMixin, generics.ListCreateAPIView):
 
 class TrackingDetail(DjangoModelPermissionsMixin, generics.RetrieveUpdateAPIView):
     """
-    Get details of a trackings.
+    Get details of a tracking.
     """
 
     queryset = Tracking.objects.all()
@@ -84,7 +84,7 @@ class TrackingEventList(DjangoModelPermissionsMixin, generics.ListCreateAPIView)
 
 class TrackingEventDetail(DjangoModelPermissionsMixin, generics.RetrieveUpdateAPIView):
     """
-    Get details of a trackings.
+    Get details of a tracking event.
     """
 
     queryset = TrackingEvent.objects.all()
@@ -102,7 +102,7 @@ class TrackingEventTypeList(DjangoModelPermissionsMixin, generics.ListCreateAPIV
 
 class TrackingEventTypeDetail(DjangoModelPermissionsMixin, generics.RetrieveUpdateAPIView):
     """
-    Get details of a trackings.
+    Get details of a tracking event type.
     """
 
     queryset = TrackingEventType.objects.all()

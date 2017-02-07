@@ -12,6 +12,7 @@ class ContainerSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = Container
+        fields = '__all__'
 
 
 class ForwarderSerializer(serializers.ModelSerializer):
@@ -21,6 +22,7 @@ class ForwarderSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Forwarder
+        fields = '__all__'
 
 
 class RoleSerializer(serializers.ModelSerializer):
@@ -29,6 +31,7 @@ class RoleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Role
+        fields = '__all__'
 
 
 class PartnerStaffSerializer(serializers.ModelSerializer):
@@ -38,6 +41,7 @@ class PartnerStaffSerializer(serializers.ModelSerializer):
     #staff = PartnerStaffSerializer(source='get_staff', many=True)
     class Meta:
         model = PartnerStaff
+        fields = '__all__'
 
 
 class PartnerSudSerializer(serializers.ModelSerializer):
@@ -47,15 +51,18 @@ class PartnerSudSerializer(serializers.ModelSerializer):
     organisation = OrganisationSerializer(many=False, read_only=True)
 
     class Meta:
-        model = PartnerSud       
+        model = PartnerSud
+        fields = '__all__'
 
 
 class ReportStaffSerializer(serializers.ModelSerializer):
     """
     """
     role = RoleSerializer(many=False, read_only=True)
+
     class Meta:
         model = ReportStaff
+        fields = '__all__'
 
 
 class ReportSerializer(serializers.ModelSerializer):
@@ -65,4 +72,5 @@ class ReportSerializer(serializers.ModelSerializer):
     staff = ReportStaffSerializer(source='get_staff', many=True)
 
     class Meta:
-        model = Report       
+        model = Report
+        fields = '__all__'

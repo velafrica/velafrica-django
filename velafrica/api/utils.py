@@ -2,7 +2,7 @@
 from django.apps import apps
 from rest_framework import generics
 from rest_framework import serializers
-
+from django.urls import reverse
 
 def get_serializer_by_model(serialize):
     """
@@ -15,6 +15,7 @@ def get_serializer_by_model(serialize):
 
         class Meta:
             model = serialize
+            fields = '__all__'
 
     g = GenericSerializer
 
@@ -129,30 +130,18 @@ def get_api_root_listing_from_urls(request, format):
     response = {}
     for namespace_set in url_tree[1]:
         namespace = namespace_set[0]
+
         urls = namespace_set[1]
         namespace_urls = {}
         for ur in urls:
             if namespace:
-                fqpn = '{}:{}'.format(namespace, ur[0])
+                fqpn = 'api:{}:{}'.format(namespace, ur[0])
                 rev = ""
-                try:
-                    rev = reverse(str(fqpn), request=request, format=format)
-                except:
-                    try:
-                        rev = reverse(str("api:{}".format(fqpn)), request=request, format=format)
-                    except:
-                        try:
-                            rev = reverse(str(fqpn), request=request, format=format, kwargs={'pk': 1})
-                        except:
-                            try:
-                                rev = reverse(str("api:{}".format(fqpn)), request=request, format=format,
-                                              kwargs={'pk': 1})
-                            except:
-                                # "something went wrong.. who cares :)"
-                                pass
-                            pass
-                        pass
-                    pass
+
+                try:    # this will work for list views
+                    rev = reverse(str(fqpn))
+                except: # if it is a detail view, we need to provide a pk
+                    rev = reverse(str(fqpn), kwargs={'pk': 1})
 
                 description = "{}".format(ur[1])
                 namespace_urls[rev] = description.strip()
