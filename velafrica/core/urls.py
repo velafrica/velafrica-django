@@ -33,6 +33,7 @@ from velafrica.transport import views as transport_views
 from velafrica.velafrica_sud import views as velafrica_sud_views
 from velafrica.collection import views as collection_views
 from velafrica.public_site import views as velafrica_public_site_views
+from mailchimp import urls as mailchimp_urls
 
 frontend = [
     url(r'^$', RedirectView.as_view(url='/pages')),
@@ -104,6 +105,7 @@ urlpatterns = [
     url(r'^admin/', include("massadmin.urls")),
     url(r'^taggit_autosuggest/', include('taggit_autosuggest.urls')),
     url(r'^paypal/', include('paypal.standard.ipn.urls')),
+    url(r'^admin/mailchimp', include(mailchimp_urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += i18n_patterns(url(r'^pages/', include('cms.urls'), name="cms"))

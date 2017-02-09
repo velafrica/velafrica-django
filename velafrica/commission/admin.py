@@ -30,7 +30,7 @@ class PurchaseOrderListPosInline(admin.TabularInline):
     def get_readonly_fields(self, request, obj=None):
         if obj and obj.state != '0':
             fields = []
-            for field in self.model._meta.get_all_field_names():
+            for field in self.model._meta.get_fields():
                 if (not field == 'id'):
                     #if (field not in self.editable_fields):
                         fields.append(field)
@@ -66,7 +66,7 @@ class PurchaseOrderAdmin(DjangoObjectActions, SimpleHistoryAdmin):
         print obj
         if obj and obj.state != '0':
             fields = []
-            for field in self.model._meta.get_all_field_names():
+            for field in self.model._meta.get_fields():
                 if (not field == 'id'):
                     #if (field not in self.editable_fields):
                         fields.append(field)

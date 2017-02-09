@@ -32,7 +32,7 @@ class TrackingInline(admin.TabularInline):
 
     def get_readonly_fields(self, request, obj=None):
         fields = []
-        for field in self.model._meta.get_all_field_names():
+        for field in self.model._meta.get_fields():
             if (not field == 'id'):
                 if (field not in self.editable_fields):
                     fields.append(field)
@@ -64,10 +64,11 @@ class ContainerAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin)
             'fields': ('container_n_of_year', 'container_no', 'warehouse_from', 'organisation_from', 'partner_to', 'velos_loaded', 'velos_unloaded', 'spare_parts', 'stocklist', 'booked')
             }),
         ('Transport', {
-            'fields': ('logistics', 'pickup_date', 'shipment_date', 'arrival_port_date', 'arrival_partner_date')
+            'fields': ('logistics', 'pickup_date', 'arrival_port_date', 'arrival_partner_date')
             }),
         ('Worth', {
-            'fields': ('velos_worth', 'spare_parts_worth', 'tools_worth', 'various_worth')
+            'fields': ('velos_worth', 'spare_parts_worth', 'tools_worth', 'various_worth'),
+            'classes': ('collapse',)
             }),
         ('Extra info', {
             'fields': ('seal_no', 'sgs_certified', 'notes')
