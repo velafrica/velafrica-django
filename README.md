@@ -196,3 +196,7 @@ or for specific models:
 heroku local:run python manage.py dumpdata --format=json --indent=2 -v 2 [app_name.model] | grep -v "Loaded ENV .env" > fixtures/[app_name.model].json
 ```
 Before you commit the new fixtures file, make sure you remove dev/test data from the json and only commit those changes which are relevant for staging or production
+
+# Documentation
+
+Most of the classes should be documented. More documentation is available per request (chregi.glatthard (at) gmail.com).
