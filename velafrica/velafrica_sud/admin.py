@@ -53,15 +53,15 @@ class ContainerResource(resources.ModelResource):
 
 class ContainerAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
     resource_class = ContainerResource
-    list_display = ['pickup_date', 'container_n_of_year', 'container_no', 'organisation_from', 'warehouse_from', 'partner_to', 'velos_loaded', 'velos_unloaded', 'spare_parts', 'booked', 'notes']
+    list_display = ['pickup_date', 'container_no', 'organisation_from', 'warehouse_from', 'partner_to', 'velos_loaded', 'velos_unloaded', 'spare_parts', 'booked', 'notes']
     search_fields = ['container_no', 'organisation_from__name', 'partner_to__organisation__name']
     list_filter = ['pickup_date', ('pickup_date', DateRangeFilter), 'organisation_from', 'partner_to',]
     change_actions = ('book_container',)
-    readonly_fields = ['container_n_of_all', 'container_n_of_year']
+    #readonly_fields = ['container_n_of_all', 'container_n_of_year']
     inlines = [TrackingInline]
     fieldsets = (
         (None, {
-            'fields': ('container_n_of_year', 'container_no', 'warehouse_from', 'organisation_from', 'partner_to', 'velos_loaded', 'velos_unloaded', 'spare_parts', 'stocklist', 'booked')
+            'fields': ('container_no', 'warehouse_from', 'organisation_from', 'partner_to', 'velos_loaded', 'velos_unloaded', 'spare_parts', 'stocklist', 'booked')
             }),
         ('Transport', {
             'fields': ('logistics', 'pickup_date', 'arrival_port_date', 'arrival_partner_date')
