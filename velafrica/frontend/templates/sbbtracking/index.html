@@ -20,7 +20,7 @@ Velo Tracking
 		<h1>Velo Tracking</h1>
 		<div class="row">
 			<div class="col-lg-6">
-				<form action="/tracking/#tracking-details" method="POST">
+				<form action="{% url 'frontend:tracking' %}/#tracking-details" method="POST">
 					{% csrf_token %}
 					<div class="input-group">
 					      <input id="tracking_no" type="text" name="tracking_no" class="form-control" placeholder="2016AXXX" value="{% if tno %}{{tno}}{%endif%}">
