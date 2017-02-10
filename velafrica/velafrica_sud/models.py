@@ -202,7 +202,7 @@ class PartnerSud(models.Model):
         if self.organisation.address:
             return self.organisation.address.country
         else:
-            return None
+            return ""
     get_country.short_description = "Land"
 
     def get_container_count(self):
@@ -223,7 +223,7 @@ class PartnerSud(models.Model):
     get_bicycle_count.short_description = 'Anzahl exp. Velos'
 
     def __unicode__(self):
-        return u"{}, {}".format(self.organisation.name, self.organisation.address.country)
+        return u"{}, {}".format(self.organisation.name, self.get_country())
 
     class Meta:
         ordering = ['organisation__name']
