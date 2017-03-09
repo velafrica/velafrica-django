@@ -57,8 +57,8 @@ class ContainerAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin)
     search_fields = ['container_no', 'organisation_from__name', 'partner_to__organisation__name']
     list_filter = ['pickup_date', ('pickup_date', DateRangeFilter), 'organisation_from', 'partner_to',]
     change_actions = ('book_container',)
-    #readonly_fields = ['container_n_of_all', 'container_n_of_year']
-    inlines = [TrackingInline]
+    readonly_fields = ['container_n_of_all', 'container_n_of_year']
+    #inlines = [TrackingInline]
     fieldsets = (
         (None, {
             'fields': ('container_no', 'warehouse_from', 'organisation_from', 'partner_to', 'velos_loaded', 'velos_unloaded', 'spare_parts', 'stocklist', 'booked')
