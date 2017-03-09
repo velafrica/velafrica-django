@@ -15,6 +15,13 @@ import mailchimp
 @api_view(['GET'])
 @permission_classes((AllowAny,))
 def get_dropoffs(request):
+    """
+    Get a list of all dropoffs from the database
+    TODO: fix AttributeError: 'str' object has no attribute 'values'
+
+    :param request:
+    :return:
+    """
     q = Q(temp=True) & Q(temp_end__lte=datetime.now().date().strftime('%Y-%m-%d'))
     all = Dropoff.objects.filter(active=True).exclude(q)
     coll_drop = list()
@@ -40,6 +47,11 @@ def get_dropoffs(request):
 @api_view(['POST'])
 @permission_classes((AllowAny,))
 def subscribe_newsletter(request):
+    """
+
+    :param request:
+    :return:
+    """
     email = request.POST.get('email', False)
     if email:
         if MAILCHIMP_LIST_ID:

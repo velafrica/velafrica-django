@@ -1,2 +1,2 @@
 release: bin/addon-wait && yes | python manage.py migrate
-web: gunicorn velafrica.core.wsgi --timeout 50 --graceful-timeout 50 --log-file -
+web: gunicorn velafrica.core.wsgi --timeout 30 --graceful-timeout 30 --log-level debug --log-file -
