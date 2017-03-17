@@ -425,6 +425,8 @@ class StockTransferListPos(StockListPos):
 
 # -------------> new Stock Models:
 
+"""
+
 class StockIn(models.Model):
     # warehouse
     # shippingOrder
@@ -447,3 +449,4 @@ class ShippingOrder(models.Model):
     # def send
     # def create
     pass
+"""
