@@ -36,12 +36,12 @@ from velafrica.public_site import views as velafrica_public_site_views
 from mailchimp import urls as mailchimp_urls
 
 frontend = [
-    url(r'^$', RedirectView.as_view(url='/pages')),
+    url(r'^$', RedirectView.as_view(url='/velo_tracking')),
     url(r'^counter', counter_views.counter, name='counter'),
     url(r'^download', download_views.downloads, name='download'),
     url(r'^stock', stock_views.stock, name='stock'),
-    url(r'^chregi_tracking/(?P<tracking_no>\w+)', sbbtracking_views.tracking, name='tracking_detail'),
-    url(r'^chregi_tracking', sbbtracking_views.tracking, name='tracking'),
+    url(r'^velo_tracking/(?P<tracking_no>\w+)', sbbtracking_views.tracking, name='tracking_detail'),
+    url(r'^velo_tracking', sbbtracking_views.tracking, name='tracking'),
     url(r'^transport', transport_views.transport, name='transport'),
     url(r'^warehouses', stock_views.warehouses, name='warehouses'),
     url(r'^warehouse/(?P<pk>[0-9]+)', stock_views.warehouse, name='warehouse_detail'),
@@ -64,15 +64,19 @@ autocomplete = [
 ]
 
 urlpatterns = [
-    # urls for the public pages
-    url(r'^', include('velafrica.public_site.urls', namespace='home')),
+
+    url(r'^', include(frontend, namespace="frontend")),
+
+    # urls for the public pages (django cms)
+    url(r'^cms/', include('velafrica.public_site.urls', namespace='home')),
     url(r'^socialwall$', velafrica_public_site_views.render_template, name='home'),
     url(r'^collection-point$', velafrica_public_site_views.render_template, name='home'),
     url(r'^collection-event$', velafrica_public_site_views.render_template, name='home'),
 
+    # api urls
     url(r'^api/', include('velafrica.api.urls', namespace="api")),
 
-    url(r'^', include(frontend, namespace="frontend")),
+    # auth related urls
     url(r'^auth/', include(auth, namespace="auth")),
         # url to request Password reset
     url(r'^auth/password/reset/$', 

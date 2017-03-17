@@ -11,6 +11,9 @@ from velafrica.organisation.models import Organisation, Address
 
 fs = MyStorage()
 
+# TODO: clean up this mess
+# TODO: migrate data first
+
 class Category(models.Model):
     """
     Represents a product category.
@@ -249,7 +252,7 @@ class StockChange(models.Model):
     StockChange objects never get created by the user directly, but when booking a StockTransfer.
     On pre_save, the application checks on the warehouse if stock is managed automatically.
     If so, the stock for all the objects in the StockList will be adjusted depending on the stock change type.
-    On pre_delete, the application undoes the stock changes and then deletes the StocChange object.
+    On pre_delete, the application undoes the stock changes and then deletes the StockChange object.
     
     TODO: change usage, implement book()
     """
@@ -418,3 +421,29 @@ class StockTransferListPos(StockListPos):
         unique_together = (("stocktransfer", "product"),)
         verbose_name = "Stock Transfer List Position"
         verbose_name_plural = "Stock Transfers List Positionen"
+
+
+# -------------> new Stock Models:
+
+class StockIn(models.Model):
+    # warehouse
+    # shippingOrder
+    # stockList
+    # book()
+    pass
+
+class StockOut(models.Model):
+    # warehouse
+    # shippingOrder
+    # stockList
+    pass
+
+class ShippingOrder(models.Model):
+    # from
+    # to
+    # stockList_from
+    # stockList_to
+    # stockList_diff
+    # def send
+    # def create
+    pass

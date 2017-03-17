@@ -20,10 +20,11 @@ from .models import DonationAmount, WalkthroughRequest, TeamMember, References, 
 def render_template(request):
     template_name = '/index'
     template_context = {}
-    if request.path != '/':
+    if request.path != '/cms/':
         template_name = request.path
+        print "---> template name: {}".format(template_name)
 
-    if request.path == '/':
+    if request.path == '/cms/':
         template_context['velo_count'] = Tracking.get_tracked_velo_count()
         if Post.objects.count() > 0:
             template_context['blog_post'] = Post.objects.filter(publish=True).order_by('-date_published').first()

@@ -134,7 +134,7 @@ heroku local:start -f Procfile_dev
 ### 9. Enjoy
 
 ```bash
-open http://localhost:5000/
+open http://localhost:8000/
 ```
 
 ### (Optional)
