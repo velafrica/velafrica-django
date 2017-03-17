@@ -11,7 +11,7 @@ register = template.Library()
 def get_content(context, key, description='', fixed=False):
     if not fixed:
         path = '_index_'
-        if context.request.path != '/':
+        if context.request.path != '/cms/':
             path = context.request.path.replace('/', '_').replace('-', '_')
             if not path.endswith('_'):
                 path = path[0:len(path)-len(path.split('_')[-1])]
