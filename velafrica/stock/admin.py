@@ -369,3 +369,11 @@ admin.site.register(StockChange, StockChangeAdmin)
 admin.site.register(StockTransfer, StockTransferAdmin)
 admin.site.register(StockList, StockListAdmin)
 admin.site.register(StockListPosition, StockListPositionAdmin)
+
+§"""
+admin.site.register(StockPosition)
+admin.site.register(StockTaking)
+admin.site.register(StockTakingStockPosition)
+admin.site.register(StockIn)
+admin.site.register(StockInStockPosition)
+"""

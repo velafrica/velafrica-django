@@ -424,20 +424,51 @@ class StockTransferListPos(StockListPos):
 
 
 # -------------> new Stock Models:
-
 """
+class StockPosition(models.Model):
+    product = models.ForeignKey(Product)
+    amount = models.IntegerField()
+
+class StockTaking(models.Model):
+    warehouse = models.ForeignKey(Warehouse)
+
+class StockTakingStockPosition(StockPosition):
+    stockTaking = models.ForeignKey(StockTaking)
+
+class StockIn(models.Model):
+    warehouse = models.ForeignKey(Warehouse)
+
+class StockInStockPosition(StockPosition):
+    stockIn = models.ForeignKey(StockIn)
+
+
+class StockPosition(models.Model)
+    product
+    amount
+
+class StockTakingStockPosition(StockPosition):
+    stocktaking
+
+class StockInStockPosition(StockPosition):
+    stockin
+
+class StockOutStockPosition(StockPosition):
+    stockout
+
+class StockTaking(models.Model):
+    datetime
 
 class StockIn(models.Model):
     # warehouse
     # shippingOrder
-    # stockList
+    # stockPositions
     # book()
     pass
 
 class StockOut(models.Model):
     # warehouse
     # shippingOrder
-    # stockList
+    # stockPositions
     pass
 
 class ShippingOrder(models.Model):
