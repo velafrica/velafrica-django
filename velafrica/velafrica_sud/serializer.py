@@ -6,12 +6,12 @@ from velafrica.velafrica_sud.models import Container, Forwarder, PartnerSud, Rep
 
 
 class ContainerSerializer(serializers.ModelSerializer):
-	"""
-	Todo: write doc.
-	"""
+    """
+    Todo: write doc.
+    """
 
-	class Meta:
-		model = Container
+    class Meta:
+        model = Container
         fields = '__all__'
 
 

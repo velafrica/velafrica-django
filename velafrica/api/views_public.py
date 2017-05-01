@@ -24,6 +24,7 @@ def get_dropoffs(request):
     """
     q = Q(temp=True) & Q(temp_end__lte=datetime.now().date().strftime('%Y-%m-%d'))
     all = Dropoff.objects.filter(active=True).exclude(q)
+
     coll_drop = list()
     for collectionevent in CollectionEvent.objects.filter(date_end__gte=datetime.now().date().strftime('%Y-%m-%d'))\
             .exclude(event__address=None):
@@ -41,6 +42,7 @@ def get_dropoffs(request):
         new_drop.id = -1 * collectionevent.id
         coll_drop.append(new_drop)
     ret = list(chain(all, coll_drop))
+
     serializer = DropoffSerializer(ret, many=True)
     return Response(serializer.data)
 

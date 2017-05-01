@@ -4,10 +4,10 @@ from velafrica.stock.models import Warehouse
 
 
 class WarehouseSerializer(serializers.ModelSerializer):
-	"""
-	Todo: write doc.
-	"""
+    """
+    Todo: write doc.
+    """
 
-	class Meta:
-		model = Warehouse
-		fields = '__all__'
+    class Meta:
+        model = Warehouse
+        fields = '__all__'

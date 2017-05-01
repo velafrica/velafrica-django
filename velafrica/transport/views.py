@@ -10,20 +10,20 @@ from velafrica.transport.models import Ride, Car, Driver
 def transport(request):
     """
     Show transport statistics.
-  	
-  	**Context**
+      
+      **Context**
 
-  	``rides``
-  		List of all instances of :model:`transport.Ride`
+      ``rides``
+          List of all instances of :model:`transport.Ride`
 
-  	``velos``
-  		Sum of velos transported in instances of :model:`transport.Ride`
-  	
-  	``cars``
-  		List of all instances of :model:`Car`
-  	
-  	``charts``
-    	Various data for charts, that will be displayed in :template:`transport/index.html`, using ``Chart.js``
+      ``velos``
+          Sum of velos transported in instances of :model:`transport.Ride`
+      
+      ``cars``
+          List of all instances of :model:`Car`
+      
+      ``charts``
+        Various data for charts, that will be displayed in :template:`transport/index.html`, using ``Chart.js``
 
     **Template**
   

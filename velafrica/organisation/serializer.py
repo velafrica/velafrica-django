@@ -15,11 +15,11 @@ class PersonSerializer(serializers.ModelSerializer):
 
 
 class CountrySerializer(serializers.ModelSerializer):
-	"""
-	"""
+    """
+    """
 
-	class Meta:
-		model = Country
+    class Meta:
+        model = Country
         fields = '__all__'
 
 class AdressSerializer(serializers.ModelSerializer):
@@ -35,12 +35,12 @@ class AdressSerializer(serializers.ModelSerializer):
 
 
 class OrganisationSerializer(serializers.ModelSerializer):
-	"""
-	Todo: write doc.
-	"""
-	address = AdressSerializer(many=False, read_only=False)
-	#partnersud = PartnerSudSerializer(many=False, read_only=False)
+    """
+    Todo: write doc.
+    """
+    address = AdressSerializer(many=False, read_only=False)
+    #partnersud = PartnerSudSerializer(many=False, read_only=False)
 
-	class Meta:
-		model = Organisation
+    class Meta:
+        model = Organisation
         fields = '__all__'

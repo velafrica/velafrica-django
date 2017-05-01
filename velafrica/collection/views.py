@@ -10,10 +10,10 @@ def collection(request):
   Show a list of all collection events.
 
   **Context**
-	``containers``
+    ``containers``
         A list of instances of :model:`velafrica_sud.Container`
 
-  	``bicycles_total``
+      ``bicycles_total``
         The sum of all bicycles transported in all containers.
 
   """

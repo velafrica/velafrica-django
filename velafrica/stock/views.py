@@ -32,13 +32,13 @@ def stock(request):
     warehouses = Warehouse.objects.filter(id__in=warehouse_ids)
 
     if request.user.is_superuser or request.user.has_perm('stock.is_admin'):
-      	stock = Stock.objects.all()
+          stock = Stock.objects.all()
     # other users with a correlating person should only see their organisations entries
     elif hasattr(request.user, 'person'):
         stock = stock.filter(warehouse__organisation=request.user.person.organisation)
     # users with no superuser role and no related person should not see any entries
-    else:	
-      	stock = stock.none()
+    else:
+          stock = stock.none()
             
     return render(request, 'stock/index.html', {
         'stock': stock, 

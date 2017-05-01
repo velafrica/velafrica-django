@@ -92,10 +92,10 @@ class RideResource(resources.ModelResource):
         widget=DateWidget(format="%d.%m.%Y"))
 
     def get_instance(self, instance_loader, row):
-    	"""
-    	Don't check for existing data rows.
-    	"""
-    	return False
+        """
+        Don't check for existing data rows.
+        """
+        return False
 
     class Meta:
         model = Ride
