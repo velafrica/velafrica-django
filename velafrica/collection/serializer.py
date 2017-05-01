@@ -30,7 +30,7 @@ class CollectionEventSerializer(serializers.ModelSerializer):
 
 class DropoffSerializer(serializers.ModelSerializer):
 
-    # address = AdressSerializer(many=False, read_only=True)
+    address = AdressSerializer(many=False, read_only=True)
 
     class Meta:
         model = Dropoff
