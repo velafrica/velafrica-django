@@ -72,7 +72,7 @@ def send_email(sender, instance, created, **kwargs):
 
             msg_footer = u"Verfolgen Sie Ihr Velo online, auf {}{}\n\nDiese Email wurde automatisch generiert. Bitte antworten Sie nicht darauf.".format(
                 getattr(settings, 'APP_URL', 'http://tracking.velafrica.ch'),
-                reverse('home:tracking:personal', kwargs={'tracking_no' : instance.tracking.tracking_no})
+                reverse('frontend:tracking_detail', kwargs={'tracking_no' : instance.tracking.tracking_no})
             )
             msg = u"{}\n\n{}".format(
                 msg_body,
