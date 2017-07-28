@@ -5,7 +5,7 @@ from rest_framework.urlpatterns import format_suffix_patterns
 from velafrica.api import utils
 from velafrica.api import views
 from velafrica.api import views_public
-from velafrica.api.counter.views import CounterEntryList
+from velafrica.api.counter.views import CounterEntryList, CounterEntryDetail
 
 collection = [
     url(r'^eventcategories/?$', utils.get_listview('collection', 'EventCategory').as_view(), name="eventcategories"),
@@ -26,7 +26,7 @@ collection = [
 
 counter = [
     url(r'^entries/?$', CounterEntryList.as_view(), name="entries"),
-    url(r'^entries/(?P<pk>[0-9]+)/?$', utils.get_listview('counter', 'entry').as_view(), name='entry'),
+    url(r'^entries/(?P<pk>[0-9]+)/?$', CounterEntryDetail.as_view(), name='entry'),
 ]
 
 stock = [
