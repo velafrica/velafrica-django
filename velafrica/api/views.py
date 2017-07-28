@@ -109,24 +109,6 @@ class TrackingEventTypeDetail(DjangoModelPermissionsMixin, generics.RetrieveUpda
     serializer_class = TrackingEventTypeSerializer
 
 
-class OrganisationList(DjangoModelPermissionsMixin, generics.ListCreateAPIView):
-    """
-    Get a list of all organisations.
-    """
-
-    queryset = Organisation.objects.all()
-    serializer_class = OrganisationSerializer
-
-
-class OrganisationDetail(DjangoModelPermissionsMixin, generics.RetrieveUpdateAPIView):
-    """
-    Get details of an organisation.
-    """
-
-    queryset = Organisation.objects.all()
-    serializer_class = OrganisationSerializer
-
-
 class WarehouseList(DjangoModelPermissionsMixin, generics.ListCreateAPIView):
     """
     Get a list of all warehouses.

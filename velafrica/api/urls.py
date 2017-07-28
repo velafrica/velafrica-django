@@ -6,6 +6,7 @@ from velafrica.api import utils
 from velafrica.api import views
 from velafrica.api import views_public
 from velafrica.api.counter.views import CounterEntryList, CounterEntryDetail
+from velafrica.api.organisation.views import OrganisationDetail, OrganisationList
 
 collection = [
     url(r'^eventcategories/?$', utils.get_listview('collection', 'EventCategory').as_view(), name="eventcategories"),
@@ -61,8 +62,8 @@ transport = [
 ]
 
 organisation = [
-    url(r'^organisations/?$', views.OrganisationList.as_view(), name="organisations"),
-    url(r'^organisations/(?P<pk>[0-9]+)/?$', views.OrganisationDetail.as_view(), name='organisations_detail'),
+    url(r'^organisations/?$', OrganisationList.as_view(), name="organisations"),
+    url(r'^organisations/(?P<pk>[0-9]+)/?$', OrganisationDetail.as_view(), name='organisations_detail'),
     url(r'^countries/?$', utils.get_listview('organisation', 'Country').as_view(), name='countries'),
     url(r'^countries/(?P<pk>[0-9]+)/?$', utils.get_retrieveview('organisation', 'Country').as_view(), name='country'),
     url(r'^municipalities/?$', utils.get_listview('organisation', 'Municipality').as_view(), name="municipalities"),
