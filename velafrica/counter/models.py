@@ -16,6 +16,7 @@ class Entry(models.Model):
     date = models.DateField(blank=False, null=False, default=timezone.now, verbose_name="Datum")
     organisation = models.ForeignKey(Organisation, blank=False, null=False, verbose_name="Verarbeitsungsort")
     amount = models.IntegerField(blank=False, null=False, verbose_name="Anzahl Velos")
+    confirmed = models.BooleanField(blank=False, null=False, verbose_name="Visum Werkstattchef")
     note = models.CharField(blank=True, null=True, max_length=255, verbose_name="Bemerkungen")
     history = HistoricalRecords()
 
