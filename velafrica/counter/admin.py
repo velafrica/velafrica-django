@@ -25,13 +25,14 @@ class EntryResource(resources.ModelResource):
 
 class EntryAdmin(ImportExportMixin, SimpleHistoryAdmin):
     resource_class = EntryResource
-    list_display = ('date', 'organisation', 'amount', 'note')
+    list_display = ('date', 'organisation', 'amount', 'note', 'confirmed')
     search_fields = ['note', 'organisation__name']
-    list_editable = ['amount', 'note']
+    list_editable = ['amount', 'note', 'confirmed']
     list_filter = (
         'date', 
         ('date', DateRangeFilter),
-        'organisation'
+        'organisation',
+        'confirmed'
         )
 
     def get_queryset(self, request):
