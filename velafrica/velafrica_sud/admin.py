@@ -109,7 +109,7 @@ class PartnerStaffInline(admin.TabularInline):
 
 class PartnerSudAdmin(SimpleHistoryAdmin):
     list_display = ['organisation', 'get_googlemaps_link', 'get_container_count', 'get_bicycle_count']
-    search_fields = ['organisation__name', 'country__name']
+    search_fields = ['organisation__name', 'organisation__address__country__name']
     readonly_fields = ['get_googlemaps_link', 'get_name', 'get_website', 'get_description', 'get_country', 'get_facebook', 'get_contact']
     inlines = [ContainerInline, PartnerStaffInline]
     fieldsets = (

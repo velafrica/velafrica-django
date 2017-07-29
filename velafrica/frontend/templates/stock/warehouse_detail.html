@@ -93,7 +93,7 @@ Organisation: {{ warehouse.organisation }}<br/>
 			{% for r in rides %}
 			<tr>
 				<td>
-					{% if r.from_warehouse = warehouse %}
+					{% if r.from_warehouse == warehouse %}
 					<span class="glyphicon glyphicon-arrow-left glyph-ride-out"></span>
 					{% else %}
 					<span class="glyphicon glyphicon-arrow-right glyph-ride-in"></span>

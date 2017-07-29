@@ -181,7 +181,7 @@ def warehouse(request, pk):
         'velos_out': velos_out,
         'velo_stock': velo_stock,
         'container_out': container_out,
-        'container_velos_out': container_velos_out,
+        'container_velos_out': container_velos_out
         }
     )
 

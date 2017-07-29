@@ -110,9 +110,7 @@ urlpatterns = [
     url(r'^velafrica_sud/', include(velafrica_sud, namespace="velafrica_sud")),
     url(r'^counter/', include(counter, namespace="counter")),
     url(r'^collections/', include(collection, namespace="collections")),
-    url(r'^public/', include(public, namespace="public")),
-    url(r'^api-auth/', include('rest_framework.urls',
-                               namespace='rest_framework'))
+    url(r'^public/', include(public, namespace="public"))
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

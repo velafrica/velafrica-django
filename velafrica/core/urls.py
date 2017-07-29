@@ -69,12 +69,14 @@ urlpatterns = [
 
     # urls for the public pages (django cms)
     url(r'^cms/', include('velafrica.public_site.urls', namespace='home')),
-    url(r'^socialwall$', velafrica_public_site_views.render_template, name='home'),
+    url(r'^socialwall$', velafrica_public_site_views.render_template, name='socialwall'),
     url(r'^collection-point$', velafrica_public_site_views.render_template, name='home'),
     url(r'^collection-event$', velafrica_public_site_views.render_template, name='home'),
 
     # api urls
     url(r'^api/', include('velafrica.api.urls', namespace="api")),
+    # api auth
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
     # auth related urls
     url(r'^auth/', include(auth, namespace="auth")),
@@ -110,6 +112,7 @@ urlpatterns = [
     url(r'^taggit_autosuggest/', include('taggit_autosuggest.urls')),
     url(r'^paypal/', include('paypal.standard.ipn.urls')),
     url(r'^admin/mailchimp', include(mailchimp_urls)),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += i18n_patterns(url(r'^pages/', include('cms.urls'), name="cms"))
