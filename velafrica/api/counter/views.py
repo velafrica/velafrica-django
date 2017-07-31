@@ -13,8 +13,8 @@ class CounterEntryList(DjangoModelPermissionsMixin, generics.ListCreateAPIView):
     permission_classes = (permissions.IsAuthenticated,)
     queryset = Entry.objects.all()
     serializer_class = EntrySerializer
-    filter_backends = (filters.SearchFilter,)
-    search_fields = ['organisation__id']
+    filter_backends = (filters.DjangoFilterBackend,)
+    filter_fields = ['organisation', 'date']
 
 class CounterEntryDetail(DjangoModelPermissionsMixin, generics.RetrieveUpdateAPIView):
     """
