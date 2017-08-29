@@ -186,7 +186,7 @@ class CollectionEvent(models.Model):
     get_event_address.short_description = "Adresse"
 
     def get_event_address_notes(self):
-        return self.event.notes
+        return self.event.address_notes
     get_event_address_notes.short_description = "Genauer Standort"
     
     address_new = models.ForeignKey(Address, verbose_name="Adresse", blank=True, null=True)
