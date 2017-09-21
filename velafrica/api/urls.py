@@ -7,6 +7,8 @@ from velafrica.api import views
 from velafrica.api import views_public
 from velafrica.api.counter.views import CounterEntryList, CounterEntryDetail
 from velafrica.api.organisation.views import OrganisationDetail, OrganisationList
+from velafrica.api.sbbtracking.views import TrackingList, TrackingEventList
+
 
 collection = [
     url(r'^eventcategories/?$', utils.get_listview('collection', 'EventCategory').as_view(), name="eventcategories"),
@@ -31,9 +33,8 @@ counter = [
 ]
 
 stock = [
-    url(r'^warehouses/?$', views.WarehouseList.as_view(), name="warehouses"),
-    url(r'^warehouses/(?P<pk>[0-9]+)/?$', views.WarehouseDetail.as_view(), name='warehouses_detail'),
-
+    url(r'^warehouses/?$', utils.get_listview('stock', 'Warehouse').as_view(), name="warehouses"),
+    url(r'^warehouses/(?P<pk>[0-9]+)/?$', utils.get_retrieveview('stock', 'Warehouse').as_view(), name='warehouse'),
     url(r'^products/?$', utils.get_listview('stock', 'Product').as_view(), name="products"),
     url(r'^products/(?P<pk>[0-9]+)/?$', utils.get_retrieveview('stock', 'Product').as_view(), name='product'),
     url(r'^categories/?$', utils.get_listview('stock', 'Category').as_view(), name="categories"),
@@ -73,14 +74,14 @@ organisation = [
 ]
 
 tracking = [
-    url(r'^trackings/?$', views.TrackingList.as_view(), name="trackings"),
-    url(r'^trackings/(?P<pk>[0-9]+)/?$', views.TrackingDetail.as_view(), name='tracking'),
-    url(r'^trackingevents/?$', views.TrackingEventList.as_view(), name="trackingevents"),
-    url(r'^trackingevents/(?P<pk>[0-9]+)/?$', views.TrackingEventDetail.as_view(), name='trackingevent'),
-    url(r'^trackingeventtypes/?$', views.TrackingEventTypeList.as_view(), name="trackingeventtypes"),
-    url(r'^trackingeventtypes/(?P<pk>[0-9]+)/?$', views.TrackingEventTypeDetail.as_view(), name='trackingeventtype'),
-    url(r'^velotypes/?$', views.VeloTypeList.as_view(), name="velotypes"),
-    url(r'^velotypes/(?P<pk>[0-9]+)/?$', views.VeloTypeDetail.as_view(), name='velotype'),
+    url(r'^trackings/?$', TrackingList.as_view(), name="trackings"),
+    url(r'^trackings/(?P<pk>[0-9]+)/?$', utils.get_retrieveview('sbbtracking', 'Tracking').as_view(), name='tracking'),
+    url(r'^trackingevents/?$', TrackingEventList.as_view(), name="trackingevents"),
+    url(r'^trackingevents/(?P<pk>[0-9]+)/?$', utils.get_retrieveview('sbbtracking', 'TrackingEvent').as_view(), name='trackingevent'),
+    url(r'^trackingeventtypes/?$', utils.get_listview('sbbtracking', 'TrackingEventType').as_view(), name="trackingeventtypes"),
+    url(r'^trackingeventtypes/(?P<pk>[0-9]+)/?$', utils.get_retrieveview('sbbtracking', 'TrackingEventType').as_view(), name='trackingeventtype'),
+    url(r'^velotypes/?$', utils.get_listview('sbbtracking', 'VeloType').as_view(), name="velotypes"),
+    url(r'^velotypes/(?P<pk>[0-9]+)/?$', utils.get_retrieveview('sbbtracking', 'VeloType').as_view(), name='velotype'),
 ]
 
 # first attempt at generic views
@@ -89,10 +90,10 @@ velafrica_sud = [
     url(r'^containers/(?P<pk>[0-9]+)/?$', utils.get_retrieveview('velafrica_sud', 'Container').as_view(), name='container'),
     url(r'^forwarders/?$', utils.get_listview('velafrica_sud', 'Forwarder').as_view(), name="forwarders"),
     url(r'^forwarders/(?P<pk>[0-9]+)/?$', utils.get_retrieveview('velafrica_sud', 'Forwarder').as_view(), name='forwarder'),
-    url(r'^partners/?$', views.PartnerSudList.as_view(), name="partners"),
-    url(r'^partners/(?P<pk>[0-9]+)/?$', views.PartnerSudDetail.as_view(), name='partner'),
-    url(r'^reports/?$', views.ReportList.as_view(), name="reports"),
-    url(r'^reports/(?P<pk>[0-9]+)/?$', views.ReportDetail.as_view(), name='report'),
+    url(r'^partners/?$', utils.get_listview('velafrica_sud', 'PartnerSud').as_view(), name="partners"),
+    url(r'^partners/(?P<pk>[0-9]+)/?$', utils.get_retrieveview('velafrica_sud', 'PartnerSud').as_view(), name='partner'),
+    url(r'^reports/?$', utils.get_listview('velafrica_sud', 'Report').as_view(), name="reports"),
+    url(r'^reports/(?P<pk>[0-9]+)/?$', utils.get_retrieveview('velafrica_sud', 'Report').as_view(), name='report'),
 ]
 
 public = [

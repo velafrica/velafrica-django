@@ -4,6 +4,14 @@ from rest_framework import generics
 from rest_framework import serializers
 from django.urls import reverse
 
+"""
+
+This whole thing is like black magic. Don't touch if you don't understand it!
+It is used to avoid writing boilerplate code when creating the views for the api.
+
+"""
+
+
 def get_serializer_by_model(serialize):
     """
 
