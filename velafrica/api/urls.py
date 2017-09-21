@@ -10,19 +10,19 @@ from velafrica.api.organisation.views import OrganisationDetail, OrganisationLis
 
 collection = [
     url(r'^eventcategories/?$', utils.get_listview('collection', 'EventCategory').as_view(), name="eventcategories"),
-    url(r'^eventcategories/(?P<pk>[0-9]+)/?$', utils.get_listview('collection', 'EventCategory').as_view(), name='eventcategory'),
+    url(r'^eventcategories/(?P<pk>[0-9]+)/?$', utils.get_retrieveview('collection', 'EventCategory').as_view(), name='eventcategory'),
     url(r'^events/?$', utils.get_listview('collection', 'Event').as_view(), name="events"),
-    url(r'^events/(?P<pk>[0-9]+)/?$', utils.get_listview('collection', 'Event').as_view(), name='event'),
+    url(r'^events/(?P<pk>[0-9]+)/?$', utils.get_retrieveview('collection', 'Event').as_view(), name='event'),
     url(r'^dropoffs/?$', utils.get_listview('collection', 'Dropoff').as_view(), name="dropoffs"),
-    url(r'^dropoffs/(?P<pk>[0-9]+)/?$', utils.get_listview('collection', 'Dropoff').as_view(), name='dropoffs'),
+    url(r'^dropoffs/(?P<pk>[0-9]+)/?$', utils.get_retrieveview('collection', 'Dropoff').as_view(), name='dropoffs'),
     url(r'^tasks/?$', utils.get_listview('collection', 'Task').as_view(), name="tasks"),
-    url(r'^tasks/(?P<pk>[0-9]+)/?$', utils.get_listview('collection', 'Task').as_view(), name='tasks'),
+    url(r'^tasks/(?P<pk>[0-9]+)/?$', utils.get_retrieveview('collection', 'Task').as_view(), name='tasks'),
     url(r'^taskprogresses/?$', utils.get_listview('collection', 'TaskProgress').as_view(), name="tasksprogresses"),
-    url(r'^taskprogresses/(?P<pk>[0-9]+)/?$', utils.get_listview('collection', 'TaskProgress').as_view(), name='taskprogress'),
+    url(r'^taskprogresses/(?P<pk>[0-9]+)/?$', utils.get_retrieveview('collection', 'TaskProgress').as_view(), name='taskprogress'),
     url(r'^collectionevents/?$', utils.get_listview('collection', 'CollectionEvent').as_view(), name="collectionevents"),
-    url(r'^collectionevents/(?P<pk>[0-9]+)/?$', utils.get_listview('collection', 'CollectionEvent').as_view(), name='collectionevent'),
+    url(r'^collectionevents/(?P<pk>[0-9]+)/?$', utils.get_retrieveview('collection', 'CollectionEvent').as_view(), name='collectionevent'),
     url(r'^hosttypes/?$', utils.get_listview('collection', 'HostType').as_view(), name="hosttypes"),
-    url(r'^hosttypes/(?P<pk>[0-9]+)/?$', utils.get_listview('collection', 'HostType').as_view(), name='hosttypes'),
+    url(r'^hosttypes/(?P<pk>[0-9]+)/?$', utils.get_retrieveview('collection', 'HostType').as_view(), name='hosttypes'),
 ]
 
 counter = [
@@ -35,30 +35,30 @@ stock = [
     url(r'^warehouses/(?P<pk>[0-9]+)/?$', views.WarehouseDetail.as_view(), name='warehouses_detail'),
 
     url(r'^products/?$', utils.get_listview('stock', 'Product').as_view(), name="products"),
-    url(r'^products/(?P<pk>[0-9]+)/?$', utils.get_listview('stock', 'Product').as_view(), name='product'),
+    url(r'^products/(?P<pk>[0-9]+)/?$', utils.get_retrieveview('stock', 'Product').as_view(), name='product'),
     url(r'^categories/?$', utils.get_listview('stock', 'Category').as_view(), name="categories"),
-    url(r'^categories/(?P<pk>[0-9]+)/?$', utils.get_listview('stock', 'Category').as_view(), name='category'),
+    url(r'^categories/(?P<pk>[0-9]+)/?$', utils.get_retrieveview('stock', 'Category').as_view(), name='category'),
     url(r'^stocks/?$', utils.get_listview('stock', 'Stock').as_view(), name="stocks"),
-    url(r'^stocks/(?P<pk>[0-9]+)/?$', utils.get_listview('stock', 'Stock').as_view(), name='stock'),
+    url(r'^stocks/(?P<pk>[0-9]+)/?$', utils.get_retrieveview('stock', 'Stock').as_view(), name='stock'),
     url(r'^stocklists/?$', utils.get_listview('stock', 'StockList').as_view(), name="stocklists"),
-    url(r'^stocklists/(?P<pk>[0-9]+)/?$', utils.get_listview('stock', 'StockList').as_view(), name='stocklist'),
+    url(r'^stocklists/(?P<pk>[0-9]+)/?$', utils.get_retrieveview('stock', 'StockList').as_view(), name='stocklist'),
     url(r'^stocklistpositions/?$', utils.get_listview('stock', 'StockListPosition').as_view(), name="stocklistpositions"),
-    url(r'^stocklistposition/(?P<pk>[0-9]+)/?$', utils.get_listview('stock', 'StockListPosition').as_view(), name='stocklistposition'),
+    url(r'^stocklistposition/(?P<pk>[0-9]+)/?$', utils.get_retrieveview('stock', 'StockListPosition').as_view(), name='stocklistposition'),
     url(r'^stocktransfers/?$', utils.get_listview('stock', 'StockTransfer').as_view(), name="stocktransfers"),
-    url(r'^stocktransfers/(?P<pk>[0-9]+)/?$', utils.get_listview('stock', 'StockTransfer').as_view(), name='stocktransfer'),
+    url(r'^stocktransfers/(?P<pk>[0-9]+)/?$', utils.get_retrieveview('stock', 'StockTransfer').as_view(), name='stocktransfer'),
     url(r'^stockchanges/?$', utils.get_listview('stock', 'StockChange').as_view(), name="stockchanges"),
-    url(r'^stockchange/(?P<pk>[0-9]+)/?$', utils.get_listview('stock', 'StockChange').as_view(), name='stockchange'),
+    url(r'^stockchange/(?P<pk>[0-9]+)/?$', utils.get_retrieveview('stock', 'StockChange').as_view(), name='stockchange'),
 ]
 
 transport = [
     url(r'^cars/?$', utils.get_listview('transport', 'Car').as_view(), name="cars"),
-    url(r'^cars/(?P<pk>[0-9]+)/?$', utils.get_listview('transport', 'Car').as_view(), name='car'),
+    url(r'^cars/(?P<pk>[0-9]+)/?$', utils.get_retrieveview('transport', 'Car').as_view(), name='car'),
     url(r'^velostates/?$', utils.get_listview('transport', 'VeloState').as_view(), name="velostates"),
-    url(r'^velostates/(?P<pk>[0-9]+)/?$', utils.get_listview('transport', 'VeloState').as_view(), name='velostate'),
+    url(r'^velostates/(?P<pk>[0-9]+)/?$', utils.get_retrieveview('transport', 'VeloState').as_view(), name='velostate'),
     url(r'^rides/?$', utils.get_listview('transport', 'Ride').as_view(), name="rides"),
-    url(r'^rides/(?P<pk>[0-9]+)/?$', utils.get_listview('transport', 'Ride').as_view(), name='ride'),
+    url(r'^rides/(?P<pk>[0-9]+)/?$', utils.get_retrieveview('transport', 'Ride').as_view(), name='ride'),
     url(r'^drivers/?$', utils.get_listview('transport', 'Driver').as_view(), name="drivers"),
-    url(r'^drivers/(?P<pk>[0-9]+)/?$', utils.get_listview('transport', 'Driver').as_view(), name='driver'),
+    url(r'^drivers/(?P<pk>[0-9]+)/?$', utils.get_retrieveview('transport', 'Driver').as_view(), name='driver'),
 ]
 
 organisation = [
