@@ -16,13 +16,20 @@ class DjangoModelPermissionsMixin(generics.GenericAPIView):
 @api_view(('GET',))
 def api_root(request, format=None):
     """
-    This is the API of Velafrica (www.velafrica.ch)
+    The REST API of the Velafrica tracking system (<a href="http://tracking.velafrica.ch">tracking.velafrica.ch</a>)
 
-    If you build something cool with it and want to show it to us, please do not hesitate!
+    It has been built with <b>Django</b> and <b>Django Rest Framework</b> by <a href="http://platzh1rsch.ch">platzh1rsch</a>, during civil service and is still updated from time to time.
 
-    Send a link with description to nikolai.raeber (at) velafrica.ch
+    All list endpoints accept GET & POST, all detail endpoints accept GET & PUT - if you have the according permissions.
 
-    Have fun!
+    -------------------
+
+    There is a github repository with all the code of this project.
+
+    If you are in need of any adjustments or bug fixes, or you need access to the repository, do not hesitate to drop me an email: <i>chregi.glatthard(at)gmail.com</i>.
+
+    If you have more general questions you can also contact Nikolai Räber <i>(nikolai.raeber(at)velafrica.ch)</i>.
+
     """
 
     response = utils.get_api_root_listing_from_urls(request, format)
