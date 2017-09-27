@@ -8,6 +8,8 @@ from velafrica.api import views_public
 from velafrica.api.counter.views import CounterEntryList, CounterEntryDetail
 from velafrica.api.organisation.views import OrganisationDetail, OrganisationList
 from velafrica.api.sbbtracking.views import TrackingList, TrackingEventList
+from velafrica.api.stock import views as views_stock
+
 
 
 collection = [
@@ -45,8 +47,13 @@ stock = [
     url(r'^stocklists/(?P<pk>[0-9]+)/?$', utils.get_retrieveview('stock', 'StockList').as_view(), name='stocklist'),
     url(r'^stocklistpositions/?$', utils.get_listview('stock', 'StockListPosition').as_view(), name="stocklistpositions"),
     url(r'^stocklistposition/(?P<pk>[0-9]+)/?$', utils.get_retrieveview('stock', 'StockListPosition').as_view(), name='stocklistposition'),
+
     url(r'^stocktransfers/?$', utils.get_listview('stock', 'StockTransfer').as_view(), name="stocktransfers"),
     url(r'^stocktransfers/(?P<pk>[0-9]+)/?$', utils.get_retrieveview('stock', 'StockTransfer').as_view(), name='stocktransfer'),
+    url(r'^stocktransfers/(?P<pk>[0-9]+)/book$', views_stock.book, name='stocktransfer'),
+    #url(r'^stocktransfers/(?P<pk>[0-9]+)/revoke$', utils.get_retrieveview('stock', 'StockTransfer').as_view(), name='stocktransfer'),
+
+
     url(r'^stockchanges/?$', utils.get_listview('stock', 'StockChange').as_view(), name="stockchanges"),
     url(r'^stockchange/(?P<pk>[0-9]+)/?$', utils.get_retrieveview('stock', 'StockChange').as_view(), name='stockchange'),
 ]
