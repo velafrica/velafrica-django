@@ -9,10 +9,14 @@ def book(request, pk):
     Book a stock transfer.
     """
     if request.method == 'POST':
-        stockTransfer = StockTransfer.objects.get(pk=pk)
-        if stockTransfer.booked:
+        try:
+            stocktransfer = StockTransfer.objects.get(pk=pk)
+        except StockTransfer.DoesNotExist:
+            return Response({"error": "No Stock Transfer found with id {}".format(pk)}, status=status.HTTP_404_NOT_FOUND)
+
+        if stocktransfer.booked:
             return Response({"error": "This Stock Transfer has already been booked"}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
         else:
-            stockTransfer.book()
+            stocktransfer.book()
 
         return Response({"success": "Stock Transfer has been booked"}, status=status.HTTP_201_CREATED)
