@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from datetime import datetime
+from django.utils import timezone
 from django.db.models import Q
 from itertools import chain
 from rest_framework.decorators import api_view, renderer_classes, permission_classes
@@ -22,11 +22,11 @@ def get_dropoffs(request):
     :param request:
     :return:
     """
-    q = Q(temp=True) & Q(temp_end__lte=datetime.now().date().strftime('%Y-%m-%d'))
+    q = Q(temp=True) & Q(temp_end__lte=timezone.now().date().strftime('%Y-%m-%d'))
     all = Dropoff.objects.filter(active=True).exclude(q)
 
     coll_drop = list()
-    for collectionevent in CollectionEvent.objects.filter(date_end__gte=datetime.now().date().strftime('%Y-%m-%d'))\
+    for collectionevent in CollectionEvent.objects.filter(date_end__gte=timezone.now().date().strftime('%Y-%m-%d'))\
             .exclude(event__address=None):
         new_drop = Dropoff(
             name=collectionevent.event.name,

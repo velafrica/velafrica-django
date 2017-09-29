@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function
-import collections
-from datetime import datetime
+from django.utils import timezone
 from djangocms_blog.models import Post
 from django.conf import settings
 from django.core.urlresolvers import reverse, resolve
@@ -327,7 +326,7 @@ def render_agenda(request):
     events = Event.objects.filter(active=True).all()
 
     coll_events = list()
-    for collectionevent in CollectionEvent.objects.filter(date_end__gte=datetime.now().date().strftime('%Y-%m-%d')) \
+    for collectionevent in CollectionEvent.objects.filter(date_end__gte=timezone.now().date().strftime('%Y-%m-%d')) \
             .exclude(event__address=None):
         new_event = Event(
             name=collectionevent.event.name,

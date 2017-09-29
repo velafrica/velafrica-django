@@ -12,30 +12,26 @@ It is used to avoid writing boilerplate code when creating the views for the api
 """
 
 
-def get_serializer_by_model(serialize):
+def get_serializer_by_model(toserialize):
     """
-
-    :param serialize:
+    :param toserialize: Django model to get serializer for
     :return:
     """
 
     class GenericSerializer(serializers.ModelSerializer):
 
         class Meta:
-            model = serialize
+            model = toserialize
             fields = '__all__'
-
-    g = GenericSerializer
 
     return GenericSerializer
             
 
-def get_serializer(module, classname, __doc__):
+def get_serializer(module, classname):
     """
 
-    :param module:
-    :param classname:
-    :param __doc__:
+    :param module: Name of the class' module name.
+    :param classname: Name of the class to get a serializer for.
     :return:
     """
 
@@ -104,6 +100,10 @@ def get_retrieveview(module, classname):
     else:
         return None
 
+
+"""
+urls.py parsing helpers for root api view
+"""
 
 def load_url_pattern_names(namespace, patterns):
     """
