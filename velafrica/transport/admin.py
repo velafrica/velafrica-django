@@ -44,8 +44,9 @@ class CarAdmin(SimpleHistoryAdmin):
 
 
 class DriverAdmin(SimpleHistoryAdmin):
-    list_display = ['name', 'organisation']
+    list_display = ['name', 'active', 'organisation']
     search_fields = ['name', 'organisation']
+    list_filter = ['active']
 
     def get_queryset(self, request):
         qs = super(DriverAdmin, self).get_queryset(request)
@@ -126,16 +127,7 @@ class RideAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
             return qs.none()
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        if db_field.name == 'driver':
-            if request.user.is_superuser:
-                pass
-            # other users with a correlating person should only see their organisation
-            elif hasattr(request.user, 'person'):
-                kwargs["queryset"] = Driver.objects.filter(organisation=request.user.person.organisation.id)
-            # users with no superuser role and no related person should not see any organisations
-            else:
-                kwargs["queryset"] = Driver.objects.none()
-        elif db_field.name == 'car':
+        if db_field.name == 'car':
             if request.user.is_superuser:
                 pass
             # other users with a correlating person should only see their organisation

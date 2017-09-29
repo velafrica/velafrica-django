@@ -2,7 +2,7 @@ from dal import autocomplete
 from django import forms
 
 from velafrica.stock.models import Warehouse
-from velafrica.transport.models import Ride
+from velafrica.transport.models import Ride, Driver
 
 
 class RideForm(forms.ModelForm):
@@ -13,6 +13,10 @@ class RideForm(forms.ModelForm):
     to_warehouse = forms.ModelChoiceField(
         queryset=Warehouse.objects.all(),
         widget=autocomplete.ModelSelect2(url='autocomplete:warehouse')
+    )
+    driver = forms.ModelChoiceField(
+        queryset=Driver.objects.all(),
+        widget=autocomplete.ModelSelect2(url='autocomplete:driver')
     )
 
     class Meta:

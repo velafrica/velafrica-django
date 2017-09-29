@@ -61,6 +61,7 @@ autocomplete = [
     url(r'^municipality/$', MunicipalityAutocomplete.as_view(), name='municipality'),
     url(r'^product/$', stock_views.ProductAutocomplete.as_view(), name='product'),
     url(r'^warehouse/$', stock_views.WarehouseAutocomplete.as_view(), name='warehouse'),
+    url(r'^driver/$', transport_views.DriverAutocomplete.as_view(), name='driver'),
 ]
 
 urlpatterns = [

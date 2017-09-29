@@ -2,9 +2,11 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.template import RequestContext
+from dal import autocomplete
+from django.db.models import Q
+
 
 from velafrica.transport.models import Ride, Car, Driver
-
 
 @login_required
 def transport(request):
@@ -66,4 +68,23 @@ def transport(request):
         'charts': charts,
         }
     )
-  
+
+class DriverAutocomplete(autocomplete.Select2QuerySetView):
+    """
+    Used for django-admin-autocomplete
+    """
+    def get_queryset(self):
+        # Don't forget to filter out results depending on the visitor !
+        if self.request.user.is_superuser:
+            qs = Driver.objects.all()
+            # other users with a correlating person should only see their organisation
+        elif hasattr(self.request.user, 'person') and self.request.user.is_authenticated():
+            qs = Driver.objects.filter(organisation=self.request.user.person.organisation.id)
+            # users with no superuser role and no related person should not see any organisations
+        else:
+            return Driver.objects.none()
+
+        if self.q:
+            qs = qs.filter(Q(name__icontains=self.q) | Q(organisation__name__icontains=self.q))
+
+        return qs

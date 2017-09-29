@@ -33,10 +33,13 @@ class Driver(models.Model):
     """
     name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Name des Fahrers")
     organisation = models.ForeignKey(Organisation, blank=True, null=True, help_text='Organisation bei welcher der Fahrer angestellt ist.')
+    active = models.BooleanField(default=True, help_text='Ist der Fahrer noch bei Velafrica? Inaktive Fahrer werden als (inaktiv) in der Auswahl bei den Fahrten aufgeführt.')
 
     history = HistoricalRecords()
     
     def __unicode__(self):
+        if not self.active:
+            return u"{} (inaktiv)".format(self.name)
         return u"{}".format(self.name)
 
     class Meta:
