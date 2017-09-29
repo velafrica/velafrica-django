@@ -28,7 +28,7 @@ django-mptt==0.8.6
 django-multiselectfield==0.1.5
 django-object-actions==0.8.2
 django-parler==1.6.5
-django-paypal==0.3.3
+django-paypal==0.4.1
 django-polymorphic==1.0.2
 django-resized==0.3.5
 django-sekizai==0.10.0
