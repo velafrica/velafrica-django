@@ -100,7 +100,7 @@ def get_retrieveview(module, classname):
     model = apps.get_model(module, classname)
 
     if model:
-        return get_listview_by_model(model)
+        return get_retrieveview_by_model(model)
     else:
         return None
 
