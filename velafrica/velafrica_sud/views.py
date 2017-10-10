@@ -21,12 +21,23 @@ def container(request):
   """
   containers = Container.objects.all()
   bicycles_total = 0
+  time_to_customer_total = 0
+  time_to_customer_entries = 0
+  time_to_customer_average = None
+
   for c in containers:
-    bicycles_total += c.velos_loaded
+      bicycles_total += c.velos_loaded
+      if c.time_to_customer:
+          time_to_customer_total += c.time_to_customer
+          time_to_customer_entries += 1
+
+  if time_to_customer_entries > 0:
+    time_to_customer_average = time_to_customer_total / time_to_customer_entries
 
   context = {
       'containers': containers,
       'bicycles_total': bicycles_total,
+      'time_to_customer_average': time_to_customer_average
   }
 
   return render(request, 'velafrica_sud/container.html', context)

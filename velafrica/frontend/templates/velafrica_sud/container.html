@@ -24,6 +24,10 @@ Container
 		<th>Total Velos:</th>
 		<td>{{ bicycles_total }}</td>
 	</tr>
+    <tr>
+		<th>Durchschnittliche Transportzeit (Tage):</th>
+		<td>{{ time_to_customer_average }}</td>
+	</tr>
 </table>
 <!--
 Todo: <br/>
@@ -42,6 +46,7 @@ Container / Partner
 		<tr>
 			<th data-sort-initial="descending">Ladedatum</th>
             <th>Ankunftsdatum</th>
+            <th>Transportzeit (d)</th>
 			<th>Ladeort</th>
 			<th>Destination</th>
 			<th data-type="numeric">Anzahl Velos</th>
@@ -53,7 +58,8 @@ Container / Partner
 		<tr>
 			<td data-value="{{ c.pickup_date |date:"c" }}">{{ c.pickup_date | date:"d.m.Y"}}</td>
             <td data-value="{{ c.arrival_partner_date |date:"c" }}"><span {% if c.arrival_partner_date %}class="label label-success"{% endif %}>{{ c.arrival_partner_date | date:"d.m.Y"}}</span></td>
-			<td>{{ c.organisation_from }} </td>
+			<td>{{ c.time_to_customer }}</td>
+            <td>{{ c.organisation_from }} </td>
 			<td>{{ c.partner_to }}</td>
 			<td>{{ c.velos_loaded }}</td>
             {% load admin_urls %}

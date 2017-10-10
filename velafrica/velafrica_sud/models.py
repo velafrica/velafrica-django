@@ -51,6 +51,8 @@ class Container(models.Model):
     arrival_partner_date = models.DateField(blank=True, null=True, verbose_name='Ankunft Partner')
     logistics = models.ForeignKey(Forwarder, blank=True, null=True, verbose_name='Forwarder', help_text='Logistikunternehmen')
 
+    time_to_customer = models.IntegerField(blank=True, null=True, verbose_name='Versandzeit (Tage)', help_text='Anzahl Tage vom Verlad bis zur Ankunft im Zielhafen.')
+
     container_no = models.CharField(blank=True, null=True, max_length=255, verbose_name='Containernummer')
     seal_no = models.CharField(blank=True, null=True, max_length=255, verbose_name='Plombennummer')
     sgs_certified = models.BooleanField(default=False, verbose_name='SGS zertifiziert?')
@@ -60,6 +62,14 @@ class Container(models.Model):
     booked = models.BooleanField(default=False, verbose_name="Abgeschlossen")
 
     history = HistoricalRecords()
+
+    def calc_time_to_customer(self):
+        """
+        Calculate the days the container needed to get from the pickup to the partner port.
+        :return:
+        """
+        if self.pickup_date and self.arrival_port_date:
+            return (self.arrival_port_date - self.pickup_date).days
 
     def book(self):
         """
