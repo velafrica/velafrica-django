@@ -11,9 +11,7 @@ def calc_time_to_customer(sender, instance, created, **kwargs):
     """
     Calculate transport time.
     """
-    newvalue = None
-    if instance.arrival_port_date:
-        print('arrival_port_date has been updated')
+    if instance.arrival_partner_date:
         delta = instance.calc_time_to_customer()
         if delta != instance.time_to_customer:
             instance.time_to_customer = delta

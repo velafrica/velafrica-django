@@ -51,7 +51,7 @@ class Container(models.Model):
     arrival_partner_date = models.DateField(blank=True, null=True, verbose_name='Ankunft Partner')
     logistics = models.ForeignKey(Forwarder, blank=True, null=True, verbose_name='Forwarder', help_text='Logistikunternehmen')
 
-    time_to_customer = models.IntegerField(blank=True, null=True, verbose_name='Versandzeit (Tage)', help_text='Anzahl Tage vom Verlad bis zur Ankunft im Zielhafen.')
+    time_to_customer = models.IntegerField(blank=True, null=True, verbose_name='Versandzeit (Tage)', help_text='Anzahl Tage vom Verlad bis zur Ankunft beim Partner.')
 
     container_no = models.CharField(blank=True, null=True, max_length=255, verbose_name='Containernummer')
     seal_no = models.CharField(blank=True, null=True, max_length=255, verbose_name='Plombennummer')
@@ -65,11 +65,13 @@ class Container(models.Model):
 
     def calc_time_to_customer(self):
         """
-        Calculate the days the container needed to get from the pickup to the partner port.
+        Calculate the days the container needed to get from the pickup to the partner.
         :return:
         """
-        if self.pickup_date and self.arrival_port_date:
-            return (self.arrival_port_date - self.pickup_date).days
+        if self.pickup_date and self.arrival_partner_date:
+            return (self.arrival_partner_date - self.pickup_date).days
+        else:
+            return None
 
     def book(self):
         """
