@@ -1,8 +1,7 @@
 from velafrica.api.views import DjangoModelPermissionsMixin
 from velafrica.sbbtracking.models import Tracking, TrackingEvent
 from velafrica.sbbtracking.serializer import TrackingSerializer, TrackingEventSerializer
-from rest_framework import filters, generics, permissions
-
+from rest_framework import generics, permissions
 
 class TrackingList(DjangoModelPermissionsMixin, generics.ListCreateAPIView):
     """
@@ -11,8 +10,7 @@ class TrackingList(DjangoModelPermissionsMixin, generics.ListCreateAPIView):
     permission_classes = (permissions.IsAuthenticated,)
     queryset = Tracking.objects.all()
     serializer_class = TrackingSerializer
-    filter_backends = (filters.SearchFilter, )
-    search_fields = ['tracking_no']
+    filter_fields = ['tracking_no']
 
 
 class TrackingEventList(DjangoModelPermissionsMixin, generics.ListCreateAPIView):
@@ -22,5 +20,4 @@ class TrackingEventList(DjangoModelPermissionsMixin, generics.ListCreateAPIView)
 
     queryset = TrackingEvent.objects.all()
     serializer_class = TrackingEventSerializer
-    filter_backends = (filters.DjangoFilterBackend, )
     filter_fields = ['tracking']

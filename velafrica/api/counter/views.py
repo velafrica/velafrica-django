@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-from rest_framework import filters, permissions
+from rest_framework import permissions
+from django_filters import rest_framework as filters
 from rest_framework import generics
 
 from velafrica.counter.models import Entry
@@ -13,7 +14,6 @@ class CounterEntryList(DjangoModelPermissionsMixin, generics.ListCreateAPIView):
     permission_classes = (permissions.IsAuthenticated,)
     queryset = Entry.objects.all()
     serializer_class = EntrySerializer
-    filter_backends = (filters.DjangoFilterBackend,)
     filter_fields = ['organisation', 'date']
 
 class CounterEntryDetail(DjangoModelPermissionsMixin, generics.RetrieveUpdateAPIView):

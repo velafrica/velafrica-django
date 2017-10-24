@@ -101,6 +101,7 @@ INSTALLED_APPS = (
     'simple_history',
     'import_export',
     'django_object_actions',
+    'django_filters',
     'rest_framework',
     'corsheaders',
     'paypal.standard.ipn',
@@ -277,7 +278,8 @@ AWS_S3_CUSTOM_DOMAIN = os.environ['AWS_S3_CUSTOM_DOMAIN']
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
-    )
+    ),
+    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',)
 }
 
 WEBPACK_LOADER = {
