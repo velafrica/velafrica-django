@@ -154,7 +154,7 @@ class Tracking(models.Model):
     Last_event is a link to the last event that has been added on the tracking, it is representing the last known status.
     Via the last_event, one can also find out where (last_event.organisation) the bicycle has been scanned the last time.
     """
-    tracking_no = models.CharField(blank=False, null=False, max_length=10, unique=True, verbose_name="Tracking Nummer")
+    tracking_no = models.CharField(blank=False, null=False, max_length=50, unique=True, verbose_name="Tracking Nummer")
     vpn = models.ForeignKey(Organisation, 
         null=True, 
         blank=True, 
