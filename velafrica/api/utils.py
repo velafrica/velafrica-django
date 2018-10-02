@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from django.apps import apps
+from django.urls import reverse
 from rest_framework import generics
 from rest_framework import serializers
-from django.urls import reverse
 
 """
 
@@ -19,13 +19,12 @@ def get_serializer_by_model(toserialize):
     """
 
     class GenericSerializer(serializers.ModelSerializer):
-
         class Meta:
             model = toserialize
             fields = '__all__'
 
     return GenericSerializer
-            
+
 
 def get_serializer(module, classname):
     """
@@ -105,6 +104,7 @@ def get_retrieveview(module, classname):
 urls.py parsing helpers for root api view
 """
 
+
 def load_url_pattern_names(namespace, patterns):
     """
     Retrieve a list of urlpattern names
@@ -143,12 +143,12 @@ def get_api_root_listing_from_urls(request, format):
         namespace_urls = {}
         for ur in urls:
             if namespace:
-                fqpn = 'api:{}:{}'.format(namespace, ur[0])
+                fqpn = "api:{}:{}".format(namespace, ur[0])
                 rev = ""
 
-                try:    # this will work for list views
+                try:  # this will work for list views
                     rev = reverse(str(fqpn))
-                except: # if it is a detail view, we need to provide a pk
+                except:  # if it is a detail view, we need to provide a pk
                     rev = reverse(str(fqpn), kwargs={'pk': 1})
 
                 description = "{}".format(ur[1])

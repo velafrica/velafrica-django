@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
+from django.conf.urls import include, url
 from rest_framework import permissions, generics
-from rest_framework import renderers, response, schemas
+from rest_framework import response, schemas
 from rest_framework.decorators import api_view, renderer_classes
+from rest_framework.renderers import CoreJSONRenderer, BrowsableAPIRenderer
 from rest_framework.response import Response
 
 from velafrica.api import utils
@@ -14,11 +16,15 @@ class DjangoModelPermissionsMixin(generics.GenericAPIView):
     permission_classes = (permissions.IsAuthenticated, permissions.DjangoModelPermissions,)
 
 
-generator = schemas.SchemaGenerator(title='Velafrica API')
+schema_url_patterns = [
+    url(r'^api/', include('velafrica.api.urls')),
+]
+
+generator = schemas.SchemaGenerator(title='Velafrica API', urlconf='velafrica.api.urls')
 
 
 @api_view()
-@renderer_classes([renderers.CoreJSONRenderer])
+@renderer_classes([BrowsableAPIRenderer, CoreJSONRenderer])
 def schema_view(request):
     schema = generator.get_schema(request)
     return response.Response(schema)
@@ -32,6 +38,8 @@ def api_root(request, format=None):
     It has been built with <b>Django</b> and <b>Django Rest Framework</b> by <a href="http://platzh1rsch.ch">platzh1rsch</a>, during civil service and is still updated from time to time.
 
     All list endpoints accept GET & POST, all detail endpoints accept GET & PUT - if you have the according permissions.
+
+    Go to /api/swagger to see the Swagger documentation of the api.
 
     -------------------
 

@@ -80,11 +80,6 @@ organisation = [
     url(r'^organisations/(?P<pk>[0-9]+)/?$', OrganisationDetail.as_view(), name='organisations_detail'),
     url(r'^countries/?$', utils.get_listview('organisation', 'Country').as_view(), name='countries'),
     url(r'^countries/(?P<pk>[0-9]+)/?$', utils.get_retrieveview('organisation', 'Country').as_view(), name='country'),
-    url(r'^municipalities/?$', utils.get_listview('organisation', 'Municipality').as_view(), name="municipalities"),
-    url(r'^municipalities/(?P<pk>[0-9]+)/?$', utils.get_retrieveview('organisation', 'Municipality').as_view(),
-        name='municipality'),
-    url(r'^cantons/?$', utils.get_listview('organisation', 'Canton').as_view(), name="cantons"),
-    url(r'^cantons/(?P<pk>[0-9]+)/?$', utils.get_retrieveview('organisation', 'Canton').as_view(), name='canton'),
 ]
 
 tracking = [
@@ -117,7 +112,6 @@ velafrica_sud = [
 ]
 
 public = [
-    url(r'^swagger/$', views_public.schema_view, name="swagger"),
     url(r'^dropoffs/$', views_public.get_dropoffs, name="dropoffs"),
     url(r'^collectionevents/$', views_collections.CollectionEventListPublic.as_view(), name="collectionevents-public"),
     url(r'^subscribe-newsletter/$', views_public.subscribe_newsletter, name="subscribe-newsletter"),
@@ -125,14 +119,14 @@ public = [
 
 # where it all comes together
 urlpatterns = [
-    # url(r'^$', views.api_root),
-    url(r'^$', views.schema_view),
+    url(r'^$', views.api_root),
+    url(r'^swagger/', include('velafrica.api.swagger.urls', namespace="swagger")),
     url(r'^organisation/', include(organisation, namespace="organisation")),
     url(r'^stock/', include(stock, namespace="stock")),
     url(r'^tracking/', include(tracking, namespace="tracking")),
     url(r'^transport/', include(transport, namespace="transport")),
     url(r'^velafrica_sud/', include(velafrica_sud, namespace="velafrica_sud")),
-    url(r'^counter/', include(counter, namespace="counter")),
+    url(r'^counter/', include('velafrica.api.counter.urls', namespace="counter")),
     url(r'^collections/', include(collection, namespace="collections")),
     url(r'^public/', include(public, namespace="public"))
 ]

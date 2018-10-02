@@ -1,17 +1,12 @@
 from dal import autocomplete
 from django import forms
 
-from velafrica.organisation.models import Municipality
 from velafrica.stock.models import Product, Stock, StockListPosition, StockListPos, Warehouse, StockTransfer
 
 
 class WarehouseForm(forms.ModelForm):
     """
     """
-    municipality = forms.ModelChoiceField(
-        queryset=Municipality.objects.all(),
-        widget=autocomplete.ModelSelect2(url='autocomplete:municipality')
-    )
 
     class Meta:
         model = Warehouse

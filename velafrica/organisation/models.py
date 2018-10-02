@@ -6,45 +6,13 @@ from simple_history.models import HistoricalRecords
 from velafrica.core import utils
 
 
-class Canton(models.Model):
-    """
-    deprecated
-
-    TODO: delete
-    """
-    name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Name des Kantons")
-    short = models.CharField(blank=False, null=False, max_length=2, unique=True, verbose_name="Kürzel der Gemeinde")
-    
-    def __unicode__(self):
-        return u"{} {}".format(self.name, self.short)
-
-
-class Municipality(models.Model):
-    """
-    deprecated
-
-    TODO: delete
-    """
-    gdenr = models.IntegerField(blank=False, null=False, verbose_name="Gemeindenr. des BFS")
-    name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Name der Gemeinde")
-    name_short = models.CharField(blank=False, null=False, max_length=255, verbose_name="Name der Gemeinde (kurz)")
-    plz = models.IntegerField(blank=False, null=False, verbose_name="Postleitzahl")
-    plz_name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Name der Gemeinde (Post)")
-    canton = models.ForeignKey(Canton)
-
-    def __unicode__(self):
-        return u"{} {} ({})".format(self.plz, self.name, self.name_short)
-
-    class Meta:
-        verbose_name_plural = "Municipalities"
-
-
 class Country(models.Model):
     """
     Represents a country of the world.
     """
     name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Name des Landes", unique=True)
-    code = models.CharField(blank=True, null=True, max_length=255, verbose_name=u"Ländercode (ISO 3166-1 alpha-2)", unique=True)
+    code = models.CharField(blank=True, null=True, max_length=255, verbose_name=u"Ländercode (ISO 3166-1 alpha-2)",
+                            unique=True)
 
     def __unicode__(self):
         return u"{}".format(self.name)
@@ -129,7 +97,8 @@ class Organisation(models.Model):
     facebook = models.URLField(blank=True, null=True, max_length=255, verbose_name="Facebook Page (URL)")
     address = models.ForeignKey(Address, verbose_name="Adresse", blank=True, null=True)
     description = models.TextField(blank=True, null=True)
-    contact = models.TextField(verbose_name="Kontaktperson", help_text="Name, Email, Telefon, Skype etc", blank=True, null=True)
+    contact = models.TextField(verbose_name="Kontaktperson", help_text="Name, Email, Telefon, Skype etc", blank=True,
+                               null=True)
 
     history = HistoricalRecords()
 
@@ -140,6 +109,7 @@ class Organisation(models.Model):
             return True
         else:
             return False
+
     is_partnersud.short_description = "Süd Partner"
 
     def get_partnersud(self):
@@ -149,6 +119,7 @@ class Organisation(models.Model):
             return self.partnersud
         else:
             return "-"
+
     get_partnersud.short_description = "Süd Partner"
 
     def __unicode__(self):
@@ -169,7 +140,7 @@ class Person(models.Model):
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         verbose_name="Django User Account"
-        )
+    )
     organisation = models.ForeignKey('Organisation', verbose_name="Arbeitgeber")
 
     def __unicode__(self):

@@ -4,11 +4,9 @@ from django.utils.safestring import mark_safe
 from django_object_actions import DjangoObjectActions
 from import_export import resources
 from import_export.admin import ImportExportMixin
-from import_export.fields import Field
-from import_export.widgets import ForeignKeyWidget
 from simple_history.admin import SimpleHistoryAdmin
 
-from velafrica.organisation.models import Organisation, Person, Canton, Municipality, Address, Country
+from velafrica.organisation.models import Organisation, Person, Address, Country
 
 
 class PersonAdmin(SimpleHistoryAdmin):
@@ -33,7 +31,8 @@ class OrganisationAdmin(ImportExportMixin, SimpleHistoryAdmin):
     # inlines = [WarehouseInline,]
     list_display = ['name', 'get_googlemaps_link', 'website', 'is_partnersud']
     search_fields = ['name', 'address__city']
-    fields = ['name', 'website', 'facebook', 'get_partnersud', 'address', 'get_googlemaps_link', 'contact','description']
+    fields = ['name', 'website', 'facebook', 'get_partnersud', 'address', 'get_googlemaps_link', 'contact',
+              'description']
     readonly_fields = ['get_partnersud', 'get_googlemaps_link']
 
     def get_googlemaps_link(self, obj):
@@ -46,54 +45,15 @@ class OrganisationAdmin(ImportExportMixin, SimpleHistoryAdmin):
                 ))
             else:
                 return ""
+
     get_googlemaps_link.short_description = 'Google Maps'
-
-
-class CantonResource(resources.ModelResource):
-    """
-    Define the organisation resource for import / export.
-    """
-
-    class Meta:
-        model = Canton
-        import_id_fields = ['short',]
-
-class CantonAdmin(ImportExportMixin, SimpleHistoryAdmin):
-    """
-    """
-    resource_class = CantonResource
-    list_display = ['short', 'name']
-    search_fields = ['short', 'name']
-
-
-class MunicipalityResource(resources.ModelResource):
-    """
-    Define the organisation resource for import / export.
-    """
-    canton = Field(
-            column_name='canton',
-            attribute='canton',
-            widget=ForeignKeyWidget(Canton, 'short'))
-    
-    class Meta:
-        model = Municipality
-        import_id_fields = ['gdenr', 'plz', 'name']
-        fields = ['gdenr', 'name', 'name_short', 'plz', 'plz_name', 'canton']
-
-
-class MunicipalityAdmin(ImportExportMixin, SimpleHistoryAdmin):
-    """
-    """
-    resource_class = MunicipalityResource
-    list_display = ['plz', 'plz_name', 'canton']
-    search_fields = ['plz', 'plz_name', 'canton__name']
-    list_filter = ['canton__name']
 
 
 class AddressAdmin(DjangoObjectActions, SimpleHistoryAdmin):
     """
     """
-    list_display = ['__str__', 'street', 'zipcode', 'city', 'state', 'country', 'latitude', 'longitude', 'get_googlemaps_link']
+    list_display = ['__str__', 'street', 'zipcode', 'city', 'state', 'country', 'latitude', 'longitude',
+                    'get_googlemaps_link']
     search_fields = ['street', 'zipcode', 'city', 'country__name']
     readonly_fields = ['get_googlemaps_link']
     list_filter = ['state', 'country']
@@ -103,9 +63,14 @@ class AddressAdmin(DjangoObjectActions, SimpleHistoryAdmin):
 
     def get_geolocation(self, request, obj):
         if obj.get_geolocation():
-            self.message_user(request, u"GPS Koordinaten erfolgreich ermittelt und gespeichert! ({}, {})".format(obj.latitude, obj.longitude))
+            self.message_user(request,
+                              u"GPS Koordinaten erfolgreich ermittelt und gespeichert! ({}, {})".format(obj.latitude,
+                                                                                                        obj.longitude))
         else:
-            self.message_user(request, u"GPS Koordinaten konnten nicht ermittelt werden. Möglicherweise sind die Adressangaben nicht korrekt oder zu ungenau.", level=messages.WARNING)
+            self.message_user(request,
+                              u"GPS Koordinaten konnten nicht ermittelt werden. Möglicherweise sind die Adressangaben nicht korrekt oder zu ungenau.",
+                              level=messages.WARNING)
+
     get_geolocation.short_description = "GPS Koordinaten ermitteln"
     get_geolocation.label = "GPS Koordinaten ermitteln"
 
@@ -119,7 +84,10 @@ class AddressAdmin(DjangoObjectActions, SimpleHistoryAdmin):
         if count > 0:
             self.message_user(request, u"GPS Koordinaten auf {} Adressen ermittelt und gespeichert".format(count))
         else:
-            self.message_user(request, u"GPS Koordinaten konnten nicht ermittelt werden. Möglicherweise sind die Adressangaben nicht korrekt oder zu ungenau.", level=messages.WARNING)
+            self.message_user(request,
+                              u"GPS Koordinaten konnten nicht ermittelt werden. Möglicherweise sind die Adressangaben nicht korrekt oder zu ungenau.",
+                              level=messages.WARNING)
+
     get_geolocations.short_description = "GPS Koordinaten ermitteln"
     get_geolocations.label = "GPS Koordinaten ermitteln"
 
@@ -132,8 +100,8 @@ class AddressAdmin(DjangoObjectActions, SimpleHistoryAdmin):
             ))
         else:
             return ""
-    get_googlemaps_link.short_description = 'Google Maps'
 
+    get_googlemaps_link.short_description = 'Google Maps'
 
 
 class CountryAdmin(SimpleHistoryAdmin):
@@ -142,9 +110,10 @@ class CountryAdmin(SimpleHistoryAdmin):
     list_display = ['name', 'code']
     search_fields = ['name', 'code']
 
+
 admin.site.register(Organisation, OrganisationAdmin)
 admin.site.register(Person, PersonAdmin)
-#admin.site.register(Municipality, MunicipalityAdmin)
-#admin.site.register(Canton, CantonAdmin)
+# admin.site.register(Municipality, MunicipalityAdmin)
+# admin.site.register(Canton, CantonAdmin)
 admin.site.register(Address, AddressAdmin)
 admin.site.register(Country, CountryAdmin)

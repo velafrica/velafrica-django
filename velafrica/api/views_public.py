@@ -3,23 +3,14 @@ import mailchimp
 from django.db.models import Q
 from django.utils import timezone
 from itertools import chain
-from rest_framework import response, schemas
-from rest_framework.decorators import api_view, renderer_classes
+from rest_framework.decorators import api_view
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
-from rest_framework_swagger.renderers import OpenAPIRenderer, SwaggerUIRenderer
 
 from velafrica.collection.models import Dropoff, CollectionEvent
 from velafrica.collection.serializer import DropoffSerializer
 from velafrica.core.settings import MAILCHIMP_LIST_ID
-
-
-@api_view()
-@renderer_classes([SwaggerUIRenderer, OpenAPIRenderer])
-def schema_view(request):
-    generator = schemas.SchemaGenerator(title='Velafrica API')
-    return response.Response(generator.get_schema(request=request))
 
 
 @api_view(['GET'])

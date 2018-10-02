@@ -27,7 +27,6 @@ from velafrica.collection import views as collection_views
 from velafrica.core import views
 from velafrica.counter import views as counter_views
 from velafrica.download import views as download_views
-from velafrica.organisation.views import MunicipalityAutocomplete
 from velafrica.public_site import views as velafrica_public_site_views
 from velafrica.sbbtracking import views as sbbtracking_views
 from velafrica.stock import views as stock_views
@@ -57,7 +56,6 @@ auth = [
 
 autocomplete = [
     # autocomplete urls
-    url(r'^municipality/$', MunicipalityAutocomplete.as_view(), name='municipality'),
     url(r'^product/$', stock_views.ProductAutocomplete.as_view(), name='product'),
     url(r'^warehouse/$', stock_views.WarehouseAutocomplete.as_view(), name='warehouse'),
     url(r'^driver/$', transport_views.DriverAutocomplete.as_view(), name='driver'),
