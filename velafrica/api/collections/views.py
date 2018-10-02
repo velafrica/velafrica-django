@@ -13,4 +13,4 @@ class CollectionEventListPublic(DjangoModelPermissionsMixin, generics.ListAPIVie
     permission_classes = (permissions.AllowAny,)
     queryset = CollectionEvent.objects.filter(public=True).order_by('date_start')
     serializer_class = CollectionEventPublicSerializer
-    filter_fields = ['date_start', 'date_end', 'complete']
+    filter_fields = {'date_start': ['gte', 'lte'], 'date_end': ['gte', 'lte'], 'complete': ['exact']}
