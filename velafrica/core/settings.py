@@ -102,9 +102,11 @@ INSTALLED_APPS = (
     'import_export',
     'django_object_actions',
     'django_filters',
+    'paypal.standard.ipn',
+    # restframework
     'rest_framework',
     'corsheaders',
-    'paypal.standard.ipn',
+    'rest_framework_swagger',
     # custom velafrica apps
     'velafrica.api',
     'velafrica.core',

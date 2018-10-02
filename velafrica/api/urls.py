@@ -117,6 +117,7 @@ velafrica_sud = [
 ]
 
 public = [
+    url(r'^swagger/$', views_public.schema_view, name="swagger"),
     url(r'^dropoffs/$', views_public.get_dropoffs, name="dropoffs"),
     url(r'^collectionevents/$', views_collections.CollectionEventListPublic.as_view(), name="collectionevents-public"),
     url(r'^subscribe-newsletter/$', views_public.subscribe_newsletter, name="subscribe-newsletter"),
