@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
-from django.utils import timezone
+import mailchimp
 from django.db.models import Q
+from django.utils import timezone
 from itertools import chain
-from rest_framework.decorators import api_view, renderer_classes, permission_classes
-from rest_framework.renderers import JSONRenderer
-from rest_framework.response import Response
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
+from rest_framework.response import Response
+
 from velafrica.collection.models import Dropoff, CollectionEvent
 from velafrica.collection.serializer import DropoffSerializer
 from velafrica.core.settings import MAILCHIMP_LIST_ID
-from velafrica.sbbtracking.models import Tracking, TrackingEventType, TrackingEvent
-import mailchimp
+
 
 @api_view(['GET'])
 @permission_classes((AllowAny,))
@@ -26,7 +26,7 @@ def get_dropoffs(request):
     all = Dropoff.objects.filter(active=True).exclude(q)
 
     coll_drop = list()
-    for collectionevent in CollectionEvent.objects.filter(date_end__gte=timezone.now().date().strftime('%Y-%m-%d'))\
+    for collectionevent in CollectionEvent.objects.filter(date_end__gte=timezone.now().date().strftime('%Y-%m-%d')) \
             .exclude(event__address=None):
         new_drop = Dropoff(
             name=collectionevent.event.name,
@@ -45,6 +45,7 @@ def get_dropoffs(request):
 
     serializer = DropoffSerializer(ret, many=True)
     return Response(serializer.data)
+
 
 @api_view(['POST'])
 @permission_classes((AllowAny,))

@@ -62,7 +62,7 @@ class Event(models.Model):
     host = models.CharField(max_length=255, verbose_name="Veranstalter")
     host_type = models.ForeignKey(HostType, null=True, verbose_name="Veranstalter Typ")
     contact = models.CharField(max_length=255, verbose_name="Kontaktperson", null=True, blank=True)
-    
+
     address = models.ForeignKey(Address, verbose_name="Adresse", blank=True, null=True)
     address_notes = models.TextField(blank=True, verbose_name="Genauer Standort")
 
@@ -93,13 +93,18 @@ class CollectionEvent(models.Model):
     date_end = models.DateField()
     event = models.ForeignKey(Event)
     time = models.CharField(max_length=255, blank=True, verbose_name="Veloannahme", help_text="Zeit für Veloannahme")
-    notes = models.TextField(blank=True, verbose_name="To do", help_text="Sachen die noch zu erledigen sind / Weitere Infos / Bemerkungen")
+    notes = models.TextField(blank=True, verbose_name="To do",
+                             help_text="Sachen die noch zu erledigen sind / Weitere Infos / Bemerkungen")
+
+    # should the event be visible on the website?
+    public = models.BooleanField(default=False, verbose_name="Öffentlich",
+                                 help_text="Soll der Event auf der Webseite angezeigt werden?")
 
     # logistics
     presence_velafrica = models.BooleanField(default=False, verbose_name="Präsenz Velafrica?")
     presence_velafrica_info = models.CharField(
         max_length=255,
-        blank=True, 
+        blank=True,
         help_text="Infos zur Präsenz von Velafrica am Event",
         verbose_name="Präsenz Velafrica")
     collection = models.TextField(
@@ -117,17 +122,17 @@ class CollectionEvent(models.Model):
         blank=True,
         null=True,
         verbose_name="Velo Verarbeitung Notizen",
-        )
+    )
     collection_partner_vrn = models.ForeignKey(
-        Organisation, 
-        blank=True, 
+        Organisation,
+        blank=True,
         null=True,
         verbose_name="Abtransport durch VRN Partner",
         help_text="Velafrica Partner der die Velos abholt",
         related_name="collection_organisation")
     collection_partner_other = models.CharField(
-        max_length=255, 
-        blank=True, 
+        max_length=255,
+        blank=True,
         verbose_name="Abtransport durch andere Organisation",
         help_text="Wenn die Velos nicht von einem Velafrica Partner abgeholt werden, bitte hier eintragen von wem")
     collection_partner_confirmed = models.BooleanField(default=False, verbose_name="Transport bestätigt?")
@@ -140,55 +145,69 @@ class CollectionEvent(models.Model):
     feedback = models.BooleanField(default=False, verbose_name="Feedback eingeholt?")
     velo_amount = models.IntegerField(default=0, verbose_name="Anzahl Velos", help_text="Anzahl gesammelter Velos")
     people_amount = models.IntegerField(default=0, verbose_name='Anzahl Helfer vor Ort')
-    hours_amount = models.IntegerField(default=0, verbose_name='Geleistete Stunden', help_text="Anzahl geleistete Stunden von allen Helfern zusammen")
-    money_amount = models.IntegerField(default=0, verbose_name='Gesammeltes Geld', help_text="Betrag in CHF der am Event gesammelt wurde")
-    additional_results = models.TextField(blank=True, verbose_name="weitere Resultate", help_text="Zusätzliche Resultate / Erkenntnisse, mündlichesFeedback, etc")
+    hours_amount = models.IntegerField(default=0, verbose_name='Geleistete Stunden',
+                                       help_text="Anzahl geleistete Stunden von allen Helfern zusammen")
+    money_amount = models.IntegerField(default=0, verbose_name='Gesammeltes Geld',
+                                       help_text="Betrag in CHF der am Event gesammelt wurde")
+    additional_results = models.TextField(blank=True, verbose_name="weitere Resultate",
+                                          help_text="Zusätzliche Resultate / Erkenntnisse, mündlichesFeedback, etc")
 
     material_returned = models.BooleanField(default=False, verbose_name="Material retour?")
-    material_returned_notes = models.TextField(blank=True, null=True, verbose_name="Bemerkungen zu Material Retournierung")
+    material_returned_notes = models.TextField(blank=True, null=True,
+                                               verbose_name="Bemerkungen zu Material Retournierung")
 
     complete = models.BooleanField(default=False, verbose_name="Abgeschlossen")
 
     def get_event_name(self):
         return self.event.name
+
     get_event_name.short_description = "Name"
 
     def get_event_description(self):
         return self.event.description
+
     get_event_description.short_description = "Beschreibung"
 
     def get_event_region(self):
         return self.event.region
+
     get_event_region.short_description = "Region"
 
     def get_event_category(self):
         return self.event.category
+
     get_event_category.short_description = "Kategorie"
 
     def get_event_yearly(self):
         return self.event.yearly
+
     get_event_yearly.short_description = "Jährlich wiederkehrend?"
 
     def get_event_host(self):
         return self.event.host
+
     get_event_host.short_description = "Veranstalter"
 
     def get_event_host_type(self):
         return self.event.host_type
+
     get_event_host_type.short_description = "Veranstalter Kategorie"
 
     def get_event_contact(self):
         return self.event.contact
+
     get_event_contact.short_description = "Kontaktperson"
 
     def get_event_address(self):
         return self.event.address
+
     get_event_address.short_description = "Adresse"
 
     def get_event_address_notes(self):
         return self.event.address_notes
+
     get_event_address_notes.short_description = "Genauer Standort"
-    
+
     address_new = models.ForeignKey(Address, verbose_name="Adresse", blank=True, null=True)
     address_notes = models.TextField(blank=True)
 

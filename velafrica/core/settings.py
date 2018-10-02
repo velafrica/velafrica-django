@@ -13,7 +13,9 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-gettext = lambda s: s # "To make your life easer" - http://docs.django-cms.org/en/release-3.3.x/how_to/install.html#configure-django-cms
+
+gettext = lambda \
+        s: s  # "To make your life easer" - http://docs.django-cms.org/en/release-3.3.x/how_to/install.html#configure-django-cms
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROJECT_DIR = os.path.join(BASE_DIR)
 PROJECT_BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -46,8 +48,6 @@ LANGUAGES = [
     ('de', 'Deutsch'),
     ('en', 'English'),
 ]
-
-
 
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, "velafrica/frontend/locale"),
@@ -117,7 +117,7 @@ INSTALLED_APPS = (
     'velafrica.public_site',
     'velafrica.stock',
     'velafrica.sbbtracking',
-    #'velafrica.translation'
+    # 'velafrica.translation'
     'velafrica.transport',
     'velafrica.velafrica_sud',
     # django storages
@@ -126,7 +126,6 @@ INSTALLED_APPS = (
     'webpack_loader',
     'mailchimp',
 )
-
 
 MIDDLEWARE_CLASSES = (
     'cms.middleware.utils.ApphookReloadMiddleware',
@@ -195,15 +194,13 @@ PARLER_LANGUAGES = {
     }
 }
 
-
-
 WSGI_APPLICATION = 'velafrica.core.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
 import dj_database_url
+
 DATABASES = {
     'default': dj_database_url.config()
 }
@@ -213,7 +210,6 @@ DATABASES = {
 
 LANGUAGE_CODE = 'de'
 
-
 # list of time zones https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 TIME_ZONE = 'Europe/Zurich'
 
@@ -222,7 +218,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 LOGIN_URL = '/auth/login'
 LOGIN_REDIRECT_URL = '/auth/profile'
@@ -273,13 +268,12 @@ AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_KEY']
 AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
 AWS_S3_CUSTOM_DOMAIN = os.environ['AWS_S3_CUSTOM_DOMAIN']
 
-
-
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
     ),
-    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',)
+    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination'
 }
 
 WEBPACK_LOADER = {
