@@ -125,7 +125,8 @@ public = [
 
 # where it all comes together
 urlpatterns = [
-    url(r'^$', views.api_root),
+    # url(r'^$', views.api_root),
+    url(r'^$', views.schema_view),
     url(r'^organisation/', include(organisation, namespace="organisation")),
     url(r'^stock/', include(stock, namespace="stock")),
     url(r'^tracking/', include(tracking, namespace="tracking")),

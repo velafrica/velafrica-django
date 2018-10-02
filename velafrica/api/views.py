@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from rest_framework import permissions, generics
-from rest_framework.decorators import api_view
+from rest_framework import renderers, response, schemas
+from rest_framework.decorators import api_view, renderer_classes
 from rest_framework.response import Response
 
 from velafrica.api import utils
@@ -11,6 +12,16 @@ class DjangoModelPermissionsMixin(generics.GenericAPIView):
     Permission Mixin
     """
     permission_classes = (permissions.IsAuthenticated, permissions.DjangoModelPermissions,)
+
+
+generator = schemas.SchemaGenerator(title='Velafrica API')
+
+
+@api_view()
+@renderer_classes([renderers.CoreJSONRenderer])
+def schema_view(request):
+    schema = generator.get_schema(request)
+    return response.Response(schema)
 
 
 @api_view(('GET',))
