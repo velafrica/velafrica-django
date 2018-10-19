@@ -11,6 +11,7 @@ Django==1.11.5
 django-appconf==1.0.2
 django-appdata==0.1.6
 django-autocomplete-light==3.1.6
+django-acme-challenge==1.2
 django-classy-tags==0.8.0
 django-cms==3.4.6
 django-cors-headers==1.1.0
