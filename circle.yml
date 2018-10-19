@@ -20,3 +20,9 @@ machine:
     ORDER_RECEIVER: ''
     ACME_CHALLENGE_URL_SLUG: ''
     ACME_CHALLENGE_TEMPLATE_CONTENT: ''
+
+deployment:
+  staging:
+    branch: master
+    heroku:
+      appname: velafrica-staging
