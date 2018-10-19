@@ -26,11 +26,6 @@ class Migration(migrations.Migration):
         ),
         migrations.AddField(
             model_name='historicalwarehouse',
-            name='municipality',
-            field=models.ForeignKey(blank=True, db_constraint=False, null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='+', to='organisation.Municipality'),
-        ),
-        migrations.AddField(
-            model_name='historicalwarehouse',
             name='street',
             field=models.CharField(blank=True, max_length=255, null=True, verbose_name=b'Strasse'),
         ),
@@ -48,11 +43,6 @@ class Migration(migrations.Migration):
             model_name='warehouse',
             name='lng',
             field=models.DecimalField(blank=True, decimal_places=6, max_digits=9, null=True, verbose_name=b'Longitude (L\xc3\xa4ngengrad)'),
-        ),
-        migrations.AddField(
-            model_name='warehouse',
-            name='municipality',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='organisation.Municipality'),
         ),
         migrations.AddField(
             model_name='warehouse',

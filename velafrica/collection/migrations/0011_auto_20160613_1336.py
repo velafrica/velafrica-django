@@ -18,16 +18,6 @@ class Migration(migrations.Migration):
             model_name='collectionevent',
             name='host',
         ),
-        migrations.RemoveField(
-            model_name='collectionevent',
-            name='municipality',
-        ),
-        migrations.AddField(
-            model_name='event',
-            name='municipality',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='organisation.Municipality', verbose_name=b'Ort'),
-            preserve_default=False,
-        ),
         migrations.AlterField(
             model_name='collectionevent',
             name='collection_partner_other',

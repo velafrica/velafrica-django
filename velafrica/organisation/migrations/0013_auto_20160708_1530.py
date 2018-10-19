@@ -7,20 +7,10 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
+    #TODO: delete
     dependencies = [
         ('organisation', '0012_auto_20160611_0950'),
     ]
 
     operations = [
-        migrations.AddField(
-            model_name='historicalorganisation',
-            name='municipality',
-            field=models.ForeignKey(blank=True, db_constraint=False, null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='+', to='organisation.Municipality'),
-        ),
-        migrations.AddField(
-            model_name='organisation',
-            name='municipality',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='organisation.Municipality', verbose_name=b'Ort'),
-        ),
     ]

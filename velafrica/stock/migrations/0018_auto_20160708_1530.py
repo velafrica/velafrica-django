@@ -21,9 +21,4 @@ class Migration(migrations.Migration):
             model_name='warehouse',
             name='street_no',
         ),
-        migrations.AlterField(
-            model_name='warehouse',
-            name='municipality',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='organisation.Municipality', verbose_name=b'Ort'),
-        ),
     ]

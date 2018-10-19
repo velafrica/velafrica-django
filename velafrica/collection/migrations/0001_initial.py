@@ -33,7 +33,6 @@ class Migration(migrations.Migration):
                 ('people_amount', models.IntegerField()),
                 ('hours_amount', models.IntegerField()),
                 ('additional_results', models.TextField()),
-                ('ort', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='organisation.Municipality')),
             ],
         ),
         migrations.CreateModel(
