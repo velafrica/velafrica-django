@@ -12,4 +12,8 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        migrations.AlterModelOptions(
+            name='municipality',
+            options={'verbose_name_plural': 'Municipalities'},
+        ),
     ]

@@ -24,6 +24,10 @@ class Migration(migrations.Migration):
         ),
         migrations.RemoveField(
             model_name='historicalwarehouse',
+            name='municipality',
+        ),
+        migrations.RemoveField(
+            model_name='historicalwarehouse',
             name='street',
         ),
         migrations.RemoveField(
@@ -33,6 +37,10 @@ class Migration(migrations.Migration):
         migrations.RemoveField(
             model_name='warehouse',
             name='lng',
+        ),
+        migrations.RemoveField(
+            model_name='warehouse',
+            name='municipality',
         ),
         migrations.RemoveField(
             model_name='warehouse',

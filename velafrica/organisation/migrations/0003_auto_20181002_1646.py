@@ -12,7 +12,14 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        migrations.RemoveField(
+            model_name='municipality',
+            name='canton',
+        ),
         migrations.DeleteModel(
             name='Canton',
+        ),
+        migrations.DeleteModel(
+            name='Municipality',
         ),
     ]

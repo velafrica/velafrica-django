@@ -6,10 +6,18 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-    #TODO: delete
+
     dependencies = [
         ('organisation', '0014_auto_20160722_1712'),
     ]
 
     operations = [
+        migrations.RemoveField(
+            model_name='historicalorganisation',
+            name='municipality',
+        ),
+        migrations.RemoveField(
+            model_name='organisation',
+            name='municipality',
+        ),
     ]

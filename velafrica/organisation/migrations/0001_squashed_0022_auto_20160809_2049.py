@@ -103,6 +103,22 @@ class Migration(migrations.Migration):
             field=models.URLField(blank=True, max_length=255, null=True, verbose_name=b'Website'),
         ),
         migrations.CreateModel(
+            name='Municipality',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('gdenr', models.IntegerField(verbose_name=b'Gemeindenr. des BFS')),
+                ('name', models.CharField(max_length=255, verbose_name=b'Name der Gemeinde')),
+                ('name_short', models.CharField(max_length=255, verbose_name=b'Name der Gemeinde (kurz)')),
+                ('plz', models.IntegerField(verbose_name=b'Postleitzahl')),
+                ('plz_name', models.CharField(max_length=255, verbose_name=b'Name der Gemeinde (Post)')),
+                ('canton', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='organisation.Canton')),
+            ],
+        ),
+        migrations.AlterModelOptions(
+            name='municipality',
+            options={'verbose_name_plural': 'Municipalities'},
+        ),
+        migrations.CreateModel(
             name='Address',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),

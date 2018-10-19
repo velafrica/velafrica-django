@@ -23,6 +23,10 @@ class Migration(migrations.Migration):
             old_name='address',
             new_name='address_notes',
         ),
+        migrations.RemoveField(
+            model_name='event',
+            name='municipality',
+        ),
         migrations.AddField(
             model_name='collectionevent',
             name='address_new',
