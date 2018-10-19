@@ -124,6 +124,8 @@ INSTALLED_APPS = (
     'velafrica.velafrica_sud',
     # django storages
     'storages',
+    # SSL
+    'acme_challenge',
 
     'webpack_loader',
     'mailchimp',
