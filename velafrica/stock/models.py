@@ -40,7 +40,7 @@ class Category(models.Model):
     )
     history = HistoricalRecords()
 
-    def __unicode__(self):
+    def __str__(self):
         return u"{}".format(self.name)
 
     class Meta:
@@ -86,7 +86,7 @@ class Product(models.Model):
     admin_image.allow_tags = True
     admin_image.short_description = "Produkt"
 
-    def __unicode__(self):
+    def __str__(self):
         return u"{}: {}".format(self.articlenr, self.name)
 
     class Meta:
@@ -136,7 +136,7 @@ class Warehouse(models.Model):
         address = self.get_address()
         return address.get_geolocation()
 
-    def __unicode__(self):
+    def __str__(self):
         return u"{}, {}".format(self.organisation.name, self.name)
 
     class Meta:
@@ -155,7 +155,7 @@ class Stock(models.Model):
                                          help_text="Tag und Zeit wann das Objekt zuletzt geändert wurde.")
     history = HistoricalRecords()
 
-    def __unicode__(self):
+    def __str__(self):
         return u"{}: {} x {}".format(self.warehouse.name, self.amount, self.product.name)
 
     class Meta:
@@ -190,7 +190,7 @@ class StockList(models.Model):
         verbose_name = "Stock Liste"
         verbose_name_plural = "Stock Listen"
 
-    def __unicode__(self):
+    def __str__(self):
         return u"SL#{0} - {1} ({2:%d.%m.%Y}, {3}:{2:%M})".format(self.id, self.description, self.last_change,
                                                                  self.last_change.hour + 2)
 
@@ -246,7 +246,7 @@ class StockListPosition(models.Model):
         verbose_name = "Stock List Position"
         verbose_name_plural = "Stock List Positionen"
 
-    def __unicode__(self):
+    def __str__(self):
         return u"StockList #{}: {}x {} ".format(self.stocklist.id, self.amount, self.product)
 
 
@@ -338,7 +338,7 @@ class StockChange(models.Model):
         else:
             return False
 
-    def __unicode__(self):
+    def __str__(self):
         return u"StockChange {}, {} {}".format(self.datetime, self.stock_change_type, self.warehouse)
 
     class Meta:
@@ -428,7 +428,7 @@ class StockTransfer(models.Model):
         self.save()
         return True
 
-    def __unicode__(self):
+    def __str__(self):
         return u"{}: {} nach {}".format(self.date, self.warehouse_from, self.warehouse_to)
 
     class Meta:

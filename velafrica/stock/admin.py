@@ -76,7 +76,7 @@ class StockResource(resources.ModelResource):
 class StockAdmin(ImportExportMixin, SimpleHistoryAdmin):
     form = StockForm
     resource_class = StockResource
-    list_display = ['__unicode__', 'product', 'warehouse', 'amount', 'last_modified']
+    list_display = ['__str__', 'product', 'warehouse', 'amount', 'last_modified']
     list_editable = ['amount']
     search_fields = ['product__name']
     list_filter = ['warehouse']

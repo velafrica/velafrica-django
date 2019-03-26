@@ -20,7 +20,7 @@ class Forwarder(models.Model):
 
     history = HistoricalRecords()
 
-    def __unicode__(self):
+    def __str__(self):
         return u"{}".format(self.name)
 
     class Meta:
@@ -146,7 +146,7 @@ class Container(models.Model):
     container_n_of_year.verbose_name = "Container dieses Jahr"
     container_n_of_year.short_description = "# / Jahr"
 
-    def __unicode__(self):
+    def __str__(self):
         if self.container_no:
             return u"{} - {} ({})".format(self.container_no, self.partner_to, self.pickup_date)
         else:
@@ -234,7 +234,7 @@ class PartnerSud(models.Model):
         return count
     get_bicycle_count.short_description = 'Anzahl exp. Velos'
 
-    def __unicode__(self):
+    def __str__(self):
         return u"{}, {}".format(self.organisation.name, self.get_country())
 
     class Meta:
@@ -248,7 +248,7 @@ class Role(models.Model):
     """
     name = models.CharField(verbose_name="Name", max_length=255, unique=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 class ReportStaff(models.Model):
@@ -261,7 +261,7 @@ class ReportStaff(models.Model):
     report = models.ForeignKey('Report', verbose_name="Report")
     history = HistoricalRecords()
 
-    def __unicode__(self):
+    def __str__(self):
         return u"{} {}s earning a total of {} USD".format(self.number, self.role, self.salary)
 
 
@@ -274,7 +274,7 @@ class PartnerStaff(models.Model):
     partner = models.ForeignKey('PartnerSud', verbose_name="Arbeitgeber")
     history = HistoricalRecords()
 
-    def __unicode__(self):
+    def __str__(self):
         return u"{}, {} at {}.".format(self.name, self.role, self.partner)
 
 
@@ -520,5 +520,5 @@ class Report(models.Model):
         """
         return ReportStaff.objects.filter(report=self.id)
 
-    def __unicode__(self):
+    def __str__(self):
         return u"{}, Report vom {}".format(self.partner_sud, self.creation)

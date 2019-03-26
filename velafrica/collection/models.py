@@ -17,7 +17,7 @@ class EventCategory(models.Model):
     """
     name = models.CharField(max_length=255, help_text="Name der Kategorie", unique=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return u"{}".format(self.name)
 
     class Meta:
@@ -32,7 +32,7 @@ class HostType(models.Model):
     """
     name = models.CharField(max_length=255, help_text="Name der Veranstalter Kategorie", unique=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return u"{}".format(self.name)
 
     class Meta:
@@ -46,7 +46,7 @@ class Region(models.Model):
     """
     name = models.CharField(max_length=255)
 
-    def __unicode__(self):
+    def __str__(self):
         return u"{}".format(self.name)
 
 
@@ -67,7 +67,7 @@ class Event(models.Model):
     address = models.ForeignKey(Address, verbose_name="Adresse", blank=True, null=True)
     address_notes = models.TextField(blank=True, verbose_name="Genauer Standort")
 
-    def __unicode__(self):
+    def __str__(self):
         return u"{}".format(self.name)
 
     class Meta:
@@ -80,7 +80,7 @@ class Task(models.Model):
     """
     name = models.CharField(max_length=255)
 
-    def __unicode__(self):
+    def __str__(self):
         return u"{}".format(self.name)
 
 
@@ -247,7 +247,7 @@ class CollectionEvent(models.Model):
             return "success"
         return "danger"
 
-    def __unicode__(self):
+    def __str__(self):
         return u"{} ({} bis {})".format(self.event.name, self.date_start, self.date_end)
 
     class Meta:
@@ -265,7 +265,7 @@ class TaskProgress(models.Model):
     notes = models.TextField(blank=True, verbose_name="Notizen")
     status = models.BooleanField(default=False, verbose_name="Erledigt?")
 
-    def __unicode__(self):
+    def __str__(self):
         return u"{}: {}".format(self.task, self.status)
 
     class Meta:
@@ -294,7 +294,7 @@ class Dropoff(models.Model):
     pickup = models.BooleanField(verbose_name="Abholservice", default=False)
     pickup_description = models.TextField(blank=True, verbose_name="Abholservice Beschreibung")
 
-    def __unicode__(self):
+    def __str__(self):
         return u"{} - {}".format(self.name, self.address)
 
     class Meta:

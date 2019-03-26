@@ -7,7 +7,7 @@ class DonationAmount(models.Model):
     description = models.TextField(verbose_name='Beschreibung')
     amount = models.DecimalField(max_digits=10, decimal_places=2)
 
-    def __unicode__(self):
+    def __str__(self):
         return u"{} - {}".format(self.amount, self.description[0:80])
 
     class Meta:
@@ -25,7 +25,7 @@ class InvoiceOrder(models.Model):
     zip = models.CharField(max_length=255, verbose_name="PLZ, Ort")
     comment = models.TextField(verbose_name="Anmerkung", blank=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return u"{} {}".format(self.first_name, self.last_name)
 
     class Meta:
@@ -44,7 +44,7 @@ class SbbTicketOrder(models.Model):
     note = models.TextField(verbose_name="Bemerkung", blank=True)
     amount = models.IntegerField(verbose_name="Anzahl", default=1)
 
-    def __unicode__(self):
+    def __str__(self):
         return u"{} {} - {}".format(self.first_name, self.last_name, self.dropoff)
 
     class Meta:
@@ -131,7 +131,7 @@ class Content(models.Model):
     value = models.TextField(verbose_name='Value', blank=True)
     description = models.TextField(verbose_name='Beschreibung', blank=True)
 
-    def __unicode__(self):
+    def __str__(self):
         if self.path == 'index':
             return u"{}_{}_{}".format(self.language, self.path, self.key)
         else:
@@ -151,7 +151,7 @@ class TeamMember(models.Model):
     image = models.CharField(max_length=255, verbose_name="Bild-URL", blank=True)
     sorting = models.IntegerField(verbose_name="Sortierung", default=0)
 
-    def __unicode__(self):
+    def __str__(self):
         return u"{}".format(self.name)
 
     class Meta:
@@ -166,7 +166,7 @@ class References(models.Model):
     text = models.TextField(verbose_name="Text")
     sorting = models.IntegerField(verbose_name="Sortierung", default=0)
 
-    def __unicode__(self):
+    def __str__(self):
         return u"{}".format(self.name)
 
     class Meta:
@@ -190,7 +190,7 @@ class Partner(models.Model):
     location = models.CharField(max_length=255, verbose_name="Kanton/Staat")
     city = models.CharField(max_length=255, verbose_name="Stadt")
 
-    def __unicode__(self):
+    def __str__(self):
         return u"{}".format(self.name)
 
     class Meta:
@@ -219,7 +219,7 @@ class Event(models.Model):
             date = ""
         return date
 
-    def __unicode__(self):
+    def __str__(self):
         return u"{}".format(self.name)
 
     class Meta:
@@ -247,7 +247,7 @@ class Supporter(models.Model):
     sorting = models.IntegerField(verbose_name="Sortierung", default=0)
     active = models.BooleanField(verbose_name="Aktiv", default=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return u"{}".format(self.name)
 
     class Meta:

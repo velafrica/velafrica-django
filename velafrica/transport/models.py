@@ -20,7 +20,7 @@ class Car(models.Model):
     
     history = HistoricalRecords()
 
-    def __unicode__(self):
+    def __str__(self):
         return u"{}".format(self.name)
 
     class Meta:
@@ -37,7 +37,7 @@ class Driver(models.Model):
 
     history = HistoricalRecords()
     
-    def __unicode__(self):
+    def __str__(self):
         if not self.active:
             return u"{} (inaktiv)".format(self.name)
         return u"{}".format(self.name)
@@ -55,7 +55,7 @@ class VeloState(models.Model):
     
     history = HistoricalRecords()
 
-    def __unicode__(self):
+    def __str__(self):
         return u"{}".format(self.name)
 
     class Meta:
@@ -115,7 +115,7 @@ class Ride(models.Model):
         return None
 
 
-    def __unicode__(self):
+    def __str__(self):
         try:
             return u"Fahrt {}, {}: {} nach {}".format(self.id, self.date, self.from_warehouse, self.to_warehouse)
         except:
