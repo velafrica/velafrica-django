@@ -81,7 +81,7 @@ class ContainerAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin)
         """
         if obj:
             result = obj.book()
-            print result
+            print(result)
             if result:
                 self.message_user(request, u"Container {} erfolgreich verbucht. {} von {} Trackings aktualisiert. ".format(obj.id, result[2], result[1]))
             else:

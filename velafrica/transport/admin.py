@@ -140,7 +140,7 @@ class RideAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
 
     def get_distance(self, request, obj):
         result = obj.get_distance()
-        print result
+        print(result)
         if type(result) == int: 
             self.message_user(request, "Die Distanz zwischen {} und {} beträgt {} Meter.".format(obj.from_warehouse, obj.to_warehouse, result))
         else:

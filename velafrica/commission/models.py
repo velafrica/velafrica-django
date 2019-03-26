@@ -40,7 +40,7 @@ class Invoice(models.Model):
 
     def get_total(self):
         total = Decimal(0.00)
-        print total
+        print(total)
         pos = InvoiceListPos.objects.all().filter(invoice=self.id)
 
         if self.purchaseorder:
@@ -48,9 +48,9 @@ class Invoice(models.Model):
                 total += p.product.get_purchase_price()
         else:
             for p in pos:
-                print p.product.sales_price
+                print(p.product.sales_price)
                 total += p.product.sales_price
-        print total
+        print(total)
         return total
     get_total.short_description = "Rechnungsbetrag"
     get_total.help_text = "Berechnet aus dem Verkaufspreis. Um Einkaufspreise zu verwenden, einen Purchase Order zur Rechnung verknüpfen"

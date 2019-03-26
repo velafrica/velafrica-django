@@ -226,7 +226,7 @@ class CollectionEvent(models.Model):
         Get status of logistic tasks.
         """
         tasks_count = self.taskprogress_set.all().count()
-        print tasks_count
+        print(tasks_count)
         if tasks_count == 0:
             return "danger"
         else:

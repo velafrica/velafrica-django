@@ -20,7 +20,7 @@ def counter(request):
   
   statistics = Entry.get_statistics(org_id)
 
-  print "STATS: {}".format(statistics)
+  print("STATS: {}".format(statistics))
 
   return render(request,
     'counter/index.html', {
