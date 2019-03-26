@@ -11,6 +11,7 @@ from velafrica.organisation.models import Organisation, Address
 
 fs = MyStorage()
 
+
 # TODO: clean up this mess
 # TODO: migrate data first
 
@@ -18,14 +19,16 @@ class Category(models.Model):
     """
     Represents a product category.
     """
-    articlenr_start = models.CharField(blank=True, null=True, max_length=8, verbose_name="Kategorienummer", unique=True, help_text="")
+    articlenr_start = models.CharField(blank=True, null=True, max_length=8, verbose_name="Kategorienummer", unique=True,
+                                       help_text="")
     name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Kategoriebezeichnung")
     description = models.TextField(blank=True, null=True, verbose_name="Beschreibung")
-    image = ResizedImageField(storage=fs, size=[500, 500], upload_to='stock/categories/', blank=True, null=True, help_text='Product picture.')
+    image = ResizedImageField(storage=fs, size=[500, 500], upload_to='stock/categories/', blank=True, null=True,
+                              help_text='Product picture.')
     color = models.CharField(
         validators=[
             RegexValidator(
-                regex="^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$", 
+                regex="^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$",
                 message="Must be a hexcode (e.g. #000 or #000000)",
                 code="invalid_hexcode"
             )
@@ -49,15 +52,19 @@ class Product(models.Model):
     """
     Represents a product.
     """
-    articlenr = models.CharField(blank=False, null=False, max_length=7, verbose_name="Artikelnummer", unique=True, help_text="Die Velafrica Artikelnummer (in der Form 123.123)")
+    articlenr = models.CharField(blank=False, null=False, max_length=7, verbose_name="Artikelnummer", unique=True,
+                                 help_text="Die Velafrica Artikelnummer (in der Form 123.123)")
     name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Produktbezeichnung")
     name_fr = models.CharField(blank=True, null=True, max_length=255, verbose_name="Produktbezeichnung FR")
     name_en = models.CharField(blank=True, null=True, max_length=255, verbose_name="Produktbezeichnung EN")
     hscode = models.CharField(blank=False, null=False, max_length=7, verbose_name="Harmonized System Code")
-    description = models.TextField(blank=True, null=True, verbose_name="Beschreibung", help_text="Hinweise zur Qualität bzw Hinweise und Ergänzung")
+    description = models.TextField(blank=True, null=True, verbose_name="Beschreibung",
+                                   help_text="Hinweise zur Qualität bzw Hinweise und Ergänzung")
     category = models.ForeignKey('Category', verbose_name="Kategorie", help_text='Die Hauptkategorie des Produktes.')
-    image = ResizedImageField(storage=fs, size=[500, 500], upload_to='stock/products/', blank=True, null=True, verbose_name="Produktbild")
-    sales_price = models.DecimalField(blank=False, null=False, max_digits=10, decimal_places=2, verbose_name="Verkaufspreis", default=0.00)
+    image = ResizedImageField(storage=fs, size=[500, 500], upload_to='stock/products/', blank=True, null=True,
+                              verbose_name="Produktbild")
+    sales_price = models.DecimalField(blank=False, null=False, max_digits=10, decimal_places=2,
+                                      verbose_name="Verkaufspreis", default=0.00)
     packaging_unit = models.IntegerField(blank=True, null=True, verbose_name="Verpackungseinheit (VE)")
     history = HistoricalRecords()
 
@@ -66,13 +73,15 @@ class Product(models.Model):
         Purchase price of a product is 1/6 of sales price.
         """
         return round(self.sales_price / 6, 2)
+
     get_purchase_price.short_description = "Einkaufspreis"
 
     def admin_image(self):
         """
         Return image for admin list view.
         """
-        return (u"<img src='{0}{1}' style='max-height: 100px;' alt='{2}' title='{2}'' />".format(settings.MEDIA_URL, self.image, self.name))
+        return (u"<img src='{0}{1}' style='max-height: 100px;' alt='{2}' title='{2}'' />".format(settings.MEDIA_URL,
+                                                                                                 self.image, self.name))
 
     admin_image.allow_tags = True
     admin_image.short_description = "Produkt"
@@ -92,16 +101,25 @@ class Warehouse(models.Model):
 
     Warehouses are also used to record :model:`transport.Ride`
     """
-    name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Name", help_text="Der Name / Bezeichnung des Lagers")
-    description = models.CharField(blank=True, null=True, max_length=255, verbose_name="Beschreibung", help_text="Beschreibung / Bemerkungen zum Lager")
-    organisation = models.ForeignKey(Organisation, verbose_name="Organisation", help_text='Die Organisation zu welcher das Lager gehört. (Nur VPN Schweiz Partner)', limit_choices_to={'partnersud': None})
-    image = ResizedImageField(storage=fs, size=[500, 500], upload_to='stock/warehouses/', blank=True, null=True, verbose_name="Bild des Lagers")
-    
-    # address
-    address = models.ForeignKey(Address, null=True, blank=True, verbose_name="Andere Adresse als Organisation", help_text="Nur angeben wenn die Lageradresse von Organisationsadresse abweicht.")
+    name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Name",
+                            help_text="Der Name / Bezeichnung des Lagers")
+    description = models.CharField(blank=True, null=True, max_length=255, verbose_name="Beschreibung",
+                                   help_text="Beschreibung / Bemerkungen zum Lager")
+    organisation = models.ForeignKey(Organisation, verbose_name="Organisation",
+                                     help_text='Die Organisation zu welcher das Lager gehört. (Nur VPN Schweiz Partner)',
+                                     limit_choices_to={'partnersud': None})
+    image = ResizedImageField(storage=fs, size=[500, 500], upload_to='stock/warehouses/', blank=True, null=True,
+                              verbose_name="Bild des Lagers")
 
-    stock_management = models.BooleanField(default=False, verbose_name="Automatisches Stock-Management", help_text="Gibt an ob automatisches Stock-Management aktiviert ist, d.h. ob bei Stock Verschiebungen der Stock automatisch angepasst werden soll.")
-    notify_on_incoming_transport = models.TextField(null=True, blank=True, verbose_name="Über angeliferte Ersatzteile informieren", help_text="Eine Emailadressen pro Zeile. Hier eingetragene Emailadressen werden jedesmal benachrichtigt, sobald eine neue Fahrt  mit Ersatzteilen zu diesem Lager erfasst wird.")
+    # address
+    address = models.ForeignKey(Address, null=True, blank=True, verbose_name="Andere Adresse als Organisation",
+                                help_text="Nur angeben wenn die Lageradresse von Organisationsadresse abweicht.")
+
+    stock_management = models.BooleanField(default=False, verbose_name="Automatisches Stock-Management",
+                                           help_text="Gibt an ob automatisches Stock-Management aktiviert ist, d.h. ob bei Stock Verschiebungen der Stock automatisch angepasst werden soll.")
+    notify_on_incoming_transport = models.TextField(null=True, blank=True,
+                                                    verbose_name="Über angeliferte Ersatzteile informieren",
+                                                    help_text="Eine Emailadressen pro Zeile. Hier eingetragene Emailadressen werden jedesmal benachrichtigt, sobald eine neue Fahrt  mit Ersatzteilen zu diesem Lager erfasst wird.")
     history = HistoricalRecords()
 
     def get_address(self):
@@ -117,7 +135,7 @@ class Warehouse(models.Model):
         """
         address = self.get_address()
         return address.get_geolocation()
-    
+
     def __unicode__(self):
         return u"{}, {}".format(self.organisation.name, self.name)
 
@@ -131,8 +149,10 @@ class Stock(models.Model):
     """
     product = models.ForeignKey(Product, verbose_name="Produkt")
     warehouse = models.ForeignKey(Warehouse, verbose_name="Lager", help_text='Das Lager wo sich der Stock befindet')
-    amount = models.IntegerField(blank=False, null=False, default=0, verbose_name="Stückzahl", help_text="Anzahl der Produkte an Lager")
-    last_modified = models.DateTimeField(auto_now=True, help_text="Tag und Zeit wann das Objekt zuletzt geändert wurde.")
+    amount = models.IntegerField(blank=False, null=False, default=0, verbose_name="Stückzahl",
+                                 help_text="Anzahl der Produkte an Lager")
+    last_modified = models.DateTimeField(auto_now=True,
+                                         help_text="Tag und Zeit wann das Objekt zuletzt geändert wurde.")
     history = HistoricalRecords()
 
     def __unicode__(self):
@@ -162,7 +182,7 @@ class StockList(models.Model):
     """
     last_change = models.DateTimeField(default=timezone.now)
     description = models.CharField(blank=True, null=True, max_length=255)
-    #stocktransfer = models.OneToOneField('StockTransfer', blank=True, null=True)
+    # stocktransfer = models.OneToOneField('StockTransfer', blank=True, null=True)
 
     history = HistoricalRecords()
 
@@ -171,7 +191,8 @@ class StockList(models.Model):
         verbose_name_plural = "Stock Listen"
 
     def __unicode__(self):
-        return u"SL#{0} - {1} ({2:%d.%m.%Y}, {3}:{2:%M})".format(self.id, self.description, self.last_change, self.last_change.hour+2)
+        return u"SL#{0} - {1} ({2:%d.%m.%Y}, {3}:{2:%M})".format(self.id, self.description, self.last_change,
+                                                                 self.last_change.hour + 2)
 
     def get_stocktransfer(self):
         """
@@ -180,6 +201,7 @@ class StockList(models.Model):
         if self.stocktransfer:
             return self.stocktransfer
         return None
+
     get_stocktransfer.short_description = 'Stock Transfer'
 
     def get_ride(self):
@@ -189,6 +211,7 @@ class StockList(models.Model):
         if self.ride:
             return self.ride
         return None
+
     get_ride.short_description = 'Ride'
 
     def get_container(self):
@@ -198,11 +221,13 @@ class StockList(models.Model):
         if self.container:
             return self.container
         return None
+
     get_container.short_description = 'Container'
 
     def size(self):
         elem = StockListPosition.objects.filter(stocklist=self)
         return elem.count()
+
     size.short_description = 'Anzahl Positionen'
 
 
@@ -231,14 +256,17 @@ class StockListPos(models.Model):
     """
     product = models.ForeignKey(Product)
     amount = models.IntegerField(blank=False, null=False, verbose_name="Stückzahl", default=0)
-    history = HistoricalRecords()
+
+    # history = HistoricalRecords()
 
     def get_sales_price(self):
         return self.product.sales_price
+
     get_sales_price.short_description = "Verkaufspreis"
 
     def get_purchase_price(self):
         return self.product.get_purchase_price()
+
     get_purchase_price.short_description = "Einkaufspreis"
     get_purchase_price.label = "Einkaufspreis"
 
@@ -310,7 +338,6 @@ class StockChange(models.Model):
         else:
             return False
 
-
     def __unicode__(self):
         return u"StockChange {}, {} {}".format(self.datetime, self.stock_change_type, self.warehouse)
 
@@ -342,9 +369,9 @@ class StockTransfer(models.Model):
     warehouse_to = models.ForeignKey(Warehouse, related_name="warehouse_to", verbose_name="Ziel-Lager")
     stocklist = models.OneToOneField(StockList, verbose_name="Stock List")
     note = models.CharField(blank=True, null=True, max_length=255, verbose_name="Bemerkungen")
-    booked = models.BooleanField(default=False, null=False, blank=False, help_text="Gibt an ob der Stock bereits angepasst wurde.")
+    booked = models.BooleanField(default=False, null=False, blank=False,
+                                 help_text="Gibt an ob der Stock bereits angepasst wurde.")
     history = HistoricalRecords()
-
 
     def book(self, fake=False):
         """
@@ -359,7 +386,7 @@ class StockTransfer(models.Model):
 
         # always create outgoing StockChange
         sc = StockChange(
-            stocktransfer=self, 
+            stocktransfer=self,
             warehouse=self.warehouse_from,
             stocklist=self.stocklist,
             stock_change_type='out',
@@ -370,8 +397,8 @@ class StockTransfer(models.Model):
         # always create incoming StockChange
         sc = StockChange(
             stocktransfer=self,
-            warehouse=self.warehouse_to, 
-            stocklist=self.stocklist, 
+            warehouse=self.warehouse_to,
+            stocklist=self.stocklist,
             stock_change_type='in'
         )
         sc.save()

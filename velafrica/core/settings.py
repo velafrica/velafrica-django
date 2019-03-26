@@ -128,7 +128,6 @@ INSTALLED_APPS = (
     'acme_challenge',
 
     'webpack_loader',
-    'mailchimp',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -266,6 +265,7 @@ EMAIL_FROM_EMAIL = 'tracking@velafrica.ch'
 
 # Django Storage settings
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_DEFAULT_ACL = None
 AWS_S3_SECURE_URLS = False
 AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY']
 AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_KEY']
@@ -320,8 +320,8 @@ if 'SITE_ID' in os.environ:
 else:
     SITE_ID = 1
 
-MAILCHIMP_API_KEY = os.environ['MAILCHIMP_API_KEY']
-MAILCHIMP_LIST_ID = os.environ['MAILCHIMP_LIST_ID']
+# MAILCHIMP_API_KEY = os.environ['MAILCHIMP_API_KEY']
+# MAILCHIMP_LIST_ID = os.environ['MAILCHIMP_LIST_ID']
 ORDER_RECEIVER = os.environ['ORDER_RECEIVER']
 INITIAL_VELO_COUNT = int(os.environ['INITIAL_VELO_COUNT'])
 AVERAGE_VELOS_PER_DAY = int(os.environ['AVERAGE_VELOS_PER_DAY'])
