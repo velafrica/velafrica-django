@@ -20,7 +20,7 @@ class Donor(models.Model):
     last_name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Nachname")
     email = models.CharField(blank=False, null=False, max_length=255, verbose_name="Email", validators=[EmailValidator])
 
-    def __unicode__(self):
+    def __str__(self):
         return u"#{} {} <{}>".format(self.tracking_no, self.donor.first_name, self.donor.last_name, self.number_of_velos)
 """
 
@@ -80,7 +80,7 @@ class TrackingEventType(models.Model):
         """
         return TrackingEventType.objects.filter(required_previous_event=self.event_type)
 
-    def __unicode__(self):
+    def __str__(self):
         return u"{}".format(self.name)
 
     class Meta:
@@ -100,7 +100,7 @@ class TrackingEvent(models.Model):
     note = models.CharField(blank=True, null=True, max_length=255, verbose_name="Bemerkung", help_text="interne Bemerkung, nirgends ersichtlich für Spender (optional)")
     history = HistoricalRecords()
 
-    def __unicode__(self):
+    def __str__(self):
         return u"{}".format(self.event_type.name)
 
     def get_description(self):
@@ -138,7 +138,7 @@ class VeloType(models.Model):
     name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Bezeichnung")
     history = HistoricalRecords()
 
-    def __unicode__(self):
+    def __str__(self):
         return u"{}".format(self.name)
 
 def get_last_event(self, tracking_id):
@@ -249,7 +249,7 @@ class Tracking(models.Model):
                 return False
         return None
 
-    def __unicode__(self):
+    def __str__(self):
         return u"#{}: {} {}".format(self.tracking_no, self.first_name, self.last_name)
 
     def next_tracking_eventtype_options(self):

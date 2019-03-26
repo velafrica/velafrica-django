@@ -33,7 +33,7 @@ class ContentAdminFilledFilter(admin.SimpleListFilter):
 class ContentAdmin(admin.ModelAdmin):
     search_fields = ['path', 'key', 'description', 'value']
     list_filter = ('language', 'path', ContentAdminFilledFilter)
-    list_display = ['__unicode__', 'description', 'is_filled_column']
+    list_display = ['__str__', 'description', 'is_filled_column']
 
     def is_filled_column(self, object):
         source = 'yes' if object.value else 'no'

@@ -25,7 +25,7 @@ class Payment(models.Model):
     amount = models.IntegerField()
     invoice = models.ForeignKey('Invoice')
 
-    def __unicode__(self):
+    def __str__(self):
         return u"{} {} {}".format(self.received_on, self.amount, self.invoice)
 
 class Invoice(models.Model):
@@ -64,7 +64,7 @@ class Invoice(models.Model):
     get_total_payments.short_description = "Eingegangene Zahlungen"
 
 
-    def __unicode__(self):
+    def __str__(self):
         return u"Invoice #{}: {} an {} ".format(self.id, self.from_org, self.to_org)
 
 
@@ -74,7 +74,7 @@ class PurchaseOrderListPos(StockListPos):
     """
     purchaseorder = models.ForeignKey('PurchaseOrder')
 
-    def __unicode__(self):
+    def __str__(self):
         return u"PurchaseOrder #{}: {}x {} ".format(self.purchaseorder.id, self.amount, self.product)
         
     class Meta:
@@ -144,7 +144,7 @@ class PurchaseOrder(models.Model):
         else:
             return False
 
-    def __unicode__(self):
+    def __str__(self):
         return u"PurchaseOrder #{}: {} ".format(self.id, self.to_org)
 
 
@@ -154,7 +154,7 @@ class SalesOrderListPos(StockListPos):
     """
     salesorder = models.ForeignKey('SalesOrder')
 
-    def __unicode__(self):
+    def __str__(self):
         return u"PurchaseOrder #{}: {}x {} ".format(self.salesorder.id, self.amount, self.product)
         
     class Meta:
@@ -207,5 +207,5 @@ class SalesOrder(models.Model):
         else:
             return False
 
-    def __unicode__(self):
+    def __str__(self):
         return u"SalesOrder #{}: {} ".format(self.id, self.to_org)

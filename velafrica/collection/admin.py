@@ -34,7 +34,7 @@ class TaskProgressResource(resources.ModelResource):
 class TaskProgressAdmin(ExportMixin, SimpleHistoryAdmin):
     resource_class = TaskProgressResource
     list_filter = ['status']
-    list_display = ['__unicode__', 'collection_event', 'task', 'notes', 'status']
+    list_display = ['__str__', 'collection_event', 'task', 'notes', 'status']
 
 
 class EventAdmin(SimpleHistoryAdmin):

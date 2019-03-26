@@ -93,7 +93,7 @@ class Entry(models.Model):
 
       return statistics
 
-    def __unicode__(self):
+    def __str__(self):
         return u"{}: {}".format(self.date, self.amount)
 
     class Meta:
