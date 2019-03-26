@@ -14,7 +14,7 @@ class Country(models.Model):
     code = models.CharField(blank=True, null=True, max_length=255, verbose_name=u"Ländercode (ISO 3166-1 alpha-2)",
                             unique=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return u"{}".format(self.name)
 
     class Meta:
@@ -42,7 +42,7 @@ class Address(models.Model):
         """
         # first check if at least city and country are provided, otherwise don't get geolocation
         if self.city and self.country:
-            loc = utils.get_geolocation(self.__unicode__())
+            loc = utils.get_geolocation(self.__str__())
             if loc:
                 self.latitude = loc['lat']
                 self.longitude = loc['lng']
@@ -55,10 +55,10 @@ class Address(models.Model):
         """
         # address should at least have country and city provided, everything else is to inacurate
         if self.country and self.city:
-            return u"{}".format(utils.get_googlemaps_url_place(self.__unicode__()))
+            return u"{}".format(utils.get_googlemaps_url_place(self.__str__()))
         return None
 
-    def __unicode__(self):
+    def __str__(self):
         __str = u""
         if self.street:
             __str += u"{}".format(self.street)
@@ -122,7 +122,7 @@ class Organisation(models.Model):
 
     get_partnersud.short_description = "Süd Partner"
 
-    def __unicode__(self):
+    def __str__(self):
         if self.address:
             return u"{}, {}".format(self.name, self.address.city)
         else:
@@ -143,7 +143,7 @@ class Person(models.Model):
     )
     organisation = models.ForeignKey('Organisation', verbose_name="Arbeitgeber")
 
-    def __unicode__(self):
+    def __str__(self):
         if (len(self.user.first_name) > 0 and len(self.user.last_name) > 0):
             return u"{} {} ({})".format(self.user.first_name, self.user.last_name, self.organisation.name)
         else:

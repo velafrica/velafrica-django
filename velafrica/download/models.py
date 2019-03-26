@@ -18,7 +18,7 @@ class File(models.Model):
     file = models.FileField(storage=fs, upload_to='downloads/', blank=True, null=True, help_text='Select file to upload.')
     history = HistoricalRecords()
 
-    def __unicode__(self):
+    def __str__(self):
         return u"File: {}".format(self.name)
 
     class Meta:

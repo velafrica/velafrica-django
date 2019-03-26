@@ -34,7 +34,7 @@ class TaskProgressResource(resources.ModelResource):
 class TaskProgressAdmin(ExportMixin, SimpleHistoryAdmin):
     resource_class = TaskProgressResource
     list_filter = ['status']
-    list_display = ['__unicode__', 'collection_event', 'task', 'notes', 'status']
+    list_display = ['__str__', 'collection_event', 'task', 'notes', 'status']
 
 
 class EventAdmin(SimpleHistoryAdmin):
@@ -159,7 +159,7 @@ class CollectionEventAdmin(ImportExportMixin, SimpleHistoryAdmin):
         """
         Helper function to get css styles in regards to task status.
         """
-        print "get status style"
+        print("get status style")
         style = "border-radius: 50%; width: 20px; height: 20px;"
         if status == "success":
             style += " background-color: #4DFA90;"
@@ -168,7 +168,7 @@ class CollectionEventAdmin(ImportExportMixin, SimpleHistoryAdmin):
         else:
             style += " background-color: #FF5468;"
 
-        print style
+        print(style)
         return style
 
     def status_marketing(self, obj):

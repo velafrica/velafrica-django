@@ -63,7 +63,7 @@ class PurchaseOrderAdmin(DjangoObjectActions, SimpleHistoryAdmin):
 
     
     def get_readonly_fields(self, request, obj=None):
-        print obj
+        print(obj)
         if obj and obj.state != '0':
             fields = []
             for field in self.model._meta.get_fields():

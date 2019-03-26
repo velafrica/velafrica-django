@@ -17,7 +17,7 @@ def send_email(sender, instance, created, **kwargs):
     Send email notification to bicycle donor.
     """
 
-    print "post save ride"
+    print("post save ride")
 
     # check if the event has been newly created or just updated
     if not created:
@@ -34,9 +34,9 @@ def send_email(sender, instance, created, **kwargs):
                 try:
                     validate_email(line)
                 except ValidationError as e:
-                    print "oops! no email {}".format(line)
+                    print("oops! no email {}".format(line))
                 else:
-                    print "hooray! email is valid, notify {}".format(line)
+                    print("hooray! email is valid, notify {}".format(line))
                     receiver_list += [line]
     if receiver:
         subject = u"Neue Ersatzteile in {}".format(warehouse)

@@ -29,7 +29,7 @@ class EventListener(models.Model):
     #object_ids # None = all
 
 
-    def __unicode__(self):
+    def __str__(self):
         return u"{}".format(self.name)
 
     class Meta:

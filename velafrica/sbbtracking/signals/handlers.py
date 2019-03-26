@@ -14,7 +14,7 @@ def send_email(sender, instance, created, **kwargs):
     """
     Send email notification to bicycle donor.
     """
-    print "send email"
+    print("send email")
 
     # check if the event has been newly created or just updated
     if not created:

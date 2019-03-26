@@ -76,7 +76,7 @@ class StockResource(resources.ModelResource):
 class StockAdmin(ImportExportMixin, SimpleHistoryAdmin):
     form = StockForm
     resource_class = StockResource
-    list_display = ['__unicode__', 'product', 'warehouse', 'amount', 'last_modified']
+    list_display = ['__str__', 'product', 'warehouse', 'amount', 'last_modified']
     list_editable = ['amount']
     search_fields = ['product__name']
     list_filter = ['warehouse']
@@ -100,7 +100,7 @@ class StockAdmin(ImportExportMixin, SimpleHistoryAdmin):
                 pass
             # other users with a correlating person should only see their organisation
             elif hasattr(request.user, 'person'):
-                print "stock is not admin"
+                print("stock is not admin")
                 kwargs["queryset"] = Warehouse.objects.filter(organisation=request.user.person.organisation.id)
             # users with no superuser role and no related person should not see any organisations
             else:
@@ -220,7 +220,7 @@ class StockListAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin)
     def listpositions_link(self, obj):
         if obj.stocklistposition_set.first():
             r = 'admin:{}_{}_changelist'.format(obj.stocklistposition_set.first()._meta.app_label, obj.stocklistposition_set.first()._meta.model_name)
-            print r
+            print(r)
             return mark_safe('<a href="{}?stocklist__id__exact={}">{}</a>'.format(
                 reverse(r, args=[]),
                 obj.id,
