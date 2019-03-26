@@ -9,6 +9,25 @@ jobs: # A basic unit of work in a run
         environment: # environment variables for primary container
           PIPENV_VENV_IN_PROJECT: true
           DATABASE_URL: postgresql://root@localhost/circle_test?sslmode=disable
+          AVERAGE_VELOS_PER_DAY: 0
+          AWS_ACCESS_KEY: ''
+          AWS_SECRET_KEY: ''
+          AWS_STORAGE_BUCKET_NAME: ''
+          AWS_S3_CUSTOM_DOMAIN: ''
+          SECRET_KEY: 'some-secrets-are-no-secrets'
+          EMAIL_HOST: ''
+          EMAIL_HOST_USER: ''
+          EMAIL_HOST_PASSWORD: ''
+          EMAIL_PORT: ''
+          FACEBOOK_APP_ID: ''
+          INITIAL_VELO_COUNT: 0
+          PAYPAL_RECEIVER_MAIL: ''
+          GMAP_API_KEY: ''
+          MAILCHIMP_API_KEY: ''
+          MAILCHIMP_LIST_ID: ''
+          ORDER_RECEIVER: ''
+          ACME_CHALLENGE_URL_SLUG: ''
+          ACME_CHALLENGE_TEMPLATE_CONTENT: ''
       # CircleCI PostgreSQL images available at: https://hub.docker.com/r/circleci/postgres/
       - image: circleci/postgres:9.6.2
         environment: # environment variables for the Postgres container.
