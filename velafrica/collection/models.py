@@ -56,6 +56,7 @@ class Event(models.Model):
     """
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True, verbose_name="Beschreibung")
+    notes = models.TextField(blank=True, null=True, verbose_name="Interne Notizen")
     region = models.ForeignKey(Region, verbose_name="Region", null=True, blank=True)
     category = models.ForeignKey(EventCategory, verbose_name="Kategorie")
     yearly = models.BooleanField(default=False, verbose_name="Jährlich wiederkehrend?")
