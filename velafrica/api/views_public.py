@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import mailchimp
 from django.db.models import Q
 from django.utils import timezone
 from itertools import chain
@@ -10,7 +9,6 @@ from rest_framework.response import Response
 
 from velafrica.collection.models import Dropoff, CollectionEvent
 from velafrica.collection.serializer import DropoffSerializer
-from velafrica.core.settings import MAILCHIMP_LIST_ID
 
 
 @api_view(['GET'])
@@ -52,14 +50,15 @@ def get_dropoffs(request):
 @permission_classes((AllowAny,))
 def subscribe_newsletter(request):
     """
-
+    TODO: find new mailchimp plugin
     :param request:
     :return:
     """
+    MAILCHIMP_LIST_ID = False
     email = request.POST.get('email', False)
     if email:
         if MAILCHIMP_LIST_ID:
-            list = mailchimp.utils.get_connection().get_list_by_id(MAILCHIMP_LIST_ID)
+            #list = mailchimp.utils.get_connection().get_list_by_id(MAILCHIMP_LIST_ID)
             # TODO: proper exception handling
             return Response(list.subscribe(email, {'EMAIL': email}, double_optin=False))
         else:

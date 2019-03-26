@@ -128,7 +128,6 @@ INSTALLED_APPS = (
     'acme_challenge',
 
     'webpack_loader',
-    'mailchimp',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -320,8 +319,8 @@ if 'SITE_ID' in os.environ:
 else:
     SITE_ID = 1
 
-MAILCHIMP_API_KEY = os.environ['MAILCHIMP_API_KEY']
-MAILCHIMP_LIST_ID = os.environ['MAILCHIMP_LIST_ID']
+#MAILCHIMP_API_KEY = os.environ['MAILCHIMP_API_KEY']
+#MAILCHIMP_LIST_ID = os.environ['MAILCHIMP_LIST_ID']
 ORDER_RECEIVER = os.environ['ORDER_RECEIVER']
 INITIAL_VELO_COUNT = int(os.environ['INITIAL_VELO_COUNT'])
 AVERAGE_VELOS_PER_DAY = int(os.environ['AVERAGE_VELOS_PER_DAY'])

@@ -21,7 +21,6 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.views.generic import RedirectView
-from mailchimp import urls as mailchimp_urls
 
 from velafrica.collection import views as collection_views
 from velafrica.core import views
@@ -110,7 +109,7 @@ urlpatterns = [
                   url(r'^admin/', include("massadmin.urls")),
                   url(r'^taggit_autosuggest/', include('taggit_autosuggest.urls')),
                   url(r'^paypal/', include('paypal.standard.ipn.urls')),
-                  url(r'^admin/mailchimp', include(mailchimp_urls)),
+                  # url(r'^admin/mailchimp', include(mailchimp_urls)),
 
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
