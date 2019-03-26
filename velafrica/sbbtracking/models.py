@@ -119,11 +119,11 @@ class TrackingEvent(models.Model):
         Get the image to display together with the description.
         """
         if self.event_type.show_partner_info and self.tracking.container:
-            print "almost return partner image"
+            print("almost return partner image")
             if self.tracking.container.partner_to.image:
-                print "return partner image"
+                print("return partner image")
                 return self.tracking.container.partner_to.image
-        print "return event type image"
+        print("return event type image")
         return self.event_type.image
 
     class Meta:
@@ -234,7 +234,7 @@ class Tracking(models.Model):
         Checks if event requirements are met.
         """
         if not t_event_type:
-            print "t_event_type not defined"
+            print("t_event_type not defined")
             return False
 
         # first off, set last event to be sure it is correct
@@ -245,7 +245,7 @@ class Tracking(models.Model):
                 te.save()
                 return True
             else:
-                print "Sorry, last event was not {}, but {}".format(t_event_type.required_previous_event, last_event.event_type)
+                print("Sorry, last event was not {}, but {}".format(t_event_type.required_previous_event, last_event.event_type))
                 return False
         return None
 

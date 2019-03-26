@@ -94,7 +94,7 @@ class Container(models.Model):
         self.save()
 
         if not tet:
-            print "No arrival_africa event type defined"
+            print("No arrival_africa event type defined")
             return (False, count, 0)
 
         for t in trackings:
