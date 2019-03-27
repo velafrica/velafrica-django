@@ -4,7 +4,7 @@ echo "Compiling the .po files to .mo files"
 export PATH=$PATH:/app/.heroku/gettext/bin/usr/local/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/app/.heroku/gettext/bin/usr/local/lib
 cd velafrica/
-django-admin compilemessages
+# django-admin compilemessages
 
 echo "remove unused assets for a smaller slug size"
 cd /app/
