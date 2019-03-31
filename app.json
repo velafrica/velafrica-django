@@ -1,7 +1,7 @@
 {
   "name": "velafrica-django",
   "scripts": {
-    "postdeploy": "echo \"from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'admin@example.com', 'pass')\" | python manage.py shell"
+    "postdeploy": "echo \"from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'admin@example.com', '1234')\" | python manage.py shell"
   },
   "env": {
     "DEBUG": "False"
@@ -17,9 +17,6 @@
     "sendgrid"
   ],
   "buildpacks": [
-    {
-      "url": "https://github.com/heroku/heroku-buildpack-addon-wait"
-    },
     {
       "url": "https://github.com/philippkueng/heroku-buildpack-sassc"
     },
