@@ -122,6 +122,7 @@ INSTALLED_APPS = (
     # 'velafrica.translation'
     'velafrica.transport',
     'velafrica.velafrica_sud',
+    'velafrica.bikes',
     # django storages
     'storages',
     # SSL
@@ -246,7 +247,7 @@ STATICFILES_DIRS = (
 
 # Media files (Files uploaded by user)
 
-MEDIA_URL = 'http://partnertool.velafrica.ch/'
+MEDIA_URL = 'http://tracking.velafrica.ch/'
 MEDIA_ROOT = os.path.join(PROJECT_DIR, "media")
 
 # Django Resized

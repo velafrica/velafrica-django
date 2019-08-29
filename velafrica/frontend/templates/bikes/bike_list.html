@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block breadcrumb %} 
+<li><a href="">Bikes</a></li>
+{% endblock %} 
+
+{% block document-head %}
+
+{% endblock %}
+
+{% block jumbotron-img %}{% endblock %}
+{% block jumbotron-title %}
+Bikes
+{% endblock %}
+
+{% block jumbotron %}
+<!--
+Todo: sorting, filter and plot
+Velos / Partner<br/>
+Container / Partner
+-->
+    {% load admin_urls %}
+    <div>    <a href="{% url 'admin:bikes_bike_add'  %}">Velo hinzufügen</a></div>
+{% endblock %}
+
+{% block content %}
+
+<!-- seach box -->
+
+
+<div class="input-group"><span class="input-group-addon">Search:</span> <input id="filter" type="text" class="form-control" /></div>
+
+<table class="table footable" data-page-size=100 data-filter="#filter">
+	<thead>
+		<tr>
+			<th data-sort-initial="descending">Nr.</th>
+            <th>Kategorie</th>
+            <th>Marke</th>
+			<th>Container</th>
+			<th>Datum</th>
+			<th>Lager</th>
+            <th data-sortable="false"></th>
+		</tr>
+	</thead>
+	<tbody>
+	{% for b in object_list %}
+		<tr>
+			<td>{{ b.number }}</td>
+            <td>{{ b.type }}</td>
+			<td>{{ b.brand }}</td>
+            <td>{{ b.container }}</td>
+			<td>{{ b.date }}</td>
+			<td>{{ b.warehouse }}</td>
+            <td><a href="{% url 'admin:bikes_bike_change' b.id  %}">Daten bearbeiten</a></td>
+		</tr>
+	{% endfor %}
+	</tbody>
+</table>
+{% endblock %}
+
+{% block document-foot %}
+<!-- include footable -->
+<link rel="stylesheet" type="text/css" href="{% static "css/footable.core.min.css" %}" />
+<script type="text/javascript" src="{% static "js/footable.all.min.js" %}"></script>
+
+<!-- init footable -->
+<script type="text/javascript">
+	$(function () {
+		$('.footable').footable();
+	});
+</script>
+
+{% endblock %}

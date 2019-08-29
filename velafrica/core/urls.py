@@ -20,8 +20,10 @@ from django.conf.urls.i18n import i18n_patterns
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
-from django.views.generic import RedirectView
+from django.views.generic import RedirectView, ListView
 
+from velafrica.bikes.models import Bike
+from velafrica.bikes.views import BikeListView
 from velafrica.collection import views as collection_views
 from velafrica.core import views
 from velafrica.counter import views as counter_views
@@ -43,6 +45,7 @@ frontend = [
     url(r'^warehouses', stock_views.warehouses, name='warehouses'),
     url(r'^warehouse/(?P<pk>[0-9]+)', stock_views.warehouse, name='warehouse_detail'),
     url(r'^container', velafrica_sud_views.container, name='container'),
+    url(r'^bikes', ListView.as_view(model=Bike), name='bike'),
     url(r'^collection', collection_views.collection, name='collection'),
 
 ]

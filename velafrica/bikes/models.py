@@ -1,0 +1,69 @@
+# -*- coding: utf-8 -*-
+import datetime
+
+from django.utils import timezone
+#  from django_resized import ResizedImageField
+from velafrica.stock.models import Warehouse
+from velafrica.velafrica_sud.models import Container
+
+from django.db import models, connection
+from .settings import BIKE_TYPES, BRAKE_TYPES, BIKE_SIZES
+
+
+# Create your models here.
+
+
+def bike_images(instance, filename):
+    return 'bikes/img/{:04d}/{}_{}'\
+        .format(
+            int(instance.number if instance.number else 0),
+            datetime.datetime.now().strftime('%Y-%m-%d'),
+            filename
+        )
+
+
+def next_a_plus_number():
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT MAX(number) AS num FROM bikes_bike")
+        m = cursor.fetchone()
+        if m[0]:
+            return m[0] + 1
+    return 1
+
+
+class Bike(models.Model):
+    number = models.IntegerField(unique=True, default=next_a_plus_number, editable=True, verbose_name=u"Nr.")
+
+    # Basic
+    type = models.CharField(choices=BIKE_TYPES, max_length=255, verbose_name=u"Kategorie")
+    date = models.DateField(default=datetime.date.today, verbose_name=u"Datum")
+    visum = models.CharField(max_length=255, blank=True, verbose_name=u"Visum")
+    warehouse = models.ForeignKey(Warehouse, blank=True, null=True, on_delete=models.SET_NULL, verbose_name=u"Lager")
+
+    # A+
+    a_plus = models.BooleanField(default=False, verbose_name=u"A+")
+
+    # Details
+    brand = models.CharField(max_length=255, default="", blank=True, verbose_name=u"Marke")
+    gearing = models.CharField(max_length=255, default="", blank=True, verbose_name=u"Schaltung")
+    drivetrain = models.CharField(max_length=255, default="", blank=True, verbose_name=u"Gänge")
+    type_of_brake = models.CharField(choices=BRAKE_TYPES, max_length=255, default="", blank=True, verbose_name=u"Bremsentyp")
+    brake = models.CharField(max_length=255, default="", blank=True, verbose_name=u"Marke der Bremsen")
+    colour = models.CharField(max_length=255, default="", blank=True, verbose_name=u"Farbe")
+    size = models.CharField(choices=BIKE_SIZES, max_length=255, default='', blank=True, verbose_name=u"Grösse")
+    suspension = models.CharField(max_length=255, null=True, blank=True, verbose_name=u"Federung")
+    extraordinary = models.CharField(max_length=255, null=True, blank=True, verbose_name=u"Spezielles")
+
+    # Image(s)
+    image = models.ImageField(upload_to=bike_images, blank=True, null=True, verbose_name=u"Bild")
+
+    # Shipping
+
+    container = models.ForeignKey(Container, null=True, blank=True, on_delete=models.SET_NULL, verbose_name=u"Container")
+
+    # Metadata
+    date_created = models.DateField(auto_now_add=True, null=True)
+    date_modified = models.DateField(auto_now=True, null=True)
+
+    def __str__(self):
+        return '#{:04d} {}'.format(self.number, self.type)
