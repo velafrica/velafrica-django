@@ -8,6 +8,7 @@ from django.dispatch import receiver
 from django.urls import reverse
 from django.utils import timezone
 #  from django_resized import ResizedImageField
+from velafrica.core.storage import MyStorage
 from velafrica.stock.models import Warehouse
 from velafrica.velafrica_sud.models import Container
 
@@ -15,11 +16,14 @@ from django.db import models, connection
 from .settings import BIKE_TYPES, BRAKE_TYPES, BIKE_SIZES
 
 
+fs = MyStorage()
+
+
 def bike_images(instance, filename):
-    return 'bikes/img/{:04d}/{}_{}'\
+    return 'bike_img/{}_{}'\
         .format(
-            int(instance.number if instance.number else 0),
-            datetime.datetime.now().strftime('%Y-%m-%d'),
+            instance.id,
+            # datetime.datetime.now().strftime('%Y-%m-%d'),
             filename
         )
 
@@ -77,7 +81,7 @@ class Bike(models.Model):
     extraordinary = models.CharField(max_length=255, null=True, blank=True, verbose_name=u"Spezielles")
 
     # Image(s)
-    image = models.ImageField(upload_to=bike_images, blank=True, null=True, verbose_name=u"Bild")
+    image = models.ImageField(storage=fs, upload_to=bike_images, blank=True, null=True, verbose_name=u"Bild")
 
     # Shipping
 
@@ -88,7 +92,7 @@ class Bike(models.Model):
     date_modified = models.DateField(auto_now=True, null=True)
 
     def __str__(self):
-        return '#{:04d} {}'.format(self.number, self.type)
+        return '{} - {}'.format(self.id, self.type)
 
     def get_url(self):
         return reverse("admin:bikes_bike_change", args=[self.pk])
