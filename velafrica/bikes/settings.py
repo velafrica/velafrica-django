@@ -3,18 +3,17 @@
 BIKE_TYPES = [
         ("", "-"),
         ("MTB", "MTB"),
-        ("TW", "Touring Woman"),
-        ("TM", "Touring Man"),
-        ("K", "Kids"),
-        ("C", "Classic"),
-        ("R", "Racing")
+        ("Touring Woman", "Touring Woman"),
+        ("Touring Man", "Touring Man"),
+        ("Kids", "Kids"),
+        ("Classic", "Classic"),
+        ("Racing", "Racing")
     ]
 
 BRAKE_TYPES = [
         ("", "-"),
-        ("hd", "hydraulic disc"),
-        ("rb", "rim brake"),
-        ("hrb", "rim brake"),
+        ("Hydr. Disc", "Hydraulic Disc"),
+        ("Rim Brake",  "Rim brake"),
     ]
 
 BIKE_SIZES = [

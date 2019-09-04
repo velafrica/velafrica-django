@@ -31,6 +31,41 @@ class BikeResource(resources.ModelResource):
         model = Bike
 
 
+class APlusForSaleListFilter(admin.SimpleListFilter):
+    # Human-readable title which will be displayed in the
+    # right admin sidebar just above the filter options.
+    title = 'A+ for sale'
+
+    # Parameter for the filter that will be used in the URL query.
+    parameter_name = 'a_plus_for_sale'
+    # boolean = True
+
+
+    def lookups(self, request, model_admin):
+        """
+        Returns a list of tuples. The first element in each
+        tuple is the coded value for the option that will
+        appear in the URL query. The second element is the
+        human-readable name for the option that will appear
+        in the right sidebar.
+        """
+        return (
+            ('1', 'YES'),
+            ('0', '-')
+        )
+
+    def queryset(self, request, queryset):
+        """
+        Returns the filtered queryset based on the value
+        provided in the query string and retrievable via
+        `self.value()`.
+        """
+        # Compare the requested value (either '80s' or '90s')
+        # to decide how to filter the queryset.
+        if self.value() == '1':
+            return queryset.filter(container__exact=None, a_plus__exact=True)
+
+
 # TODO: show details fields as soon as A+ is selected
 class BikeAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
     labels = {key: Bike._meta.get_field(key).verbose_name for key in Bike.plotable}
@@ -39,13 +74,21 @@ class BikeAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
     resource_class = BikeResource  # import export
 
     list_display = ['id', 'type', 'brand', 'a_plus', 'for_sale', 'warehouse']
-    search_fields = ['id', 'type', 'brand', 'a_plus', 'for_sale', 'warehouse']
-    list_filter = ['for_sale', 'a_plus', 'warehouse', 'type', ('date', DateRangeFilter)]
+    search_fields = ['id', 'type', 'brand', 'a_plus', 'warehouse']
+    list_filter = [APlusForSaleListFilter, 'a_plus', 'warehouse', 'type', ('date', DateRangeFilter), 'container']
     # change_actions = ('book_container',)
     # # inlines = [TrackingInline]
 
     def for_sale(self, obj):
         return obj.container is None
+
+    # Set the column name in the change list
+
+    for_sale.short_description = "For sale"
+    # Set the field to use when ordering using this column
+    for_sale.admin_order_field = 'container'
+
+    for_sale.boolean = True
 
     actions = ["plot_to_pdf"]
     readonly_fields = ['id']
@@ -102,7 +145,7 @@ class BikeAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
         for key in Bike.plotable:
             if bike.__getattribute__(key):  # not blank
                 c.drawString(50, 450 - 30 * i - self.fontsize, self.labels[key])
-                c.drawString(160, 450 - 30 * i - self.fontsize, str(bike.__getattribute__(key)))
+                c.drawString(180, 450 - 30 * i - self.fontsize, str(bike.__getattribute__(key)))
                 i += 1
 
         if bike.image:
