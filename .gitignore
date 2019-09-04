@@ -39,4 +39,4 @@ staticfiles/
 
 # prevent .mo files from being added
 *.mo
-/velafrica/media/**
+/velafrica/media/*
