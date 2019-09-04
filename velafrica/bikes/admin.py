@@ -25,6 +25,8 @@ from simple_history.admin import SimpleHistoryAdmin
 from velafrica.bikes.models import Bike
 from velafrica.core.settings import PROJECT_DIR
 
+from reportlab.lib.utils import simpleSplit
+
 
 class BikeResource(resources.ModelResource):
     class Meta:
@@ -70,10 +72,11 @@ class APlusForSaleListFilter(admin.SimpleListFilter):
 class BikeAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
     labels = {key: Bike._meta.get_field(key).verbose_name for key in Bike.plotable}
     fontsize = 12
+    line_height = 13
 
     resource_class = BikeResource  # import export
 
-    list_display = ['id', 'type', 'brand', 'a_plus', 'for_sale', 'warehouse']
+    list_display = ['number', 'type', 'brand', 'a_plus', 'for_sale', 'warehouse']
     search_fields = ['id', 'type', 'brand', 'a_plus', 'warehouse']
     list_filter = [APlusForSaleListFilter, 'a_plus', 'warehouse', 'type', ('date', DateRangeFilter), 'container']
     # change_actions = ('book_container',)
@@ -102,13 +105,16 @@ class BikeAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
              'fields': (
                  'a_plus',
                  'brand',
+                 'bike_model',
                  'gearing',
+#                 'crankset',
                  'drivetrain',
                  'type_of_brake',
                  'brake',
                  'colour',
                  'size',
                  'suspension',
+                 'rear_suspension',
                  'extraordinary',
                  'image'
              ),
@@ -131,7 +137,7 @@ class BikeAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
 
         # Header
         c.setFont("Helvetica", 32)
-        c.drawString(x=50, y=510, text="A+ Bike")
+        c.drawString(x=40, y=510, text="A+ Bike")
         c.drawImage(
             os.path.join(PROJECT_DIR, 'frontend', 'static', 'img/velafrica_RGB.jpg'),
             x=657.5, y=471,
@@ -142,16 +148,21 @@ class BikeAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
         c.setFont("Helvetica", self.fontsize)
 
         i = 0
+        y = 450 - self.fontsize
         for key in Bike.plotable:
             if bike.__getattribute__(key):  # not blank
-                c.drawString(50, 450 - 30 * i - self.fontsize, self.labels[key])
-                c.drawString(180, 450 - 30 * i - self.fontsize, str(bike.__getattribute__(key)))
-                i += 1
+                c.drawString(40, y, self.labels[key])
+                lines = simpleSplit(str(bike.__getattribute__(key)), c._fontname, c._fontsize, 130)
+                for text in lines:
+                    c.drawString(175, y, text)
+                    y -= 14
+                y -= 12
+
 
         if bike.image:
             w = 480
             h = bike.image.height / bike.image.width * w
-            c.drawImage(bike.image.url, 321.9, 450 - h, width=w, height=h)
+            c.drawImage("/Users/tim/Documents/Django-Test/velafrica-django/velafrica/media/" + bike.image.name, 321.9, 450 - h, width=w, height=h)
 
         c.showPage()  # New Page
 

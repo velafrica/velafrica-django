@@ -7,7 +7,7 @@ import qrcode
 from django.dispatch import receiver
 from django.urls import reverse
 from django.utils import timezone
-#  from django_resized import ResizedImageField
+from django_resized import ResizedImageField
 from velafrica.core.storage import MyStorage
 from velafrica.stock.models import Warehouse
 from velafrica.velafrica_sud.models import Container
@@ -48,13 +48,16 @@ class Bike(models.Model):
             "number",
             "type",
             "brand",
+            "bike_model",
             "gearing",
+#            "crankset",
             "drivetrain",
             "type_of_brake",
             "brake",
             "colour",
             "size",
             "suspension",
+            "rear_suspension",
             "extraordinary"
         ]
 
@@ -71,17 +74,21 @@ class Bike(models.Model):
 
     # Details
     brand = models.CharField(max_length=255, default="", blank=True, verbose_name=u"Brand")
+    bike_model = models.CharField(max_length=255, default="", blank=True, verbose_name=u"Model")
     gearing = models.CharField(max_length=255, default="", blank=True, verbose_name=u"Group of components")
+    # crankset = models.CharField(max_length=255, default="", blank=True, verbose_name=u"Crankset")
     drivetrain = models.CharField(max_length=255, default="", blank=True, verbose_name=u"Drivetrain")
     type_of_brake = models.CharField(choices=BRAKE_TYPES, max_length=255, default="", blank=True, verbose_name=u"Type of Brake")
     brake = models.CharField(max_length=255, default="", blank=True, verbose_name=u"Brake")
     colour = models.CharField(max_length=255, default="", blank=True, verbose_name=u"Colour")
-    size = models.CharField(choices=BIKE_SIZES, max_length=255, default='', blank=True, verbose_name=u"Size")
+    size = models.CharField(max_length=255, default='', blank=True, verbose_name=u"Size") # choices=BIKE_SIZES,
     suspension = models.CharField(max_length=255, null=True, blank=True, verbose_name=u"Suspension")
-    extraordinary = models.CharField(max_length=255, null=True, blank=True, verbose_name=u"Extraordinary")
+    rear_suspension = models.CharField(max_length=255, null=True, blank=True, verbose_name=u"Rear Suspension")
+    extraordinary = models.TextField(max_length=255, null=True, blank=True, verbose_name=u"Extraordinary")
+
 
     # Image(s)
-    image = models.ImageField(upload_to=bike_images, blank=True, null=True, verbose_name=u"Image")  # storage=fs
+    image = ResizedImageField(size=[1920, 1080], upload_to=bike_images, blank=True, null=True, verbose_name=u"Image")  # storage=fs
 
     # Shipping
 
