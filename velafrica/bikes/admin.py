@@ -95,7 +95,7 @@ class BikeAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('id', 'number', 'type', 'visum', 'date', 'warehouse')
+            'fields': ('id', 'number', 'type', 'visa', 'date', 'warehouse')
         }),
         ('A+',  # Details ?
          {
