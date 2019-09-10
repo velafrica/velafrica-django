@@ -160,9 +160,12 @@ class BikeAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
 
 
         if bike.image:
-            w = 480
-            h = bike.image.height / bike.image.width * w
-            c.drawImage("/Users/tim/Documents/Django-Test/velafrica-django/velafrica/media/" + bike.image.name, 321.9, 450 - h, width=w, height=h)
+            w = 480  # fixed width
+            h = bike.image.height / bike.image.width * w  # keep ratio
+            c.drawImage(
+                bike.image.url,
+                x=321.9, y=450-h, width=w, height=h
+            )
 
         c.showPage()  # New Page
 
