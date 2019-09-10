@@ -3,7 +3,6 @@ import datetime
 import io
 import os
 
-from django.conf.global_settings import MEDIA_ROOT
 from django.conf.urls import url
 from django.core.exceptions import PermissionDenied
 from django.http import FileResponse, HttpResponse, StreamingHttpResponse
@@ -14,12 +13,9 @@ from reportlab.lib.pagesizes import landscape, A4
 
 from daterange_filter.filter import DateRangeFilter
 from django.contrib import admin
-from django.forms import model_to_dict
-from django.utils.safestring import mark_safe
 from django_object_actions import DjangoObjectActions
 from import_export import resources
 from import_export.admin import ImportExportMixin
-from import_export.fields import Field
 from simple_history.admin import SimpleHistoryAdmin
 
 from velafrica.bikes.models import Bike
@@ -188,13 +184,6 @@ class BikeAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
             datetime.datetime.now().strftime('%Y-%m-%d')
         )
         return response
-
-
-class BikeInline(admin.TabularInline):
-    model = Bike
-    fields = ('number', 'type', 'brand')
-    extra = 0
-    readonly_fields = []
 
 
 admin.site.register(Bike, BikeAdmin)

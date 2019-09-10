@@ -3,10 +3,8 @@ import datetime
 import os
 import uuid
 
-import qrcode
 from django.dispatch import receiver
 from django.urls import reverse
-from django.utils import timezone
 from django_resized import ResizedImageField
 from velafrica.core.storage import MyStorage
 from velafrica.stock.models import Warehouse
