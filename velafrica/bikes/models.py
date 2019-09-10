@@ -16,7 +16,7 @@ from django.db import models, connection
 from .settings import BIKE_TYPES, BRAKE_TYPES, BIKE_SIZES
 
 
-# fs = MyStorage()
+fs = MyStorage()
 
 
 # image path and name
@@ -94,9 +94,8 @@ class Bike(models.Model):
     rear_suspension = models.CharField(max_length=255, null=True, blank=True, verbose_name=u"Rear Suspension")
     extraordinary = models.TextField(max_length=255, null=True, blank=True, verbose_name=u"Extraordinary")
 
-
-    # Image(s)
-    image = ResizedImageField(size=[1920, 1080], upload_to=bike_images, blank=True, null=True, verbose_name=u"Image")  # storage=fs
+    # image(s)
+    image = ResizedImageField(storage=fs, size=[1920, 1080], upload_to=bike_images, blank=True, null=True, verbose_name=u"Image")  #
 
     # Shipping
     container = models.ForeignKey(Container, null=True, blank=True, on_delete=models.SET_NULL, verbose_name=u"Container")
