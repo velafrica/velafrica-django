@@ -19,6 +19,7 @@ from .settings import BIKE_TYPES, BRAKE_TYPES, BIKE_SIZES
 # fs = MyStorage()
 
 
+# image path and name
 def bike_images(instance, filename):
     return 'bike_img/{}_{}'\
         .format(
@@ -28,6 +29,7 @@ def bike_images(instance, filename):
         )
 
 
+# get the next number for A+-Bikes
 def next_a_plus_number():
     with connection.cursor() as cursor:
         cursor.execute("SELECT MAX(number) AS num FROM bikes_bike")
@@ -37,20 +39,21 @@ def next_a_plus_number():
     return 1
 
 
+# generates a unique id with the year as prefix
 def bike_id():
     return datetime.datetime.now().strftime('%y') + "-" + uuid.uuid4().hex[:6].upper()
 
 
 class Bike(models.Model):
 
-    id = models.CharField(primary_key=True, unique=True, default=bike_id, max_length=255)
+    # fields used from plot_to_pdf
     plotable = [
             "number",
             "type",
             "brand",
             "bike_model",
             "gearing",
-#            "crankset",
+            # "crankset",
             "drivetrain",
             "type_of_brake",
             "brake",
@@ -61,16 +64,21 @@ class Bike(models.Model):
             "extraordinary"
         ]
 
-    number = models.IntegerField(unique=True, default=next_a_plus_number, editable=True, verbose_name=u"No.")
+    id = models.CharField(primary_key=True, unique=True, default=bike_id, max_length=255)
 
-    # Basic
+    # bike category
     type = models.CharField(choices=BIKE_TYPES, null=True, max_length=255, verbose_name=u"Type")
+
+    # production signature
     date = models.DateField(default=datetime.date.today, verbose_name=u"Date")
     visa = models.CharField(max_length=255, blank=True, verbose_name=u"Visa")
+
+    # placement of the bike
     warehouse = models.ForeignKey(Warehouse, blank=True, null=True, on_delete=models.SET_NULL, verbose_name=u"Warehouse")
 
     # A+
     a_plus = models.BooleanField(default=False, verbose_name=u"A+")
+    number = models.IntegerField(unique=True, default=next_a_plus_number, editable=True, verbose_name=u"No.")
 
     # Details
     brand = models.CharField(max_length=255, default="", blank=True, verbose_name=u"Brand")
@@ -91,7 +99,6 @@ class Bike(models.Model):
     image = ResizedImageField(size=[1920, 1080], upload_to=bike_images, blank=True, null=True, verbose_name=u"Image")  # storage=fs
 
     # Shipping
-
     container = models.ForeignKey(Container, null=True, blank=True, on_delete=models.SET_NULL, verbose_name=u"Container")
 
     # Metadata
@@ -101,7 +108,8 @@ class Bike(models.Model):
     def __str__(self):
         return '{} - {}'.format(self.id, self.type)
 
-    def get_url(self):
+    # backend url
+    def get_backend_url(self):
         return reverse("admin:bikes_bike_change", args=[self.pk])
 
 
