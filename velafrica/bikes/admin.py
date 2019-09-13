@@ -12,13 +12,12 @@ from django.contrib.admin.utils import unquote
 from django.core.exceptions import PermissionDenied, ValidationError
 from django.db import transaction
 from django.forms import all_valid
-from django.http import StreamingHttpResponse, HttpResponseRedirect, HttpResponse, Http404
+from django.http import StreamingHttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render
 from django.urls import reverse
 from django.utils.encoding import force_text
 from django.utils.html import escape
 from django.utils.safestring import mark_safe
-from massadmin.massadmin import MassAdmin
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import landscape, A4
 
@@ -27,7 +26,6 @@ from django.contrib import admin
 from django_object_actions import DjangoObjectActions
 from import_export import resources
 from import_export.admin import ImportExportMixin
-from simple_history.admin import SimpleHistoryAdmin
 
 from velafrica.bikes.models import Bike
 from velafrica.core.settings import PROJECT_DIR
@@ -108,9 +106,7 @@ class BikeAdmin(ImportExportMixin, DjangoObjectActions, admin.ModelAdmin):
          ),
         ('Container',
          {
-             'fields': [
-                 'container'
-             ]
+             'fields': ['container']
          }
          ),
     )
