@@ -100,22 +100,10 @@ class BikeAdmin(ImportExportMixin, DjangoObjectActions, admin.ModelAdmin):
         }),
         ('A+',  # Details ?
          {
-             'fields': (
-                 'a_plus',
-                 'brand',
-                 'bike_model',
-                 'gearing',
-                 # 'crankset',
-                 'drivetrain',
-                 'type_of_brake',
-                 'brake',
-                 'colour',
-                 'size',
-                 'suspension',
-                 'rear_suspension',
-                 'extraordinary',
-                 'image'
-             ),
+             'fields': ('a_plus', 'brand', 'bike_model', 'gearing',  # 'crankset',
+                        'drivetrain', 'type_of_brake', 'brake', 'colour', 'size',
+                        'suspension', 'rear_suspension', 'extraordinary', 'image'
+                        ),
          }
          ),
         ('Container',
@@ -141,11 +129,7 @@ class BikeAdmin(ImportExportMixin, DjangoObjectActions, admin.ModelAdmin):
     # PDF-PLOT
     # TODO: language-labels
     def draw_pdf_page(self, c, bike):
-        # Draw things on the PDF. Here's where the PDF generation happens.
-        # See the ReportLab documentation for the full list of functionality.
-        # W, H = landscape(A4)  # 841.9, 595.27
-
-        # Header : Title and Logo
+        # Header - Title and Logo
         c.setFont("Helvetica", 32)
         c.drawString(x=40, y=510, text="A+ Bike")
         c.drawImage(
@@ -163,18 +147,15 @@ class BikeAdmin(ImportExportMixin, DjangoObjectActions, admin.ModelAdmin):
                 c.drawString(40, y, self.labels[key])
 
                 # breaks lines if too long
-                lines = simpleSplit(
-                    text=str(bike.__getattribute__(key)),
-                    fontName=c._fontname,
-                    fontSize=c._fontsize,
-                    maxWidth=130
-                )
-
-                # draw line by line
-                for line in lines:
+                # and then draw line by line
+                for line in simpleSplit(text=str(bike.__getattribute__(key)),
+                                        fontName=c._fontname,
+                                        fontSize=c._fontsize,
+                                        maxWidth=130):
                     c.drawString(175, y, line)
                     y -= 14
-                y -= 12  # add row spacing
+                # add spacing between two rows
+                y -= 12
 
         # plot image of bike
         if bike.image:
@@ -182,10 +163,10 @@ class BikeAdmin(ImportExportMixin, DjangoObjectActions, admin.ModelAdmin):
             h = bike.image.height / bike.image.width * w  # keep ratio
             c.drawImage(
                 bike.image.url,
-                x=321.9, y=450-h, width=w, height=h
+                x=321.9, y=450 - h, width=w, height=h
             )
 
-        # New Page
+        # End Page
         c.showPage()
 
     def plot_to_pdf(self, request, queryset):
@@ -193,10 +174,7 @@ class BikeAdmin(ImportExportMixin, DjangoObjectActions, admin.ModelAdmin):
         buf = io.BytesIO()
 
         # Create the PDF object, using the buffer as its "file."
-        p = canvas.Canvas(
-            buf,
-            pagesize=landscape(A4)
-        )
+        p = canvas.Canvas(buf, pagesize=landscape(A4))  # W, H = landscape(A4)  # 841.9, 595.27
 
         # create a pdf page for each bike
         for bike in queryset:
@@ -213,6 +191,8 @@ class BikeAdmin(ImportExportMixin, DjangoObjectActions, admin.ModelAdmin):
             datetime.datetime.now().strftime('%Y-%m-%d')
         )
         return response
+
+    plot_to_pdf.short_description = "Als PDF Drucken"
 
     def get_urls(self):
         return [
