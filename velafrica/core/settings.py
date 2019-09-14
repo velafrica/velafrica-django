@@ -27,7 +27,7 @@ PROJECT_BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspa
 SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True if 'DEBUG' in os.environ and os.environ['DEBUG'] == 'True' else False
+DEBUG = 'DEBUG' in os.environ and os.environ['DEBUG'] == 'True'
 
 INTERNAL_IPS = (
     '127.0.0.1',
@@ -296,7 +296,7 @@ ROLLBAR = {
     'root': '/app',
 }
 
-PAYPAL_TEST = True if 'PAYPAL_TEST' in os.environ and os.environ['PAYPAL_TEST'] == 'True' else False
+PAYPAL_TEST = 'PAYPAL_TEST' in os.environ and os.environ['PAYPAL_TEST'] == 'True'
 
 PAYPAL_RECEIVER_MAIL = os.environ['PAYPAL_RECEIVER_MAIL']
 GMAP_API_KEY = os.environ['GMAP_API_KEY']
