@@ -74,6 +74,7 @@ Markdown = "*"
 URLObject = "*"
 YURL = "*"
 reportlab = "*"
+pdfrw = "*"
 
 [requires]
 python_version = "3.6"
