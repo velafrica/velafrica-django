@@ -85,7 +85,7 @@ class BikeAdmin(ImportExportMixin, DjangoObjectActions, admin.ModelAdmin):
     for_sale.boolean = True
 
     book_bike_exclude = ['number', 'type', 'visa', 'date', 'a_plus', 'brand', 'bike_model', 'gearing',
-                         'drivetrain', 'type_of_brake', 'brake', 'colour', 'size', 'suspension',
+                         'drivetrain', 'brake', 'colour', 'size', 'suspension',
                          'rear_suspension', 'extraordinary', 'image']
 
     # actions on selected elements
@@ -102,7 +102,7 @@ class BikeAdmin(ImportExportMixin, DjangoObjectActions, admin.ModelAdmin):
         ('A+',  # Details ?
          {
              'fields': ('a_plus', 'brand', 'bike_model', 'gearing',  # 'crankset',
-                        'drivetrain', 'type_of_brake', 'brake', 'colour', 'size',
+                        'drivetrain', 'brake', 'colour', 'size',
                         'suspension', 'rear_suspension', 'extraordinary', 'image'
                         ),
          }
