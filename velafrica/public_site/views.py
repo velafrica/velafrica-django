@@ -3,7 +3,7 @@ from __future__ import print_function
 from django.utils import timezone
 from djangocms_blog.models import Post
 from django.conf import settings
-from django.core.urlresolvers import reverse, resolve
+from django.urls import reverse, resolve
 from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.template import RequestContext
