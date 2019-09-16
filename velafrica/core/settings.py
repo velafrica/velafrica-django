@@ -27,13 +27,7 @@ PROJECT_BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspa
 SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-if 'DEBUG' in os.environ:
-    if os.environ['DEBUG'] == 'True':
-        DEBUG = True
-    else:
-        DEBUG = False
-else:
-    DEBUG = False
+DEBUG = 'DEBUG' in os.environ and os.environ['DEBUG'] == 'True'
 
 INTERNAL_IPS = (
     '127.0.0.1',
@@ -122,6 +116,7 @@ INSTALLED_APPS = (
     # 'velafrica.translation'
     'velafrica.transport',
     'velafrica.velafrica_sud',
+    'velafrica.bikes',
     # django storages
     'storages',
     # SSL
@@ -246,7 +241,7 @@ STATICFILES_DIRS = (
 
 # Media files (Files uploaded by user)
 
-MEDIA_URL = 'http://partnertool.velafrica.ch/'
+MEDIA_URL = os.environ['MEDIA_URL'] if 'MEDIA_URL' in os.environ else 'http://tracking.velafrica.ch/'
 MEDIA_ROOT = os.path.join(PROJECT_DIR, "media")
 
 # Django Resized
@@ -295,31 +290,20 @@ WEBPACK_LOADER = {
 }
 
 ROLLBAR = {
-    'access_token': '',
+    'access_token': os.environ['ROLLBAR_ACCESS_TOKEN'] if 'ROLLBAR_ACCESS_TOKEN' in os.environ else '',
     'environment': 'development' if DEBUG else 'production',
     'branch': 'master',
     'root': '/app',
 }
-if 'ROLLBAR_ACCESS_TOKEN' in os.environ:
-    ROLLBAR['access_token'] = os.environ['ROLLBAR_ACCESS_TOKEN']
 
-if 'PAYPAL_TEST' in os.environ:
-    if os.environ['PAYPAL_TEST'] == 'True':
-        PAYPAL_TEST = True
-    else:
-        PAYPAL_TEST = False
-else:
-    PAYPAL_TEST = False
+PAYPAL_TEST = 'PAYPAL_TEST' in os.environ and os.environ['PAYPAL_TEST'] == 'True'
 
 PAYPAL_RECEIVER_MAIL = os.environ['PAYPAL_RECEIVER_MAIL']
 GMAP_API_KEY = os.environ['GMAP_API_KEY']
 
 # Due to a mistake the SITE_ID on staging has to be 2 but will be 1 on production
 # so its configurable per env variable (shame on HaRii)
-if 'SITE_ID' in os.environ:
-    SITE_ID = int(os.environ['SITE_ID'])
-else:
-    SITE_ID = 1
+SITE_ID = int(os.environ['SITE_ID']) if 'SITE_ID' in os.environ else 1
 
 # MAILCHIMP_API_KEY = os.environ['MAILCHIMP_API_KEY']
 # MAILCHIMP_LIST_ID = os.environ['MAILCHIMP_LIST_ID']

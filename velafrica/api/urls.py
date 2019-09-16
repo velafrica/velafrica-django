@@ -111,6 +111,12 @@ velafrica_sud = [
     url(r'^reports/(?P<pk>[0-9]+)/?$', utils.get_retrieveview('velafrica_sud', 'Report').as_view(), name='report'),
 ]
 
+# bikes = [
+#     url(r'^bikes/?$', utils.get_listview('bikes', 'Bike').as_view(), name="bikes"),
+#     url(r'^bikes/(?P<pk>[0-9]+)/?$', utils.get_retrieveview('bikes', 'Bike').as_view(),
+#         name='container'),
+# ]
+
 public = [
     url(r'^dropoffs/$', views_public.get_dropoffs, name="dropoffs"),
     url(r'^collectionevents/$', views_collections.CollectionEventListPublic.as_view(), name="collectionevents-public"),
