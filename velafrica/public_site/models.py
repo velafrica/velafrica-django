@@ -34,7 +34,7 @@ class InvoiceOrder(models.Model):
 
 
 class SbbTicketOrder(models.Model):
-    dropoff = models.ForeignKey('collection.Dropoff', on_delete=models.SET_NULL, null=True, blank=True)
+    dropoff = models.ForeignKey('collection.Dropoff', on_delete=models.CASCADE, null=True, blank=True)
     first_name = models.CharField(max_length=255, verbose_name="Vorname")
     last_name = models.CharField(max_length=255, verbose_name="Nachname")
     address = models.CharField(max_length=255, verbose_name="Strasse und Hausnummer")
@@ -201,8 +201,8 @@ class Partner(models.Model):
 class Event(models.Model):
     name = models.CharField(max_length=255, verbose_name="Name")
     category = models.ForeignKey('collection.EventCategory', related_name='pub_event_category',
-                                 on_delete=models.SET_NULL, verbose_name="Kategorie", null=True)
-    address = models.ForeignKey('organisation.Address', related_name='pub_event_address', on_delete=models.SET_NULL,
+                                 on_delete=models.CASCADE, verbose_name="Kategorie", null=True)
+    address = models.ForeignKey('organisation.Address', related_name='pub_event_address', on_delete=models.CASCADE,
                                 verbose_name="Adresse", null=True)
     description = models.TextField(verbose_name="Beschreibung", blank=True)
     organizer = models.CharField(max_length=255, verbose_name="Veranstalter", blank=True)
@@ -228,7 +228,7 @@ class Event(models.Model):
 
 
 class EventDateTime(models.Model):
-    event = models.ForeignKey(Event, related_name="datetimes")
+    event = models.ForeignKey(Event, related_name="datetimes", on_delete=models.CASCADE)
     date = models.DateField(verbose_name="Datum")
     time_start = models.CharField(max_length=255, verbose_name="Von", blank=True)
     time_end = models.CharField(max_length=255, verbose_name="Bis", blank=True)

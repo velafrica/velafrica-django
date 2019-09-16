@@ -14,7 +14,7 @@ class File(models.Model):
     timestamp = models.DateTimeField(blank=False, null=False, default=timezone.now, verbose_name="Uploadzeitpunkt")
     name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Dateiname", help_text="Name der im Frontend angezeigt werden soll")
     description = models.CharField(blank=True, null=True, max_length=255, verbose_name="Beschreibung")
-    #category = models.ForeignKey(FileCategory, blank=True, null=True)
+    #category = models.ForeignKey(FileCategory, blank=True, null=True, on_delete=models.CASCADE)
     file = models.FileField(storage=fs, upload_to='downloads/', blank=True, null=True, help_text='Select file to upload.')
     history = HistoricalRecords()
 

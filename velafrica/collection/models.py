@@ -57,14 +57,14 @@ class Event(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True, verbose_name="Beschreibung")
     notes = models.TextField(blank=True, null=True, verbose_name="Interne Notizen")
-    region = models.ForeignKey(Region, verbose_name="Region", null=True, blank=True)
-    category = models.ForeignKey(EventCategory, verbose_name="Kategorie")
+    region = models.ForeignKey(Region, verbose_name="Region", null=True, blank=True, on_delete=models.SET_NULL)
+    category = models.ForeignKey(EventCategory, verbose_name="Kategorie", on_delete=models.CASCADE)
     yearly = models.BooleanField(default=False, verbose_name="Jährlich wiederkehrend?")
     host = models.CharField(max_length=255, verbose_name="Veranstalter")
-    host_type = models.ForeignKey(HostType, null=True, verbose_name="Veranstalter Typ")
+    host_type = models.ForeignKey(HostType, null=True, verbose_name="Veranstalter Typ", on_delete=models.SET_NULL)
     contact = models.CharField(max_length=255, verbose_name="Kontaktperson", null=True, blank=True)
 
-    address = models.ForeignKey(Address, verbose_name="Adresse", blank=True, null=True)
+    address = models.ForeignKey(Address, verbose_name="Adresse", blank=True, null=True, on_delete=models.SET_NULL)
     address_notes = models.TextField(blank=True, verbose_name="Genauer Standort")
 
     def __str__(self):
@@ -92,7 +92,7 @@ class CollectionEvent(models.Model):
     """
     date_start = models.DateField()
     date_end = models.DateField()
-    event = models.ForeignKey(Event)
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
     time = models.CharField(max_length=255, blank=True, verbose_name="Veloannahme", help_text="Zeit für Veloannahme")
     notes = models.TextField(blank=True, verbose_name="To do",
                              help_text="Sachen die noch zu erledigen sind / Weitere Infos / Bemerkungen")
@@ -117,7 +117,7 @@ class CollectionEvent(models.Model):
         verbose_name="Velo Verarbeitung",
         related_name="processing_organisation",
         null=True,
-        blank=True)
+        blank=True, on_delete=models.SET_NULL)
     processing_notes = models.CharField(
         max_length=255,
         blank=True,
@@ -130,7 +130,8 @@ class CollectionEvent(models.Model):
         null=True,
         verbose_name="Abtransport durch VRN Partner",
         help_text="Velafrica Partner der die Velos abholt",
-        related_name="collection_organisation")
+        related_name="collection_organisation",
+        on_delete=models.SET_NULL)
     collection_partner_other = models.CharField(
         max_length=255,
         blank=True,
@@ -209,7 +210,7 @@ class CollectionEvent(models.Model):
 
     get_event_address_notes.short_description = "Genauer Standort"
 
-    address_new = models.ForeignKey(Address, verbose_name="Adresse", blank=True, null=True)
+    address_new = models.ForeignKey(Address, verbose_name="Adresse", blank=True, null=True, on_delete=models.SET_NULL)
     address_notes = models.TextField(blank=True)
 
     def get_status_logistics(self):
@@ -260,8 +261,8 @@ class TaskProgress(models.Model):
     """
     Represents the progress of a task.
     """
-    collection_event = models.ForeignKey(CollectionEvent)
-    task = models.ForeignKey(Task)
+    collection_event = models.ForeignKey(CollectionEvent, on_delete=models.CASCADE)
+    task = models.ForeignKey(Task, on_delete=models.CASCADE)
     notes = models.TextField(blank=True, verbose_name="Notizen")
     status = models.BooleanField(default=False, verbose_name="Erledigt?")
 
@@ -288,7 +289,7 @@ class Dropoff(models.Model):
     temp_end = models.DateField(blank=True, null=True, verbose_name="Temporär Ende")
     opening_time = models.TextField(blank=True, verbose_name="Öffnungszeiten")
     notes = models.TextField(blank=True, verbose_name="Optionale Textinfo")
-    address = models.ForeignKey(Address, verbose_name="Adresse")
+    address = models.ForeignKey(Address, verbose_name="Adresse", on_delete=models.CASCADE)
     custom_lat = models.CharField(max_length=255, blank=True, verbose_name="Latitude")
     custom_lon = models.CharField(max_length=255, blank=True, verbose_name="Longitude")
     pickup = models.BooleanField(verbose_name="Abholservice", default=False)

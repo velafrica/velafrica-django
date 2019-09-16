@@ -32,7 +32,7 @@ class Address(models.Model):
     zipcode = models.IntegerField(blank=True, null=True, verbose_name="Zipcode / PLZ")
     city = models.CharField(blank=True, null=True, max_length=255, verbose_name="Ort")
     state = models.CharField(blank=True, null=True, max_length=255, verbose_name="Kanton / Region")
-    country = models.ForeignKey(Country, verbose_name="Land")
+    country = models.ForeignKey(Country, verbose_name="Land", on_delete=models.CASCADE)
 
     latitude = models.DecimalField(blank=True, null=True, verbose_name='Breitengrad', max_digits=9, decimal_places=6)
     longitude = models.DecimalField(blank=True, null=True, verbose_name='Längengrad', max_digits=9, decimal_places=6)
@@ -95,7 +95,7 @@ class Organisation(models.Model):
     name = models.CharField(blank=False, null=True, max_length=255, verbose_name="Name der Organisation")
     website = models.URLField(blank=True, null=True, max_length=255, verbose_name="Website (URL)")
     facebook = models.URLField(blank=True, null=True, max_length=255, verbose_name="Facebook Page (URL)")
-    address = models.ForeignKey(Address, verbose_name="Adresse", blank=True, null=True)
+    address = models.ForeignKey(Address, verbose_name="Adresse", blank=True, null=True, on_delete=models.SET_NULL)
     description = models.TextField(blank=True, null=True)
     contact = models.TextField(verbose_name="Kontaktperson", help_text="Name, Email, Telefon, Skype etc", blank=True,
                                null=True)
@@ -141,7 +141,7 @@ class Person(models.Model):
         on_delete=models.CASCADE,
         verbose_name="Django User Account"
     )
-    organisation = models.ForeignKey('Organisation', verbose_name="Arbeitgeber")
+    organisation = models.ForeignKey('Organisation', verbose_name="Arbeitgeber", on_delete=models.CASCADE)
 
     def __str__(self):
         if (len(self.user.first_name) > 0 and len(self.user.last_name) > 0):
