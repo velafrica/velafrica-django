@@ -191,9 +191,10 @@ class BikeAdmin(ImportExportMixin, DjangoObjectActions, admin.ModelAdmin):
         # define HTT-Response
         response = StreamingHttpResponse(buf, content_type="application/pdf")  # set type to PDF
         # name the document and download it
-        response['Content-Disposition'] = "attachment;filename={}_bikes.pdf".format(
+        filename = "{} A-Plus bikes for sale.pdf".format(
             datetime.datetime.now().strftime('%Y-%m-%d')
         )
+        response['Content-Disposition'] = "attachment;filename={}".format(filename)
         return response
 
     plot_to_pdf.short_description = "Als PDF Drucken"
