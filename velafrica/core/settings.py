@@ -71,23 +71,23 @@ INSTALLED_APPS = (
     'sekizai',  # for JavaScript and CSS management
     'easy_thumbnails',
     'filer',
-    'aldryn_apphooks_config',
-    'cmsplugin_filer_image',
+    #'aldryn_apphooks_config',
+    #'cmsplugin_filer_image',
     'parler',
     'taggit',
     'taggit_autosuggest',
     'meta',
     'djangocms_blog',
     # django cms plugins
-    'djangocms_file',
-    'djangocms_inherit',
-    'djangocms_picture',
-    'djangocms_teaser',
-    'djangocms_video',
-    'djangocms_link',
+    #'djangocms_file',
+    #'djangocms_inherit',
+    #'djangocms_picture',
+    #'djangocms_teaser',
+    #'djangocms_video',
+    #'djangocms_link',
     # custom django cms plugins
-    'velafrica.cms_plugins.big_picture',
-    'velafrica.cms_plugins.row',
+    #'velafrica.cms_plugins.big_picture',
+    #'velafrica.cms_plugins.row',
     # custom apps
     'massadmin',
     'daterange_filter',
@@ -125,13 +125,12 @@ INSTALLED_APPS = (
     'webpack_loader',
 )
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = (
     'cms.middleware.utils.ApphookReloadMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'corsheaders.middleware.CorsMiddleware',
@@ -250,10 +249,10 @@ DJANGORESIZED_DEFAULT_QUALITY = 75
 DJANGORESIZED_DEFAULT_KEEP_META = True
 
 # Email settings
-EMAIL_HOST = os.environ['EMAIL_HOST']
-EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
-EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
-EMAIL_PORT = os.environ['EMAIL_PORT']
+EMAIL_HOST = os.environ['EMAIL_HOST'] or ''
+EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER'] or ''
+EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD'] or ''
+EMAIL_PORT = os.environ['EMAIL_PORT'] or ''
 EMAIL_USE_SSL = True
 
 EMAIL_FROM_NAME = 'Velafrica Tracking'
@@ -272,6 +271,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
     ),
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
     'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination'
 }
@@ -303,7 +303,7 @@ GMAP_API_KEY = os.environ['GMAP_API_KEY']
 
 # Due to a mistake the SITE_ID on staging has to be 2 but will be 1 on production
 # so its configurable per env variable (shame on HaRii)
-SITE_ID = int(os.environ['SITE_ID']) if 'SITE_ID' in os.environ else 1
+SITE_ID = int(os.environ['SITE_ID'] or 1) if 'SITE_ID' in os.environ else 1
 
 # MAILCHIMP_API_KEY = os.environ['MAILCHIMP_API_KEY']
 # MAILCHIMP_LIST_ID = os.environ['MAILCHIMP_LIST_ID']
