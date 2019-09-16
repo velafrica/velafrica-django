@@ -3,7 +3,7 @@ from django import template
 from django_object_actions import DjangoObjectActions
 from django.contrib import admin
 from django.utils.safestring import mark_safe
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.shortcuts import redirect
 from velafrica.commission.models import *
 from velafrica.stock.forms import StockListPosForm
