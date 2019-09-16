@@ -69,9 +69,9 @@ class BikeAdmin(ImportExportMixin, DjangoObjectActions, admin.ModelAdmin):
 
     resource_class = BikeResource  # import export
 
-    list_display = ['number', 'type', 'brand', 'a_plus', 'for_sale', 'warehouse']
+    list_display = ['number', 'type', 'brand', 'a_plus', 'for_sale', 'container', 'warehouse']
     search_fields = ['id', 'type', 'brand', 'a_plus', 'warehouse']
-    list_filter = [APlusForSaleListFilter, 'a_plus', 'warehouse', 'type', ('date', DateRangeFilter), 'container']
+    list_filter = [APlusForSaleListFilter, 'a_plus', 'type', 'container', 'warehouse', ('date', DateRangeFilter)]
 
     # "for_sale" a boolean column in the list-view
     def for_sale(self, obj):
