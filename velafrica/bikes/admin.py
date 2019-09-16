@@ -18,6 +18,8 @@ from django.urls import reverse
 from django.utils.encoding import force_text
 from django.utils.html import escape
 from django.utils.safestring import mark_safe
+from pdfrw.buildxobj import pagexobj
+from pdfrw.toreportlab import makerl
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import landscape, A4
 
@@ -32,6 +34,7 @@ from velafrica.core.settings import PROJECT_DIR
 
 from reportlab.lib.utils import simpleSplit
 
+from pdfrw import PdfReader
 
 def get_formsets(model, request, obj=None):
     return [f for f, _ in model.get_formsets_with_inlines(request, obj)]
@@ -171,6 +174,11 @@ class BikeAdmin(ImportExportMixin, DjangoObjectActions, admin.ModelAdmin):
 
         # Create the PDF object, using the buffer as its "file."
         p = canvas.Canvas(buf, pagesize=landscape(A4))  # W, H = landscape(A4)  # 841.9, 595.27
+
+        # Add Preface (page by page)
+        for page in PdfReader(PROJECT_DIR + "/media/APlusPreface.pdf").pages:
+            p.doForm(makerl(p, pagexobj(page)))
+            p.showPage()
 
         # create a pdf page for each bike
         for bike in queryset:
