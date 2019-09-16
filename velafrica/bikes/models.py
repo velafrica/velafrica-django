@@ -11,7 +11,7 @@ from velafrica.stock.models import Warehouse
 from velafrica.velafrica_sud.models import Container
 
 from django.db import models, connection
-from .settings import BIKE_TYPES, BRAKE_TYPES, BIKE_SIZES
+from .settings import BIKE_TYPES
 
 
 fs = MyStorage()
@@ -84,7 +84,7 @@ class Bike(models.Model):
     gearing = models.CharField(max_length=255, default="", blank=True, verbose_name=u"Group of components")
     # crankset = models.CharField(max_length=255, default="", blank=True, verbose_name=u"Crankset")
     drivetrain = models.CharField(max_length=255, default="", blank=True, verbose_name=u"Drivetrain")
-    type_of_brake = models.CharField(choices=BRAKE_TYPES, max_length=255, default="", blank=True, verbose_name=u"Type of Brake")
+    type_of_brake = models.CharField(max_length=255, default="", blank=True, verbose_name=u"Type of Brake")
     brake = models.CharField(max_length=255, default="", blank=True, verbose_name=u"Brake")
     colour = models.CharField(max_length=255, default="", blank=True, verbose_name=u"Colour")
     size = models.CharField(max_length=255, default='', blank=True, verbose_name=u"Size") # choices=BIKE_SIZES,

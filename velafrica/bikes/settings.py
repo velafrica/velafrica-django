@@ -13,8 +13,11 @@ BIKE_TYPES = [
 BRAKE_TYPES = [
         ("", "-"),
         ("Hydr. Disc", "Hydraulic Disc"),
+        ("Mechanical Disc", "Mechanical Disc"),
+        ("V-Brake", "V-Brake"),
         ("Rim Brake",  "Rim brake"),
-    ]
+        ("Caliper", "Caliper"),
+]
 
 BIKE_SIZES = [
         ("", "-"),
