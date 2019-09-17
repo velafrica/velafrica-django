@@ -24,7 +24,7 @@ PROJECT_BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspa
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ['SECRET_KEY']
+SECRET_KEY = os.environ['SECRET_KEY'] if 'SECRET_KEY' in os.environ else 'no-secrets'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'DEBUG' in os.environ and os.environ['DEBUG'] == 'True'
@@ -249,10 +249,10 @@ DJANGORESIZED_DEFAULT_QUALITY = 75
 DJANGORESIZED_DEFAULT_KEEP_META = True
 
 # Email settings
-EMAIL_HOST = os.environ['EMAIL_HOST'] or ''
-EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER'] or ''
-EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD'] or ''
-EMAIL_PORT = os.environ['EMAIL_PORT'] or ''
+EMAIL_HOST = os.environ['EMAIL_HOST'] if 'EMAIL_HOST' in os.environ else ''
+EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER'] if 'EMAIL_HOST_USER' in os.environ else ''
+EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD'] if 'EMAIL_HOST_PASSWORD' in os.environ else ''
+EMAIL_PORT = os.environ['EMAIL_PORT'] if 'EMAIL_PORT' in os.environ else ''
 EMAIL_USE_SSL = True
 
 EMAIL_FROM_NAME = 'Velafrica Tracking'
@@ -262,10 +262,10 @@ EMAIL_FROM_EMAIL = 'tracking@velafrica.ch'
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 AWS_DEFAULT_ACL = None
 AWS_S3_SECURE_URLS = False
-AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY']
-AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_KEY']
-AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
-AWS_S3_CUSTOM_DOMAIN = os.environ['AWS_S3_CUSTOM_DOMAIN']
+AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY'] if 'AWS_ACCESS_KEY' in os.environ else ''
+AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_KEY'] if 'AWS_SECRET_KEY' in os.environ else ''
+AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME'] if 'AWS_STORAGE_BUCKET_NAME' in os.environ else ''
+AWS_S3_CUSTOM_DOMAIN = os.environ['AWS_S3_CUSTOM_DOMAIN'] if 'AWS_S3_CUSTOM_DOMAIN' in os.environ else ''
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
@@ -298,8 +298,8 @@ ROLLBAR = {
 
 PAYPAL_TEST = 'PAYPAL_TEST' in os.environ and os.environ['PAYPAL_TEST'] == 'True'
 
-PAYPAL_RECEIVER_MAIL = os.environ['PAYPAL_RECEIVER_MAIL']
-GMAP_API_KEY = os.environ['GMAP_API_KEY']
+PAYPAL_RECEIVER_MAIL = os.environ['PAYPAL_RECEIVER_MAIL'] if 'PAYPAL_RECEIVER_MAIL' in os.environ else '',
+GMAP_API_KEY = os.environ['GMAP_API_KEY'] if 'GMAP_API_KEY' in os.environ else '',
 
 # Due to a mistake the SITE_ID on staging has to be 2 but will be 1 on production
 # so its configurable per env variable (shame on HaRii)
@@ -307,10 +307,10 @@ SITE_ID = int(os.environ['SITE_ID'] or 1) if 'SITE_ID' in os.environ else 1
 
 # MAILCHIMP_API_KEY = os.environ['MAILCHIMP_API_KEY']
 # MAILCHIMP_LIST_ID = os.environ['MAILCHIMP_LIST_ID']
-ORDER_RECEIVER = os.environ['ORDER_RECEIVER']
-INITIAL_VELO_COUNT = int(os.environ['INITIAL_VELO_COUNT'])
-AVERAGE_VELOS_PER_DAY = int(os.environ['AVERAGE_VELOS_PER_DAY'])
-FACEBOOK_APP_ID = os.environ['FACEBOOK_APP_ID']
+ORDER_RECEIVER = os.environ['ORDER_RECEIVER'] if 'ORDER_RECEIVER' in os.environ else ''
+INITIAL_VELO_COUNT = int(os.environ['INITIAL_VELO_COUNT']) if 'INITIAL_VELO_COUNT' in os.environ else 0
+AVERAGE_VELOS_PER_DAY = int(os.environ['AVERAGE_VELOS_PER_DAY']) if 'AVERAGE_VELOS_PER_DAY' in os.environ else None
+FACEBOOK_APP_ID = os.environ['FACEBOOK_APP_ID'] if 'FACEBOOK_APP_ID' in os.environ else ''
 
-ACME_CHALLENGE_TEMPLATE_CONTENT = os.environ['ACME_CHALLENGE_TEMPLATE_CONTENT']
-ACME_CHALLENGE_URL_SLUG = os.environ['ACME_CHALLENGE_URL_SLUG']
+ACME_CHALLENGE_TEMPLATE_CONTENT = os.environ['ACME_CHALLENGE_TEMPLATE_CONTENT'] if 'ACME_CHALLENGE_TEMPLATE_CONTENT' in os.environ else None
+ACME_CHALLENGE_URL_SLUG = os.environ['ACME_CHALLENGE_URL_SLUG'] if 'ACME_CHALLENGE_URL_SLUG' in os.environ else None
