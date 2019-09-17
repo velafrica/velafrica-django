@@ -14,7 +14,7 @@ class Car(models.Model):
     Represents a car.
     """
     name = models.CharField(blank=False, null=True, max_length=255, verbose_name="Name des Fahrzeugs")
-    organisation = models.ForeignKey(Organisation, blank=True, null=True, help_text='Organisation welcher das Fahrzeug gehört.')
+    organisation = models.ForeignKey(Organisation, blank=True, null=True, help_text='Organisation welcher das Fahrzeug gehört.', on_delete=models.CASCADE)
     image = ResizedImageField(size=[500, 500], upload_to='stock/categories/', blank=True, null=True, help_text='Foto des Fahrzeugs')
     plate = models.CharField(blank=True, null=True, max_length=255, verbose_name='Autokennzeichen')
     
@@ -32,7 +32,7 @@ class Driver(models.Model):
     Represents a driver.
     """
     name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Name des Fahrers")
-    organisation = models.ForeignKey(Organisation, blank=True, null=True, help_text='Organisation bei welcher der Fahrer angestellt ist.')
+    organisation = models.ForeignKey(Organisation, blank=True, null=True, help_text='Organisation bei welcher der Fahrer angestellt ist.', on_delete=models.SET_NULL)
     active = models.BooleanField(default=True, help_text='Ist der Fahrer noch bei Velafrica? Inaktive Fahrer werden als (inaktiv) in der Auswahl bei den Fahrten aufgeführtgi.')
 
     history = HistoricalRecords()
@@ -70,20 +70,22 @@ class Ride(models.Model):
     :model:`stock.StockList`
     """
     date = models.DateField(blank=False, null=False, default=timezone.now, verbose_name="Datum")
-    from_warehouse = models.ForeignKey(Warehouse, verbose_name='Start', related_name='from_warehouse', help_text='Start der Fahrt')
+    from_warehouse = models.ForeignKey(Warehouse, verbose_name='Start',
+                                       related_name='from_warehouse', help_text='Start der Fahrt',
+                                       on_delete=models.CASCADE)
     from_warehouse_detail_address = models.TextField(blank=True, null=True,
                                                    verbose_name='FROM_WAREHOUSE alternative Adress (optional)',
                                                    help_text='Bei Auswahl von "Diverse Spender" als Startpunkt, kann hier optional die genaue Adresse eingetragen werden.')
-    to_warehouse = models.ForeignKey(Warehouse, verbose_name='Ziel', related_name='to_warehouse', help_text='Ziel der Fahrt')
+    to_warehouse = models.ForeignKey(Warehouse, verbose_name='Ziel', related_name='to_warehouse', help_text='Ziel der Fahrt', on_delete=models.CASCADE)
     to_warehouse_detail_address = models.TextField(blank=True, null=True,
                                                    verbose_name='TO_WAREHOUSE alternative Adress (optional)',
                                                    help_text='Bei Auswahl von "Diverse Spender" als Ziel, kann hier optional die genaue Adresse eingetragen werden.')
-    driver = models.ForeignKey(Driver, verbose_name='Fahrer', help_text='Person die den Transport durchgeführt hat.')
-    car = models.ForeignKey(Car, verbose_name='Fahrzeug')
+    driver = models.ForeignKey(Driver, verbose_name='Fahrer', help_text='Person die den Transport durchgeführt hat.', on_delete=models.CASCADE)
+    car = models.ForeignKey(Car, verbose_name='Fahrzeug', on_delete=models.CASCADE)
     velos = models.IntegerField(blank=False, null=False, default=0, verbose_name='Anzahl Velos')
-    velo_state = models.ForeignKey(VeloState, verbose_name='Zustand der Velos')
+    velo_state = models.ForeignKey(VeloState, verbose_name='Zustand der Velos', on_delete=models.CASCADE)
     spare_parts = models.BooleanField(default=False, verbose_name='Ersatzteile transportiert?')
-    stocklist = models.OneToOneField(StockList, null=True, blank=True)
+    stocklist = models.OneToOneField(StockList, null=True, blank=True, on_delete=models.SET_NULL)
     note = models.CharField(blank=True, null=True, max_length=255, verbose_name="Bemerkung", help_text="Bemerkung zur Fahrt")
     
     distance = models.IntegerField(verbose_name="Ungefähre Distanz in Meter", blank=True, null=True)

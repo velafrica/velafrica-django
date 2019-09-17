@@ -11,6 +11,8 @@ from velafrica.api.organisation.views import OrganisationDetail, OrganisationLis
 from velafrica.api.sbbtracking.views import TrackingList, TrackingEventList
 from velafrica.api.stock import views as views_stock
 
+app_name = "api"
+
 collection = [
     url(r'^eventcategories/?$', utils.get_listview('collection', 'EventCategory').as_view(), name="eventcategories"),
     url(r'^eventcategories/(?P<pk>[0-9]+)/?$', utils.get_retrieveview('collection', 'EventCategory').as_view(),
@@ -111,11 +113,11 @@ velafrica_sud = [
     url(r'^reports/(?P<pk>[0-9]+)/?$', utils.get_retrieveview('velafrica_sud', 'Report').as_view(), name='report'),
 ]
 
-# bikes = [
-#     url(r'^bikes/?$', utils.get_listview('bikes', 'Bike').as_view(), name="bikes"),
-#     url(r'^bikes/(?P<pk>[0-9]+)/?$', utils.get_retrieveview('bikes', 'Bike').as_view(),
-#         name='container'),
-# ]
+bikes = [
+    url(r'^bikes/?$', utils.get_listview('bikes', 'Bike').as_view(), name="bikes"),
+    url(r'^bikes/(?P<pk>[0-9]+)/?$', utils.get_retrieveview('bikes', 'Bike').as_view(),
+        name='container'),
+]
 
 public = [
     url(r'^dropoffs/$', views_public.get_dropoffs, name="dropoffs"),
@@ -126,15 +128,16 @@ public = [
 # where it all comes together
 urlpatterns = [
     url(r'^$', views.api_root),
-    url(r'^swagger/', include('velafrica.api.swagger.urls', namespace="swagger")),
-    url(r'^organisation/', include(organisation, namespace="organisation")),
-    url(r'^stock/', include(stock, namespace="stock")),
-    url(r'^tracking/', include(tracking, namespace="tracking")),
-    url(r'^transport/', include(transport, namespace="transport")),
-    url(r'^velafrica_sud/', include(velafrica_sud, namespace="velafrica_sud")),
-    url(r'^counter/', include('velafrica.api.counter.urls', namespace="counter")),
-    url(r'^collections/', include(collection, namespace="collections")),
-    url(r'^public/', include(public, namespace="public"))
+    url(r'^swagger/', include('velafrica.api.swagger.urls')),
+    url(r'^organisation/', include((organisation, app_name), namespace='organisation')),
+    url(r'^stock/', include((stock, app_name))),
+    url(r'^bikes/', include((bikes, app_name))),
+    url(r'^tracking/', include((tracking, app_name))),
+    url(r'^transport/', include((transport, app_name))),
+    url(r'^velafrica_sud/', include((velafrica_sud, app_name))),
+    url(r'^counter/', include('velafrica.api.counter.urls')),
+    url(r'^collections/', include((collection, app_name))),
+    url(r'^public/', include((public, app_name)))
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

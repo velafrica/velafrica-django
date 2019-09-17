@@ -50,61 +50,61 @@ We recommend using [PyCharm by IntelliJ](https://www.jetbrains.com/pycharm/) (fu
 
 # Setup
 
-## Required software
+## 1. Install required software
 
-- python (>2.7, <3.0)
-    - macOS: `brew install python`
-    - Windows: download installer from https://www.python.org/downloads/release/python-2712/
-- python-pip
-- virtualenv
-    - Windows: http://pymote.readthedocs.io/en/latest/install/windows_virtualenv.html
+### python 3.6.1
+- macOS: `brew install python3`
+- Windows: download installer from https://www.python.org/downloads/release/python-361/
+
+### python-pip
+- macOs:
+- Windows:
+
+### pipenv
+```bash
+pip install pipenv
+```
+
+### Postgres
 - postgresql (9.4)
-- node (5.5): https://nodejs.org/download/release/v5.5.0/
-- heroku toolbelt: https://devcenter.heroku.com/articles/heroku-command-line#download-and-install
+
+### NodeJS
+node (5.5): https://nodejs.org/download/release/v5.5.0/
+
+### Heroku Toolbelt
+https://devcenter.heroku.com/articles/heroku-command-line#download-and-install
 
 ## Getting started
 
-### 1. Setup virtualenv
+### 1. Setup virtual environment (pipenv)
 
-Virtualenv is here to provide an isolated environment for your app, with its own python runtime and python packages.
-Navigate into the project directory and type the following command:
-
-```bash
-virtualenv venv
-```
-
-This creates a virtual environment in a newly created `venv` folder, inside of your project directory.
-
-### 2. Activate virtualenv
-
-#### Windows
+<strong>NOTE:</strong> Before we were using virtualenv, but we migrated to pipenv recently, since it is easier to use and better supported by IDEs.
 
 ```bash
-./venv/Scripts/activate
+pipenv install --python 3.6
 ```
 
-#### Linux / Mac
+This creates a virtual environment.
+
+### 2. Activate your virtual environment
 
 ```bash
-source venv/bin/activate
+pipenv shell
 ```
 
-### 3. Install packages
-
-```bash
-pip install -r requirements.txt
-npm install
-```
-
-*There is a problem installing libxml on Windows machines, follow [this](http://stackoverflow.com/questions/30493031/installing-lxml-libxml2-libxslt-on-windows-8-1) to get it working.
-
-### 4. Define the environment variables
+### 3. Define the environment variables
 
 ```bash
 cp .env_dist .env
 ```
 
-And then fill in your database credentials (eg. username, password & database name) in `.env`
+### 4. Add your database connection in the new .env file
+
+Fill in your database credentials (eg. username, password & database name) in `.env`, by modifying the following entry: 
+
+```bash
+DATABASE_URL=postgres://your-username:your-password@localhost:5432/velafrica_dev
+```
 
 ### 5. Create database (apply migrations)
 

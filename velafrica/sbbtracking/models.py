@@ -49,7 +49,8 @@ class TrackingEventType(models.Model):
         blank=True,
         null=True,
         verbose_name="Vorangehender Event",
-        help_text="Wird dieses Feld ausgefüllt, muss der letzte Event auf dem Tracking vom angegebenen Typ sein, sonst kann kein Event dieses Event Typs hinzugefügt werden. Dies soll verhindern dass Events vergessen gehen.")
+        help_text="Wird dieses Feld ausgefüllt, muss der letzte Event auf dem Tracking vom angegebenen Typ sein, sonst kann kein Event dieses Event Typs hinzugefügt werden. Dies soll verhindern dass Events vergessen gehen.",
+        on_delete=models.SET_NULL)
     arrival_africa = models.BooleanField(
         blank=False,
         null=False,
@@ -92,9 +93,9 @@ class TrackingEvent(models.Model):
     Represents an event during tracking of a bicycle.
     """
     datetime = models.DateTimeField(blank=False, null=False, default=timezone.now, verbose_name="Zeitpunkt")
-    event_type = models.ForeignKey(TrackingEventType, help_text="Art des Events")
-    tracking = models.ForeignKey('Tracking')
-    organisation = models.ForeignKey(Organisation, null=True, blank=True, verbose_name="Organisation", help_text="Organisation welche den Event erstellt hat.")
+    event_type = models.ForeignKey(TrackingEventType, help_text="Art des Events", on_delete=models.CASCADE)
+    tracking = models.ForeignKey('Tracking', on_delete=models.CASCADE)
+    organisation = models.ForeignKey(Organisation, null=True, blank=True, verbose_name="Organisation", help_text="Organisation welche den Event erstellt hat.", on_delete=models.CASCADE)
     latitude = models.DecimalField(blank=True, null=True, verbose_name='Breitengrad', max_digits=9, decimal_places=6)
     longitude = models.DecimalField(blank=True, null=True, verbose_name='Längengrad', max_digits=9, decimal_places=6)
     note = models.CharField(blank=True, null=True, max_length=255, verbose_name="Bemerkung", help_text="interne Bemerkung, nirgends ersichtlich für Spender (optional)")
@@ -159,25 +160,24 @@ class Tracking(models.Model):
         null=True, 
         blank=True, 
         verbose_name="Partner", 
-        help_text="wird momentan noch nicht berücksichtigt"
+        help_text="wird momentan noch nicht berücksichtigt", on_delete=models.CASCADE
     )
 
-    #donor = models.ForeignKey(Person)
+    #donor = models.ForeignKey(Person, on_delete=models.SET_NULL)
 
     first_name = models.CharField(blank=True, null=True, max_length=255, verbose_name="Vorname")
     last_name = models.CharField(blank=True, null=True, max_length=255, verbose_name="Nachname")
     email = models.CharField(blank=True, null=True, max_length=255, verbose_name="Email", validators=[EmailValidator])
-    container = models.ForeignKey(Container, blank=True, null=True)
+    container = models.ForeignKey(Container, blank=True, null=True, on_delete=models.SET_NULL)
     note = models.CharField(blank=True, null=True, max_length=255, verbose_name="Bemerkung")
-    velo_type = models.ForeignKey('VeloType', blank=True, null=True)
+    velo_type = models.ForeignKey('VeloType', blank=True, null=True, on_delete=models.SET_NULL)
     last_event = models.ForeignKey(
         'TrackingEvent',
         null=True, 
         blank=True,
         verbose_name='Letzter Event',
         related_name='tracking_last_event',
-        on_delete=models.SET(None)
-    )
+        on_delete=models.SET_NULL)
     complete = models.BooleanField(default=False, verbose_name='Abgeschlossen')
 
     history = HistoricalRecords()
@@ -290,8 +290,8 @@ class EmailLog(models.Model):
     """
     Helper class, used to log sent emails.
     """
-    tracking = models.ForeignKey(Tracking)
-    tracking_event = models.ForeignKey(TrackingEvent)
+    tracking = models.ForeignKey(Tracking, on_delete=models.CASCADE)
+    tracking_event = models.ForeignKey(TrackingEvent, on_delete=models.CASCADE)
     subject = models.CharField(blank=False, null=False, max_length=255)
     sender = models.CharField(blank=False, null=False, max_length=255)
     receiver = models.CharField(blank=False, null=False, max_length=255)

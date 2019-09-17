@@ -114,12 +114,13 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='trackingevent',
             name='state',
-            field=models.ForeignKey(to='sbbtracking.TrackingEventState'),
+            field=models.ForeignKey(to='sbbtracking.TrackingEventState', on_delete=models.SET_NULL),
         ),
         migrations.AddField(
             model_name='trackingevent',
             name='tracking',
-            field=models.ForeignKey(to='sbbtracking.Tracking'),
+            field=models.ForeignKey(to='sbbtracking.Tracking',
+            on_delete=models.SET_NULL),
         ),
         migrations.AddField(
             model_name='historicaltrackingevent',

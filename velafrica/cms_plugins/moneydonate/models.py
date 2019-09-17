@@ -35,7 +35,7 @@ class Moneydonate(CMSPlugin):
 
 
 class MoneydonateAmount(models.Model):
-    plugin = models.ForeignKey(Moneydonate, related_name='amounts')
+    plugin = models.ForeignKey(Moneydonate, related_name='amounts', on_delete=models.CASCADE)
     description = models.CharField(max_length=255, verbose_name='Beschreibung')
     amount = models.IntegerField(verbose_name='Betrag')
     is_active = models.BooleanField(default=True, verbose_name='Aktiv')

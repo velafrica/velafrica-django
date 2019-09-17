@@ -4,7 +4,7 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 from velafrica.sbbtracking.models import TrackingEvent, EmailLog
 

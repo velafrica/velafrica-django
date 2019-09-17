@@ -12,7 +12,7 @@ from velafrica.stock.models import StockListPos
 class InvoiceListPos(StockListPos):
     """
     """
-    invoice = models.ForeignKey('Invoice')
+    invoice = models.ForeignKey('Invoice', on_delete=models.CASCADE)
 
     class Meta:
         unique_together = (("invoice", "product"),)
@@ -23,7 +23,7 @@ class Payment(models.Model):
     """
     received_on = models.DateField(default=timezone.now, verbose_name="Eingangsdatum")
     amount = models.IntegerField()
-    invoice = models.ForeignKey('Invoice')
+    invoice = models.ForeignKey('Invoice', on_delete=models.CASCADE)
 
     def __str__(self):
         return u"{} {} {}".format(self.received_on, self.amount, self.invoice)
@@ -31,11 +31,13 @@ class Payment(models.Model):
 class Invoice(models.Model):
     """
     """
-    from_org = models.ForeignKey(Organisation, related_name='invoice_from', verbose_name="Rechnungssteller")
-    to_org = models.ForeignKey(Organisation, related_name='invoice_to', verbose_name="Rechnungsempfänger")
+    from_org = models.ForeignKey(Organisation, related_name='invoice_from', verbose_name="Rechnungssteller", on_delete=models.CASCADE)
+    to_org = models.ForeignKey(Organisation, related_name='invoice_to', verbose_name="Rechnungsempfänger", on_delete=models.CASCADE)
     comments = models.TextField(blank=True, null=True, verbose_name="Kommentare")
-    purchaseorder = models.ForeignKey('PurchaseOrder', blank=True, null=True, verbose_name="Kaufauftrag (Purchase Order)", help_text="Wird hier ein Kaufauftrag (Purchase Order) hinterlegt, wird für die Berechnung des Rechnungsbetrags der Einkaufspreis verwendet.")
-    salesorder = models.ForeignKey('SalesOrder', blank=True, null=True, verbose_name="Kundenauftrag (Sales Order)")
+    purchaseorder = models.ForeignKey('PurchaseOrder', blank=True, null=True, verbose_name="Kaufauftrag (Purchase Order)",
+                                      help_text="Wird hier ein Kaufauftrag (Purchase Order) hinterlegt, wird für die Berechnung des Rechnungsbetrags der Einkaufspreis verwendet.",
+                                      on_delete=models.SET_NULL)
+    salesorder = models.ForeignKey('SalesOrder', blank=True, null=True, verbose_name="Kundenauftrag (Sales Order)", on_delete=models.CASCADE)
     history = HistoricalRecords()
 
     def get_total(self):
@@ -72,7 +74,7 @@ class PurchaseOrderListPos(StockListPos):
     """
     One position of a :model:`commission.PurchaseOrder` including product and amount.
     """
-    purchaseorder = models.ForeignKey('PurchaseOrder')
+    purchaseorder = models.ForeignKey('PurchaseOrder', on_delete=models.CASCADE)
 
     def __str__(self):
         return u"PurchaseOrder #{}: {}x {} ".format(self.purchaseorder.id, self.amount, self.product)
@@ -87,8 +89,8 @@ class PurchaseOrder(models.Model):
     TODO:
       - create procurement (stock in)
     """
-    from_org = models.ForeignKey(Organisation, related_name="purchaseorder_from", blank=True, null=True, verbose_name="Anbieter")
-    to_org = models.ForeignKey(Organisation, related_name="purchaseorder_to", blank=True, null=True, verbose_name="Kunde")
+    from_org = models.ForeignKey(Organisation, related_name="purchaseorder_from", blank=True, null=True, verbose_name="Anbieter", on_delete=models.SET_NULL)
+    to_org = models.ForeignKey(Organisation, related_name="purchaseorder_to", blank=True, null=True, verbose_name="Kunde", on_delete=models.SET_NULL)
     comments = models.TextField(blank=True, null=True, verbose_name="Kommentare")
     PO_STATE_CHOICES = {
         ('0', 'draft'),
@@ -152,7 +154,7 @@ class SalesOrderListPos(StockListPos):
     """
 
     """
-    salesorder = models.ForeignKey('SalesOrder')
+    salesorder = models.ForeignKey('SalesOrder', on_delete=models.CASCADE)
 
     def __str__(self):
         return u"PurchaseOrder #{}: {}x {} ".format(self.salesorder.id, self.amount, self.product)
@@ -173,12 +175,12 @@ class SalesOrder(models.Model):
         - create picking (stock out)
         - create payment (partial?)
     """
-    from_org = models.ForeignKey(Organisation, related_name="salesorder_from", blank=True, null=True, verbose_name="Anbieter")
-    to_org = models.ForeignKey(Organisation, related_name="salesorder_to", blank=True, null=True, verbose_name="Kunde")
+    from_org = models.ForeignKey(Organisation, related_name="salesorder_from", blank=True, null=True, verbose_name="Anbieter", on_delete=models.SET_NULL)
+    to_org = models.ForeignKey(Organisation, related_name="salesorder_to", blank=True, null=True, verbose_name="Kunde", on_delete=models.SET_NULL)
     comments = models.TextField(blank=True, null=True, verbose_name="Kommentare")
     history = HistoricalRecords()
 
-    # container = models.ForeignKey(Container)
+    # container = models.ForeignKey(Container, on_delete=models.SET_NULL)
 
     def get_total(self):
         """

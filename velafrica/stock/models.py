@@ -60,7 +60,7 @@ class Product(models.Model):
     hscode = models.CharField(blank=False, null=False, max_length=7, verbose_name="Harmonized System Code")
     description = models.TextField(blank=True, null=True, verbose_name="Beschreibung",
                                    help_text="Hinweise zur Qualität bzw Hinweise und Ergänzung")
-    category = models.ForeignKey('Category', verbose_name="Kategorie", help_text='Die Hauptkategorie des Produktes.')
+    category = models.ForeignKey('Category', verbose_name="Kategorie", help_text='Die Hauptkategorie des Produktes.', on_delete=models.CASCADE)
     image = ResizedImageField(storage=fs, size=[500, 500], upload_to='stock/products/', blank=True, null=True,
                               verbose_name="Produktbild")
     sales_price = models.DecimalField(blank=False, null=False, max_digits=10, decimal_places=2,
@@ -106,6 +106,7 @@ class Warehouse(models.Model):
     description = models.CharField(blank=True, null=True, max_length=255, verbose_name="Beschreibung",
                                    help_text="Beschreibung / Bemerkungen zum Lager")
     organisation = models.ForeignKey(Organisation, verbose_name="Organisation",
+                                     on_delete=models.CASCADE,
                                      help_text='Die Organisation zu welcher das Lager gehört. (Nur VPN Schweiz Partner)',
                                      limit_choices_to={'partnersud': None})
     image = ResizedImageField(storage=fs, size=[500, 500], upload_to='stock/warehouses/', blank=True, null=True,
@@ -113,6 +114,7 @@ class Warehouse(models.Model):
 
     # address
     address = models.ForeignKey(Address, null=True, blank=True, verbose_name="Andere Adresse als Organisation",
+                                on_delete=models.CASCADE,
                                 help_text="Nur angeben wenn die Lageradresse von Organisationsadresse abweicht.")
 
     stock_management = models.BooleanField(default=False, verbose_name="Automatisches Stock-Management",
@@ -147,8 +149,8 @@ class Stock(models.Model):
     """
     Used to hold information on product stock in a specific :model:`stock.Warehouse`
     """
-    product = models.ForeignKey(Product, verbose_name="Produkt")
-    warehouse = models.ForeignKey(Warehouse, verbose_name="Lager", help_text='Das Lager wo sich der Stock befindet')
+    product = models.ForeignKey(Product, verbose_name="Produkt", on_delete=models.CASCADE)
+    warehouse = models.ForeignKey(Warehouse, verbose_name="Lager", help_text='Das Lager wo sich der Stock befindet', on_delete=models.CASCADE)
     amount = models.IntegerField(blank=False, null=False, default=0, verbose_name="Stückzahl",
                                  help_text="Anzahl der Produkte an Lager")
     last_modified = models.DateTimeField(auto_now=True,
@@ -236,8 +238,8 @@ class StockListPosition(models.Model):
     TODO: remove
     One position in a StockList.
     """
-    stocklist = models.ForeignKey('StockList', verbose_name='StockList')
-    product = models.ForeignKey(Product)
+    stocklist = models.ForeignKey('StockList', verbose_name='StockList', on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
     amount = models.IntegerField(blank=False, null=False, verbose_name="Stückzahl")
     history = HistoricalRecords()
 
@@ -254,7 +256,7 @@ class StockListPos(models.Model):
     """
     Abstract BaseClass for all stock list position models.
     """
-    product = models.ForeignKey(Product)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
     amount = models.IntegerField(blank=False, null=False, verbose_name="Stückzahl", default=0)
 
     # history = HistoricalRecords()
@@ -289,9 +291,9 @@ class StockChange(models.Model):
         ('out', 'out')
     }
     datetime = models.DateTimeField(default=timezone.now)
-    stocktransfer = models.ForeignKey('StockTransfer')
-    warehouse = models.ForeignKey(Warehouse)
-    stocklist = models.ForeignKey(StockList)
+    stocktransfer = models.ForeignKey('StockTransfer', on_delete=models.CASCADE)
+    warehouse = models.ForeignKey(Warehouse, on_delete=models.CASCADE)
+    stocklist = models.ForeignKey(StockList, on_delete=models.CASCADE)
     stock_change_type = models.CharField(choices=STOCK_CHANGE_TYPES, max_length=255)
     booked = models.BooleanField(default=False, help_text="Indicates if stock adjustments have been made.")
 
@@ -349,7 +351,7 @@ class StockChange(models.Model):
 class StockChangeListPos(StockListPos):
     """
     """
-    stockchange = models.ForeignKey(StockChange)
+    stockchange = models.ForeignKey(StockChange, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = "Stock Change List Position"
@@ -365,9 +367,9 @@ class StockTransfer(models.Model):
     self.booked to False.    
     """
     date = models.DateField(blank=False, null=False, default=timezone.now, verbose_name="Ausführdatum")
-    warehouse_from = models.ForeignKey(Warehouse, related_name="warehouse_from", verbose_name="Herkunfts-Lager")
-    warehouse_to = models.ForeignKey(Warehouse, related_name="warehouse_to", verbose_name="Ziel-Lager")
-    stocklist = models.OneToOneField(StockList, verbose_name="Stock List")
+    warehouse_from = models.ForeignKey(Warehouse, related_name="warehouse_from", verbose_name="Herkunfts-Lager", on_delete=models.CASCADE)
+    warehouse_to = models.ForeignKey(Warehouse, related_name="warehouse_to", verbose_name="Ziel-Lager", on_delete=models.CASCADE)
+    stocklist = models.OneToOneField(StockList, verbose_name="Stock List", on_delete=models.CASCADE)
     note = models.CharField(blank=True, null=True, max_length=255, verbose_name="Bemerkungen")
     booked = models.BooleanField(default=False, null=False, blank=False,
                                  help_text="Gibt an ob der Stock bereits angepasst wurde.")
@@ -442,7 +444,7 @@ class StockTransferListPos(StockListPos):
     Not in use yet.
     TODO: implement properly.
     """
-    stocktransfer = models.ForeignKey(StockTransfer)
+    stocktransfer = models.ForeignKey(StockTransfer, on_delete=models.CASCADE)
 
     class Meta:
         unique_together = (("stocktransfer", "product"),)
@@ -453,20 +455,20 @@ class StockTransferListPos(StockListPos):
 # -------------> new Stock Models:
 """
 class StockPosition(models.Model):
-    product = models.ForeignKey(Product)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
     amount = models.IntegerField()
 
 class StockTaking(models.Model):
-    warehouse = models.ForeignKey(Warehouse)
+    warehouse = models.ForeignKey(Warehouse, on_delete=models.CASCADE)
 
 class StockTakingStockPosition(StockPosition):
-    stockTaking = models.ForeignKey(StockTaking)
+    stockTaking = models.ForeignKey(StockTaking, on_delete=models.CASCADE)
 
 class StockIn(models.Model):
-    warehouse = models.ForeignKey(Warehouse)
+    warehouse = models.ForeignKey(Warehouse, on_delete=models.CASCADE)
 
 class StockInStockPosition(StockPosition):
-    stockIn = models.ForeignKey(StockIn)
+    stockIn = models.ForeignKey(StockIn, on_delete=models.CASCADE)
 
 
 class StockPosition(models.Model)

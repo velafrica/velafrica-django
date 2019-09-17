@@ -50,7 +50,7 @@ class TrackingStationQuery(models.Model):
     query_order = models.IntegerField(verbose_name="Reihenfolge", default=0)
     plugin = models.ForeignKey(
         TrackingStation,
-        related_name="queries"
+        related_name="queries", on_delete=models.CASCADE
     )
 
     def get_count(self):

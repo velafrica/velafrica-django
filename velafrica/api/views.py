@@ -6,8 +6,6 @@ from rest_framework.decorators import api_view, renderer_classes
 from rest_framework.renderers import CoreJSONRenderer, BrowsableAPIRenderer
 from rest_framework.response import Response
 
-from velafrica.api import utils
-
 
 class DjangoModelPermissionsMixin(generics.GenericAPIView):
     """
@@ -51,6 +49,7 @@ def api_root(request, format=None):
 
     """
 
-    response = utils.get_api_root_listing_from_urls(request, format)
+    #response = utils.get_api_root_listing_from_urls(request, format)
+    response = "Go to /api/swagger to see all the available endpoints"
 
     return Response(response)

@@ -31,14 +31,14 @@ class Container(models.Model):
     """
     Represents a container.
     """
-    organisation_from = models.ForeignKey(Organisation, blank=True, null=True, verbose_name='Verarbeitungspartner', help_text='Ort wo der Container geladen wurde.')
-    warehouse_from = models.ForeignKey(Warehouse, blank=True, null=True, verbose_name='Export Lager', help_text='Lager wo die Velos verladen wurden')
-    partner_to = models.ForeignKey('PartnerSud', blank=False, null=False, verbose_name='Destination')
+    organisation_from = models.ForeignKey(Organisation, blank=True, null=True, verbose_name='Verarbeitungspartner', help_text='Ort wo der Container geladen wurde.', on_delete=models.CASCADE)
+    warehouse_from = models.ForeignKey(Warehouse, blank=True, null=True, verbose_name='Export Lager', help_text='Lager wo die Velos verladen wurden', on_delete=models.CASCADE)
+    partner_to = models.ForeignKey('PartnerSud', blank=False, null=False, verbose_name='Destination', on_delete=models.CASCADE)
 
     velos_loaded = models.IntegerField(blank=False, null=False, default=0, verbose_name='Anzahl Velos eingeladen')
     velos_unloaded = models.IntegerField(blank=False, null=False, default=0, verbose_name='Anzahl Velos ausgeladen')
     spare_parts = models.BooleanField(default=False, verbose_name='Ersatzteile transportiert?')
-    stocklist = models.OneToOneField(StockList, null=True, blank=True)
+    stocklist = models.OneToOneField(StockList, null=True, blank=True, on_delete=models.CASCADE)
 
     velos_worth = models.IntegerField(blank=False, null=False, default=0, verbose_name='Wert Velos')   
     spare_parts_worth = models.IntegerField(blank=False, null=False, default=0, verbose_name='Wert Ersatzteile')
@@ -49,7 +49,7 @@ class Container(models.Model):
     shipment_date = models.DateField(blank=True, null=True, verbose_name='Verschiffungsdatum ab Europa') 
     arrival_port_date = models.DateField(blank=True, null=True, verbose_name='Ankunft Hafen Partner')
     arrival_partner_date = models.DateField(blank=True, null=True, verbose_name='Ankunft Partner')
-    logistics = models.ForeignKey(Forwarder, blank=True, null=True, verbose_name='Forwarder', help_text='Logistikunternehmen')
+    logistics = models.ForeignKey(Forwarder, blank=True, null=True, verbose_name='Forwarder', help_text='Logistikunternehmen', on_delete=models.SET_NULL)
 
     time_to_customer = models.IntegerField(blank=True, null=True, verbose_name='Versandzeit (Tage)', help_text='Anzahl Tage vom Verlad bis zur Ankunft beim Partner.')
 
@@ -160,7 +160,7 @@ class PartnerSud(models.Model):
     """
     Represents a partner of the Velafrica Sud Network.
     """
-    organisation = models.OneToOneField(Organisation, blank=False, null=False, related_name="partnersud")
+    organisation = models.OneToOneField(Organisation, blank=False, null=False, related_name="partnersud", on_delete=models.CASCADE)
     image = ResizedImageField(storage=fs, size=[800, 800], upload_to='velafrica_sud/partner/', blank=True, null=True, help_text='Foto vom Partner vor Ort.')
 
     # partner sud info
@@ -255,10 +255,10 @@ class ReportStaff(models.Model):
     """
     Used to add information about personal staff at partner.
     """
-    role = models.ForeignKey(Role,verbose_name="Rolle")
+    role = models.ForeignKey(Role,verbose_name="Rolle", on_delete=models.CASCADE)
     salary = models.IntegerField(verbose_name="Salär (USD)")
     number = models.IntegerField(verbose_name="Anzahl Angestellte")
-    report = models.ForeignKey('Report', verbose_name="Report")
+    report = models.ForeignKey('Report', verbose_name="Report", on_delete=models.CASCADE)
     history = HistoricalRecords()
 
     def __str__(self):
@@ -269,9 +269,9 @@ class PartnerStaff(models.Model):
     """
     Used to add information about personal staff at partner.
     """
-    role = models.ForeignKey(Role,verbose_name="Rolle")
+    role = models.ForeignKey(Role,verbose_name="Rolle", on_delete=models.CASCADE)
     name = models.CharField(max_length=255, verbose_name="Name des Angestellten")
-    partner = models.ForeignKey('PartnerSud', verbose_name="Arbeitgeber")
+    partner = models.ForeignKey('PartnerSud', verbose_name="Arbeitgeber", on_delete=models.CASCADE)
     history = HistoricalRecords()
 
     def __str__(self):
@@ -285,7 +285,7 @@ class Report(models.Model):
     TODO: currency to USD functions & add these to Resource
     """
     creation = models.DateField(default=timezone.now,)
-    partner_sud = models.ForeignKey(PartnerSud)
+    partner_sud = models.ForeignKey(PartnerSud, on_delete=models.CASCADE)
     currency = models.CharField(blank=False, null=True, default="", max_length=10, verbose_name="Verwendete Währung bei Finanzangaben")
     currency_rate = models.DecimalField(blank=False, null=False, decimal_places=2, max_digits=10, default=1.0, verbose_name="Währungskurs zu USD")
 
