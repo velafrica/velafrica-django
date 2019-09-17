@@ -298,8 +298,8 @@ ROLLBAR = {
 
 PAYPAL_TEST = 'PAYPAL_TEST' in os.environ and os.environ['PAYPAL_TEST'] == 'True'
 
-PAYPAL_RECEIVER_MAIL = os.environ['PAYPAL_RECEIVER_MAIL'] if 'PAYPAL_RECEIVER_MAIL' in os.environ else '',
-GMAP_API_KEY = os.environ['GMAP_API_KEY'] if 'GMAP_API_KEY' in os.environ else '',
+PAYPAL_RECEIVER_MAIL = os.environ['PAYPAL_RECEIVER_MAIL'] if 'PAYPAL_RECEIVER_MAIL' in os.environ else ''
+GMAP_API_KEY = os.environ['GMAP_API_KEY'] if 'GMAP_API_KEY' in os.environ else ''
 
 # Due to a mistake the SITE_ID on staging has to be 2 but will be 1 on production
 # so its configurable per env variable (shame on HaRii)
