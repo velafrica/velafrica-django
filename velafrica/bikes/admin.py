@@ -13,7 +13,7 @@ from django.core.exceptions import PermissionDenied, ValidationError
 from django.db import transaction
 from django.forms import all_valid
 from django.http import StreamingHttpResponse, HttpResponseRedirect, Http404
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.utils.encoding import force_text
 from django.utils.html import escape
@@ -35,6 +35,9 @@ from velafrica.core.settings import PROJECT_DIR
 from reportlab.lib.utils import simpleSplit
 
 from pdfrw import PdfReader
+
+from velafrica.velafrica_sud.models import Container
+
 
 def get_formsets(model, request, obj=None):
     return [f for f, _ in model.get_formsets_with_inlines(request, obj)]
@@ -172,13 +175,17 @@ class BikeAdmin(ImportExportMixin, DjangoObjectActions, admin.ModelAdmin):
         # Create a file-like buffer to receive PDF data.
         buf = io.BytesIO()
 
+        a_plus_for_sale = "a_plus_for_sale" in request.GET
+        container = request.GET['container__id__exact'] if 'container__id__exact' in request.GET else None
+
         # Create the PDF object, using the buffer as its "file."
         p = canvas.Canvas(buf, pagesize=landscape(A4))  # W, H = landscape(A4)  # 841.9, 595.27
 
-        # Add Preface (page by page)
-        for page in PdfReader(PROJECT_DIR + "/media/APlusPreface.pdf").pages:
-            p.doForm(makerl(p, pagexobj(page)))
-            p.showPage()
+        if a_plus_for_sale:
+            # Add Preface (page by page)
+            for page in PdfReader(PROJECT_DIR + "/media/APlusPreface.pdf").pages:
+                p.doForm(makerl(p, pagexobj(page)))
+                p.showPage()
 
         # create a pdf page for each bike
         for bike in queryset:
@@ -190,11 +197,22 @@ class BikeAdmin(ImportExportMixin, DjangoObjectActions, admin.ModelAdmin):
 
         # define HTT-Response
         response = StreamingHttpResponse(buf, content_type="application/pdf")  # set type to PDF
-        # name the document and download it
-        filename = "{} A-Plus bikes for sale.pdf".format(
+
+        # name the document
+        name = "{} bikes".format(
             datetime.datetime.now().strftime('%Y-%m-%d')
         )
-        response['Content-Disposition'] = "attachment;filename={}".format(filename)
+        if container:
+            name = "bikes sold {}".format(
+                get_object_or_404(Container, pk=container)
+            )
+        elif a_plus_for_sale:
+            name = "{} A-Plus bikes for sale".format(
+                datetime.datetime.now().strftime('%Y-%m-%d')
+            )
+
+        # and download it
+        response['Content-Disposition'] = "attachment;filename={}.pdf".format(name)
         return response
 
     plot_to_pdf.short_description = "Als PDF Drucken"
