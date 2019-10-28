@@ -62,7 +62,7 @@ def transport(request):
   
     :template:`transport/index.html`
     """
-    rides = Ride.objects.all()
+    rides = Ride.objects.all()[:100]
 
     # TODO: refactor get_velo_count
     # velos = get_velo_count(rides)

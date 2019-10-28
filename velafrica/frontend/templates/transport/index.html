@@ -57,7 +57,7 @@
             <th>Spare Parts</th>
         </tr>
 
-        {% for r in rides[:100] %}
+        {% for r in rides %}
             <tr>
                 <td>{{ r.date }}</td>
                 <td><a href="{% url 'frontend:warehouse_detail' r.from_warehouse.id %}">{{ r.from_warehouse }}</a></td>
