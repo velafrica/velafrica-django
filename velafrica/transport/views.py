@@ -8,6 +8,37 @@ from django.db.models import Q
 
 from velafrica.transport.models import Ride, Car, Driver
 
+
+def get_velo_count(rides):
+    velos = 0
+    for r in rides:
+        velos += r.velos
+    return velos
+
+
+def get_charts(cars, rides):
+    charts = {}
+    # by car
+    charts_car = {}
+    for c in cars:
+        rs = rides.filter(car=c.id)
+        charts_car[c.name] = rs.count()
+    charts['Cars'] = charts_car
+
+    # by driver
+    charts_driver = {}
+    for d in Driver.objects.all():
+        rs = rides.filter(driver=d.id)
+        charts_driver[d.name] = rs.count()
+    charts['Driver'] = charts_driver
+
+    # by spare parts / no spare parts
+    charts['Freight'] = {
+        'Spare Parts': rides.filter(spare_parts=True).count(),
+        'Velos': rides.filter(spare_parts=False).count()
+    }
+    return charts
+
 @login_required
 def transport(request):
     """
@@ -32,40 +63,18 @@ def transport(request):
     :template:`transport/index.html`
     """
     rides = Ride.objects.all()
+
+    # TODO: refactor get_velo_count
+    # velos = get_velo_count(rides)
     velos = 0
-    for r in rides:
-        velos += r.velos
+
     cars = Car.objects.all()
   
     # chart data
-
-
+    # TODO: refactor get_charts
+    # charts = get_charts(cars, rides)
     charts = {}
 
-    """
-    disable charts for now, since they break the view
-    TODO: better solution for charts
-    # by car
-    charts_car = {}
-    for c in cars:
-        rs = rides.filter(car=c.id)
-        charts_car[c.name] = rs.count()
-    charts['Cars'] = charts_car
-  
-    # by driver
-    charts_driver = {}
-    for d in Driver.objects.all():
-        rs = rides.filter(driver=d.id)
-        charts_driver[d.name] = rs.count()
-    charts['Driver'] = charts_driver
-  
-    # by spare parts / no spare parts
-    charts['Freight'] = {
-        'Spare Parts': rides.filter(spare_parts=True).count(), 
-        'Velos': rides.filter(spare_parts=False).count()
-    }
-    """
-  
     return render(request, 'transport/index.html', {
         'rides': rides,
         'velos': velos,

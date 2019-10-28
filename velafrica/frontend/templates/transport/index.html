@@ -1,75 +1,79 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 
-{% block breadcrumb %} 
-<li><a href="{% url 'frontend:transport' %}">Transport</a></li>
-{% endblock %} 
+{% block breadcrumb %}
+    <li><a href="{% url 'frontend:transport' %}">Transport</a></li>
+{% endblock %}
 
 {% block document-head %}
-<script src="/static/js/Chart.min.js"></script>
+    <script src="/static/js/Chart.min.js"></script>
 
 {% endblock %}
 
 {% block jumbotron-img %}{% endblock %}
 {% block jumbotron-title %}
-Transport Tracking
+    Transport Tracking
 {% endblock %}
 
 {% block jumbotron %}
-<table class="table">
-	<tr>
-		<th>Total Fahrten:</th>
-		<td>{{ rides.count }}</td>
-	</tr>
-	<tr>
+    <table class="table">
+        <tr>
+            <th>Total Fahrten:</th>
+            <td>{{ rides.count }}</td>
+        </tr>
+        <!-- TODO: refactor velo count
+    <tr>
 		<th>Total Velos:</th>
 		<td>{{ velos }}</td>
-	</tr>
-</table>
-<div class="row">
-	{% for key, val in charts.iteritems %}
+	</tr> -->
+    </table>
+    <div class="row">
+        {% for key, val in charts.iteritems %}
 
-	<div class="col-md-3">
-	<canvas id="{{key}}" width="300" height="300"></canvas>
-	</div>
-	<div class="col-md-1">
-	</div>
+            <div class="col-md-3">
+                <canvas id="{{ key }}" width="300" height="300"></canvas>
+            </div>
+            <div class="col-md-1">
+            </div>
 
-	{% endfor %}
-</div>
+        {% endfor %}
+    </div>
 
 {% endblock %}
 
 
 {% block content %}
-<h2>Fahrten</h2>
-<table class="table">
-	<tr>
-		<th>Datum</th>
-		<th>Von</th>
-		<th>Nach</th>
-		<th>Fahrer</th>
-		<th>Fahrzeug</th>
-		<th>Velos</th>
-		<th>Zustand</th>
-		<th>Spare Parts</th>
-	</tr>
+    <h2>Fahrten</h2>
+    <p>Es werden nur die 100 neusten Fahrten angezeigt.</p>
+    <table class="table">
+        <tr>
+            <th>Datum</th>
+            <th>Von</th>
+            <th>Nach</th>
+            <th>Fahrer</th>
+            <th>Fahrzeug</th>
+            <th>Velos</th>
+            <th>Zustand</th>
+            <th>Spare Parts</th>
+        </tr>
 
-	{% for r in rides %}
-	<tr>
-		<td>{{ r.date }}</td>
-		<td><a href="{% url 'frontend:warehouse_detail' r.from_warehouse.id %}">{{ r.from_warehouse }}</a></td>
-		<td><a href="{% url 'frontend:warehouse_detail' r.to_warehouse.id %}">{{ r.to_warehouse }}</a></td>
-		<td>{{ r.driver }}</td>
-		<td>{{ r.car }}</td>
-		<td>{% if r.velos <= 0 %}<span class="label label-danger">{% else %}<span class="label label-success">{% endif %}{{ r.velos }}</span></td>
-		<td>{{ r.velo_state }}</td>
-		<td>{% if r.spare_parts %}<span class="glyph-ride-in glyphicon glyphicon-ok">{% else %}<span class="glyph-ride-out glyphicon glyphicon-remove">{% endif %}</td>
-	</tr>
+        {% for r in rides[:100] %}
+            <tr>
+                <td>{{ r.date }}</td>
+                <td><a href="{% url 'frontend:warehouse_detail' r.from_warehouse.id %}">{{ r.from_warehouse }}</a></td>
+                <td><a href="{% url 'frontend:warehouse_detail' r.to_warehouse.id %}">{{ r.to_warehouse }}</a></td>
+                <td>{{ r.driver }}</td>
+                <td>{{ r.car }}</td>
+                <td>{% if r.velos <= 0 %}<span class="label label-danger">{% else %}
+                    <span class="label label-success">{% endif %}{{ r.velos }}</span></td>
+                <td>{{ r.velo_state }}</td>
+                <td>{% if r.spare_parts %}<span class="glyph-ride-in glyphicon glyphicon-ok"></span>{% else %}
+                    <span class="glyph-ride-out glyphicon glyphicon-remove"></span>{% endif %}</td>
+            </tr>
 
 
-	{% endfor %}
-</table>
+        {% endfor %}
+    </table>
 
 {% endblock %}
 
@@ -79,65 +83,65 @@ Transport Tracking
 
 
 
-<script>
-    
+    <script>
 
-	$(function () {
 
-		{% for key, val in charts.iteritems %}
-			var labels = [];
-			var data = [];
-			{% for subkey, subval in val.iteritems %}
-				labels.push("{{ subkey}}");
-				data.push("{{ subval }}");
-			{% endfor %}
-				// Any of the following formats may be used
-	var ctx = document.getElementById("{{key}}");
-	var ctx = document.getElementById("{{key}}").getContext("2d");
-	var ctx = $("#{{key}}");
-	var myChart = new Chart(ctx, {
-	    type: 'pie',
-	    data: {
-	        labels: labels,
-	        datasets: [{
-	            data: data,
-	            backgroundColor: [
-	            	'rgba(241,88,84,0.5)',
-		            'rgba(77, 77, 77, 0.5)',
-					'rgba(93,165,218,0.5)',
-					'rgba(250,164,	58,0.5)',
-					'rgba(96,189,	104,0.5)',
-					'rgba(241,124,	176,0.5)',
-					'rgba(178,145,	47,0.5)',
-					'rgba(178,118,	178,0.5)',
-					'rgba(222,207,63,0.5)',
-		            ],
-	            borderColor: [
-	            	'rgba(241,88,84,1)',
-	               	'rgba(77, 77, 77, 1)',
-					'rgba(93,165,218,1)',
-					'rgba(250,164,	58,1)',
-					'rgba(96,189,	104,1)',
-					'rgba(241,124,	176,1)',
-					'rgba(178,145,	47,1)',
-					'rgba(178,118,	178,1)',
-					'rgba(222,207,63,1)',
-					
-	            ],
-	            borderWidth: 1
-	        }]
-	    },
-	    options: {
-	        responsive: true,
-	        title: {
-	        	text: "Rides by {{key}}",
-	        	display: true,
-	        }
-	    }
-	});
-{% endfor %}
-});
+        $(function() {
 
-</script>
+            {% for key, val in charts.iteritems %}
+                var labels = [];
+                var data = [];
+                {% for subkey, subval in val.iteritems %}
+                    labels.push("{{ subkey}}");
+                    data.push("{{ subval }}");
+                {% endfor %}
+                // Any of the following formats may be used
+                var ctx = document.getElementById("{{key}}");
+                var ctx = document.getElementById("{{key}}").getContext("2d");
+                var ctx = $("#{{key}}");
+                var myChart = new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: labels,
+                        datasets: [ {
+                            data: data,
+                            backgroundColor: [
+                                'rgba(241,88,84,0.5)',
+                                'rgba(77, 77, 77, 0.5)',
+                                'rgba(93,165,218,0.5)',
+                                'rgba(250,164,	58,0.5)',
+                                'rgba(96,189,	104,0.5)',
+                                'rgba(241,124,	176,0.5)',
+                                'rgba(178,145,	47,0.5)',
+                                'rgba(178,118,	178,0.5)',
+                                'rgba(222,207,63,0.5)',
+                            ],
+                            borderColor: [
+                                'rgba(241,88,84,1)',
+                                'rgba(77, 77, 77, 1)',
+                                'rgba(93,165,218,1)',
+                                'rgba(250,164,	58,1)',
+                                'rgba(96,189,	104,1)',
+                                'rgba(241,124,	176,1)',
+                                'rgba(178,145,	47,1)',
+                                'rgba(178,118,	178,1)',
+                                'rgba(222,207,63,1)',
+
+                            ],
+                            borderWidth: 1
+                        } ]
+                    },
+                    options: {
+                        responsive: true,
+                        title: {
+                            text: "Rides by {{key}}",
+                            display: true,
+                        }
+                    }
+                });
+            {% endfor %}
+        });
+
+    </script>
 
 {% endblock %}
