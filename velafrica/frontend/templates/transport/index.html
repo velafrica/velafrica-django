@@ -19,7 +19,7 @@
     <table class="table">
         <tr>
             <th>Total Fahrten:</th>
-            <td>{{ rides.count }}</td>
+            <td>{{ rides_count }}</td>
         </tr>
         <!-- TODO: refactor velo count
     <tr>
@@ -44,7 +44,7 @@
 
 {% block content %}
     <h2>Fahrten</h2>
-    <p>Es werden nur die 100 neusten Fahrten angezeigt.</p>
+    <p>Es werden nur die 100 neusten Fahrten angezeigt (von {rides_count} total).</p>
     <table class="table">
         <tr>
             <th>Datum</th>
