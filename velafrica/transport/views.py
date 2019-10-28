@@ -38,9 +38,13 @@ def transport(request):
     cars = Car.objects.all()
   
     # chart data
-  
+
+
     charts = {}
-  
+
+    """
+    disable charts for now, since they break the view
+    TODO: better solution for charts
     # by car
     charts_car = {}
     for c in cars:
@@ -60,6 +64,7 @@ def transport(request):
         'Spare Parts': rides.filter(spare_parts=True).count(), 
         'Velos': rides.filter(spare_parts=False).count()
     }
+    """
   
     return render(request, 'transport/index.html', {
         'rides': rides,
