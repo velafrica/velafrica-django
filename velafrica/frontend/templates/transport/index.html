@@ -44,36 +44,39 @@
 
 {% block content %}
     <h2>Fahrten</h2>
-    <p>Es werden nur die 100 neusten Fahrten angezeigt (von {rides_count} total).</p>
-    <table class="table">
-        <tr>
-            <th>Datum</th>
-            <th>Von</th>
-            <th>Nach</th>
-            <th>Fahrer</th>
-            <th>Fahrzeug</th>
-            <th>Velos</th>
-            <th>Zustand</th>
-            <th>Spare Parts</th>
-        </tr>
-
-        {% for r in rides %}
+    {% if rides_count <= 0 %}<p>Es wurden bisher keine Fahrten erfasst.</p>{% else %}
+        <p>Es werden nur die 100 neusten Fahrten angezeigt (von {{ rides_count }} total).</p>
+        <table class="table">
             <tr>
-                <td>{{ r.date }}</td>
-                <td><a href="{% url 'frontend:warehouse_detail' r.from_warehouse.id %}">{{ r.from_warehouse }}</a></td>
-                <td><a href="{% url 'frontend:warehouse_detail' r.to_warehouse.id %}">{{ r.to_warehouse }}</a></td>
-                <td>{{ r.driver }}</td>
-                <td>{{ r.car }}</td>
-                <td>{% if r.velos <= 0 %}<span class="label label-danger">{% else %}
-                    <span class="label label-success">{% endif %}{{ r.velos }}</span></td>
-                <td>{{ r.velo_state }}</td>
-                <td>{% if r.spare_parts %}<span class="glyph-ride-in glyphicon glyphicon-ok"></span>{% else %}
-                    <span class="glyph-ride-out glyphicon glyphicon-remove"></span>{% endif %}</td>
+                <th>Datum</th>
+                <th>Von</th>
+                <th>Nach</th>
+                <th>Fahrer</th>
+                <th>Fahrzeug</th>
+                <th>Velos</th>
+                <th>Zustand</th>
+                <th>Spare Parts</th>
             </tr>
 
+            {% for r in rides %}
+                <tr>
+                    <td>{{ r.date }}</td>
+                    <td><a href="{% url 'frontend:warehouse_detail' r.from_warehouse.id %}">{{ r.from_warehouse }}</a>
+                    </td>
+                    <td><a href="{% url 'frontend:warehouse_detail' r.to_warehouse.id %}">{{ r.to_warehouse }}</a></td>
+                    <td>{{ r.driver }}</td>
+                    <td>{{ r.car }}</td>
+                    <td>{% if r.velos <= 0 %}<span class="label label-danger">{% else %}
+                        <span class="label label-success">{% endif %}{{ r.velos }}</span></td>
+                    <td>{{ r.velo_state }}</td>
+                    <td>{% if r.spare_parts %}<span class="glyph-ride-in glyphicon glyphicon-ok"></span>{% else %}
+                        <span class="glyph-ride-out glyphicon glyphicon-remove"></span>{% endif %}</td>
+                </tr>
 
-        {% endfor %}
-    </table>
+
+            {% endfor %}
+        </table>
+    {% endif %}
 
 {% endblock %}
 
