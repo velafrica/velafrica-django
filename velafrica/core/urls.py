@@ -24,6 +24,7 @@ from velafrica.core import views
 from velafrica.public_site import views as velafrica_public_site_views
 from velafrica.stock import views as stock_views
 from velafrica.transport import views as transport_views
+from velafrica.core.autocomplete import urls as autocomplete_urls
 
 app_name = "core"
 
@@ -94,7 +95,7 @@ urlpatterns = [
                       name='password_reset_complete'
                       ),
 
-                  url(r'^autocomplete/', include(autocomplete)),
+                  url(r'^autocomplete/', include(autocomplete_urls)),
 
                   # admin doc urls
                   url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

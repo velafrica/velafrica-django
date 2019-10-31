@@ -94,7 +94,7 @@ class DriverAutocomplete(autocomplete.Select2QuerySetView):
         if self.request.user.is_superuser:
             qs = Driver.objects.all()
             # other users with a correlating person should only see their organisation
-        elif hasattr(self.request.user, 'person') and self.request.user.is_authenticated():
+        elif hasattr(self.request.user, 'person') and self.request.user.is_authenticated:
             qs = Driver.objects.filter(organisation=self.request.user.person.organisation.id)
             # users with no superuser role and no related person should not see any organisations
         else:

@@ -49,7 +49,7 @@ def get_content(context, key, description='', fixed=False):
     if value.value:
         return mark_safe(value.value)
     else:
-        if context.request.user.is_authenticated():
+        if context.request.user.is_authenticated:
             return full_key
         else:
             return ''
