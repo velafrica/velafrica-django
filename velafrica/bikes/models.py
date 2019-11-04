@@ -58,8 +58,7 @@ class Bike(models.Model):
             "colour",
             "size",
             "suspension",
-            "rear_suspension",
-            "extraordinary"
+            "rear_suspension"
         ]
 
     id = models.CharField(primary_key=True, unique=True, default=bike_id, max_length=255)

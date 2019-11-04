@@ -155,9 +155,19 @@ class BikeAdmin(ImportExportMixin, DjangoObjectActions, admin.ModelAdmin):
                                         fontSize=c._fontsize,
                                         maxWidth=130):
                     c.drawString(175, y, line)
-                    y -= 14
+                    y -= 15
                 # add spacing between two rows
-                y -= 12
+                y -= 6
+
+        if bike.extraordinary and bike.extraordinary != "":
+            c.drawString(40, y, "Extraordinary:")
+            y -= 16
+            for line in simpleSplit(text=str(bike.extraordinary),
+                                    fontName=c._fontname,
+                                    fontSize=c._fontsize,
+                                    maxWidth=255):
+                c.drawString(50, y, line)
+                y -= 14
 
         # plot image of bike
         if bike.image:
