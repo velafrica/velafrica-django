@@ -65,7 +65,11 @@ class APlusForSaleListFilter(admin.SimpleListFilter):
 
     def queryset(self, request, queryset):
         if self.value() == '1':
-            return queryset.filter(container__exact=None, a_plus__exact=True)
+            return queryset.filter(
+                container__exact=None,  # not yet sold and shipped within another container
+                a_plus__exact=True,  # is A+
+                status__exact=0  # status 'normal'
+            )
 
 
 # TODO: show details fields only when A+ is selected
