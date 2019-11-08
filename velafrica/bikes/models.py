@@ -13,7 +13,6 @@ from velafrica.velafrica_sud.models import Container
 from django.db import models, connection
 from .settings import BIKE_TYPES
 
-
 fs = MyStorage()
 
 
@@ -119,34 +118,36 @@ def delete_file(filename):
         except OSError:
             return
 
+# TODO: 'auto_file_deletion' witch would work with AWS
+# temporary workaround - no deletion :)
 
-@receiver(models.signals.post_delete, sender=Bike)
-def auto_delete_file_on_delete(sender, instance, **kwargs):
-    """
-    Deletes file from filesystem
-    when corresponding `MediaFile` object is deleted.
-    """
-    if instance.image:
-        delete_file(instance.image.path)
-
-
-@receiver(models.signals.pre_save, sender=Bike)
-def auto_delete_file_on_change(sender, instance, **kwargs):
-    """
-    Deletes old file from filesystem
-    when corresponding `MediaFile` object is updated
-    with new file.
-    """
-    if not instance.pk:
-        return False
-
-    try:
-        old_file = Bike.objects.get(pk=instance.pk).image
-    except Bike.DoesNotExist:
-        return False
-
-    new_file = instance.image
-    if not old_file == new_file:
-        if old_file.name:
-            delete_file(old_file.path)
-
+# @receiver(models.signals.post_delete, sender=Bike)
+# def auto_delete_file_on_delete(sender, instance, **kwargs):
+#     """
+#     Deletes file from filesystem
+#     when corresponding `MediaFile` object is deleted.
+#     """
+#     if instance.image:
+#         delete_file(instance.image.path)
+#
+#
+# @receiver(models.signals.pre_save, sender=Bike)
+# def auto_delete_file_on_change(sender, instance, **kwargs):
+#     """
+#     Deletes old file from filesystem
+#     when corresponding `MediaFile` object is updated
+#     with new file.
+#     """
+#     if not instance.pk:
+#         return False
+#
+#     try:
+#         old_file = Bike.objects.get(pk=instance.pk).image
+#     except Bike.DoesNotExist:
+#         return False
+#
+#     new_file = instance.image
+#     if not old_file == new_file:
+#         if old_file.name:
+#             delete_file(old_file.path)
+#
