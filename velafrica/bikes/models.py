@@ -89,6 +89,11 @@ class Bike(models.Model):
     suspension = models.CharField(max_length=255, null=True, blank=True, verbose_name=u"Suspension")
     rear_suspension = models.CharField(max_length=255, null=True, blank=True, verbose_name=u"Rear Suspension")
     extraordinary = models.TextField(max_length=255, null=True, blank=True, verbose_name=u"Extraordinary")
+    status = models.IntegerField(default=0, verbose_name='status',
+                                 choices=[
+                                     {0, 'Normal'},
+                                     {1, 'Dismissed'}
+                                 ])
 
     # image(s)
     image = ResizedImageField(storage=fs, size=[1920, 1080], upload_to=bike_images, blank=True, null=True,
