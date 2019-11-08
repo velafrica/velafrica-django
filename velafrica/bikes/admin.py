@@ -65,7 +65,11 @@ class APlusForSaleListFilter(admin.SimpleListFilter):
 
     def queryset(self, request, queryset):
         if self.value() == '1':
-            return queryset.filter(container__exact=None, a_plus__exact=True)
+            return queryset.filter(
+                container__exact=None,  # not yet sold and shipped within another container
+                a_plus__exact=True,  # is A+
+                status__exact=0  # status 'normal'
+            )
 
 
 # TODO: show details fields only when A+ is selected
@@ -155,9 +159,19 @@ class BikeAdmin(ImportExportMixin, DjangoObjectActions, admin.ModelAdmin):
                                         fontSize=c._fontsize,
                                         maxWidth=130):
                     c.drawString(175, y, line)
-                    y -= 14
+                    y -= 15
                 # add spacing between two rows
-                y -= 12
+                y -= 6
+
+        if bike.extraordinary and bike.extraordinary != "":
+            c.drawString(40, y, "Extraordinary:")
+            y -= 16
+            for line in simpleSplit(text=str(bike.extraordinary),
+                                    fontName=c._fontname,
+                                    fontSize=c._fontsize,
+                                    maxWidth=255):
+                c.drawString(50, y, line)
+                y -= 14
 
         # plot image of bike
         if bike.image:
