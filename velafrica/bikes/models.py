@@ -18,12 +18,12 @@ fs = MyStorage()
 
 # image path and name
 def bike_images(instance, filename):
-    return 'bike_img/{}_{}'\
+    return 'bike_img/{}_{}' \
         .format(
-            instance.id,
-            # datetime.datetime.now().strftime('%Y-%m-%d'),
-            filename
-        )
+        instance.id,
+        # datetime.datetime.now().strftime('%Y-%m-%d'),
+        filename
+    )
 
 
 # get the next number for A+-Bikes
@@ -42,23 +42,22 @@ def bike_id():
 
 
 class Bike(models.Model):
-
     # fields used from plot_to_pdf
     plotable = [
-            "number",
-            "type",
-            "brand",
-            "bike_model",
-            "gearing",
-            # "crankset",
-            "drivetrain",
-            # "type_of_brake",
-            "brake",
-            "colour",
-            "size",
-            "suspension",
-            "rear_suspension"
-        ]
+        "number",
+        "type",
+        "brand",
+        "bike_model",
+        "gearing",
+        # "crankset",
+        "drivetrain",
+        # "type_of_brake",
+        "brake",
+        "colour",
+        "size",
+        "suspension",
+        "rear_suspension"
+    ]
 
     id = models.CharField(primary_key=True, unique=True, default=bike_id, max_length=255)
 
@@ -70,7 +69,8 @@ class Bike(models.Model):
     visa = models.CharField(max_length=255, blank=True, verbose_name=u"Visa")
 
     # placement of the bike
-    warehouse = models.ForeignKey(Warehouse, blank=True, null=True, on_delete=models.SET_NULL, verbose_name=u"Warehouse")
+    warehouse = models.ForeignKey(Warehouse, blank=True, null=True, on_delete=models.SET_NULL,
+                                  verbose_name=u"Warehouse")
 
     # A+
     a_plus = models.BooleanField(default=False, verbose_name=u"A+")
@@ -85,16 +85,18 @@ class Bike(models.Model):
     # type_of_brake = models.CharField(max_length=255, default="", blank=True, verbose_name=u"Type of Brake")
     brake = models.CharField(max_length=255, default="", blank=True, verbose_name=u"Brake")
     colour = models.CharField(max_length=255, default="", blank=True, verbose_name=u"Colour")
-    size = models.CharField(max_length=255, default='', blank=True, verbose_name=u"Size") # choices=BIKE_SIZES,
+    size = models.CharField(max_length=255, default='', blank=True, verbose_name=u"Size")  # choices=BIKE_SIZES,
     suspension = models.CharField(max_length=255, null=True, blank=True, verbose_name=u"Suspension")
     rear_suspension = models.CharField(max_length=255, null=True, blank=True, verbose_name=u"Rear Suspension")
     extraordinary = models.TextField(max_length=255, null=True, blank=True, verbose_name=u"Extraordinary")
 
     # image(s)
-    image = ResizedImageField(storage=fs, size=[1920, 1080], upload_to=bike_images, blank=True, null=True, verbose_name=u"Image")  #
+    image = ResizedImageField(storage=fs, size=[1920, 1080], upload_to=bike_images, blank=True, null=True,
+                              verbose_name=u"Image")  #
 
     # Shipping
-    container = models.ForeignKey(Container, null=True, blank=True, on_delete=models.SET_NULL, verbose_name=u"Container")
+    container = models.ForeignKey(Container, null=True, blank=True, on_delete=models.SET_NULL,
+                                  verbose_name=u"Container")
 
     # Metadata
     date_created = models.DateField(auto_now_add=True, null=True)
