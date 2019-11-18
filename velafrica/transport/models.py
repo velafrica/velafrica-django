@@ -43,7 +43,7 @@ class Driver(models.Model):
         return u"{}".format(self.name)
 
     class Meta:
-        ordering = ['name']
+        ordering = ['-active', 'name']
 
 
 class VeloState(models.Model):
