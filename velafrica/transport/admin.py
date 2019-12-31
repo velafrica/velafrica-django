@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from django.conf.urls import url
 from django.contrib import admin, messages
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
@@ -14,6 +15,7 @@ from velafrica.stock.models import Warehouse
 from velafrica.transport.forms import RideForm
 from velafrica.transport.models import Car, Driver, VeloState, Ride
 from velafrica.transport.models import Car, Driver, VeloState, Ride, RequestCategory
+from velafrica.transport.views import print_transport_request_view
 
 
 class CarAdmin(SimpleHistoryAdmin):
@@ -264,6 +266,15 @@ class RideAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
             "Auf Google Maps zeigen"
         ) if maps_url else ""
     get_googlemaps_link.short_description = 'Google Maps'
+
+    def get_urls(self):
+        return [
+            url(
+                r'^(?P<rides>.+)/print/$',  # comma separated pks of rides
+                view=print_transport_request_view,
+                name='print-request-view',
+            ),
+        ] + super().get_urls()
 
     def status(self, obj):
         status_html = get_status_circle(status=obj.get_status_ride(), title="Transportstatus")
