@@ -15,7 +15,6 @@ from simple_history.admin import SimpleHistoryAdmin
 from velafrica.organisation.models import Organisation
 from velafrica.stock.models import Warehouse
 from velafrica.transport.forms import RideForm
-from velafrica.transport.models import Car, Driver, VeloState, Ride
 from velafrica.transport.models import Car, Driver, VeloState, Ride, RequestCategory
 from velafrica.transport.views import print_transport_request_view
 
@@ -106,7 +105,7 @@ class RideResource(resources.ModelResource):
 
     class Meta:
         model = Ride
-        fields = ('date', 'from_warehouse', 'from_warehouse__name', 'to_warehouse', 'to_warehouse__name', 'driver', 'driver__name', 'car', 'car__name', 'velos', 'velo_state', 'velo_state__name', 'spare_parts', )
+        fields = ('id', 'from_warehouse', 'from_warehouse__name', 'date', 'date_created', 'date_modified', 'created_by', 'velo_state__name', 'planned_velos', 'request_category', 'request_comment', 'driver', 'car','velos', 'spare_parts', 'stocklist', 'note', 'completed', 'from_street_nr', 'from_zip_code', 'from_city', 'from_contact_name', 'from_contact_phone', 'from_comment', 'to_warehouse', 'to_street_nr', 'to_zip_code', 'to_city', 'to_contact_name', 'to_comment', 'customer_company', 'customer_salutation', 'customer_firstname', 'customer_lastname', 'customer_email', 'customer_phone', 'customer_street_nr', 'customer_zip_code', 'customer_city', 'invoice_same_as_customer', 'charged', 'price', 'invoice_company_name', 'invoice_company_addition', 'invoice_street_nr', 'invoice_zip_code', 'invoice_city', 'invoice_commissioned')
 
 def get_status_circle(status, title=""):
     """
@@ -244,8 +243,7 @@ class RideAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
 
     def get_distance(self, request, obj):
         result = obj.get_distance()
-        print(result)
-        if type(result) == int: 
+        if type(result) == int:
             self.message_user(request, "Die Distanz zwischen {} und {} beträgt {} Meter.".format(obj.from_warehouse, obj.to_warehouse, result))
         else:
             self.message_user(request, "Die Distanz konnte nicht ermittelt werden.", level=messages.WARNING)
