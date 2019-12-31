@@ -69,25 +69,133 @@ class Ride(models.Model):
 
     :model:`stock.StockList`
     """
-    date = models.DateField(blank=False, null=False, default=timezone.now, verbose_name="Datum")
-    from_warehouse = models.ForeignKey(Warehouse, verbose_name='Start',
-                                       related_name='from_warehouse', help_text='Start der Fahrt',
-                                       on_delete=models.CASCADE)
     from_warehouse_detail_address = models.TextField(blank=True, null=True,
                                                    verbose_name='FROM_WAREHOUSE alternative Adress (optional)',
                                                    help_text='Bei Auswahl von "Diverse Spender" als Startpunkt, kann hier optional die genaue Adresse eingetragen werden.')
-    to_warehouse = models.ForeignKey(Warehouse, verbose_name='Ziel', related_name='to_warehouse', help_text='Ziel der Fahrt', on_delete=models.CASCADE)
     to_warehouse_detail_address = models.TextField(blank=True, null=True,
                                                    verbose_name='TO_WAREHOUSE alternative Adress (optional)',
                                                    help_text='Bei Auswahl von "Diverse Spender" als Ziel, kann hier optional die genaue Adresse eingetragen werden.')
-    driver = models.ForeignKey(Driver, verbose_name='Fahrer', help_text='Person die den Transport durchgeführt hat.', on_delete=models.CASCADE)
-    car = models.ForeignKey(Car, verbose_name='Fahrzeug', on_delete=models.CASCADE)
-    velos = models.IntegerField(blank=False, null=False, default=0, verbose_name='Anzahl Velos')
-    velo_state = models.ForeignKey(VeloState, verbose_name='Zustand der Velos', on_delete=models.CASCADE)
+
+    # request
+    date_created = models.DateField(
+        auto_now_add=True,
+        null=True,
+        verbose_name="Auftrag erstellt am",
+    )
+    date_modified = models.DateField(
+        auto_now=True,
+        null=True,
+        verbose_name="Bearbeitet am"
+    )
+    created_by = models.CharField(
+        max_length=255,
+        blank=True,    # TODO: change to false as soon as all rides are within the new format
+        default="",
+        verbose_name="Auftrag erstellt von"
+    )
+    velo_state = models.ForeignKey(
+        VeloState,
+        blank=True,
+        null=True,
+        verbose_name='Zustand der Velos',
+        on_delete=models.CASCADE
+    )
+    planned_velos = models.CharField(max_length=255, blank=True, null=True, verbose_name='Anzahl')
+    request_comment = models.CharField(
+        max_length=255,
+        verbose_name='Bemerkung',
+        blank=True,
+        default="",
+        help_text="Bemerkung zum Auftrag"
+    )
+
+    # ride
+    date = models.DateField(blank=True, null=True, default=timezone.now, verbose_name=u"Ausführdatum")
+    driver = models.ForeignKey(
+        Driver,
+        on_delete=models.CASCADE,
+        verbose_name='Fahrer',
+        blank=True,
+        null=True,
+        help_text='Person die den Transport durchgeführt hat.'
+    )
+    car = models.ForeignKey(
+        Car,
+        on_delete=models.CASCADE,
+        verbose_name='Fahrzeug',
+        blank=True,
+        null=True
+    )
+    velos = models.IntegerField(blank=True, null=True, default=0, verbose_name='Anzahl Velos')
     spare_parts = models.BooleanField(default=False, verbose_name='Ersatzteile transportiert?')
     stocklist = models.OneToOneField(StockList, null=True, blank=True, on_delete=models.SET_NULL)
-    note = models.CharField(blank=True, null=True, max_length=255, verbose_name="Bemerkung", help_text="Bemerkung zur Fahrt")
-    
+    note = models.CharField(blank=True, null=True, max_length=255, verbose_name="Bemerkung",
+                            help_text="Bemerkung zum Fahrt")
+    completed = models.BooleanField(default=False, verbose_name="Auftrag ausgeführt")
+
+    # from
+    from_warehouse = models.ForeignKey(
+        Warehouse,
+        on_delete=models.CASCADE,
+        related_name='from_warehouse',
+        verbose_name='Start',
+        blank=True,
+        null=True,
+        help_text='Start der Fahrt',
+    )
+    from_street_nr = models.CharField(max_length=255, blank=True, default="", verbose_name="Strasse, Nr.")
+    from_zip_code = models.CharField(max_length=255, blank=True, default="", verbose_name="PLZ")
+    from_city = models.CharField(max_length=255, blank=True, default="", verbose_name="Ort")
+    from_contact_name = models.CharField(max_length=255, blank=True, default="", verbose_name="Kontaktperson")
+    from_contact_phone = models.CharField(max_length=255, blank=True, default="", verbose_name="Telefonnummer")
+    from_comment = models.CharField(max_length=255, blank=True, default="", verbose_name="Bemerkung",
+                                    help_text="Bemerkung zum Abholort")
+
+    # to
+    to_warehouse = models.ForeignKey(
+        Warehouse,
+        verbose_name='Ziel',
+        related_name='to_warehouse',
+        help_text='Ziel der Fahrt',
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True
+    )
+    to_street_nr = models.CharField(max_length=255, blank=True, default="", verbose_name="Strasse, Nr.")
+    to_zip_code = models.CharField(max_length=255, blank=True, default="", verbose_name="PLZ")
+    to_city = models.CharField(max_length=255, blank=True, default="", verbose_name="Ort")
+    to_contact_name = models.CharField(max_length=255, blank=True, default="", verbose_name="Kontaktperson")
+    to_comment = models.CharField(
+        max_length=255,
+        blank=True,
+        default="",
+        verbose_name="Bemerkung",
+        help_text="Bemerkung zur Lieferadresse"
+    )
+
+    # customer
+    customer_company = models.CharField(max_length=255, blank=True, default="", verbose_name="Firma")
+    customer_salutation = models.CharField(max_length=255, blank=True, default="", verbose_name="Anrede")
+    customer_firstname = models.CharField(max_length=255, blank=True, default="", verbose_name="Vorname")
+    customer_lastname = models.CharField(max_length=255, blank=True, default="", verbose_name="Nachname")
+    customer_email = models.CharField(max_length=255, blank=True, default="", verbose_name="Email")
+    customer_phone = models.CharField(max_length=255, blank=True, default="", verbose_name="Telefon")
+    customer_street_nr = models.CharField(max_length=255, blank=True, default="", verbose_name="Strasse, Nr.")
+    customer_zip_code = models.CharField(max_length=255, blank=True, default="", verbose_name="PLZ")
+    customer_city = models.CharField(max_length=255, blank=True, default="", verbose_name="Ort")
+
+    # invoice
+    invoice_same_as_customer = models.BooleanField(default=True)
+    charged = models.BooleanField(default=False, verbose_name="Kostenpflichtig")
+    price = models.IntegerField(default=0, verbose_name="Preis")
+    invoice_company_name = models.CharField(max_length=255, blank=True, default="", verbose_name="Firmenname")
+    invoice_company_addition = models.CharField(max_length=255, blank=True, default="", verbose_name="Firmenzusatz")
+    invoice_street_nr = models.CharField(max_length=255, blank=True, default="", verbose_name="Strasse, Nr.")
+    invoice_zip_code = models.CharField(max_length=255, blank=True, default="", verbose_name="PLZ")
+    invoice_city = models.CharField(max_length=255, blank=True, default="", verbose_name="Ort")
+    invoice_commissioned = models.BooleanField(default=False, verbose_name="Rechnung in Auftrag gegeben")
+
+    # optional ride data
     distance = models.IntegerField(verbose_name="Ungefähre Distanz in Meter", blank=True, null=True)
 
     history = HistoricalRecords()
