@@ -125,3 +125,20 @@ class CarAutocomplete(autocomplete.Select2QuerySetView):
             qs = qs.filter(Q(name__icontains=self.q) | Q(organisation__name__icontains=self.q))
 
         return qs
+
+
+def print_transport_request_view(request, rides, *args, **kwargs):
+    return render(
+        request,
+        template_name="transport/print-request.html",
+        context={
+            "title": "Transport Request",
+            "body_attributes": {
+               "onload": "window.print()"
+            },
+            "stylesheets": ["/static/css/transport_request.css"],
+            "logo": "/static/img/velafrica_logo_small.png",
+            "rides": Ride.objects.filter(pk__in=rides.split(","))
+        }
+    )
+
