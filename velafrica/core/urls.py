@@ -49,13 +49,6 @@ auth = [
     url(r'^logout', views.accounts_logout, name='logout'),
 ]
 
-autocomplete = [
-    # autocomplete urls
-    url(r'^product/$', stock_views.ProductAutocomplete.as_view(), name='product'),
-    url(r'^warehouse/$', stock_views.WarehouseAutocomplete.as_view(), name='warehouse'),
-    url(r'^driver/$', transport_views.DriverAutocomplete.as_view(), name='driver'),
-]
-
 # main configuration
 urlpatterns = [
                   url(r'^', include('velafrica.frontend.urls')),
