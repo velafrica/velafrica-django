@@ -231,14 +231,12 @@ class RideAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
     get_distances.short_description = "Distanz berechnen"
 
     def get_googlemaps_link(self, obj):
-        url = obj.get_googlemaps_url()
-        if url:
-            return mark_safe(u"<a href='{}' target='_blank'>{}</a>".format(
-                url,
-                "Auf Google Maps zeigen"
-            ))
-        else:
-            return ""
+        maps_url = obj.get_googlemaps_url()
+        return format_html(
+            u"<a href='{}' target='_blank'>{}</a>",
+            maps_url,
+            "Auf Google Maps zeigen"
+        ) if maps_url else ""
     get_googlemaps_link.short_description = 'Google Maps'
 
 

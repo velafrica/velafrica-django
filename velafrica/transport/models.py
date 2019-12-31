@@ -215,26 +215,30 @@ class Ride(models.Model):
         """
         Get distance from start to end of the driven way, using the Google Maps API.
         """
-        loc1 = self.from_warehouse.get_geolocation()
-        loc2 = self.to_warehouse.get_geolocation()
-        if loc1 and loc2:
-            result = utils.get_distance(loc1, loc2)
-            if type(result) == int:
-                self.distance = result
-                self.save()
-                return result
+        if self.from_warehouse and self.to_warehouse:
+            loc1 = self.from_warehouse.get_geolocation()
+            loc2 = self.to_warehouse.get_geolocation()
+            if loc1 and loc2:
+                result = utils.get_distance(loc1, loc2)
+                if type(result) == int:
+                    self.distance = result
+                    self.save()
+                    return result
         return None
 
     def get_googlemaps_url(self):
         """
         """
-        start = self.from_warehouse.get_address()
-        end = self.to_warehouse.get_address()
-        if start and end:
-            if start.city and start.country and end.city and end.country:
-                return utils.get_googlemaps_url_distance(self.from_warehouse.get_address(), self.to_warehouse.get_address())
+        if self.from_warehouse and self.to_warehouse:
+            start = self.from_warehouse.get_address()
+            end = self.to_warehouse.get_address()
+            if start and end:
+                if start.city and start.country and end.city and end.country:
+                    return utils.get_googlemaps_url_distance(self.from_warehouse.get_address(),
+                                                             self.to_warehouse.get_address())
+        # else:
+        # return utils.get_googlemaps_url_distance(self.from_warehouse_detail_address, self.to_warehouse_detail_address)
         return None
-
 
     def __str__(self):
         try:
