@@ -69,12 +69,6 @@ class Ride(models.Model):
 
     :model:`stock.StockList`
     """
-    from_warehouse_detail_address = models.TextField(blank=True, null=True,
-                                                   verbose_name='FROM_WAREHOUSE alternative Adress (optional)',
-                                                   help_text='Bei Auswahl von "Diverse Spender" als Startpunkt, kann hier optional die genaue Adresse eingetragen werden.')
-    to_warehouse_detail_address = models.TextField(blank=True, null=True,
-                                                   verbose_name='TO_WAREHOUSE alternative Adress (optional)',
-                                                   help_text='Bei Auswahl von "Diverse Spender" als Ziel, kann hier optional die genaue Adresse eingetragen werden.')
 
     # request
     date_created = models.DateField(
