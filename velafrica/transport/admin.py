@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin, messages
+from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 from django_object_actions import DjangoObjectActions
 from import_export import resources
@@ -102,6 +103,30 @@ class RideResource(resources.ModelResource):
     class Meta:
         model = Ride
         fields = ('date', 'from_warehouse', 'from_warehouse__name', 'to_warehouse', 'to_warehouse__name', 'driver', 'driver__name', 'car', 'car__name', 'velos', 'velo_state', 'velo_state__name', 'spare_parts', )
+
+def get_status_circle(status, title=""):
+    """
+    Generates html for a colored circle
+    """
+    return format_html('<div span style="{style}" title="{title}">&nbsp;</div>',
+                       style="; ".join(
+                           [
+                               "display: inline-block",
+                               "margin-right: 2px",
+                               "border-radius: 50%",
+                               "width: 20px",
+                               "height: 20px",
+                               "background-color: {color}".format(
+                                   color={
+                                       "success": "#4DFA90",  # green
+                                       "warning": "#FABE4D",  # orange
+                                       "danger":  "#FF5468",  # red
+                                   }.get(status, "white")
+                               )
+                           ]
+                       ),
+                       title=title
+                       )
 
 
 class RideAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
@@ -239,6 +264,13 @@ class RideAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
             "Auf Google Maps zeigen"
         ) if maps_url else ""
     get_googlemaps_link.short_description = 'Google Maps'
+
+    def status(self, obj):
+        status_html = get_status_circle(status=obj.get_status_ride(), title="Transportstatus")
+        if obj.completed and obj.charged:
+            status_html += get_status_circle(status=obj.get_status_invoice(), title="Rechnungsstatus")
+        return status_html
+    status.short_description = ""  # column header needed ?
 
 
 admin.site.register(RequestCategory)

@@ -211,6 +211,21 @@ class Ride(models.Model):
 
     history = HistoricalRecords()
 
+    def get_status_ride(self):
+        if self.completed:      # transport completed
+            return "success"
+        elif self.date:         # date fix for transport
+            return "warning"
+        else:                   # nothing done yet
+            return "danger"
+
+    def get_status_invoice(self):
+        if not self.charged:
+            return
+        if self.invoice_commissioned:  # invoice sent
+            return "success"
+        return "danger"
+
     def get_distance(self):
         """
         Get distance from start to end of the driven way, using the Google Maps API.
