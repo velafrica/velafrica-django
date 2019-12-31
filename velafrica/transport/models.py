@@ -62,6 +62,16 @@ class VeloState(models.Model):
         ordering = ['name']
 
 
+class RequestCategory(models.Model):
+    category_name = models.CharField(max_length=255, blank=True, default="", verbose_name="Name")
+
+    def __str__(self):
+        return self.category_name
+
+    class Meta:
+        verbose_name_plural = "request categories"
+
+
 class Ride(models.Model):
     """
     Represents a ride from one destination to the other.
@@ -95,6 +105,13 @@ class Ride(models.Model):
         on_delete=models.CASCADE
     )
     planned_velos = models.CharField(max_length=255, blank=True, null=True, verbose_name='Anzahl')
+    request_category = models.ForeignKey(
+        RequestCategory,
+        on_delete=models.CASCADE,
+        verbose_name='Auftragsart',
+        blank=True,
+        null=True,
+    )
     request_comment = models.CharField(
         max_length=255,
         verbose_name='Bemerkung',
