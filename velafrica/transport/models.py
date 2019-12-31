@@ -246,6 +246,20 @@ class Ride(models.Model):
         except:
             return u"Fahrt {}".format(self.id)
 
+    def save(self, *args, **kwargs):
+        # copy customer info for invoice
+        if self.charged and self.invoice_same_as_customer:
+            if not self.invoice_company_name:
+                self.invoice_company_name = self.customer_company
+            if not self.invoice_street_nr:
+                self.invoice_street_nr = self.customer_street_nr
+            if not self.invoice_zip_code:
+                self.invoice_zip_code = self.customer_zip_code
+            if not self.invoice_city:
+                self.invoice_city = self.customer_city
+
+        super().save(*args, **kwargs)
+
     class Meta:
         ordering = [
             'completed',
