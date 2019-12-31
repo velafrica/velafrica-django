@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from django.conf.urls import url
 from django.contrib import admin, messages
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 from django_object_actions import DjangoObjectActions
@@ -134,13 +136,14 @@ def get_status_circle(status, title=""):
 class RideAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
     form = RideForm
     resource_class = RideResource
-    list_display = ['id', 'date', 'from_warehouse', 'to_warehouse', 'driver', 'velos', 'velo_state', 'spare_parts', 'distance', 'get_googlemaps_link']
     search_fields = ['from_warehouse__name', 'to_warehouse__name', 'driver__name']
+    list_display = ['id', 'print_request_button', 'status', 'date', 'date_created', 'from_warehouse', 'to_warehouse']
     list_filter = ['date', 'driver', 'velo_state', 'spare_parts']
-    changelist_actions = ['get_distances']
-    change_actions = ['get_distance']
-    actions = ['get_distances']
     readonly_fields = ['get_googlemaps_link', 'date_created', 'date_modified']
+    changelist_actions = ['redirect_print_request_multiple', 'get_distances']
+    change_actions = ['redirect_print_request_single', 'get_distance']
+    actions = ['redirect_print_request_multiple', 'get_distances']
+
     fieldsets = (
             ('Transport', {
                 'fields': (
@@ -275,6 +278,40 @@ class RideAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
                 name='print-request-view',
             ),
         ] + super().get_urls()
+
+    def print_transport_request_link(self, pks):
+        return reverse(
+            "admin:print-request-view",
+            kwargs={
+                "rides": ",".join(
+                    str(pk) for pk in pks
+                )
+            }
+        )
+
+    def redirect_print_request_multiple(self, request, queryset):
+        return HttpResponseRedirect(
+            redirect_to=self.print_transport_request_link(
+                pks=queryset.values_list('pk', flat=True)
+            )
+        )
+    redirect_print_request_multiple.short_description = "Ausgewählte Aufträge drucken"
+
+    def redirect_print_request_single(self, request, obj):
+        return HttpResponseRedirect(
+            redirect_to=self.print_transport_request_link(
+                pks=[obj.pk]
+            )
+        )
+    redirect_print_request_single.short_description = "Auftrag drucken"
+    redirect_print_request_single.label = "Auftrag drucken"
+
+    def print_request_button(self, obj):
+        return format_html(
+            '<a class="button" href="{link}"  target="_blank">Drucken</a>',
+            link=self.print_transport_request_link(pks=[obj.pk])
+        )
+    print_request_button.short_description = ""  # column header text is not needed
 
     def status(self, obj):
         status_html = get_status_circle(status=obj.get_status_ride(), title="Transportstatus")
