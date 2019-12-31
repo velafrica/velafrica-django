@@ -14,10 +14,12 @@ class Car(models.Model):
     Represents a car.
     """
     name = models.CharField(blank=False, null=True, max_length=255, verbose_name="Name des Fahrzeugs")
-    organisation = models.ForeignKey(Organisation, blank=True, null=True, help_text='Organisation welcher das Fahrzeug gehört.', on_delete=models.CASCADE)
-    image = ResizedImageField(size=[500, 500], upload_to='stock/categories/', blank=True, null=True, help_text='Foto des Fahrzeugs')
+    organisation = models.ForeignKey(Organisation, blank=True, null=True,
+                                     help_text='Organisation welcher das Fahrzeug gehört.', on_delete=models.CASCADE)
+    image = ResizedImageField(size=[500, 500], upload_to='stock/categories/', blank=True, null=True,
+                              help_text='Foto des Fahrzeugs')
     plate = models.CharField(blank=True, null=True, max_length=255, verbose_name='Autokennzeichen')
-    
+
     history = HistoricalRecords()
 
     def __str__(self):
@@ -32,11 +34,16 @@ class Driver(models.Model):
     Represents a driver.
     """
     name = models.CharField(blank=False, null=False, max_length=255, verbose_name="Name des Fahrers")
-    organisation = models.ForeignKey(Organisation, blank=True, null=True, help_text='Organisation bei welcher der Fahrer angestellt ist.', on_delete=models.SET_NULL)
-    active = models.BooleanField(default=True, help_text='Ist der Fahrer noch bei Velafrica? Inaktive Fahrer werden als (inaktiv) in der Auswahl bei den Fahrten aufgeführtgi.')
+    organisation = models.ForeignKey(Organisation, blank=True, null=True,
+                                     help_text='Organisation bei welcher der Fahrer angestellt ist.',
+                                     on_delete=models.SET_NULL)
+    active = models.BooleanField(default=True,
+                                 help_text='Ist der Fahrer noch bei Velafrica? '
+                                           'Inaktive Fahrer werden als (inaktiv) '
+                                           'in der Auswahl bei den Fahrten aufgeführt.')
 
     history = HistoricalRecords()
-    
+
     def __str__(self):
         if not self.active:
             return u"{} (inaktiv)".format(self.name)
@@ -52,7 +59,7 @@ class VeloState(models.Model):
     """
     name = models.CharField(blank=False, null=False, max_length=40, verbose_name="Name des Zustandes")
     description = models.CharField(blank=True, null=True, max_length=255, verbose_name="Beschreibung")
-    
+
     history = HistoricalRecords()
 
     def __str__(self):
@@ -76,8 +83,6 @@ class Ride(models.Model):
     """
     Represents a ride from one destination to the other.
     Used to count how many bicycles went from one place to another in a certain period of time.
-
-    :model:`stock.StockList`
     """
 
     # request
