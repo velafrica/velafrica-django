@@ -243,4 +243,8 @@ class Ride(models.Model):
             return u"Fahrt {}".format(self.id)
 
     class Meta:
-        ordering = ['-date', 'from_warehouse']
+        ordering = [
+            'completed',
+            '-date',
+            '-date_created'
+        ]
