@@ -135,8 +135,8 @@ def get_status_circle(status, title=""):
 class RideAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
     form = RideForm
     resource_class = RideResource
-    search_fields = ['from_warehouse__name', 'to_warehouse__name', 'driver__name']
     list_display = ['id', 'print_request_button', 'status', 'date', 'date_created', 'from_warehouse', 'to_warehouse']
+    search_fields = ['from_warehouse__name', 'to_warehouse__name', 'driver__name', 'id']
     list_filter = ['date', 'driver', 'velo_state', 'spare_parts']
     readonly_fields = ['get_googlemaps_link', 'date_created', 'date_modified']
     changelist_actions = ['redirect_print_request_multiple', 'get_distances']
