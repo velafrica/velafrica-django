@@ -12,6 +12,7 @@ from velafrica.organisation.models import Organisation
 from velafrica.stock.models import Warehouse
 from velafrica.transport.forms import RideForm
 from velafrica.transport.models import Car, Driver, VeloState, Ride
+from velafrica.transport.models import Car, Driver, VeloState, Ride, RequestCategory
 
 
 class CarAdmin(SimpleHistoryAdmin):
@@ -240,6 +241,7 @@ class RideAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
     get_googlemaps_link.short_description = 'Google Maps'
 
 
+admin.site.register(RequestCategory)
 admin.site.register(Car, CarAdmin)
 admin.site.register(Driver, DriverAdmin)
 admin.site.register(VeloState, VeloStateAdmin)
