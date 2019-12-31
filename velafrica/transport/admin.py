@@ -109,10 +109,95 @@ class RideAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
     list_display = ['id', 'date', 'from_warehouse', 'to_warehouse', 'driver', 'velos', 'velo_state', 'spare_parts', 'distance', 'get_googlemaps_link']
     search_fields = ['from_warehouse__name', 'to_warehouse__name', 'driver__name']
     list_filter = ['date', 'driver', 'velo_state', 'spare_parts']
-    readonly_fields = ['get_googlemaps_link']
     changelist_actions = ['get_distances']
     change_actions = ['get_distance']
     actions = ['get_distances']
+    readonly_fields = ['get_googlemaps_link', 'date_created', 'date_modified']
+    fieldsets = (
+            ('Transport', {
+                'fields': (
+                    'date',
+                    ('driver', 'car'),
+                    'note',
+                    'velos',
+                    'completed'
+                )
+            }),
+            (None, {
+                'fields': (
+                    ('from_warehouse', 'to_warehouse'),
+                )
+            }),
+            ('Abholadresse', {
+                'fields': (
+                    'from_street_nr',
+                    'from_zip_code',
+                    'from_city',
+                    'from_contact_name',
+                    'from_contact_phone',
+                    'from_comment'
+                ),
+                'classes': ('collapse', )
+            }),
+            ('Lieferadresse', {
+                'fields': (
+                    'to_street_nr',
+                    'to_zip_code',
+                    'to_city',
+                    'to_contact_name',
+                    'to_comment'
+                ),
+                'classes': ('collapse',)
+            }),
+            ('Auftrag', {
+                'fields': (
+                    ('date_created', 'date_modified'),
+                    'created_by',
+                    'request_category',
+                    'velo_state',
+                    'planned_velos',
+                    'request_comment'
+                ),
+                'classes': ('collapse',)
+            }),
+            ('Auftraggeber*in', {
+                'fields': (
+                    'customer_company',
+                    'customer_salutation',
+                    'customer_firstname',
+                    'customer_lastname',
+                    'customer_street_nr',
+                    'customer_zip_code',
+                    'customer_city',
+                    'customer_phone',
+                    'customer_email',
+                ),
+                'classes': ('collapse',)
+            }),
+            ('Rechnung', {
+                'fields': (
+                    'invoice_same_as_customer',
+                    'charged',
+                    'price',
+                    'invoice_company_name',
+                    'invoice_company_addition',
+                    'invoice_street_nr',
+                    'invoice_zip_code',
+                    'invoice_city',
+                    'invoice_commissioned'
+                ),
+                'classes': ('collapse',)
+            }),
+            ('Zusätzliche Infos', {
+                'fields': (
+                    'spare_parts',
+                    'stocklist',
+                    'distance',
+                    'get_googlemaps_link'
+                ),
+                'classes': ('collapse',)
+            })
+        )
 
     def get_queryset(self, request):
         qs = super(RideAdmin, self).get_queryset(request)
@@ -125,18 +210,6 @@ class RideAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
         # users with no superuser role and no related person should not see any entries
         else:
             return qs.none()
-
-    def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        if db_field.name == 'car':
-            if request.user.is_superuser:
-                pass
-            # other users with a correlating person should only see their organisation
-            elif hasattr(request.user, 'person'):
-                kwargs["queryset"] = Car.objects.filter(organisation=request.user.person.organisation.id)
-            # users with no superuser role and no related person should not see any organisations
-            else:
-                kwargs["queryset"] = Car.objects.none()
-        return super(RideAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
 
     def get_distance(self, request, obj):
         result = obj.get_distance()

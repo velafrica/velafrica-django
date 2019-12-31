@@ -85,6 +85,7 @@ def transport(request):
         }
     )
 
+
 class DriverAutocomplete(autocomplete.Select2QuerySetView):
     """
     Used for django-admin-autocomplete
@@ -100,6 +101,26 @@ class DriverAutocomplete(autocomplete.Select2QuerySetView):
         else:
             return Driver.objects.none()
 
+        if self.q:
+            qs = qs.filter(Q(name__icontains=self.q) | Q(organisation__name__icontains=self.q))
+
+        return qs
+
+
+class CarAutocomplete(autocomplete.Select2QuerySetView):
+    """
+    Used for django-admin-autocomplete
+    """
+    def get_queryset(self):
+        # Don't forget to filter out results depending on the visitor !
+        if self.request.user.is_superuser:
+            qs = Car.objects.all()
+            # other users with a correlating person should only see their organisation
+        elif hasattr(self.request.user, 'person') and self.request.user.is_authenticated:
+            qs = Car.objects.filter(organisation=self.request.user.person.organisation.id)
+            # users with no superuser role and no related person should not see any organisations
+        else:
+            return Car.objects.none()
         if self.q:
             qs = qs.filter(Q(name__icontains=self.q) | Q(organisation__name__icontains=self.q))
 
