@@ -111,8 +111,8 @@ def print_transport_request_view(request, rides, *args, **kwargs):
             "body_attributes": {
                "onload": "window.print()"
             },
-            "stylesheets": ["/static/css/transport_request.css"],
-            "logo": "/static/img/velafrica_logo_small.png",
+            "stylesheets": ["css/transport_request.css"],
+            "logo": "img/velafrica_logo_small.png",
             "rides": Ride.objects.filter(pk__in=rides.split(","))
         }
     )

@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <title>{{ title }}</title>
     {% for stylesheet in stylesheets %}
-        <link rel="stylesheet" type="text/css" href="{{ stylesheet }}">
+        <link rel="stylesheet" type="text/css" href="{% static stylesheet %}">
     {% endfor %}
 </head>
 <body {% for k, v in body_attributes.items %}{{k}}="{{v}}"{% endfor %}>
@@ -12,7 +13,7 @@
         <div class="request">
             <header>
                 <div class="title"><span>Transportauftrag {{ ride.pk }} </span></div>
-                <div class="logo"><img src="{{ logo }}" /></div>
+                <div class="logo"><img src="{% static logo %}" /></div>
             </header>
 
             <div class="inside">
