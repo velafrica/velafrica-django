@@ -102,6 +102,20 @@ class CarAutocomplete(autocomplete.Select2QuerySetView):
         return qs
 
 
+def prepare_ride(obj):
+    if obj.from_warehouse and obj.from_warehouse.get_address():
+        obj.from_street_nr = obj.from_warehouse.get_address().street
+        obj.from_zip_code = obj.from_warehouse.get_address().zipcode
+        obj.from_city = obj.from_warehouse.get_address().city
+
+    if obj.to_warehouse and obj.to_warehouse.get_address():
+        obj.to_street_nr = obj.to_warehouse.get_address().street
+        obj.to_zip_code = obj.to_warehouse.get_address().zipcode
+        obj.to_city = obj.to_warehouse.get_address().city
+
+    return obj
+
+
 def print_transport_request_view(request, rides, *args, **kwargs):
     return render(
         request,
@@ -113,7 +127,7 @@ def print_transport_request_view(request, rides, *args, **kwargs):
             },
             "stylesheets": ["css/transport_request.css"],
             "logo": "img/velafrica_logo_small.png",
-            "rides": Ride.objects.filter(pk__in=rides.split(","))
+            "rides": [prepare_ride(r) for r in Ride.objects.filter(pk__in=rides.split(","))]
         }
     )
 
