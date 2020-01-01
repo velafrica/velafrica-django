@@ -2,6 +2,7 @@
 from django.conf.urls import url
 from django.contrib import admin, messages
 from django.http import HttpResponseRedirect
+from django.templatetags.static import static
 from django.urls import reverse
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
@@ -309,7 +310,7 @@ class RideAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
             u'<a href="{link}" title="{title}" target="_blank"><img src="{img}" /></a>',
             link=self.print_transport_request_link(pks=[obj.pk]),
             title='Drucken',
-            img="/static/img/print.png"
+            img=static("img/print.png")
         )
     print_request_button.short_description = ""  # column header text is not needed
 
