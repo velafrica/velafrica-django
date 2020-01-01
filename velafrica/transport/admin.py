@@ -135,7 +135,7 @@ def get_status_circle(status, title=""):
 class RideAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
     form = RideForm
     resource_class = RideResource
-    list_display = ['id', 'print_request_button', 'status', 'date', 'date_created', 'from_warehouse', 'to_warehouse']
+    list_display = ['id', 'print_request_button', 'status', 'date', 'date_created', 'start', 'end']
     search_fields = ['from_warehouse__name', 'to_warehouse__name', 'driver__name', 'id']
     list_filter = ['date', 'driver', 'velo_state', 'spare_parts']
     readonly_fields = ['get_googlemaps_link', 'date_created', 'date_modified']
@@ -319,6 +319,20 @@ class RideAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
             status_html += get_status_circle(status=obj.get_status_invoice(), title="Rechnungsstatus")
         return status_html
     status.short_description = ""  # column header needed ?
+
+    def start(self, obj):
+        if obj.from_warehouse:
+            return obj.from_warehouse
+        return obj.get_from_address()
+    start.short_description = "Start"
+
+    def end(self, obj):
+        if obj.to_warehouse:
+            return obj.to_warehouse
+        return obj.get_to_address()
+    end.short_description = "Ziel"
+
+
 
 
 admin.site.register(RequestCategory)
