@@ -3,41 +3,27 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.template import RequestContext
 from dal import autocomplete
-from django.db.models import Q
-
+from django.db.models import Q, Count, Sum
 
 from velafrica.transport.models import Ride, Car, Driver
 
 
-def get_velo_count(rides):
-    velos = 0
-    for r in rides:
-        velos += r.velos
-    return velos
-
-
-def get_charts(cars, rides):
-    charts = {}
-    # by car
-    charts_car = {}
-    for c in cars:
-        rs = rides.filter(car=c.id)
-        charts_car[c.name] = rs.count()
-    charts['Cars'] = charts_car
-
-    # by driver
-    charts_driver = {}
-    for d in Driver.objects.all():
-        rs = rides.filter(driver=d.id)
-        charts_driver[d.name] = rs.count()
-    charts['Driver'] = charts_driver
-
-    # by spare parts / no spare parts
-    charts['Freight'] = {
-        'Spare Parts': rides.filter(spare_parts=True).count(),
-        'Velos': rides.filter(spare_parts=False).count()
+def get_charts():
+    return {
+        'Cars': {
+            c.name: c.ride__count
+            for c in Car.objects.annotate(Count('ride'))
+        },
+        # There're probably too many drivers
+        # 'Driver': {
+        #     d.name: d.ride__count
+        #     for d in Driver.objects.annotate(Count('ride'))
+        # },
+        'Freight': {
+            'Spare Parts': Ride.objects.filter(spare_parts=True).count(),
+            'No Spare Parts': Ride.objects.filter(spare_parts=False).count()
+        }
     }
-    return charts
 
 @login_required
 def transport(request):
@@ -62,26 +48,15 @@ def transport(request):
   
     :template:`transport/index.html`
     """
-    rides = Ride.objects.all()[:100]
-    rides_count = Ride.objects.all().count
-
-    # TODO: refactor get_velo_count
-    # velos = get_velo_count(rides)
-    velos = 0
-
-    cars = Car.objects.all()
-  
-    # chart data
-    # TODO: refactor get_charts
-    # charts = get_charts(cars, rides)
-    charts = {}
-
-    return render(request, 'transport/index.html', {
-        'rides': rides,
-        'rides_count': rides_count,
-        'velos': velos,
-        'cars': cars,
-        'charts': charts,
+    return render(
+        request,
+        template_name='transport/index.html',
+        context={
+            'rides': Ride.objects.all()[:100],
+            'rides_count': Ride.objects.count(),
+            'velos': Ride.objects.aggregate(velo_count=Sum('velos'))['velo_count'],
+            'cars':  Car.objects.all(),
+            'charts': {}  # get_charts() disabled for now
         }
     )
 
