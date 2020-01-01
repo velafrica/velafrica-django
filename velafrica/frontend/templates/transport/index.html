@@ -21,14 +21,13 @@
             <th>Total Fahrten:</th>
             <td>{{ rides_count }}</td>
         </tr>
-        <!-- TODO: refactor velo count
-    <tr>
-		<th>Total Velos:</th>
-		<td>{{ velos }}</td>
-	</tr> -->
+        <tr>
+            <th>Total Velos:</th>
+            <td>{{ velos }}</td>
+        </tr>
     </table>
     <div class="row">
-        {% for key, val in charts.iteritems %}
+        {% for key, val in charts.items %}
 
             <div class="col-md-3">
                 <canvas id="{{ key }}" width="300" height="300"></canvas>
@@ -45,7 +44,7 @@
 {% block content %}
     <h2>Fahrten</h2>
     {% if rides_count <= 0 %}<p>Es wurden bisher keine Fahrten erfasst.</p>{% else %}
-        <p>Es werden nur die 100 neusten Fahrten angezeigt (von {{ rides_count }} total).</p>
+        <p> {{ rides.count }} von {{ rides_count }} Rides angezeigt.</p>
         <table class="table">
             <tr>
                 <th>Datum</th>
@@ -102,10 +101,10 @@
 
         $(function() {
 
-            {% for key, val in charts.iteritems %}
+            {% for key, val in charts.items %}
                 var labels = [];
                 var data = [];
-                {% for subkey, subval in val.iteritems %}
+                {% for subkey, subval in val.items %}
                     labels.push("{{ subkey}}");
                     data.push("{{ subval }}");
                 {% endfor %}
