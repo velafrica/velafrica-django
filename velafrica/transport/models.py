@@ -256,9 +256,35 @@ class Ride(models.Model):
                 if start.city and start.country and end.city and end.country:
                     return utils.get_googlemaps_url_distance(self.from_warehouse.get_address(),
                                                              self.to_warehouse.get_address())
-        # else:
-        # return utils.get_googlemaps_url_distance(self.from_warehouse_detail_address, self.to_warehouse_detail_address)
         return None
+
+    def get_from_address(self):
+        if self.from_warehouse and self.from_warehouse.get_address():
+            return str(self.from_warehouse.get_address())
+        address = ""
+        if self.from_street_nr:
+            address += u"{}".format(self.from_street_nr)
+        if self.from_zip_code:
+            address += u", {}".format(self.from_zip_code)
+            if self.from_city:
+                address += u" {}".format(self.from_city)
+        elif self.from_city:
+            address += u", {}".format(self.from_city)
+        return address
+
+    def get_to_address(self):
+        if self.to_warehouse and self.to_warehouse.get_address():
+            return str(self.to_warehouse.get_address())
+        address = ""
+        if self.to_street_nr:
+            address += u"{}".format(self.to_street_nr)
+        if self.to_zip_code:
+            address += u", {}".format(self.to_zip_code)
+            if self.to_city:
+                address += u" {}".format(self.to_city)
+        elif self.to_city:
+            address += u", {}".format(self.to_city)
+        return address
 
     def __str__(self):
         try:
