@@ -61,9 +61,20 @@
             {% for r in rides %}
                 <tr>
                     <td>{{ r.date }}</td>
-                    <td><a href="{% url 'frontend:warehouse_detail' r.from_warehouse.id %}">{{ r.from_warehouse }}</a>
+                    <td>
+                        {% if r.from_warehouse %}
+                            <a href="{% url 'frontend:warehouse_detail' r.from_warehouse.id %}">{{ r.from_warehouse }}</a>
+                        {% else %}
+                            <a href="https://map.search.ch/?q={{ r.get_from_address | urlencode }}" target="_blank">{{ r.get_from_address }}</a>
+                        {% endif %}
                     </td>
-                    <td><a href="{% url 'frontend:warehouse_detail' r.to_warehouse.id %}">{{ r.to_warehouse }}</a></td>
+                    <td>
+                        {% if r.to_warehouse %}
+                            <a href="{% url 'frontend:warehouse_detail' r.to_warehouse.id %}">{{ r.to_warehouse }}</a>
+                        {% else %}
+                            <a href="https://map.search.ch/?q={{ r.get_to_address | urlencode }}" target="_blank">{{ r.get_to_address }}</a>
+                        {% endif %}
+                    </td>
                     <td>{{ r.driver }}</td>
                     <td>{{ r.car }}</td>
                     <td>{% if r.velos <= 0 %}<span class="label label-danger">{% else %}
