@@ -306,8 +306,10 @@ class RideAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
 
     def print_request_button(self, obj):
         return format_html(
-            '<a class="button" href="{link}"  target="_blank">Drucken</a>',
-            link=self.print_transport_request_link(pks=[obj.pk])
+            u'<a href="{link}" title="{title}" target="_blank"><img src="{img}" /></a>',
+            link=self.print_transport_request_link(pks=[obj.pk]),
+            title='Drucken',
+            img="/static/img/print.png"
         )
     print_request_button.short_description = ""  # column header text is not needed
 
