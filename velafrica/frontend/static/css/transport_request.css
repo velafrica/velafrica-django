@@ -106,3 +106,7 @@ td {
 	margin-bottom: 5px;
 }
 
+.part {
+	page-break-inside:avoid;
+}
+
