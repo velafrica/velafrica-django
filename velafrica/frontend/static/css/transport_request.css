@@ -16,11 +16,19 @@ body {
 	font: 10pt "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
 }
 
+p, h1 {
+	margin: 0;
+	padding: 0;
+}
+
+
+/* Header */
+
 header {
 	margin-bottom: 22px;
 }
 
-Header .title span {
+header .title span {
 	font-size: 20px;
 }
 
@@ -33,80 +41,73 @@ header .logo {
 	margin-top: -25px;
 }
 
-div.request {
+
+/* Transport Request Formatting */
+
+.request {
 	padding: 1.5cm;
 	background: white;
 	clear: both;
 	page-break-after: always;
 }
 
-p, h1 {
-	margin: 0;
-	padding: 0;
+.request .table-caption {
+	font-size: 11pt;
+	margin-top: 12px;
+	margin-bottom: 5px;
 }
 
-table {
+.request .part {
+	page-break-inside: avoid;
+}
+
+.request table {
 	width: 100%;
 	margin-bottom: 0;
 	border-collapse: collapse;
 	border-spacing: 0;
 }
 
-td {
-	border: 1px solid;
-	padding: 4px;
+.request td {
+	border: 1px solid #777;
+	padding: 2px 4px;
 	min-width: 3cm;
 }
 
-.note {
-	font-size: 8pt;
-}
-
-.label {
-	background: #ccc;
-	border: 1px solid #333;
-	padding: 2px;
+.request td.label {
+	background: #e0e0e0;
 	width: 3cm;
 }
 
-.agb-text {
-	font-size: 9pt;
+.request .note {
+	font-size: 8pt;
 }
 
-.agb {
-	border: none;
-	padding: 4px 0;
-}
+
+/* signature style */
 
 .agb td {
 	border: none;
 	min-width: 0;
-	padding: 4px 0;
+	padding: 6px 0 4px;
 }
 
-.signature td {
-	padding-top: 15px;
+.agb td.agb-text {
+	font-size: 9pt;
 }
 
-.signature .gap {
+.agb .signature td {
+	padding-top: 12px;
+}
+
+.agb .signature .gap {
 	width: 0.5cm;
 }
 
-.signature .fill-out {
-	border: none;
+.agb .signature .fill-out {
 	min-width: 5cm;
 	border-bottom: 1px solid #333;
 	padding-top: 0;
 	margin-top: 0;
-}
-
-.table-caption {
-	font-size: 12pt;
-	margin-top: 12px;
-	margin-bottom: 5px;
-}
-
-.part {
-	page-break-inside:avoid;
 }
 
