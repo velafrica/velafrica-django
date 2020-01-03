@@ -96,7 +96,7 @@ class Bike(models.Model):
                                  ])
 
     # image(s)
-    image = ResizedImageField(storage=fs, size=[1920, 1080], upload_to=bike_images, blank=True, null=True,
+    image = ResizedImageField(storage=fs, size=[1920, 1080], upload_to="bikes/", blank=True, null=True,
                               verbose_name=u"Image")  #
 
     # Shipping
