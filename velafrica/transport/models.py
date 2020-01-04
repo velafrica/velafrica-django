@@ -109,7 +109,13 @@ class Ride(models.Model):
         verbose_name='Zustand der Velos',
         on_delete=models.CASCADE
     )
-    planned_velos = models.CharField(max_length=255, blank=True, null=True, verbose_name='Anzahl')
+    planned_velos = models.CharField(
+        max_length=255,
+        blank=True,
+        null=True,
+        verbose_name='Voraussichtliche Anzahl Velos',
+        help_text='Zustand bitte im oberen Abschnitt ausfüllen'
+    )
     request_category = models.ForeignKey(
         RequestCategory,
         on_delete=models.CASCADE,
@@ -142,7 +148,7 @@ class Ride(models.Model):
         blank=True,
         null=True
     )
-    velos = models.IntegerField(blank=True, null=True, default=0, verbose_name='Anzahl Velos')
+    velos = models.IntegerField(blank=True, null=True, default=0, verbose_name='Anzahl transportierter Velos')
     spare_parts = models.BooleanField(default=False, verbose_name='Ersatzteile transportiert?')
     stocklist = models.OneToOneField(StockList, null=True, blank=True, on_delete=models.SET_NULL)
     note = models.CharField(blank=True, null=True, max_length=255, verbose_name="Bemerkung",

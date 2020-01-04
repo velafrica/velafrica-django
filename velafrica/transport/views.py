@@ -5,7 +5,7 @@ from django.template import RequestContext
 from dal import autocomplete
 from django.db.models import Q, Count, Sum
 
-from velafrica.transport.models import Ride, Car, Driver
+from velafrica.transport.models import Ride, Car, Driver, VeloState
 
 
 def get_charts():
@@ -80,6 +80,11 @@ class DriverAutocomplete(autocomplete.Select2QuerySetView):
             qs = qs.filter(Q(name__icontains=self.q) | Q(organisation__name__icontains=self.q))
 
         return qs
+
+
+class VeloStateAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        return VeloState.objects.all()
 
 
 class CarAutocomplete(autocomplete.Select2QuerySetView):

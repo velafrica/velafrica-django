@@ -19,4 +19,5 @@ urlpatterns = [
     url(r'^warehouse/$', stock_views.WarehouseAutocomplete.as_view(), name='warehouse'),
     url(r'^driver/$', transport_views.DriverAutocomplete.as_view(), name='driver'),
     path('car/', transport_views.CarAutocomplete.as_view(), name='car'),
+    path('velostate/', transport_views.VeloStateAutocomplete.as_view(), name='velostate'),
 ]

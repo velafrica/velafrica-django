@@ -204,7 +204,7 @@ class RideAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
                     'date',
                     ('driver', 'car'),
                     'note',
-                    'velos',
+                    ('velos', 'velo_state'),
                     'completed'
                 )
             }),
@@ -212,6 +212,15 @@ class RideAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
                 'fields': (
                     ('from_warehouse', 'to_warehouse'),
                 )
+            }),
+            ('Auftrag', {
+                'fields': (
+                    ('date_created', 'date_modified'),
+                    'created_by',
+                    'request_category',
+                    'planned_velos',
+                    'request_comment'
+                ),
             }),
             ('Abholadresse', {
                 'fields': (
@@ -222,7 +231,7 @@ class RideAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
                     'from_contact_phone',
                     'from_comment'
                 ),
-                'classes': ('collapse', )
+                'classes': ('collapse',)
             }),
             ('Lieferadresse', {
                 'fields': (
@@ -231,17 +240,6 @@ class RideAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
                     'to_city',
                     'to_contact_name',
                     'to_comment'
-                ),
-                'classes': ('collapse',)
-            }),
-            ('Auftrag', {
-                'fields': (
-                    ('date_created', 'date_modified'),
-                    'created_by',
-                    'request_category',
-                    'velo_state',
-                    'planned_velos',
-                    'request_comment'
                 ),
                 'classes': ('collapse',)
             }),
