@@ -90,25 +90,25 @@ class RideResource(resources.ModelResource):
     """
     Define the ride resource for import / export.
     """
-    from_warehouse = Field(
-        column_name='from_warehouse',
-        attribute='from_warehouse',
-        widget=ForeignKeyWidget(Warehouse, 'id'))
 
-    date = Field(
-        column_name='date',
-        attribute='date',
-        widget=DateWidget(format="%d.%m.%Y"))
-
-    def get_instance(self, instance_loader, row):
-        """
-        Don't check for existing data rows.
-        """
-        return False
+    date = Field('date', 'date', DateWidget(format="%d.%m.%Y"))
+    date_created = Field('date_created', 'date_created', DateWidget(format="%d.%m.%Y"))
 
     class Meta:
         model = Ride
-        fields = ('id', 'from_warehouse', 'from_warehouse__name', 'date', 'date_created', 'date_modified', 'created_by', 'velo_state__name', 'planned_velos', 'request_category', 'request_comment', 'driver', 'car','velos', 'spare_parts', 'stocklist', 'note', 'completed', 'from_street_nr', 'from_zip_code', 'from_city', 'from_contact_name', 'from_contact_phone', 'from_comment', 'to_warehouse', 'to_street_nr', 'to_zip_code', 'to_city', 'to_contact_name', 'to_comment', 'customer_company', 'customer_salutation', 'customer_firstname', 'customer_lastname', 'customer_email', 'customer_phone', 'customer_street_nr', 'customer_zip_code', 'customer_city', 'invoice_same_as_customer', 'charged', 'price', 'invoice_company_name', 'invoice_company_addition', 'invoice_street_nr', 'invoice_zip_code', 'invoice_city', 'invoice_commissioned')
+        export_order = (
+            'id', 'date_created', 'date', 'driver__name', 'car__name', 'velos', 'velo_state__name', 'note', 'completed',
+            'from_warehouse__name', 'to_warehouse__name', 'created_by', 'request_category__category_name',
+            'planned_velos', 'request_comment', 'from_street_nr', 'from_zip_code', 'from_city', 'from_contact_name',
+            'from_contact_phone', 'from_comment', 'to_street_nr', 'to_zip_code', 'to_city', 'to_contact_name',
+            'to_comment', 'customer_company', 'customer_salutation', 'customer_firstname', 'customer_lastname',
+            'customer_email', 'customer_phone', 'customer_street_nr', 'customer_zip_code', 'customer_city',
+            'invoice_same_as_customer', 'charged', 'price', 'invoice_company_name', 'invoice_company_addition',
+            'invoice_street_nr', 'invoice_zip_code', 'invoice_city', 'invoice_commissioned', 'spare_parts', 'stocklist',
+            'distance'
+        )
+        fields = export_order
+
 
 def get_status_circle(status, title=""):
     """
