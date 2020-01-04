@@ -287,10 +287,7 @@ class Ride(models.Model):
         return address
 
     def __str__(self):
-        try:
-            return u"Fahrt {}, {}: {} nach {}".format(self.id, self.date, self.from_warehouse, self.to_warehouse)
-        except:
-            return u"Fahrt {}".format(self.id)
+        return u"Transport {}".format(self.id)
 
     def save(self, *args, **kwargs):
         # copy customer info for invoice
