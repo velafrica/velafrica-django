@@ -2,7 +2,7 @@ from dal import autocomplete
 from django import forms
 
 from velafrica.stock.models import Warehouse
-from velafrica.transport.models import Ride, Driver, Car
+from velafrica.transport.models import Ride, Driver, Car, VeloState
 
 
 class RideForm(forms.ModelForm):
@@ -29,6 +29,12 @@ class RideForm(forms.ModelForm):
         widget=autocomplete.ModelSelect2(url='autocomplete:car'),
         required=False,
         label='Fahrzeug'
+    )
+    velo_state = forms.ModelChoiceField(
+        queryset=VeloState.objects.all(),
+        widget=autocomplete.ModelSelect2(url='autocomplete:velostate'),
+        required=False,
+        label="Zustand der Velos"
     )
 
     class Meta:
