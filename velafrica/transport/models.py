@@ -132,7 +132,7 @@ class Ride(models.Model):
     )
 
     # ride
-    date = models.DateField(blank=True, null=True, default=timezone.now, verbose_name=u"Ausführdatum")
+    date = models.DateField(blank=True, null=True, verbose_name=u"Ausführdatum")
     driver = models.ForeignKey(
         Driver,
         on_delete=models.CASCADE,
