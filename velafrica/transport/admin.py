@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.conf.urls import url
 from django.contrib import admin, messages
+from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.templatetags.static import static
 from django.urls import reverse
@@ -15,6 +16,7 @@ from simple_history.admin import SimpleHistoryAdmin
 
 from velafrica.organisation.models import Organisation
 from velafrica.stock.models import Warehouse
+from velafrica.transport.filter import MultiListFilter
 from velafrica.transport.forms import RideForm
 from velafrica.transport.models import Car, Driver, VeloState, Ride, RequestCategory
 from velafrica.transport.views import print_transport_request_view
@@ -133,12 +135,64 @@ def get_status_circle(status, title=""):
                        )
 
 
+
+class TransportStatusFilter(MultiListFilter):
+    title = 'Transportstatus'
+    parameter_name = 'transport_status'
+
+    def options(self):
+        return [
+            MultiListFilter.Option(
+                key='new',
+                title='Neue Aufträge',
+                query=Q(completed__exact=False, date__isnull=True)
+            ),
+            MultiListFilter.Option(
+                key='planned',
+                title='Termin vereinbart',
+                query=Q(completed__exact=False, date__isnull=False)
+            ),
+            MultiListFilter.Option(
+                key='completed',
+                title='Erledigte Aufträge',
+                query=Q(completed__exact=True)
+            )
+        ]
+
+
+class InvoiceStatusFilter(MultiListFilter):
+    title = 'Rechnungsstatus'
+    parameter_name = 'invoice_status'
+
+    def options(self):
+        return [
+            MultiListFilter.Option(
+                key='uncommissioned',
+                title='Neue Kostenpflichtige',
+                query=Q(charged__exact=True, invoice_commissioned__exact=False)
+            ),
+            MultiListFilter.Option(
+                key='commissioned',
+                title='Rechnung versendet',
+                query=Q(charged__exact=True, invoice_commissioned__exact=True)
+            )
+        ]
+
+
+# TODO: Make searchable
+# TODO: Add filters
+
 class RideAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
     form = RideForm
     resource_class = RideResource
     list_display = ['id', 'print_request_button', 'status', 'date', 'date_created', 'start', 'end']
     search_fields = ['from_warehouse__name', 'to_warehouse__name', 'driver__name', 'id']
-    list_filter = ['date', 'driver', 'velo_state', 'spare_parts']
+    list_filter = [
+        TransportStatusFilter,
+        InvoiceStatusFilter,
+        'date',
+        'date_created',
+    ]
     readonly_fields = ['get_googlemaps_link', 'date_created', 'date_modified']
     changelist_actions = ['redirect_print_request_multiple', 'get_distances']
     change_actions = ['redirect_print_request_single', 'get_distance']
