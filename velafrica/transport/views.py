@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-from django.template import RequestContext
 from dal import autocomplete
 from django.db.models import Q, Count, Sum
 
@@ -24,6 +23,7 @@ def get_charts():
             'No Spare Parts': Ride.objects.filter(spare_parts=False).count()
         }
     }
+
 
 @login_required
 def transport(request):
@@ -65,6 +65,7 @@ class DriverAutocomplete(autocomplete.Select2QuerySetView):
     """
     Used for django-admin-autocomplete
     """
+
     def get_queryset(self):
         # Don't forget to filter out results depending on the visitor !
         if self.request.user.is_superuser:
@@ -91,6 +92,7 @@ class CarAutocomplete(autocomplete.Select2QuerySetView):
     """
     Used for django-admin-autocomplete
     """
+
     def get_queryset(self):
         # Don't forget to filter out results depending on the visitor !
         if self.request.user.is_superuser:
@@ -128,11 +130,10 @@ def print_transport_request_view(request, rides, *args, **kwargs):
         context={
             "title": "Transport Request",
             "body_attributes": {
-               "onload": "window.print()"
+                "onload": "window.print()"
             },
             "stylesheets": ["css/transport_request.css"],
             "logo": "img/velafrica_logo_small.png",
             "rides": [prepare_ride(r) for r in Ride.objects.filter(pk__in=rides.split(","))]
         }
     )
-
