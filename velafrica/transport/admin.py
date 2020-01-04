@@ -6,16 +6,14 @@ from django.http import HttpResponseRedirect
 from django.templatetags.static import static
 from django.urls import reverse
 from django.utils.html import format_html
-from django.utils.safestring import mark_safe
 from django_object_actions import DjangoObjectActions
 from import_export import resources
 from import_export.admin import ImportExportMixin
 from import_export.fields import Field
-from import_export.widgets import DateWidget, ForeignKeyWidget
+from import_export.widgets import DateWidget
 from simple_history.admin import SimpleHistoryAdmin
 
 from velafrica.organisation.models import Organisation
-from velafrica.stock.models import Warehouse
 from velafrica.transport.filter import MultiListFilter
 from velafrica.transport.forms import RideForm
 from velafrica.transport.models import Car, Driver, VeloState, Ride, RequestCategory
@@ -114,26 +112,26 @@ def get_status_circle(status, title=""):
     """
     Generates html for a colored circle
     """
-    return format_html('<div span style="{style}" title="{title}">&nbsp;</div>',
-                       style="; ".join(
-                           [
-                               "display: inline-block",
-                               "margin-right: 2px",
-                               "border-radius: 50%",
-                               "width: 20px",
-                               "height: 20px",
-                               "background-color: {color}".format(
-                                   color={
-                                       "success": "#4DFA90",  # green
-                                       "warning": "#FABE4D",  # orange
-                                       "danger":  "#FF5468",  # red
-                                   }.get(status, "white")
-                               )
-                           ]
-                       ),
-                       title=title
-                       )
-
+    return format_html(
+        '<div span style="{style}" title="{title}">&nbsp;</div>',
+        style="; ".join(
+            [
+                "display: inline-block",
+                "margin-right: 2px",
+                "border-radius: 50%",
+                "width: 20px",
+                "height: 20px",
+                "background-color: {color}".format(
+                    color={
+                        "success": "#4DFA90",  # green
+                        "warning": "#FABE4D",  # orange
+                        "danger": "#FF5468",  # red
+                    }.get(status, "white")
+                )
+            ]
+        ),
+        title=title
+    )
 
 
 class TransportStatusFilter(MultiListFilter):
@@ -179,13 +177,19 @@ class InvoiceStatusFilter(MultiListFilter):
         ]
 
 
-# TODO: Make searchable
-# TODO: Add filters
-
 class RideAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
     form = RideForm
     resource_class = RideResource
-    list_display = ['id', 'print_request_button', 'status', 'date', 'date_created', 'start', 'end']
+
+    list_display = [
+        'id',
+        'print_request_button',
+        'status',
+        'date',
+        'date_created',
+        'start',
+        'end',
+    ]
 
     search_fields = [
         'id',
@@ -201,94 +205,95 @@ class RideAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
         'date',
         'date_created',
     ]
+
     readonly_fields = ['get_googlemaps_link', 'date_created', 'date_modified']
     changelist_actions = ['redirect_print_request_multiple', 'get_distances']
     change_actions = ['redirect_print_request_single', 'get_distance']
     actions = ['redirect_print_request_multiple', 'get_distances']
 
     fieldsets = (
-            ('Transport', {
-                'fields': (
-                    'date',
-                    ('driver', 'car'),
-                    'note',
-                    ('velos', 'velo_state'),
-                    'completed'
-                )
-            }),
-            (None, {
-                'fields': (
-                    ('from_warehouse', 'to_warehouse'),
-                )
-            }),
-            ('Auftrag', {
-                'fields': (
-                    ('date_created', 'date_modified'),
-                    'created_by',
-                    'request_category',
-                    'planned_velos',
-                    'request_comment'
-                ),
-            }),
-            ('Abholadresse', {
-                'fields': (
-                    'from_street_nr',
-                    'from_zip_code',
-                    'from_city',
-                    'from_contact_name',
-                    'from_contact_phone',
-                    'from_comment'
-                ),
-                'classes': ('collapse',)
-            }),
-            ('Lieferadresse', {
-                'fields': (
-                    'to_street_nr',
-                    'to_zip_code',
-                    'to_city',
-                    'to_contact_name',
-                    'to_comment'
-                ),
-                'classes': ('collapse',)
-            }),
-            ('Auftraggeber*in', {
-                'fields': (
-                    'customer_company',
-                    'customer_salutation',
-                    'customer_firstname',
-                    'customer_lastname',
-                    'customer_street_nr',
-                    'customer_zip_code',
-                    'customer_city',
-                    'customer_phone',
-                    'customer_email',
-                ),
-                'classes': ('collapse',)
-            }),
-            ('Rechnung', {
-                'fields': (
-                    'invoice_same_as_customer',
-                    'charged',
-                    'price',
-                    'invoice_company_name',
-                    'invoice_company_addition',
-                    'invoice_street_nr',
-                    'invoice_zip_code',
-                    'invoice_city',
-                    'invoice_commissioned'
-                ),
-                'classes': ('collapse',)
-            }),
-            ('Zusätzliche Infos', {
-                'fields': (
-                    'spare_parts',
-                    'stocklist',
-                    'distance',
-                    'get_googlemaps_link'
-                ),
-                'classes': ('collapse',)
-            })
-        )
+        ('Transport', {
+            'fields': (
+                'date',
+                ('driver', 'car'),
+                'note',
+                ('velos', 'velo_state'),
+                'completed'
+            )
+        }),
+        (None, {
+            'fields': (
+                ('from_warehouse', 'to_warehouse'),
+            )
+        }),
+        ('Auftrag', {
+            'fields': (
+                ('date_created', 'date_modified'),
+                'created_by',
+                'request_category',
+                'planned_velos',
+                'request_comment'
+            ),
+        }),
+        ('Abholadresse', {
+            'fields': (
+                'from_street_nr',
+                'from_zip_code',
+                'from_city',
+                'from_contact_name',
+                'from_contact_phone',
+                'from_comment'
+            ),
+            'classes': ('collapse',)
+        }),
+        ('Lieferadresse', {
+            'fields': (
+                'to_street_nr',
+                'to_zip_code',
+                'to_city',
+                'to_contact_name',
+                'to_comment'
+            ),
+            'classes': ('collapse',)
+        }),
+        ('Auftraggeber*in', {
+            'fields': (
+                'customer_company',
+                'customer_salutation',
+                'customer_firstname',
+                'customer_lastname',
+                'customer_street_nr',
+                'customer_zip_code',
+                'customer_city',
+                'customer_phone',
+                'customer_email',
+            ),
+            'classes': ('collapse',)
+        }),
+        ('Rechnung', {
+            'fields': (
+                'invoice_same_as_customer',
+                'charged',
+                'price',
+                'invoice_company_name',
+                'invoice_company_addition',
+                'invoice_street_nr',
+                'invoice_zip_code',
+                'invoice_city',
+                'invoice_commissioned'
+            ),
+            'classes': ('collapse',)
+        }),
+        ('Zusätzliche Infos', {
+            'fields': (
+                'spare_parts',
+                'stocklist',
+                'distance',
+                'get_googlemaps_link'
+            ),
+            'classes': ('collapse',)
+        })
+    )
 
     def get_queryset(self, request):
         qs = super(RideAdmin, self).get_queryset(request)
@@ -340,16 +345,17 @@ class RideAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
             maps_url,
             "Auf Google Maps zeigen"
         ) if maps_url else ""
+
     get_googlemaps_link.short_description = 'Google Maps'
 
     def get_urls(self):
         return [
-            url(
-                r'^(?P<rides>.+)/print/$',  # comma separated pks of rides
-                view=print_transport_request_view,
-                name='print-request-view',
-            ),
-        ] + super().get_urls()
+                   url(
+                       r'^(?P<rides>.+)/print/$',  # comma separated pks of rides
+                       view=print_transport_request_view,
+                       name='print-request-view',
+                   ),
+               ] + super().get_urls()
 
     def print_transport_request_link(self, pks):
         return reverse(
@@ -367,6 +373,7 @@ class RideAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
                 pks=queryset.values_list('pk', flat=True)
             )
         )
+
     redirect_print_request_multiple.short_description = "Ausgewählte Aufträge drucken"
 
     def redirect_print_request_single(self, request, obj):
@@ -375,6 +382,7 @@ class RideAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
                 pks=[obj.pk]
             )
         )
+
     redirect_print_request_single.short_description = "Auftrag drucken"
     redirect_print_request_single.label = "Auftrag drucken"
 
@@ -385,6 +393,7 @@ class RideAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
             title='Drucken',
             img=static("img/print.png")
         )
+
     print_request_button.short_description = ""  # column header text is not needed
 
     def status(self, obj):
@@ -392,20 +401,22 @@ class RideAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
         if obj.completed and obj.charged:
             status_html += get_status_circle(status=obj.get_status_invoice(), title="Rechnungsstatus")
         return status_html
+
     status.short_description = ""  # column header needed ?
 
     def start(self, obj):
         if obj.from_warehouse:
             return obj.from_warehouse
         return obj.get_from_address()
+
     start.short_description = "Start"
 
     def end(self, obj):
         if obj.to_warehouse:
             return obj.to_warehouse
         return obj.get_to_address()
-    end.short_description = "Ziel"
 
+    end.short_description = "Ziel"
 
     class Media:
         css = {

@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from django.db import models
-from django.utils import timezone
 from django_resized import ResizedImageField
 from simple_history.models import HistoricalRecords
 
