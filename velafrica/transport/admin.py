@@ -186,7 +186,15 @@ class RideAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
     form = RideForm
     resource_class = RideResource
     list_display = ['id', 'print_request_button', 'status', 'date', 'date_created', 'start', 'end']
-    search_fields = ['from_warehouse__name', 'to_warehouse__name', 'driver__name', 'id']
+
+    search_fields = [
+        'id',
+        'from_warehouse__name',
+        'to_warehouse__name',
+        'driver__name',
+        'car__name'
+    ]
+
     list_filter = [
         TransportStatusFilter,
         InvoiceStatusFilter,
