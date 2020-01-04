@@ -299,9 +299,21 @@ class RideAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
     def get_distance(self, request, obj):
         result = obj.get_distance()
         if type(result) == int:
-            self.message_user(request, "Die Distanz zwischen {} und {} beträgt {} Meter.".format(obj.from_warehouse, obj.to_warehouse, result))
+            self.message_user(
+                request,
+                "Die Distanz zwischen {} und {} beträgt {} Meter.".format(
+                    obj.get_from_address(),
+                    obj.get_to_address(),
+                    result
+                )
+            )
         else:
-            self.message_user(request, "Die Distanz konnte nicht ermittelt werden.", level=messages.WARNING)
+            self.message_user(
+                request,
+                "Die Distanz konnte nicht ermittelt werden.",
+                level=messages.WARNING
+            )
+
     get_distance.short_description = "Distanz berechnen"
     get_distance.label = "Distanz berechnen"
 
@@ -311,7 +323,8 @@ class RideAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
             result = r.get_distance()
             if result:
                 count += 1
-        self.message_user(request, "Die Distanz wurde auf {} Adressen gesetzt.".format(count))
+        self.message_user(request, "Die Distanz wurde für {} Adressen gesetzt.".format(count))
+
     get_distances.short_description = "Distanz berechnen"
 
     def get_googlemaps_link(self, obj):
