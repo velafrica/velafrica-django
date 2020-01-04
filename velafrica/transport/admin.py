@@ -407,6 +407,10 @@ class RideAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
     end.short_description = "Ziel"
 
 
+    class Media:
+        css = {
+            "screen": (static("css/ride-admin.css"),)
+        }
 
 
 admin.site.register(RequestCategory)

@@ -1,0 +1,16 @@
+#ride_form .form-row {
+	padding: 0;
+	margin: 0 0 8px;
+}
+
+div.checkbox-row {
+	margin: 6px 0;
+}
+
+fieldset.aligned {
+	width: 100%;
+}
+
+.fieldBox {
+	width: 45%;
+}
