@@ -3,7 +3,6 @@ import datetime
 import os
 import uuid
 
-from django.dispatch import receiver
 from django.db.models import Max
 from django.urls import reverse
 from django_resized import ResizedImageField
@@ -11,7 +10,7 @@ from velafrica.core.storage import MyStorage
 from velafrica.stock.models import Warehouse
 from velafrica.velafrica_sud.models import Container
 
-from django.db import models, connection
+from django.db import models
 from .settings import BIKE_TYPES
 
 fs = MyStorage()
@@ -19,10 +18,8 @@ fs = MyStorage()
 
 # image path and name
 def bike_images(instance, filename):
-    return 'bike_img/{}_{}' \
-        .format(
+    return 'bike_img/{}_{}'.format(
         instance.id,
-        # datetime.datetime.now().strftime('%Y-%m-%d'),
         filename
     )
 
@@ -59,9 +56,7 @@ class Bike(models.Model):
         "brand",
         "bike_model",
         "gearing",
-        # "crankset",
         "drivetrain",
-        # "type_of_brake",
         "brake",
         "colour",
         "size",
@@ -85,8 +80,13 @@ class Bike(models.Model):
     visa = models.CharField(max_length=255, blank=True, verbose_name=u"Visa")
 
     # placement of the bike
-    warehouse = models.ForeignKey(Warehouse, blank=True, null=True, on_delete=models.SET_NULL,
-                                  verbose_name=u"Warehouse")
+    warehouse = models.ForeignKey(
+        Warehouse,
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+        verbose_name=u"Warehouse",
+    )
 
     # A+
     a_plus = models.BooleanField(default=False, verbose_name=u"A+")
@@ -96,12 +96,10 @@ class Bike(models.Model):
     brand = models.CharField(max_length=255, default="", blank=True, verbose_name=u"Brand")
     bike_model = models.CharField(max_length=255, default="", blank=True, verbose_name=u"Model")
     gearing = models.CharField(max_length=255, default="", blank=True, verbose_name=u"Group of components")
-    # crankset = models.CharField(max_length=255, default="", blank=True, verbose_name=u"Crankset")
     drivetrain = models.CharField(max_length=255, default="", blank=True, verbose_name=u"Drivetrain")
-    # type_of_brake = models.CharField(max_length=255, default="", blank=True, verbose_name=u"Type of Brake")
     brake = models.CharField(max_length=255, default="", blank=True, verbose_name=u"Brake")
     colour = models.CharField(max_length=255, default="", blank=True, verbose_name=u"Colour")
-    size = models.CharField(max_length=255, default='', blank=True, verbose_name=u"Size")  # choices=BIKE_SIZES,
+    size = models.CharField(max_length=255, default='', blank=True, verbose_name=u"Size")
     suspension = models.CharField(max_length=255, null=True, blank=True, verbose_name=u"Suspension")
     rear_suspension = models.CharField(max_length=255, null=True, blank=True, verbose_name=u"Rear Suspension")
     extraordinary = models.TextField(max_length=255, null=True, blank=True, verbose_name=u"Extraordinary")
@@ -112,19 +110,32 @@ class Bike(models.Model):
                                  ])
 
     # image(s)
-    image = ResizedImageField(storage=fs, size=[1920, 1080], upload_to=bike_images, blank=True, null=True,
-                              verbose_name=u"Image")  #
+    image = ResizedImageField(
+        storage=fs,
+        size=[1920, 1080],
+        upload_to=bike_images,
+        blank=True,
+        null=True,
+        verbose_name=u"Image",
+    )
 
     # Shipping
-    container = models.ForeignKey(Container, null=True, blank=True, on_delete=models.SET_NULL,
-                                  verbose_name=u"Container")
+    container = models.ForeignKey(
+        Container,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        verbose_name=u"Container",
+    )
 
     # Metadata
     date_created = models.DateField(auto_now_add=True, null=True)
     date_modified = models.DateField(auto_now=True, null=True)
 
     def __str__(self):
-        return '{} - {}'.format(self.id, self.type)
+        if self.number:
+            return '#{} - {}'.format(self.number, self.category)
+        return '{} - {}'.format(self.id, self.category)
 
     # backend url
     def get_backend_url(self):

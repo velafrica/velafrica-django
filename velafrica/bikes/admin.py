@@ -41,8 +41,6 @@ from pdfrw import PdfReader
 from velafrica.velafrica_sud.models import Container
 
 
-def get_formsets(model, request, obj=None):
-    return [f for f, _ in model.get_formsets_with_inlines(request, obj)]
 class BikeCategoryResource(resources.ModelResource):
     class Meta:
         model = BikeCategory
@@ -334,7 +332,7 @@ class BikeAdmin(ImportExportMixin, DjangoObjectActions, admin.ModelAdmin):
                         new_object = self.save_form(request, form, change=True) if form.is_valid() else obj
 
                         prefixes = {}
-                        for FormSet in get_formsets(self, request, new_object):
+                        for FormSet, _ in self.get_formsets_with_inlines(request, new_object):
                             prefix = FormSet.get_default_prefix()
                             prefixes[prefix] = prefixes.get(prefix, 0) + 1
                             if prefixes[prefix] != 1:
@@ -367,7 +365,7 @@ class BikeAdmin(ImportExportMixin, DjangoObjectActions, admin.ModelAdmin):
         form = ModelForm(instance=obj)
         form._errors = errors
         prefixes = {}
-        for FormSet in get_formsets(self, request, obj):
+        for FormSet, _ in self.get_formsets_with_inlines(request, new_object):
             prefix = FormSet.get_default_prefix()
             prefixes[prefix] = prefixes.get(prefix, 0) + 1
             if prefixes[prefix] != 1:
