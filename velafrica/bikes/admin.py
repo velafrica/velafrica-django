@@ -29,6 +29,7 @@ from django_object_actions import DjangoObjectActions
 from import_export import resources
 from import_export.admin import ImportExportMixin
 
+from velafrica.bikes.forms import BikeForm
 from velafrica.bikes.models import Bike, BikeCategory
 from velafrica.core.settings import PROJECT_DIR
 
@@ -82,6 +83,8 @@ class APlusForSaleListFilter(admin.SimpleListFilter):
 
 # TODO: show details fields only when A+ is selected
 class BikeAdmin(ImportExportMixin, DjangoObjectActions, admin.ModelAdmin):
+    form = BikeForm
+
     fontsize = 12  # pdf font size
     labels = {key: Bike._meta.get_field(key).verbose_name for key in Bike.plotable}  # labels for pdf
 
