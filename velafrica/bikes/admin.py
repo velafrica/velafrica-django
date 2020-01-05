@@ -29,7 +29,7 @@ from django_object_actions import DjangoObjectActions
 from import_export import resources
 from import_export.admin import ImportExportMixin
 
-from velafrica.bikes.models import Bike
+from velafrica.bikes.models import Bike, BikeCategory
 from velafrica.core.settings import PROJECT_DIR
 
 from reportlab.lib.utils import simpleSplit
@@ -41,6 +41,14 @@ from velafrica.velafrica_sud.models import Container
 
 def get_formsets(model, request, obj=None):
     return [f for f, _ in model.get_formsets_with_inlines(request, obj)]
+class BikeCategoryResource(resources.ModelResource):
+    class Meta:
+        model = BikeCategory
+
+
+class BikeCategoryAdmin(ImportExportMixin, admin.ModelAdmin):
+    resource_class = BikeCategoryResource
+    fields = ['name']
 
 
 class BikeResource(resources.ModelResource):
@@ -410,3 +418,4 @@ class BikeAdmin(ImportExportMixin, DjangoObjectActions, admin.ModelAdmin):
 
 
 admin.site.register(Bike, BikeAdmin)
+admin.site.register(BikeCategory, BikeCategoryAdmin)

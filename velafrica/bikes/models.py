@@ -41,11 +41,25 @@ def bike_id():
     return datetime.datetime.now().strftime('%y') + "-" + uuid.uuid4().hex[:6].upper()
 
 
+class BikeCategory(models.Model):
+    name = models.CharField(
+        max_length=255,
+        verbose_name='Category',
+        default='',
+    )
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = "bike categories"
+
+
 class Bike(models.Model):
     # fields used from plot_to_pdf
     plotable = [
         "number",
-        "type",
+        "category",
         "brand",
         "bike_model",
         "gearing",
@@ -63,6 +77,12 @@ class Bike(models.Model):
 
     # bike category
     type = models.CharField(choices=BIKE_TYPES, null=True, max_length=255, verbose_name=u"Type")
+    category = models.ForeignKey(
+        BikeCategory,
+        null=True,
+        verbose_name=u"Type",
+        on_delete=models.CASCADE,
+    )
 
     # production signature
     date = models.DateField(default=datetime.date.today, verbose_name=u"Date")
