@@ -49,21 +49,6 @@ class BikeCategory(models.Model):
 
 
 class Bike(models.Model):
-    # fields used from plot_to_pdf
-    plotable = [
-        "number",
-        "category",
-        "brand",
-        "bike_model",
-        "gearing",
-        "drivetrain",
-        "brake",
-        "colour",
-        "size",
-        "suspension",
-        "rear_suspension"
-    ]
-
     id = models.CharField(primary_key=True, unique=True, default=bike_id, max_length=255)
 
     # bike category
