@@ -4,6 +4,7 @@ import os
 import uuid
 
 from django.dispatch import receiver
+from django.db.models import Max
 from django.urls import reverse
 from django_resized import ResizedImageField
 from velafrica.core.storage import MyStorage
@@ -28,12 +29,7 @@ def bike_images(instance, filename):
 
 # get the next number for A+-Bikes
 def next_a_plus_number():
-    with connection.cursor() as cursor:
-        cursor.execute("SELECT MAX(number) AS num FROM bikes_bike")
-        m = cursor.fetchone()
-        if m[0]:
-            return m[0] + 1
-    return 1
+    return Bike.objects.aggregate(new_number=Max('number')+1)['new_number']
 
 
 # generates a unique id with the year as prefix
