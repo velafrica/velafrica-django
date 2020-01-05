@@ -14,6 +14,7 @@ from django.db import transaction
 from django.forms import all_valid
 from django.http import StreamingHttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404
+from django.templatetags.static import static
 from django.urls import reverse
 from django.utils.encoding import force_text
 from django.utils.html import escape
@@ -85,6 +86,11 @@ class APlusForSaleListFilter(admin.SimpleListFilter):
 class BikeAdmin(ImportExportMixin, DjangoObjectActions, admin.ModelAdmin):
     form = BikeForm
 
+    class Media:
+        js = (
+            static("js/bikes.js"),  # hides A+ fieldset
+        )
+
     fontsize = 12  # pdf font size
     labels = {key: Bike._meta.get_field(key).verbose_name for key in Bike.plotable}  # labels for pdf
 
@@ -139,6 +145,7 @@ class BikeAdmin(ImportExportMixin, DjangoObjectActions, admin.ModelAdmin):
                  'extraordinary',
                  'image'
              ),
+             'classes': ('a_plus_fieldset',)
          }
          ),
         ('Container',
