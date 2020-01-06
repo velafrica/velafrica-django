@@ -62,6 +62,7 @@ class APlusFilter(MultiListFilter):
 
 class BikeAdmin(ImportExportMixin, DjangoObjectActions, admin.ModelAdmin):
     form = BikeForm
+    change_list_template = "bikes/change_list_bike.html"
 
     class Media:
         js = (
