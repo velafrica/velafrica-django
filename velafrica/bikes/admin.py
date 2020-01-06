@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from daterange_filter.filter import DateRangeFilter
 from django.conf.urls import url
 from django.contrib import admin
 from django.contrib.admin.templatetags.admin_urls import add_preserved_filters
+from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from django.templatetags.static import static
@@ -15,6 +15,7 @@ from import_export.admin import ImportExportMixin
 from velafrica.bikes.forms import BikeForm
 from velafrica.bikes.models import Bike, BikeCategory
 from velafrica.bikes.views import book_bikes_view, BikePDFView
+from velafrica.transport.filter import MultiListFilter
 
 
 class BikeCategoryResource(resources.ModelResource):
@@ -32,31 +33,33 @@ class BikeResource(resources.ModelResource):
         model = Bike
 
 
-# Filters out all A+ Bikes which are still for sale
-class APlusForSaleListFilter(admin.SimpleListFilter):
-    # Human-readable title which will be displayed in the
-    # right admin sidebar just above the filter options.
-    title = 'A+ for sale'
+class APlusFilter(MultiListFilter):
+    title = 'A+'
+    parameter_name = 'a_plus'
 
-    # Parameter for the filter that will be used in the URL query.
-    parameter_name = 'a_plus_for_sale'
-
-    def lookups(self, request, model_admin):
-        return (  # most return more than one
-            ('1', 'YES'),
-            ('0', '-')
-        )
-
-    def queryset(self, request, queryset):
-        if self.value() == '1':
-            return queryset.filter(
-                container__exact=None,  # not yet sold and shipped within another container
-                a_plus__exact=True,  # is A+
-                status__exact=0  # status 'normal'
+    def options(self):
+        return [  # most return more than one
+            MultiListFilter.Option(
+                key='a_plus_sold',
+                title='A+ sold',
+                query=Q(
+                    container__isnull=False,  # not yet sold and shipped within another container
+                    a_plus__exact=True,  # is A+
+                    status__exact=0  # status 'normal'
+                )
+            ),
+            MultiListFilter.Option(
+                key='a_plus_for_sale',
+                title='A+ for sale',
+                query=Q(
+                    container__isnull=True,  # not yet sold and shipped within another container
+                    a_plus__exact=True,  # is A+
+                    status__exact=0  # status 'normal'
+                )
             )
+        ]
 
 
-# TODO: show details fields only when A+ is selected
 class BikeAdmin(ImportExportMixin, DjangoObjectActions, admin.ModelAdmin):
     form = BikeForm
 
@@ -69,7 +72,13 @@ class BikeAdmin(ImportExportMixin, DjangoObjectActions, admin.ModelAdmin):
 
     list_display = ['number', 'category', 'brand', 'a_plus', 'for_sale', 'container', 'warehouse']
     search_fields = ['id', 'category', 'brand', 'a_plus', 'warehouse']
-    list_filter = [APlusForSaleListFilter, 'a_plus', 'category', 'container', 'warehouse', ('date', DateRangeFilter)]
+    list_filter = [
+        APlusFilter,
+        'category',
+        'date',
+        'container',
+        'warehouse',
+    ]
 
     # "for_sale" a boolean column in the list-view
     def for_sale(self, obj):
