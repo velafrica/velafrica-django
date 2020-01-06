@@ -62,6 +62,8 @@ class APlusFilter(MultiListFilter):
 
 class BikeAdmin(ImportExportMixin, DjangoObjectActions, admin.ModelAdmin):
     form = BikeForm
+    resource_class = BikeResource  # import export
+
     change_list_template = "bikes/change_list_bike.html"
 
     class Media:
@@ -69,10 +71,21 @@ class BikeAdmin(ImportExportMixin, DjangoObjectActions, admin.ModelAdmin):
             static("js/bikes.js"),  # hides A+ fieldset
         )
 
-    resource_class = BikeResource  # import export
-
-    list_display = ['number', 'category', 'brand', 'a_plus', 'for_sale', 'container', 'warehouse']
-    search_fields = ['id', 'category', 'brand', 'a_plus', 'warehouse']
+    list_display = [
+        'number',
+        'category',
+        'brand',
+        'a_plus',
+        'for_sale',
+        'container',
+        'warehouse',
+    ]
+    search_fields = [
+        'brand',
+        'number',
+        'warehouse__name',
+        'container__partner_to__organisation__name'
+    ]
     list_filter = [
         APlusFilter,
         'category',
@@ -107,7 +120,7 @@ class BikeAdmin(ImportExportMixin, DjangoObjectActions, admin.ModelAdmin):
                 'a_plus',
             )
         }),
-        ('A+',  # Details ?
+        ('A+',  # A+ details
          {
              'fields': (
                  'brand',
@@ -127,7 +140,7 @@ class BikeAdmin(ImportExportMixin, DjangoObjectActions, admin.ModelAdmin):
          ),
         ('Container',
          {
-             'fields': ['container']
+             'fields': ('container',)
          }
          ),
     )
