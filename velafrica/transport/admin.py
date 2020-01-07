@@ -294,18 +294,6 @@ class RideAdmin(ImportExportMixin, SimpleHistoryAdmin):
         })
     )
 
-    def get_queryset(self, request):
-        qs = super(RideAdmin, self).get_queryset(request)
-        # superusers should see all entries
-        if request.user.is_superuser:
-            return qs
-        # other users with a correlating person should only see their organisations entries
-        elif hasattr(request.user, 'person'):
-            return qs.filter(driver__organisation=request.user.person.organisation)
-        # users with no superuser role and no related person should not see any entries
-        else:
-            return qs.none()
-
     def get_distance(self, request, obj):
         result = obj.get_distance()
         if type(result) == int:
