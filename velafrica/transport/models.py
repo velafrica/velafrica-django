@@ -97,15 +97,15 @@ class Ride(models.Model):
     )
     created_by = models.CharField(
         max_length=255,
-        blank=True,    # TODO: change to false as soon as all rides are within the new format
+        blank=False,
         default="",
-        verbose_name="Auftrag erstellt von"
+        verbose_name="Auftrag erstellt von (Vor- und Nachname)"
     )
     velo_state = models.ForeignKey(
         VeloState,
         blank=True,
         null=True,
-        verbose_name='Zustand der Velos',
+        verbose_name='Was',
         on_delete=models.CASCADE
     )
     planned_velos = models.CharField(
@@ -113,12 +113,11 @@ class Ride(models.Model):
         blank=True,
         null=True,
         verbose_name='Voraussichtliche Anzahl Velos',
-        help_text='Zustand bitte im oberen Abschnitt ausfüllen'
     )
     request_category = models.ForeignKey(
         RequestCategory,
         on_delete=models.CASCADE,
-        verbose_name='Auftragsart',
+        verbose_name='Kategorie',
         blank=True,
         null=True,
     )
@@ -131,7 +130,7 @@ class Ride(models.Model):
     )
 
     # ride
-    date = models.DateField(blank=True, null=True, verbose_name=u"Ausführdatum")
+    date = models.DateField(blank=True, null=True, verbose_name=u"Vereinbartes Abholdatum")
     driver = models.ForeignKey(
         Driver,
         on_delete=models.CASCADE,
@@ -147,7 +146,13 @@ class Ride(models.Model):
         blank=True,
         null=True
     )
-    velos = models.IntegerField(blank=True, null=True, default=0, verbose_name='Anzahl transportierter Velos')
+    velos = models.IntegerField(
+        blank=True,
+        null=True,
+        default=0,
+        verbose_name='Anzahl transportierter Velos',
+        help_text='Wird durch den Transport ausgefüllt.'
+    )
     spare_parts = models.BooleanField(default=False, verbose_name='Ersatzteile transportiert?')
     stocklist = models.OneToOneField(StockList, null=True, blank=True, on_delete=models.SET_NULL)
     note = models.CharField(blank=True, null=True, max_length=255, verbose_name="Bemerkung",
@@ -169,8 +174,8 @@ class Ride(models.Model):
     from_city = models.CharField(max_length=255, blank=True, default="", verbose_name="Ort")
     from_contact_name = models.CharField(max_length=255, blank=True, default="", verbose_name="Kontaktperson")
     from_contact_phone = models.CharField(max_length=255, blank=True, default="", verbose_name="Telefonnummer")
-    from_comment = models.CharField(max_length=255, blank=True, default="", verbose_name="Bemerkung",
-                                    help_text="Bemerkung zum Abholort")
+    from_comment = models.CharField(max_length=255, blank=True, default="", verbose_name="Details Standort",
+                                    help_text="Details zum Abholstandort")
 
     # to
     to_warehouse = models.ForeignKey(
@@ -190,8 +195,8 @@ class Ride(models.Model):
         max_length=255,
         blank=True,
         default="",
-        verbose_name="Bemerkung",
-        help_text="Bemerkung zur Lieferadresse"
+        verbose_name="Details Standort",
+        help_text="Details zur Lieferadresse"
     )
 
     # customer
@@ -206,15 +211,19 @@ class Ride(models.Model):
     customer_city = models.CharField(max_length=255, blank=True, default="", verbose_name="Ort")
 
     # invoice
-    invoice_same_as_customer = models.BooleanField(default=True)
-    charged = models.BooleanField(default=False, verbose_name="Kostenpflichtig")
+    invoice_same_as_customer = models.BooleanField(default=True, verbose_name="Rechnungsadresse = Kundenadresse")
+    charged = models.BooleanField(default=False, verbose_name="Kostenpflichtig?")
     price = models.IntegerField(default=0, verbose_name="Preis")
     invoice_company_name = models.CharField(max_length=255, blank=True, default="", verbose_name="Firmenname")
     invoice_company_addition = models.CharField(max_length=255, blank=True, default="", verbose_name="Firmenzusatz")
     invoice_street_nr = models.CharField(max_length=255, blank=True, default="", verbose_name="Strasse, Nr.")
     invoice_zip_code = models.CharField(max_length=255, blank=True, default="", verbose_name="PLZ")
     invoice_city = models.CharField(max_length=255, blank=True, default="", verbose_name="Ort")
-    invoice_commissioned = models.BooleanField(default=False, verbose_name="Rechnung in Auftrag gegeben")
+    invoice_commissioned = models.BooleanField(
+        default=False,
+        verbose_name="Rechnung der Buchhaltung in Auftrag gegeben",
+        help_text="Wird nur durch die zuständige Person von Velafrica ausgefüllt",
+    )
 
     # optional ride data
     distance = models.IntegerField(verbose_name="Ungefähre Distanz in Meter", blank=True, null=True)

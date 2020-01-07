@@ -10,13 +10,15 @@ class RideForm(forms.ModelForm):
         queryset=Warehouse.objects.all(),
         widget=autocomplete.ModelSelect2(url='autocomplete:warehouse'),
         required=False,
-        label='von'
+        label='von (Standardadresse)',
+        help_text='Nur für Standardadressen auswählen, sonst den Abschnittt "Abholadresse" verwenden.',
     )
     to_warehouse = forms.ModelChoiceField(
         queryset=Warehouse.objects.all(),
         widget=autocomplete.ModelSelect2(url='autocomplete:warehouse'),
         required=False,
-        label='nach'
+        label='nach (Standardadresse)',
+        help_text='Nur für Standardadressen auswählen, sonst den Abschnittt "Lieferadresse" verwenden.',
     )
     driver = forms.ModelChoiceField(
         queryset=Driver.objects.all(),
@@ -34,7 +36,7 @@ class RideForm(forms.ModelForm):
         queryset=VeloState.objects.all(),
         widget=autocomplete.ModelSelect2(url='autocomplete:velostate'),
         required=False,
-        label="Zustand der Velos"
+        label="Was"
     )
     request_category = forms.ModelChoiceField(
         queryset=RequestCategory.objects.all(),

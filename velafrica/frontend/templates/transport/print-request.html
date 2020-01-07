@@ -21,11 +21,15 @@
                     <table>
                         <tr>
                             <td class="label">Was</td><td>{{ ride.planned_velos | default:"" }} {{ ride.velo_state | default:"" }}</td>
-                            <td class="label">Art</td><td>{{ ride.request_category | default:"" }}</td>
+                            <td class="label">Kategorie</td><td>{{ ride.request_category | default:"" }}</td>
                         </tr>
                         <tr>
                             <td class="label">Erstellt am</td><td>{{ ride.date_created | date:"d.m.Y" }}</td>
                             <td class="label">von</td><td>{{ ride.created_by }}</td>
+                        </tr>
+                        <tr>
+                            <td class="label">Bemerkung</td>
+                            <td colspan="3">{{ ride.request_comment }}</td>
                         </tr>
                     </table>
                 </div>
@@ -44,7 +48,7 @@
                             <td class="label">Telefon</td> <td>{{ ride.from_contact_phone }}</td>
                         </tr>
                         <tr>
-                            <td class="label">Bemerkung</td><td colspan="3">{{ ride.from_comment }}</td>
+                            <td class="label">Details Standort</td><td colspan="3">{{ ride.from_comment }}</td>
                         </tr>
                     </table>
                 </div>
@@ -54,17 +58,17 @@
                         <span>Liefern nach {{ ride.to_warehouse|default:"" }}</span>
                     </div>
                     <table>
-
                         <tr>
                             <td class="label">Adresse</td><td>{{ ride.to_street_nr }}</td>
-                            {%  if ride.to_contact %}<td rowspan="2" class="label">Kontakt</td> <td rowspan="2">{{ ride.to_contact }}</td>{% endif %}
                         </tr>
                         <tr>
-                            <td class="label">PLZ, Ort</td> <td>{{ ride.to_zip_code }} {{ ride.to_city }}</td>
+                            <td class="label">PLZ, Ort</td><td>{{ ride.to_zip_code }} {{ ride.to_city }}</td>
                         </tr>
+                        {%  if ride.to_contact_name %}
                         <tr>
-                            <td class="label">Bemerkung</td><td {% if ride.to_contact %}colspan="3"{% endif %}>{{ ride.to_comment }}</td>
+                            <td class="label">Kontakt</td> <td>{{ ride.to_contact_name }}</td>
                         </tr>
+                        {% endif %}
 
                     </table>
                 </div>
@@ -72,7 +76,7 @@
                 <div class="part">
                     <div class="table-caption"><span>Auftraggeber*in</span></div>
                     <table>
-                        <tr><td class="label">Firma</td><td></td></tr>
+                        <tr><td class="label">Firma</td><td>{{ ride.customer_company }}</td></tr>
                         <tr><td class="label">Name</td><td>{{ ride.customer_salutation }} {{ ride.customer_firstname }} {{ ride.customer_lastname }}</td></tr>
                         <tr><td class="label">Adresse</td><td>{{ ride.customer_street_nr }}</td></tr>
                         <tr><td class="label">PLZ, Ort</td><td>{{ ride.customer_zip_code }} {{ ride.customer_city }}</td></tr>
@@ -110,7 +114,7 @@
                     <table>
                         <tr><td class="label">Liegenschaftsverwaltung</td><td colspan="3"></td></tr>
                         <tr><td class="label">Liegenschaft <span class="note">(Adresse)</span></td><td colspan="3"></td></tr>
-                        <tr><td class="label">Zuständige Person <span class="note">(z.B. Hauswart*in, Liegenschaftsverwalter*in)</span></td><td colspan="3"></td></tr>
+                        <tr><td class="label">Zuständige Person <span class="note">(z.B. Hauswart*in, Verwalter*in)</span></td><td colspan="3"></td></tr>
                         <tr><td class="label">Anzahl Velos</td><td colspan="3"></td></tr>
                     </table>
                     <table class="agb">

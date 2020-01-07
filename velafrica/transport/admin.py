@@ -166,7 +166,7 @@ class InvoiceStatusFilter(MultiListFilter):
         return [
             MultiListFilter.Option(
                 key='uncommissioned',
-                title='Neue Kostenpflichtige',
+                title='Kostenpflichtige (noch nicht versendet)',
                 query=Q(charged__exact=True, invoice_commissioned__exact=False)
             ),
             MultiListFilter.Option(
@@ -217,7 +217,7 @@ class RideAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
                 'date',
                 ('driver', 'car'),
                 'note',
-                ('velos', 'velo_state'),
+                'velos',
                 'completed'
             )
         }),
@@ -231,7 +231,7 @@ class RideAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
                 ('date_created', 'date_modified'),
                 'created_by',
                 'request_category',
-                'planned_velos',
+                ('planned_velos', 'velo_state'),
                 'request_comment'
             ),
         }),

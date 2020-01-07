@@ -14,3 +14,8 @@ fieldset.aligned {
 .fieldBox {
 	width: 45%;
 }
+
+form .aligned .field-invoice_commissioned .help {
+    color: red !important;
+
+}
