@@ -289,8 +289,6 @@ class RideAdmin(ImportExportMixin, SimpleHistoryAdmin):
         }),
         ('Zusätzliche Infos', {
             'fields': (
-                'spare_parts',
-                'stocklist',
                 'distance',
                 'get_googlemaps_link'
             ),
