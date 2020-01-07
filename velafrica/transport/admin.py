@@ -177,7 +177,7 @@ class InvoiceStatusFilter(MultiListFilter):
         ]
 
 
-class RideAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
+class RideAdmin(ImportExportMixin, SimpleHistoryAdmin):
     form = RideForm
     resource_class = RideResource
 
