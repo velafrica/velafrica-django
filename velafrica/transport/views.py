@@ -4,7 +4,7 @@ from django.shortcuts import render
 from dal import autocomplete
 from django.db.models import Q, Count, Sum
 
-from velafrica.transport.models import Ride, Car, Driver, VeloState
+from velafrica.transport.models import Ride, Car, Driver, VeloState, RequestCategory
 
 
 def get_charts():
@@ -81,6 +81,11 @@ class DriverAutocomplete(autocomplete.Select2QuerySetView):
             qs = qs.filter(Q(name__icontains=self.q) | Q(organisation__name__icontains=self.q))
 
         return qs
+
+
+class RequestCategoryAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        return RequestCategory.objects.all()
 
 
 class VeloStateAutocomplete(autocomplete.Select2QuerySetView):
