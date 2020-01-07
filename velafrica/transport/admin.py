@@ -246,7 +246,7 @@ class RideAdmin(ImportExportMixin, SimpleHistoryAdmin):
                 'from_contact_phone',
                 'from_comment'
             ),
-            'classes': ('collapse',)
+            'classes': ('collapse', 'from_address',)
         }),
         ('Lieferadresse', {
             'fields': (
@@ -255,7 +255,7 @@ class RideAdmin(ImportExportMixin, SimpleHistoryAdmin):
                 'to_city',
                 'to_contact_name',
             ),
-            'classes': ('collapse',)
+            'classes': ('collapse', 'to_address',)
         }),
         ('Auftraggeber*in', {
             'fields': (
@@ -271,10 +271,12 @@ class RideAdmin(ImportExportMixin, SimpleHistoryAdmin):
             ),
             'classes': ('collapse',)
         }),
+        (None, {
+            'fields': ('charged',)
+        }),
         ('Rechnung', {
             'fields': (
                 'invoice_same_as_customer',
-                'charged',
                 'price',
                 'invoice_company_name',
                 'invoice_company_addition',
@@ -283,7 +285,7 @@ class RideAdmin(ImportExportMixin, SimpleHistoryAdmin):
                 'invoice_city',
                 'invoice_commissioned'
             ),
-            'classes': ('collapse',)
+            'classes': ('collapse', 'invoice')
         }),
         ('Zusätzliche Infos', {
             'fields': (
@@ -411,6 +413,9 @@ class RideAdmin(ImportExportMixin, SimpleHistoryAdmin):
         css = {
             "screen": (static("css/ride-admin.css"),)
         }
+        js = (
+            static("js/ride-admin.js"),
+        )
 
 
 admin.site.register(RequestCategory)
