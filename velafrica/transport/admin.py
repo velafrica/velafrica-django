@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from daterange_filter.filter import DateRangeFilter
 from django.conf.urls import url
 from django.contrib import admin, messages
 from django.db.models import Q
@@ -202,13 +203,14 @@ class RideAdmin(ImportExportMixin, SimpleHistoryAdmin):
     list_filter = [
         TransportStatusFilter,
         InvoiceStatusFilter,
-        'date',
-        'date_created',
+        'request_category',
+        ('date_created', DateRangeFilter),
+        ('date', DateRangeFilter),
     ]
 
+
     readonly_fields = ['get_googlemaps_link', 'date_created', 'date_modified']
-    changelist_actions = ['redirect_print_request_multiple', 'get_distances']
-    change_actions = ['redirect_print_request_single', 'get_distance']
+    change_actions = ['get_distance']
     actions = ['redirect_print_request_multiple', 'get_distances']
 
     fieldsets = (
