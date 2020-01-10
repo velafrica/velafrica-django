@@ -36,7 +36,7 @@ class RideForm(forms.ModelForm):
         queryset=VeloState.objects.all(),
         widget=autocomplete.ModelSelect2(url='autocomplete:velostate'),
         required=False,
-        label="Was"
+        label="Transportgut"
     )
     request_category = forms.ModelChoiceField(
         queryset=RequestCategory.objects.all(),

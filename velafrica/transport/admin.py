@@ -214,29 +214,14 @@ class RideAdmin(ImportExportMixin, SimpleHistoryAdmin):
     actions = ['redirect_print_request_multiple', 'get_distances']
 
     fieldsets = (
-        ('Transport', {
-            'fields': (
-                'date',
-                ('driver', 'car'),
-                'note',
-                'velos',
-                'completed'
-            )
-        }),
         (None, {
-            'fields': (
-                ('from_warehouse', 'to_warehouse'),
-            )
-        }),
-        ('Auftrag', {
-            'fields': (
-                ('date_created', 'date_modified'),
-                'created_by',
+            "fields": (
+                ('velo_state', 'planned_velos', ),
                 'request_category',
-                ('planned_velos', 'velo_state'),
-                'request_comment'
+                ('from_warehouse','to_warehouse'),
             ),
         }),
+
         ('Abholadresse', {
             'fields': (
                 'from_street_nr',
@@ -254,9 +239,12 @@ class RideAdmin(ImportExportMixin, SimpleHistoryAdmin):
                 'to_zip_code',
                 'to_city',
                 'to_contact_name',
+                'to_contact_phone',
+                'to_comment'
             ),
             'classes': ('collapse', 'to_address',)
         }),
+
         ('Auftraggeber*in', {
             'fields': (
                 'customer_company',
@@ -271,6 +259,23 @@ class RideAdmin(ImportExportMixin, SimpleHistoryAdmin):
             ),
             'classes': ('collapse',)
         }),
+        ('Auftrag', {
+            'fields': (
+                ('date_created', 'date_modified'),
+                'created_by',
+                'request_comment'
+            ),
+        }),
+        ('Transport', {
+            'fields': (
+                'date',
+                ('driver', 'car'),
+                'note',
+                'velos',
+                'completed'
+            )
+        }),
+
         (None, {
             'fields': ('charged',)
         }),
