@@ -105,19 +105,19 @@ class Ride(models.Model):
         VeloState,
         blank=True,
         null=True,
-        verbose_name='Was',
+        verbose_name='Transportgut',
         on_delete=models.CASCADE
     )
     planned_velos = models.CharField(
         max_length=255,
         blank=True,
         null=True,
-        verbose_name='Voraussichtliche Anzahl Velos',
+        verbose_name='Anzahl Velos (voraussichtlich)',
     )
     request_category = models.ForeignKey(
         RequestCategory,
         on_delete=models.CASCADE,
-        verbose_name='Kategorie',
+        verbose_name='Kategorie Velospender',
         blank=True,
         null=True,
     )
@@ -173,7 +173,7 @@ class Ride(models.Model):
     from_zip_code = models.CharField(max_length=255, blank=True, default="", verbose_name="PLZ")
     from_city = models.CharField(max_length=255, blank=True, default="", verbose_name="Ort")
     from_contact_name = models.CharField(max_length=255, blank=True, default="", verbose_name="Kontaktperson")
-    from_contact_phone = models.CharField(max_length=255, blank=True, default="", verbose_name="Telefonnummer")
+    from_contact_phone = models.CharField(max_length=255, blank=True, default="", verbose_name="Tel. Nr. (Mobile)")
     from_comment = models.CharField(max_length=255, blank=True, default="", verbose_name="Details Standort",
                                     help_text="Details zum Abholstandort")
 
@@ -191,6 +191,7 @@ class Ride(models.Model):
     to_zip_code = models.CharField(max_length=255, blank=True, default="", verbose_name="PLZ")
     to_city = models.CharField(max_length=255, blank=True, default="", verbose_name="Ort")
     to_contact_name = models.CharField(max_length=255, blank=True, default="", verbose_name="Kontaktperson")
+    to_contact_phone = models.CharField(max_length=255, blank=True, default="", verbose_name="Tel. Nr. (Mobile)")
     to_comment = models.CharField(
         max_length=255,
         blank=True,
@@ -205,7 +206,7 @@ class Ride(models.Model):
     customer_firstname = models.CharField(max_length=255, blank=True, default="", verbose_name="Vorname")
     customer_lastname = models.CharField(max_length=255, blank=True, default="", verbose_name="Nachname")
     customer_email = models.CharField(max_length=255, blank=True, default="", verbose_name="Email")
-    customer_phone = models.CharField(max_length=255, blank=True, default="", verbose_name="Telefon")
+    customer_phone = models.CharField(max_length=255, blank=True, default="", verbose_name="Tel. Nr.")
     customer_street_nr = models.CharField(max_length=255, blank=True, default="", verbose_name="Strasse, Nr.")
     customer_zip_code = models.CharField(max_length=255, blank=True, default="", verbose_name="PLZ")
     customer_city = models.CharField(max_length=255, blank=True, default="", verbose_name="Ort")

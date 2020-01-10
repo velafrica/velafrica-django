@@ -20,8 +20,8 @@
                 <div class="part">
                     <table>
                         <tr>
-                            <td class="label">Was</td><td>{{ ride.planned_velos | default:"" }} {{ ride.velo_state | default:"" }}</td>
-                            <td class="label">Kategorie</td><td>{{ ride.request_category | default:"" }}</td>
+                            <td class="label">Transportgut</td><td>{{ ride.planned_velos | default:"" }} {{ ride.velo_state | default:"" }}</td>
+                            <td class="label">Kategorie Velospender</td><td>{{ ride.request_category | default:"" }}</td>
                         </tr>
                         <tr>
                             <td class="label">Erstellt am</td><td>{{ ride.date_created | date:"d.m.Y" }}</td>
@@ -60,16 +60,15 @@
                     <table>
                         <tr>
                             <td class="label">Adresse</td><td>{{ ride.to_street_nr }}</td>
+                            <td class="label">Kontakt</td><td>{{ ride.to_contact_name }}</tr>
                         </tr>
                         <tr>
                             <td class="label">PLZ, Ort</td><td>{{ ride.to_zip_code }} {{ ride.to_city }}</td>
+                            <td class="label">Telefon</td><td>{{ ride.to_contact_phone }}  </td>
                         </tr>
-                        {%  if ride.to_contact_name %}
                         <tr>
-                            <td class="label">Kontakt</td> <td>{{ ride.to_contact_name }}</td>
+                            <td class="label">Details Standort</td><td colspan="3">{{ ride.to_comment }}</td>
                         </tr>
-                        {% endif %}
-
                     </table>
                 </div>
 
@@ -90,8 +89,7 @@
                     <table>
                         <tr>
                             <td class="label">Abholtermin</td>
-                            <td>Datum: {{ ride.date | date:"d.m.Y" | default:"" }}</td>
-                            <td colspan="2">Zeit: </td>
+                            <td colspan="3">{{ ride.date | date:"d.m.Y" | default:"" }}</td>
                         </tr>
                         <tr>
                             <td class="label">Anzahl Velos</td>
