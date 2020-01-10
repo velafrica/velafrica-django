@@ -130,7 +130,7 @@ class Ride(models.Model):
     )
 
     # ride
-    date = models.DateField(blank=True, null=True, verbose_name=u"Vereinbartes Abholdatum")
+    date = models.DateTimeField(blank=True, null=True, verbose_name=u"Vereinbarter Abholtermin")
     driver = models.ForeignKey(
         Driver,
         on_delete=models.CASCADE,

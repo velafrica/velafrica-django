@@ -10,7 +10,7 @@ from django_object_actions import DjangoObjectActions
 from import_export import resources
 from import_export.admin import ImportExportMixin
 from import_export.fields import Field
-from import_export.widgets import DateWidget
+from import_export.widgets import DateWidget, DateTimeWidget
 from simple_history.admin import SimpleHistoryAdmin
 
 from velafrica.organisation.models import Organisation
@@ -89,7 +89,7 @@ class RideResource(resources.ModelResource):
     Define the ride resource for import / export.
     """
 
-    date = Field('date', 'date', DateWidget(format="%d.%m.%Y"))
+    date = Field('date', 'date', DateTimeWidget(format="%d.%m.%Y %H:%M"))
     date_created = Field('date_created', 'date_created', DateWidget(format="%d.%m.%Y"))
 
     class Meta:
