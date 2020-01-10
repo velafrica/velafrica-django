@@ -29,7 +29,7 @@
                         </tr>
                         <tr>
                             <td class="label">Bemerkung</td>
-                            <td colspan="3">{{ ride.request_comment }}</td>
+                            <td colspan="3" class="comment">{{ ride.request_comment }}</td>
                         </tr>
                     </table>
                 </div>
@@ -48,7 +48,7 @@
                             <td class="label">Telefon</td> <td>{{ ride.from_contact_phone }}</td>
                         </tr>
                         <tr>
-                            <td class="label">Details Standort</td><td colspan="3">{{ ride.from_comment }}</td>
+                            <td class="label">Details Standort</td><td colspan="3" class="comment">{{ ride.from_comment }}</td>
                         </tr>
                     </table>
                 </div>
@@ -67,7 +67,7 @@
                             <td class="label">Telefon</td><td>{{ ride.to_contact_phone }}  </td>
                         </tr>
                         <tr>
-                            <td class="label">Details Standort</td><td colspan="3">{{ ride.to_comment }}</td>
+                            <td class="label">Details Standort</td><td colspan="3" class="comment">{{ ride.to_comment }}</td>
                         </tr>
                     </table>
                 </div>
@@ -97,7 +97,7 @@
                         </tr>
                         <tr>
                             <td class="label">Bemerkung</td>
-                            <td colspan="3">{{ ride.note | default:"" }}</td>
+                            <td colspan="3" class="comment">{{ ride.note | default:"" }}</td>
                         </tr>
                         <tr>
                             <td class="label">Datum</td>
