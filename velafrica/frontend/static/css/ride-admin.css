@@ -7,8 +7,9 @@ div.checkbox-row {
 	margin: 6px 0;
 }
 
-fieldset.aligned {
+form fieldset.collapsed.aligned {
 	width: 100%;
+	margin-bottom: 10px !important;
 }
 
 .fieldBox {
