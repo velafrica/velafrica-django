@@ -297,6 +297,18 @@ class Ride(models.Model):
             address += u", {}".format(self.to_city)
         return address
 
+    def prepare_for_view(self):
+        if self.from_warehouse and self.from_warehouse.get_address():
+            self.from_street_nr = self.from_warehouse.get_address().street
+            self.from_zip_code = self.from_warehouse.get_address().zipcode
+            self.from_city = self.from_warehouse.get_address().city
+
+        if self.to_warehouse and self.to_warehouse.get_address():
+            self.to_street_nr = self.to_warehouse.get_address().street
+            self.to_zip_code = self.to_warehouse.get_address().zipcode
+            self.to_city = self.to_warehouse.get_address().city
+        return self
+
     def __str__(self):
         return u"Transport {}".format(self.id)
 

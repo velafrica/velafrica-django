@@ -123,6 +123,7 @@ INSTALLED_APPS = (
     'acme_challenge',
 
     'webpack_loader',
+    'easy_pdf',
 )
 
 MIDDLEWARE = (
@@ -241,7 +242,7 @@ STATICFILES_DIRS = (
 # Media files (Files uploaded by user)
 
 MEDIA_URL = os.environ['MEDIA_URL'] if 'MEDIA_URL' in os.environ else 'http://tracking.velafrica.ch/'
-MEDIA_ROOT = os.path.join(PROJECT_DIR, "media")
+MEDIA_ROOT = os.path.join(PROJECT_DIR, "core", "media")
 
 # Django Resized
 DJANGORESIZED_DEFAULT_SIZE = [1920, 1080]
