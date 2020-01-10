@@ -42,7 +42,20 @@ class RideForm(forms.ModelForm):
         queryset=RequestCategory.objects.all(),
         widget=autocomplete.ModelSelect2(url='autocomplete:request_category'),
         required=False,
-        label="Kategorie"
+        label="Kategorie Velospender"
+    )
+    request_comment = forms.CharField(
+        widget=forms.Textarea(attrs={"rows": 1}),
+        required=False,
+        label='Bemerkung',
+        help_text="Bemerkung zum Auftrag"
+    )
+
+    note = forms.CharField(
+        widget=forms.Textarea(attrs={"rows": 1}),
+        required=False,
+        label='Bemerkung',
+        help_text="Bemerkung zur Fahrt"
     )
 
     class Meta:

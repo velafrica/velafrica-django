@@ -83,6 +83,10 @@ header .logo {
 	font-size: 8pt;
 }
 
+.request .comment {
+	white-space: pre-wrap;
+}
+
 
 /* signature style */
 
