@@ -282,7 +282,9 @@ class RideAdmin(ImportExportMixin, SimpleHistoryAdmin):
         ('Rechnung', {
             'fields': (
                 'invoice_same_as_customer',
+                'invoice_purpose',
                 'price',
+                'cost_type',
                 'invoice_company_name',
                 'invoice_company_addition',
                 'invoice_street_nr',

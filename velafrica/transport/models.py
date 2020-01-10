@@ -214,7 +214,9 @@ class Ride(models.Model):
     # invoice
     invoice_same_as_customer = models.BooleanField(default=True, verbose_name="Rechnungsadresse = Kundenadresse")
     charged = models.BooleanField(default=False, verbose_name="Kostenpflichtig?")
-    price = models.IntegerField(default=0, verbose_name="Preis")
+    invoice_purpose = models.CharField(max_length=255, null=True, blank=True, verbose_name="Zweck")
+    price = models.IntegerField(null=True, blank=True, verbose_name="Betrag exkl. MWSt.")
+    cost_type = models.CharField(max_length=255, default="3510-506", blank=True, verbose_name="Kostenart und Kostenstelle")
     invoice_company_name = models.CharField(max_length=255, blank=True, default="", verbose_name="Firmenname")
     invoice_company_addition = models.CharField(max_length=255, blank=True, default="", verbose_name="Firmenzusatz")
     invoice_street_nr = models.CharField(max_length=255, blank=True, default="", verbose_name="Strasse, Nr.")
