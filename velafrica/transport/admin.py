@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 from daterange_filter.filter import DateRangeFilter
-from django.conf.urls import url
 from django.contrib import admin, messages
 from django.db.models import Q
-from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404
 from django.templatetags.static import static
-from django.urls import reverse
+from django.urls import reverse, path
 from django.utils.html import format_html
 from django_object_actions import DjangoObjectActions
 from import_export import resources
@@ -18,7 +17,7 @@ from velafrica.organisation.models import Organisation
 from velafrica.transport.filter import MultiListFilter
 from velafrica.transport.forms import RideForm
 from velafrica.transport.models import Car, Driver, VeloState, Ride, RequestCategory
-from velafrica.transport.views import print_transport_request_view
+from velafrica.transport.views import transport_request_pdf_view
 
 
 class CarAdmin(SimpleHistoryAdmin):
@@ -178,6 +177,14 @@ class InvoiceStatusFilter(MultiListFilter):
         ]
 
 
+def single_transport_request_pdf(request, ride, **kwargs):
+    return transport_request_pdf_view(
+        request,
+        rides=[get_object_or_404(Ride, pk=ride)],
+        title="Transportauftrag {}.pdf".format(ride)
+    )
+
+
 class RideAdmin(ImportExportMixin, SimpleHistoryAdmin):
     form = RideForm
     resource_class = RideResource
@@ -207,7 +214,6 @@ class RideAdmin(ImportExportMixin, SimpleHistoryAdmin):
         ('date_created', DateRangeFilter),
         ('date', DateRangeFilter),
     ]
-
 
     readonly_fields = ['get_googlemaps_link', 'date_created', 'date_modified']
     change_actions = ['get_distance']
@@ -346,46 +352,22 @@ class RideAdmin(ImportExportMixin, SimpleHistoryAdmin):
 
     def get_urls(self):
         return [
-                   url(
-                       r'^(?P<rides>.+)/print/$',  # comma separated pks of rides
-                       view=print_transport_request_view,
+                   path(
+                       'print/<int:ride>/',
+                       view=single_transport_request_pdf,
                        name='print-request-view',
                    ),
                ] + super().get_urls()
 
-    def print_transport_request_link(self, pks):
-        return reverse(
-            "admin:print-request-view",
-            kwargs={
-                "rides": ",".join(
-                    str(pk) for pk in pks
-                )
-            }
-        )
-
     def redirect_print_request_multiple(self, request, queryset):
-        return HttpResponseRedirect(
-            redirect_to=self.print_transport_request_link(
-                pks=queryset.values_list('pk', flat=True)
-            )
-        )
+        return transport_request_pdf_view(request, rides=queryset, title="Transportaufträge.pdf")
 
     redirect_print_request_multiple.short_description = "Ausgewählte Aufträge drucken"
 
-    def redirect_print_request_single(self, request, obj):
-        return HttpResponseRedirect(
-            redirect_to=self.print_transport_request_link(
-                pks=[obj.pk]
-            )
-        )
-
-    redirect_print_request_single.short_description = "Auftrag drucken"
-    redirect_print_request_single.label = "Auftrag drucken"
-
     def print_request_button(self, obj):
         return format_html(
-            u'<a href="{link}" title="{title}" target="_blank"><img src="{img}" /></a>',
-            link=self.print_transport_request_link(pks=[obj.pk]),
+            u'<a href="{link}" title="{title}"><img src="{img}" /></a>',
+            link=reverse("admin:print-request-view", args=[obj.pk]),
             title='Drucken',
             img=static("img/print.png")
         )

@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
-from dal import autocomplete
-from django.db.models import Q, Count, Sum
+import os
 
+from dal import autocomplete
+from django.contrib.auth.decorators import login_required, permission_required
+from django.db.models import Q, Count, Sum
+from django.shortcuts import render
+from easy_pdf.rendering import render_to_pdf_response
+
+from velafrica.core.settings import MEDIA_ROOT
 from velafrica.transport.models import Ride, Car, Driver, VeloState, RequestCategory
 
 
@@ -114,31 +118,21 @@ class CarAutocomplete(autocomplete.Select2QuerySetView):
         return qs
 
 
-def prepare_ride(obj):
-    if obj.from_warehouse and obj.from_warehouse.get_address():
-        obj.from_street_nr = obj.from_warehouse.get_address().street
-        obj.from_zip_code = obj.from_warehouse.get_address().zipcode
-        obj.from_city = obj.from_warehouse.get_address().city
-
-    if obj.to_warehouse and obj.to_warehouse.get_address():
-        obj.to_street_nr = obj.to_warehouse.get_address().street
-        obj.to_zip_code = obj.to_warehouse.get_address().zipcode
-        obj.to_city = obj.to_warehouse.get_address().city
-
-    return obj
-
-
-def print_transport_request_view(request, rides, *args, **kwargs):
-    return render(
+@permission_required("transport.delete_ride")
+def transport_request_pdf_view(request, rides, title):
+    return render_to_pdf_response(
         request,
-        template_name="transport/print-request.html",
+        template="transport/print-request-pdf.html",
         context={
-            "title": "Transport Request",
-            "body_attributes": {
-                "onload": "window.print()"
-            },
-            "stylesheets": ["css/transport_request.css"],
-            "logo": "img/velafrica_logo_small.png",
-            "rides": [prepare_ride(r) for r in Ride.objects.filter(pk__in=rides.split(","))]
-        }
+            "title": title,
+            "logos": (
+                os.path.join(MEDIA_ROOT, "Drahtesel_A4_schwarz.png"),
+                os.path.join(MEDIA_ROOT, "velafrica_SW.png"),
+            ),
+            "rides": [
+                r.prepare_for_view()
+                for r in rides
+            ]
+        },
+        filename="{}.pdf".format(title),
     )
