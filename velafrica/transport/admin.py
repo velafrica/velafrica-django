@@ -6,7 +6,6 @@ from django.shortcuts import get_object_or_404
 from django.templatetags.static import static
 from django.urls import reverse, path
 from django.utils.html import format_html
-from django_object_actions import DjangoObjectActions
 from import_export import resources
 from import_export.admin import ImportExportMixin
 from import_export.fields import Field
@@ -18,6 +17,9 @@ from velafrica.transport.filter import MultiListFilter
 from velafrica.transport.forms import RideForm
 from velafrica.transport.models import Car, Driver, VeloState, Ride, RequestCategory
 from velafrica.transport.views import transport_request_pdf_view
+
+ride_css = "css/ride-admin.css"
+ride_js = "js/ride-admin.js"
 
 
 class CarAdmin(SimpleHistoryAdmin):
@@ -222,9 +224,9 @@ class RideAdmin(ImportExportMixin, SimpleHistoryAdmin):
     fieldsets = (
         (None, {
             "fields": (
-                ('velo_state', 'planned_velos', ),
+                ('velo_state', 'planned_velos',),
                 'request_category',
-                ('from_warehouse','to_warehouse'),
+                ('from_warehouse', 'to_warehouse'),
             ),
         }),
 
@@ -398,10 +400,10 @@ class RideAdmin(ImportExportMixin, SimpleHistoryAdmin):
 
     class Media:
         css = {
-            "screen": (static("css/ride-admin.css"),)
+            "screen": (static(ride_css),)
         }
         js = (
-            static("js/ride-admin.js"),
+            static(ride_js),
         )
 
 
