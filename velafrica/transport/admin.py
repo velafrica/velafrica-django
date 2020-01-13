@@ -18,9 +18,6 @@ from velafrica.transport.forms import RideForm
 from velafrica.transport.models import Car, Driver, VeloState, Ride, RequestCategory
 from velafrica.transport.views import transport_request_pdf_view
 
-ride_css = "css/ride-admin.css"
-ride_js = "js/ride-admin.js"
-
 
 class CarAdmin(SimpleHistoryAdmin):
     list_display = ['name', 'organisation', 'plate']
@@ -400,10 +397,10 @@ class RideAdmin(ImportExportMixin, SimpleHistoryAdmin):
 
     class Media:
         css = {
-            "screen": (static(ride_css),)
+            "screen": (static("css/ride-admin.css"),)
         }
         js = (
-            static(ride_js),
+            static("js/ride-admin.js"),
         )
 
 
