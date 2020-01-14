@@ -265,23 +265,6 @@ class RideAdmin(ImportExportMixin, SimpleHistoryAdmin):
             ),
             'classes': ('collapse',)
         }),
-        ('Auftrag', {
-            'fields': (
-                ('date_created', 'date_modified'),
-                'created_by',
-                'request_comment'
-            ),
-        }),
-        ('Transport', {
-            'fields': (
-                'date',
-                ('driver', 'car'),
-                'note',
-                'velos',
-                'completed'
-            )
-        }),
-
         (None, {
             'fields': ('charged',)
         }),
@@ -299,6 +282,22 @@ class RideAdmin(ImportExportMixin, SimpleHistoryAdmin):
                 'invoice_commissioned'
             ),
             'classes': ('collapse', 'invoice')
+        }),
+        ('Auftrag', {
+            'fields': (
+                ('date_created', 'date_modified'),
+                'created_by',
+                'request_comment'
+            ),
+        }),
+        ('Transport', {
+            'fields': (
+                'date',
+                ('driver', 'car'),
+                'note',
+                'velos',
+                'completed'
+            )
         }),
         ('Zusätzliche Infos', {
             'fields': (
