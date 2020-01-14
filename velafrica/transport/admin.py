@@ -181,7 +181,7 @@ def single_transport_request_pdf(request, ride, **kwargs):
     return transport_request_pdf_view(
         request,
         rides=[get_object_or_404(Ride, pk=ride)],
-        title="Transportauftrag {}.pdf".format(ride)
+        title="Transportauftrag {}".format(ride)
     )
 
 
@@ -359,7 +359,7 @@ class RideAdmin(ImportExportMixin, SimpleHistoryAdmin):
                ] + super().get_urls()
 
     def redirect_print_request_multiple(self, request, queryset):
-        return transport_request_pdf_view(request, rides=queryset, title="Transportaufträge.pdf")
+        return transport_request_pdf_view(request, rides=queryset, title="Transportaufträge")
 
     redirect_print_request_multiple.short_description = "Ausgewählte Aufträge drucken"
 
