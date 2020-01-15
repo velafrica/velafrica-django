@@ -123,7 +123,6 @@ INSTALLED_APPS = (
     'acme_challenge',
 
     'webpack_loader',
-    'easy_pdf',
 )
 
 MIDDLEWARE = (
