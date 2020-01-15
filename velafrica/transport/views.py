@@ -118,7 +118,7 @@ class CarAutocomplete(autocomplete.Select2QuerySetView):
         return qs
 
 
-@permission_required("transport.delete_ride")
+@permission_required("transport.view_ride")
 def transport_request_pdf_view(request, rides, title):
     return render_to_pdf_response(
         request,
