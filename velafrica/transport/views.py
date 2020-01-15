@@ -127,8 +127,8 @@ def transport_request_pdf_view(request, rides, title):
                 'css/transport_request.css',
             ),
             "logos": (
-                "img/velafrica_SW.png",  # os.path.join(MEDIA_ROOT, "velafrica_SW.png"),
-                "img/Drahtesel_A4_schwarz.png",  # os.path.join(MEDIA_ROOT, "Drahtesel_A4_schwarz.png"),
+                "img/velafrica_SW.png",
+                "img/Drahtesel_A4_schwarz.png",
             ),
             "rides": [
                 r.prepare_for_view()

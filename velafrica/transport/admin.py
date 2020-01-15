@@ -6,7 +6,6 @@ from django.shortcuts import get_object_or_404
 from django.templatetags.static import static
 from django.urls import reverse, path
 from django.utils.html import format_html
-from django_object_actions import DjangoObjectActions
 from import_export import resources
 from import_export.admin import ImportExportMixin
 from import_export.fields import Field
