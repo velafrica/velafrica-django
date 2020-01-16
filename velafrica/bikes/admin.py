@@ -29,7 +29,7 @@ from django_object_actions import DjangoObjectActions
 from import_export import resources
 from import_export.admin import ImportExportMixin
 
-from velafrica.bikes.models import Bike
+from velafrica.bikes.models import Bike, BikeCategory
 from velafrica.core.settings import PROJECT_DIR
 
 from reportlab.lib.utils import simpleSplit
@@ -41,6 +41,14 @@ from velafrica.velafrica_sud.models import Container
 
 def get_formsets(model, request, obj=None):
     return [f for f, _ in model.get_formsets_with_inlines(request, obj)]
+class BikeCategoryResource(resources.ModelResource):
+    class Meta:
+        model = BikeCategory
+
+
+class BikeCategoryAdmin(ImportExportMixin, admin.ModelAdmin):
+    resource_class = BikeCategoryResource
+    fields = ['name']
 
 
 class BikeResource(resources.ModelResource):
@@ -79,9 +87,9 @@ class BikeAdmin(ImportExportMixin, DjangoObjectActions, admin.ModelAdmin):
 
     resource_class = BikeResource  # import export
 
-    list_display = ['number', 'type', 'brand', 'a_plus', 'for_sale', 'container', 'warehouse']
-    search_fields = ['id', 'type', 'brand', 'a_plus', 'warehouse']
-    list_filter = [APlusForSaleListFilter, 'a_plus', 'type', 'container', 'warehouse', ('date', DateRangeFilter)]
+    list_display = ['number', 'category', 'brand', 'a_plus', 'for_sale', 'container', 'warehouse']
+    search_fields = ['id', 'category', 'brand', 'a_plus', 'warehouse']
+    list_filter = [APlusForSaleListFilter, 'a_plus', 'category', 'container', 'warehouse', ('date', DateRangeFilter)]
 
     # "for_sale" a boolean column in the list-view
     def for_sale(self, obj):
@@ -91,7 +99,7 @@ class BikeAdmin(ImportExportMixin, DjangoObjectActions, admin.ModelAdmin):
     for_sale.admin_order_field = 'container'
     for_sale.boolean = True
 
-    book_bike_exclude = ['number', 'type', 'visa', 'date', 'a_plus', 'brand', 'bike_model', 'gearing',
+    book_bike_exclude = ['number', 'category', 'visa', 'date', 'a_plus', 'brand', 'bike_model', 'gearing',
                          'drivetrain', 'brake', 'colour', 'size', 'suspension',
                          'rear_suspension', 'extraordinary', 'image']
 
@@ -104,14 +112,30 @@ class BikeAdmin(ImportExportMixin, DjangoObjectActions, admin.ModelAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('id', 'number', 'type', 'visa', 'date', 'warehouse')
+            'fields': (
+                'id',
+                'number',
+                'category',
+                ('date', 'visa'),
+                'warehouse',
+                'a_plus',
+            )
         }),
         ('A+',  # Details ?
          {
-             'fields': ('a_plus', 'brand', 'bike_model', 'gearing',  # 'crankset',
-                        'drivetrain', 'brake', 'colour', 'size',
-                        'suspension', 'rear_suspension', 'extraordinary', 'image'
-                        ),
+             'fields': (
+                 'brand',
+                 'bike_model',
+                 'gearing',
+                 'drivetrain',
+                 'brake',
+                 'colour',
+                 'size',
+                 'suspension',
+                 'rear_suspension',
+                 'extraordinary',
+                 'image'
+             ),
          }
          ),
         ('Container',
@@ -410,3 +434,4 @@ class BikeAdmin(ImportExportMixin, DjangoObjectActions, admin.ModelAdmin):
 
 
 admin.site.register(Bike, BikeAdmin)
+admin.site.register(BikeCategory, BikeCategoryAdmin)
