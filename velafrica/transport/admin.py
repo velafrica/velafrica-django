@@ -3,7 +3,7 @@ from daterange_filter.filter import DateRangeFilter
 from django.contrib import admin, messages
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
-from django.templatetags.static import static
+from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.urls import reverse, path
 from django.utils.html import format_html
 from import_export import resources
