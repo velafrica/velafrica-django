@@ -3,7 +3,7 @@ from daterange_filter.filter import DateRangeFilter
 from django.contrib import admin, messages
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
-from django.templatetags.static import static
+from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.urls import reverse, path
 from django.utils.html import format_html
 from import_export import resources
@@ -221,9 +221,9 @@ class RideAdmin(ImportExportMixin, SimpleHistoryAdmin):
     fieldsets = (
         (None, {
             "fields": (
-                ('velo_state', 'planned_velos', ),
+                ('velo_state', 'planned_velos',),
                 'request_category',
-                ('from_warehouse','to_warehouse'),
+                ('from_warehouse', 'to_warehouse'),
             ),
         }),
 
@@ -396,11 +396,9 @@ class RideAdmin(ImportExportMixin, SimpleHistoryAdmin):
 
     class Media:
         css = {
-            "screen": (static("css/ride-admin.css"),)
+            "screen": ("css/ride-admin.css",),
         }
-        js = (
-            static("js/ride-admin.js"),
-        )
+        js = ("js/ride-admin.js",)
 
 
 admin.site.register(RequestCategory)
