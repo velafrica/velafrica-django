@@ -6,7 +6,6 @@ from django.db.models import Q, Count, Sum
 from django.shortcuts import render
 
 from velafrica.core.pdf_utils import render_to_pdf
-
 from velafrica.transport.models import Ride, Car, Driver, VeloState, RequestCategory
 
 

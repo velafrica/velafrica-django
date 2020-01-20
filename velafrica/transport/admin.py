@@ -221,9 +221,9 @@ class RideAdmin(ImportExportMixin, SimpleHistoryAdmin):
     fieldsets = (
         (None, {
             "fields": (
-                ('velo_state', 'planned_velos', ),
+                ('velo_state', 'planned_velos',),
                 'request_category',
-                ('from_warehouse','to_warehouse'),
+                ('from_warehouse', 'to_warehouse'),
             ),
         }),
 
