@@ -396,11 +396,9 @@ class RideAdmin(ImportExportMixin, SimpleHistoryAdmin):
 
     class Media:
         css = {
-            "screen": (static("css/ride-admin.css"),)
+            "screen": ("css/ride-admin.css",),
         }
-        js = (
-            static("js/ride-admin.js"),
-        )
+        js = ("js/ride-admin.js",)
 
 
 admin.site.register(RequestCategory)
