@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    {% for stylesheet in stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{% static stylesheet %}">
+    {% endfor %}
+</head>
+<body><div>
+    {% for ride in rides %}
+        <div class="request">
+            <header>
+                <div class="logo">
+                    {% for logo in logos %}&nbsp; &nbsp;<img src="{% static logo %}" width="128" />{% endfor %}
+                </div>
+                <div class="title"><span>Transportauftrag {{ ride.pk }} </span></div>
+            </header>
+
+            <div class="inside">
+                <div class="part">
+                    <table>
+                        <tr>
+                            <td class="label">Transportgut</td><td>{{ ride.planned_velos | default:"" }} {{ ride.velo_state | default:"" }} </td>
+                            <td class="label">Kategorie Velospender</td><td>{{ ride.request_category | default:"" }} </td>
+                        </tr>
+                        <tr>
+                            <td class="label">Erstellt am</td><td>{{ ride.date_created | date:"d.m.Y" }} </td>
+                            <td class="label">von</td><td>{{ ride.created_by }} </td>
+                        </tr>
+                        <tr>
+                            <td class="label">Bemerkung</td>
+                            <td colspan="3" class="comment">{{ ride.request_comment }} </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="part">
+                    <div class="table-caption">
+                        <span>Abholen in {{ ride.from_warehouse|default:"" }} </span>
+                    </div>
+                    <table>
+                        <tr>
+                            <td class="label">Adresse</td><td>{{ ride.from_street_nr }} </td>
+                            <td class="label">Kontakt</td><td>{{ ride.from_contact_name }} </td>
+                        </tr>
+                        <tr>
+                            <td class="label">PLZ, Ort</td><td>{{ ride.from_zip_code }} {{ ride.from_city }} </td>
+                            <td class="label">Telefon</td><td>{{ ride.from_contact_phone }}  </td>
+                        </tr>
+                        <tr>
+                            <td class="label">Details Standort</td><td colspan="3" class="comment">{{ ride.from_comment }} </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="part">
+                    <div class="table-caption">
+                        <span>Liefern nach {{ ride.to_warehouse|default:"" }} </span>
+                    </div>
+                    <table>
+                        <tr>
+                            <td class="label">Adresse</td><td>{{ ride.to_street_nr }} </td>
+                            <td class="label">Kontakt</td><td>{{ ride.to_contact_name }} </tr>
+                        </tr>
+                        <tr>
+                            <td class="label">PLZ, Ort</td><td>{{ ride.to_zip_code }} {{ ride.to_city }} </td>
+                            <td class="label">Telefon</td><td>{{ ride.to_contact_phone }}  </td>
+                        </tr>
+                        <tr>
+                            <td class="label">Details Standort</td><td colspan="3" class="comment">{{ ride.to_comment }} </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="part">
+                    <div class="table-caption"><span>Auftraggeber*in</span></div>
+                    <table>
+                        <tr><td class="label">Firma</td><td>{{ ride.customer_company }} </td></tr>
+                        <tr><td class="label">Name</td><td>{{ ride.customer_salutation }} {{ ride.customer_firstname }} {{ ride.customer_lastname }} </td></tr>
+                        <tr><td class="label">Adresse</td><td>{{ ride.customer_street_nr }} </td></tr>
+                        <tr><td class="label">PLZ, Ort</td><td>{{ ride.customer_zip_code }} {{ ride.customer_city }} </td></tr>
+                        <tr><td class="label">Telefon</td><td>{{ ride.customer_phone }} </td></tr>
+                        <tr><td class="label">Email</td><td>{{ ride.customer_email }} </td></tr>
+                    </table>
+                </div>
+
+                <div class="part">
+                    <div class="table-caption"><span>Terminvereinbarung</span></div>
+                    <table>
+                        <tr>
+                            <td class="label">Abholtermin</td>
+                            <td colspan="3">{{ ride.date | date:"d.m.Y H:i" | default:"" }} </td>
+                        </tr>
+                        <tr>
+                            <td class="label">Anzahl Velos</td>
+                            <td colspan="3">{{ ride.velos | default:"" }} </td>
+                        </tr>
+                        <tr>
+                            <td class="label">Bemerkung</td>
+                            <td colspan="3" class="comment">{{ ride.note | default:"" }} </td>
+                        </tr>
+                        <tr>
+                            <td class="label">Datum</td>
+                            <td> </td>
+                            <td class="label">Visum</td>
+                            <td> </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="part confirmation">
+                    <div class="table-caption"><span>Bestätigung bei Räumung von Drittvelos</span></div>
+                    <table class="big-labels">
+                        <tr>
+                            <td class="label">Liegenschaftsverwaltung</td>
+                            <td> </td>
+                        </tr>
+                        <tr>
+                            <td class="label">Liegenschaft <span class="note">(Adresse)</span></td>
+                            <td> </td>
+                        </tr>
+                        <tr>
+                            <td class="label">Zuständige Person <span class="note">(z.B. Hauswart*in, Verwalter*in)</span></td>
+                            <td> </td>
+                        </tr>
+                        <tr>
+                            <td class="label">Anzahl Velos</td>
+                            <td> </td>
+                        </tr>
+                    </table>
+                    <div class="agb">
+                        <div class="agb-text">
+                            <span>Wir bestätigen hiermit, dass wir keine Forderungen an Velafrica/Drahtesel stellen werden, sollte sich herausstellen, dass ein Velo von der oben genannten Räumung fälschlicherweise entsorgt oder zur weiteren Verwendung in Afrika freigegeben wurde. Wir gehen davon aus, dass es sich bei den Velos um herrenlose Ware handelt, und wir daher darüber verfügen dürfen. Die vorgängigen Besitzer sind nicht mehr zu ermitteln oder verzichten auf ihre Besitzrechte.</span>
+                        </div>
+                        <table class="signature">
+                            <tr>
+                                <td class="">Ort, Datum:</td>
+                                <td class="fill-out"> </td>
+                                <td class="gap"> </td>
+                                <td class="">Unterschrift:</td>
+                                <td class="fill-out"> </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+</body>

@@ -21,14 +21,13 @@
             <th>Total Fahrten:</th>
             <td>{{ rides_count }}</td>
         </tr>
-        <!-- TODO: refactor velo count
-    <tr>
-		<th>Total Velos:</th>
-		<td>{{ velos }}</td>
-	</tr> -->
+        <tr>
+            <th>Total Velos:</th>
+            <td>{{ velos }}</td>
+        </tr>
     </table>
     <div class="row">
-        {% for key, val in charts.iteritems %}
+        {% for key, val in charts.items %}
 
             <div class="col-md-3">
                 <canvas id="{{ key }}" width="300" height="300"></canvas>
@@ -45,7 +44,7 @@
 {% block content %}
     <h2>Fahrten</h2>
     {% if rides_count <= 0 %}<p>Es wurden bisher keine Fahrten erfasst.</p>{% else %}
-        <p>Es werden nur die 100 neusten Fahrten angezeigt (von {{ rides_count }} total).</p>
+        <p> {{ rides.count }} von {{ rides_count }} Rides angezeigt.</p>
         <table class="table">
             <tr>
                 <th>Datum</th>
@@ -61,9 +60,20 @@
             {% for r in rides %}
                 <tr>
                     <td>{{ r.date }}</td>
-                    <td><a href="{% url 'frontend:warehouse_detail' r.from_warehouse.id %}">{{ r.from_warehouse }}</a>
+                    <td>
+                        {% if r.from_warehouse %}
+                            <a href="{% url 'frontend:warehouse_detail' r.from_warehouse.id %}">{{ r.from_warehouse }}</a>
+                        {% else %}
+                            <a href="https://map.search.ch/?q={{ r.get_from_address | urlencode }}" target="_blank">{{ r.get_from_address }}</a>
+                        {% endif %}
                     </td>
-                    <td><a href="{% url 'frontend:warehouse_detail' r.to_warehouse.id %}">{{ r.to_warehouse }}</a></td>
+                    <td>
+                        {% if r.to_warehouse %}
+                            <a href="{% url 'frontend:warehouse_detail' r.to_warehouse.id %}">{{ r.to_warehouse }}</a>
+                        {% else %}
+                            <a href="https://map.search.ch/?q={{ r.get_to_address | urlencode }}" target="_blank">{{ r.get_to_address }}</a>
+                        {% endif %}
+                    </td>
                     <td>{{ r.driver }}</td>
                     <td>{{ r.car }}</td>
                     <td>{% if r.velos <= 0 %}<span class="label label-danger">{% else %}
@@ -91,10 +101,10 @@
 
         $(function() {
 
-            {% for key, val in charts.iteritems %}
+            {% for key, val in charts.items %}
                 var labels = [];
                 var data = [];
-                {% for subkey, subval in val.iteritems %}
+                {% for subkey, subval in val.items %}
                     labels.push("{{ subkey}}");
                     data.push("{{ subval }}");
                 {% endfor %}

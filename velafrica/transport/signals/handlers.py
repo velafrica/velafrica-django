@@ -17,13 +17,15 @@ def send_email(sender, instance, created, **kwargs):
     Send email notification to bicycle donor.
     """
 
-    print("post save ride")
-
     # check if the event has been newly created or just updated
     if not created:
         return
 
     warehouse = instance.to_warehouse
+
+    # check if the warehouse exists
+    if not warehouse:
+        return
 
     emails = warehouse.notify_on_incoming_transport
     receiver_list = []

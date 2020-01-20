@@ -1,0 +1,86 @@
+body, p, h1 {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font: 9pt "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+}
+
+.logo {
+	text-align: right;
+}
+
+.logo img {
+	width: 3cm;
+}
+
+.title {
+	font-size: 14pt;
+	margin-bottom: 12px;
+}
+
+.request {
+	page-break-after: always;
+}
+
+.table-caption {
+	font-size: 10pt;
+	margin-top: 15px;
+}
+
+table {
+	width: 100%;
+	margin-bottom: 0;
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+td {
+	border: 1px solid #777;
+	padding: 2px;
+	vertical-align: middle;
+	min-width: 100;
+	line-height: normal;
+}
+
+td.label {
+	width: 3cm;
+	background-color: #ddd;
+}
+
+.big-labels td.label {
+
+}
+
+.request .note {
+	font-size: 7pt;
+}
+
+.request .comment {
+	white-space: pre-wrap;
+}
+
+.agb-text {
+	font-size: 8pt;
+	line-height: 9pt;
+	margin: 10px 0;
+}
+
+.signature {
+	margin-top: 25px;
+}
+
+.signature td {
+	border: none;
+	padding: 0;
+	margin: 0;
+}
+
+.signature .gap {
+	width: 0.5cm;
+}
+
+.signature td.fill-out {
+	width: 5cm;
+}

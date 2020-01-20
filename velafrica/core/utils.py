@@ -36,12 +36,11 @@ def get_distance(origin, destination):
     """
     Returns the distance in metres between two destinations.
     """
-    if gmaps == None:
-        return None
-    distance_result = gmaps.distance_matrix(origin, destination, mode="driving")
-    print(distance_result)
-    if distance_result:
-        return distance_result['rows'][0]['elements'][0]['distance']['value']
+    if gmaps and origin and destination:
+        distance_result = gmaps.distance_matrix(origin, destination, mode="driving")
+        print(distance_result)
+        if distance_result:
+            return distance_result['rows'][0]['elements'][0]['distance']['value']
     else:
         return None
 
