@@ -1,117 +1,86 @@
-@media screen {
-	html {
-		background: #aaa;
-	}
-	
-	.request {
-		margin-bottom: 2cm;
-	}
-}
-        
-body {
-	width: 100%;
-	max-width: 21cm;
-	margin: 0 auto;
-	padding: 0;
-	font: 10pt "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
-}
-
-p, h1 {
+body, p, h1 {
 	margin: 0;
 	padding: 0;
 }
 
-
-/* Header */
-
-header {
-	margin-bottom: 22px;
+body {
+	font: 9pt "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
 }
 
-header .title span {
-	font-size: 20px;
+.logo {
+	text-align: right;
 }
 
-header div {
-	display: inline-block;
+.logo img {
+	width: 3cm;
 }
 
-header .logo {
-	float: right;
-	margin-top: -25px;
+.title {
+	font-size: 14pt;
+	margin-bottom: 12px;
 }
-
-
-/* Transport Request Formatting */
 
 .request {
-	padding: 1.5cm;
-	background: white;
-	clear: both;
 	page-break-after: always;
 }
 
-.request .table-caption {
-	font-size: 11pt;
-	margin-top: 12px;
-	margin-bottom: 5px;
+.table-caption {
+	font-size: 10pt;
+	margin-top: 15px;
 }
 
-.request .part {
-	page-break-inside: avoid;
-}
-
-.request table {
+table {
 	width: 100%;
 	margin-bottom: 0;
 	border-collapse: collapse;
 	border-spacing: 0;
 }
 
-.request td {
+td {
 	border: 1px solid #777;
-	padding: 2px 4px;
-	min-width: 3cm;
+	padding: 2px;
+	vertical-align: middle;
+	min-width: 100;
+	line-height: normal;
 }
 
-.request td.label {
-	background: #e0e0e0;
+td.label {
 	width: 3cm;
+	background-color: #ddd;
+}
+
+.big-labels td.label {
+
 }
 
 .request .note {
-	font-size: 8pt;
+	font-size: 7pt;
 }
 
 .request .comment {
 	white-space: pre-wrap;
 }
 
+.agb-text {
+	font-size: 8pt;
+	line-height: 9pt;
+	margin: 10px 0;
+}
 
-/* signature style */
+.signature {
+	margin-top: 25px;
+}
 
-.agb td {
+.signature td {
 	border: none;
-	min-width: 0;
-	padding: 6px 0 4px;
+	padding: 0;
+	margin: 0;
 }
 
-.agb td.agb-text {
-	font-size: 9pt;
-}
-
-.agb .signature td {
-	padding-top: 12px;
-}
-
-.agb .signature .gap {
+.signature .gap {
 	width: 0.5cm;
 }
 
-.agb .signature .fill-out {
-	min-width: 5cm;
-	border-bottom: 1px solid #333;
-	padding-top: 0;
-	margin-top: 0;
+.signature td.fill-out {
+	width: 5cm;
 }
-

@@ -180,7 +180,7 @@ def single_transport_request_pdf(request, ride, **kwargs):
     return transport_request_pdf_view(
         request,
         rides=[get_object_or_404(Ride, pk=ride)],
-        title="Transportauftrag {}.pdf".format(ride)
+        title="Transportauftrag {}".format(ride)
     )
 
 
@@ -221,9 +221,9 @@ class RideAdmin(ImportExportMixin, SimpleHistoryAdmin):
     fieldsets = (
         (None, {
             "fields": (
-                ('velo_state', 'planned_velos',),
+                ('velo_state', 'planned_velos', ),
                 'request_category',
-                ('from_warehouse', 'to_warehouse'),
+                ('from_warehouse','to_warehouse'),
             ),
         }),
 
@@ -264,23 +264,6 @@ class RideAdmin(ImportExportMixin, SimpleHistoryAdmin):
             ),
             'classes': ('collapse',)
         }),
-        ('Auftrag', {
-            'fields': (
-                ('date_created', 'date_modified'),
-                'created_by',
-                'request_comment'
-            ),
-        }),
-        ('Transport', {
-            'fields': (
-                'date',
-                ('driver', 'car'),
-                'note',
-                'velos',
-                'completed'
-            )
-        }),
-
         (None, {
             'fields': ('charged',)
         }),
@@ -298,6 +281,22 @@ class RideAdmin(ImportExportMixin, SimpleHistoryAdmin):
                 'invoice_commissioned'
             ),
             'classes': ('collapse', 'invoice')
+        }),
+        ('Auftrag', {
+            'fields': (
+                ('date_created', 'date_modified'),
+                'created_by',
+                'request_comment'
+            ),
+        }),
+        ('Transport', {
+            'fields': (
+                'date',
+                ('driver', 'car'),
+                'note',
+                'velos',
+                'completed'
+            )
         }),
         ('Zusätzliche Infos', {
             'fields': (
@@ -359,7 +358,7 @@ class RideAdmin(ImportExportMixin, SimpleHistoryAdmin):
                ] + super().get_urls()
 
     def redirect_print_request_multiple(self, request, queryset):
-        return transport_request_pdf_view(request, rides=queryset, title="Transportaufträge.pdf")
+        return transport_request_pdf_view(request, rides=queryset, title="Transportaufträge")
 
     redirect_print_request_multiple.short_description = "Ausgewählte Aufträge drucken"
 

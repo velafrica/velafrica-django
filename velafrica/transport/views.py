@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
-import os
 
 from dal import autocomplete
 from django.contrib.auth.decorators import login_required, permission_required
 from django.db.models import Q, Count, Sum
 from django.shortcuts import render
-from easy_pdf.rendering import render_to_pdf_response
 
-from velafrica.core.settings import MEDIA_ROOT
+from velafrica.core.pdf_utils import render_to_pdf
+
 from velafrica.transport.models import Ride, Car, Driver, VeloState, RequestCategory
 
 
@@ -59,7 +58,7 @@ def transport(request):
             'rides': Ride.objects.all()[:100],
             'rides_count': Ride.objects.count(),
             'velos': Ride.objects.aggregate(velo_count=Sum('velos'))['velo_count'],
-            'cars':  Car.objects.all(),
+            'cars': Car.objects.all(),
             'charts': {}  # get_charts() disabled for now
         }
     )
@@ -118,21 +117,24 @@ class CarAutocomplete(autocomplete.Select2QuerySetView):
         return qs
 
 
-@permission_required("transport.delete_ride")
+@permission_required("transport.view_ride")
 def transport_request_pdf_view(request, rides, title):
-    return render_to_pdf_response(
-        request,
-        template="transport/print-request-pdf.html",
+    return render_to_pdf(
+        request=request,
+        template="transport/print-request.html",
         context={
             "title": title,
+            "stylesheets": (
+                'css/transport_request.css',
+            ),
             "logos": (
-                os.path.join(MEDIA_ROOT, "Drahtesel_A4_schwarz.png"),
-                os.path.join(MEDIA_ROOT, "velafrica_SW.png"),
+                "img/velafrica_SW.png",
+                "img/Drahtesel_A4_schwarz.png",
             ),
             "rides": [
                 r.prepare_for_view()
                 for r in rides
             ]
         },
-        filename="{}.pdf".format(title),
+        filename="{}.pdf".format(title)
     )
