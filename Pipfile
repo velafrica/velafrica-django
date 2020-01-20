@@ -78,5 +78,6 @@ pdfrw = "*"
 openpyxl = "!= 3.0.2"
 weasyprint = "*"
 
+
 [requires]
 python_version = "3.6"

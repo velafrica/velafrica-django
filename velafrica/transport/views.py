@@ -6,6 +6,7 @@ from django.db.models import Q, Count, Sum
 from django.shortcuts import render
 
 from velafrica.core.pdf_utils import render_to_pdf
+
 from velafrica.transport.models import Ride, Car, Driver, VeloState, RequestCategory
 
 
@@ -15,7 +16,7 @@ def get_charts():
             c.name: c.ride__count
             for c in Car.objects.annotate(Count('ride'))
         },
-        # There're probably too many drivers
+        # There are probably too many drivers
         # 'Driver': {
         #     d.name: d.ride__count
         #     for d in Driver.objects.annotate(Count('ride'))
