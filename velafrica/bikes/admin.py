@@ -57,7 +57,7 @@ class APlusFilter(MultiListFilter):
         ]
 
 
-def plot_bikes_for_sale(self, request):
+def plot_bikes_for_sale(request):
     return bikes_pdf(
         request=request,
         queryset=Bike.objects.filter(container__isnull=True).order_by("number"),
