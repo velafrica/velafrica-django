@@ -102,7 +102,7 @@ class ContainerAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin)
                 partner_name=obj.partner_to.organisation.name
             ),
             subtitle="{:%d.%m.%Y}".format(obj.pickup_date),
-            filename="{date:%y%m%d} A+ bikes for sold to {partner_name}".format(
+            filename="{date:%y%m%d} A+ bikes sold to {partner_name}".format(
                 date=obj.pickup_date,
                 partner_name=obj.partner_to.organisation.name
             )
