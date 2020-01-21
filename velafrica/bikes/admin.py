@@ -138,7 +138,7 @@ class BikeAdmin(ImportExportMixin, admin.ModelAdmin):
                  'extraordinary',
                  'image'
              ),
-             'classes': ('a_plus_fieldset',)
+             'classes': ('a_plus_fieldset', 'collapse')
          }
          ),
         ('Container',
