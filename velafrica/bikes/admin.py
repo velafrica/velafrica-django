@@ -8,7 +8,6 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from django.templatetags.static import static
 from django.urls import reverse, path
-from django_object_actions import DjangoObjectActions
 from import_export import resources
 from import_export.admin import ImportExportMixin
 
@@ -60,7 +59,7 @@ class APlusFilter(MultiListFilter):
         ]
 
 
-class BikeAdmin(ImportExportMixin, DjangoObjectActions, admin.ModelAdmin):
+class BikeAdmin(ImportExportMixin, admin.ModelAdmin):
     form = BikeForm
     resource_class = BikeResource  # import export
 
@@ -104,6 +103,15 @@ class BikeAdmin(ImportExportMixin, DjangoObjectActions, admin.ModelAdmin):
 
     # actions on selected elements
     actions = ["plot_to_pdf", "book_bikes_action"]
+
+    massadmin_exclude = [
+        f.name for f in Bike._meta.get_fields()
+        if f.name not in (
+            'container',
+            'warehouse',
+            'a_plus',
+        )
+    ]
 
     #
     #  Detail view
@@ -152,11 +160,6 @@ class BikeAdmin(ImportExportMixin, DjangoObjectActions, admin.ModelAdmin):
 
     def get_urls(self):
         return [
-                   url(
-                       r'^book/(?P<object_ids>[\w,\.\-]+)/$',
-                       self.book_bikes,
-                       name='bikes_bike_book'
-                   ),
                    path(
                        'plot/<slug:key>/',
                        BikePDFView.as_view(),
@@ -176,29 +179,6 @@ class BikeAdmin(ImportExportMixin, DjangoObjectActions, admin.ModelAdmin):
 
     plot_to_pdf.short_description = "Als PDF Drucken"
 
-    def book_bikes(self, *args, **kwargs):
-        return book_bikes_view(self, *args, **kwargs)
-
-    def book_bikes_action(self, request, queryset):
-        return HttpResponseRedirect(
-            add_preserved_filters(
-                context={
-                    'preserved_filters': self.get_preserved_filters(request),
-                    'opts': queryset.model._meta
-                },
-                url=reverse(
-                    "admin:bikes_bike_book",
-                    kwargs={
-                        "object_ids": ",".join(
-                            str(q.pk)
-                            for q in queryset
-                        )
-                    }
-                )
-            )
-        )
-
-    book_bikes_action.short_description = "Velos buchen / verschieben"
 
 
 admin.site.register(Bike, BikeAdmin)
