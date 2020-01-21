@@ -126,6 +126,9 @@ class Bike(models.Model):
     def get_backend_url(self):
         return reverse("admin:bikes_bike_change", args=[self.pk])
 
+    class Meta:
+        ordering = ["number"]
+
 
 # The following auto-delete files from filesystem when they are unneeded:
 def delete_file(filename):
