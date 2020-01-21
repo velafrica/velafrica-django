@@ -127,7 +127,7 @@ class Bike(models.Model):
         return reverse("admin:bikes_bike_change", args=[self.pk])
 
     class Meta:
-        ordering = ["number"]
+        ordering = ["-number"]
 
 
 # The following auto-delete files from filesystem when they are unneeded:
