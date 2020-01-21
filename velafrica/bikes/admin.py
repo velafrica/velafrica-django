@@ -1,10 +1,6 @@
 # -*- coding: utf-8 -*-
-
-from django.conf.urls import url
 from django.contrib import admin
-from django.contrib.admin.templatetags.admin_urls import add_preserved_filters
 from django.db.models import Q
-from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from django.templatetags.static import static
 from django.urls import reverse, path
@@ -116,7 +112,6 @@ class BikeAdmin(ImportExportMixin, admin.ModelAdmin):
     #
     #  Detail view
     #
-
     fieldsets = (
         (None, {
             'fields': (
@@ -164,7 +159,7 @@ class BikeAdmin(ImportExportMixin, admin.ModelAdmin):
                        'plot/<slug:key>/',
                        BikePDFView.as_view(),
                        name='bikes_plot'
-                   )
+                   ),
                ] + super(BikeAdmin, self).get_urls()
 
     def plot_to_pdf(self, request, queryset):
@@ -178,7 +173,6 @@ class BikeAdmin(ImportExportMixin, admin.ModelAdmin):
         )
 
     plot_to_pdf.short_description = "Als PDF Drucken"
-
 
 
 admin.site.register(Bike, BikeAdmin)
