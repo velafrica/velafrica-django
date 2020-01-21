@@ -3,6 +3,7 @@ from django.conf import settings
 from django.core.validators import RegexValidator
 from django.db import models
 from django.utils import timezone
+from django.utils.html import format_html
 from django_resized import ResizedImageField
 from simple_history.models import HistoricalRecords
 
@@ -80,8 +81,11 @@ class Product(models.Model):
         """
         Return image for admin list view.
         """
-        return (u"<img src='{0}{1}' style='max-height: 100px;' alt='{2}' title='{2}'' />".format(settings.MEDIA_URL,
-                                                                                                 self.image, self.name))
+        return format_html(
+            u"<img src='{image_src}' style='max-height: 100px;' alt='{title}' title='{title}'' />",
+            image_src=self.image.url,
+            title=self.name
+        )
 
     admin_image.allow_tags = True
     admin_image.short_description = "Produkt"
