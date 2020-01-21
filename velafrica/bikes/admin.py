@@ -4,7 +4,6 @@ from datetime import datetime
 from daterange_filter.filter import DateRangeFilter
 from django.contrib import admin
 from django.db.models import Q
-from django.templatetags.static import static
 from django.urls import reverse, path
 from django.utils.html import format_html
 from import_export import resources
@@ -76,7 +75,7 @@ class BikeAdmin(ImportExportMixin, admin.ModelAdmin):
 
     class Media:
         js = (
-            static("js/bikes.js"),  # hides A+ fieldset
+            "js/bikes.js",  # hides A+ fieldset
         )
 
     list_display = [
