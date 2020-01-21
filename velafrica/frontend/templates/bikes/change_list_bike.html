@@ -1,0 +1,6 @@
+{% extends "admin/import_export/change_list_import_export.html" %}
+
+{% block object-tools-items %}
+  {% include "bikes/change_list_bike_plot_item.html" %}
+  {{ block.super }}
+{% endblock %}

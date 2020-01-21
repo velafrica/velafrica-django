@@ -1,9 +1,26 @@
 # -*- coding: utf-8 -*-
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+
+from dal import autocomplete
 from django.views.generic import ListView
 
-from velafrica.bikes.models import Bike
+from velafrica.bikes.models import Bike, BikeCategory
+from velafrica.core.pdf_utils import render_to_pdf
+
+
+def bikes_pdf(request, queryset, title=None, subtitle=None, filename=""):
+    return render_to_pdf(
+        request,
+        template="bikes/bikes_pdf.html",
+        context={
+            "title": title,
+            "subtitle": subtitle,
+            "pagesize": "A4 landscape",
+            "logo": 'img/velafrica_RGB.jpg',
+            "stylesheets": ("css/bike_plot.css",),
+            "bikes": queryset,
+        },
+        filename="{}.pdf".format(filename) if filename else None,
+    )
 
 
 class BikeListView(ListView):
@@ -20,3 +37,8 @@ class BikeListView(ListView):
 
     model = Bike
     template_name = "bikes/bike_list.html"
+
+
+class BikeCategoryAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        return BikeCategory.objects.all()

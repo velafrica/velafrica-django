@@ -1,0 +1,7 @@
+{% load i18n %}
+{% load admin_urls %}
+
+{% load static %}
+<li><a href="{% url 'admin:bike_plot_for_sale' %}" class="plot_link">
+    <img src="{% static 'img/print.png'  %}" style="height: 16px; vertical-align:middle;" />&nbsp;{% trans "for sale" %}
+</a></li>

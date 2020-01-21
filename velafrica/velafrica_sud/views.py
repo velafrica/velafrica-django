@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from dal import autocomplete
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.template import RequestContext
@@ -41,3 +42,9 @@ def container(request):
   }
 
   return render(request, 'velafrica_sud/container.html', context)
+
+
+class ContainerAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        return Container.objects.all()
+

@@ -8,6 +8,8 @@ from import_export.admin import ImportExportMixin
 from import_export.fields import Field
 from simple_history.admin import SimpleHistoryAdmin
 
+from velafrica.bikes.models import Bike
+from velafrica.bikes.views import bikes_pdf
 from velafrica.sbbtracking.models import Tracking
 from velafrica.velafrica_sud.models import Forwarder, PartnerSud, Container, Report, ReportStaff, PartnerStaff, Role
 
@@ -56,7 +58,7 @@ class ContainerAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin)
     list_display = ['pickup_date', 'container_no', 'organisation_from', 'warehouse_from', 'partner_to', 'velos_loaded', 'velos_unloaded', 'spare_parts', 'booked', 'notes']
     search_fields = ['container_no', 'organisation_from__name', 'partner_to__organisation__name']
     list_filter = ['pickup_date', ('pickup_date', DateRangeFilter), 'organisation_from', 'partner_to',]
-    change_actions = ('book_container',)
+    change_actions = ('print_bikes', 'book_container',)
     readonly_fields = ['container_n_of_all', 'container_n_of_year', 'time_to_customer']
     #inlines = [TrackingInline]
     fieldsets = (
@@ -91,6 +93,22 @@ class ContainerAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin)
         
     book_container.short_description = "Container Verbuchen"
     book_container.label = "Verbuchen"
+
+    def print_bikes(self, request, obj):
+        return bikes_pdf(
+            request=request,
+            queryset=Bike.objects.filter(container__exact=obj.id).order_by("number"),
+            title='A+ bikes sold to {partner_name}'.format(
+                partner_name=obj.partner_to.organisation.name
+            ),
+            subtitle="{:%d.%m.%Y}".format(obj.pickup_date),
+            filename="{date:%y%m%d} A+ bikes for sold to {partner_name}".format(
+                date=obj.pickup_date,
+                partner_name=obj.partner_to.organisation.name
+            )
+        )
+
+    print_bikes.label = "Print bikes"
 
 
 class ContainerInline(admin.TabularInline):

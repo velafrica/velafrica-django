@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>{{ title|default:"Bikes" }}</title>
+    {% for stylesheet in stylesheets %}
+        <link rel="stylesheet" type="text/css" href="{% static stylesheet %}">
+    {% endfor %}
+    <style type="text/css">
+        @page {
+            size: {{ pagesize }};
+        }
+    </style>
+</head>
+<body>
+    <div>
+    {% if title %}
+
+        <div class="page">
+            <header>
+                <div class="logo">
+                    <img src="{% static logo %}" />
+                </div>
+            </header>
+
+            <div class="titlepage">
+                <div class="title-text">
+                    <span>{{ title }}</span>
+                </div>
+                {% if subtitle %}
+                <div>
+                    <span>{{ subtitle }}</span>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+    {% for bike in bikes %}
+        <div class="page">
+            <header>
+                <div class="logo">
+                    <img src="{% static logo %}" />
+                </div>
+                <div class="title"><span>A+ bike</span></div>
+            </header>
+
+
+            <div class="bike">
+                <div class="bike-info">
+                    <table>
+                        <tr><td class='label'>No.</td><td>{{ bike.number}} </td></tr>
+                        <tr><td class='label'>Type</td><td>{{ bike.category}} </td></tr>
+                        {% if bike.brand %}
+                            <tr><td class='label'>Brand</td><td>{{ bike.brand}} </td></tr>
+                        {% endif %}
+                        {% if bike.bike_model %}
+                            <tr><td class='label'>Model</td><td>{{ bike.bike_model}} </td></tr>
+                        {% endif %}
+                        {% if bike.gearing %}
+                            <tr><td class='label'>Group of components</td><td>{{ bike.gearing}} </td></tr>
+                        {% endif %}
+                        {% if bike.drivetrain %}
+                            <tr><td class='label'>Drivetrain</td><td>{{ bike.drivetrain}} </td></tr>
+                        {% endif %}
+                        {% if bike.brake %}
+                            <tr><td class='label'>Brake</td><td>{{ bike.brake}} </td></tr>
+                        {% endif %}
+                        {% if bike.colour %}
+                            <tr><td class='label'>Colour</td><td>{{ bike.colour}} </td></tr>
+                        {% endif %}
+                        {% if bike.size %}
+                            <tr><td class='label'>Size</td><td>{{ bike.size}} </td></tr>
+                        {% endif %}
+                        {% if bike.suspension %}
+                            <tr><td class='label'>Suspension</td><td>{{ bike.suspension}} </td></tr>
+                        {% endif %}
+                        {% if bike.rear_suspension %}
+                            <tr><td class='label'>Rear suspension</td><td>{{ bike.rear_suspension }} </td></tr>
+                        {% endif %}
+                        {% if bike.extraordinary %}
+                        <tr><td colspan="2" style="white-space: pre-wrap;">Extraordinary: <p class="extraordinary">{{ bike.extraordinary }}</p></td></tr>
+                        {% endif %}
+                    </table>
+                </div>
+                <div class="bike-image">
+                    <img alt='Bike' src="{{ bike.image.url }}" />
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
