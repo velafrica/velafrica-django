@@ -9,7 +9,7 @@ from import_export.admin import ImportExportMixin
 
 from velafrica.bikes.forms import BikeForm
 from velafrica.bikes.models import Bike, BikeCategory
-from velafrica.bikes.views import book_bikes_view, BikePDFView
+from velafrica.bikes.views import BikePDFView
 from velafrica.transport.filter import MultiListFilter
 
 
