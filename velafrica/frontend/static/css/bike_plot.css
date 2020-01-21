@@ -1,0 +1,93 @@
+body, p, h1 {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font: 12pt "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+}
+
+.page {
+	page-break-after: always;
+}
+
+.titlepage {
+	
+	vertical-align: middle;
+	
+}
+
+.titlepage div {
+	text-align: center;
+}
+
+.titlepage .title-text {
+	margin-top: 3.5cm;
+	font-size: 32pt;
+}
+
+.titlepage .subtitle {
+		font-size: 24pt;
+	
+	
+}
+
+.logo {
+	float: right;
+	text-align: right;
+}
+
+.logo img {
+	width: 4cm;
+}
+
+header {
+	display: block;
+	height: 106px;
+}
+
+.title {
+	font-size: 20pt;
+	padding-top: 51px;
+}
+
+.bike-info {
+	margin-right: 20px;
+}
+
+.bike-info, .bike-image {
+	display: inline-block;
+	vertical-align: top;
+}
+
+.bike-image {
+	text-align: right;
+	float: right;
+}
+
+.bike-image img {
+	margin: auto 0 auto auto;
+	width: 15cm;
+	max-height: 12cm;
+}
+
+table {
+	width: 10cm;
+}
+
+td.label {
+	width: 100px;
+	padding-right: 10px;
+	padding-bottom: 2px;
+}
+
+.extraordinary {
+	padding: 10px;
+}
+
+@media screen {
+	body {
+		padding: 1cm;
+		width: 29.7cm;
+	}
+}

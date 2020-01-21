@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
+from datetime import datetime
+
 from django.contrib import admin
 from django.db.models import Q
-from django.shortcuts import redirect
 from django.templatetags.static import static
 from django.urls import reverse, path
 from import_export import resources
@@ -9,7 +10,7 @@ from import_export.admin import ImportExportMixin
 
 from velafrica.bikes.forms import BikeForm
 from velafrica.bikes.models import Bike, BikeCategory
-from velafrica.bikes.views import BikePDFView
+from velafrica.bikes.views import bikes_pdf
 from velafrica.transport.filter import MultiListFilter
 
 
@@ -53,6 +54,16 @@ class APlusFilter(MultiListFilter):
                 )
             )
         ]
+
+
+def plot_bikes_for_sale(self, request):
+    return bikes_pdf(
+        request=request,
+        queryset=Bike.objects.filter(container__isnull=True).order_by("number"),
+        title='A+ bikes for sale',
+        subtitle="{:%d.%m.%Y}".format(datetime.today()),
+        filename="{:%y%m%d} A+ bikes for sale".format(datetime.today())
+    )
 
 
 class BikeAdmin(ImportExportMixin, admin.ModelAdmin):
@@ -156,20 +167,18 @@ class BikeAdmin(ImportExportMixin, admin.ModelAdmin):
     def get_urls(self):
         return [
                    path(
-                       'plot/<slug:key>/',
-                       BikePDFView.as_view(),
-                       name='bikes_plot'
+                       "plot/for_sale/",
+                       plot_bikes_for_sale,
+                       name="bike_plot_for_sale"
                    ),
                ] + super(BikeAdmin, self).get_urls()
 
     def plot_to_pdf(self, request, queryset):
-        return redirect(
-            reverse(
-                "admin:bikes_plot",
-                kwargs={
-                    "key": ",".join([str(q.pk) for q in queryset])
-                }
-            ),
+        return bikes_pdf(
+            request,
+            queryset,
+            title='A+ Bikes',
+            filename="A+ bikes"
         )
 
     plot_to_pdf.short_description = "Als PDF Drucken"
