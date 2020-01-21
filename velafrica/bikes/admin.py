@@ -5,6 +5,7 @@ from django.contrib import admin
 from django.db.models import Q
 from django.templatetags.static import static
 from django.urls import reverse, path
+from django.utils.html import format_html
 from import_export import resources
 from import_export.admin import ImportExportMixin
 
@@ -83,7 +84,7 @@ class BikeAdmin(ImportExportMixin, admin.ModelAdmin):
         'brand',
         'a_plus',
         'for_sale',
-        'container',
+        'container_list_item',
         'warehouse',
     ]
     search_fields = [
@@ -158,6 +159,13 @@ class BikeAdmin(ImportExportMixin, admin.ModelAdmin):
          }
          ),
     )
+
+    def container_list_item(self, obj):
+        return format_html(
+            "<a href='{link}'>{name}</a>",
+            link=reverse("admin:velafrica_sud_container_change", args=[obj.container.id]),
+            name=obj.container
+        ) if obj.container else "-"
 
     readonly_fields = ['id']
 
