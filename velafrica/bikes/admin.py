@@ -167,7 +167,7 @@ class BikeAdmin(ImportExportMixin, admin.ModelAdmin):
             reverse(
                 "admin:bikes_plot",
                 kwargs={
-                    "pks": ",".join([str(q.pk) for q in queryset])
+                    "key": ",".join([str(q.pk) for q in queryset])
                 }
             ),
         )

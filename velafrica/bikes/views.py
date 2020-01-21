@@ -7,6 +7,7 @@ from dal import autocomplete
 from django.http import StreamingHttpResponse
 from django.shortcuts import get_object_or_404, get_list_or_404
 from django.shortcuts import render
+from django.core.exceptions import PermissionDenied
 from django.views import View
 from django.views.generic import ListView
 from pdfrw import PdfReader
@@ -100,7 +101,8 @@ class BikePDFView(View):
         if key == 'for_sale':
             queryset = Bike.objects.filter(container__isnull=True, a_plus__exact=True)
         else:
-            queryset = get_list_or_404(Bike, pk__in=pks.split(','))
+            pks = key.split(',')
+            queryset = get_list_or_404(Bike, pk__in=pks)
 
         # Create a file-like buffer to receive PDF data.
         buf = io.BytesIO()
