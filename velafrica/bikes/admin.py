@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
 
+from daterange_filter.filter import DateRangeFilter
 from django.contrib import admin
 from django.db.models import Q
 from django.templatetags.static import static
@@ -96,7 +97,7 @@ class BikeAdmin(ImportExportMixin, admin.ModelAdmin):
     list_filter = [
         APlusFilter,
         'category',
-        'date',
+        ('date', DateRangeFilter),
         'container',
         'warehouse',
     ]
