@@ -91,7 +91,7 @@
                     <table>
                         <tr>
                             <td class="label">Abholtermin</td>
-                            <td colspan="3">{{ ride.date | date:"d.m.Y H:i" | default:"" }} </td>
+                            <td colspan="3">{{ ride.date | date:"d.m.Y" | default:"" }} {{ ride.pickup_time | default:"" }} </td>
                         </tr>
                         <tr>
                             <td class="label">Anzahl Velos</td>
