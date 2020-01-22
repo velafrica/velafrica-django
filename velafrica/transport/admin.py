@@ -9,7 +9,7 @@ from django.utils.html import format_html
 from import_export import resources
 from import_export.admin import ImportExportMixin
 from import_export.fields import Field
-from import_export.widgets import DateWidget, DateTimeWidget
+from import_export.widgets import DateWidget
 from simple_history.admin import SimpleHistoryAdmin
 
 from velafrica.organisation.models import Organisation
@@ -88,7 +88,7 @@ class RideResource(resources.ModelResource):
     Define the ride resource for import / export.
     """
 
-    date = Field('date', 'date', DateTimeWidget(format="%d.%m.%Y %H:%M"))
+    date = Field('date', 'date', DateWidget(format="%d.%m.%Y"))
     date_created = Field('date_created', 'date_created', DateWidget(format="%d.%m.%Y"))
 
     class Meta:
@@ -102,7 +102,7 @@ class RideResource(resources.ModelResource):
             'customer_lastname', 'customer_email', 'customer_phone', 'customer_street_nr', 'customer_zip_code',
             'customer_city', 'invoice_same_as_customer', 'charged', 'invoice_purpose', 'price', 'cost_type',
             'invoice_company_name', 'invoice_company_addition', 'invoice_street_nr', 'invoice_zip_code', 'invoice_city',
-            'invoice_commissioned', 'spare_parts', 'stocklist', 'distance'
+            'invoice_commissioned', 'spare_parts', 'stocklist', 'distance', 'pickup_time',
         )
         fields = export_order
 
@@ -291,7 +291,7 @@ class RideAdmin(ImportExportMixin, SimpleHistoryAdmin):
         }),
         ('Transport', {
             'fields': (
-                'date',
+                ('date', 'pickup_time',),
                 ('driver', 'car'),
                 'note',
                 'velos',
