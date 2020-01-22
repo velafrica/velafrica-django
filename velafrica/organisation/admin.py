@@ -32,7 +32,7 @@ class OrganisationAdmin(ImportExportMixin, SimpleHistoryAdmin):
     list_display = ['name', 'get_googlemaps_link', 'website', 'is_partnersud']
     search_fields = ['name', 'address__city']
     fields = ['name', 'website', 'facebook', 'get_partnersud', 'address', 'get_googlemaps_link', 'contact',
-              'description']
+              'phone', 'email', 'description']
     readonly_fields = ['get_partnersud', 'get_googlemaps_link']
 
     def get_googlemaps_link(self, obj):
