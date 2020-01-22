@@ -85,7 +85,7 @@ class Product(models.Model):
             u"<img src='{image_src}' style='max-height: 100px;' alt='{title}' title='{title}'' />",
             image_src=self.image.url,
             title=self.name
-        )
+        ) if self.image else u"-"
 
     admin_image.allow_tags = True
     admin_image.short_description = "Produkt"
