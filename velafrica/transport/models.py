@@ -303,14 +303,14 @@ class Ride(models.Model):
             self.from_street_nr = self.from_warehouse.get_address().street
             self.from_zip_code = self.from_warehouse.get_address().zipcode
             self.from_city = self.from_warehouse.get_address().city
-            self.from_contact_name = self.from_warehouse.organisation.contact
+            self.from_contact_name = self.from_warehouse.organisation.contact_person
             self.from_contact_phone = self.from_warehouse.organisation.phone
 
         if self.to_warehouse and self.to_warehouse.get_address():
             self.to_street_nr = self.to_warehouse.get_address().street
             self.to_zip_code = self.to_warehouse.get_address().zipcode
             self.to_city = self.to_warehouse.get_address().city
-            self.to_contact_name = self.to_warehouse.organisation.contact
+            self.to_contact_name = self.to_warehouse.organisation.contact_person
             self.to_contact_phone = self.to_warehouse.organisation.phone
         return self
 
