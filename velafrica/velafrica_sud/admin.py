@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from daterange_filter.filter import DateRangeFilter
 from django.contrib import admin
+from django.contrib.staticfiles.templatetags.staticfiles import static
+from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 from django_object_actions import DjangoObjectActions
 from import_export import resources
@@ -108,7 +110,11 @@ class ContainerAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin)
             )
         )
 
-    print_bikes.label = "Print bikes"
+    print_bikes.label = format_html(
+        "<img src='{img}' style='height: 16px; vertical-align:middle;' />&nbsp;{text}",
+        img=static('img/print.png'),
+        text="Bikes"
+    )
 
 
 class ContainerInline(admin.TabularInline):
