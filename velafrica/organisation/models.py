@@ -97,7 +97,9 @@ class Organisation(models.Model):
     facebook = models.URLField(blank=True, null=True, max_length=255, verbose_name="Facebook Page (URL)")
     address = models.ForeignKey(Address, verbose_name="Adresse", blank=True, null=True, on_delete=models.SET_NULL)
     description = models.TextField(blank=True, null=True)
-    contact = models.CharField(blank=True, default="", max_length=255, verbose_name="Kontaktperson")
+    contact = models.TextField(verbose_name="Kontaktperson", help_text="Name, Email, Telefon, Skype etc", blank=True,
+                               null=True)
+    contact_person = models.CharField(blank=True, default="", max_length=255, verbose_name="Kontaktperson")
     phone = models.CharField(blank=True, default="", max_length=255, verbose_name="Tel Nr.")
     email = models.CharField(blank=True, default="", max_length=255, verbose_name="E-Mail")
 
