@@ -114,7 +114,10 @@ class ContainerAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin)
 
     def display_bikes(self, request, obj):
         return redirect(
-            reverse("admin:bikes_bike_changelist")
+            "{link}?container__id__exact={container_id}".format(
+                link=reverse("admin:bikes_bike_changelist"),
+                container_id=obj.id,
+            )
         )
 
     display_bikes.label = "Show bikes"
