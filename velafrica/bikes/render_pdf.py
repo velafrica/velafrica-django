@@ -66,15 +66,17 @@ def render_bikes_to_pdf_with_reportlab(queryset, fields={}, title=None, subtitle
     # title page
     canvas.setFont("Helvetica", 28)
     canvas.drawCentredString(text=title, x=841.9/2, y=300)
+
     canvas.setFont("Helvetica", 20)
     canvas.drawCentredString(text=subtitle, x=841.9/2, y=270)
+    
     pdf_page_frame(canvas, logo)
 
     # bike pages
     for bike in queryset:
         draw_pdf_page(
             canvas=canvas,
-            table=[
+            table=[  # label - value pairs for selected 'fields'
                 (label, "{}".format(bike.__getattribute__(key)))
                 for key, label in fields.items()
                 if bike.__getattribute__(key)  # if not blank
