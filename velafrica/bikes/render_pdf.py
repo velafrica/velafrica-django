@@ -12,7 +12,7 @@ from velafrica.core.settings import PROJECT_DIR
 
 def pdf_page_frame(canvas, logo=None):
     if logo:
-        canvas.drawImage(logo, x=657.5, y=471, width=164.4, preserveAspectRatio=True)
+        canvas.drawImage(logo, x=657.5, y=471, width=2466 / 15, height=1565 / 15)
 
     # End Page
     canvas.showPage()
