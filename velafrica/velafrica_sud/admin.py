@@ -111,6 +111,11 @@ class ContainerAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin)
                 partner_name=obj.partner_to.organisation.name
             )
         )
+    print_bikes.label = format_html(
+        "<img src='{img}' style='height: 16px; vertical-align:middle;' />&nbsp;{text}",
+        img=static('img/print.png'),
+        text="Bikes"
+    )
 
     def display_bikes(self, request, obj):
         return redirect(
@@ -119,14 +124,7 @@ class ContainerAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin)
                 container_id=obj.id,
             )
         )
-
     display_bikes.label = "Show bikes"
-
-    print_bikes.label = format_html(
-        "<img src='{img}' style='height: 16px; vertical-align:middle;' />&nbsp;{text}",
-        img=static('img/print.png'),
-        text="Bikes"
-    )
 
 
 class ContainerInline(admin.TabularInline):
