@@ -4,22 +4,31 @@ from dal import autocomplete
 from django.views.generic import ListView
 
 from velafrica.bikes.models import Bike, BikeCategory
-from velafrica.core.pdf_utils import render_to_pdf
+from velafrica.bikes.render_pdf import render_bikes_to_pdf_with_reportlab
+from velafrica.core.pdf_utils import make_response
 
 
 def bikes_pdf(request, queryset, title=None, subtitle=None, filename=""):
-    return render_to_pdf(
-        request,
-        template="bikes/bikes_pdf.html",
-        context={
-            "title": title,
-            "subtitle": subtitle,
-            "pagesize": "A4 landscape",
-            "logo": 'img/velafrica_RGB.jpg',
-            "stylesheets": ("css/bike_plot.css",),
-            "bikes": queryset,
-        },
-        filename="{}.pdf".format(filename) if filename else None,
+    return make_response(
+        render_bikes_to_pdf_with_reportlab(
+            queryset,
+            fields={
+                "number": "No.",
+                "category": "Type",
+                "brand": "Brand",
+                "bike_model": "Model",
+                "gearing": "Group of components",
+                "drivetrain": "Drivetrain",
+                "brake": "Brake",
+                "colour": "Colour",
+                "size": "Size",
+                "suspension": "Suspension",
+                "rear_suspension": "Rear suspension"
+            },
+            title=title,
+            subtitle=subtitle
+        ),
+        filename="{}.pdf".format(filename) if filename else None
     )
 
 
