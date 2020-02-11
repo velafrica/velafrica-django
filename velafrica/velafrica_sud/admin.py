@@ -111,11 +111,7 @@ class ContainerAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin)
                 partner_name=obj.partner_to.organisation.name
             )
         )
-    print_bikes.label = format_html(
-        "<img src='{img}' style='height: 16px; vertical-align:middle;' />&nbsp;{text}",
-        img=static('img/print.png'),
-        text="Bikes"
-    )
+    print_bikes.label = "Print bikes"
 
     def display_bikes(self, request, obj):
         return redirect(
