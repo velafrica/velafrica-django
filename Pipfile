@@ -75,6 +75,7 @@ URLObject = "*"
 YURL = "*"
 openpyxl = "!= 3.0.2"
 weasyprint = "*"
+reportlab = "*"
 
 
 [requires]
