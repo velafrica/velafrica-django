@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 from daterange_filter.filter import DateRangeFilter
 from django.contrib import admin
-from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.shortcuts import redirect
 from django.urls import reverse
-from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 from django_object_actions import DjangoObjectActions
 from import_export import resources
@@ -111,6 +109,7 @@ class ContainerAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin)
                 partner_name=obj.partner_to.organisation.name
             )
         )
+    print_bikes.label = "Print bikes"
 
     def display_bikes(self, request, obj):
         return redirect(
@@ -119,14 +118,7 @@ class ContainerAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin)
                 container_id=obj.id,
             )
         )
-
     display_bikes.label = "Show bikes"
-
-    print_bikes.label = format_html(
-        "<img src='{img}' style='height: 16px; vertical-align:middle;' />&nbsp;{text}",
-        img=static('img/print.png'),
-        text="Bikes"
-    )
 
 
 class ContainerInline(admin.TabularInline):
