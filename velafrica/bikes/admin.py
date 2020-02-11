@@ -60,7 +60,10 @@ class APlusFilter(MultiListFilter):
 def plot_bikes_for_sale(request):
     return bikes_pdf(
         request=request,
-        queryset=Bike.objects.filter(container__isnull=True).order_by("number"),
+        queryset=Bike.objects.filter(
+            container__isnull=True,  # not sold
+            status__exact=0,  # status = 'normal'
+        ).order_by("number"),
         title='A+ bikes for sale',
         subtitle="{:%d.%m.%Y}".format(datetime.today()),
         filename="{:%y%m%d} A+ bikes for sale".format(datetime.today())
