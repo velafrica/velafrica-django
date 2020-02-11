@@ -126,7 +126,7 @@ class Organisation(models.Model):
     get_partnersud.short_description = "Süd Partner"
 
     def __str__(self):
-        if self.address:
+        if self.address and self.address.city:
             return u"{}, {}".format(self.name, self.address.city)
         else:
             return u"{}".format(self.name)
