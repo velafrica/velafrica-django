@@ -161,6 +161,12 @@ class BikeAdmin(ImportExportMixin, admin.ModelAdmin):
              'fields': ('container',)
          }
          ),
+        ('Extra',
+         {
+             'fields': ('status',),
+             'classes': ('collapse',),
+         }
+         )
     )
 
     def container_list_item(self, obj):
