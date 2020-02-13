@@ -106,7 +106,7 @@ class BikeAdmin(ImportExportMixin, admin.ModelAdmin):
 
     # "for_sale" a boolean column in the list-view
     def for_sale(self, obj):
-        return obj.container is None
+        return obj.container is None and obj.status is 0
 
     for_sale.short_description = "For sale"
     for_sale.admin_order_field = 'container'
