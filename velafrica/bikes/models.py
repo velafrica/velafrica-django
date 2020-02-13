@@ -88,11 +88,15 @@ class Bike(models.Model):
     suspension = models.CharField(max_length=255, null=True, blank=True, verbose_name=u"Suspension")
     rear_suspension = models.CharField(max_length=255, null=True, blank=True, verbose_name=u"Rear Suspension")
     extraordinary = models.TextField(max_length=255, null=True, blank=True, verbose_name=u"Extraordinary")
-    status = models.IntegerField(default=0, verbose_name='status',
-                                 choices=[
-                                     {0, 'Normal'},
-                                     {1, 'Dismissed'}
-                                 ])
+    status = models.IntegerField(
+        default=0,
+        verbose_name='status',
+        choices=[
+            (0, 'Normal'),
+            (1, 'Dismissed'),
+        ],
+        help_text="Dismissed = bike is neither in stock nor sold."
+    )
 
     # image(s)
     image = ResizedImageField(
