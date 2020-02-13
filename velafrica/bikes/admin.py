@@ -28,6 +28,12 @@ class BikeCategoryAdmin(ImportExportMixin, admin.ModelAdmin):
 class BikeResource(resources.ModelResource):
     class Meta:
         model = Bike
+        export_order = [
+            'id', 'category', 'category__name', 'date', 'visa', 'warehouse', 'a_plus', 'number', 'brand', 'bike_model',
+            'gearing', 'drivetrain', 'brake', 'colour', 'size', 'suspension', 'rear_suspension', 'extraordinary',
+            'status', 'image', 'container', 'date_created',
+        ]
+        fields = export_order
 
 
 class APlusFilter(MultiListFilter):
