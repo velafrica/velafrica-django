@@ -39,7 +39,7 @@ table {
 td {
 	border: 1px solid #777;
 	padding: 2px;
-	vertical-align: middle;
+	vertical-align: top;
 	min-width: 100;
 	line-height: normal;
 }
@@ -59,6 +59,7 @@ td.label {
 
 .request .comment {
 	white-space: pre-wrap;
+	min-height: 50px;
 }
 
 .agb-text {
@@ -83,4 +84,8 @@ td.label {
 
 .signature td.fill-out {
 	width: 5cm;
+}
+
+.emph {
+    font-weight: bold;
 }

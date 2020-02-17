@@ -22,7 +22,7 @@
                 <div class="part">
                     <table>
                         <tr>
-                            <td class="label">Transportgut</td><td>{{ ride.planned_velos | default:"" }} {{ ride.velo_state | default:"" }} </td>
+                            <td class="label">Transportgut</td><td class="emph">{{ ride.planned_velos | default:"" }} {{ ride.velo_state | default:"" }} </td>
                             <td class="label">Kategorie Velospender</td><td>{{ ride.request_category | default:"" }} </td>
                         </tr>
                         <tr>
@@ -38,15 +38,15 @@
 
                 <div class="part">
                     <div class="table-caption">
-                        <span>Abholen in {{ ride.from_warehouse|default:"" }} </span>
+                        <span>Abholen in <span class="emph">{{ ride.from_warehouse|default:"" }}</span> </span>
                     </div>
                     <table>
                         <tr>
-                            <td class="label">Adresse</td><td>{{ ride.from_street_nr }} </td>
+                            <td class="label">Adresse</td><td class="emph">{{ ride.from_street_nr }} </td>
                             <td class="label">Kontakt</td><td>{{ ride.from_contact_name }} </td>
                         </tr>
                         <tr>
-                            <td class="label">PLZ, Ort</td><td>{{ ride.from_zip_code }} {{ ride.from_city }} </td>
+                            <td class="label">PLZ, Ort</td><td class="emph">{{ ride.from_zip_code }} {{ ride.from_city }}</td>
                             <td class="label">Telefon</td><td>{{ ride.from_contact_phone }}  </td>
                         </tr>
                         <tr>
