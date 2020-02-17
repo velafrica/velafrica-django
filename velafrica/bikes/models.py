@@ -48,6 +48,11 @@ class BikeCategory(models.Model):
         verbose_name_plural = "bike categories"
 
 
+class BikeStatus:
+    NORMAL = 0
+    DISMISSED = 1
+
+
 class Bike(models.Model):
     id = models.CharField(primary_key=True, unique=True, default=bike_id, max_length=255)
 
@@ -88,11 +93,15 @@ class Bike(models.Model):
     suspension = models.CharField(max_length=255, null=True, blank=True, verbose_name=u"Suspension")
     rear_suspension = models.CharField(max_length=255, null=True, blank=True, verbose_name=u"Rear Suspension")
     extraordinary = models.TextField(max_length=255, null=True, blank=True, verbose_name=u"Extraordinary")
-    status = models.IntegerField(default=0, verbose_name='status',
-                                 choices=[
-                                     {0, 'Normal'},
-                                     {1, 'Dismissed'}
-                                 ])
+    status = models.IntegerField(
+        default=0,
+        verbose_name='status',
+        choices=[
+            (BikeStatus.NORMAL, 'Normal'),
+            (BikeStatus.DISMISSED, 'Dismissed'),
+        ],
+        help_text="Dismissed = bike is neither in stock nor sold."
+    )
 
     # image(s)
     image = ResizedImageField(

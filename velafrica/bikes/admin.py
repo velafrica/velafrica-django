@@ -10,7 +10,7 @@ from import_export import resources
 from import_export.admin import ImportExportMixin
 
 from velafrica.bikes.forms import BikeForm
-from velafrica.bikes.models import Bike, BikeCategory
+from velafrica.bikes.models import Bike, BikeCategory, BikeStatus
 from velafrica.bikes.views import bikes_pdf
 from velafrica.transport.filter import MultiListFilter
 
@@ -48,7 +48,7 @@ class APlusFilter(MultiListFilter):
                 query=Q(
                     container__isnull=False,  # not yet sold and shipped within another container
                     a_plus__exact=True,  # is A+
-                    status__exact=0  # status 'normal'
+                    status__exact=BikeStatus.NORMAL
                 )
             ),
             MultiListFilter.Option(
@@ -57,7 +57,7 @@ class APlusFilter(MultiListFilter):
                 query=Q(
                     container__isnull=True,  # not yet sold and shipped within another container
                     a_plus__exact=True,  # is A+
-                    status__exact=0  # status 'normal'
+                    status__exact=BikeStatus.NORMAL
                 )
             )
         ]
@@ -68,7 +68,7 @@ def plot_bikes_for_sale(request):
         request=request,
         queryset=Bike.objects.filter(
             container__isnull=True,  # not sold
-            status__exact=0,  # status = 'normal'
+            status__exact=BikeStatus.NORMAL,
         ).order_by("number"),
         title='A+ bikes for sale',
         subtitle="{:%d.%m.%Y}".format(datetime.today()),
@@ -106,13 +106,14 @@ class BikeAdmin(ImportExportMixin, admin.ModelAdmin):
         APlusFilter,
         'category',
         ('date', DateRangeFilter),
+        'status',
         'container',
         'warehouse',
     ]
 
     # "for_sale" a boolean column in the list-view
     def for_sale(self, obj):
-        return obj.container is None
+        return obj.container is None and obj.status is BikeStatus.NORMAL
 
     for_sale.short_description = "For sale"
     for_sale.admin_order_field = 'container'
@@ -167,6 +168,12 @@ class BikeAdmin(ImportExportMixin, admin.ModelAdmin):
              'fields': ('container',)
          }
          ),
+        ('Extra',
+         {
+             'fields': ('status',),
+             'classes': ('collapse',),
+         }
+         )
     )
 
     def container_list_item(self, obj):
