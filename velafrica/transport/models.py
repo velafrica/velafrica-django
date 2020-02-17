@@ -302,6 +302,9 @@ class Ride(models.Model):
         return address
 
     def prepare_for_print(self):
+        self.printed = True
+        self.save()
+
         if self.from_warehouse and self.from_warehouse.get_address():
             self.from_street_nr = self.from_warehouse.get_address().street
             self.from_zip_code = self.from_warehouse.get_address().zipcode
