@@ -59,6 +59,7 @@ td.label {
 
 .request .comment {
 	white-space: pre-wrap;
+	min-height: 50px;
 }
 
 .agb-text {
