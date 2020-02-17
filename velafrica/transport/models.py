@@ -159,6 +159,7 @@ class Ride(models.Model):
     note = models.CharField(blank=True, null=True, max_length=255, verbose_name="Bemerkung",
                             help_text="Bemerkung zum Fahrt")
     completed = models.BooleanField(default=False, verbose_name="Auftrag ausgeführt")
+    printed = models.BooleanField(default=False, verbose_name="Auftrag gedruckt")
 
     # from
     from_warehouse = models.ForeignKey(
