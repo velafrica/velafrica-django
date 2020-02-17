@@ -237,11 +237,13 @@ class Ride(models.Model):
 
     def get_status_ride(self):
         if self.completed:      # transport completed
-            return "success"
+            return "completed"
         elif self.date:         # date fix for transport
-            return "warning"
+            return "fixed"
+        elif self.printed:      # date fix for transport
+            return "printed"
         else:                   # nothing done yet
-            return "danger"
+            return "new"
 
     def get_status_invoice(self):
         if not self.charged:
