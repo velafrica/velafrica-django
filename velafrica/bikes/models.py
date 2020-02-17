@@ -48,6 +48,11 @@ class BikeCategory(models.Model):
         verbose_name_plural = "bike categories"
 
 
+class BikeStatus:
+    NORMAL = 0
+    DISMISSED = 1
+
+
 class Bike(models.Model):
     id = models.CharField(primary_key=True, unique=True, default=bike_id, max_length=255)
 
