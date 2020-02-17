@@ -301,7 +301,7 @@ class Ride(models.Model):
             address += u", {}".format(self.to_city)
         return address
 
-    def prepare_for_view(self):
+    def prepare_for_print(self):
         if self.from_warehouse and self.from_warehouse.get_address():
             self.from_street_nr = self.from_warehouse.get_address().street
             self.from_zip_code = self.from_warehouse.get_address().zipcode
