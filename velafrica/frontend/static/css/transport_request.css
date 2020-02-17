@@ -39,7 +39,7 @@ table {
 td {
 	border: 1px solid #777;
 	padding: 2px;
-	vertical-align: middle;
+	vertical-align: top;
 	min-width: 100;
 	line-height: normal;
 }
