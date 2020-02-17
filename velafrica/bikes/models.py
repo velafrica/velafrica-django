@@ -97,8 +97,8 @@ class Bike(models.Model):
         default=0,
         verbose_name='status',
         choices=[
-            (0, 'Normal'),
-            (1, 'Dismissed'),
+            (BikeStatus.NORMAL, 'Normal'),
+            (BikeStatus.DISMISSED, 'Dismissed'),
         ],
         help_text="Dismissed = bike is neither in stock nor sold."
     )
