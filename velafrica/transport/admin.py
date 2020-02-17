@@ -122,9 +122,15 @@ def get_status_circle(status, title=""):
                 "height: 20px",
                 "background-color: {color}".format(
                     color={
-                        "success": "#4DFA90",  # green
+                        "success": "#20DD70",  # green
                         "warning": "#FABE4D",  # orange
                         "danger": "#FF5468",  # red
+
+                        # more readable names
+                        "completed": "#20DD70",  # green
+                        "fixed": "#FFEE00",  # yellow
+                        "printed": "#FABE4D",  # orange
+                        "new": "#FF5468",  # red
                     }.get(status, "white")
                 )
             ]

@@ -131,7 +131,7 @@ def transport_request_pdf_view(request, rides, title):
                 "img/Drahtesel_A4_schwarz.png",
             ),
             "rides": [
-                r.prepare_for_view()
+                r.prepare_for_print()
                 for r in rides
             ]
         },

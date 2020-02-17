@@ -159,6 +159,7 @@ class Ride(models.Model):
     note = models.CharField(blank=True, null=True, max_length=255, verbose_name="Bemerkung",
                             help_text="Bemerkung zum Fahrt")
     completed = models.BooleanField(default=False, verbose_name="Auftrag ausgeführt")
+    printed = models.BooleanField(default=False, verbose_name="Auftrag gedruckt")
 
     # from
     from_warehouse = models.ForeignKey(
@@ -236,11 +237,13 @@ class Ride(models.Model):
 
     def get_status_ride(self):
         if self.completed:      # transport completed
-            return "success"
+            return "completed"
         elif self.date:         # date fix for transport
-            return "warning"
+            return "fixed"
+        elif self.printed:      # date fix for transport
+            return "printed"
         else:                   # nothing done yet
-            return "danger"
+            return "new"
 
     def get_status_invoice(self):
         if not self.charged:
@@ -298,7 +301,10 @@ class Ride(models.Model):
             address += u", {}".format(self.to_city)
         return address
 
-    def prepare_for_view(self):
+    def prepare_for_print(self):
+        self.printed = True
+        self.save()
+
         if self.from_warehouse and self.from_warehouse.get_address():
             self.from_street_nr = self.from_warehouse.get_address().street
             self.from_zip_code = self.from_warehouse.get_address().zipcode
