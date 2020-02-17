@@ -84,3 +84,7 @@ td.label {
 .signature td.fill-out {
 	width: 5cm;
 }
+
+.emph {
+    font-weight: bold;
+}
