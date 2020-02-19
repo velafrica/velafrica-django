@@ -208,8 +208,9 @@ class RideAdmin(ImportExportMixin, SimpleHistoryAdmin):
         'id',
         'from_warehouse__name',
         'to_warehouse__name',
-        'driver__name',
-        'car__name'
+        'from_city',
+        'customer_lastname',
+        'from_contact_name',
     ]
 
     list_filter = [
