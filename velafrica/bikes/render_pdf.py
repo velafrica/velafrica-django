@@ -64,13 +64,15 @@ def render_bikes_to_pdf_with_reportlab(queryset, fields={}, title=None, subtitle
     logo = os.path.join(PROJECT_DIR, 'frontend', 'static', 'img/velafrica_RGB.jpg')
 
     # title page
-    canvas.setFont("Helvetica", 28)
-    canvas.drawCentredString(text=title, x=841.9/2, y=300)
+    if title:
+        canvas.setFont("Helvetica", 28)
+        canvas.drawCentredString(text=title, x=841.9/2, y=300)
+    if subtitle:
+        canvas.setFont("Helvetica", 20)
+        canvas.drawCentredString(text=subtitle, x=841.9/2, y=270)
 
-    canvas.setFont("Helvetica", 20)
-    canvas.drawCentredString(text=subtitle, x=841.9/2, y=270)
-    
-    pdf_page_frame(canvas, logo)
+    if title or subtitle:
+        pdf_page_frame(canvas, logo)
 
     # bike pages
     for bike in queryset:
