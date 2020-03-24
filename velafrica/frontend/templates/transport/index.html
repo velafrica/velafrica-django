@@ -55,32 +55,38 @@
                 <th>Velos</th>
                 <th>Zustand</th>
                 <th>Spare Parts</th>
+                <th data-sortable="false"></th>
             </tr>
 
             {% for r in rides %}
                 <tr>
-                    <td>{{ r.date }}</td>
+                    <td>{{ r.date|default_if_none:"--" }}</td>
                     <td>
                         {% if r.from_warehouse %}
-                            <a href="{% url 'frontend:warehouse_detail' r.from_warehouse.id %}">{{ r.from_warehouse }}</a>
+                            <a href="{% url 'frontend:warehouse_detail' r.from_warehouse.id %}">{{ r.from_warehouse|default_if_none:"--" }}</a>
                         {% else %}
-                            <a href="https://map.search.ch/?q={{ r.get_from_address | urlencode }}" target="_blank">{{ r.get_from_address }}</a>
+                            <a href="https://map.search.ch/?q={{ r.get_from_address | urlencode }}"
+                               target="_blank">{{ r.get_from_address|default_if_none:"--" }}</a>
                         {% endif %}
                     </td>
                     <td>
                         {% if r.to_warehouse %}
                             <a href="{% url 'frontend:warehouse_detail' r.to_warehouse.id %}">{{ r.to_warehouse }}</a>
                         {% else %}
-                            <a href="https://map.search.ch/?q={{ r.get_to_address | urlencode }}" target="_blank">{{ r.get_to_address }}</a>
+                            <a href="https://map.search.ch/?q={{ r.get_to_address | urlencode }}"
+                               target="_blank">{{ r.get_to_address|default_if_none:"--" }}</a>
                         {% endif %}
                     </td>
-                    <td>{{ r.driver }}</td>
-                    <td>{{ r.car }}</td>
+                    <td>{{ r.driver|default_if_none:"--" }}</td>
+                    <td>{{ r.car|default_if_none:"--" }}</td>
                     <td>{% if r.velos <= 0 %}<span class="label label-danger">{% else %}
                         <span class="label label-success">{% endif %}{{ r.velos }}</span></td>
-                    <td>{{ r.velo_state }}</td>
+                    <td>{{ r.velo_state|default_if_none:"--" }}</td>
                     <td>{% if r.spare_parts %}<span class="glyph-ride-in glyphicon glyphicon-ok"></span>{% else %}
                         <span class="glyph-ride-out glyphicon glyphicon-remove"></span>{% endif %}</td>
+
+                    {% load admin_urls %}
+                    <td><a href="{% url 'admin:transport_ride_change' r.id %}">Daten bearbeiten</a></td>
                 </tr>
 
 
@@ -99,7 +105,7 @@
     <script>
 
 
-        $(function() {
+        $(function () {
 
             {% for key, val in charts.items %}
                 var labels = [];
@@ -116,7 +122,7 @@
                     type: 'pie',
                     data: {
                         labels: labels,
-                        datasets: [ {
+                        datasets: [{
                             data: data,
                             backgroundColor: [
                                 'rgba(241,88,84,0.5)',
@@ -142,7 +148,7 @@
 
                             ],
                             borderWidth: 1
-                        } ]
+                        }]
                     },
                     options: {
                         responsive: true,

@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 
-{% block breadcrumb %} 
-<li><a href="{% url 'frontend:container' %}">Container</a></li>
-{% endblock %} 
+{% block breadcrumb %}
+    <li><a href="{% url 'frontend:container' %}">Container</a></li>
+{% endblock %}
 
 {% block document-head %}
 
@@ -11,75 +11,78 @@
 
 {% block jumbotron-img %}{% endblock %}
 {% block jumbotron-title %}
-Container
+    Container
 {% endblock %}
 
 {% block jumbotron %}
-<table class="table">
-	<tr>
-		<th>Total Container:</th>
-		<td>{{ containers.count }}</td>
-	</tr>
-	<tr>
-		<th>Total Velos:</th>
-		<td>{{ bicycles_total }}</td>
-	</tr>
-    <tr>
-		<th>Durchschnittliche Transportzeit (Tage):</th>
-		<td>{{ time_to_customer_average }}</td>
-	</tr>
-</table>
-<!--
-Todo: <br/>
-Velos / Partner<br/>
-Container / Partner
--->
+    <table class="table">
+        <tr>
+            <th>Total Container:</th>
+            <td>{{ containers.count }}</td>
+        </tr>
+        <tr>
+            <th>Total Velos:</th>
+            <td>{{ bicycles_total }}</td>
+        </tr>
+        <tr>
+            <th>Durchschnittliche Transportzeit (Tage):</th>
+            <td>{{ time_to_customer_average }}</td>
+        </tr>
+    </table>
+    <!--
+    Todo: <br/>
+    Velos / Partner<br/>
+    Container / Partner
+    -->
 {% endblock %}
 
 {% block content %}
 
-<!-- seach box -->
-<div class="input-group"><span class="input-group-addon">Search:</span> <input id="filter" type="text" class="form-control" /></div>
+    <!-- seach box -->
+    <div class="input-group"><span class="input-group-addon">Search:</span> <input id="filter" type="text"
+                                                                                   class="form-control"/></div>
 
-<table class="table footable" data-page-size=100 data-filter="#filter">
-	<thead>
-		<tr>
-			<th data-sort-initial="descending">Ladedatum</th>
+    <table class="table footable" data-page-size=100 data-filter="#filter">
+        <thead>
+        <tr>
+            <th data-sort-initial="descending">Ladedatum</th>
             <th>Ankunftsdatum</th>
             <th>Transportzeit (d)</th>
-			<th>Ladeort</th>
-			<th>Destination</th>
-			<th data-type="numeric">Anzahl Velos</th>
-			<th data-sortable="false"></th>
-		</tr>
-	</thead>
-	<tbody>
-	{% for c in containers %}
-		<tr>
-			<td data-value="{{ c.pickup_date |date:"c" }}">{{ c.pickup_date | date:"d.m.Y"}}</td>
-            <td data-value="{{ c.arrival_partner_date |date:"c" }}"><span {% if c.arrival_partner_date %}class="label label-success"{% endif %}>{{ c.arrival_partner_date | date:"d.m.Y"}}</span></td>
-			<td>{{ c.time_to_customer }}</td>
-            <td>{{ c.organisation_from }} </td>
-			<td>{{ c.partner_to }}</td>
-			<td>{{ c.velos_loaded }}</td>
-            {% load admin_urls %}
-			<td><a href="{% url 'admin:velafrica_sud_container_change' c.id  %}">Daten bearbeiten</a></td>
-		</tr>
-	{% endfor %}
-	</tbody>
-</table>
+            <th>Ladeort</th>
+            <th>Destination</th>
+            <th data-type="numeric">Anzahl Velos</th>
+            <th data-sortable="false"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for c in containers %}
+            <tr>
+                <td data-value="{{ c.pickup_date |date:"c"|default_if_none:"--" }}">{{ c.pickup_date | date:"d.m.Y" }}</td>
+                <td data-value="{{ c.arrival_partner_date |date:"c"|default_if_none:"--" }}"><span
+                        {% if c.arrival_partner_date %}class="label label-success"{% endif %}>{{ c.arrival_partner_date | date:"d.m.Y" }}</span>
+                </td>
+                <td>{{ c.time_to_customer|default_if_none:"--" }}</td>
+                <td>{{ c.organisation_from|default_if_none:"--" }} </td>
+                <td>{{ c.partner_to|default_if_none:"--" }}</td>
+                <td>{{ c.velos_loaded|default_if_none:"--" }}</td>
+                {% load admin_urls %}
+                <td><a href="{% url 'admin:velafrica_sud_container_change' c.id %}">Daten bearbeiten</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}
 
 {% block document-foot %}
-<!-- include footable -->
-<link rel="stylesheet" type="text/css" href="{% static "css/footable.core.min.css" %}" />
-<script type="text/javascript" src="{% static "js/footable.all.min.js" %}"></script>
+    <!-- include footable -->
+    <link rel="stylesheet" type="text/css" href="{% static "css/footable.core.min.css" %}"/>
+    <script type="text/javascript" src="{% static "js/footable.all.min.js" %}"></script>
 
-<!-- init footable -->
-<script type="text/javascript">
-	$(function () {
-		$('.footable').footable();
-	});
-</script>
+    <!-- init footable -->
+    <script type="text/javascript">
+        $(function () {
+            $('.footable').footable();
+        });
+    </script>
 
 {% endblock %}
