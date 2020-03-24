@@ -65,6 +65,23 @@ We recommend using [PyCharm by IntelliJ](https://www.jetbrains.com/pycharm/) (fu
 pip install pipenv
 ```
 
+### Weasyprint dependencies
+We use Weasyprint to generate PDF files.
+Follow the installation instructions here: https://weasyprint.readthedocs.io/en/latest/install.html#
+
+Weasyprint itself will be installed using pipenv in "Getting started".
+
+- macOs:
+
+
+    brew install cairo pango gdk-pixbuf libffi
+
+If there are permission errors, make sure to give your user write access on /usr/local
+
+
+    sudo chown -R $(whoami) /usr/local/*
+   
+   
 ### Postgres
 - postgresql (9.4)
 

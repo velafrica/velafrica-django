@@ -176,8 +176,13 @@ class Ride(models.Model):
     from_city = models.CharField(max_length=255, blank=True, default="", verbose_name="Ort")
     from_contact_name = models.CharField(max_length=255, blank=True, default="", verbose_name="Kontaktperson")
     from_contact_phone = models.CharField(max_length=255, blank=True, default="", verbose_name="Tel. Nr. (Mobile)")
-    from_comment = models.CharField(max_length=1024, blank=True, default="", verbose_name="Details Standort",
-                                    help_text="Details zum Abholstandort")
+    from_comment = models.TextField(
+        max_length=1024,
+        blank=True,
+        default="",
+        verbose_name="Details Standort",
+        help_text="Details zum Abholstandort"
+    )
 
     # to
     to_warehouse = models.ForeignKey(
@@ -194,7 +199,7 @@ class Ride(models.Model):
     to_city = models.CharField(max_length=255, blank=True, default="", verbose_name="Ort")
     to_contact_name = models.CharField(max_length=255, blank=True, default="", verbose_name="Kontaktperson")
     to_contact_phone = models.CharField(max_length=255, blank=True, default="", verbose_name="Tel. Nr. (Mobile)")
-    to_comment = models.CharField(
+    to_comment = models.TextField(
         max_length=1024,
         blank=True,
         default="",
