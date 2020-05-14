@@ -21,11 +21,9 @@ from django.contrib import admin
 from django.contrib.auth.views import *
 
 from velafrica.core import views
-from velafrica.public_site import views as velafrica_public_site_views
-from velafrica.stock import views as stock_views
-from velafrica.transport import views as transport_views
 from velafrica.core.autocomplete import urls as autocomplete_urls
-
+from velafrica.public_site import views as velafrica_public_site_views
+from velafrica.public_site import urls as velafrica_public_site_urls
 app_name = "core"
 
 # frontend = [
@@ -54,10 +52,10 @@ urlpatterns = [
                   url(r'^', include('velafrica.frontend.urls')),
 
                   # urls for the public pages (django cms)
-                  url(r'^cms/', include('velafrica.public_site.urls')),
+                  url(r'^cms/', include(velafrica_public_site_urls, namespace='home')),
                   url(r'^socialwall$', velafrica_public_site_views.render_template, name='socialwall'),
-                  url(r'^collection-point$', velafrica_public_site_views.render_template, name='home'),
-                  url(r'^collection-event$', velafrica_public_site_views.render_template, name='home'),
+                  url(r'^collection-point$', velafrica_public_site_views.render_template, name='collection-points'),
+                  url(r'^collection-event$', velafrica_public_site_views.render_template, name='collection-events'),
 
                   # api urls
                   url(r'^api/', include('velafrica.api.urls')),
