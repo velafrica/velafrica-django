@@ -1,20 +1,21 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function
+
+from itertools import chain
+
+from django.conf import settings
+from django.shortcuts import render, redirect
+from django.urls import reverse, resolve
 from django.utils import timezone
 from djangocms_blog.models import Post
-from django.conf import settings
-from django.urls import reverse, resolve
-from django.db.models import Q
-from django.shortcuts import render, redirect
-from django.template import RequestContext
-from itertools import chain
 from paypal.standard.forms import PayPalPaymentsForm
+
+from velafrica.collection.models import Dropoff, CollectionEvent
 from velafrica.core.settings import PAYPAL_RECEIVER_MAIL, GMAP_API_KEY, ORDER_RECEIVER
 from velafrica.core.utils import send_mail
-from velafrica.collection.models import Dropoff, CollectionEvent
-from velafrica.sbbtracking.models import Tracking, TrackingEvent, TrackingEventType
+from velafrica.sbbtracking.models import Tracking, TrackingEvent
 from .forms import InvoiceForm, SbbTicketOrderForm, WalkthroughRequestForm, ContactRequestForm
-from .models import DonationAmount, WalkthroughRequest, TeamMember, References, Partner, Event, EventDateTime, Supporter
+from .models import DonationAmount, TeamMember, References, Partner, Event, Supporter
 
 
 def render_template(request):
@@ -357,14 +358,15 @@ def render_specific_agenda(request, event_id):
     if "-" in event_id:
         event_id = int(event_id.replace('-', ''))
         coll_event = CollectionEvent.objects.filter(pk=event_id).first()
-        event = Event(
-            name=coll_event.event.name,
-            active=True,
-            category=coll_event.event.category,
-            address=coll_event.event.address,
-            description=coll_event.event.description,
-            organizer=coll_event.event.host
-        )
+        if coll_event:
+            event = Event(
+                name=coll_event.event.name,
+                active=True,
+                category=coll_event.event.category,
+                address=coll_event.event.address,
+                description=coll_event.event.description,
+                organizer=coll_event.event.host
+            )
         if coll_event.date_start == coll_event.date_end:
             date = u"{}".format(coll_event.date_start.strftime('%d.%m'))
         else:
