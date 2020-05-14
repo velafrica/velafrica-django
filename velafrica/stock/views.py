@@ -127,53 +127,53 @@ def warehouse(request, pk):
         for r in rides_out_list:
             velos_out += r.velos
 
-    containers = Container.objects.filter(warehouse_from=pk)
-    container_out = containers.count()
-    for c in containers:
-        container_velos_out += c.velos_loaded
+        containers = Container.objects.filter(warehouse_from=pk)
+        container_out = containers.count()
+        for c in containers:
+            container_velos_out += c.velos_loaded
 
-    velo_stock = velos_in - velos_out - container_velos_out
+        velo_stock = velos_in - velos_out - container_velos_out
 
-    # Some rides don't have a date. Which leads to an error.
-    allRides = chain(rides_in_list, rides_out_list)
-    allRidesWithDates = [ride for ride in allRides if ride.date]
-    allRidesWithoutDates = [ride for ride in allRides if not ride.date]
-    allRidesWithDatesSorted = sorted(allRidesWithDates, lambda instance: instance.date)
+        # Some rides don't have a date. Which leads to an error.
+        allRides = chain(rides_in_list, rides_out_list)
+        allRidesWithDates = [ride for ride in allRides if ride.date]
+        allRidesWithoutDates = [ride for ride in allRides if not ride.date]
+        allRidesWithDatesSorted = sorted(allRidesWithDates, key=lambda instance: instance.date)
 
-    rides = chain(allRidesWithoutDates, allRidesWithDatesSorted)
+        rides = chain(allRidesWithoutDates, allRidesWithDatesSorted)
 
-    # get stock statistics 
-    # TODO: needs performance improvement, also create separate function
-    stockchanges = StockChange.objects.filter(warehouse=warehouse)
-    stockchanges_in = stockchanges.filter(stock_change_type='in')
-    stockchanges_out = stockchanges.filter(stock_change_type='out')
+        # get stock statistics
+        # TODO: needs performance improvement, also create separate function
+        stockchanges = StockChange.objects.filter(warehouse=warehouse)
+        stockchanges_in = stockchanges.filter(stock_change_type='in')
+        stockchanges_out = stockchanges.filter(stock_change_type='out')
 
-    stocklists_in = []
-    for sci in stockchanges_in:
-        stocklists_in.append(sci.stocklist)
+        stocklists_in = []
+        for sci in stockchanges_in:
+            stocklists_in.append(sci.stocklist)
 
-    stocklists_out = []
-    for sco in stockchanges_out:
-        stocklists_out.append(sco.stocklist)
+        stocklists_out = []
+        for sco in stockchanges_out:
+            stocklists_out.append(sco.stocklist)
 
-    listpos_in = StockListPosition.objects.filter(stocklist__in=stocklists_in)
-    listpos_out = StockListPosition.objects.filter(stocklist__in=stocklists_out)
+        listpos_in = StockListPosition.objects.filter(stocklist__in=stocklists_in)
+        listpos_out = StockListPosition.objects.filter(stocklist__in=stocklists_out)
 
-    # prepare dict in form of "product" : (current stock, total in, total out)
-    stock_movements = {}
+        # prepare dict in form of "product" : (current stock, total in, total out)
+        stock_movements = {}
 
-    stocks = Stock.objects.filter(warehouse=warehouse)
+        stocks = Stock.objects.filter(warehouse=warehouse)
 
-    for s in stocks:
-        s_in = 0
-        s_out = 0
-        for l in listpos_in.filter(product=s.product):
-            s_in += l.amount
-        for l in listpos_out.filter(product=s.product):
-            s_out += l.amount
+        for s in stocks:
+            s_in = 0
+            s_out = 0
+            for l in listpos_in.filter(product=s.product):
+                s_in += l.amount
+            for l in listpos_out.filter(product=s.product):
+                s_out += l.amount
 
-        # save in tuple (in, out, diff)
-        stock_movements[s] = (s_in, s_out, (s_in - s_out))
+            # save in tuple (in, out, diff)
+            stock_movements[s] = (s_in, s_out, (s_in - s_out))
 
     return render(request, 'stock/warehouse_detail.html', {
         'warehouse': warehouse,
