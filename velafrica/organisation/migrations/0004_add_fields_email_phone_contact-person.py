@@ -4,8 +4,13 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
-    replaces = [('organisation', '0004_auto_20200122_1030'), ('organisation', '0005_auto_20200123_1324')]
+    """
+    Add email, phone and contact_person fields.
+    """
+    replaces = [('organisation', '0004_auto_20200122_1030'),
+                ('organisation', '0005_auto_20200123_1324'),
+                ('organisation', '0004_auto_20200122_1030_squashed_0005_auto_20200123_1324')
+                ]
 
     dependencies = [
         ('organisation', '0003_auto_20190925_1956'),
