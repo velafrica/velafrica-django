@@ -20,7 +20,7 @@
     "foundation-sites": "^6.5.3",
     "global": "^4.4.0",
     "imports-loader": "^0.6.5",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "jquery-easing": "0.0.1",
     "lodash": "^4.17.15",
     "node-libs-browser": "^1.0.0",
