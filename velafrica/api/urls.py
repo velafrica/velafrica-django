@@ -10,6 +10,7 @@ from velafrica.api.counter.views import CounterEntryList, CounterEntryDetail
 from velafrica.api.organisation.views import OrganisationDetail, OrganisationList
 from velafrica.api.sbbtracking.views import TrackingList, TrackingEventList
 from velafrica.api.stock import views as views_stock
+from velafrica.api.velafrica_sud import views as views_velafrica_sud
 
 app_name = "api"
 
@@ -100,7 +101,7 @@ tracking = [
 
 # first attempt at generic views
 velafrica_sud = [
-    url(r'^containers/?$', utils.get_listview('velafrica_sud', 'Container').as_view(), name="containers"),
+    url(r'^containers/?$', views_velafrica_sud.ContainerList.as_view(), name="containers"),
     url(r'^containers/(?P<pk>[0-9]+)/?$', utils.get_retrieveview('velafrica_sud', 'Container').as_view(),
         name='container'),
     url(r'^forwarders/?$', utils.get_listview('velafrica_sud', 'Forwarder').as_view(), name="forwarders"),
