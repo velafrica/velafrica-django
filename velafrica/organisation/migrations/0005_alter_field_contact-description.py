@@ -4,10 +4,10 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-    replaces = [('organisation', '0005_auto_20200324_1137.py'), ]
+    replaces = [('organisation', '0005_auto_20200324_1137'), ]
 
     dependencies = [
-        ('organisation', '0004_add_fields_email_phone_contact-person.py'),
+        ('organisation', '0004_add_fields_email_phone_contact-person'),
     ]
 
     operations = [
