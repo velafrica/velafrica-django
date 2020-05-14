@@ -37,14 +37,4 @@ class Migration(migrations.Migration):
             name='phone',
             field=models.CharField(blank=True, default='', max_length=255, verbose_name='Tel Nr.'),
         ),
-        migrations.AddField(
-            model_name='historicalorganisation',
-            name='contact_person',
-            field=models.CharField(blank=True, default='', max_length=255, verbose_name='Kontaktperson'),
-        ),
-        migrations.AddField(
-            model_name='organisation',
-            name='contact_person',
-            field=models.CharField(blank=True, default='', max_length=255, verbose_name='Kontaktperson'),
-        ),
     ]
