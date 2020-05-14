@@ -5,7 +5,6 @@ from dal import autocomplete
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.shortcuts import render
-from django.template import RequestContext
 
 from velafrica.stock.models import Product, Warehouse, Stock, StockChange, StockListPosition
 from velafrica.transport.models import Ride
@@ -32,19 +31,19 @@ def stock(request):
     warehouses = Warehouse.objects.filter(id__in=warehouse_ids)
 
     if request.user.is_superuser or request.user.has_perm('stock.is_admin'):
-          stock = Stock.objects.all()
+        stock = Stock.objects.all()
     # other users with a correlating person should only see their organisations entries
     elif hasattr(request.user, 'person'):
         stock = stock.filter(warehouse__organisation=request.user.person.organisation)
     # users with no superuser role and no related person should not see any entries
     else:
-          stock = stock.none()
-            
+        stock = stock.none()
+
     return render(request, 'stock/index.html', {
-        'stock': stock, 
+        'stock': stock,
         'warehouses': warehouses,
-        }
-    )
+    }
+                  )
 
 
 @login_required
@@ -63,8 +62,9 @@ def warehouses(request):
     """
     return render(request, 'stock/warehouses.html', {
         'warehouses': Warehouse.objects.all(),
-        }
-    )
+    }
+                  )
+
 
 @login_required
 def warehouse(request, pk):
@@ -115,7 +115,7 @@ def warehouse(request, pk):
     container_velos_out = 0
     rides = Ride.objects.none()
 
-    if not warehouse: 
+    if not warehouse:
         messages.add_message(request, messages.ERROR, "Kein Lager mit der ID {} gefunden.".format(pk))
     else:
         rides_in_list = Ride.objects.filter(to_warehouse=pk)
@@ -134,9 +134,13 @@ def warehouse(request, pk):
 
     velo_stock = velos_in - velos_out - container_velos_out
 
-    rides = sorted(
-        chain(rides_in_list, rides_out_list),
-        key=lambda instance: instance.date)
+    # Some rides don't have a date. Which leads to an error.
+    allRides = chain(rides_in_list, rides_out_list)
+    allRidesWithDates = [ride for ride in allRides if ride.date]
+    allRidesWithoutDates = [ride for ride in allRides if not ride.date]
+    allRidesWithDatesSorted = sorted(allRidesWithDates, lambda instance: instance.date)
+
+    rides = chain(allRidesWithoutDates, allRidesWithDatesSorted)
 
     # get stock statistics 
     # TODO: needs performance improvement, also create separate function
@@ -151,7 +155,7 @@ def warehouse(request, pk):
     stocklists_out = []
     for sco in stockchanges_out:
         stocklists_out.append(sco.stocklist)
-    
+
     listpos_in = StockListPosition.objects.filter(stocklist__in=stocklists_in)
     listpos_out = StockListPosition.objects.filter(stocklist__in=stocklists_out)
 
@@ -182,15 +186,15 @@ def warehouse(request, pk):
         'velo_stock': velo_stock,
         'container_out': container_out,
         'container_velos_out': container_velos_out
-        }
-    )
-
+    }
+                  )
 
 
 class ProductAutocomplete(autocomplete.Select2QuerySetView):
     """
     Used for django-admin-autocomplete
     """
+
     def get_queryset(self):
         # Don't forget to filter out results depending on the visitor !
         if not self.request.user.is_authenticated:
@@ -203,10 +207,12 @@ class ProductAutocomplete(autocomplete.Select2QuerySetView):
 
         return qs
 
+
 class WarehouseAutocomplete(autocomplete.Select2QuerySetView):
     """
     Used for django-admin-autocomplete
     """
+
     def get_queryset(self):
         # Don't forget to filter out results depending on the visitor !
         if not self.request.user.is_authenticated:
