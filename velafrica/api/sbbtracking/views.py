@@ -3,6 +3,7 @@ from velafrica.sbbtracking.models import Tracking, TrackingEvent
 from velafrica.sbbtracking.serializer import TrackingSerializer, TrackingEventSerializer
 from rest_framework import generics, permissions
 
+
 class TrackingList(DjangoModelPermissionsMixin, generics.ListCreateAPIView):
     """
     Get a list of all trackings.

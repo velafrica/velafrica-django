@@ -10,6 +10,7 @@ from velafrica.api.counter.views import CounterEntryList, CounterEntryDetail
 from velafrica.api.organisation.views import OrganisationDetail, OrganisationList
 from velafrica.api.sbbtracking.views import TrackingList, TrackingEventList
 from velafrica.api.stock import views as views_stock
+from velafrica.api.user import views as views_user
 from velafrica.api.velafrica_sud import views as views_velafrica_sud
 
 app_name = "api"
@@ -126,10 +127,18 @@ public = [
     url(r'^subscribe-newsletter/$', views_public.subscribe_newsletter, name="subscribe-newsletter"),
 ]
 
+user = [
+    url(r'^current/$', views_user.current_user, name="current_user"),
+
+]
+
 # where it all comes together
 urlpatterns = [
     url(r'^$', views.api_root),
     url(r'^swagger/', include('velafrica.api.swagger.urls')),
+
+    url(r'^user/', include((user, app_name))),
+
     url(r'^organisation/', include((organisation, app_name), namespace='organisation')),
     url(r'^stock/', include((stock, app_name))),
     url(r'^bikes/', include((bikes, app_name))),
