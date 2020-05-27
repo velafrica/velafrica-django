@@ -198,8 +198,10 @@ class RideAdmin(ImportExportMixin, SimpleHistoryAdmin):
         'id',
         'print_request_button',
         'status',
-        'date',
-        'date_created',
+        'created_time',
+        'pickup_date',
+        'auftraggeber_str',
+        'number_of_velos',
         'start',
         'end',
     ]

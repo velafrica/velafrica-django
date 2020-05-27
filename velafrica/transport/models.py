@@ -221,7 +221,8 @@ class Ride(models.Model):
     charged = models.BooleanField(default=False, verbose_name="Kostenpflichtig?")
     invoice_purpose = models.CharField(max_length=255, null=True, blank=True, verbose_name="Zweck")
     price = models.IntegerField(null=True, blank=True, verbose_name="Betrag exkl. MWSt.")
-    cost_type = models.CharField(max_length=255, default="3510-506", blank=True, verbose_name="Kostenart und Kostenstelle")
+    cost_type = models.CharField(max_length=255, default="3510-506", blank=True,
+                                 verbose_name="Kostenart und Kostenstelle")
     invoice_company_name = models.CharField(max_length=255, blank=True, default="", verbose_name="Firmenname")
     invoice_company_addition = models.CharField(max_length=255, blank=True, default="", verbose_name="Firmenzusatz")
     invoice_street_nr = models.CharField(max_length=255, blank=True, default="", verbose_name="Strasse, Nr.")
@@ -238,14 +239,42 @@ class Ride(models.Model):
 
     history = HistoricalRecords()
 
+    # admin helper methods
+    def auftraggeber_str(self):
+        str = ""
+        if self.customer_company:
+            str += self.customer_company
+        if self.customer_firstname or self.customer_lastname:
+            if len(str) > 0:
+                str += ", "
+            str += self.customer_firstname + " " + self.customer_lastname
+        return str
+    auftraggeber_str.short_description = 'Auftraggeber'
+
+    def pickup_date(self):
+        return self.date
+    pickup_date.short_description = "Abholdatum"
+
+    def pickup_date_time(self):
+        return self.pickup_time
+    pickup_date_time.short_description = "Zeit"
+
+    def created_time(self):
+        return self.date_created
+    created_time.short_description = "Erstellt"
+
+    def number_of_velos(self):
+        return self.velos
+    number_of_velos.short_description = "Velos"
+
     def get_status_ride(self):
-        if self.completed:      # transport completed
+        if self.completed:  # transport completed
             return "completed"
-        elif self.date:         # date fix for transport
+        elif self.date:  # date fix for transport
             return "fixed"
-        elif self.printed:      # date fix for transport
+        elif self.printed:  # date fix for transport
             return "printed"
-        else:                   # nothing done yet
+        else:  # nothing done yet
             return "new"
 
     def get_status_invoice(self):
