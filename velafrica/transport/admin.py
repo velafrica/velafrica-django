@@ -281,18 +281,23 @@ class RideAdmin(ImportExportMixin, SimpleHistoryAdmin):
         }),
         ('Rechnung', {
             'fields': (
-                'invoice_same_as_customer',
                 'invoice_purpose',
                 'price',
                 'cost_type',
+                'invoice_commissioned',
+                'invoice_same_as_customer',
+            ),
+            'classes': ('collapse', 'invoice')
+        }),
+        ('Rechnungsadresse', {
+            'fields': (
                 'invoice_company_name',
                 'invoice_company_addition',
                 'invoice_street_nr',
                 'invoice_zip_code',
                 'invoice_city',
-                'invoice_commissioned'
             ),
-            'classes': ('collapse', 'invoice')
+            'classes': ('collapse', 'invoice_address')
         }),
         ('Auftrag', {
             'fields': (

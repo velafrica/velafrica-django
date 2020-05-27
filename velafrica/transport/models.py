@@ -217,7 +217,11 @@ class Ride(models.Model):
     customer_city = models.CharField(max_length=255, blank=True, default="", verbose_name="Ort")
 
     # invoice
-    invoice_same_as_customer = models.BooleanField(default=True, verbose_name="Rechnungsadresse = Kundenadresse")
+    invoice_same_as_customer = models.BooleanField(
+        default=True,
+        verbose_name="Rechnungsadresse = Kundenadresse",
+        help_text="Standardmässig wird als Rechnungsempfänger die Adresse des Kunden (Auftraggeber) verwendet."
+    )
     charged = models.BooleanField(default=False, verbose_name="Kostenpflichtig?")
     invoice_purpose = models.CharField(max_length=255, null=True, blank=True, verbose_name="Zweck")
     price = models.IntegerField(null=True, blank=True, verbose_name="Betrag exkl. MWSt.")
@@ -249,22 +253,27 @@ class Ride(models.Model):
                 str += ", "
             str += self.customer_firstname + " " + self.customer_lastname
         return str
+
     auftraggeber_str.short_description = 'Auftraggeber'
 
     def pickup_date(self):
         return self.date
+
     pickup_date.short_description = "Abholdatum"
 
     def pickup_date_time(self):
         return self.pickup_time
+
     pickup_date_time.short_description = "Zeit"
 
     def created_time(self):
         return self.date_created
+
     created_time.short_description = "Erstellt"
 
     def number_of_velos(self):
         return self.velos
+
     number_of_velos.short_description = "Velos"
 
     def get_status_ride(self):
