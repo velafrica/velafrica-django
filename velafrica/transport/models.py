@@ -121,8 +121,7 @@ class Ride(models.Model):
         blank=True,
         null=True,
     )
-    request_comment = models.CharField(
-        max_length=1024,
+    request_comment = models.TextField(
         verbose_name='Bemerkung',
         blank=True,
         default="",
@@ -156,7 +155,7 @@ class Ride(models.Model):
     )
     spare_parts = models.BooleanField(default=False, verbose_name='Ersatzteile transportiert?')
     stocklist = models.OneToOneField(StockList, null=True, blank=True, on_delete=models.SET_NULL)
-    note = models.CharField(blank=True, null=True, max_length=1024, verbose_name="Bemerkung",
+    note = models.TextField(blank=True, null=True, verbose_name="Bemerkung",
                             help_text="Bemerkung zum Fahrt")
     completed = models.BooleanField(default=False, verbose_name="Auftrag ausgeführt")
     printed = models.BooleanField(default=False, verbose_name="Auftrag gedruckt")
@@ -177,7 +176,6 @@ class Ride(models.Model):
     from_contact_name = models.CharField(max_length=255, blank=True, default="", verbose_name="Kontaktperson")
     from_contact_phone = models.CharField(max_length=255, blank=True, default="", verbose_name="Tel. Nr. (Mobile)")
     from_comment = models.TextField(
-        max_length=1024,
         blank=True,
         default="",
         verbose_name="Details Standort",
