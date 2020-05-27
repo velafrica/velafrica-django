@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 from django import forms
-from django import template
 from django.contrib import admin
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from import_export import resources
 from import_export.admin import ImportExportMixin
 from simple_history.admin import SimpleHistoryAdmin
 
+from velafrica.sbbtracking.resources import TrackingResource
 from velafrica.sbbtracking.models import Tracking, TrackingEvent, TrackingEventType, EmailLog, VeloType
 
 
@@ -100,18 +99,10 @@ class EmailLogInline(admin.TabularInline):
     def has_add_permission(self, request):
         return False
 
+
 class VeloTypeAdmin(SimpleHistoryAdmin):
     model = VeloType
 
-class TrackingResource(resources.ModelResource):
-    """
-    Define the Tracking resource for import / export.
-    """
-
-    class Meta:
-        model = Tracking
-        import_id_fields = ('tracking_no',)
-        fields = ('first_name', 'last_name', 'email', 'tracking_no', 'last_event__event_type__name', 'velo_type__name')
 
 class TrackingAdmin(ImportExportMixin, SimpleHistoryAdmin):
     resource_class = TrackingResource

@@ -2,10 +2,10 @@
 from django.contrib import admin, messages
 from django.utils.safestring import mark_safe
 from django_object_actions import DjangoObjectActions
-from import_export import resources
 from import_export.admin import ImportExportMixin
 from simple_history.admin import SimpleHistoryAdmin
 
+from velafrica.organisation.resources import OrganisationResource
 from velafrica.organisation.models import Organisation, Person, Address, Country
 
 
@@ -15,15 +15,6 @@ class PersonAdmin(SimpleHistoryAdmin):
     list_display = ['__str__', 'user', 'organisation']
     list_filter = ['organisation']
     search_fields = ['organisation__name', 'user__username']
-
-
-class OrganisationResource(resources.ModelResource):
-    """
-    Define the organisation resource for import / export.
-    """
-
-    class Meta:
-        model = Organisation
 
 
 class OrganisationAdmin(ImportExportMixin, SimpleHistoryAdmin):

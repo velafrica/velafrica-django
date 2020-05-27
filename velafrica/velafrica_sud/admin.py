@@ -5,15 +5,14 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 from django_object_actions import DjangoObjectActions
-from import_export import resources
 from import_export.admin import ImportExportMixin
-from import_export.fields import Field
 from simple_history.admin import SimpleHistoryAdmin
 
 from velafrica.bikes.models import Bike
 from velafrica.bikes.views import bikes_pdf
 from velafrica.sbbtracking.models import Tracking
 from velafrica.velafrica_sud.models import Forwarder, PartnerSud, Container, Report, ReportStaff, PartnerStaff, Role
+from velafrica.velafrica_sud.resources import ContainerResource, ReportResource
 
 
 class ReportInline(admin.TabularInline):
@@ -44,20 +43,6 @@ class TrackingInline(admin.TabularInline):
 
     def has_add_permission(self, request):
         return False
-
-
-class ContainerResource(resources.ModelResource):
-    """
-    Define the Conainter resource for import / export.
-    """
-
-    class Meta:
-        model = Container
-        fields = ('container_no', 'container_n_of_year', 'organisation_from', 'organisation_from__name', 'partner_to',
-                  'partner_to__organisation__name', 'velos_loaded', 'velos_unloaded', 'spare_parts', 'logistics',
-                  'logistics__name', 'pickup_date', 'shipment_date', 'arrival_port_date', 'arrival_partner_date',
-                  'velos_worth', 'spare_parts_worth', 'tools_worth', 'various_worth', 'seal_no', 'sgs_certified',
-                  'notes')
 
 
 class ContainerAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
@@ -187,29 +172,6 @@ class ReportStaffInline(admin.TabularInline):
     """
     model = ReportStaff
     extra = 0
-
-
-class ReportResource(resources.ModelResource):
-    """
-    Define the Conainter resource for import / export.
-    """
-    economic_bicycles_turnover_USD = Field(readonly=True, attribute='economic_bicycles_turnover_USD',
-                                           column_name='economic_bicycles_turnover_USD')
-    economic_turnover_total_USD = Field(readonly=True, attribute='economic_turnover_total_USD',
-                                        column_name='economic_turnover_total_USD')
-    economic_spareparts_turnover_USD = Field(readonly=True, attribute='economic_spareparts_turnover_USD',
-                                             column_name='economic_spareparts_turnover_USD')
-    economic_services_turnover_USD = Field(readonly=True, attribute='economic_services_turnover_USD',
-                                           column_name='economic_services_turnover_USD')
-    economic_transport_costs_port_to_organisation_USD = Field(readonly=True,
-                                                              attribute='economic_transport_costs_port_to_organisation_USD',
-                                                              column_name='economic_transport_costs_port_to_organisation_USD')
-    communityproject_reinvest_profit_total_USD = Field(readonly=True,
-                                                       attribute='communityproject_reinvest_profit_total_USD',
-                                                       column_name='communityproject_reinvest_profit_total_USD')
-
-    class Meta:
-        model = Report
 
 
 class ReportAdmin(ImportExportMixin, SimpleHistoryAdmin):

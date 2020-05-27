@@ -1,46 +1,23 @@
 # -*- coding: utf-8 -*-
-from django import template
-from django_object_actions import DjangoObjectActions
 from django.contrib import admin
-from django.utils.safestring import mark_safe
 from django.urls import reverse
-from django.shortcuts import render_to_response
-from velafrica.stock.models import *
-from velafrica.stock.forms import StockForm, StockListPositionForm, StockListPosForm, StockTransferForm
-from velafrica.transport.models import Ride
-from velafrica.velafrica_sud.models import Container
-from import_export import resources
+from django.utils.safestring import mark_safe
+from django_object_actions import DjangoObjectActions
 from import_export.admin import ImportExportMixin
 from simple_history.admin import SimpleHistoryAdmin
-from import_export.fields import Field
 
-
-class CategoryResource(resources.ModelResource):
-    """
-    Define the category resource for import / export.
-    """
-
-    class Meta:
-        model = Category
-        import_id_fields = ('articlenr_start',)
-        fields = ('articlenr_start', 'name', 'description')
+from velafrica.stock.resources import ProductResource, WarehouseResource, StockResource, StockChangeResource, \
+    StockListPositionResource, StockListResource, StockTransferResource, CategoryResource
+from velafrica.stock.forms import StockForm, StockListPositionForm, StockListPosForm, StockTransferForm
+from velafrica.stock.models import *
+from velafrica.transport.models import Ride
+from velafrica.velafrica_sud.models import Container
 
 
 class CategoryAdmin(ImportExportMixin, SimpleHistoryAdmin):
     resource_class = CategoryResource
     list_display = ('articlenr_start', 'name', 'description')
     search_fields = ['name', 'description']
-
-
-class ProductResource(resources.ModelResource):
-    """
-    Define the Product resource for import / export.
-    """
-
-    class Meta:
-        model = Product
-        import_id_fields = ('articlenr',)
-        fields = ('category', 'category__name', 'articlenr', 'hscode', 'name', 'name_en', 'name_fr', 'packaging_unit', 'sales_price', 'description')
 
 
 class ProductAdmin(ImportExportMixin, SimpleHistoryAdmin):
@@ -55,24 +32,8 @@ class ProductAdmin(ImportExportMixin, SimpleHistoryAdmin):
     list_filter = ['category']
 
 
-class WarehouseResource(resources.ModelResource):
-    """
-    """
-    class Meta:
-        model = Warehouse
-
 class StockInline(admin.TabularInline):
     model = Stock
-
-
-class StockResource(resources.ModelResource):
-    """
-    Define the Stock resource for import / export.
-    """
-
-    class Meta:
-        model = Stock
-        fields = ('product__articlenr', 'product', 'product__name', 'warehouse', 'warehouse__name', 'amount', 'last_modified')
 
 
 class StockAdmin(ImportExportMixin, SimpleHistoryAdmin):
@@ -110,15 +71,6 @@ class StockAdmin(ImportExportMixin, SimpleHistoryAdmin):
         return super(StockAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
 
 
-class StockChangeResource(resources.ModelResource):
-    """
-    Define the StockChange resource for import / export.
-    """
-
-    class Meta:
-        model = StockChange
-
-
 class StockChangeAdmin(ImportExportMixin, SimpleHistoryAdmin):
     resource_class = StockChangeResource
     model = StockChange
@@ -128,7 +80,7 @@ class StockChangeAdmin(ImportExportMixin, SimpleHistoryAdmin):
 
 
 class WarehouseAdmin(ImportExportMixin, SimpleHistoryAdmin):
-    inlines = [StockInline,]
+    inlines = [StockInline, ]
     resource_class = WarehouseResource
     list_display = ['name', 'organisation', 'description', 'stock_management', 'get_googlemaps_link']
     search_fields = ['name', 'description', 'organisation__name']
@@ -146,6 +98,7 @@ class WarehouseAdmin(ImportExportMixin, SimpleHistoryAdmin):
                 ))
             else:
                 return ""
+
     get_googlemaps_link.short_description = 'Google Maps'
 
 
@@ -158,14 +111,6 @@ class StockChangeInline(admin.TabularInline):
         return False
 
 
-class StockListPositionResource(resources.ModelResource):
-    """
-    """
-    class Meta:
-        fields = ['stocklist', 'stocklist__description', 'stocklist__container', 'stocklist__container', 'stocklist__container__partner_to', 'stocklist__container__partner_to__organisation__address__country__name', 'stocklist__container__partner_to__organisation__name', 'product', 'product__name', 'amount']
-        model = StockListPosition
-
-
 class StockListPositionAdmin(ImportExportMixin, SimpleHistoryAdmin):
     form = StockListPositionForm
     model = StockListPosition
@@ -173,14 +118,6 @@ class StockListPositionAdmin(ImportExportMixin, SimpleHistoryAdmin):
     list_display = ['id', 'product', 'amount', 'stocklist']
     list_filter = ['stocklist']
     search_fields = ['product__name', 'product__articlenr', 'stocklist__description']
-
-
-class StockListResource(resources.ModelResource):
-    """
-
-    """
-    class Meta:
-        model = StockList
 
 
 class StockListPositionInline(admin.TabularInline):
@@ -209,19 +146,22 @@ class StockTransferInline(admin.TabularInline):
 class ContainerInline(admin.TabularInline):
     model = Container
 
+
 class StockListAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
     """
     TODO: remove, StockList is deprecated
     """
     inlines = [StockListPositionInline]
     resource_class = StockListResource
-    list_display = ['id', 'ride_link', 'stocktransfer_link', 'container_link', 'description', 'last_change', 'listpositions_link']
+    list_display = ['id', 'ride_link', 'stocktransfer_link', 'container_link', 'description', 'last_change',
+                    'listpositions_link']
     search_fields = ['description']
     readonly_fields = ['ride_link', 'stocktransfer_link', 'container_link']
 
     def listpositions_link(self, obj):
         if obj.stocklistposition_set.first():
-            r = 'admin:{}_{}_changelist'.format(obj.stocklistposition_set.first()._meta.app_label, obj.stocklistposition_set.first()._meta.model_name)
+            r = 'admin:{}_{}_changelist'.format(obj.stocklistposition_set.first()._meta.app_label,
+                                                obj.stocklistposition_set.first()._meta.model_name)
             print(r)
             return mark_safe('<a href="{}?stocklist__id__exact={}">{}</a>'.format(
                 reverse(r, args=[]),
@@ -229,6 +169,7 @@ class StockListAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin)
                 obj.size()
             ))
         return None
+
     listpositions_link.short_description = 'Anzahl Positionen'
 
     def ride_link(self, obj):
@@ -237,6 +178,7 @@ class StockListAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin)
             reverse(r, args=(obj.ride.id,)),
             obj.ride
         ))
+
     ride_link.short_description = 'Ride'
 
     def stocktransfer_link(self, obj):
@@ -245,6 +187,7 @@ class StockListAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin)
             reverse(r, args=(obj.stocktransfer.id,)),
             obj.stocktransfer
         ))
+
     stocktransfer_link.short_description = 'StockTransfer'
 
     def container_link(self, obj):
@@ -253,19 +196,12 @@ class StockListAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin)
             reverse(r, args=(obj.container.id,)),
             obj.container
         ))
+
     container_link.short_description = 'Container'
 
 
-class StockTransferResource(resources.ModelResource):
-    """
-
-    """
-    class Meta:
-        model = StockTransfer
-
-
 class StockTransferAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin):
-    #inlines = [StockChangeInline, StockTransferListPosInline]
+    # inlines = [StockChangeInline, StockTransferListPosInline]
     inlines = [StockChangeInline]
     form = StockTransferForm
     resource_class = StockTransferResource
@@ -287,7 +223,7 @@ class StockTransferAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAd
                 self.message_user(request, "StockTransfer %s wurde bereits verbucht." % obj.id)
         else:
             self.message_user(request, "Not sure which StockTransfer to book." % obj.id)
-        
+
     fake_book_stocktransfer.short_description = "StockTransfer Fake Verbuchen"
     fake_book_stocktransfer.label = "Fake Verbuchen"
 
@@ -302,7 +238,7 @@ class StockTransferAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAd
                 self.message_user(request, "StockTransfer %s wurde bereits verbucht." % obj.id)
         else:
             self.message_user(request, "Not sure which StockTransfer to book." % obj.id)
-        
+
     book_stocktransfer.short_description = "StockTransfer Verbuchen"
     book_stocktransfer.label = "Verbuchen"
 
@@ -321,11 +257,13 @@ class StockTransferAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAd
         else:
             message_bit = "%s StockTransfer " % rows_updated
         self.message_user(request, "%s erfolgreich verbucht." % message_bit)
+
     book_stocktransfers.short_description = "Ausgewählte StrockTransfers verbuchen"
     book_stocktransfers.label = "Verbuchen"
 
     def fake_book_stocktransfers(self, request, queryset):
         self.book_stocktransfers(request, queryset, fake=True)
+
     fake_book_stocktransfers.short_description = "Ausgewählte StrockTransfers Fake verbuchen"
     fake_book_stocktransfers.label = "Fake Verbuchen"
 
@@ -340,7 +278,7 @@ class StockTransferAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAd
                 self.message_user(request, "StockTransfer %s ist momentan noch nicht verbucht." % obj.id)
         else:
             self.message_user(request, "Not sure which StockTransfer to revoke." % obj.id)
-        
+
     revoke_stocktransfer.short_description = "StockTransfer zurückbuchen"
     revoke_stocktransfer.label = "Zurückbuchen"
 
@@ -358,7 +296,7 @@ class StockTransferAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAd
         else:
             message_bit = "%s StockTransfer were" % rows_updated
         self.message_user(request, "%s revoked successfully." % message_bit)
-    
+
     revoke_stocktransfer.short_description = "StockTransfer zurückbuchen"
     revoke_stocktransfer.label = "Zurückbuchen"
 

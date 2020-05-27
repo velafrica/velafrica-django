@@ -28,6 +28,7 @@ class Payment(models.Model):
     def __str__(self):
         return u"{} {} {}".format(self.received_on, self.amount, self.invoice)
 
+
 class Invoice(models.Model):
     """
     """
@@ -129,7 +130,6 @@ class PurchaseOrder(models.Model):
             polp.save()
 
         return p
-
 
     def create_invoice(self):
         """

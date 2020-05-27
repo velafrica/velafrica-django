@@ -1,27 +1,13 @@
 # -*- coding: utf-8 -*-
 from daterange_filter.filter import DateRangeFilter
 from django.contrib import admin
-from import_export import resources
 from import_export.admin import ImportExportMixin
-from import_export.fields import Field
-from import_export.widgets import DateWidget
 from simple_history.admin import SimpleHistoryAdmin
 
 from velafrica.counter.models import Entry
+from velafrica.counter.resources import EntryResource
 from velafrica.organisation.models import Organisation
 
-
-class EntryResource(resources.ModelResource):
-    """
-    Define the resource for counter entry.
-    """
-    date = Field(
-        column_name='date',
-        attribute='date',
-        widget=DateWidget(format="%d.%m.%Y"))
-
-    class Meta:
-        model = Entry
 
 class EntryAdmin(ImportExportMixin, SimpleHistoryAdmin):
     resource_class = EntryResource
@@ -29,11 +15,11 @@ class EntryAdmin(ImportExportMixin, SimpleHistoryAdmin):
     search_fields = ['note', 'organisation__name']
     list_editable = ['amount', 'note', 'confirmed']
     list_filter = (
-        'date', 
+        'date',
         ('date', DateRangeFilter),
         'organisation',
         'confirmed'
-        )
+    )
 
     def get_queryset(self, request):
         qs = super(EntryAdmin, self).get_queryset(request)
@@ -58,5 +44,6 @@ class EntryAdmin(ImportExportMixin, SimpleHistoryAdmin):
             else:
                 kwargs["queryset"] = Organisation.objects.none()
         return super(EntryAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
+
 
 admin.site.register(Entry, EntryAdmin)
