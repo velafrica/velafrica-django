@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from daterange_filter.filter import DateRangeFilter
 from django.contrib import admin, messages
+from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
-from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.urls import reverse, path
 from django.utils.html import format_html
 from import_export import resources
@@ -21,7 +21,7 @@ from velafrica.transport.views import transport_request_pdf_view
 
 class CarAdmin(SimpleHistoryAdmin):
     list_display = ['name', 'organisation', 'plate']
-    search_fields = ['name']
+    search_fields = ['name', ]
 
     def get_queryset(self, request):
         qs = super(CarAdmin, self).get_queryset(request)
@@ -209,8 +209,11 @@ class RideAdmin(ImportExportMixin, SimpleHistoryAdmin):
         'from_warehouse__name',
         'to_warehouse__name',
         'from_city',
-        'customer_lastname',
+        'from_street_nr',
+        'from_zip_code',
         'from_contact_name',
+        'customer_company',
+        'customer_lastname',
     ]
 
     list_filter = [
