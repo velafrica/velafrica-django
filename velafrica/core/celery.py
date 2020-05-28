@@ -3,10 +3,11 @@ from __future__ import absolute_import, unicode_literals
 import os
 
 from celery import Celery
+from django.conf import settings  # noqa
 
 app = Celery('velafrica.core',
-             broker='amqp://guest@localhost',
-             backend='amqp://guest@localhost')
+             broker=settings.BROKER_URL,
+             backend=settings.BROKER_URL)
 
 # Optional configuration, see the application user guide.
 app.conf.update(
@@ -15,8 +16,6 @@ app.conf.update(
 
 # set the default Django settings module for the 'celery' program.
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "project.settings")
-
-from django.conf import settings  # noqa
 
 # Using a string here means the worker will not have to
 # pickle the object when using Windows.

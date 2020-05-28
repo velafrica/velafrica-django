@@ -153,6 +153,9 @@ IMPORT_EXPORT_CELERY_MODELS = {
 
 IMPORT_EXPORT_CELERY_INIT_MODULE = "velafrica.core.celery"
 
+# celery & rabbitMQ setup
+BROKER_URL = os.getenv("CLOUDAMQP_URL", "amqp://guest@localhost")
+
 CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'velafrica.core.urls'
@@ -248,7 +251,7 @@ STATICFILES_DIRS = (
 
 # Media files (Files uploaded by user)
 
-MEDIA_URL = os.environ['MEDIA_URL'] if 'MEDIA_URL' in os.environ else 'http://tracking.velafrica.ch/'
+MEDIA_URL = os.getenv('MEDIA_URL', 'http://tracking.velafrica.ch/')
 MEDIA_ROOT = os.path.join(PROJECT_DIR, "core", "media")
 
 # Django Resized
@@ -257,10 +260,10 @@ DJANGORESIZED_DEFAULT_QUALITY = 75
 DJANGORESIZED_DEFAULT_KEEP_META = True
 
 # Email settings
-EMAIL_HOST = os.environ['EMAIL_HOST'] if 'EMAIL_HOST' in os.environ else ''
-EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER'] if 'EMAIL_HOST_USER' in os.environ else ''
-EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD'] if 'EMAIL_HOST_PASSWORD' in os.environ else ''
-EMAIL_PORT = os.environ['EMAIL_PORT'] if 'EMAIL_PORT' in os.environ else ''
+EMAIL_HOST = os.getenv('EMAIL_HOST', '')
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', '')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', '')
+EMAIL_PORT = os.getenv('EMAIL_PORT', '')
 EMAIL_USE_SSL = True
 
 EMAIL_FROM_NAME = 'Velafrica Tracking'
@@ -270,10 +273,10 @@ EMAIL_FROM_EMAIL = 'tracking@velafrica.ch'
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 AWS_DEFAULT_ACL = None
 AWS_S3_SECURE_URLS = False
-AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY'] if 'AWS_ACCESS_KEY' in os.environ else ''
-AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_KEY'] if 'AWS_SECRET_KEY' in os.environ else ''
-AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME'] if 'AWS_STORAGE_BUCKET_NAME' in os.environ else ''
-AWS_S3_CUSTOM_DOMAIN = os.environ['AWS_S3_CUSTOM_DOMAIN'] if 'AWS_S3_CUSTOM_DOMAIN' in os.environ else ''
+AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY', '')
+AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_KEY', '')
+AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME', '')
+AWS_S3_CUSTOM_DOMAIN = os.getenv('AWS_S3_CUSTOM_DOMAIN', '')
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
@@ -298,7 +301,7 @@ WEBPACK_LOADER = {
 }
 
 ROLLBAR = {
-    'access_token': os.environ['ROLLBAR_ACCESS_TOKEN'] if 'ROLLBAR_ACCESS_TOKEN' in os.environ else '',
+    'access_token': os.getenv('ROLLBAR_ACCESS_TOKEN', ''),
     'environment': 'development' if DEBUG else 'production',
     'branch': 'master',
     'root': '/app',
@@ -306,8 +309,8 @@ ROLLBAR = {
 
 PAYPAL_TEST = 'PAYPAL_TEST' in os.environ and os.environ['PAYPAL_TEST'] == 'True'
 
-PAYPAL_RECEIVER_MAIL = os.environ['PAYPAL_RECEIVER_MAIL'] if 'PAYPAL_RECEIVER_MAIL' in os.environ else ''
-GMAP_API_KEY = os.environ['GMAP_API_KEY'] if 'GMAP_API_KEY' in os.environ else ''
+PAYPAL_RECEIVER_MAIL = os.getenv('PAYPAL_RECEIVER_MAIL', '')
+GMAP_API_KEY = os.getenv('GMAP_API_KEY', '')
 
 # Due to a mistake the SITE_ID on staging has to be 2 but will be 1 on production
 # so its configurable per env variable (shame on HaRii)
@@ -315,11 +318,10 @@ SITE_ID = int(os.environ['SITE_ID'] or 1) if 'SITE_ID' in os.environ else 1
 
 # MAILCHIMP_API_KEY = os.environ['MAILCHIMP_API_KEY']
 # MAILCHIMP_LIST_ID = os.environ['MAILCHIMP_LIST_ID']
-ORDER_RECEIVER = os.environ['ORDER_RECEIVER'] if 'ORDER_RECEIVER' in os.environ else ''
+ORDER_RECEIVER = os.getenv('ORDER_RECEIVER', '')
 INITIAL_VELO_COUNT = int(os.environ['INITIAL_VELO_COUNT']) if 'INITIAL_VELO_COUNT' in os.environ else 0
 AVERAGE_VELOS_PER_DAY = int(os.environ['AVERAGE_VELOS_PER_DAY']) if 'AVERAGE_VELOS_PER_DAY' in os.environ else None
-FACEBOOK_APP_ID = os.environ['FACEBOOK_APP_ID'] if 'FACEBOOK_APP_ID' in os.environ else ''
+FACEBOOK_APP_ID = os.getenv('FACEBOOK_APP_ID', '')
 
-ACME_CHALLENGE_TEMPLATE_CONTENT = os.environ[
-    'ACME_CHALLENGE_TEMPLATE_CONTENT'] if 'ACME_CHALLENGE_TEMPLATE_CONTENT' in os.environ else None
-ACME_CHALLENGE_URL_SLUG = os.environ['ACME_CHALLENGE_URL_SLUG'] if 'ACME_CHALLENGE_URL_SLUG' in os.environ else None
+ACME_CHALLENGE_TEMPLATE_CONTENT = os.getenv('ACME_CHALLENGE_TEMPLATE_CONTENT')
+ACME_CHALLENGE_URL_SLUG = os.getenv('ACME_CHALLENGE_URL_SLUG')
