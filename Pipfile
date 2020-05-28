@@ -76,7 +76,8 @@ YURL = "*"
 openpyxl = "!= 3.0.2"
 weasyprint = "*"
 reportlab = "*"
-
+celery = "*"
+django-import-export-celery = {git = "git://github.com/auto-mat/django-import-export-celery"}
 
 [requires]
 python_version = "3.6"

@@ -243,6 +243,13 @@ class Ride(models.Model):
 
     history = HistoricalRecords()
 
+    # allow celery exports
+    @classmethod
+    def export_resource_classes(cls):
+        return {
+            'all rides': ('Ride resources', 'RideResource'),
+        }
+
     # admin helper methods
     def auftraggeber_str(self):
         str = ""

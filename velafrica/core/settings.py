@@ -71,29 +71,30 @@ INSTALLED_APPS = (
     'sekizai',  # for JavaScript and CSS management
     'easy_thumbnails',
     'filer',
-    #'aldryn_apphooks_config',
-    #'cmsplugin_filer_image',
+    # 'aldryn_apphooks_config',
+    # 'cmsplugin_filer_image',
     'parler',
     'taggit',
     'taggit_autosuggest',
     'meta',
     'djangocms_blog',
     # django cms plugins
-    #'djangocms_file',
-    #'djangocms_inherit',
-    #'djangocms_picture',
-    #'djangocms_teaser',
-    #'djangocms_video',
-    #'djangocms_link',
+    # 'djangocms_file',
+    # 'djangocms_inherit',
+    # 'djangocms_picture',
+    # 'djangocms_teaser',
+    # 'djangocms_video',
+    # 'djangocms_link',
     # custom django cms plugins
-    #'velafrica.cms_plugins.big_picture',
-    #'velafrica.cms_plugins.row',
+    # 'velafrica.cms_plugins.big_picture',
+    # 'velafrica.cms_plugins.row',
     # custom apps
     'massadmin',
     'daterange_filter',
     'django_resized',
     'simple_history',
     'import_export',
+    'import_export_celery',
     'django_object_actions',
     'django_filters',
     'paypal.standard.ipn',
@@ -143,7 +144,14 @@ MIDDLEWARE = (
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'simple_history.middleware.HistoryRequestMiddleware',
     'rollbar.contrib.django.middleware.RollbarNotifierMiddleware',
+    'author.middlewares.AuthorDefaultBackendMiddleware',
 )
+
+IMPORT_EXPORT_CELERY_MODELS = {
+    "Ride": {'app_label': 'velafrica.transport', 'model_name': 'Ride'}
+}
+
+IMPORT_EXPORT_CELERY_INIT_MODULE = "velafrica.core.celery"
 
 CORS_ORIGIN_ALLOW_ALL = True
 
@@ -312,5 +320,6 @@ INITIAL_VELO_COUNT = int(os.environ['INITIAL_VELO_COUNT']) if 'INITIAL_VELO_COUN
 AVERAGE_VELOS_PER_DAY = int(os.environ['AVERAGE_VELOS_PER_DAY']) if 'AVERAGE_VELOS_PER_DAY' in os.environ else None
 FACEBOOK_APP_ID = os.environ['FACEBOOK_APP_ID'] if 'FACEBOOK_APP_ID' in os.environ else ''
 
-ACME_CHALLENGE_TEMPLATE_CONTENT = os.environ['ACME_CHALLENGE_TEMPLATE_CONTENT'] if 'ACME_CHALLENGE_TEMPLATE_CONTENT' in os.environ else None
+ACME_CHALLENGE_TEMPLATE_CONTENT = os.environ[
+    'ACME_CHALLENGE_TEMPLATE_CONTENT'] if 'ACME_CHALLENGE_TEMPLATE_CONTENT' in os.environ else None
 ACME_CHALLENGE_URL_SLUG = os.environ['ACME_CHALLENGE_URL_SLUG'] if 'ACME_CHALLENGE_URL_SLUG' in os.environ else None
