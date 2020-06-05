@@ -78,6 +78,7 @@ weasyprint = "*"
 reportlab = "*"
 celery = "*"
 django-import-export-celery = {git = "git://github.com/auto-mat/django-import-export-celery"}
+django-author = "*"
 
 [requires]
 python_version = "3.6"
