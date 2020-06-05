@@ -209,9 +209,16 @@ WSGI_APPLICATION = 'velafrica.core.wsgi.application'
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
 import dj_database_url
+DEBUG=True
 
 DATABASES = {
-    'default': dj_database_url.config()
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.environ.get('DATABASE_NAME', 'klub'),
+        'USER': os.environ.get('DATABASE_USER', 'klub'),
+        'PASSWORD': os.environ.get('DATABASE_PASSWORD', 'foobar'),
+        'HOST': os.environ.get('DATABASE_HOST', 'postgres'),
+    },
 }
 
 # Internationalization
