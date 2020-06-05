@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 from django_resized import ResizedImageField
-from import_export.fields import Field
-from import_export.resources import ModelResource
-from import_export.widgets import DateWidget
 from simple_history.models import HistoricalRecords
 
 from velafrica.core import utils
@@ -320,46 +317,43 @@ class Ride(models.Model):
             return result
         return None
 
-    def from_warehouse_has_address(self):
-        return self.warehouse_not_null_and_has_address(self.from_warehouse)
-
-    def to_warehouse_has_address(self):
-        return self.warehouse_not_null_and_has_address(self.to_warehouse)
-
-    def warehouse_not_null_and_has_address(self, warehouse):
-        return warehouse and warehouse.get_address()
-
-    def build_address_string(self, street_nr, zip_code, city):
-        address = ""
-        if street_nr:
-            address += u"{}".format(street_nr)
-        if zip_code:
-            address += u", {}".format(zip_code)
-            if city:
-                address += u" {}".format(city)
-        elif city:
-            address += u", {}".format(city)
-        return address
-
     def get_googlemaps_url(self):
         start, end = self.get_from_address(), self.get_to_address()
         return utils.get_googlemaps_url_distance(start, end) if start and end else None
 
     def get_from_address(self):
-        if self.from_warehouse_has_address():
+        if self.from_warehouse and self.from_warehouse.get_address():
             return str(self.from_warehouse.get_address())
-        return self.build_address_string(self.from_street_nr, self.from_zip_code, self.from_city)
+        address = ""
+        if self.from_street_nr:
+            address += u"{}".format(self.from_street_nr)
+        if self.from_zip_code:
+            address += u", {}".format(self.from_zip_code)
+            if self.from_city:
+                address += u" {}".format(self.from_city)
+        elif self.from_city:
+            address += u", {}".format(self.from_city)
+        return address
 
     def get_to_address(self):
-        if self.to_warehouse_has_address():
+        if self.to_warehouse and self.to_warehouse.get_address():
             return str(self.to_warehouse.get_address())
-        return self.build_address_string(self.to_street_nr, self.to_zip_code, self.to_city)
+        address = ""
+        if self.to_street_nr:
+            address += u"{}".format(self.to_street_nr)
+        if self.to_zip_code:
+            address += u", {}".format(self.to_zip_code)
+            if self.to_city:
+                address += u" {}".format(self.to_city)
+        elif self.to_city:
+            address += u", {}".format(self.to_city)
+        return address
 
     def prepare_for_print(self):
         self.printed = True
         self.save()
 
-        if self.from_warehouse_has_address():
+        if self.from_warehouse and self.from_warehouse.get_address():
             self.from_street_nr = self.from_warehouse.get_address().street
             self.from_zip_code = self.from_warehouse.get_address().zipcode
             self.from_city = self.from_warehouse.get_address().city
@@ -397,4 +391,3 @@ class Ride(models.Model):
             '-date',
             '-date_created'
         ]
-
