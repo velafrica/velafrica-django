@@ -154,7 +154,8 @@ IMPORT_EXPORT_CELERY_MODELS = {
 IMPORT_EXPORT_CELERY_INIT_MODULE = "velafrica.core.celery"
 
 # celery & rabbitMQ setup
-BROKER_URL = os.getenv("CLOUDAMQP_URL", "amqp://guest@localhost")
+# TODO: USE REDIS_URL
+BROKER_URL = os.getenv("CLOUDAMQP_URL", "redis://redis:6379/0")
 
 CORS_ORIGIN_ALLOW_ALL = True
 
@@ -208,10 +209,16 @@ WSGI_APPLICATION = 'velafrica.core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
-import dj_database_url
+DEBUG = True
 
 DATABASES = {
-    'default': dj_database_url.config()
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.environ.get('DATABASE_NAME', 'klub'),
+        'USER': os.environ.get('DATABASE_USER', 'klub'),
+        'PASSWORD': os.environ.get('DATABASE_PASSWORD', 'foobar'),
+        'HOST': os.environ.get('DATABASE_HOST', 'postgres'),
+    },
 }
 
 # Internationalization
