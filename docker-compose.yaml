@@ -12,6 +12,8 @@ services:
     stdin_open: true
     working_dir: /app-v/
     user: test
+    environment:
+      DOCKER: True
     volumes:
       - ./:/app-v/
       - ./pipenv:/home/test

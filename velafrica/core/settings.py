@@ -29,6 +29,8 @@ SECRET_KEY = os.environ['SECRET_KEY'] if 'SECRET_KEY' in os.environ else 'no-sec
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'DEBUG' in os.environ and os.environ['DEBUG'] == 'True'
+ON_HEROKU = os.environ.get('ON_HEROKU', False)
+DOCKER = os.environ.get('DOCKER', False)
 
 INTERNAL_IPS = (
     '127.0.0.1',
@@ -209,7 +211,7 @@ WSGI_APPLICATION = 'velafrica.core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
-if DEBUG:
+if not DOCKER:
     DATABASES = {
         'default': dj_database_url.config()
     }

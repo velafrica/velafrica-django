@@ -22,8 +22,9 @@ from django.contrib.auth.views import *
 
 from velafrica.core import views
 from velafrica.core.autocomplete import urls as autocomplete_urls
-from velafrica.public_site import views as velafrica_public_site_views
 from velafrica.public_site import urls as velafrica_public_site_urls
+from velafrica.public_site import views as velafrica_public_site_views
+
 app_name = "core"
 
 # frontend = [
