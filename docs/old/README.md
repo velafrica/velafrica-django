@@ -5,6 +5,51 @@ It consists of different modules, all serving the purpose to manage specific pro
 
 TODO: docker instructions
 
+# Table of contents
+
+  * [Detailed description](#detailed-description)
+  * [Technology](#technology)
+  * [Learning resources](#learning-resources)
+  * [Recommended tools](#recommended-tools)
+  * [Setup](#setup)
+    * [Required software](#required-software)
+    * [Getting started](#getting-started)
+  * [Deployment](#deployment)
+
+## Detailed description
+
+`ch.velafrica.admin` can be looked at on [http://tracking.velafrica.ch](http://tracking.velafrica.ch) at the moment.
+
+The modules are:
+
+- collection
+- commission
+- core
+- counter
+- download
+- organisation
+- sbbtracking
+- stock
+- transport
+- velafrica_sud
+
+Furthermore there are two special modules:
+
+- api (specification and handling for the rest api)
+- frontend (all the html stuff for the frontend)
+
+## Technology
+`ch.velafrica.admin` is a Django application, using various 3rd party packages for additional features. Django is a very well known python framework to develop web applications. On the frontend, bootstrap is used to avoid the pain of building yet another responsive website from scratch.
+
+## Learning resources
+If you do not know much about Django or Bootstrap yet, we can recommend the following sites to extend your knowledge:
+
+- [https://www.djangoproject.com/](https://www.djangoproject.com/)
+- [http://getbootstrap.com/](http://getbootstrap.com/)
+
+## Recommended tools
+We recommend using [PyCharm by IntelliJ](https://www.jetbrains.com/pycharm/) (full IDE) or Sublime Text (enhanced Text editor) to work on the code.
+
 # Setup
 
 ## 1. Install required software
