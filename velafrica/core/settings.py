@@ -154,8 +154,7 @@ IMPORT_EXPORT_CELERY_MODELS = {
 IMPORT_EXPORT_CELERY_INIT_MODULE = "velafrica.core.celery"
 
 # celery & rabbitMQ setup
-# TODO: USE REDIS_URL
-BROKER_URL = os.getenv("CLOUDAMQP_URL", "redis://redis:6379/0")
+BROKER_URL = os.getenv("REDIS", "redis://redis:6379/0")
 
 CORS_ORIGIN_ALLOW_ALL = True
 
