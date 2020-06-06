@@ -6,7 +6,8 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-django-cms = "~=3.6.0"
+Django = "==2.1.15"
+django-cms = "==3.6.0"
 django-appconf = "*"
 #cmsplugin-filer = "*"
 dj-database-url = "*"
@@ -16,7 +17,8 @@ django-acme-challenge = "*"
 django-cors-headers = "*"
 django-daterange-filter = "*"
 django-filer = "*"
-django-filter = "*"
+django-filter = "==2.2"
+django-polymorphic = ">=2.1.2"
 djangorestframework = "*"
 requests = "*"
 django-rest-swagger = "*"
@@ -69,7 +71,6 @@ rollbar = "*"
 s3transfer = "*"
 tablib = "*"
 whitenoise = "*"
-Django = "~=2.1"
 Markdown = "*"
 URLObject = "*"
 YURL = "*"
@@ -78,6 +79,9 @@ weasyprint = "*"
 reportlab = "*"
 celery = "*"
 django-import-export-celery = {git = "git://github.com/auto-mat/django-import-export-celery"}
+django-author = "*"
+future = "*"
+redis = "*"
 
 [requires]
 python_version = "3.6"
