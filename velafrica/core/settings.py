@@ -11,8 +11,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.8/ref/settings/
 """
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-import os
+import os  # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+
+import dj_database_url
 
 gettext = lambda \
         s: s  # "To make your life easer" - http://docs.django-cms.org/en/release-3.3.x/how_to/install.html#configure-django-cms
@@ -208,17 +209,20 @@ WSGI_APPLICATION = 'velafrica.core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
-DEBUG = True
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get('DATABASE_NAME', 'klub'),
-        'USER': os.environ.get('DATABASE_USER', 'klub'),
-        'PASSWORD': os.environ.get('DATABASE_PASSWORD', 'foobar'),
-        'HOST': os.environ.get('DATABASE_HOST', 'postgres'),
-    },
-}
+if DEBUG:
+    DATABASES = {
+        'default': dj_database_url.config()
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': os.environ.get('DATABASE_NAME', 'klub'),
+            'USER': os.environ.get('DATABASE_USER', 'klub'),
+            'PASSWORD': os.environ.get('DATABASE_PASSWORD', 'foobar'),
+            'HOST': os.environ.get('DATABASE_HOST', 'postgres'),
+        },
+    }
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
