@@ -211,11 +211,7 @@ WSGI_APPLICATION = 'velafrica.core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
-if not DOCKER:
-    DATABASES = {
-        'default': dj_database_url.config()
-    }
-else:
+if DOCKER is True:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -224,6 +220,10 @@ else:
             'PASSWORD': os.environ.get('DATABASE_PASSWORD', 'foobar'),
             'HOST': os.environ.get('DATABASE_HOST', 'postgres'),
         },
+    }
+else:
+    DATABASES = {
+        'default': dj_database_url.config()
     }
 
 # Internationalization
