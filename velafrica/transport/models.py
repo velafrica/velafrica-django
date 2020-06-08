@@ -243,6 +243,14 @@ class Ride(models.Model):
 
     history = HistoricalRecords()
 
+    # allow celery exports
+    @classmethod
+    def export_resource_classes(cls):
+        from velafrica.transport.resources import RideResource
+        return {
+            'all rides': ('Ride resources', RideResource),
+        }
+
     # admin helper methods
     def auftraggeber_str(self):
         str = ""

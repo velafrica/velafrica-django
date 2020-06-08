@@ -7,13 +7,14 @@ from django.shortcuts import get_object_or_404
 from django.urls import reverse, path
 from django.utils.html import format_html
 from import_export.admin import ImportExportMixin
+from import_export_celery.admin_actions import create_export_job_action
 from simple_history.admin import SimpleHistoryAdmin
 
-from velafrica.transport.resources import RideResource
 from velafrica.organisation.models import Organisation
 from velafrica.transport.filter import MultiListFilter
 from velafrica.transport.forms import RideForm
 from velafrica.transport.models import Car, Driver, VeloState, Ride, RequestCategory
+from velafrica.transport.resources import RideResource
 from velafrica.transport.views import transport_request_pdf_view
 
 
@@ -202,7 +203,7 @@ class RideAdmin(ImportExportMixin, SimpleHistoryAdmin):
 
     readonly_fields = ['get_googlemaps_link', 'date_created', 'date_modified']
     change_actions = ['get_distance']
-    actions = ['redirect_print_request_multiple', 'get_distances']
+    actions = ['redirect_print_request_multiple', 'get_distances', create_export_job_action]
 
     fieldsets = (
         (None, {

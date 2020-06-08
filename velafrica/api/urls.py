@@ -138,6 +138,7 @@ urlpatterns = [
     url(r'^swagger/', include('velafrica.api.swagger.urls')),
 
     url(r'^user/', include((user, app_name))),
+    url(r'^user/', include((user, app_name), namespace="user")),
 
     url(r'^organisation/', include((organisation, app_name), namespace='organisation')),
     url(r'^stock/', include((stock, app_name))),
@@ -145,8 +146,14 @@ urlpatterns = [
     url(r'^tracking/', include((tracking, app_name))),
     url(r'^transport/', include((transport, app_name))),
     url(r'^velafrica_sud/', include((velafrica_sud, app_name))),
+    url(r'^stock/', include((stock, app_name), namespace="stock")),
+    url(r'^bikes/', include((bikes, app_name), namespace="bikes")),
+    url(r'^tracking/', include((tracking, app_name), namespace="tracking")),
+    url(r'^transport/', include((transport, app_name), namespace="transport")),
+    url(r'^velafrica_sud/', include((velafrica_sud, app_name), namespace="velafrica_sud")),
     url(r'^counter/', include('velafrica.api.counter.urls')),
     url(r'^collections/', include((collection, app_name))),
+    url(r'^collections/', include((collection, app_name), namespace="collection")),
     url(r'^public/', include((public, app_name), namespace='public'))
 ]
 
