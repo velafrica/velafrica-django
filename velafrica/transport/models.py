@@ -246,8 +246,9 @@ class Ride(models.Model):
     # allow celery exports
     @classmethod
     def export_resource_classes(cls):
+        from velafrica.transport.resources import RideResource
         return {
-            'all rides': ('Ride resources', 'RideResource'),
+            'all rides': ('Ride resources', RideResource),
         }
 
     # admin helper methods

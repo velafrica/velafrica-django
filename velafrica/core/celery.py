@@ -1,6 +1,7 @@
 from __future__ import absolute_import, unicode_literals
 
 import os
+
 from celery import Celery
 from django.conf import settings  # noqa
 
@@ -18,7 +19,4 @@ app.conf.update(
 
 # Using a string here means the worker will not have to
 # pickle the object when using Windows.
-app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)
-
-if __name__ == '__main__':
-    app.start()
+app.autodiscover_tasks()
