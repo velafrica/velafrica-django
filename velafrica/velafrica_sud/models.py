@@ -63,6 +63,14 @@ class Container(models.Model):
 
     history = HistoricalRecords()
 
+    # allow celery exports
+    @classmethod
+    def export_resource_classes(cls):
+        from velafrica.velafrica_sud.resources import ContainerResource
+        return {
+            'All Containers': ('A list of all Containers.', ContainerResource),
+        }
+
     def calc_time_to_customer(self):
         """
         Calculate the days the container needed to get from the pickup to the partner.
