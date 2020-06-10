@@ -248,7 +248,7 @@ class Ride(models.Model):
     def export_resource_classes(cls):
         from velafrica.transport.resources import RideResource
         return {
-            'all rides': ('Ride resources', RideResource),
+            'All Rides': ('A list of all Rides.', RideResource),
         }
 
     # admin helper methods

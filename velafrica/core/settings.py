@@ -151,7 +151,8 @@ MIDDLEWARE = (
 )
 
 IMPORT_EXPORT_CELERY_MODELS = {
-    "Ride": {'app_label': 'velafrica.transport', 'model_name': 'Ride'}
+    "Ride": {'app_label': 'velafrica.transport', 'model_name': 'Ride'},
+    "Container": {'app_label': 'velafrica.velafrica_sud', 'model_name': 'Container'},
 }
 
 IMPORT_EXPORT_CELERY_INIT_MODULE = "velafrica.core.celery"
