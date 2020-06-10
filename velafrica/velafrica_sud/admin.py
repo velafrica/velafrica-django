@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.utils.safestring import mark_safe
 from django_object_actions import DjangoObjectActions
 from import_export.admin import ImportExportMixin
+from import_export_celery.admin_actions import create_export_job_action
 from simple_history.admin import SimpleHistoryAdmin
 
 from velafrica.bikes.models import Bike
@@ -52,6 +53,7 @@ class ContainerAdmin(ImportExportMixin, DjangoObjectActions, SimpleHistoryAdmin)
     search_fields = ['container_no', 'organisation_from__name', 'partner_to__organisation__name']
     list_filter = ['pickup_date', ('pickup_date', DateRangeFilter), 'organisation_from', 'partner_to', ]
     change_actions = ('print_bikes', 'display_bikes', 'book_container',)
+    actions = [create_export_job_action]
     readonly_fields = ['container_n_of_all', 'container_n_of_year', 'time_to_customer']
     # inlines = [TrackingInline]
     fieldsets = (
