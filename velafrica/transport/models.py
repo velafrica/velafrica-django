@@ -112,7 +112,7 @@ class Ride(models.Model):
         max_length=255,
         blank=True,
         null=True,
-        verbose_name='Anzahl Velos (voraussichtlich)',
+        verbose_name='Velos (angemeldet)',
     )
     request_category = models.ForeignKey(
         RequestCategory,
@@ -150,7 +150,7 @@ class Ride(models.Model):
         blank=True,
         null=True,
         default=0,
-        verbose_name='Anzahl transportierter Velos',
+        verbose_name='Velos (abgeholt)',
         help_text='Wird durch den Transport ausgefüllt.'
     )
     spare_parts = models.BooleanField(default=False, verbose_name='Ersatzteile transportiert?')
@@ -282,7 +282,8 @@ class Ride(models.Model):
     def number_of_velos(self):
         return self.velos
 
-    number_of_velos.short_description = "Velos"
+    number_of_velos.short_description = "Velos (transportiert)"
+    planned_velos.short_description = "Velos (geplant)"
 
     def get_status_ride(self):
         if self.completed:  # transport completed

@@ -18,6 +18,19 @@ from velafrica.transport.resources import RideResource
 from velafrica.transport.views import transport_request_pdf_view
 
 
+def get_organisations_filtered_by_permissions(self, adminClass, db_field, request, **kwargs):
+    if db_field.name == 'organisation':
+        if request.user.is_superuser:
+            pass
+        # other users with a correlating person should only see their organisation
+        elif hasattr(request.user, 'person'):
+            kwargs["queryset"] = Organisation.objects.filter(id=request.user.person.organisation.id)
+        # users with no superuser role and no related person should not see any organisations
+        else:
+            kwargs["queryset"] = Organisation.objects.none()
+    return super(adminClass, self).formfield_for_foreignkey(db_field, request, **kwargs)
+
+
 class CarAdmin(SimpleHistoryAdmin):
     list_display = ['name', 'organisation', 'plate']
     search_fields = ['name', ]
@@ -35,16 +48,7 @@ class CarAdmin(SimpleHistoryAdmin):
             return qs.none()
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        if db_field.name == 'organisation':
-            if request.user.is_superuser:
-                pass
-            # other users with a correlating person should only see their organisation
-            elif hasattr(request.user, 'person'):
-                kwargs["queryset"] = Organisation.objects.filter(id=request.user.person.organisation.id)
-            # users with no superuser role and no related person should not see any organisations
-            else:
-                kwargs["queryset"] = Organisation.objects.none()
-        return super(CarAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
+        return get_organisations_filtered_by_permissions(self, CarAdmin, db_field, request, **kwargs)
 
 
 class DriverAdmin(SimpleHistoryAdmin):
@@ -65,16 +69,7 @@ class DriverAdmin(SimpleHistoryAdmin):
             return qs.none()
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        if db_field.name == 'organisation':
-            if request.user.is_superuser:
-                pass
-            # other users with a correlating person should only see their organisation
-            elif hasattr(request.user, 'person'):
-                kwargs["queryset"] = Organisation.objects.filter(id=request.user.person.organisation.id)
-            # users with no superuser role and no related person should not see any organisations
-            else:
-                kwargs["queryset"] = Organisation.objects.none()
-        return super(DriverAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
+        return get_organisations_filtered_by_permissions(self, DriverAdmin, db_field, request, **kwargs)
 
 
 class VeloStateAdmin(SimpleHistoryAdmin):
@@ -176,6 +171,7 @@ class RideAdmin(ImportExportMixin, SimpleHistoryAdmin):
         'created_time',
         'pickup_date',
         'auftraggeber_str',
+        'planned_velos',
         'number_of_velos',
         'start',
         'end',
