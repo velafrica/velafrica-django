@@ -280,7 +280,7 @@ class RideAdmin(ImportExportMixin, SimpleHistoryAdmin):
         ('Transport', {
             'fields': (
                 ('date', 'pickup_time',),
-                ('driver', 'car'),
+                ('driver', 'co_driver', 'car'),
                 'note',
                 'velos',
                 'completed'

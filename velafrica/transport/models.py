@@ -133,11 +133,20 @@ class Ride(models.Model):
     pickup_time = models.CharField(blank=True, default="", max_length=30, verbose_name="Vereinbarte Abholzeit")
     driver = models.ForeignKey(
         Driver,
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         verbose_name='Fahrer',
         blank=True,
         null=True,
         help_text='Person die den Transport durchgeführt hat.'
+    )
+    co_driver = models.ForeignKey(
+        Driver,
+        on_delete=models.SET_NULL,
+        verbose_name='Beifahrer',
+        related_name='co_driver',
+        blank=True,
+        null=True,
+        help_text='Nur anzugeben falls noch ein Beifahrer dabei war.'
     )
     car = models.ForeignKey(
         Car,

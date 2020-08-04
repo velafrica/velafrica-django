@@ -26,6 +26,12 @@ class RideForm(forms.ModelForm):
         required=False,
         label='Fahrer'
     )
+    co_driver = forms.ModelChoiceField(
+        queryset=Driver.objects.all(),
+        widget=autocomplete.ModelSelect2(url='autocomplete:driver'),
+        required=False,
+        label='Beifahrer'
+    )
     car = forms.ModelChoiceField(
         queryset=Car.objects.all(),
         widget=autocomplete.ModelSelect2(url='autocomplete:car'),
