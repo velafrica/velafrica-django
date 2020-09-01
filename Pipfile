@@ -4,17 +4,18 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+zest-releaser = "*"
 
 [packages]
-Django = "==2.1.15"
-django-cms = "==3.6.0"
+Django = "==2.2"
+django-cms = "==3.7.0"
 django-appconf = "*"
 #cmsplugin-filer = "*"
 dj-database-url = "*"
 django-appdata = "*"
 django-autocomplete-light = "!=3.5.1"
 django-acme-challenge = "*"
-django-cors-headers = "*"
+django-cors-headers = "==3.3.0"
 django-daterange-filter = "*"
 django-filer = "*"
 django-filter = "==2.2"
@@ -45,7 +46,7 @@ django-resized = "*"
 django-sortedm2m = "*"
 django-spurl = "*"
 django-standard-form = "*"
-django-storages = "*"
+django-storages = "==1.8"
 django-taggit-autosuggest = "*"
 django-taggit-templatetags = "*"
 django-templatetag-sugar = "*"
@@ -82,7 +83,6 @@ django-import-export-celery = {git = "git://github.com/auto-mat/django-import-ex
 django-author = "*"
 future = "*"
 redis = "*"
-zest-releaser = "*"
 
 [requires]
 python_version = "3.6"
