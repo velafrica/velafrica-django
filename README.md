@@ -11,6 +11,13 @@ We are using zest.releaser for version management.
 
 https://zestreleaser.readthedocs.io/
 
+Commands:
+
+* prerelease
+* release
+* postrelease
+* fullrelease
+
 # Setup
 
 ## 1. Install required software
