@@ -1,4 +1,0 @@
-# RELEASENOTES
-
-## 2020-06-06_1
-TBD
