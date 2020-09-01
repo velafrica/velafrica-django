@@ -5,6 +5,12 @@ It consists of different modules, all serving the purpose to manage specific pro
 
 TODO: docker instructions
 
+# Releases
+
+We are using zest.releaser for version management.
+
+https://zestreleaser.readthedocs.io/
+
 # Setup
 
 ## 1. Install required software
