@@ -82,6 +82,7 @@ django-import-export-celery = {git = "git://github.com/auto-mat/django-import-ex
 django-author = "*"
 future = "*"
 redis = "*"
+zest-releaser = "*"
 
 [requires]
 python_version = "3.6"
