@@ -6,7 +6,7 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-Django = "==2.2.20"
+Django = "==2.2.22"
 django-cms = "==3.7.4"
 django-appconf = "*"
 #cmsplugin-filer = "*"
